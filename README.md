@@ -5,6 +5,8 @@ Click [here](#install) to install
 ## programs used
 - neovim
 - hyprland
+- waybar
+- grklock
 - arch linux (not required)
 
 ## install
