@@ -9,19 +9,24 @@ Click [here](#install) to install
 
 ## programs modified
 - neovim
-- hyprland
-- waybar
-- gtklock
-- kitty
+- *hyprland (not yet)*
+- *waybar (not yet)*
+- *gtklock (not yet)*
+- *kitty (not yet)*
   
 - *Firefox* (not yet)
 - *LibreWolf* (not yet)
 
 
 ## install
+
+note: this script is still unfinished and you **will** encounter bugs
 ```sh
 git clone https://github.com/ImAwsumm/dotfiles.git
 cd /dotfiles
+chmod u+x ./install.sh
+chmod u+x ./update.sh
+./install.sh
 ```
 ## after install 
 Useful keybinds to know:
