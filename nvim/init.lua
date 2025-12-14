@@ -13,7 +13,7 @@ vim.wo.relativenumber = true
 
 require("lazy").setup({
   {
-    "catppuccin/nvim",
+    "catppuccin/nvim", -- set theme
     name = "catppuccin",
     priority = 1000,
     config = function()
