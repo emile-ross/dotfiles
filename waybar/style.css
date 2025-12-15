@@ -1,0 +1,87 @@
+/* Base styling */
+* {
+    border: none;
+    font-family: "JetBrainsMono Nerd Font", "Font Awesome 6 Free", sans-serif;
+    font-size: 14px;
+    color: #ffffff;
+}
+
+/* Waybar container */
+window#waybar 
+{
+    background: rgba(20, 20, 20, 0.9);
+    border-bottom: 2px solid #333;
+}
+
+/* Module spacing */
+#workspaces,
+#clock,
+#battery,
+#cpu,
+#memory,
+#network,
+#pulseaudio,
+#backlight,
+#tray,
+#custom-launcher,
+#custom-power,
+#custom-updates,
+#temperature 
+{
+    padding: 0 6px;   /* reduced from 0 10px */
+    margin: 0 2px;    /* reduced from 0 5px */
+}
+
+/* Module styling with tighter padding/margins */
+#workspaces button,
+#clock,
+#battery,
+#cpu,
+#memory,
+#network,
+#pulseaudio,
+#backlight,
+#tray,
+#custom-launcher,
+#custom-power,
+#custom-updates,
+#temperature 
+{
+    background-color: #44475a;
+    padding: 4px 6px;   /* reduced from 6px 10px */
+    margin: 2px 3px;    /* reduced from 4px 6px */
+    border-radius: 14px;  /* slightly smaller radius for tighter look */
+    transition: background-color 0.3s ease;
+}
+
+/* Hover effect */
+#workspaces button:hover,
+#clock:hover,
+#battery:hover,
+#cpu:hover,
+#memory:hover,
+#network:hover,
+#pulseaudio:hover,
+#backlight:hover,
+#tray:hover,
+#custom-launcher:hover,
+#custom-power:hover,
+#custom-updates:hover,
+#temperature:hover 
+{
+    background-color: #6272a4;
+}
+
+/* Active workspace button */
+#workspaces button.active 
+{
+    background-color: #50fa7b;
+    color: #282a36;
+}
+
+/* Focused workspace */
+#workspaces button.focused 
+{
+    background-color: #8be9fd;
+    color: #282a36;
+}
