@@ -9,9 +9,9 @@ Click [here](#install) to install
 
 ## programs modified
 - neovim
-- *hyprland (not yet)*
+- hyprland
 - *waybar (not yet)*
-- *gtklock (not yet)*
+- gtklock
 - *kitty (not yet)*
   
 - *Firefox* (not yet)
@@ -28,6 +28,9 @@ chmod u+x ./install.sh
 chmod u+x ./update.sh
 ./install.sh
 ```
+
+A new install script is in the making.  It will run faster because it is in C instead of bash.  This script will need to be compiled using the gcc compiler.
+
 ## after install 
 Useful keybinds to know:
 (super = "Windows key")
@@ -36,8 +39,11 @@ Useful keybinds to know:
  super + 1 -> **execute LibreWolf**
  super + 2 -> **execute Firefox**
  
+ 
  super + F1 -> **switch to Workspace 1**
+ 
  (super + F1-F10 -> Workspaces 1-10)
 
+ super + m -> **exit hyprland**
 
 If you ever encounter an issue please report it by providing the issue you are experiencing with a log, it helps me improve this script. 
