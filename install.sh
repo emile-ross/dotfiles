@@ -5,7 +5,7 @@ cd ~
 ISYAY=/sbin/yay
 if [ -f $ISYAY ] ; then
 
-echo -e " Yay is nstalled, congrats \n"
+echo -e " Yay is now installed, congrats! \n"
 
 else
    # install yay if it isn't already installed
@@ -83,3 +83,11 @@ cd ~/dotfiles
 fi
 
 cd ~
+
+echo -e "You can now use Hyprland ino order to launch it whenever you want.\n"
+read -n1 -rep 'Would you like to start Hyprland now? (Y,n)' EXECHYPR
+if [[ $EXECHYPR == "Y" || $EXECHYPR == "y" ]]; then
+    exec Hyprland
+else
+    exit
+fi
