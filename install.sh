@@ -78,8 +78,8 @@ cd ~/dotfiles
 	cd ~/dotfiles
 		cd ~/dotfiles/nvim
 		cp init.lua ~/.config/nvim 
-	cd ~/dotfiles
-
+	cd ~/dotfiles/waybar
+    cp config.jsonc ~/.config/waybar && cp style.css ~/.config/waybar
 fi
 
 cd ~
