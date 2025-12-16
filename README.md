@@ -10,8 +10,9 @@ Click [here](#install) to install
 ## programs modified
 - neovim
 - hyprland
-- *waybar (not yet)*
+- waybar
 - gtklock
+- *fastfetch ( not yet)*
 - *kitty (not yet)*
   
 - *Firefox* (not yet)
@@ -21,14 +22,20 @@ Click [here](#install) to install
 ## install
 
 note: this script is still unfinished and you **will** encounter bugs
+bash script:
 ```sh
 git clone https://github.com/ImAwsumm/dotfiles.git
-cd /dotfiles
+cd dotfiles
 chmod u+x ./install.sh
 chmod u+x ./update.sh
 ./install.sh
 ```
-
+before executing the c script, you will need to compile it.  
+```bash
+git clone https://github.com/ImAwsumm/dotfiles.git
+gcc install-script.c -o cinstall
+./cinstall
+```
 A new install script is in the making.  It will run faster because it is in C instead of bash.  This script will need to be compiled using the gcc compiler.
 
 ## after install 
