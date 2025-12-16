@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #define MAX_CMD 512
-
+// error code 1 is caused by a missing dependency
 int main() 
 {
     // Check if yay is installed
@@ -76,6 +76,7 @@ int main()
     {
         system("cd ~/dotfiles/hypr && cp hyprland.conf ~/.config/hypr && cp hypridle.conf ~/.config/hypr && cp hyprpaper.conf ~/.config/hypr");
         system("cd ~/dotfiles/nvim && cp init.lua ~/.config/nvim");
+        system("cd ~/dotfiles/waybar && cp style.css ~/.config/waybar && cp config.jsonc ~/.config/waybar");
     }
         else 
     {
