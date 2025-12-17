@@ -1,7 +1,7 @@
 /* Base styling */
 * {
     border: none;
-    font-family: "JetBrainsMono Nerd Font", "Font Awesome 6 Free", sans-serif;
+    font-family: "JetBrainsMono Nerd Font";
     font-size: 14px;
     color: #ffffff;
 }
@@ -9,8 +9,8 @@
 /* Waybar container */
 window#waybar 
 {
-    background: rgba(20, 20, 20, 0.9);
-    border-bottom: 2px solid #333;
+    background: rgba(5, 5, 5, 0.75); /*last value for transparency */
+    border-bottom: 1px solid #757575;
 }
 
 /* Module spacing */
@@ -28,7 +28,7 @@ window#waybar
 #custom-updates,
 #temperature 
 {
-    padding: 0 6px;   /* reduced from 0 10px */
+    padding: 0 10px;   /* reduced from 0 10px */
     margin: 0 2px;    /* reduced from 0 5px */
 }
 
@@ -47,10 +47,10 @@ window#waybar
 #custom-updates,
 #temperature 
 {
-    background-color: #44475a;
-    padding: 4px 6px;   /* reduced from 6px 10px */
-    margin: 2px 3px;    /* reduced from 4px 6px */
-    border-radius: 14px;  /* slightly smaller radius for tighter look */
+    background-color: #282828; /* background color for the modules */
+    padding: 5px 5px;   /* reduced from 6px 10px */
+    margin: 5px 2px;    /* reduced from 4px 6px */
+    border-radius: 12px;  /* slightly smaller radius for tighter look */
     transition: background-color 0.3s ease;
 }
 
@@ -69,7 +69,7 @@ window#waybar
 #custom-updates:hover,
 #temperature:hover 
 {
-    background-color: #6272a4;
+    background-color: #575757;
 }
 
 /* Active workspace button */
@@ -85,3 +85,4 @@ window#waybar
     background-color: #8be9fd;
     color: #282a36;
 }
+
