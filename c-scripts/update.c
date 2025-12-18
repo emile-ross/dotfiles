@@ -8,8 +8,8 @@ int main(void) {
 
 
 // buffers to store strings in memory
-    char line[512];
-    char VAWSM[512] = {0}; 
+    char line[128]; // down from 512
+    char VAWSM[16] = {0}; // down from 512 ( 512 is 100% overkill we are just storing a few chars)
     while (fgets(line, sizeof(line), f))
     {
         char *p = line;
@@ -34,7 +34,7 @@ int main(void) {
         }
     }
     fclose(f); // won't need it anymore
-    if (strlen(VAWSM) > 0)
+    if (VAWSM[0])
         printf("VAWSM = %s\n", VAWSM);
       // just prints the version we will work on that
     else
