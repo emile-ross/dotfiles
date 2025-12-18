@@ -6,26 +6,35 @@ int main(void) {
     FILE *f = fopen("hyprland.conf", "r");
     if (!f) return 1; // exit with errcode 1 if it fails
 
-  
-// buffers
-    char line[512]; 
-    char VAWSM[512] = {0};
+
+// buffers to store strings in memory
+    char line[512];
+    char VAWSM[512] = {0}; 
     while (fgets(line, sizeof(line), f))
     {
         char *p = line;
-        // Skip leading whitespace
+        // skip whitespace (spaces / indenting)
         while (isspace((unsigned char)*p)) p++;
-    
-        if (strncmp(p, "AWSMVERSION:", 12) == 0) 
+        // checks for comments only
+        if (*p != '#')
+            continue;
+        p++;
+      // skip '#'
+        // Skip whitespace after '#'
+        while (isspace((unsigned char)*p)) p++;
+        // Match key
+        if (strncmp(p, "AWSMVERSION:", 12) == 0) // 12 will need to be modified if the length of the string is modified
         {
-            p += 12;
+            p += 12; // 12 because string is 12 chars
+            while (isspace((unsigned char)*p)) p++;
+            // skip newline
             p[strcspn(p, "\r\n")] = 0;
-            strncpy(VAWSM, sizeof(VAWSM));
+            strncpy(VAWSM, p, sizeof(VAWSM) - 1);
             break;
         }
     }
-    fclose(f);
-    if (VAWSM[0])
+    fclose(f); // won't need it anymore
+    if (strlen(VAWSM) > 0)
         printf("VAWSM = %s\n", VAWSM);
       // just prints the version we will work on that
     else
