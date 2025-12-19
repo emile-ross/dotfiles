@@ -12,18 +12,23 @@ Click [here](#install) to install
 - hyprland
 - waybar
 - gtklock
-- *fastfetch ( not yet)*
-- *kitty (not yet)*
-  
-- *Firefox* (not yet)
-- *LibreWolf* (not yet)
+- fastfetch
+
+
+- *kitty* (not yet)
+- *Firefox* (not planned)
+- *LibreWolf* (not planned)
+- *Floorp* (not planned)
+- *Chromium* (not planned)
 
 
 ## install
 
 note: this script is still unfinished and you **will** encounter bugs
+
 bash script:
 ```sh
+cd ~
 git clone https://github.com/ImAwsumm/dotfiles.git
 cd dotfiles
 chmod u+x ./install.sh
