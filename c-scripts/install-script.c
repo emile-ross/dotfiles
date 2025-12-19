@@ -64,6 +64,7 @@ int main()
     scanf(" %c", &ARCHIVE);
     if (ARCHIVE == 'Y' || ARCHIVE == 'y')
     {
+        // renaming old configs
         system("cd ~/.config/hypr && mv hyprland.conf hyprland-oldv0.conf && mv hyprpaper.conf hyprpaper-oldv0.conf && mv hypridle.conf hypridle-oldv0.conf");
         system("cd ~/.config/nvim && mv init.lua init-oldv0.lua");
         printf("Done. -oldv0 was appended to the end of the old config filenames.\n");
@@ -74,9 +75,14 @@ int main()
     scanf(" %c", &DOTINSTALL);
     if (DOTINSTALL == 'Y' || DOTINSTALL == 'y') 
     {
+        // export hyprland dotfiles
         system("cd ~/dotfiles/hypr && cp hyprland.conf ~/.config/hypr && cp hypridle.conf ~/.config/hypr && cp hyprpaper.conf ~/.config/hypr");
+        
+        // export neovim config
         system("cd ~/dotfiles/nvim && cp init.lua ~/.config/nvim");
-        system("cd ~/dotfiles/waybar && cp style.css ~/.config/waybar && cp config.jsonc ~/.config/waybar");
+        
+         // export waybar config and appearance
+         system("cd ~/dotfiles/waybar && cp style.css ~/.config/waybar && cp config.jsonc ~/.config/waybar");
     }
         else 
     {
