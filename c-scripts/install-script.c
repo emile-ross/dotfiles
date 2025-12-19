@@ -83,6 +83,9 @@ int main()
         
          // export waybar config and appearance
          system("cd ~/dotfiles/waybar && cp style.css ~/.config/waybar && cp config.jsonc ~/.config/waybar");
+
+        // export fastfetch config
+        system("cd ~/dotfiles/fastfetch && cp config.jsonc ~/.config/fastfetch");
     }
         else 
     {
