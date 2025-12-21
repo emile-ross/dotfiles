@@ -37,9 +37,16 @@ int main(void)
         // Only execute if version is exactly 1.0 (will be modified in newer versions
         if (strcmp(VAWSM, "1.0") == 0) 
         {
+            // hyprland config
             system("cd ~/dotfiles/hypr && cp hyprland.conf ~/.config/hypr && cp hypridle.conf ~/.config/hypr && cp hyprpaper.conf ~/.config/hypr");
-            system("cd ~/dotfiles/nvim && cp init.lua ~/.config/nvim");
+            
+            // nvim config
+            system("cd ~/dotfiles/nvim && cp init.lua ~/.config/nvim && cp -rf lua ~/.config/nvim && cp lazy-lock.json ~/.config/nvim");
+            
+            // waybar config
             system("cd ~/dotfiles/waybar && cp style.css ~/.config/waybar && cp config.jsonc ~/.config/waybar");
+            
+            //fastfetch config
             system("cd ~/dotfiles/fastfetch && cp config.jsonc ~/.config/fastfetch");
         } 
         else 
