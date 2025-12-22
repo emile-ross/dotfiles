@@ -4,9 +4,7 @@
 cd ~
 ISYAY=/sbin/yay
 if [ -f $ISYAY ] ; then
-
 echo -e " Yay is now installed, congrats! \n"
-
 else
    # install yay if it isn't already installed
    read -n1 -p "Yay is not installed, do you want to install it? (Y/n): " YAY
@@ -49,21 +47,24 @@ fi
 # Propose saving the old config files before performing the update 
 
 read -n1 -p "Do you want to save a copy of your old dotfiles before updating them? (Y/n): " ARCHIVE 
-  if [[ $ARCHIVE == "Y" || $ARCHIVE == "y" ]]; then
+if [[ $ARCHIVE == "Y" || $ARCHIVE == "y" ]]; then
+    OLD_VERSION="0"
+	# old version is 0 since this is the first install
+    # Archive Hyprland config files
+    cd ~/.config/hypr || exit 1
+    mv hyprland.conf "hyprland-oldv${OLD_VERSION}.conf"
+    mv hyprpaper.conf "hyprpaper-oldv${OLD_VERSION}.conf"
+    mv hypridle.conf "hypridle-oldv${OLD_VERSION}.conf"
+
+    # archive neovim config files
+    cd ~/.config/nvim || exit 1
+    mv init.lua "init-oldv${OLD_VERSION}.lua"
+    cd ~
+    echo -e "Done. -oldv${OLD_VERSION} was appended to the old config filenames."
+	fi
+	
   
-  cd ~/.config/hypr #   Create an Archive of the hyprland config files
-     mv hyprland.conf hyprland-oldv0.conf
-     mv hyprpaper.conf hyprpaper-oldv0.conf
-     mv hypridle.conf hypridle-oldv0.conf
-	 
-  cd ~/.config/nvim #  Create an Archive of the NeoVim config files ( not needed )
-     mv init.lua init-oldv0.lua
-  cd ~
-  
-  echo -e "Done. -oldv0 was appended to the end of the old config filenames."
-  fi
-  
-# actually install the dotfiles
+# actually move the dotfiles to ~/.config/
 read -n1 -p 'Do you want to install the dotfiles? (Y/n) ' DOTINSTALL
 if [[ $DOTINSTALL == "Y" || $DOTINSTALL == "y" ]]; then
 
@@ -83,11 +84,4 @@ cd ~/dotfiles
 fi
 
 cd ~
-
-echo -e "You can now use Hyprland ino order to launch it whenever you want.\n"
-read -n1 -rep 'Would you like to start Hyprland now? (Y,n)' EXECHYPR
-if [[ $EXECHYPR == "Y" || $EXECHYPR == "y" ]]; then
-    exec Hyprland
-else
-    exit
-fi
+echo -e "The dotfiles are now installed, you can press super+m to restart hyprland."
