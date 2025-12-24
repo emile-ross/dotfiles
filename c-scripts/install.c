@@ -64,9 +64,12 @@ int main()
     scanf(" %c", &ARCHIVE);
     if (ARCHIVE == 'Y' || ARCHIVE == 'y')
     {
-        // renaming old configs
+        // renaming old configs before replacing them
         system("cd ~/.config/hypr && mv hyprland.conf hyprland-oldv0.conf && mv hyprpaper.conf hyprpaper-oldv0.conf && mv hypridle.conf hypridle-oldv0.conf");
         system("cd ~/.config/nvim && mv init.lua init-oldv0.lua");
+        // waybar archiving is missing
+        // fastfetch archiving is missing
+        
         printf("Done. -oldv0 was appended to the end of the old config filenames.\n");
     }
     // Install the dotfiles
