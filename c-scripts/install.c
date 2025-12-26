@@ -66,6 +66,7 @@ int main()
     {
         // renaming old configs before replacing them
         system("cd ~/.config/hypr && mv hyprland.conf hyprland-oldv0.conf && mv hyprpaper.conf hyprpaper-oldv0.conf && mv hypridle.conf hypridle-oldv0.conf");
+        system("cd ~/.config/waybar && mv config.jsonc config-oldv0.jsonc && mv style.css style-oldv0.css");
         system("cd ~/.config/nvim && mv init.lua init-oldv0.lua");
         // waybar archiving is missing
         // fastfetch archiving is missing
