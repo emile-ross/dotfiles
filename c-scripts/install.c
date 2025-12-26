@@ -56,7 +56,7 @@ int main()
     printf("\n");
     if (PKGINSTALL == 'Y' || PKGINSTALL == 'y') 
     {
-        system("yay -S --noconfirm hyprland kitty waybar gtklock hyprpaper wofi fastfetch floorp-bin");
+        system("yay -S --noconfirm hyprland kitty waybar gtklock hyprpaper wofi fastfetch floorp-bin librewolf-bin");
     }
     // Propose saving the old config files before performing the update
     char ARCHIVE;
