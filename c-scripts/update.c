@@ -46,18 +46,14 @@ int main(void)
         if (strcmp(VAWSM, "1.0") == 0) 
         {
             char cmd[256];
-            system("cd ~/.config/hypr && mv hyprland.conf");
+            system("cd ~/.config/hypr && mv hyprland.conf hyprland-v%s.conf", VAWSM);
             // system("cd ~/.config/hypr && mv hyprland.conf hyprland-oldv0.conf && mv hyprpaper.conf hyprpaper-oldv0.conf && mv hypridle.conf hypridle-oldv0.conf");
-            // system("cd ~/.config/nvim && mv init.lua init-oldv0.lua");
+            system("cd ~/.config/nvim && mv init.lua init-v%s.lua", VAWSM);
             
+            // system("cd ~/.config/hypr && mv hyprland.conf");
             
-            system("cd ~/.config/hypr && mv hyprland.conf");
             // backup old configs with the current version name 
             // only the modifed files are backed up
-            system("cd ~/.config/hypr");
-            snprintf(cmd, sizeof(cmd),
-                     "mv hyprland.conf hyprland-v%s.conf", VAWSM);
-            system(cmd);
 
             // hyprland config
             system("cd ~/dotfiles/hypr && cp hyprland.conf ~/.config/hypr && cp hypridle.conf ~/.config/hypr && cp hyprpaper.conf ~/.config/hypr");
