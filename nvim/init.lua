@@ -4,13 +4,10 @@ if not vim.loop.fs_stat(lazypath) then
   print("lazy.nvim not found")
   return
 end
+
 vim.opt.rtp:prepend(lazypath)
-
-
 vim.wo.number = true
 vim.wo.relativenumber = true
-
-
 require("lazy").setup({
   {
     "catppuccin/nvim", -- set theme
