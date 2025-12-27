@@ -38,7 +38,7 @@ chmod u+x ./update.sh
 before executing the c script, you will need to compile it.  
 ```bash
 git clone https://github.com/ImAwsumm/dotfiles.git
-gcc install-script.c -o cinstall
+gcc install.c -o cinstall
 ./cinstall
 ```
 A new install script is in the making.  It will run faster because it is in C instead of bash.  This script will need to be compiled using the gcc compiler.
