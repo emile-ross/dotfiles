@@ -30,7 +30,7 @@ bash script:
 ```sh
 cd ~
 git clone https://github.com/ImAwsumm/dotfiles.git
-cd dotfiles
+cd dotfiles/bash-scripts
 chmod u+x ./install.sh
 chmod u+x ./update.sh
 ./install.sh
