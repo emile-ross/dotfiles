@@ -1,5 +1,10 @@
 // -*- mode: jsonc -*-
 {
+
+// this config file was not made by @ImAwsumm
+// I got it from a deleted account on discord 
+// credits can't be attributed to anyone
+// no license
     // "layer": "top", // Waybar at top layer
     // "position": "bottom", // Waybar position (top|bottom|left|right)
     "height": 30, // Waybar height (to be removed for auto height)
