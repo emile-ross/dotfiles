@@ -2,6 +2,8 @@
 Dotfiles are files used to customize your system to your liking.  You can modify them to your liking by editing them using a text editor.  
 Click [here](#install) to install 
 
+If you want to update your dotfiles, click [here](#Update)
+
 ## requirements
 - an Arch based distribution of linux (Windows will **never** get support)
 - Hyprland isn't required but still recomended in order to benefit from all configurations
@@ -48,9 +50,9 @@ Useful keybinds to know:
 (super = "Windows key")
  
  super + q -> **execute Kitty**
- super + 1 -> **execute LibreWolf**
+ super + 1 -> **execute Floorp**
  super + 2 -> **execute Firefox**
- 
+ super + 3 -> **execute LibreWolf**
  
  super + F1 -> **switch to Workspace 1**
  
@@ -59,3 +61,13 @@ Useful keybinds to know:
  super + m -> **exit hyprland**
 
 If you ever encounter an issue please report it by providing the issue you are experiencing with a log, it helps me improve this script. 
+
+# Update
+
+After reading the code, you can paste this in your terminal in order to update
+
+```sh 
+cd ~/dotfiles/c-scripts
+gcc update.c -o update
+./update
+```
