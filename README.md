@@ -23,21 +23,15 @@ If you want to update your dotfiles, click [here](#Update)
 - *Floorp* (not planned)
 - *Chromium* (not planned)
 
+--- 
 
-## install
+## Install
 
-note: this script is still unfinished and you **will** encounter bugs
+In order to install the dotfiles you will need to run a C script.  
 
-bash script:
-```sh
-cd ~
-git clone https://github.com/ImAwsumm/dotfiles.git
-cd dotfiles/bash-scripts
-chmod u+x ./install.sh
-chmod u+x ./update.sh
-./install.sh
-```
-before executing the c script, you will need to compile it.  
+>  **Warning** Be careful running scripts found on the internet!
+
+Before executing the c script, you will need to compile it.  
 ```bash
 git clone https://github.com/ImAwsumm/dotfiles.git
 gcc install.c -o cinstall
