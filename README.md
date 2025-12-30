@@ -1,8 +1,8 @@
 # ImAwsum's dotfiles
-Dotfiles are files used to customize your system to your liking.  You can modify them to your liking by editing them using a text editor.  
-Click [here](#install) to install 
+Dotfiles are files used to customize your system to your liking.  You can modify them by editing config files using a text editor (Neovim).
 
-If you want to update your dotfiles, click [here](#Update)
+If you want to **install** your dotfiles, click [here](#install) 
+If you want to **update** your dotfiles, click [here](#Update)
 
 ## requirements
 - an Arch based distribution of linux (Windows will **never** get support)
@@ -15,7 +15,6 @@ If you want to update your dotfiles, click [here](#Update)
 - waybar
 - gtklock
 - fastfetch
-
 
 - *kitty* (not yet)
 - *Firefox* (not planned)
@@ -37,22 +36,26 @@ git clone https://github.com/ImAwsumm/dotfiles.git
 gcc install.c -o cinstall
 ./cinstall
 ```
-A new install script is in the making.  It will run faster because it is in C instead of bash.  This script will need to be compiled using the gcc compiler.
 
 ## after install 
 Useful keybinds to know:
 (super = "Windows key")
  
- super + q -> **execute Kitty**
- super + 1 -> **execute Floorp**
- super + 2 -> **execute Firefox**
- super + 3 -> **execute LibreWolf**
- 
- super + F1 -> **switch to Workspace 1**
- 
- (super + F1-F10 -> Workspaces 1-10)
+ > super + Q -> **execute kitty**
 
- super + m -> **exit hyprland**
+ > super + R -> **execute fuzzer**
+
+ > super + 1 -> **execute floorp**
+ 
+ > super + 2 -> **execute firefox**
+
+ > super + 3 -> **execute LibreWolf**
+ 
+ > super + F1 -> **switch to Workspace 1**
+ 
+ > *super + (F1-F11) -> Workspaces (1-11)*
+
+ > super + m -> **exit hyprland**
 
 If you ever encounter an issue please report it by providing the issue you are experiencing with a log, it helps me improve this script. 
 
@@ -65,3 +68,4 @@ cd ~/dotfiles/c-scripts
 gcc update.c -o update
 ./update
 ```
+
