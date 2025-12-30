@@ -38,7 +38,6 @@ int main()
             {
                 printf("Makepkg is already installed.\n");
             }
-            // Clone yay and build it from source
             system("git clone https://aur.archlinux.org/yay.git");
             system("cd yay && makepkg -si");
             printf("\nYay is installed, congrats!\n");
@@ -53,10 +52,11 @@ int main()
     char PKGINSTALL;
     printf("Do you want to proceed with the installation of packages? (Y/n): ");
     scanf(" %c", &PKGINSTALL);
+    // ask the user if they want to install packages (needed) 
     printf("\n");
     if (PKGINSTALL == 'Y' || PKGINSTALL == 'y') 
     {
-        system("yay -S --noconfirm hyprland kitty waybar gtklock hyprpaper wofi fastfetch floorp-bin librewolf-bin");
+        system("yay -S --noconfirm hyprland kitty waybar gtklock hyprpaper fuzzel fastfetch floorp-bin librewolf-bin");
     }
     // Propose saving the old config files before performing the update
     char ARCHIVE;
