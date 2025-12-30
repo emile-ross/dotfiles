@@ -67,6 +67,11 @@ int main(void)
             // fastfetch config
             system("cd ~/dotfiles/fastfetch && cp config.jsonc ~/.config/fastfetch");
         } 
+        if (strcmp(VAWSM, "1.2") == 0) 
+		system("yay -S --noconfirm fuzzel");
+    		// import fuzzel config	
+		system("cd ~/dotfiles/ && cp -r fuzzel");
+	{
         else 
         {
             printf("Unsupported VAWSM version. No files were copied.\n");
