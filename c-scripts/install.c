@@ -6,6 +6,9 @@
 int main() 
 {
     int FIXINST;
+    printf("\n What do you want to do?");
+    printf("\n [1] proceed with installation");
+    printf("\n [2] fix your installation");
     scanf(" %d", &FIXINST);
     if (FIXINST == '2')
     {
