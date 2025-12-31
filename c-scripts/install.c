@@ -5,6 +5,17 @@
 // error code 1 is caused by a missing dependency
 int main() 
 {
+    int FIXINST;
+    scanf(" %d", &FIXINST);
+    if (FIXINST == '2')
+    {
+        // add commands for fixing script below
+        system("sudo pacman -S --noconfim nvim waybar git ");
+    }
+    else
+    {
+        printf("\n The installation is now starting. \n");
+    }
     // Check if yay is installed
     if (system("test -f /sbin/yay") == 0) 
     {
