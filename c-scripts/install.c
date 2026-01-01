@@ -14,7 +14,7 @@ int main()
     {
         // add commands for fixing script below
         system("sudo pacman -S --noconfim nvim waybar git ");
-        system("mkdir -p ~/.config/fuzzel && mkdir -p ~/.config/nvim/lua && mkdir -p ~/.config/fastfetch");
+        system("mkdir -p ~/.config/fuzzel && mkdir -p ~/.config/nvim/lua/config && mkdir -p ~/.config/nvim/lua/plugins && mkdir -p ~/.config/fastfetch && mkdir -p ~/.config/hypr");
     }
     else
     {
