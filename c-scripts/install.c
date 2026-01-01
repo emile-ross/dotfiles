@@ -103,6 +103,9 @@ int main()
          // export waybar config and appearance
          system("cd ~/dotfiles/waybar && cp style.css ~/.config/waybar && cp config.jsonc ~/.config/waybar");
 
+         // export fuzzel appearance
+         system("cd ~/dotfiles/fuzzel && mkdir ~/.config/fuzzel && cp fuzzel.ini ~/.config/fuzzel");
+
         // export fastfetch config
         system("cd ~/dotfiles/fastfetch && cp config.jsonc ~/.config/fastfetch");
     }
