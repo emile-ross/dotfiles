@@ -81,6 +81,6 @@ int main(void)
     {
         printf("You need to install the dotfiles before updating them.\n");
     }
-
+printf("\n If you encountered any issues, you can execute the install.c script and use the fixing option.\n");
     return 0;
 }
