@@ -36,6 +36,7 @@ In order to install the dotfiles you will need to run a C script.
 Before executing the c script, you will need to compile it.  
 ```bash
 git clone https://github.com/ImAwsumm/dotfiles.git
+cd dotfiles/c-scripts
 gcc install.c -o cinstall
 ./cinstall
 ```
