@@ -1,6 +1,7 @@
 # ImAwsum's dotfiles
 Dotfiles are files used to customize your system to your liking.  You can modify them by editing config files using a text editor (Neovim).
 
+
 If you want to **install** your dotfiles, click [here](#install) 
 If you want to **update** your dotfiles, click [here](#Update)
 
@@ -68,4 +69,8 @@ cd ~/dotfiles/c-scripts
 gcc update.c -o update
 ./update
 ```
+# Credits 
 
+Many configs were directly from or inspired by [@kzndotsh](https://github.com/kzndotsh)
+(fuzzel, cava, waybar...)
+You can find the original content at: [github.com/kzndotsh/dotfiles](https://github.com/kzndotsh/dotfiles)
