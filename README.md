@@ -16,6 +16,8 @@ If you want to **update** your dotfiles, click [here](#Update)
 - waybar
 - gtklock
 - fastfetch
+- cava
+- fuzzel
 
 - *kitty* (not yet)
 - *Firefox* (not planned)
