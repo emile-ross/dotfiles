@@ -13,8 +13,12 @@ int main()
     if (FIXINST == '2')
     {
         // add commands for fixing script below
-        system("sudo pacman -S --noconfim nvim waybar git ");
-        system("mkdir -p ~/.config/fuzzel && mkdir -p ~/.config/nvim/lua/config && mkdir -p ~/.config/nvim/lua/plugins && mkdir -p ~/.config/fastfetch && mkdir -p ~/.config/hypr");
+        system("sudo pacman -S --noconfim nvim waybar git cava fuzzel");
+        // system("yay -S --noconfirm ");
+
+        // make directories
+        system("mkdir -p ~/.config/nvim/lua/config && mkdir -p ~/.config/nvim/lua/plugins && mkdir -p ~/.config/fastfetch && mkdir -p ~/.config/hypr");
+        system("mkdir -p ~/.config/cava && mkdir -p ~/.config/fuzzel");
     }
     else
     {
@@ -108,6 +112,9 @@ int main()
 
         // export fastfetch config
         system("cd ~/dotfiles/fastfetch && cp config.jsonc ~/.config/fastfetch");
+
+        // export cava config 
+        system("cd ~/dotfiles/cava && cp config ~/.config/cava");
     }
         else 
     {
