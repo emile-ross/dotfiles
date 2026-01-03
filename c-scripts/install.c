@@ -9,6 +9,7 @@ int main()
     printf("\n What do you want to do?");
     printf("\n [1] proceed with installation");
     printf("\n [2] fix your installation");
+    printf("\n : ");
     scanf(" %d", &FIXINST);
     if (FIXINST == '2')
     {
@@ -75,7 +76,7 @@ int main()
     printf("\n");
     if (PKGINSTALL == 'Y' || PKGINSTALL == 'y') 
     {
-        system("yay -S --noconfirm hyprland kitty waybar gtklock hyprpaper fuzzel fastfetch floorp-bin librewolf-bin");
+        system("yay -S --noconfirm hyprland kitty waybar gtklock hyprpaper fuzzel fastfetch floorp-bin librewolf-bin xclip wl-clipboard");
     }
     // Propose saving the old config files before performing the update
     char ARCHIVE;
@@ -86,7 +87,7 @@ int main()
         // renaming old configs before replacing them
         system("mkdir ~/.config/hypr && cd ~/.config/hypr && mv hyprland.conf hyprland-oldv0.conf && mv hyprpaper.conf hyprpaper-oldv0.conf && mv hypridle.conf hypridle-oldv0.conf");
         system("mkdir ~/.config/waybar && cd ~/.config/waybar && mv config.jsonc config-oldv0.jsonc && mv style.css style-oldv0.css");
-        system("mkdir ~/.config/nvim cd ~/.config/nvim && mv init.lua init-oldv0.lua");
+        system("mkdir ~/.config/nvim cd ~/.config/nvim && mv init.lua init-oldv0.lua && mv lazy-lock.json lazy-lock-oldv0.json");
         // waybar archiving is missing
         // fastfetch archiving is missing
         
@@ -102,10 +103,10 @@ int main()
         system("cd ~/dotfiles/hypr && cp hyprland.conf ~/.config/hypr && cp hypridle.conf ~/.config/hypr && cp hyprpaper.conf ~/.config/hypr");
         
         // export neovim config
-            system("cd ~/dotfiles/nvim && cp init.lua ~/.config/nvim && cp -rf lua ~/.config/nvim && cp lazy-lock.json ~/.config/nvim");
+            system("cd ~/dotfiles/nvim && cp -f init.lua ~/.config/nvim && cp -rf lua ~/.config/nvim && cp -f lazy-lock.json ~/.config/nvim");
         
          // export waybar config and appearance
-         system("cd ~/dotfiles/waybar && cp style.css ~/.config/waybar && cp config.jsonc ~/.config/waybar");
+         system("cd ~/dotfiles/waybar && cp -f style.css ~/.config/waybar && cp -f config.jsonc ~/.config/waybar");
 
          // export fuzzel appearance
          system("cd ~/dotfiles/fuzzel && mkdir ~/.config/fuzzel && cp fuzzel.ini ~/.config/fuzzel");
