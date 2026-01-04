@@ -1,5 +1,5 @@
 # ImAwsum's dotfiles
-Dotfiles are files used to customize your system to your liking.  You can modify them by editing config files using a text editor (Neovim).
+Dotfiles are files used to customize your system to your liking.  You can modify them by editing config files using a text editor ([Neovim](https://github.com/neovim/neovim)).
 
 
 If you want to **install** your dotfiles, click [here](#install) 
@@ -18,8 +18,9 @@ If you want to **update** your dotfiles, click [here](#Update)
 - fastfetch
 - cava
 - fuzzel
+- kitty
 
-- *kitty* (not yet)
+  
 - *Firefox* (not planned)
 - *LibreWolf* (not planned)
 - *Floorp* (not planned)
