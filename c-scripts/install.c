@@ -86,7 +86,7 @@ int main()
 	char cmd[256];
 	snprintf(cmd, sizeof(cmd),
 		"yay -S --noconfirm hyprland kitty waybar gtklock hyprpaper floorp-bin librewolf-bin xclip wl-clipboard && "
-		"sudo pacman -S ttf-jetbrains-mono nerd-fonts-jetbrains-mono cava fuzzel fastfetch");
+		"sudo pacman -S --noconfirm ttf-jetbrains-mono nerd-fonts-jetbrains-mono cava fuzzel fastfetch");
 		system(cmd);
     }
     // Propose saving the old config files before performing the update
@@ -151,9 +151,9 @@ int main()
         char cmd[256];
         snprintf(cmd, sizeof(cmd),
                "cd ~/dotfiles/hypr && "
-               "cp hyprland.conf ~/.config/hypr && "
-               "cp hypridle.conf ~/.config/hypr && "
-               "cp hyprpaper.conf ~/.config/hypr");
+               "cp -f hyprland.conf ~/.config/hypr && "
+               "cp -f hypridle.conf ~/.config/hypr && "
+               "cp -f hyprpaper.conf ~/.config/hypr");
         system(cmd);
 
         // export neovim config
