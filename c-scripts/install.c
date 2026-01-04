@@ -83,7 +83,11 @@ int main()
     if (PKGINSTALL == 'Y' || PKGINSTALL == 'y')
     {
         // install packages
-        system("yay -S --noconfirm hyprland kitty waybar gtklock hyprpaper fuzzel fastfetch floorp-bin librewolf-bin xclip wl-clipboard cava");
+	char cmd[256];
+	snprintf(cmd, sizeof(cmd),
+		"yay -S --noconfirm hyprland kitty waybar gtklock hyprpaper floorp-bin librewolf-bin xclip wl-clipboard && "
+		"sudo pacman -S ttf-jetbrains-mono nerd-fonts-jetbrains-mono cava fuzzel fastfetch");
+		system(cmd);
     }
     // Propose saving the old config files before performing the update
     char ARCHIVE;
