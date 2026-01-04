@@ -3,7 +3,7 @@
 #include <string.h>
 #define MAX_CMD 512
 // error code 1 is caused by a missing dependency
-int main() 
+int main()
 {
     // this float sets the past version (0 because this is the install script)
     float pver = 0.0f;
@@ -27,43 +27,48 @@ int main()
         printf("\n The installation is now starting. \n");
     }
     // Check if yay is installed
-    if (system("test -f /sbin/yay") == 0) 
+    if (system("test -f /sbin/yay") == 0)
     {
         printf("Yay is now installed, congrats!\n");
     }
-    else 
+    else
     {
         char YAY;
         printf("Yay is not installed, do you want to install it? (Y/n): ");
-        scanf(" %c", &YAY); // asks the user if they wanna install yay (needed) 
-        if (YAY == 'Y' || YAY == 'y') 
+        scanf(" %c", &YAY); // asks the user if they wanna install yay (needed)
+        if (YAY == 'Y' || YAY == 'y')
         {
             // Check if makepkg is installed ( it is needed in order to compile yay )
-            if (system("command -v makepkg > /dev/null") != 0) 
+            if (system("command -v makepkg > /dev/null") != 0)
             {
                 printf("\nMakepkg is not installed. Installing 'base-devel' package group to proceed...\n");
                 system("sudo pacman -S --noconfirm base-devel");
 
                 // Check if makepkg is available after installing the base-devel package
-                if (system("command -v makepkg > /dev/null") != 0) 
+                if (system("command -v makepkg > /dev/null") != 0)
                 {
                     printf("Makepkg installation failed. Please check your system configuration.\n");
                     return 1;
                 }
-                else 
+                else
                 {
                     printf("Makepkg has been successfully installed!\n");
                 }
             }
-            else 
+            else
             {
                 printf("Makepkg is already installed.\n");
             }
-            system("git clone https://aur.archlinux.org/yay.git");
-            system("cd yay && makepkg -si");
+            char cmd[256];
+            snprintf(cmd, sizeof(cmd),
+                "git clone https://aur.archlinux.org/yay.git &&"
+                "cd yay &&"
+                "makepkg -si");
+            system(cmd);
+
             printf("\nYay is installed, congrats!\n");
         }
-        else 
+        else
         {
             printf("\nYay is needed in order to proceed with the script.\n");
             return 1;
@@ -73,11 +78,11 @@ int main()
     char PKGINSTALL;
     printf("Do you want to proceed with the installation of packages? (Y/n): ");
     scanf(" %c", &PKGINSTALL);
-    // ask the user if they want to install packages (needed) 
+    // ask the user if they want to install packages (needed)
     printf("\n");
-    if (PKGINSTALL == 'Y' || PKGINSTALL == 'y') 
+    if (PKGINSTALL == 'Y' || PKGINSTALL == 'y')
     {
-        // install packages 
+        // install packages
         system("yay -S --noconfirm hyprland kitty waybar gtklock hyprpaper fuzzel fastfetch floorp-bin librewolf-bin xclip wl-clipboard cava");
     }
     // Propose saving the old config files before performing the update
@@ -119,7 +124,7 @@ int main()
 
         // waybar archiving is missing
         // fastfetch archiving is missing
-        
+
         // clean the path ~/.config/cava
         system("rm ~/.config/cava && mkdir ~/.config/cava");
         // rename the old config
@@ -135,14 +140,14 @@ int main()
     char DOTINSTALL;
     printf("Do you want to install the dotfiles? (Y/n): ");
     scanf(" %c", &DOTINSTALL);
-    if (DOTINSTALL == 'Y' || DOTINSTALL == 'y') 
+    if (DOTINSTALL == 'Y' || DOTINSTALL == 'y')
     {
         // export hyprland dotfiles
         system("cd ~/dotfiles/hypr && cp hyprland.conf ~/.config/hypr && cp hypridle.conf ~/.config/hypr && cp hyprpaper.conf ~/.config/hypr");
-        
+
         // export neovim config
         system("cd ~/dotfiles/nvim && cp -f init.lua ~/.config/nvim && cp -rf lua ~/.config/nvim && cp -f lazy-lock.json ~/.config/nvim");
-        
+
          // export waybar config and appearance
         system("cd ~/dotfiles/waybar && cp -f style.css ~/.config/waybar && cp -f config.jsonc ~/.config/waybar");
 
@@ -152,10 +157,10 @@ int main()
         // export fastfetch config
         system("cd ~/dotfiles/fastfetch && cp config.jsonc ~/.config/fastfetch");
 
-        // export cava config 
+        // export cava config
         system("cd ~/dotfiles/cava && cp config ~/.config/cava");
     }
-        else 
+        else
     {
         return 0;
     }
