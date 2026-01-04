@@ -5,11 +5,12 @@
 // error code 1 is caused by a missing dependency
 int main() 
 {
+    // this float sets the past version (0 because this is the install script)
+    float pver = 0.0f;
     int FIXINST;
     printf("\n What do you want to do?");
     printf("\n [1] proceed with installation");
-    printf("\n [2] fix your installation");
-    printf("\n : ");
+    printf("\n [2] fix your installation\n");
     scanf(" %d", &FIXINST);
     if (FIXINST == '2')
     {
@@ -76,7 +77,8 @@ int main()
     printf("\n");
     if (PKGINSTALL == 'Y' || PKGINSTALL == 'y') 
     {
-        system("yay -S --noconfirm hyprland kitty waybar gtklock hyprpaper fuzzel fastfetch floorp-bin librewolf-bin xclip wl-clipboard");
+        // install packages 
+        system("yay -S --noconfirm hyprland kitty waybar gtklock hyprpaper fuzzel fastfetch floorp-bin librewolf-bin xclip wl-clipboard cava");
     }
     // Propose saving the old config files before performing the update
     char ARCHIVE;
@@ -85,13 +87,49 @@ int main()
     if (ARCHIVE == 'Y' || ARCHIVE == 'y')
     {
         // renaming old configs before replacing them
-        system("mkdir ~/.config/hypr && cd ~/.config/hypr && mv hyprland.conf hyprland-oldv0.conf && mv hyprpaper.conf hyprpaper-oldv0.conf && mv hypridle.conf hypridle-oldv0.conf");
-        system("mkdir ~/.config/waybar && cd ~/.config/waybar && mv config.jsonc config-oldv0.jsonc && mv style.css style-oldv0.css");
-        system("mkdir ~/.config/nvim cd ~/.config/nvim && mv init.lua init-oldv0.lua && mv lazy-lock.json lazy-lock-oldv0.json");
+          char cmd[512];
+    snprintf(cmd, sizeof(cmd),
+         "mkdir -p ~/.config/hypr && cd ~/.config/hypr && "
+         "mv hyprland.conf hyprland-oldv%.1f.conf && "
+         "mv hyprpaper.conf hyprpaper-oldv%.1f.conf && "
+         "mv hypridle.conf hypridle-oldv%.1f.conf",
+         pver, pver, pver);
+    system(cmd);
+
+    snprintf(cmd, sizeof(cmd),
+         "mkdir -p ~/.config/waybar && cd ~/.config/waybar && "
+         "mv config.jsonc config-oldv%.1f.jsonc && "
+         "mv style.css style-oldv%.1f.css",
+         pver, pver);
+    system(cmd);
+
+    snprintf(cmd, sizeof(cmd),
+         "mkdir -p ~/.config/nvim && cd ~/.config/nvim && "
+         "mv init.lua init-oldv%.1f.lua && "
+         "mv lazy-lock.json lazy-lock-oldv%.1f.json",
+         pver, pver);
+    system(cmd);
+
+    snprintf(cmd, sizeof(cmd),
+         "mkdir -p ~/.config/fastfetch && "
+         "mv ~/.config/fastfetch/config.jsonc "
+         "~/.config/fastfetch/config-oldv%.1f.jsonc",
+         pver);
+    system(cmd);
+
         // waybar archiving is missing
         // fastfetch archiving is missing
         
-        printf("Done. -oldv0 was appended to the end of the old config filenames.\n");
+        // clean the path ~/.config/cava
+        system("rm ~/.config/cava && mkdir ~/.config/cava");
+        // rename the old config
+
+    snprintf(cmd, sizeof(cmd),
+        "mv ~/.config/cava/config ~/.config/cava/config-oldv%.1f",
+        pver);
+    system(cmd);
+
+        printf("Done. -oldv%.1f was appended to the end of the old config filenames.\n", pver);
     }
     // Install the dotfiles
     char DOTINSTALL;
@@ -103,13 +141,13 @@ int main()
         system("cd ~/dotfiles/hypr && cp hyprland.conf ~/.config/hypr && cp hypridle.conf ~/.config/hypr && cp hyprpaper.conf ~/.config/hypr");
         
         // export neovim config
-            system("cd ~/dotfiles/nvim && cp -f init.lua ~/.config/nvim && cp -rf lua ~/.config/nvim && cp -f lazy-lock.json ~/.config/nvim");
+        system("cd ~/dotfiles/nvim && cp -f init.lua ~/.config/nvim && cp -rf lua ~/.config/nvim && cp -f lazy-lock.json ~/.config/nvim");
         
          // export waybar config and appearance
-         system("cd ~/dotfiles/waybar && cp -f style.css ~/.config/waybar && cp -f config.jsonc ~/.config/waybar");
+        system("cd ~/dotfiles/waybar && cp -f style.css ~/.config/waybar && cp -f config.jsonc ~/.config/waybar");
 
          // export fuzzel appearance
-         system("cd ~/dotfiles/fuzzel && mkdir ~/.config/fuzzel && cp fuzzel.ini ~/.config/fuzzel");
+        system("cd ~/dotfiles/fuzzel && mkdir ~/.config/fuzzel && cp fuzzel.ini ~/.config/fuzzel");
 
         // export fastfetch config
         system("cd ~/dotfiles/fastfetch && cp config.jsonc ~/.config/fastfetch");
