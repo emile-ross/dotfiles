@@ -146,23 +146,49 @@ int main()
     scanf(" %c", &DOTINSTALL);
     if (DOTINSTALL == 'Y' || DOTINSTALL == 'y')
     {
+
         // export hyprland dotfiles
-        system("cd ~/dotfiles/hypr && cp hyprland.conf ~/.config/hypr && cp hypridle.conf ~/.config/hypr && cp hyprpaper.conf ~/.config/hypr");
+        char cmd[256];
+        snprintf(cmd, sizeof(cmd),
+               "cd ~/dotfiles/hypr && "
+               "cp hyprland.conf ~/.config/hypr && "
+               "cp hypridle.conf ~/.config/hypr && "
+               "cp hyprpaper.conf ~/.config/hypr");
+        system(cmd);
 
         // export neovim config
-        system("cd ~/dotfiles/nvim && cp -f init.lua ~/.config/nvim && cp -rf lua ~/.config/nvim && cp -f lazy-lock.json ~/.config/nvim");
-
+        snprintf(cmd, sizeof(cmd),
+                "cd ~/dotfiles/nvim && "
+                "cp -f init.lua ~/.config/nvim && "
+                "cp -rf lua ~/.config/nvim && "
+                "cp -f lazy-lock.json ~/.config/nvim");
+        system(cmd);
+        
          // export waybar config and appearance
-        system("cd ~/dotfiles/waybar && cp -f style.css ~/.config/waybar && cp -f config.jsonc ~/.config/waybar");
+        snprintf(cmd, sizeof(cmd),
+                "cd ~/dotfiles/waybar && "
+                "cp -f style.css ~/.config/waybar && "
+                "cp -f config.jsonc ~/.config/waybar");
+        system(cmd);
 
          // export fuzzel appearance
-        system("cd ~/dotfiles/fuzzel && mkdir ~/.config/fuzzel && cp fuzzel.ini ~/.config/fuzzel");
+        snprintf(cmd, sizeof(cmd),
+                "cd ~/dotfiles/fuzzel && "
+                "mkdir ~/.config/fuzzel && "
+                "cp fuzzel.ini ~/.config/fuzzel");
+        system(cmd);
 
         // export fastfetch config
-        system("cd ~/dotfiles/fastfetch && cp config.jsonc ~/.config/fastfetch");
+        snprintf(cmd, sizeof(cmd),
+                "cd ~/dotfiles/fastfetch && "
+                "cp config.jsonc ~/.config/fastfetch");
+        system(cmd);
 
         // export cava config
-        system("cd ~/dotfiles/cava && cp config ~/.config/cava");
+        snprintf(cmd, sizeof(cmd),
+                "cd ~/dotfiles/cava && "
+                "cp config ~/.config/cava");
+        system(cmd);
     }
         else
     {
