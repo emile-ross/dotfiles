@@ -25,7 +25,7 @@ int main(void)
         p++; // skip '#'
         while (isspace((unsigned char)*p)) p++;
 
-        if (strncmp(p, "AWSMVERSION:", 12) == 0) 
+        if (strncmp(p, "AWSMVERSION:", 12) == 0)
         {
             p += 12;
             while (isspace((unsigned char)*p)) p++;
@@ -42,45 +42,13 @@ int main(void)
     {
         printf("VAWSM = %s\n", VAWSM);
 
-        // Only execute if version is exactly 1.0
-        if (strcmp(VAWSM, "1.0") == 0) 
-        {
-            char cmd[256];
-            system("cd ~/.config/hypr && mv hyprland.conf hyprland-v%s.conf", VAWSM);
-            // system("cd ~/.config/hypr && mv hyprland.conf hyprland-oldv0.conf && mv hyprpaper.conf hyprpaper-oldv0.conf && mv hypridle.conf hypridle-oldv0.conf");
-            system("cd ~/.config/nvim && mv init.lua init-v%s.lua", VAWSM);
-            
-            // system("cd ~/.config/hypr && mv hyprland.conf");
-            
-            // backup old configs with the current version name 
-            // only the modifed files are backed up
-
-            // hyprland config
-            system("cd ~/dotfiles/hypr && cp hyprland.conf ~/.config/hypr && cp hypridle.conf ~/.config/hypr && cp hyprpaper.conf ~/.config/hypr");
-
-            // nvim config
-            system("cd ~/dotfiles/nvim && cp init.lua ~/.config/nvim && cp -rf lua ~/.config/nvim && cp lazy-lock.json ~/.config/nvim");
-
-            // waybar config
-            system("cd ~/dotfiles/waybar && cp style.css ~/.config/waybar && cp config.jsonc ~/.config/waybar");
-
-            // fastfetch config
-            system("cd ~/dotfiles/fastfetch && cp config.jsonc ~/.config/fastfetch");
-        } 
-        if (strcmp(VAWSM, "1.2") == 0) 
-		system("yay -S --noconfirm fuzzel");
-    		// import fuzzel config	
-		system("cd ~/dotfiles/ && cp -r fuzzel");
-	{
-        else 
-        {
-            printf("Unsupported VAWSM version. No files were copied.\n");
-        }
     } 
     else 
     {
         printf("You need to install the dotfiles before updating them.\n");
     }
+    system("cd ~ && git clone https://github.com/imawsumm/dotfiles && cd ~/c-scripts");
+    system("gcc update.c -o localupdate && ./localupdate");
 printf("\n If you encountered any issues, you can execute the install.c script and use the fixing option.\n");
     return 0;
 }
