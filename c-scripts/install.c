@@ -122,19 +122,13 @@ int main()
     snprintf(cmd, sizeof(cmd),
          "mkdir -p ~/.config/fastfetch && "
          "mv ~/.config/fastfetch/config.jsonc "
-         "~/.config/fastfetch/config-oldv%.1f.jsonc",
+		"~/.config/fastfetch/config-oldv%.1f.jsonc",
          pver);
     system(cmd);
 
-        // waybar archiving is missing
-        // fastfetch archiving is missing
-
-        // clean the path ~/.config/cava
-        system("rm ~/.config/cava && mkdir ~/.config/cava");
-        // rename the old config
-
     snprintf(cmd, sizeof(cmd),
-        "mv ~/.config/cava/config ~/.config/cava/config-oldv%.1f",
+        "mv ~/.config/cava/config "
+		"~/.config/cava/config-oldv%.1f",
         pver);
     system(cmd);
 
@@ -146,7 +140,27 @@ int main()
     scanf(" %c", &DOTINSTALL);
     if (DOTINSTALL == 'Y' || DOTINSTALL == 'y')
     {
-
+        // export cava config
+        snprintf(cmd, sizeof(cmd),
+			    "rm ~/.config/cava && "
+			    "mkdir -p ~/.config/cava && "
+                "cd ~/dotfiles/cava && "
+                "cp config ~/.config/cava");
+        system(cmd);
+		
+        // export fastfetch config
+        snprintf(cmd, sizeof(cmd),
+			    "mkdir -p ~/.config/fastfetch && "
+                "cd ~/dotfiles/fastfetch && "
+                "cp config.jsonc ~/.config/fastfetch");
+        system(cmd);
+         // export fuzzel appearance
+        snprintf(cmd, sizeof(cmd),
+                "cd ~/dotfiles/fuzzel && "
+                "mkdir ~/.config/fuzzel && "
+                "cp fuzzel.ini ~/.config/fuzzel");
+        system(cmd);  
+		
         // export hyprland dotfiles
         char cmd[256];
         snprintf(cmd, sizeof(cmd),
@@ -155,6 +169,9 @@ int main()
                "cp -f hypridle.conf ~/.config/hypr && "
                "cp -f hyprpaper.conf ~/.config/hypr");
         system(cmd);
+
+		// export kitty config
+		
 
         // export neovim config
         snprintf(cmd, sizeof(cmd),
@@ -169,25 +186,6 @@ int main()
                 "cd ~/dotfiles/waybar && "
                 "cp -f style.css ~/.config/waybar && "
                 "cp -f config.jsonc ~/.config/waybar");
-        system(cmd);
-
-         // export fuzzel appearance
-        snprintf(cmd, sizeof(cmd),
-                "cd ~/dotfiles/fuzzel && "
-                "mkdir ~/.config/fuzzel && "
-                "cp fuzzel.ini ~/.config/fuzzel");
-        system(cmd);
-
-        // export fastfetch config
-        snprintf(cmd, sizeof(cmd),
-                "cd ~/dotfiles/fastfetch && "
-                "cp config.jsonc ~/.config/fastfetch");
-        system(cmd);
-
-        // export cava config
-        snprintf(cmd, sizeof(cmd),
-                "cd ~/dotfiles/cava && "
-                "cp config ~/.config/cava");
         system(cmd);
     }
         else
