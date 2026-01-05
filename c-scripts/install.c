@@ -65,7 +65,6 @@ int main()
                 "cd yay &&"
                 "makepkg -si");
             system(cmd);
-
             printf("\nYay is installed, congrats!\n");
         }
         else
@@ -104,7 +103,7 @@ int main()
          "mv hypridle.conf hypridle-oldv%.1f.conf",
          pver, pver, pver);
     system(cmd);
-
+// kitty missing
     snprintf(cmd, sizeof(cmd),
          "mkdir -p ~/.config/waybar && cd ~/.config/waybar && "
          "mv config.jsonc config-oldv%.1f.jsonc && "
@@ -131,7 +130,6 @@ int main()
 		"~/.config/cava/config-oldv%.1f",
         pver);
     system(cmd);
-
         printf("Done. -oldv%.1f was appended to the end of the old config filenames.\n", pver);
     }
     // Install the dotfiles
@@ -159,8 +157,7 @@ int main()
                 "cd ~/dotfiles/fuzzel && "
                 "mkdir ~/.config/fuzzel && "
                 "cp fuzzel.ini ~/.config/fuzzel");
-        system(cmd);  
-		
+        system(cmd);  		
         // export hyprland dotfiles
         char cmd[256];
         snprintf(cmd, sizeof(cmd),
@@ -169,10 +166,10 @@ int main()
                "cp -f hypridle.conf ~/.config/hypr && "
                "cp -f hyprpaper.conf ~/.config/hypr");
         system(cmd);
-
 		// export kitty config
-		
-
+		snprintf(cmd, sizeof(cmd),
+                "cp -f ~/dotfiles/kitty/kitty.conf ~/.config/kitty");
+		system(cmd);
         // export neovim config
         snprintf(cmd, sizeof(cmd),
                 "cd ~/dotfiles/nvim && "
@@ -180,7 +177,6 @@ int main()
                 "cp -rf lua ~/.config/nvim && "
                 "cp -f lazy-lock.json ~/.config/nvim");
         system(cmd);
-        
          // export waybar config and appearance
         snprintf(cmd, sizeof(cmd),
                 "cd ~/dotfiles/waybar && "
