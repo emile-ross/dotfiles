@@ -77,6 +77,15 @@ int main(void)
         {
             system("yay -S --noconfirm fuzzel");
         }
+		else if 
+		{
+			char cmd[256];
+			snprintf(cmd, sizeof(cmd);
+			"sudo pacman --noconfirm cava fuzzel hyprland kitty && "
+			"mv ~/.config/kitty/kitty.conf ~/.config/kitty/kitty-oldv0.conf && "
+			"cp -f ~/dotfiles/kitty/kitty.conf ~/.config/kitty && "
+			"
+		}
         else 
         {
             printf("Unsupported VAWSM version. No files were copied.\n");
