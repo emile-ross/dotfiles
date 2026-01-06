@@ -69,23 +69,35 @@ int main(void)
         } 
         else if (strcmp(VAWSM, "1.2") == 0) 
         {
-            system("yay -S --noconfirm fuzzel");
+            system("yay -S --noconfirm fuzzel cava kitty");
     		// import fuzzel config	
 		    system("cd ~/dotfiles/ && cp -r fuzzel");
         }
         else if (strcmp(VAWSM, "1.3") == 0)
         {
-            system("yay -S --noconfirm fuzzel");
+			char cmd[256];
+			snprintf(cmd, sizeof(cmd);
+			"sudo pacman --noconfirm cava fuzzel kitty hyprland && "
+			"rm ~/.config/cava && "
+			"mkdir ~/.config/cava && "
+			"cp -f ~/dotfiles/cava/config ~/.config/cava/ && "
+			"mv ~/.config/kitty/kitty.conf ~/.config/kitty/kitty-oldv0.conf && "
+			"mv ~/.config/hypr/hyprland.conf ~/.config/hypr/hyprland-oldv1.4.conf && "
+			"cp -f ~/dotfiles/hypr/hyprland.conf ~/.config/hypr/ && "
+			"cp -f ~/dotfiles/kitty/kitty.conf ~/.config/kitty");
+			system(cmd);
         }
-		else if 
+		else if (strcmp(VAWSM, "1.4") == 0)
 		{
 			char cmd[256];
 			snprintf(cmd, sizeof(cmd);
-			"sudo pacman --noconfirm cava fuzzel hyprland kitty && "
+			"sudo pacman --noconfirm cava kitty bpytop && "
 			"rm ~/.config/cava && "
 			"mkdir ~/.config/cava && "
-			"cp ~/dotfiles/cava/config ~/.config/cava/ && "
+			"cp -f ~/dotfiles/cava/config ~/.config/cava/ && "
 			"mv ~/.config/kitty/kitty.conf ~/.config/kitty/kitty-oldv0.conf && "
+			"mv ~/.config/hypr/hyprland.conf ~/.config/hypr/hyprland-oldv1.4.conf && "
+			"cp -f ~/dotfiles/hypr/hyprland.conf ~/.config/hypr/ && "
 			"cp -f ~/dotfiles/kitty/kitty.conf ~/.config/kitty");
 			system(cmd);
 		
