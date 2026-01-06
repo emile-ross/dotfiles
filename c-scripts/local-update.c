@@ -82,9 +82,13 @@ int main(void)
 			char cmd[256];
 			snprintf(cmd, sizeof(cmd);
 			"sudo pacman --noconfirm cava fuzzel hyprland kitty && "
+			"rm ~/.config/cava && "
+			"mkdir ~/.config/cava && "
+			"cp ~/dotfiles/cava/config ~/.config/cava/ && "
 			"mv ~/.config/kitty/kitty.conf ~/.config/kitty/kitty-oldv0.conf && "
-			"cp -f ~/dotfiles/kitty/kitty.conf ~/.config/kitty && "
-			"
+			"cp -f ~/dotfiles/kitty/kitty.conf ~/.config/kitty");
+			system(cmd);
+		
 		}
         else 
         {
