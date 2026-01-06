@@ -35,9 +35,22 @@ int main(void)
         }
     }
     fclose(f);
-
-    system("cd ~ && git clone https://github.com/imawsumm/dotfiles && cd dotfiles/c-scripts");
-    system("gcc local-update.c -o lupdate && ./lupdate");
-  
+    char ACCURATEV;
+    printf("\nYour current version is %s", VAWSM);
+    printf("\nDoes this seem correct? (Y/n)\n");
+    scanf("%c", ACCURATEV);
+    if (ACCURATEV == 'Y' || ACCURATEV == 'y')
+    {
+       system("pacman -S --noconfirm hyprland");
+       system("cd ~ && git clone https://github.com/imawsumm/dotfiles && cd dotfiles/c-scripts");
+       system("gcc local-update.c -o lupdate");
+       system("./lupdate");
+        
+    }
+    else
+    {
+    return 1;
+    }
+    printf("\nUpdate completed.\n");
   return 0;
 }
