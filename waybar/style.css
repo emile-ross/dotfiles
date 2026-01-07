@@ -5,14 +5,12 @@
     font-size: 14px;
     color: #ffffff;
 }
-
 /* Waybar container */
 window#waybar 
 {
-    background: rgba(5, 5, 5, 0.75); /*last value for transparency */
+    background: rgba(5, 5, 5, 0.75);
     border-bottom: 1px solid #757575;
 }
-
 /* Module spacing */
 #workspaces,
 #clock,
@@ -31,7 +29,6 @@ window#waybar
     padding: 0 10px;   /* reduced from 0 10px */
     margin: 0 2px;    /* reduced from 0 5px */
 }
-
 /* Module styling with tighter padding/margins */
 #workspaces button,
 #clock,
@@ -47,10 +44,10 @@ window#waybar
 #custom-updates,
 #temperature 
 {
-    background-color: #282828; /* background color for the modules */
-    padding: 5px 5px;   /* reduced from 6px 10px */
-    margin: 5px 2px;    /* reduced from 4px 6px */
-    border-radius: 12px;  /* slightly smaller radius for tighter look */
+    background-color: #282828;
+    padding: 5px 5px;
+    margin: 5px 2px;
+    border-radius: 12px;
     transition: background-color 0.3s ease;
 }
 
@@ -71,18 +68,15 @@ window#waybar
 {
     background-color: #575757;
 }
-
 /* Active workspace button */
 #workspaces button.active 
 {
     background-color: #50fa7b;
     color: #282a36;
 }
-
 /* Focused workspace */
 #workspaces button.focused 
 {
     background-color: #8be9fd;
     color: #282a36;
 }
-
