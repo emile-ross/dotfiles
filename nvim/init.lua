@@ -30,11 +30,6 @@ require("lazy").setup({
       vim.cmd.colorscheme "catppuccin"
     end,
   },
-  { -- treesitter
-  	'nvim-treesitter/nvim-treesitter',
-  	lazy = false,
-  	build = ':TSUpdate'
-  },
   { -- telescope 
     'nvim-telescope/telescope.nvim', tag = '0.1.8',
     dependencies = {
