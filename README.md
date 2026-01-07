@@ -66,11 +66,12 @@ If you ever encounter an issue please report it by providing the issue you are e
 
 # Update
 
-After reading the code, you can paste this in your terminal in order to update
+After reading the code, you can paste this in your terminal in order to update.  
+This will download the latest script from this github and it will then execute the newest updating script.
 
 ```sh 
 cd ~/dotfiles/c-scripts
-gcc update.c -o update
+gcc local-update.c -o update
 ./update
 ```
 # Credits 
