@@ -6,6 +6,10 @@
 int main()
 {
     // this float sets the past version (0 because this is the install script)
+    char HYPR;
+    printf("\nWould you like to install the Hyprland config? (Y/n)\n");
+    scanf(" %c", &HYPR);
+
     float pver = 0.0f;
     int FIXINST;
     printf("\n What do you want to do?");
@@ -82,11 +86,22 @@ int main()
     if (PKGINSTALL == 'Y' || PKGINSTALL == 'y')
     {
         // install packages
-	char cmd[256];
-	snprintf(cmd, sizeof(cmd),
-		"yay -S --noconfirm hyprland kitty waybar gtklock hyprpaper floorp-bin librewolf-bin xclip wl-clipboard && "
-		"sudo pacman -S --noconfirm ttf-jetbrains-mono nerd-fonts-jetbrains-mono cava fuzzel fastfetch");
+        if (HYPR == 'Y' || HYPR == 'y')
+        {
+    	char cmd[256];
+	    snprintf(cmd, sizeof(cmd),
+		    "yay -S --noconfirm hyprland kitty waybar gtklock hyprpaper floorp-bin librewolf-bin xclip wl-clipboard && "
+		    "sudo pacman -S --noconfirm ttf-jetbrains-mono nerd-fonts-jetbrains-mono cava fuzzel fastfetch");
 		system(cmd);
+        }
+        else
+        {
+    	char cmd[256];
+	    snprintf(cmd, sizeof(cmd),
+		    "yay -S --noconfirm kitty floorp-bin librewolf-bin xclip wl-clipboard && "
+		    "sudo pacman -S --noconfirm ttf-jetbrains-mono nerd-fonts-jetbrains-mono cava fuzzel fastfetch");
+		system(cmd);
+        }
     }
     // Propose saving the old config files before performing the update
     char ARCHIVE;
@@ -95,21 +110,25 @@ int main()
     if (ARCHIVE == 'Y' || ARCHIVE == 'y')
     {
         // renaming old configs before replacing them
-          char cmd[512];
-    snprintf(cmd, sizeof(cmd),
-         "mkdir -p ~/.config/hypr && cd ~/.config/hypr && "
-         "mv hyprland.conf hyprland-oldv%.1f.conf && "
-         "mv hyprpaper.conf hyprpaper-oldv%.1f.conf && "
-         "mv hypridle.conf hypridle-oldv%.1f.conf",
-         pver, pver, pver);
-    system(cmd);
-// kitty missing
-    snprintf(cmd, sizeof(cmd),
-         "mkdir -p ~/.config/waybar && cd ~/.config/waybar && "
-         "mv config.jsonc config-oldv%.1f.jsonc && "
-         "mv style.css style-oldv%.1f.css",
-         pver, pver);
-    system(cmd);
+        
+        if (HYPR == 'Y' || HYPR == 'y')
+        {
+            char cmd[512];
+                snprintf(cmd, sizeof(cmd),
+                    "mkdir -p ~/.config/hypr && cd ~/.config/hypr && "
+                    "mv hyprland.conf hyprland-oldv%.1f.conf && "
+                    "mv hyprpaper.conf hyprpaper-oldv%.1f.conf && "
+                    "mv hypridle.conf hypridle-oldv%.1f.conf",
+                pver, pver, pver);
+                system(cmd);
+
+                snprintf(cmd, sizeof(cmd),
+                    "mkdir -p ~/.config/waybar && cd ~/.config/waybar && "
+                    "mv config.jsonc config-oldv%.1f.jsonc && "
+                    "mv style.css style-oldv%.1f.css",
+                pver, pver);
+                system(cmd);
+        }
 
     snprintf(cmd, sizeof(cmd),
          "mkdir -p ~/.config/nvim && cd ~/.config/nvim && "
@@ -139,6 +158,7 @@ int main()
     if (DOTINSTALL == 'Y' || DOTINSTALL == 'y')
     {
         // export cava config
+        char cmd[128];
         snprintf(cmd, sizeof(cmd),
 			    "rm ~/.config/cava && "
 			    "mkdir -p ~/.config/cava && "
@@ -159,13 +179,22 @@ int main()
                 "cp fuzzel.ini ~/.config/fuzzel");
         system(cmd);  		
         // export hyprland dotfiles
-        char cmd[256];
+
+        if (HYPR == 'Y' || HYPR == 'y')
+        {
         snprintf(cmd, sizeof(cmd),
                "cd ~/dotfiles/hypr && "
                "cp -f hyprland.conf ~/.config/hypr && "
                "cp -f hypridle.conf ~/.config/hypr && "
                "cp -f hyprpaper.conf ~/.config/hypr");
         system(cmd);
+         // export waybar config and appearance
+        snprintf(cmd, sizeof(cmd),
+                "cd ~/dotfiles/waybar && "
+                "cp -f style.css ~/.config/waybar && "
+                "cp -f config.jsonc ~/.config/waybar");
+        system(cmd);
+        }
 		// export kitty config
 		snprintf(cmd, sizeof(cmd),
                 "cp -f ~/dotfiles/kitty/kitty.conf ~/.config/kitty");
@@ -176,12 +205,6 @@ int main()
                 "cp -f init.lua ~/.config/nvim && "
                 "cp -rf lua ~/.config/nvim && "
                 "cp -f lazy-lock.json ~/.config/nvim");
-        system(cmd);
-         // export waybar config and appearance
-        snprintf(cmd, sizeof(cmd),
-                "cd ~/dotfiles/waybar && "
-                "cp -f style.css ~/.config/waybar && "
-                "cp -f config.jsonc ~/.config/waybar");
         system(cmd);
     }
         else
