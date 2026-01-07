@@ -46,7 +46,11 @@ int main(void)
         if (strcmp(VAWSM, "1.0") == 0) 
         {
             char cmd[256];
-            system("cd ~/.config/hypr && mv hyprland.conf hyprland-v%s.conf", VAWSM);
+			snprintf(cmd, sizeof(cmd);
+               "cd ~/.config/hypr && "
+			   "mv hyprland.conf hyprland-v%s.conf", VAWSM);
+			system(cmd);
+			
             // system("cd ~/.config/hypr && mv hyprland.conf hyprland-oldv0.conf && mv hyprpaper.conf hyprpaper-oldv0.conf && mv hypridle.conf hypridle-oldv0.conf");
             system("cd ~/.config/nvim && mv init.lua init-v%s.lua", VAWSM);
             
