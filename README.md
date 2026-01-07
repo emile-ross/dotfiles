@@ -14,7 +14,6 @@ If you want to **update** your dotfiles, click [here](#Update)
 - neovim
 - hyprland
 - waybar
-- gtklock
 - fastfetch
 - cava
 - fuzzel
@@ -25,7 +24,7 @@ If you want to **update** your dotfiles, click [here](#Update)
 - *LibreWolf* (not planned)
 - *Floorp* (not planned)
 - *Chromium* (not planned)
-
+- *gtklock (not yet)
 --- 
 
 ## Install
