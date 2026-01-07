@@ -24,9 +24,9 @@ int main(void)
         p++; // skip '#'
         while (isspace((unsigned char)*p)) p++;
 
-        if (strncmp(p, "AWSMVERSION:", 12) == 0) 
+        if (strncmp(p, "AWSMVERSION:", 12) == 0)
         {
-            p += 12;
+            p += 12; // 12 bytes
             while (isspace((unsigned char)*p)) p++;
 
             p[strcspn(p, "\r\n")] = 0; // strip newline
@@ -35,17 +35,23 @@ int main(void)
         }
     }
     fclose(f);
+
+    // check if the current version of dotfiles is correct
     char ACCURATEV;
     printf("\nYour current version is %s", VAWSM);
     printf("\nDoes this seem correct? (Y/n)\n");
     scanf("%c", ACCURATEV);
     if (ACCURATEV == 'Y' || ACCURATEV == 'y')
     {
-       system("pacman -S --noconfirm hyprland");
-       system("cd ~ && git clone https://github.com/imawsumm/dotfiles && cd dotfiles/c-scripts");
-       system("gcc local-update.c -o lupdate");
-       system("./lupdate");
-        
+        char cmd[256];
+        snprintf(cmd, sizeof(cmd),
+       "cd ~ && " 
+        "git clone https://github.com/imawsumm/dotfiles && " // download the repo
+        "cd dotfiles/c-scripts && "
+        "gcc local-update.c -o lupdate && " // compile the update script
+        "./lupdate");
+    system(cmd);
+    // add a prompt to ask if the user wants to remove the repo
     }
     else
     {
