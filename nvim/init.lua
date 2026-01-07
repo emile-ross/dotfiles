@@ -1,8 +1,14 @@
 -- Load Lazy plugin manager
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-  print("lazy.nvim not found")
-  return
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable",
+    lazypath,
+  })
 end
 vim.opt.rtp:prepend(lazypath)
 
@@ -24,5 +30,18 @@ require("lazy").setup({
       vim.cmd.colorscheme "catppuccin"
     end,
   },
+  { -- treesitter
+  	'nvim-treesitter/nvim-treesitter',
+  	lazy = false,
+  	build = ':TSUpdate'
+  },
+  { -- telescope 
+    'nvim-telescope/telescope.nvim', tag = '0.1.8',
+    dependencies = {
+        'nvim-lua/plenary.nvim',
+        { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+    }
+  }
 })
-
+local builtin = require("telescope.builtin")
+vim.keymap.set('n', '<C-p>', builtin.find_files, {})
