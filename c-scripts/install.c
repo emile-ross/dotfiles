@@ -18,8 +18,12 @@ int main()
     scanf(" %d", &FIXINST);
     if (FIXINST == '2')
     {
+		if (HYPR == 'Y' || HYPR == 'y')
+        {
+			system("sudo pacman -S waybar hyprland");
+		}
         // add commands for fixing script below
-        system("sudo pacman -S --noconfim nvim waybar git cava fuzzel");
+        system("sudo pacman -S --noconfim nvim git cava fuzzel");
         // system("yay -S --noconfirm ");
 
         // make directories
@@ -90,8 +94,8 @@ int main()
         {
     	char cmd[256];
 	    snprintf(cmd, sizeof(cmd),
-		    "yay -S --noconfirm hyprland kitty waybar gtklock hyprpaper floorp-bin librewolf-bin xclip wl-clipboard && "
-		    "sudo pacman -S --noconfirm ttf-jetbrains-mono nerd-fonts-jetbrains-mono cava fuzzel fastfetch");
+		    "yay -S --noconfirm kitty gtklock hyprpaper floorp-bin librewolf-bin xclip wl-clipboard && "
+		    "sudo pacman -S --noconfirm ttf-jetbrains-mono nerd-fonts-jetbrains-mono fastfetch");
 		system(cmd);
         }
         else
@@ -99,7 +103,7 @@ int main()
     	char cmd[256];
 	    snprintf(cmd, sizeof(cmd),
 		    "yay -S --noconfirm kitty floorp-bin librewolf-bin xclip wl-clipboard && "
-		    "sudo pacman -S --noconfirm ttf-jetbrains-mono nerd-fonts-jetbrains-mono cava fuzzel fastfetch");
+		    "sudo pacman -S --noconfirm ttf-jetbrains-mono nerd-fonts-jetbrains-mono fastfetch");
 		system(cmd);
         }
     }
@@ -203,7 +207,7 @@ int main()
         snprintf(cmd, sizeof(cmd),
                 "cd ~/dotfiles/nvim && "
                 "cp -f init.lua ~/.config/nvim && "
-                "cp -rf lua ~/.config/nvim && "
+                //" cp -rf lua ~/.config/nvim && "
                 "cp -f lazy-lock.json ~/.config/nvim");
         system(cmd);
     }
