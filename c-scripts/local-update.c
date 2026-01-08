@@ -52,21 +52,31 @@ int main(void)
 			system(cmd);
 			
             // system("cd ~/.config/hypr && mv hyprland.conf hyprland-oldv0.conf && mv hyprpaper.conf hyprpaper-oldv0.conf && mv hypridle.conf hypridle-oldv0.conf");
-            system("cd ~/.config/nvim && mv init.lua init-v%s.lua", VAWSM);
-            
+			snprintf(cmd, sizeof(cmd);
+			"cd ~/.config/nvim && "
+			"mv init.lua init-v%s.lua", VAWSM);
+            system(cmd);
             // system("cd ~/.config/hypr && mv hyprland.conf");
             
             // backup old configs with the current version name 
             // only the modifed files are backed up
 
-            // hyprland config
-            system("cd ~/dotfiles/hypr && cp hyprland.conf ~/.config/hypr && cp hypridle.conf ~/.config/hypr && cp hyprpaper.conf ~/.config/hypr");
+            // hyprland + waybar config
+			snprintd(cmd, sizeof(cmd);
+			"cd ~/dotfiles/hypr && "
+			"cp hyprland.conf ~/.config/hypr && "
+			"cp hypridle.conf ~/.config/hypr && "
+			"cp hyprpaper.conf ~/.config/hypr && "
+			"cd ~/dotfiles/waybar && "
+			"cp style.css ~/.config/waybar && "
+			"cp config.jsonc ~/.config/waybar");
+			system(cmd);
 
             // nvim config
             system("cd ~/dotfiles/nvim && cp init.lua ~/.config/nvim && cp -rf lua ~/.config/nvim && cp lazy-lock.json ~/.config/nvim");
 
             // waybar config
-            system("cd ~/dotfiles/waybar && cp style.css ~/.config/waybar && cp config.jsonc ~/.config/waybar");
+            // system("cd ~/dotfiles/waybar && cp style.css ~/.config/waybar && cp config.jsonc ~/.config/waybar");
 
             // fastfetch config
             system("cd ~/dotfiles/fastfetch && cp config.jsonc ~/.config/fastfetch");
@@ -106,9 +116,13 @@ int main(void)
 			system(cmd);
 		
 		}
+		else if (strcmp(VAWSM, "2.0") == 0) // check if latest version is installed
+		{
+			printf("\n Your dotfiles are up to date\n");
+		}
         else 
         {
-            printf("Unsupported VAWSM version. No files were copied.\n");
+            printf("\nUnsupported VAWSM version. No files were copied.\n");
         }
     } 
     else 
