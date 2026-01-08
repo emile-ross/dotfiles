@@ -114,7 +114,18 @@ int main(void)
 			"cp -f ~/dotfiles/hypr/hyprland.conf ~/.config/hypr/ && "
 			"cp -f ~/dotfiles/kitty/kitty.conf ~/.config/kitty");
 			system(cmd);
-		
+			printf("\n Update completed.");
+			printf("\n Would you like to install the Neovim plugins? (Y/n)\n");
+			char ENVIM;
+			scanf(" %c", &ENVIM);
+				if (ENVIM == 'Y' || ENVIM == 'y')
+                {
+		             system("nvim");
+				}
+			    else
+				{
+					return 0;
+				}
 		}
 		else if (strcmp(VAWSM, "2.0") == 0) // check if latest version is installed
 		{
