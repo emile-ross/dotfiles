@@ -1,1 +1,10 @@
-
+window {
+    background-color: black;
+    background-image: url("lockscreen.png");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+#clock-label {
+    opacity: 0.0;
+    font-size: 0.0;
+}
