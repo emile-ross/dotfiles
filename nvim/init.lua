@@ -36,7 +36,7 @@ require("lazy").setup({
   	      'nvim-lua/plenary.nvim',
   	      { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
   	  }
-  	}
+  	},
 	{
 	    'nvim-lualine/lualine.nvim',
 	    dependencies = { 'nvim-tree/nvim-web-devicons' }
@@ -44,3 +44,5 @@ require("lazy").setup({
 })
 local builtin = require("telescope.builtin")
 vim.keymap.set('n', '<C-p>', builtin.find_files, {})
+require('lualine').setup()
+options = { theme = 'gruvbox-material' }
