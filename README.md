@@ -12,19 +12,20 @@ If you want to **update** your dotfiles, click [here](#Update)
 
 ## programs modified
 - neovim
+  - lazy, telescope and lualine
 - hyprland
 - waybar
 - fastfetch
 - cava
 - fuzzel
 - kitty
-
+  - font options
   
 - *Firefox* (not planned)
 - *LibreWolf* (not planned)
 - *Floorp* (not planned)
 - *Chromium* (not planned)
-- *gtklock (not yet)
+- *gtklock* (not yet)
 --- 
 
 ## Install
@@ -70,7 +71,7 @@ This will download the latest script from this github and it will then execute t
 
 ```sh 
 cd ~/dotfiles/c-scripts
-gcc local-update.c -o update
+gcc new-update.c -o update
 ./update
 ```
 # Credits 
