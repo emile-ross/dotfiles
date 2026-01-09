@@ -199,6 +199,14 @@ int main()
                 "cp -f config.jsonc ~/.config/waybar");
         system(cmd);
         }
+		// export gtklock config
+        snprintf(cmd, sizeof(cmd),
+			    // make directory
+                "cd ~/dotfiles/gtklock && "
+                "cp -f style.css ~/.config/gtklock && "			    
+                // "cp -f image location");
+        system(cmd);
+		
 		// export kitty config
 		snprintf(cmd, sizeof(cmd),
                 "cp -f ~/dotfiles/kitty/kitty.conf ~/.config/kitty");
