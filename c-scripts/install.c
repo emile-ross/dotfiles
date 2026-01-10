@@ -142,18 +142,21 @@ int main()
     system(cmd);
 
     snprintf(cmd, sizeof(cmd),
-         "mkdir -p ~/.config/fastfetch && "
-         "mv ~/.config/fastfetch/config.jsonc "
-		"~/.config/fastfetch/config-oldv%.1f.jsonc",
-         pver);
+		    "mkdir -p ~/.config/fastfetch && "
+		    "mv ~/.config/fastfetch/config.jsonc "
+		    "~/.config/fastfetch/config-oldv%.1f.jsonc", pver);
     system(cmd);
-
+// backup kitty config
     snprintf(cmd, sizeof(cmd),
-        "mv ~/.config/cava/config "
-		"~/.config/cava/config-oldv%.1f",
-        pver);
+		    "mv ~/.config/kitty/kitty.conf "
+		    "~/.config/kitty/kitty-oldv%.1f.conf", pver);
+    snprintf(cmd, sizeof(cmd),
+		    "mv ~/.config/cava/config "
+		    "~/.config/cava/config-oldv%.1f", pver);
     system(cmd);
-        printf("Done. -oldv%.1f was appended to the end of the old config filenames.\n", pver);
+    	
+
+    	printf("Done. -oldv%.1f was appended to the end of the old config filenames.\n", pver);
     }
     // Install the dotfiles
     char DOTINSTALL;
@@ -164,59 +167,62 @@ int main()
         // export cava config
         char cmd[128];
         snprintf(cmd, sizeof(cmd),
-			    "rm ~/.config/cava && "
-			    "mkdir -p ~/.config/cava && "
-                "cd ~/dotfiles/cava && "
-                "cp config ~/.config/cava");
+			"rm ~/.config/cava && "
+			"mkdir -p ~/.config/cava && "
+                	"cd ~/dotfiles/cava && "
+                	"cp config ~/.config/cava");
         system(cmd);
 		
         // export fastfetch config
         snprintf(cmd, sizeof(cmd),
-			    "mkdir -p ~/.config/fastfetch && "
-                "cd ~/dotfiles/fastfetch && "
-                "cp config.jsonc ~/.config/fastfetch");
+			"mkdir -p ~/.config/fastfetch && "
+                	"cd ~/dotfiles/fastfetch && "
+                	"cp config.jsonc ~/.config/fastfetch");
         system(cmd);
          // export fuzzel appearance
         snprintf(cmd, sizeof(cmd),
-                "cd ~/dotfiles/fuzzel && "
-                "mkdir ~/.config/fuzzel && "
-                "cp fuzzel.ini ~/.config/fuzzel");
+                	"cd ~/dotfiles/fuzzel && "
+                	"mkdir ~/.config/fuzzel && "
+                	"cp fuzzel.ini ~/.config/fuzzel");
         system(cmd);  		
         // export hyprland dotfiles
 
         if (HYPR == 'Y' || HYPR == 'y')
         {
         snprintf(cmd, sizeof(cmd),
-               "cd ~/dotfiles/hypr && "
-               "cp -f hyprland.conf ~/.config/hypr && "
-               "cp -f hypridle.conf ~/.config/hypr && "
-               "cp -f hyprpaper.conf ~/.config/hypr");
+			"cd ~/dotfiles/hypr && "
+			"cp -f hyprland.conf ~/.config/hypr && "
+			"cp -f hypridle.conf ~/.config/hypr && "
+			"cp -f hyprpaper.conf ~/.config/hypr");
         system(cmd);
          // export waybar config and appearance
         snprintf(cmd, sizeof(cmd),
-                "cd ~/dotfiles/waybar && "
-                "cp -f style.css ~/.config/waybar && "
-                "cp -f config.jsonc ~/.config/waybar");
+			"cd ~/dotfiles/waybar && "
+               		"cp -f style.css ~/.config/waybar && "
+               		"cp -f config.jsonc ~/.config/waybar");
         system(cmd);
         }
-		// export gtklock config
+
+	// export gtklock config
         snprintf(cmd, sizeof(cmd),
-			    // make directory
-                "cd ~/dotfiles/gtklock && "
-                "cp -f style.css ~/.config/gtklock && "			    
-                // "cp -f image location");
+			"mkdir -p ~/.config/gtklock/assets && "
+                	"cd ~/dotfiles/gtklock && "
+                	"cp -f style.css ~/.config/gtklock && "
+                	"cp -f lockscreen.jpg ~/.config/gtklock/assets");
         system(cmd);
 		
-		// export kitty config
-		snprintf(cmd, sizeof(cmd),
-                "cp -f ~/dotfiles/kitty/kitty.conf ~/.config/kitty");
-		system(cmd);
+	// export kitty config
+	snprintf(cmd, sizeof(cmd),
+			"mkdir ~/.config/kitty && "
+                	"cp -f ~/dotfiles/kitty/kitty.conf ~/.config/kitty");
+	system(cmd);
+
         // export neovim config
         snprintf(cmd, sizeof(cmd),
-                "cd ~/dotfiles/nvim && "
-                "cp -f init.lua ~/.config/nvim && "
-                //" cp -rf lua ~/.config/nvim && "
-                "cp -f lazy-lock.json ~/.config/nvim");
+			"cd ~/dotfiles/nvim && "
+			"cp -f init.lua ~/.config/nvim && "
+			//" cp -rf lua ~/.config/nvim && "
+			//"cp -f lazy-lock.json ~/.config/nvim");
         system(cmd);
     }
         else
