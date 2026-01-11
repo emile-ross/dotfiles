@@ -2,9 +2,34 @@
 #include <stdlib.h>
 #include <string.h>
 #define MAX_CMD 512
+
 // error code 1 is caused by a missing dependency
-int main()
+
+
+int is_hyprland() 
 {
+	// check current environment variable
+	const char *hypr_sig = getenv("HYPRLAND_INSTANCE_SIGNATURE");
+    	const char *current_desktop = getenv("XDG_CURRENT_DESKTOP");
+    
+    	// Return true if either check confirms Hyprland
+    	return (hypr_sig != NULL) || (current_desktop != NULL && 
+            (strcasestr(current_desktop, "hyprland") != NULL));
+}
+
+int main() 
+{
+    if (is_hyprland()) 
+    {
+        printf("Current desktop is Hyprland\n");
+        return 0;
+
+    }
+    else
+    {
+        printf("Current desktop is NOT Hyprland\n");
+	return 1;
+    }
     // this float sets the past version (0 because this is the install script)
     char HYPR;
     printf("\nWould you like to install the Hyprland config? (Y/n)\n");
