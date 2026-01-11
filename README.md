@@ -11,21 +11,23 @@ If you want to **update** your dotfiles, click [here](#Update)
   
 
 ## programs modified
-- neovim
+- **neovim**
   - lazy, telescope and lualine
-- hyprland
-- waybar
+- **hyprland**
+- **waybar**
 - fastfetch
 - cava
 - fuzzel
 - kitty
   - font options
-  
+- gtklock
+  - (lockscreen options coming)
+    
 - *Firefox* (not planned)
 - *LibreWolf* (not planned)
 - *Floorp* (not planned)
 - *Chromium* (not planned)
-- *gtklock* (not yet)
+
 --- 
 
 ## Install
