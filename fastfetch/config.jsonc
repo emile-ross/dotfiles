@@ -7,7 +7,7 @@
     "source": "~/.config/fastfetch/assets/archlinux.png",
     /*the directory above can be changed to anything you want*/
     "width": 34,
-    "height": 18
+    "height": 20
  /* make sure the width and the height is well ajusted in order for your icon to have the same aspect ratio */
   },
 
@@ -30,6 +30,6 @@
     "battery",
     "poweradapter",
     "break",
-    "colors"
+    //"colors"
   ]
 }
