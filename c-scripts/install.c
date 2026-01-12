@@ -174,7 +174,8 @@ int main()
     {
         // renaming old configs before replacing them
         
-        if (HYPRY == 'Y' || HYPRY == 'y')
+	char cmd[256];
+        if (HYPRI == 'Y' || HYPRI == 'y')
         {
             char cmd[512];
 
@@ -223,7 +224,7 @@ int main()
         system(cmd);
         // export hyprland dotfiles
 
-        if (HYPRY == 'Y' || HYPRY == 'y')
+        if (HYPRI == 'Y' || HYPRI == 'y')
         {
         }
 
@@ -232,7 +233,7 @@ int main()
         // export neovim config
         snprintf(cmd, sizeof(cmd),
 			"cd ~/dotfiles/nvim && "
-			"cp -f init.lua ~/.config/nvim && "
+			"cp -f init.lua ~/.config/nvim && ");
 			//" cp -rf lua ~/.config/nvim && "
 			//"cp -f lazy-lock.json ~/.config/nvim");
         system(cmd);
@@ -244,7 +245,7 @@ int main()
     return 0;
 }
 
-void BTOP(char ARCHIVE])
+void BTOP(char ARCHIVE)
 {
 	char cmd[256];
         if (ARCHIVE == 'Y' || ARCHIVE == 'y')
@@ -386,7 +387,7 @@ void NVIM(char ARCHIVE)
 	}
 	// export nvim config
         snprintf(cmd, sizeof(cmd),
-			"cp -f dotfiles/nvim/init.lua ~/.config/nvim"
+			"cp -f dotfiles/nvim/init.lua ~/.config/nvim");
 			//" cp -rf lua ~/.config/nvim && "
 			//"cp -f lazy-lock.json ~/.config/nvim");
         system(cmd);
