@@ -36,8 +36,8 @@ int main()
     int FIXINST;
     printf("\n What do you want to do?");
     printf("\n [1] proceed with installation");
-    printf("\n [2] fix your installation\n");
-	printf("\n [3] prompt for every config\n");
+    printf("\n [2] fix your installation");
+	printf("\n [3] prompt for every config");
 	printf("\n [4] exit this script\n");
     scanf(" %d", &FIXINST);
     if (FIXINST == '1')
