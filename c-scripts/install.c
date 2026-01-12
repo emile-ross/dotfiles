@@ -37,8 +37,14 @@ int main()
     printf("\n What do you want to do?");
     printf("\n [1] proceed with installation");
     printf("\n [2] fix your installation\n");
-	printf("\n [3] exit this script\n");
+	printf("\n [3] prompt for every config\n");
+	printf("\n [4] exit this script\n");
     scanf(" %d", &FIXINST);
+    if (FIXINST == '1')
+	{
+	    char BTOP == 'y';
+		char CAVA == 'y';
+	}
     if (FIXINST == '2')
     {
 		if (HYPR == 'Y' || HYPR == 'y')
@@ -54,6 +60,17 @@ int main()
         system("mkdir -p ~/.config/cava && mkdir -p ~/.config/fuzzel");
     }
 	if (FIXINST == '3')
+	{
+	    // prompt for everything
+		char BTOP;
+		char CAVA;
+		char FAST;
+		char FUZZ;
+		char HYPR;
+		char GTKL;
+		return 0;
+	}
+	if (FIXINST == '4')
 	{
 		printf("\nExiting install script.\n");
 		return 0;
