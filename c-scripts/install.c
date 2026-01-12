@@ -178,6 +178,10 @@ int main()
                 pver, pver);
                 system(cmd);
 			    // archive btop config
+			    snprintf(cmd, sizeof(cmd),
+                    "mv ~/.config/btop/config.jsonc "
+					"~/.config/btop/config-oldv%.1f.jsonc", pver);
+                system(cmd);
         }
 
     snprintf(cmd, sizeof(cmd),
@@ -210,12 +214,17 @@ int main()
     if (DOTINSTALL == 'Y' || DOTINSTALL == 'y')
     {
         char cmd[128];
-			// export btop config
-
+		
+        // export btop config
+        snprintf(cmd, sizeof(cmd),
+			        "mkdir -p ~/.config/btop && "
+                	"cp ~/dotfiles/btop/config.jsonc ~/.config/btop");
+        system(cmd);
+		
 		// export cava config
         snprintf(cmd, sizeof(cmd),
-			"rm ~/.config/cava && "
-			"mkdir -p ~/.config/cava && "
+	        		"rm ~/.config/cava && "
+			        "mkdir -p ~/.config/cava && "
                 	"cd ~/dotfiles/cava && "
                 	"cp config ~/.config/cava");
         system(cmd);
