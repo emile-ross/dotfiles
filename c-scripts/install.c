@@ -5,7 +5,7 @@
 
 // error code 1 is caused by a missing dependency
 
-
+char HYPR;
 int is_hyprland() 
 {
 	// check current environment variable
@@ -22,24 +22,22 @@ int main()
     if (is_hyprland()) 
     {
         printf("Current desktop is Hyprland\n");
-        return 0;
-
+		char HYPR == 'Y';
     }
     else
     {
         printf("Current desktop is NOT Hyprland\n");
-	return 1;
+		printf("Would you like to install the Hyprland config? (Y/n)\n");
+	    scanf(" %c", &HYPR);
     }
+	
     // this float sets the past version (0 because this is the install script)
-    char HYPR;
-    printf("\nWould you like to install the Hyprland config? (Y/n)\n");
-    scanf(" %c", &HYPR);
-
     float pver = 0.0f;
     int FIXINST;
     printf("\n What do you want to do?");
     printf("\n [1] proceed with installation");
     printf("\n [2] fix your installation\n");
+	printf("\n [3] exit this script\n");
     scanf(" %d", &FIXINST);
     if (FIXINST == '2')
     {
@@ -55,6 +53,11 @@ int main()
         system("mkdir -p ~/.config/nvim/lua/config && mkdir -p ~/.config/nvim/lua/plugins && mkdir -p ~/.config/fastfetch && mkdir -p ~/.config/hypr");
         system("mkdir -p ~/.config/cava && mkdir -p ~/.config/fuzzel");
     }
+	if (FIXINST == '3')
+	{
+		printf("\nExiting install script.\n");
+		return 0;
+	}
     else
     {
         printf("\n The installation is now starting. \n");
@@ -119,7 +122,7 @@ int main()
         {
     	char cmd[256];
 	    snprintf(cmd, sizeof(cmd),
-		    "yay -S --noconfirm kitty gtklock hyprpaper floorp-bin librewolf-bin xclip wl-clipboard && "
+		    "yay -S --noconfirm kitty btop gtklock hyprpaper floorp-bin librewolf-bin xclip wl-clipboard && "
 		    "sudo pacman -S --noconfirm ttf-jetbrains-mono nerd-fonts-jetbrains-mono fastfetch");
 		system(cmd);
         }
@@ -127,7 +130,7 @@ int main()
         {
     	char cmd[256];
 	    snprintf(cmd, sizeof(cmd),
-		    "yay -S --noconfirm kitty floorp-bin librewolf-bin xclip wl-clipboard && "
+		    "yay -S --noconfirm kitty floorp-bin btop librewolf-bin xclip wl-clipboard && "
 		    "sudo pacman -S --noconfirm ttf-jetbrains-mono nerd-fonts-jetbrains-mono fastfetch");
 		system(cmd);
         }
@@ -157,6 +160,7 @@ int main()
                     "mv style.css style-oldv%.1f.css",
                 pver, pver);
                 system(cmd);
+			    // archive btop config
         }
 
     snprintf(cmd, sizeof(cmd),
@@ -179,7 +183,6 @@ int main()
 		    "mv ~/.config/cava/config "
 		    "~/.config/cava/config-oldv%.1f", pver);
     system(cmd);
-    	
 
     	printf("Done. -oldv%.1f was appended to the end of the old config filenames.\n", pver);
     }
@@ -189,8 +192,10 @@ int main()
     scanf(" %c", &DOTINSTALL);
     if (DOTINSTALL == 'Y' || DOTINSTALL == 'y')
     {
-        // export cava config
         char cmd[128];
+			// export btop config
+
+		// export cava config
         snprintf(cmd, sizeof(cmd),
 			"rm ~/.config/cava && "
 			"mkdir -p ~/.config/cava && "
@@ -200,9 +205,9 @@ int main()
 		
         // export fastfetch config
         snprintf(cmd, sizeof(cmd),
-			"mkdir -p ~/.config/fastfetch && "
-                	"cd ~/dotfiles/fastfetch && "
-                	"cp config.jsonc ~/.config/fastfetch");
+			        "mkdir -p ~/.config/fastfetch && "
+                    "cd ~/dotfiles/fastfetch && "
+                    "cp config.jsonc ~/.config/fastfetch");
         system(cmd);
          // export fuzzel appearance
         snprintf(cmd, sizeof(cmd),
@@ -222,7 +227,7 @@ int main()
         system(cmd);
          // export waybar config and appearance
         snprintf(cmd, sizeof(cmd),
-			"cd ~/dotfiles/waybar && "
+		        	"cd ~/dotfiles/waybar && "
                		"cp -f style.css ~/.config/waybar && "
                		"cp -f config.jsonc ~/.config/waybar");
         system(cmd);
@@ -230,7 +235,7 @@ int main()
 
 	// export gtklock config
         snprintf(cmd, sizeof(cmd),
-			"mkdir -p ~/.config/gtklock/assets && "
+	             	"mkdir -p ~/.config/gtklock/assets && "
                 	"cd ~/dotfiles/gtklock && "
                 	"cp -f style.css ~/.config/gtklock && "
                 	"cp -f lockscreen.jpg ~/.config/gtklock/assets");
