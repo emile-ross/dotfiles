@@ -317,9 +317,10 @@ void WAYB(char ARCHIVE)
 	}
         // export waybar config and appearance
 	snprintf(cmd, sizeof(cmd),
-			"cd ~/dotfiles/waybar && "
+			"cd dotfiles/waybar && "
                		"cp -f style.css ~/.config/waybar && "
-               		"cp -f config.jsonc ~/.config/waybar");
+               		"cp -f config.jsonc ~/.config/waybar && "
+		            "cd .. && cd .. ");
 	system(cmd);
 }
 
