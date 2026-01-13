@@ -83,64 +83,17 @@ int main()
                 } 
                 else if (highlight == 1) 
                 {
-					   // Check if yay is installed
-    if (system("test -f /sbin/yay") == 0)
-    {
-        printf("Yay is now installed, congrats!\n");
-    }
-    else
-    {
-        char YAY;
-        printf("Yay is not installed, do you want to install it? (Y/n): ");
-        scanf(" %c", &YAY); // asks the user if they wanna install yay (needed)
-        if (YAY == 'Y' || YAY == 'y')
-        {
-            // Check if makepkg is installed ( it is needed in order to compile yay )
-            if (system("command -v makepkg > /dev/null") != 0)
-            {
-                printf("\nMakepkg is not installed. Installing 'base-devel' package group to proceed...\n");
-                system("sudo pacman -S --noconfirm base-devel");
+			
+			fix_script();   // display a prompt
+			install_yay();  // Check if yay is installed
 
-                // Check if makepkg is available after installing the base-devel package
-                if (system("command -v makepkg > /dev/null") != 0)
-                {
-                    printf("Makepkg installation failed. Please check your system configuration.\n");
-                    return 1;
-                }
-                else
-                {
-                    printf("Makepkg has been successfully installed!\n");
-                }
-            }
-            else
-            {
-                printf("Makepkg is already installed.\n");
-            }
-            char cmd[256];
-            snprintf(cmd, sizeof(cmd),
-                "git clone https://aur.archlinux.org/yay.git &&"
-                "cd yay &&"
-                "makepkg -si &&"
-	    	"cd ..");
-            system(cmd);
-            printf("\nYay is installed, congrats!\n");
-        }
-        else
-        {
-            printf("\nYay is needed in order to proceed with the script.\n");
-            return 1;
-        }    }
-			        fix_script();
-					install_yay();
-
-
-					// make sure yay is installed and install it if it isn't 
-					char cmd[256];
-					snprintf(cmd, sizeof(cmd),
-					    "sudo yay -Syu && "
-					    "sudo yay -S --noconfirm fastfetch cava btop gtklock");
-			        	system(cmd);
-					printw("\nInstall was fixed\n");
+			// update after yay was checked
+		       	char cmd[256];
+		       	snprintf(cmd, sizeof(cmd),
+		       	    "sudo yay -Syu && "
+		       	    "sudo yay -S --noconfirm fastfetch cava btop gtklock");
+		       	system(cmd);
+				printw("\nInstall was fixed\n");
                 } 
                 else if (highlight == 2) 
                 {
@@ -334,35 +287,35 @@ int install_yay()
    // Check if yay is installed
     if (system("test -f /sbin/yay") == 0)
     {
-        printf("\nYay is already installed, moving on...\n");
+        printw("\nYay is already installed, moving on...\n");
     }
     else
     {
         char YAY;
-        printf("Yay is not installed, do you want to install it? (Y/n): ");
+        printw("Yay is not installed, do you want to install it? (Y/n): ");
         scanf(" %c", &YAY); // asks the user if they wanna install yay (needed)
         if (YAY == 'Y' || YAY == 'y')
         {
             // Check if makepkg is installed ( it is needed in order to compile yay )
             if (system("command -v makepkg > /dev/null") != 0)
             {
-                printf("\nMakepkg is not installed. Installing 'base-devel' package group to proceed...\n");
+                printw("\nMakepkg is not installed. Installing 'base-devel' package group to proceed...\n");
                 system("sudo pacman -S --noconfirm base-devel");
 
                 // Check if makepkg is available after installing the base-devel package
                 if (system("command -v makepkg > /dev/null") != 0)
                 {
-                    printf("\nMakepkg installation failed. Please check your system configuration.\n");
+                    printw("\nMakepkg installation failed. Please check your system configuration.\n");
                     return 1;
                 }
                 else
                 {
-                    printf("Makepkg has been successfully installed!\n");
+                    printw("Makepkg has been successfully installed!\n");
                 }
             }
             else
             {
-                printf("Makepkg is already installed.\n");
+                printw("Makepkg is already installed.\n");
             }
             char cmd[256];
             snprintf(cmd, sizeof(cmd),
@@ -371,11 +324,11 @@ int install_yay()
                 "makepkg -si &&"
 	    	"cd ..");
             system(cmd);
-            printf("\nYay is installed, congrats!\n");
+            printw("\nYay is installed, congrats!\n");
         }
         else
         {
-            printf("\nYay is needed in order to proceed with the script.\n");
+            printw("\nYay is needed in order to proceed with the script.\n");
             return 1;
         }
     }
