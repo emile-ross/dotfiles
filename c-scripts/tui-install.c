@@ -14,22 +14,22 @@ void KITT(char ARCHIVE);
 void NVIM(char ARCHIVE);
 void WAYB(char ARCHIVE);
 
-void view_item() 
+void install_script() 
 {
     printw("\nInstalling...\n");
     refresh();
-    getch();
+    //getch();
 }
 
-void add_item() 
+void fix_script() 
 {
-    printw("\nAdding item...\n");
+    printw("\nFixing the installation...\n");
     refresh();
-    getch(); // Wait for user input
+    //getch(); // Wait for user input
 }
-void delete_item() 
+void advanced_mode() 
 {
-    printw("\nDeleting item...\n");
+    printw("\nAdvanced configuration isn't available yet.\n");
     refresh();
     getch(); // Wait for user input
 }
@@ -43,9 +43,9 @@ int main()
 
     const char *menu[] = 
     {
-        "View Item",
-        "Add Item",
-        "Delete Item",
+        "Install",
+        "Fix install",
+        "Advanced configuration",
         "Exit"
     };
     int n_options = sizeof(menu) / sizeof(menu[0]);
@@ -77,15 +77,16 @@ int main()
             case 10: // Enter key
                 if (highlight == 0) 
                 {
-                    view_item(); // Action for "View Item"
+                    fix_install(); // Action for "View Item"
                 } 
                 else if (highlight == 1) 
                 {
+			fix_script();
 			system("fastfetch");
                 } 
                 else if (highlight == 2) 
                 {
-                    delete_item(); // Action for "Delete Item"
+                    advanced_mode(); // Action for "Delete Item"
                 } 
                 else if (highlight == 3) 
                 {
@@ -98,4 +99,172 @@ int main()
 
     endwin();
     return 0;
+}
+
+
+void BTOP(char ARCHIVE)
+{
+	char cmd[256];
+        if (ARCHIVE == 'Y' || ARCHIVE == 'y')
+	{
+		// archive btop config
+		snprintf(cmd, sizeof(cmd),
+				"mv ~/.config/btop/config.jsonc "
+				"~/.config/btop/config-oldv%.1f.jsonc", pver);
+                system(cmd);
+	}
+        // export btop config
+        snprintf(cmd, sizeof(cmd),
+			"mkdir -p ~/.config/btop && "
+                	"cp ~/dotfiles/btop/config.jsonc ~/.config/btop");
+        system(cmd);
+}
+void CAVA(char ARCHIVE)
+{
+	char cmd[256];
+        if (ARCHIVE == 'Y' || ARCHIVE == 'y')
+	{
+		// backup cava config
+	    	snprintf(cmd, sizeof(cmd),
+				"mv ~/.config/cava/config "
+		    		"~/.config/cava/config-oldv%.1f", pver);
+		system(cmd);
+	}
+	// export cava config
+        snprintf(cmd, sizeof(cmd),
+			"mkdir -p ~/.config/cava && "
+                	"cp -f dotfiles/cava/config ~/.config/cava/ && ");
+        system(cmd);
+}
+void FAST(char ARCHIVE)
+{
+	char cmd[256];
+        if (ARCHIVE == 'Y' || ARCHIVE == 'y')
+	{
+		// backup fastfetch config
+		snprintf(cmd, sizeof(cmd),
+    		    	    "mkdir -p ~/.config/fastfetch && "
+    		    	    "mv ~/.config/fastfetch/config.jsonc "
+    		    	    "~/.config/fastfetch/config-oldv%.1f.jsonc", pver);
+    		system(cmd);
+	}
+	// export fastfetch config
+        snprintf(cmd, sizeof(cmd),
+			"cp dotfiles/fastfetch/config.jsonc "
+			"~/.config/fastfetch");
+        system(cmd);
+}
+void FUZZ(char ARCHIVE)
+{
+	char cmd[256];
+        if (ARCHIVE == 'Y' || ARCHIVE == 'y')
+	{
+		// backup fuzzel config
+	    	snprintf(cmd, sizeof(cmd),
+                		"mv ~/.config/fuzzel/fuzzel.ini"
+				"~/.config/fuzzel/fuzzel-oldv%.1f.ini", pver);
+		system(cmd);
+	}
+        // export fuzzel appearance
+        snprintf(cmd, sizeof(cmd),
+                	"mkdir ~/.config/fuzzel && "
+                	"cp dotfiles/fuzzel/fuzzel.ini "
+			"~/.config/fuzzel");
+        system(cmd);  		
+}
+void GTKL(char ARCHIVE)
+{
+	char cmd[256];
+        if (ARCHIVE == 'Y' || ARCHIVE == 'y')
+	{
+		// backup gtklock config
+	    	snprintf(cmd, sizeof(cmd),
+                		"mv ~/.config/gtklock/style.css "
+				"~/.config/gtklock/style-oldv%.1f.css", pver);
+		system(cmd);
+	}
+	// export gtklock config
+        snprintf(cmd, sizeof(cmd),
+	             	"mkdir -p ~/.config/gtklock/assets && "
+                	"cp -f dotfiles/gtklock/style.css ~/.config/gtklock && "
+                	"cp -f dotfiles/gtklock/lockscreen.jpg ~/.config/gtklock/assets");
+        system(cmd);
+}
+
+void HYPR(char ARCHIVE)
+{
+	char cmd[256];
+        if (ARCHIVE == 'Y' || ARCHIVE == 'y')
+	{
+		// archive hyprland configs
+                snprintf(cmd, sizeof(cmd),
+                    "mkdir -p ~/.config/hypr && "
+                    "mv ~/.config/hypr/hyprland.conf ~/.config/hypr/hyprland-oldv%.1f.conf && "
+                    "mv ~/.config/hypr/hyprpaper.conf ~/.config/hypr/hyprpaper-oldv%.1f.conf && "
+                    "mv ~/.config/hypr/hypridle.conf ~/.config/hypr/hypridle-oldv%.1f.conf",
+                pver, pver, pver);
+                system(cmd);
+	}
+	// export hyprland configs
+        snprintf(cmd, sizeof(cmd),
+			"cp -f dotfiles/hypr/hyprland.conf ~/.config/hypr && "
+			"cp -f dotfiles/hypr/hypridle.conf ~/.config/hypr && "
+			"cp -f dotfiles/hypr/hyprpaper.conf ~/.config/hypr");
+        system(cmd);
+}
+void KITT(char ARCHIVE)
+{
+	char cmd[256];
+        if (ARCHIVE == 'Y' || ARCHIVE == 'y')
+	{
+		// backup kitty config
+	    	snprintf(cmd, sizeof(cmd),
+				"mv ~/.config/kitty/kitty.conf "
+				"~/.config/kitty/kitty-oldv%.1f.conf", pver);
+		system(cmd);
+	}
+	// export kitty config
+	snprintf(cmd, sizeof(cmd),
+			"mkdir ~/.config/kitty && "
+                	"cp -f ~/dotfiles/kitty/kitty.conf ~/.config/kitty");
+	system(cmd);
+}
+
+void NVIM(char ARCHIVE)
+{
+	char cmd[256];
+        if (ARCHIVE == 'Y' || ARCHIVE == 'y')
+	{
+	    snprintf(cmd, sizeof(cmd),
+			    "mkdir -p ~/.config/nvim && cd ~/.config/nvim && "
+	    		    "mv init.lua init-oldv%.1f.lua && "
+			    "mv lazy-lock.json lazy-lock-oldv%.1f.json",
+			    pver, pver);
+	    system(cmd);
+	}
+	// export nvim config
+        snprintf(cmd, sizeof(cmd),
+			"cp -f dotfiles/nvim/init.lua ~/.config/nvim");
+			//" cp -rf lua ~/.config/nvim && "
+			//"cp -f lazy-lock.json ~/.config/nvim");
+        system(cmd);
+}
+void WAYB(char ARCHIVE)
+{
+	char cmd[256];
+        if (ARCHIVE == 'Y' || ARCHIVE == 'y')
+	{
+		// archive waybar
+                snprintf(cmd, sizeof(cmd),
+				"mkdir -p ~/.config/waybar && "
+				"mv ~/.config/waybar/config.jsonc ~/.config/waybar/config-oldv%.1f.jsonc && "
+				"mv ~/.config/waybar/style.css ~/.config/waybar/style-oldv%.1f.css",
+                pver, pver);
+	}
+        // export waybar config and appearance
+	snprintf(cmd, sizeof(cmd),
+			"cd ~/dotfiles/waybar && "
+               		"cp -f style.css ~/.config/waybar && "
+               		"cp -f config.jsonc ~/.config/waybar");
+	system(cmd);
 }
