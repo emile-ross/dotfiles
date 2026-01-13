@@ -18,7 +18,6 @@ void KITT(char ARCHIVE);
 void NVIM(char ARCHIVE);
 void WAYB(char ARCHIVE);
 
-
 int is_hyprland() 
 {
 	// check current environment variable
@@ -205,38 +204,18 @@ int main()
     scanf(" %c", &DOTINSTALL);
     if (DOTINSTALL == 'Y' || DOTINSTALL == 'y')
     {
-        char cmd[128];
-		
-		
-		// export cava config
-        snprintf(cmd, sizeof(cmd),
-			"rm ~/.config/cava && "
-			"mkdir -p ~/.config/cava && "
-                	"cd ~/dotfiles/cava && "
-                	"cp config ~/.config/cava");
-        system(cmd);
-		
-        // export fastfetch config
-        snprintf(cmd, sizeof(cmd),
-			        "mkdir -p ~/.config/fastfetch && "
-                    "cd ~/dotfiles/fastfetch && "
-                    "cp config.jsonc ~/.config/fastfetch");
-        system(cmd);
-        // export hyprland dotfiles
-
+	void BTOP(char ARCHIVE);
+	void CAVA(char ARCHIVE);
+	void FAST(char ARCHIVE);
+	void FUZZ(char ARCHIVE);
+	void GTKL(char ARCHIVE);
+	void KITT(char ARCHIVE);
+	void NVIM(char ARCHIVE);
         if (HYPRI == 'Y' || HYPRI == 'y')
         {
+		void WAYB(char ARCHIVE);
+		void HYPR(char ARCHIVE);
         }
-
-		
-
-        // export neovim config
-        snprintf(cmd, sizeof(cmd),
-			"cd ~/dotfiles/nvim && "
-			"cp -f init.lua ~/.config/nvim && ");
-			//" cp -rf lua ~/.config/nvim && "
-			//"cp -f lazy-lock.json ~/.config/nvim");
-        system(cmd);
     }
         else
     {
@@ -392,7 +371,6 @@ void NVIM(char ARCHIVE)
 			//"cp -f lazy-lock.json ~/.config/nvim");
         system(cmd);
 }
-
 void WAYB(char ARCHIVE)
 {
 	char cmd[256];
