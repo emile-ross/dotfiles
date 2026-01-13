@@ -33,6 +33,8 @@ If you want to **update** your dotfiles, click [here](#Update)
 ## Install
 
 In order to install the dotfiles you will need to run a C script.  
+A new tui install script was recently added but it isn't ready yet. 
+
 
 >  **Warning** Be careful running scripts found on the internet!
 
