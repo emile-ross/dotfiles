@@ -13,7 +13,7 @@ void HYPR(char ARCHIVE);
 void KITT(char ARCHIVE);
 void NVIM(char ARCHIVE);
 void WAYB(char ARCHIVE);
-void install_yay();
+int install_yay();
 
 
 void install_script() 
@@ -79,7 +79,7 @@ int main()
             case 10: // Enter key
                 if (highlight == 0) 
                 {
-                    fix_install(); // Action for "View Item"
+                    install_script(); // Action for "View Item"
                 } 
                 else if (highlight == 1) 
                 {
@@ -132,11 +132,15 @@ int main()
         }    }
 			        fix_script();
 					install_yay();
-					char cmd[256);
+
+
+					// make sure yay is installed and install it if it isn't 
+					char cmd[256];
 					snprintf(cmd, sizeof(cmd),
 					    "sudo yay -Syu && "
 					    "sudo yay -S --noconfirm fastfetch cava btop gtklock");
-			        system(cmd);
+			        	system(cmd);
+					printw("\nInstall was fixed\n");
                 } 
                 else if (highlight == 2) 
                 {
@@ -298,6 +302,7 @@ void NVIM(char ARCHIVE)
 	}
 	// export nvim config
         snprintf(cmd, sizeof(cmd),
+			"mkdir -p ~/.config/nvim && cd ~/.config/nvim && "
 			"cp -f dotfiles/nvim/init.lua ~/.config/nvim");
 			//" cp -rf lua ~/.config/nvim && "
 			//"cp -f lazy-lock.json ~/.config/nvim");
@@ -317,20 +322,19 @@ void WAYB(char ARCHIVE)
 	}
         // export waybar config and appearance
 	snprintf(cmd, sizeof(cmd),
-			"cd dotfiles/waybar && "
-               		"cp -f style.css ~/.config/waybar && "
-               		"cp -f config.jsonc ~/.config/waybar && "
-		            "cd .. && cd .. ");
+			"mkdir -p ~/.config/waybar && "
+               		"cp -f dotfiles/waybar/style.css ~/.config/waybar && "
+               		"cp -f dotfiles/waybar/config.jsonc ~/.config/waybar && ");
 	system(cmd);
 }
 
 
-void install_yay();
+int install_yay()
 {
    // Check if yay is installed
     if (system("test -f /sbin/yay") == 0)
     {
-        printf("Yay is now installed, congrats!\n");
+        printf("\nYay is already installed, moving on...\n");
     }
     else
     {
@@ -348,7 +352,7 @@ void install_yay();
                 // Check if makepkg is available after installing the base-devel package
                 if (system("command -v makepkg > /dev/null") != 0)
                 {
-                    printf("Makepkg installation failed. Please check your system configuration.\n");
+                    printf("\nMakepkg installation failed. Please check your system configuration.\n");
                     return 1;
                 }
                 else
