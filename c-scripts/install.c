@@ -153,7 +153,7 @@ int main()
     	char cmd[256];
 	    snprintf(cmd, sizeof(cmd),
 		    "yay -S --noconfirm kitty btop gtklock hyprpaper floorp-bin librewolf-bin xclip wl-clipboard && "
-		    "sudo pacman -S --noconfirm ttf-jetbrains-mono nerd-fonts-jetbrains-mono fastfetch");
+		    "sudo pacman -S --noconfirm ttf-jetbrains-mono nerd-fonts-jetbrains-mono ttf-ubuntu-font-family fastfetch");
 		system(cmd);
         }
         else
@@ -221,6 +221,8 @@ int main()
     {
         return 0;
     }
+	printf("\nNext time you want to manage your dotfiles,");
+	printf(" a tui utility might be available.  I enourage you to go check it out.\n");
     return 0;
 }
 
