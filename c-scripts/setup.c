@@ -1,136 +1,22 @@
-#include <ncurses.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include <string.h>
 
 float pver = 0.0f;
-char HYPRI;
-int fexit()
-{
-	endwin();
-	return 0;
-}
-
-int menu();
-
-void install_script();
-void fix_script();
-void advanced_mode();
 
 char BTOP(char ARCHIVE);
-void CAVA(char ARCHIVE);
-void FAST(char ARCHIVE);
-void FUZZ(char ARCHIVE);
-void GTKL(char ARCHIVE);
-void HYPR(char ARCHIVE);
-void KITT(char ARCHIVE);
-void NVIM(char ARCHIVE);
-void WAYB(char ARCHIVE);
-
-int install_yay();
-int install_noconfirm();
+char CAVA(char ARCHIVE);
+char FAST(char ARCHIVE);
+char FUZZ(char ARCHIVE);
+char GTKL(char ARCHIVE);
+char HYPR(char ARCHIVE);
+char KITT(char ARCHIVE);
+char NVIM(char ARCHIVE);
+char WAYB(char ARCHIVE);
 
 int main()
 {
-		menu();
-}
-int menu() 
-{
-    initscr();
-    noecho();
-    cbreak();
-    keypad(stdscr, TRUE);
 
-    const char *menu[] = 
-    {
-        "Install",
-        "Fix install",
-        "Advanced configuration",
-        "Exit"
-    };
-    int n_options = sizeof(menu) / sizeof(menu[0]);
-    int highlight = 0;
-    int choice;
-
-    while (1) 
-    {
-	    clear();
-        	for (int i = 0; i < n_options; ++i) 
-        	{	if (i == highlight) 
-			attron(A_REVERSE);
-			mvprintw(i + 1, 1, menu[i]);
-        	    	if (i == highlight) 
-        	        attroff(A_REVERSE);
-        	}
-        	refresh();
-        	choice = getch();
-
-        	switch (choice) 
-        	{
-        	    	case KEY_UP:
-		    	        highlight = (highlight == 0) ? n_options - 1 : highlight - 1;
-        	    	        break;
-        	    	case KEY_DOWN:
-        	    	        highlight = (highlight == n_options - 1) ? 0 : highlight + 1;
-        	    	        break;
-        	    	case 10: // Enter key
-				 if (highlight == 0) 
-				 {
-					 clear();
-					 printw("success\n");
-					 refresh();
-				//	        BTOP('Y');
-				//	        CAVA('Y');
-				//	 
-        	    	        //	install_script();
-		    	        // 	install_noconfirm();
-				 } 
-				 else if (highlight == 1)
-				 {
-		    	    		
-		    	    		fix_script();   // display a prompt
-		    	    		install_yay();  // Check if yay is installed
-
-		    	    		// update after yay was checked
-					
-		    	    		       	char cmd[256];
-		    	    		       	snprintf(cmd, sizeof(cmd),
-		    	    					"yay -Syu && "
-		    	    		       	    		"yay -S --noconfirm fastfetch cava btop gtklock");
-		    	    		       	system(cmd);
-		    	    			printw("\nInstall was fixed\n");
-        	    	    } 
-        	    	    else if (highlight == 2) 
-        	    	    {
-		    	    	endwin();
-		    	    	char cmd[256];
-		    	    	snprintf(cmd, sizeof(cmd),
-		    	    			"cd dotfiles/c-scripts && "
-		    	    			"gcc install.c -o cinstall && "
-		    	    			"./cinstall");
-		    	    	system(cmd);
-
-		    	    } 
-        	    	    else if (highlight == 3) 
-        	    	    {
-		    	    	fexit();
-        	    	        return 0;
-        	    	    }
-        	    	    break;
-		}
-    }
-
-    endwin();
-    return 0;
-}
-void install_script() 
-{
-	clear();
-	printw("\nThis will execute install script.");
-	printw("\n Are you sure you want to proceed (Y/n)\n");
-	getch();
-	char CONFIRM_FULL_INSTALL;
-	scanf("%c", CONFIRM_FULL_INSTALL);
-	refresh();
 }
 
 char BTOP(char ARCHIVE)
@@ -150,7 +36,7 @@ char BTOP(char ARCHIVE)
                 	"cp ~/dotfiles/btop/config.jsonc ~/.config/btop");
         system(cmd);
 }
-void CAVA(char ARCHIVE)
+char CAVA(char ARCHIVE)
 {
 	char cmd[256];
         if (ARCHIVE == 'Y' || ARCHIVE == 'y')
@@ -167,7 +53,7 @@ void CAVA(char ARCHIVE)
                 	"cp -f dotfiles/cava/config ~/.config/cava/ && ");
         system(cmd);
 }
-void FAST(char ARCHIVE)
+char FAST(char ARCHIVE)
 {
 	char cmd[256];
         if (ARCHIVE == 'Y' || ARCHIVE == 'y')
@@ -185,7 +71,7 @@ void FAST(char ARCHIVE)
 			"~/.config/fastfetch");
         system(cmd);
 }
-void FUZZ(char ARCHIVE)
+char FUZZ(char ARCHIVE)
 {
 	char cmd[256];
         if (ARCHIVE == 'Y' || ARCHIVE == 'y')
@@ -203,7 +89,7 @@ void FUZZ(char ARCHIVE)
 			"~/.config/fuzzel");
         system(cmd);  		
 }
-void GTKL(char ARCHIVE)
+char GTKL(char ARCHIVE)
 {
 	char cmd[256];
         if (ARCHIVE == 'Y' || ARCHIVE == 'y')
@@ -222,7 +108,7 @@ void GTKL(char ARCHIVE)
         system(cmd);
 }
 
-void HYPR(char ARCHIVE)
+char HYPR(char ARCHIVE)
 {
 	char cmd[256];
         if (ARCHIVE == 'Y' || ARCHIVE == 'y')
@@ -243,7 +129,7 @@ void HYPR(char ARCHIVE)
 			"cp -f dotfiles/hypr/hyprpaper.conf ~/.config/hypr");
         system(cmd);
 }
-void KITT(char ARCHIVE)
+char KITT(char ARCHIVE)
 {
 	char cmd[256];
         if (ARCHIVE == 'Y' || ARCHIVE == 'y')
@@ -261,7 +147,7 @@ void KITT(char ARCHIVE)
 	system(cmd);
 }
 
-void NVIM(char ARCHIVE)
+char NVIM(char ARCHIVE)
 {
 	char cmd[256];
         if (ARCHIVE == 'Y' || ARCHIVE == 'y')
@@ -281,7 +167,7 @@ void NVIM(char ARCHIVE)
 			//"cp -f lazy-lock.json ~/.config/nvim");
         system(cmd);
 }
-void WAYB(char ARCHIVE)
+char WAYB(char ARCHIVE)
 {
 	char cmd[256];
         if (ARCHIVE == 'Y' || ARCHIVE == 'y')
@@ -299,77 +185,4 @@ void WAYB(char ARCHIVE)
                		"cp -f dotfiles/waybar/style.css ~/.config/waybar && "
                		"cp -f dotfiles/waybar/config.jsonc ~/.config/waybar && ");
 	system(cmd);
-}
-
-
-int install_yay()
-{
-	// Check if yay is installed
-    	if (system("test -f /sbin/yay") == 0)
-    	{
-    	    printw("\nYay is already installed, moving on...\n");
-    	}
-    	else
-    	{
-		char YAY;
-    	    	printw("Yay is not installed, do you want to install it? (Y/n): ");
-    	    	scanf(" %c", &YAY); // asks the user if they wanna install yay (needed)
-    	    	if (YAY == 'Y' || YAY == 'y')
-    	    	{
-			// Check if makepkg is installed ( it is needed in order to compile yay )
-    	    	    	if (system("command -v makepkg > /dev/null") != 0)
-    	    	    	{
-    	    	    	    	printw("\nMakepkg is not installed. Installing 'base-devel' package group to proceed...\n");
-    	    	    	    	system("sudo pacman -S --noconfirm base-devel");
-
-    	    	    	    	// Check if makepkg is available after installing the base-devel package
-    	    	    	    	if (system("command -v makepkg > /dev/null") != 0)
-    	    	    	    	{
-    	    	    	    	    	printw("\nMakepkg installation failed. Please check your system configuration.\n");
-    	    	    	    	    	return 1;
-    	    	    	    	}
-    	    	    	    	else
-    	    	    	    	{
-					printw("Makepkg has been successfully installed!\n");
-    	    	    	    	}
-    	    	    	}
-    	    	    else
-    	    	    {
-			    printw("Makepkg is already installed.\n");
-    	    	    }
-    	    	    char cmd[256];
-    	    	    snprintf(cmd, sizeof(cmd),
-				    "git clone https://aur.archlinux.org/yay.git &&"
-				    "cd yay &&"
-				    "makepkg -si && "
-				    "cd ..");
-    	    	    system(cmd);
-    	    	    printw("\nYay is installed, congrats!\n");
-    	    	}
-    	    	else
-    	    	{
-			printw("\nYay is needed in order to proceed with the script.\n");
-			return 1;
-    	    	}
-    	}
-}
-
-
-void fix_script() 
-{
-    printw("\nFixing the installation...\n");
-    refresh();
-    //getch(); // Wait for user input
-}
-void advanced_mode() 
-{
-	printw("\nAdvanced configuration isn't available yet.\n");
-	refresh();
-	getch(); // Wait for user input
-}
-
-int install_noconfirm()
-{
-	printw("\nInstalling\n");
-	return 0;
 }
