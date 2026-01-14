@@ -47,14 +47,13 @@ int main(void)
         {
             char cmd[256];
 			snprintf(cmd, sizeof(cmd);
-               "cd ~/.config/hypr && "
-			   "mv hyprland.conf hyprland-v%s.conf", VAWSM);
+			   "mv ~/.config/hypr/hyprland.conf ~/.config/hypr/hyprland-v%s.conf", VAWSM);
 			system(cmd);
 			
             // system("cd ~/.config/hypr && mv hyprland.conf hyprland-oldv0.conf && mv hyprpaper.conf hyprpaper-oldv0.conf && mv hypridle.conf hypridle-oldv0.conf");
 			snprintf(cmd, sizeof(cmd);
-			"cd ~/.config/nvim && "
-			"mv init.lua init-v%s.lua", VAWSM);
+			    "yay -S --noconfirm btop gtklock cava fuzzel kitty fastfetch nvim waybar && "
+			    "mv ~/.config/nvim/init.lua ~/.config/nvim/init-v%s.lua", VAWSM);
             system(cmd);
             // system("cd ~/.config/hypr && mv hyprland.conf");
             
@@ -63,13 +62,17 @@ int main(void)
 
             // hyprland + waybar config
 			snprintd(cmd, sizeof(cmd);
-			"cd ~/dotfiles/hypr && "
+			"cd dotfiles/hypr && "
 			"cp hyprland.conf ~/.config/hypr && "
 			"cp hypridle.conf ~/.config/hypr && "
 			"cp hyprpaper.conf ~/.config/hypr && "
-			"cd ~/dotfiles/waybar && "
+			"cd .. && "
+			"cd .. && "
+			"cd dotfiles/waybar && "
 			"cp style.css ~/.config/waybar && "
-			"cp config.jsonc ~/.config/waybar");
+			"cp config.jsonc ~/.config/waybar && "
+			"cd .. && "
+			"cd .. ");
 			system(cmd);
 
             // nvim config
@@ -83,7 +86,7 @@ int main(void)
         } 
         else if (strcmp(VAWSM, "1.2") == 0) 
         {
-            system("yay -S --noconfirm fuzzel cava kitty");
+			system("yay -S --noconfirm btop gtklock cava fuzzel kitty && ");
     		// import fuzzel config	
 		    system("cd ~/dotfiles/ && cp -r fuzzel");
         }
@@ -106,6 +109,7 @@ int main(void)
 			char cmd[256];
 			snprintf(cmd, sizeof(cmd);
 			"sudo pacman --noconfirm cava kitty bpytop && "
+			"yay -S --noconfirm btop gtklock && "
 			"rm ~/.config/cava && "
 			"mkdir ~/.config/cava && "
 			"cp -f ~/dotfiles/cava/config ~/.config/cava/ && "
