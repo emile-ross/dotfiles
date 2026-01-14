@@ -4,6 +4,14 @@
 
 float pver = 0.0f;
 char HYPRI;
+int fexit;
+
+int menu(int fexit);
+
+void install_script();
+void fix_script();
+void advanced_mode();
+
 void BTOP(char ARCHIVE);
 void CAVA(char ARCHIVE);
 void FAST(char ARCHIVE);
@@ -13,30 +21,20 @@ void HYPR(char ARCHIVE);
 void KITT(char ARCHIVE);
 void NVIM(char ARCHIVE);
 void WAYB(char ARCHIVE);
+
 int install_yay();
 
 
-void install_script() 
+int main(int fexit)
 {
-    printw("\nInstalling...\n");
-    refresh();
-    //getch();
+	
+	do 
+	{
+		menu(fexit);
+	}
+	while (fexit != 0);
 }
-
-void fix_script() 
-{
-    printw("\nFixing the installation...\n");
-    refresh();
-    //getch(); // Wait for user input
-}
-void advanced_mode() 
-{
-    printw("\nAdvanced configuration isn't available yet.\n");
-    refresh();
-    getch(); // Wait for user input
-}
-
-int main() 
+int menu(int fexit) 
 {
     initscr();
     noecho();
@@ -88,11 +86,11 @@ int main()
 			install_yay();  // Check if yay is installed
 
 			// update after yay was checked
-		       	char cmd[256];
-		       	snprintf(cmd, sizeof(cmd),
-		       	    "sudo yay -Syu && "
-		       	    "sudo yay -S --noconfirm fastfetch cava btop gtklock");
-		       	system(cmd);
+			       	char cmd[256];
+			       	snprintf(cmd, sizeof(cmd),
+			       	    "yay -Syu && "
+			       	    "yay -S --noconfirm fastfetch cava btop gtklock");
+			       	system(cmd);
 				printw("\nInstall was fixed\n");
                 } 
                 else if (highlight == 2) 
@@ -101,7 +99,8 @@ int main()
                 } 
                 else if (highlight == 3) 
                 {
-                    endwin();
+                    //endwin();
+		    int fexit = 1;
                     return 0; // Exit
                 }
                 break;
@@ -332,4 +331,24 @@ int install_yay()
             return 1;
         }
     }
+}
+
+void install_script() 
+{
+    printw("\nInstalling...\n");
+    refresh();
+    //getch();
+}
+
+void fix_script() 
+{
+    printw("\nFixing the installation...\n");
+    refresh();
+    //getch(); // Wait for user input
+}
+void advanced_mode() 
+{
+    printw("\nAdvanced configuration isn't available yet.\n");
+    refresh();
+    getch(); // Wait for user input
 }
