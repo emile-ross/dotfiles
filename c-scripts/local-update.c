@@ -85,7 +85,19 @@ int main(void)
             system("cd ~/dotfiles/fastfetch && cp config.jsonc ~/.config/fastfetch");
         } 
         else if (strcmp(VAWSM, "1.2") == 0) 
-        {
+        {	
+			char cmd[256];
+			snprintf(cmd, sizeof(cmd);
+			"sudo pacman --noconfirm btop cava fuzzel kitty hyprland && "
+			"rm ~/.config/cava && "
+			"mkdir ~/.config/cava && "
+			"cp -f ~/dotfiles/cava/config ~/.config/cava/ && "
+			"mv ~/.config/kitty/kitty.conf ~/.config/kitty/kitty-oldv0.conf && "
+			"mv ~/.config/hypr/hyprland.conf ~/.config/hypr/hyprland-oldv1.4.conf && "
+			"cp -f ~/dotfiles/hypr/hyprland.conf ~/.config/hypr/ && "
+			"cp -f ~/dotfiles/fuzzel/fuzzel.ini ~/.config/fuzzel && "
+			"cp -f ~/dotfiles/kitty/kitty.conf ~/.config/kitty");
+			system(cmd);
 			system("yay -S --noconfirm btop gtklock cava fuzzel kitty && ");
     		// import fuzzel config	
 		    system("cd ~/dotfiles/ && cp -r fuzzel");
@@ -94,7 +106,7 @@ int main(void)
         {
 			char cmd[256];
 			snprintf(cmd, sizeof(cmd);
-			"sudo pacman --noconfirm cava fuzzel kitty hyprland && "
+			"sudo pacman --noconfirm btop cava fuzzel kitty hyprland && "
 			"rm ~/.config/cava && "
 			"mkdir ~/.config/cava && "
 			"cp -f ~/dotfiles/cava/config ~/.config/cava/ && "
@@ -108,7 +120,7 @@ int main(void)
 		{
 			char cmd[256];
 			snprintf(cmd, sizeof(cmd);
-			"sudo pacman --noconfirm cava kitty bpytop && "
+			"sudo pacman --noconfirm btop kitty && "
 			"yay -S --noconfirm btop gtklock && "
 			"rm ~/.config/cava && "
 			"mkdir ~/.config/cava && "
