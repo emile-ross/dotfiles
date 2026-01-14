@@ -49,9 +49,14 @@ int main(void)
         "git clone https://github.com/imawsumm/dotfiles && " // download the repo
         "cd dotfiles/c-scripts && "
         "gcc local-update.c -o lupdate && " // compile the update script
-        "./lupdate");
+        "./lupdate && 
+        "cd .. && "
+        "cd ..");
     system(cmd);
     // add a prompt to ask if the user wants to remove the repo
+    char RM_REP;
+            printf("\nWould you like to remove this repo? (Y/n)"\n);
+            scanf("%c", RM_REP);
     }
     else
     {
