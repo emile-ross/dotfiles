@@ -4,9 +4,13 @@
 
 float pver = 0.0f;
 char HYPRI;
-int fexit;
+int fexit()
+{
+	endwin();
+	return 0;
+}
 
-int menu(int fexit);
+int menu();
 
 void install_script();
 void fix_script();
@@ -25,16 +29,11 @@ void WAYB(char ARCHIVE);
 int install_yay();
 
 
-int main(int fexit)
+int main()
 {
-	
-	do 
-	{
-		menu(fexit);
-	}
-	while (fexit != 0);
+		menu();
 }
-int menu(int fexit) 
+int menu() 
 {
     initscr();
     noecho();
@@ -54,56 +53,55 @@ int menu(int fexit)
 
     while (1) 
     {
-        clear();
-        for (int i = 0; i < n_options; ++i) 
-        {
-            if (i == highlight) 
-                attron(A_REVERSE);
-            mvprintw(i + 1, 1, menu[i]);
-            if (i == highlight) 
-                attroff(A_REVERSE);
-        }
-        refresh();
-        choice = getch();
+	    clear();
+        	for (int i = 0; i < n_options; ++i) 
+        	{	if (i == highlight) 
+			attron(A_REVERSE);
+			mvprintw(i + 1, 1, menu[i]);
+        	    	if (i == highlight) 
+        	        attroff(A_REVERSE);
+        	}
+        	refresh();
+        	choice = getch();
 
-        switch (choice) 
-        {
-            case KEY_UP:
-                highlight = (highlight == 0) ? n_options - 1 : highlight - 1;
-                break;
-            case KEY_DOWN:
-                highlight = (highlight == n_options - 1) ? 0 : highlight + 1;
-                break;
-            case 10: // Enter key
-                if (highlight == 0) 
-                {
-                    install_script(); // Action for "View Item"
-                } 
-                else if (highlight == 1) 
-                {
-			
-			fix_script();   // display a prompt
-			install_yay();  // Check if yay is installed
+        	switch (choice) 
+        	{
+        	    case KEY_UP:
+        	        highlight = (highlight == 0) ? n_options - 1 : highlight - 1;
+        	        break;
+        	    case KEY_DOWN:
+        	        highlight = (highlight == n_options - 1) ? 0 : highlight + 1;
+        	        break;
+        	    case 10: // Enter key
+        	        if (highlight == 0) 
+        	        {
+        	            install_script(); // Action for "View Item"
+        	        } 
+        	        else if (highlight == 1) 
+        	        {
+				
+				fix_script();   // display a prompt
+				install_yay();  // Check if yay is installed
 
-			// update after yay was checked
-			       	char cmd[256];
-			       	snprintf(cmd, sizeof(cmd),
-			       	    "yay -Syu && "
-			       	    "yay -S --noconfirm fastfetch cava btop gtklock");
-			       	system(cmd);
-				printw("\nInstall was fixed\n");
-                } 
-                else if (highlight == 2) 
-                {
-                    advanced_mode(); // Action for "Delete Item"
-                } 
-                else if (highlight == 3) 
-                {
-                    //endwin();
-		    int fexit = 1;
-                    return 0; // Exit
-                }
-                break;
+				// update after yay was checked
+				       	char cmd[256];
+				       	snprintf(cmd, sizeof(cmd),
+				       	    "yay -Syu && "
+				       	    "yay -S --noconfirm fastfetch cava btop gtklock");
+				       	system(cmd);
+					printw("\nInstall was fixed\n");
+        	        } 
+        	        else if (highlight == 2) 
+        	        {
+        	            advanced_mode(); // Action for "Delete Item"
+        	        } 
+        	        else if (highlight == 3) 
+        	        {
+				fexit();
+        	            //endwin();
+        	            return 0; // Exit
+        	        }
+        	        break;
         }
     }
 
@@ -283,54 +281,54 @@ void WAYB(char ARCHIVE)
 
 int install_yay()
 {
-   // Check if yay is installed
-    if (system("test -f /sbin/yay") == 0)
-    {
-        printw("\nYay is already installed, moving on...\n");
-    }
-    else
-    {
-        char YAY;
-        printw("Yay is not installed, do you want to install it? (Y/n): ");
-        scanf(" %c", &YAY); // asks the user if they wanna install yay (needed)
-        if (YAY == 'Y' || YAY == 'y')
-        {
-            // Check if makepkg is installed ( it is needed in order to compile yay )
-            if (system("command -v makepkg > /dev/null") != 0)
-            {
-                printw("\nMakepkg is not installed. Installing 'base-devel' package group to proceed...\n");
-                system("sudo pacman -S --noconfirm base-devel");
+	// Check if yay is installed
+    	if (system("test -f /sbin/yay") == 0)
+    	{
+    	    printw("\nYay is already installed, moving on...\n");
+    	}
+    	else
+    	{
+		char YAY;
+    	    	printw("Yay is not installed, do you want to install it? (Y/n): ");
+    	    	scanf(" %c", &YAY); // asks the user if they wanna install yay (needed)
+    	    	if (YAY == 'Y' || YAY == 'y')
+    	    	{
+			// Check if makepkg is installed ( it is needed in order to compile yay )
+    	    	    	if (system("command -v makepkg > /dev/null") != 0)
+    	    	    	{
+    	    	    	    	printw("\nMakepkg is not installed. Installing 'base-devel' package group to proceed...\n");
+    	    	    	    	system("sudo pacman -S --noconfirm base-devel");
 
-                // Check if makepkg is available after installing the base-devel package
-                if (system("command -v makepkg > /dev/null") != 0)
-                {
-                    printw("\nMakepkg installation failed. Please check your system configuration.\n");
-                    return 1;
-                }
-                else
-                {
-                    printw("Makepkg has been successfully installed!\n");
-                }
-            }
-            else
-            {
-                printw("Makepkg is already installed.\n");
-            }
-            char cmd[256];
-            snprintf(cmd, sizeof(cmd),
-                "git clone https://aur.archlinux.org/yay.git &&"
-                "cd yay &&"
-                "makepkg -si &&"
-	    	"cd ..");
-            system(cmd);
-            printw("\nYay is installed, congrats!\n");
-        }
-        else
-        {
-            printw("\nYay is needed in order to proceed with the script.\n");
-            return 1;
-        }
-    }
+    	    	    	    	// Check if makepkg is available after installing the base-devel package
+    	    	    	    	if (system("command -v makepkg > /dev/null") != 0)
+    	    	    	    	{
+    	    	    	    	    	printw("\nMakepkg installation failed. Please check your system configuration.\n");
+    	    	    	    	    	return 1;
+    	    	    	    	}
+    	    	    	    	else
+    	    	    	    	{
+					printw("Makepkg has been successfully installed!\n");
+    	    	    	    	}
+    	    	    	}
+    	    	    else
+    	    	    {
+			    printw("Makepkg is already installed.\n");
+    	    	    }
+    	    	    char cmd[256];
+    	    	    snprintf(cmd, sizeof(cmd),
+				    "git clone https://aur.archlinux.org/yay.git &&"
+				    "cd yay &&"
+				    "makepkg -si && "
+				    "cd ..");
+    	    	    system(cmd);
+    	    	    printw("\nYay is installed, congrats!\n");
+    	    	}
+    	    	else
+    	    	{
+			printw("\nYay is needed in order to proceed with the script.\n");
+			return 1;
+    	    	}
+    	}
 }
 
 void install_script() 
