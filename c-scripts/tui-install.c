@@ -75,7 +75,10 @@ int menu()
         	    	case 10: // Enter key
 				 if (highlight == 0) 
 				 {
-        	    	         	install_script(); 
+					        BTOP('Y');
+					        CAVA('Y');
+					 
+        	    	        install_script();
 		    	         	install_noconfirm();
 				 } 
 				 else if (highlight == 1)
@@ -135,11 +138,11 @@ char BTOP(char ARCHIVE)
 		snprintf(cmd, sizeof(cmd),
 				"mv ~/.config/btop/config.jsonc "
 				"~/.config/btop/config-oldv%.1f.jsonc", pver);
-                system(cmd);
+        system(cmd);
 	}
         // export btop config
         snprintf(cmd, sizeof(cmd),
-			"mkdir -p ~/.config/btop && "
+			        "mkdir -p ~/.config/btop && "
                 	"cp ~/dotfiles/btop/config.jsonc ~/.config/btop");
         system(cmd);
 }
