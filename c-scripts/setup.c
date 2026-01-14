@@ -2,7 +2,14 @@
 #include <stdio.h>
 #include <string.h>
 
+#define BOLD_S  "\e[1m" // defines BOLD_S as a keyword to make text bold
+#define ANSI_BLUE    "\x1b[34m"
+#define ANSI_CYAN    "\x1b[36m"
+#define STYLE_END   "\e[m" // resets the styling
+
 float pver = 0.0f;
+
+void clear();
 
 char BTOP(char ARCHIVE);
 char CAVA(char ARCHIVE);
@@ -16,7 +23,14 @@ char WAYB(char ARCHIVE);
 
 int main()
 {
+	clear();
+	printf(BOLD_S ANSI_CYAN "\n Welcome to the setup utility for ImAwsumm's dotfiles \n" STYLE_END);
+	printf(BOLD_S "\n [1] " STYLE_END "Install the dotfiles\n");
 
+	printf(BOLD_S " [2] " STYLE_END "Fix the dotfiles\n");
+	printf(BOLD_S " [3] " STYLE_END "Update your dotfiles\n");
+	printf(BOLD_S " [4] " STYLE_END "Something else\n");
+	printf(BOLD_S " [5] " STYLE_END "Exit\n");
 }
 
 char BTOP(char ARCHIVE)
@@ -185,4 +199,11 @@ char WAYB(char ARCHIVE)
                		"cp -f dotfiles/waybar/style.css ~/.config/waybar && "
                		"cp -f dotfiles/waybar/config.jsonc ~/.config/waybar && ");
 	system(cmd);
+}
+
+
+
+void clear()
+{
+	printf("\033[2J\033[H");
 }
