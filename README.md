@@ -52,15 +52,25 @@ Useful keybinds to know:
  
  > super + Q -> **execute kitty**
 
- > super + R -> **execute fuzzer**
+ > super + V -> **Toggle Floating Mode**
 
- > super + 1 -> **execute floorp**
+ > super + C -> **Close Window**
+
+ > super + R -> **execute fuzzel**
+
+ > super + E -> **execute dolphin**
+
+ > super + 1 -> **execute Floorp**
  
- > super + 2 -> **execute firefox**
+ > super + 2 -> **execute Firefox**
 
- > super + 3 -> **execute LibreWolf**
+ > super + 3 -> **execute Chromium**
+
+ > super + 4 -> **execute LibreWolf**
  
  > super + F1 -> **switch to Workspace 1**
+
+ > super + shift + F1 -> **move window to Workspace 1** 
  
  > *super + (F1-F11) -> Workspaces (1-11)*
 
