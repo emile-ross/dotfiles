@@ -90,8 +90,8 @@ int main()
 				
 				printf(BOLD_S ANSI_WHITE "%s\n"STYLE_END, opt_for_text );
 				printf(BOLD_S "\n [1] " STYLE_END "%s\n", hypr_config_menu_text);
-				printf(BOLD_S "\n [2] " STYLE_END "%s\n", kitty_config_menu_text);
-				printf(BOLD_S "\n [0] " STYLE_END "%s\n", opt_exit_text);
+				printf(BOLD_S " [2] " STYLE_END "%s\n", kitty_config_menu_text);
+				printf(BOLD_S " [0] " STYLE_END "%s\n", opt_exit_text);
 				
 				scanf(" %d", &dotfiles_config_menu);
 				
@@ -104,7 +104,7 @@ int main()
 						char kitty_color_text[128] = "Change Kitty color scheme";
 						char kitty_fonts_text[128] = "Change Kitty fonts";
 						
-						printf(BOLD_S ANSI_WHITE "\n" STYLE_END "%s\n\n", kitty_config_menu_text);
+						printf(BOLD_S ANSI_WHITE "%s\n\n"STYLE_END, kitty_config_menu_text );
 						printf(BOLD_S " [1] " STYLE_END "%s\n", kitty_color_text);
 						printf(BOLD_S " [2] " STYLE_END "%s\n", kitty_fonts_text);
 						printf(BOLD_S " [0] " STYLE_END "%s\n", opt_exit_text);
@@ -121,9 +121,13 @@ int main()
 						else if (kitty_config_choice == 2)
 						{
 							system("kitty +list-fonts");
+							printf("\nThe install script can be used to install more fonts.");
 						}
-						else
+						else 
 						{
+							// typo? perhaps?
+							clear();
+							fflush(stdin);
 							break;
 						}
 					}
@@ -132,7 +136,8 @@ int main()
 				}
 				else
 				{
-					return 0;
+					clear();
+					fflush(stdin);
 				}
 			} 
 			while(dotfiles_config_menu != 0.0);
