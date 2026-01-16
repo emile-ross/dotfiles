@@ -5,6 +5,8 @@
 #define BOLD_S  "\e[1m" // defines BOLD_S as a keyword to make text bold
 #define ITALICS_S  "\e[3m"
 #define ANSI_BLUE    "\x1b[34m"
+#define ANSI_WHITE    "\x1b[97m"
+#define ANSI_GREY    "\x1b[90m"
 #define ANSI_CYAN    "\x1b[36m"
 #define ANSI_RED "\x1b[31m"
 #define STYLE_END   "\e[m" // resets the styling
@@ -29,7 +31,6 @@ char full_inst_noconfirm(char ARCHIVE);
 
 int main()
 {
-
     	int menu_one_i;
 	do
 	{
@@ -39,7 +40,7 @@ int main()
 		char opt_one_text[128] = "Install the dotfiles";
 		char opt_two_text[128] = "Fix the dotfiles";
 		char opt_the_text[128] = "Update your dotfiles";
-		char opt_for_text[128] = "Access the custom configuration menu";
+		char opt_for_text[128] = "Custom configuration menu";
 		char opt_fiv_text[128] = "Something else";
 		char opt_exit_text[128] = "Exit";
 
@@ -67,9 +68,6 @@ int main()
 			{
 				full_inst_noconfirm(ARCHIVE);
 			}
-
-
-			
 		}
 		else if (menu_one_i == 2)
 		{
@@ -87,22 +85,57 @@ int main()
 			do
 			{
 				clear();
-				printf(BOLD_S "%s\n"STYLE_END, opt_for_text );
+				char hypr_config_menu_text[128] = "NOT COMPLETE Edit hyprland config";
 				char kitty_config_menu_text[128] = "Edit kitty appearance and behavior";
-				int kitty_config_opt;
-
-				printf(BOLD_S "\n [1] " STYLE_END "%s\n", kitty_config_menu_text);
+				
+				printf(BOLD_S ANSI_WHITE "%s\n"STYLE_END, opt_for_text );
+				printf(BOLD_S "\n [1] " STYLE_END "%s\n", hypr_config_menu_text);
+				printf(BOLD_S "\n [2] " STYLE_END "%s\n", kitty_config_menu_text);
 				printf(BOLD_S "\n [0] " STYLE_END "%s\n", opt_exit_text);
 				
-				fflush(stdin);
-				
-				//printf("Hi");
 				scanf(" %d", &dotfiles_config_menu);
+				
+				if (dotfiles_config_menu == 2)
+				{
+					int kitty_config_choice;
+					do
+					{
+						clear();
+						char kitty_color_text[128] = "Change Kitty color scheme";
+						char kitty_fonts_text[128] = "Change Kitty fonts";
+						
+						printf(BOLD_S ANSI_WHITE "\n" STYLE_END "%s\n\n", kitty_config_menu_text);
+						printf(BOLD_S " [1] " STYLE_END "%s\n", kitty_color_text);
+						printf(BOLD_S " [2] " STYLE_END "%s\n", kitty_fonts_text);
+						printf(BOLD_S " [0] " STYLE_END "%s\n", opt_exit_text);
+						scanf("\n%c", kitty_config_choice);
+						fflush(stdin);
+						if (kitty_config_choice == 0)
+						{
+							break;
+						}
+						else if (kitty_config_choice == 1)
+						{
+							system("kitten themes");
+						}
+						else if (kitty_config_choice == 2)
+						{
+							system("kitty +list-fonts");
+						}
+						else
+						{
+							break;
+						}
+					}
+					while(kitty_config_choice != 0.0);
 
-  				//system(kitty +list-fonts)
+				}
+				else
+				{
+					return 0;
+				}
 			} 
 			while(dotfiles_config_menu != 0.0);
-			return 0;
 		}
 		else if (menu_one_i == 5)
 		{
