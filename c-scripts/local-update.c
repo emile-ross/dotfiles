@@ -61,7 +61,7 @@ int main(void)
             // only the modifed files are backed up
 
             // hyprland + waybar config
-			snprintd(cmd, sizeof(cmd);
+			snprintf(cmd, sizeof(cmd);
 			"cd dotfiles/hypr && "
 			"cp hyprland.conf ~/.config/hypr && "
 			"cp hypridle.conf ~/.config/hypr && "
@@ -110,6 +110,7 @@ int main(void)
 			"rm ~/.config/cava && "
 			"mkdir ~/.config/cava && "
 			"cp -f ~/dotfiles/cava/config ~/.config/cava/ && "
+			"yay -S --noconfirm ttf-ubuntu-font-family && "
 			"mv ~/.config/kitty/kitty.conf ~/.config/kitty/kitty-oldv0.conf && "
 			"mv ~/.config/hypr/hyprland.conf ~/.config/hypr/hyprland-oldv1.4.conf && "
 			"cp -f ~/dotfiles/hypr/hyprland.conf ~/.config/hypr/ && "
@@ -122,6 +123,7 @@ int main(void)
 			snprintf(cmd, sizeof(cmd);
 			"sudo pacman --noconfirm btop kitty && "
 			"yay -S --noconfirm btop gtklock && "
+			"yay -S --noconfirm ttf-ubuntu-font-family && "
 			"rm ~/.config/cava && "
 			"mkdir ~/.config/cava && "
 			"cp -f ~/dotfiles/cava/config ~/.config/cava/ && "
