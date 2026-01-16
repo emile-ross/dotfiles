@@ -2,8 +2,11 @@
 Dotfiles are files used to customize your system to your liking.  You can modify them by editing config files using a text editor ([Neovim](https://github.com/neovim/neovim)).
 
 
-If you want to **install** your dotfiles, click [here](#install) 
+If you want to **install** your dotfiles, click [here](#install)
+
 If you want to **update** your dotfiles, click [here](#Update)
+
+If you want to **configure** your dotfiles, click [here](#Configure)
 
 ## requirements
 - an Arch based distribution of linux (Windows will **never** get support)
@@ -20,6 +23,7 @@ If you want to **update** your dotfiles, click [here](#Update)
 - fuzzel
 - kitty
   - font options
+  - color scheme
 - gtklock
   - (lockscreen options coming)
     
@@ -31,10 +35,6 @@ If you want to **update** your dotfiles, click [here](#Update)
 --- 
 
 ## Install
-
-In order to install the dotfiles you will need to run a C script.  
-A new tui install script was recently added but it isn't ready yet. 
-
 
 >  **Warning** Be careful running scripts found on the internet!
 
@@ -91,7 +91,7 @@ gcc new-update.c -o update
 # Configure
 This is a script to help new users configure their system to tbeir liking.  
 For now you can only customize your kitty terminal but more features will come in tbe future
-```
+```sh
 cd dotfiles/c-scripts
 gcc setup.c -o setup
 ./setup
