@@ -88,6 +88,14 @@ cd ~/dotfiles/c-scripts
 gcc new-update.c -o update
 ./update
 ```
+# Configure
+This is a script to help new users configure their system to tbeir liking.  
+For now you can only customize your kitty terminal but more features will come in tbe future
+```
+cd dotfiles/c-scripts
+gcc setup.c -o setup
+./setup
+```
 # Credits 
 
 Many configs were directly from or inspired by [@kzndotsh](https://github.com/kzndotsh)
