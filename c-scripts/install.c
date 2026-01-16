@@ -221,8 +221,8 @@ int main()
     {
         return 0;
     }
-	printf("\nNext time you want to manage your dotfiles,");
-	printf(" a tui utility might be available.  I enourage you to go check it out.\n");
+	printf("\nNext time you want to customize your dotfiles,");
+	printf(" a user friendly script might be available (setup.c).  I enourage you to go check it out.\n");
     return 0;
 }
 
