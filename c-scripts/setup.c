@@ -175,7 +175,7 @@ char BTOP(char ARCHIVE)
         // export btop config
         snprintf(cmd, sizeof(cmd),
 			        "mkdir -p ~/.config/btop && "
-                	"cp ~/dotfiles/btop/config.jsonc ~/.config/btop");
+                	"cp dotfiles/btop/config.jsonc ~/.config/btop");
         system(cmd);
 }
 char CAVA(char ARCHIVE)
@@ -228,7 +228,7 @@ char FUZZ(char ARCHIVE)
         snprintf(cmd, sizeof(cmd),
                 	"mkdir ~/.config/fuzzel && "
                 	"cp dotfiles/fuzzel/fuzzel.ini "
-			"~/.config/fuzzel");
+			        "~/.config/fuzzel");
         system(cmd);  		
 }
 char GTKL(char ARCHIVE)
@@ -285,7 +285,8 @@ char KITT(char ARCHIVE)
 	// export kitty config
 	snprintf(cmd, sizeof(cmd),
 			"mkdir ~/.config/kitty && "
-                	"cp -f ~/dotfiles/kitty/kitty.conf ~/.config/kitty");
+		    "cp -f dotfiles/kitty/current-theme.conf ~/.config/kitty && "
+            "cp -f dotfiles/kitty/kitty.conf ~/.config/kitty");
 	system(cmd);
 }
 
