@@ -11,8 +11,6 @@
 
 void clear();
 
-
-
 char ARCHIVE;
 char confirm_full_inst;
 float pver = 0.0f;
@@ -31,71 +29,98 @@ char full_inst_noconfirm(char ARCHIVE);
 
 int main()
 {
-	clear();
-	// sets the text for each option and each menu title
+
     	int menu_one_i;
-	char main_menu_text[128] = "Welcome to the setup utility for ImAwsumm's dotfiles";
-	char opt_one_text[128] = "Install the dotfiles";
-	char opt_two_text[128] = "Fix the dotfiles";
-	char opt_the_text[128] = "Update your dotfiles";
-	char opt_for_text[128] = "Access the custom configuration menu";
-	char opt_fiv_text[128] = "Something else";
-	char opt_six_text[128] = "Exit";
-
-
-	printf(BOLD_S ANSI_CYAN "%s\n" STYLE_END, main_menu_text );
-	printf(BOLD_S "\n [1] " STYLE_END "%s\n", opt_one_text);
-	printf(BOLD_S " [2] " STYLE_END "%s\n", opt_two_text);
-	printf(BOLD_S " [3] " STYLE_END "%s\n", opt_the_text);
-	printf(BOLD_S " [4] " STYLE_END "%s\n", opt_for_text);
-	printf(BOLD_S " [5] " STYLE_END "%s\n", opt_fiv_text);
-	printf(BOLD_S " [6] " STYLE_END "%s\n", opt_six_text);
-    	scanf(" %d", &menu_one_i);
-    	if (menu_one_i == 1)
+	do
 	{
 		clear();
-		printf(BOLD_S "%s\n"STYLE_END, opt_one_text );
-		printf("\nDo you want to backup your old dotfiles before proceeding? (Y/n)\n");
-		scanf(" %c", &ARCHIVE);
-		printf(ANSI_RED BOLD_S"\nWARNING\n"STYLE_END BOLD_S"This will install every config.\n"STYLE_END);
-		printf(ITALICS_S"\nIn order to pick the configs you want, you need to use the custom configuration option\n"STYLE_END);
-		printf("\nProceed with installation (Y/n)\n");
-		fflush(stdin);
-		scanf(" %c", &confirm_full_inst);
-		if (confirm_full_inst == 'Y' || confirm_full_inst == 'y')
+		// sets the text for each option and each menu title
+		char main_menu_text[128] = "Welcome to the setup utility for ImAwsumm's dotfiles";
+		char opt_one_text[128] = "Install the dotfiles";
+		char opt_two_text[128] = "Fix the dotfiles";
+		char opt_the_text[128] = "Update your dotfiles";
+		char opt_for_text[128] = "Access the custom configuration menu";
+		char opt_fiv_text[128] = "Something else";
+		char opt_exit_text[128] = "Exit";
+
+
+		printf(BOLD_S ANSI_CYAN "%s\n" STYLE_END, main_menu_text );
+		printf(BOLD_S "\n [1] " STYLE_END "%s\n", opt_one_text);
+		printf(BOLD_S " [2] " STYLE_END "%s\n", opt_two_text);
+		printf(BOLD_S " [3] " STYLE_END "%s\n", opt_the_text);
+		printf(BOLD_S " [4] " STYLE_END "%s\n", opt_for_text);
+		printf(BOLD_S " [5] " STYLE_END "%s\n", opt_fiv_text);
+		printf(BOLD_S "\n [0] " STYLE_END "%s\n", opt_exit_text);
+    		scanf(" %d", &menu_one_i);
+    		if (menu_one_i == 1)
 		{
-			full_inst_noconfirm(ARCHIVE);
+			clear();
+			printf(BOLD_S "%s\n"STYLE_END, opt_one_text );
+			printf("\nDo you want to backup your old dotfiles before proceeding? (Y/n)\n");
+			scanf(" %c", &ARCHIVE);
+			printf(ANSI_RED BOLD_S"\nWARNING\n"STYLE_END BOLD_S"This will install every config.\n"STYLE_END);
+			printf(ITALICS_S"\nIn order to pick the configs you want, you need to use the custom configuration option\n"STYLE_END);
+			printf("\nProceed with installation (Y/n)\n");
+			fflush(stdin);
+			scanf(" %c", &confirm_full_inst);
+			if (confirm_full_inst == 'Y' || confirm_full_inst == 'y')
+			{
+				full_inst_noconfirm(ARCHIVE);
+			}
+
+
+			
 		}
+		else if (menu_one_i == 2)
+		{
+			clear();
+			printf(BOLD_S "%s\n"STYLE_END, opt_two_text );
+		}
+		else if (menu_one_i == 3)
+		{
+			clear();
+			printf(BOLD_S "%s\n"STYLE_END, opt_the_text );
+		}
+		else if (menu_one_i == 4)
+		{
+			int dotfiles_config_menu;
+			do
+			{
+				clear();
+				printf(BOLD_S "%s\n"STYLE_END, opt_for_text );
+				char kitty_config_menu_text[128] = "Edit kitty appearance and behavior";
+				int kitty_config_opt;
 
+				printf(BOLD_S "\n [1] " STYLE_END "%s\n", kitty_config_menu_text);
+				printf(BOLD_S "\n [0] " STYLE_END "%s\n", opt_exit_text);
+				
+				fflush(stdin);
+				
+				//printf("Hi");
+				scanf(" %d", &dotfiles_config_menu);
 
-		
+  				//system(kitty +list-fonts)
+			} 
+			while(dotfiles_config_menu != 0.0);
+			return 0;
+		}
+		else if (menu_one_i == 5)
+		{
+			clear();
+			printf(BOLD_S "%s\n"STYLE_END, opt_fiv_text );
+			printf("\nThere isn't anything here yet..\n");
+		}
+		else if (menu_one_i == '0')
+		{
+			//printf("\n");
+			return 0;
+		}
+		else
+		{
+			return 1; // error code 1
+		}
 	}
-    	if (menu_one_i == 2)
-	{
-		clear();
-		printf(BOLD_S "%s\n"STYLE_END, opt_two_text );
-	}
-    	if (menu_one_i == 3)
-	{
-		clear();
-		printf(BOLD_S "%s\n"STYLE_END, opt_the_text );
-	}
-    	if (menu_one_i == 4)
-	{
-		clear();
-		printf(BOLD_S "%s\n"STYLE_END, opt_for_text );
-	}
-    	if (menu_one_i == 5)
-	{
-		clear();
-		printf(BOLD_S "%s\n"STYLE_END, opt_fiv_text );
-		printf("\nThere isn't anything here yet..\n");
-	}
-    	if (menu_one_i == 6)
-	{
-		printf("\n");
-		return 0;
-	}
+	while(menu_one_i != 0);
 }
 
 char BTOP(char ARCHIVE)
