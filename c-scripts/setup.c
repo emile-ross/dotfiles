@@ -92,7 +92,7 @@ int main()
 				printf(BOLD_S "\n [1] " STYLE_END "%s\n", hypr_config_menu_text);
 				printf(BOLD_S " [2] " STYLE_END "%s\n", kitty_config_menu_text);
 				printf(BOLD_S " [0] " STYLE_END "%s\n", opt_exit_text);
-				
+				fflush(stdin);
 				scanf(" %d", &dotfiles_config_menu);
 				
 				if (dotfiles_config_menu == 2)
@@ -239,7 +239,7 @@ char GTKL(char ARCHIVE)
 		// backup gtklock config
 	    	snprintf(cmd, sizeof(cmd),
                 		"mv ~/.config/gtklock/style.css "
-				"~/.config/gtklock/style-oldv%.1f.css", pver);
+						"~/.config/gtklock/style-oldv%.1f.css", pver);
 		system(cmd);
 	}
 	// export gtklock config
