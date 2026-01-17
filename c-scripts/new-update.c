@@ -35,7 +35,7 @@ int main(void)
         }
     }
     fclose(f);
-
+							fflush(stdin);
     // check if the current version of dotfiles is correct
     char ACCURATEV;
     printf("\nYour current version is %s", VAWSM);
