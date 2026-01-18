@@ -189,8 +189,12 @@ int main()
 
 // backup kitty config
     snprintf(cmd, sizeof(cmd),
+			"mv ~/.config/kitty/current-theme.conf "
+			"~/.config/kitty/current-theme-old%.1f.conf && "
 		    "mv ~/.config/kitty/kitty.conf "
 		    "~/.config/kitty/kitty-oldv%.1f.conf", pver);
+	system(cmd);
+		
     snprintf(cmd, sizeof(cmd),
 		    "mv ~/.config/cava/config "
 		    "~/.config/cava/config-oldv%.1f", pver);
