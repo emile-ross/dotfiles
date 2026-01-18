@@ -52,15 +52,25 @@ Useful keybinds to know:
  
  > super + Q -> **execute kitty**
 
+(the default terminal)
+
  > super + V -> **Toggle Floating Mode**
+
+( Allows windoes to stack on top of each other)
 
  > super + C -> **Close Window**
 
  > super + R -> **execute fuzzel**
 
+(fuzzel is the app launcher)
+
  > super + E -> **execute dolphin**
 
+(A gui file manager)
+
  > super + 1 -> **execute Floorp**
+
+(firefox/gecko based browser)
  
  > super + 2 -> **execute Firefox**
 
