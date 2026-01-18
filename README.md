@@ -64,11 +64,11 @@ Useful keybinds to know:
 
 (fuzzel is the app launcher)
 
- > super + E -> **execute dolphin**
+ > super + E -> **execute [dolphin](https://github.com/KDE/dolphin)**
 
 (A gui file manager)
 
- > super + 1 -> **execute Floorp**
+ > super + 1 -> **execute [Floorp](https://github.com/Floorp-Projects/Floorp)**
 
 (firefox/gecko based browser)
  
