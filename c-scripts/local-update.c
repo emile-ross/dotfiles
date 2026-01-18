@@ -45,23 +45,25 @@ int main(void)
         // Only execute if version is exactly 1.0
         if (strcmp(VAWSM, "1.0") == 0) 
         {
-            char cmd[256];
-			snprintf(cmd, sizeof(cmd);
-			   "mv ~/.config/hypr/hyprland.conf ~/.config/hypr/hyprland-v%s.conf", VAWSM);
-			system(cmd);
+		char cmd[256];
+		snprintf(cmd, sizeof(cmd),
+				"mv ~/.config/hypr/hyprland.conf ~/.config/hypr/hyprland-v%s.conf", VAWSM);
+		system(cmd);
 			
             // system("cd ~/.config/hypr && mv hyprland.conf hyprland-oldv0.conf && mv hyprpaper.conf hyprpaper-oldv0.conf && mv hypridle.conf hypridle-oldv0.conf");
-			snprintf(cmd, sizeof(cmd);
-			    "yay -S --noconfirm btop gtklock cava fuzzel kitty fastfetch nvim waybar && "
-			    "mv ~/.config/nvim/init.lua ~/.config/nvim/init-v%s.lua", VAWSM);
-            system(cmd);
+			snprintf(cmd, sizeof(cmd),
+			    		"yay -S --noconfirm btop gtklock cava fuzzel kitty fastfetch nvim waybar && "
+					"cp -f dotfiles/kitty/kitty.conf ~/.config/kitty && "
+					"cp -f dotfiles/kitty/current-theme.conf ~/.config/current-theme.conf && "
+			    		"mv ~/.config/nvim/init.lua ~/.config/nvim/init-v%s.lua", VAWSM);
+			system(cmd);
             // system("cd ~/.config/hypr && mv hyprland.conf");
             
             // backup old configs with the current version name 
             // only the modifed files are backed up
 
             // hyprland + waybar config
-			snprintf(cmd, sizeof(cmd);
+			snprintf(cmd, sizeof(cmd),
 			    "cd dotfiles/hypr && "
 			    "cp hyprland.conf ~/.config/hypr && "
 			    "yay -S --noconfirm ttf-ubuntu-font-family ttf-ibmplex-mono-nerd ttf-blex-nerd-font-git ttf-victor-mono-nerd ttf-cascadia-mono-nerd && "
@@ -76,8 +78,16 @@ int main(void)
 			    "cd .. ");
 			system(cmd);
 
-            // nvim config
-            system("cd ~/dotfiles/nvim && cp init.lua ~/.config/nvim && cp -rf lua ~/.config/nvim && cp lazy-lock.json ~/.config/nvim");
+            		// nvim config
+			snprintf(cmd, sizeof(cmd),
+					"cd dotfiles/nvim && "
+					"cp init.lua ~/.config/nvim && "
+					"cp -rf lua ~/.config/nvim && "
+					"cp lazy-lock.json ~/.config/nvim"
+					"cd .. && "
+					"cd .. ");
+			system(cmd);
+            //system("cd ~/dotfiles/nvim && cp init.lua ~/.config/nvim && cp -rf lua ~/.config/nvim && cp lazy-lock.json ~/.config/nvim");
 
             // waybar config
             // system("cd ~/dotfiles/waybar && cp style.css ~/.config/waybar && cp config.jsonc ~/.config/waybar");
@@ -88,17 +98,18 @@ int main(void)
         else if (strcmp(VAWSM, "1.2") == 0) 
         {	
 			char cmd[256];
-			snprintf(cmd, sizeof(cmd);
-			    "sudo pacman --noconfirm btop cava fuzzel kitty hyprland && "
-			    "yay -S --noconfirm ttf-ubuntu-font-family ttf-ibmplex-mono-nerd ttf-blex-nerd-font-git ttf-victor-mono-nerd ttf-cascadia-mono-nerd && "
-			    "rm ~/.config/cava && "
-			    "mkdir ~/.config/cava && "
-			    "cp -f ~/dotfiles/cava/config ~/.config/cava/ && "
-			    "mv ~/.config/kitty/kitty.conf ~/.config/kitty/kitty-oldv0.conf && "
-			    "mv ~/.config/hypr/hyprland.conf ~/.config/hypr/hyprland-oldv1.4.conf && "
-			    "cp -f ~/dotfiles/hypr/hyprland.conf ~/.config/hypr/ && "
-			    "cp -f ~/dotfiles/fuzzel/fuzzel.ini ~/.config/fuzzel && "
-			    "cp -f ~/dotfiles/kitty/kitty.conf ~/.config/kitty");
+			snprintf(cmd, sizeof(cmd),
+					"sudo pacman --noconfirm btop cava fuzzel kitty hyprland && "
+			    		"yay -S --noconfirm ttf-ubuntu-font-family ttf-ibmplex-mono-nerd ttf-blex-nerd-font-git ttf-victor-mono-nerd ttf-cascadia-mono-nerd && "
+			    		"rm ~/.config/cava && "
+			    		"mkdir ~/.config/cava && "
+			    		"cp -f ~/dotfiles/cava/config ~/.config/cava/ && "
+			    		"mv ~/.config/kitty/kitty.conf ~/.config/kitty/kitty-oldv0.conf && "
+			    		"mv ~/.config/hypr/hyprland.conf ~/.config/hypr/hyprland-oldv1.4.conf && "
+			    		"cp -f ~/dotfiles/hypr/hyprland.conf ~/.config/hypr/ && "
+			    		"cp -f ~/dotfiles/fuzzel/fuzzel.ini ~/.config/fuzzel && "
+					"cp -f dotfiles/kitty/kitty.conf ~/.config/kitty && "
+					"cp -f dotfiles/kitty/current-theme.conf ~/.config/current-theme.conf");
 			system(cmd);
 			system("yay -S --noconfirm btop gtklock cava fuzzel kitty && ");
     		// import fuzzel config	
@@ -107,33 +118,36 @@ int main(void)
         else if (strcmp(VAWSM, "1.3") == 0)
         {
 			char cmd[256];
-			snprintf(cmd, sizeof(cmd);
-			"sudo pacman --noconfirm btop cava fuzzel kitty hyprland && "
-			"yay -S --noconfirm ttf-ubuntu-font-family ttf-ibmplex-mono-nerd ttf-blex-nerd-font-git ttf-victor-mono-nerd ttf-cascadia-mono-nerd && "
-			"rm ~/.config/cava && "
-			"mkdir ~/.config/cava && "
-			"cp -f ~/dotfiles/cava/config ~/.config/cava/ && "
-			"yay -S --noconfirm ttf-ubuntu-font-family && "
-			"mv ~/.config/kitty/kitty.conf ~/.config/kitty/kitty-oldv0.conf && "
-			"mv ~/.config/hypr/hyprland.conf ~/.config/hypr/hyprland-oldv1.4.conf && "
-			"cp -f ~/dotfiles/hypr/hyprland.conf ~/.config/hypr/ && "
-			"cp -f ~/dotfiles/kitty/kitty.conf ~/.config/kitty");
+			snprintf(cmd, sizeof(cmd),
+					"sudo pacman --noconfirm btop cava fuzzel kitty hyprland && "
+					"yay -S --noconfirm ttf-ubuntu-font-family ttf-ibmplex-mono-nerd ttf-blex-nerd-font-git ttf-victor-mono-nerd ttf-cascadia-mono-nerd && "
+					"rm ~/.config/cava && "
+					"mkdir ~/.config/cava && "
+					"cp -f dotfiles/cava/config ~/.config/cava/ && "
+					"yay -S --noconfirm ttf-ubuntu-font-family && "
+					"mv ~/.config/kitty/kitty.conf ~/.config/kitty/kitty-oldv0.conf && "
+					"mv ~/.config/hypr/hyprland.conf ~/.config/hypr/hyprland-oldv1.4.conf && "
+					"cp -f dotfiles/hypr/hyprland.conf ~/.config/hypr/ && "
+					"cp -f dotfiles/kitty/kitty.conf ~/.config/kitty && "
+					"cp -f dotfiles/kitty/current-theme.conf ~/.config/current-theme.conf");
 			system(cmd);
         }
 		else if (strcmp(VAWSM, "1.4") == 0)
 		{
 			char cmd[256];
-			snprintf(cmd, sizeof(cmd);
-			    "sudo pacman --noconfirm btop kitty && "
-			    "yay -S --noconfirm btop gtklock && "
-			    "yay -S --noconfirm ttf-ubuntu-font-family ttf-ibmplex-mono-nerd ttf-blex-nerd-font-git ttf-victor-mono-nerd ttf-cascadia-mono-nerd && "
-			    "rm ~/.config/cava && "
-			    "mkdir ~/.config/cava && "
-			    "cp -f ~/dotfiles/cava/config ~/.config/cava/ && "
-			    "mv ~/.config/kitty/kitty.conf ~/.config/kitty/kitty-oldv0.conf && "
-			    "mv ~/.config/hypr/hyprland.conf ~/.config/hypr/hyprland-oldv1.4.conf && "
-			    "cp -f ~/dotfiles/hypr/hyprland.conf ~/.config/hypr/ && "
-			    "cp -f ~/dotfiles/kitty/kitty.conf ~/.config/kitty");
+			snprintf(cmd, sizeof(cmd),
+					"sudo pacman --noconfirm btop kitty && "
+			    		"yay -S --noconfirm btop gtklock && "
+			    		"yay -S --noconfirm ttf-ubuntu-font-family ttf-ibmplex-mono-nerd ttf-blex-nerd-font-git ttf-victor-mono-nerd ttf-cascadia-mono-nerd && "
+			    		"rm ~/.config/cava && "
+			    		"mkdir ~/.config/cava && "
+			    		"cp -f ~/dotfiles/cava/config ~/.config/cava/ && "
+			    		"mv ~/.config/kitty/kitty.conf ~/.config/kitty/kitty-oldv0.conf && "
+			    		"mv ~/.config/hypr/hyprland.conf ~/.config/hypr/hyprland-oldv1.4.conf && "
+			    		"cp -f ~/dotfiles/hypr/hyprland.conf ~/.config/hypr/ && "
+			    		"cp -f ~/dotfiles/kitty/kitty.conf ~/.config/kitty && "
+			    		"cp -f ~/dotfiles/kitty/current-theme.conf ~/.config/current-theme.conf");
+			
 			system(cmd);
 			printf("\n Update completed.");
 			printf("\n Would you like to install the Neovim plugins? (Y/n)\n");
