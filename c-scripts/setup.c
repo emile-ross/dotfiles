@@ -2,16 +2,19 @@
 #include <stdio.h>
 #include <string.h>
 
-#define BOLD_S  "\e[1m" // defines BOLD_S as a keyword to make text bold
-#define ITALICS_S  "\e[3m"
-#define ANSI_BLUE    "\x1b[34m"
-#define ANSI_WHITE    "\x1b[97m"
-#define ANSI_GREY    "\x1b[90m"
-#define ANSI_CYAN    "\x1b[36m"
-#define ANSI_RED "\x1b[31m"
-#define STYLE_END   "\e[m" // resets the styling
+#define BOLD_S  	"\e[1m" // defines BOLD_S as a keyword to make text bold
+#define ITALICS_S 	"\e[3m"
+#define ANSI_BLUE    	"\x1b[34m"
+#define ANSI_WHITE    	"\x1b[97m"
+#define ANSI_GREY    	"\x1b[90m"
+#define ANSI_CYAN    	"\x1b[36m"
+#define ANSI_RED 	"\x1b[31m"
+#define STYLE_END   	"\e[m" // resets the styling
 
-void clear();
+void clear()
+{
+	printf("\033[2J\033[H");
+}
 
 char ARCHIVE;
 char confirm_full_inst;
@@ -53,6 +56,7 @@ int main()
 		printf(BOLD_S " [5] " STYLE_END "%s\n", opt_fiv_text);
 		printf(BOLD_S "\n [0] " STYLE_END "%s\n", opt_exit_text);
     		scanf(" %d", &menu_one_i);
+
     		if (menu_one_i == 1)
 		{
 			clear();
@@ -116,11 +120,18 @@ int main()
 						}
 						else if (kitty_config_choice == 1)
 						{
-							system("kitten themes");
+							char cmd[256];
+							snprintf(cmd, sizeof(cmd),
+									"kitten themes");
+							system(cmd);
 						}
 						else if (kitty_config_choice == 2)
 						{
-							system("kitty +list-fonts");
+							char cmd[256];
+							snprintf(cmd, sizeof(cmd),
+									"kitty +list-fonts");
+							system(cmd);
+
 							printf("\nThe install script can be used to install more fonts.");
 						}
 						else 
@@ -132,7 +143,7 @@ int main()
 						}
 					}
 					while(kitty_config_choice != 0.0);
-
+					// exits the while loop when the user types 0
 				}
 				else
 				{
@@ -141,6 +152,7 @@ int main()
 				}
 			} 
 			while(dotfiles_config_menu != 0.0);
+			// exits the while loop when the user types 0
 		}
 		else if (menu_one_i == 5)
 		{
@@ -159,6 +171,7 @@ int main()
 		}
 	}
 	while(menu_one_i != 0);
+	// exits the while loop when the user types 0
 }
 
 char BTOP(char ARCHIVE)
@@ -285,8 +298,8 @@ char KITT(char ARCHIVE)
 	// export kitty config
 	snprintf(cmd, sizeof(cmd),
 			"mkdir ~/.config/kitty && "
-		    "cp -f dotfiles/kitty/current-theme.conf ~/.config/kitty && "
-            "cp -f dotfiles/kitty/kitty.conf ~/.config/kitty");
+			"cp -f dotfiles/kitty/current-theme.conf ~/.config/kitty && "
+			"cp -f dotfiles/kitty/kitty.conf ~/.config/kitty");
 	system(cmd);
 }
 
@@ -330,16 +343,14 @@ char WAYB(char ARCHIVE)
 	system(cmd);
 }
 
-
-
-void clear()
-{
-	printf("\033[2J\033[H");
-}
-
-
 char full_inst_noconfirm(char ARCHIVE)
 {
+	printf("\nInstalling dotfiles...\n");
+	char cmd[256];
+	snprintf(cmd, sizeof(cmd),
+			"gcc install.c -o cinstall && " 
+			"./cinstall");
+	systen(cmd);
 	printf("\nInstalling dotfiles...\n");
 	return 0;
 }
