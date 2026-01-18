@@ -62,17 +62,18 @@ int main(void)
 
             // hyprland + waybar config
 			snprintf(cmd, sizeof(cmd);
-			"cd dotfiles/hypr && "
-			"cp hyprland.conf ~/.config/hypr && "
-			"cp hypridle.conf ~/.config/hypr && "
-			"cp hyprpaper.conf ~/.config/hypr && "
-			"cd .. && "
-			"cd .. && "
-			"cd dotfiles/waybar && "
-			"cp style.css ~/.config/waybar && "
-			"cp config.jsonc ~/.config/waybar && "
-			"cd .. && "
-			"cd .. ");
+			    "cd dotfiles/hypr && "
+			    "cp hyprland.conf ~/.config/hypr && "
+			    "yay -S --noconfirm ttf-ubuntu-font-family ttf-ibmplex-mono-nerd ttf-blex-nerd-font-git ttf-victor-mono-nerd ttf-cascadia-mono-nerd && "
+			    "cp hypridle.conf ~/.config/hypr && "
+			    "cp hyprpaper.conf ~/.config/hypr && "
+			    "cd .. && "
+			    "cd .. && "
+			    "cd dotfiles/waybar && "
+			    "cp style.css ~/.config/waybar && "
+			    "cp config.jsonc ~/.config/waybar && "
+			    "cd .. && "
+			    "cd .. ");
 			system(cmd);
 
             // nvim config
@@ -88,15 +89,16 @@ int main(void)
         {	
 			char cmd[256];
 			snprintf(cmd, sizeof(cmd);
-			"sudo pacman --noconfirm btop cava fuzzel kitty hyprland && "
-			"rm ~/.config/cava && "
-			"mkdir ~/.config/cava && "
-			"cp -f ~/dotfiles/cava/config ~/.config/cava/ && "
-			"mv ~/.config/kitty/kitty.conf ~/.config/kitty/kitty-oldv0.conf && "
-			"mv ~/.config/hypr/hyprland.conf ~/.config/hypr/hyprland-oldv1.4.conf && "
-			"cp -f ~/dotfiles/hypr/hyprland.conf ~/.config/hypr/ && "
-			"cp -f ~/dotfiles/fuzzel/fuzzel.ini ~/.config/fuzzel && "
-			"cp -f ~/dotfiles/kitty/kitty.conf ~/.config/kitty");
+			    "sudo pacman --noconfirm btop cava fuzzel kitty hyprland && "
+			    "yay -S --noconfirm ttf-ubuntu-font-family ttf-ibmplex-mono-nerd ttf-blex-nerd-font-git ttf-victor-mono-nerd ttf-cascadia-mono-nerd && "
+			    "rm ~/.config/cava && "
+			    "mkdir ~/.config/cava && "
+			    "cp -f ~/dotfiles/cava/config ~/.config/cava/ && "
+			    "mv ~/.config/kitty/kitty.conf ~/.config/kitty/kitty-oldv0.conf && "
+			    "mv ~/.config/hypr/hyprland.conf ~/.config/hypr/hyprland-oldv1.4.conf && "
+			    "cp -f ~/dotfiles/hypr/hyprland.conf ~/.config/hypr/ && "
+			    "cp -f ~/dotfiles/fuzzel/fuzzel.ini ~/.config/fuzzel && "
+			    "cp -f ~/dotfiles/kitty/kitty.conf ~/.config/kitty");
 			system(cmd);
 			system("yay -S --noconfirm btop gtklock cava fuzzel kitty && ");
     		// import fuzzel config	
@@ -107,6 +109,7 @@ int main(void)
 			char cmd[256];
 			snprintf(cmd, sizeof(cmd);
 			"sudo pacman --noconfirm btop cava fuzzel kitty hyprland && "
+			"yay -S --noconfirm ttf-ubuntu-font-family ttf-ibmplex-mono-nerd ttf-blex-nerd-font-git ttf-victor-mono-nerd ttf-cascadia-mono-nerd && "
 			"rm ~/.config/cava && "
 			"mkdir ~/.config/cava && "
 			"cp -f ~/dotfiles/cava/config ~/.config/cava/ && "
@@ -121,16 +124,16 @@ int main(void)
 		{
 			char cmd[256];
 			snprintf(cmd, sizeof(cmd);
-			"sudo pacman --noconfirm btop kitty && "
-			"yay -S --noconfirm btop gtklock && "
-			"yay -S --noconfirm ttf-ubuntu-font-family && "
-			"rm ~/.config/cava && "
-			"mkdir ~/.config/cava && "
-			"cp -f ~/dotfiles/cava/config ~/.config/cava/ && "
-			"mv ~/.config/kitty/kitty.conf ~/.config/kitty/kitty-oldv0.conf && "
-			"mv ~/.config/hypr/hyprland.conf ~/.config/hypr/hyprland-oldv1.4.conf && "
-			"cp -f ~/dotfiles/hypr/hyprland.conf ~/.config/hypr/ && "
-			"cp -f ~/dotfiles/kitty/kitty.conf ~/.config/kitty");
+			    "sudo pacman --noconfirm btop kitty && "
+			    "yay -S --noconfirm btop gtklock && "
+			    "yay -S --noconfirm ttf-ubuntu-font-family ttf-ibmplex-mono-nerd ttf-blex-nerd-font-git ttf-victor-mono-nerd ttf-cascadia-mono-nerd && "
+			    "rm ~/.config/cava && "
+			    "mkdir ~/.config/cava && "
+			    "cp -f ~/dotfiles/cava/config ~/.config/cava/ && "
+			    "mv ~/.config/kitty/kitty.conf ~/.config/kitty/kitty-oldv0.conf && "
+			    "mv ~/.config/hypr/hyprland.conf ~/.config/hypr/hyprland-oldv1.4.conf && "
+			    "cp -f ~/dotfiles/hypr/hyprland.conf ~/.config/hypr/ && "
+			    "cp -f ~/dotfiles/kitty/kitty.conf ~/.config/kitty");
 			system(cmd);
 			printf("\n Update completed.");
 			printf("\n Would you like to install the Neovim plugins? (Y/n)\n");
