@@ -359,7 +359,7 @@ char full_inst_noconfirm(char ARCHIVE)
 	snprintf(cmd, sizeof(cmd),
 			"gcc install.c -o cinstall && " 
 			"./cinstall");
-	systen(cmd);
+	system(cmd);
 	printf("\nInstalling dotfiles...\n");
 	return 0;
 }
