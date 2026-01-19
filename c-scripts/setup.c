@@ -188,7 +188,7 @@ char BTOP(char ARCHIVE)
         // export btop config
         snprintf(cmd, sizeof(cmd),
 			        "mkdir -p ~/.config/btop && "
-                	"cp dotfiles/btop/config.jsonc ~/.config/btop");
+				"cp -f dotfiles/btop/config.jsonc ~/.config/btop");
         system(cmd);
 	return 0;
 }
@@ -243,8 +243,8 @@ char FUZZ(char ARCHIVE)
         // export fuzzel appearance
         snprintf(cmd, sizeof(cmd),
                 	"mkdir ~/.config/fuzzel && "
-                	"cp dotfiles/fuzzel/fuzzel.ini "
-			        "~/.config/fuzzel");
+                	"cp -f dotfiles/fuzzel/fuzzel.ini "
+			"~/.config/fuzzel");
         system(cmd);  		
 	return 0;
 }
@@ -256,7 +256,7 @@ char GTKL(char ARCHIVE)
 		// backup gtklock config
 	    	snprintf(cmd, sizeof(cmd),
                 		"mv ~/.config/gtklock/style.css "
-						"~/.config/gtklock/style-oldv%.1f.css", pver);
+				"~/.config/gtklock/style-oldv%.1f.css", pver);
 		system(cmd);
 	}
 	// export gtklock config
@@ -316,15 +316,15 @@ char NVIM(char ARCHIVE)
         if (ARCHIVE == 'Y' || ARCHIVE == 'y')
 	{
 	    snprintf(cmd, sizeof(cmd),
-			    "mkdir -p ~/.config/nvim && cd ~/.config/nvim && "
-	    		    "mv init.lua init-oldv%.1f.lua && "
-			    "mv lazy-lock.json lazy-lock-oldv%.1f.json",
+			    "mkdir -p ~/.config/nvim && "
+	    		    "mv ~/.config/nvim/init.lua ~/.config/nvim/init-oldv%.1f.lua && "
+			    "mv ~/.config/nvim/lazy-lock.json ~/.config/nvim/lazy-lock-oldv%.1f.json",
 			    pver, pver);
 	    system(cmd);
 	}
 	// export nvim config
         snprintf(cmd, sizeof(cmd),
-			"mkdir -p ~/.config/nvim && cd ~/.config/nvim && "
+			"mkdir -p ~/.config/nvim && "
 			"cp -f dotfiles/nvim/init.lua ~/.config/nvim");
 			//" cp -rf lua ~/.config/nvim && "
 			//"cp -f lazy-lock.json ~/.config/nvim");
