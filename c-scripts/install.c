@@ -229,7 +229,6 @@ int main()
 	printf(" a user friendly script might be available (setup.c).  I enourage you to go check it out.\n");
     return 0;
 }
-
 char BTOP(char ARCHIVE)
 {
 	char cmd[256];
@@ -239,12 +238,12 @@ char BTOP(char ARCHIVE)
 		snprintf(cmd, sizeof(cmd),
 				"mv ~/.config/btop/config.jsonc "
 				"~/.config/btop/config-oldv%.1f.jsonc", pver);
-                system(cmd);
+        system(cmd);
 	}
         // export btop config
         snprintf(cmd, sizeof(cmd),
-			"mkdir -p ~/.config/btop && "
-                	"cp ~/dotfiles/btop/config.jsonc ~/.config/btop");
+			        "mkdir -p ~/.config/btop && "
+				"cp -f dotfiles/btop/config.jsonc ~/.config/btop");
         system(cmd);
 	return 0;
 }
@@ -299,7 +298,7 @@ char FUZZ(char ARCHIVE)
         // export fuzzel appearance
         snprintf(cmd, sizeof(cmd),
                 	"mkdir ~/.config/fuzzel && "
-                	"cp dotfiles/fuzzel/fuzzel.ini "
+                	"cp -f dotfiles/fuzzel/fuzzel.ini "
 			"~/.config/fuzzel");
         system(cmd);  		
 	return 0;
@@ -331,10 +330,10 @@ char HYPR(char ARCHIVE)
 	{
 		// archive hyprland configs
                 snprintf(cmd, sizeof(cmd),
-				"mkdir -p ~/.config/hypr && "
-				"mv ~/.config/hypr/hyprland.conf ~/.config/hypr/hyprland-oldv%.1f.conf && "
-                    		"mv ~/.config/hypr/hyprpaper.conf ~/.config/hypr/hyprpaper-oldv%.1f.conf && "
-                    		"mv ~/.config/hypr/hypridle.conf ~/.config/hypr/hypridle-oldv%.1f.conf",
+                    "mkdir -p ~/.config/hypr && "
+                    "mv ~/.config/hypr/hyprland.conf ~/.config/hypr/hyprland-oldv%.1f.conf && "
+                    "mv ~/.config/hypr/hyprpaper.conf ~/.config/hypr/hyprpaper-oldv%.1f.conf && "
+                    "mv ~/.config/hypr/hypridle.conf ~/.config/hypr/hypridle-oldv%.1f.conf",
                 pver, pver, pver);
                 system(cmd);
 	}
@@ -360,7 +359,8 @@ char KITT(char ARCHIVE)
 	// export kitty config
 	snprintf(cmd, sizeof(cmd),
 			"mkdir ~/.config/kitty && "
-                	"cp -f ~/dotfiles/kitty/kitty.conf ~/.config/kitty");
+			"cp -f dotfiles/kitty/current-theme.conf ~/.config/kitty && "
+			"cp -f dotfiles/kitty/kitty.conf ~/.config/kitty");
 	system(cmd);
 	return 0;
 }
@@ -371,17 +371,19 @@ char NVIM(char ARCHIVE)
         if (ARCHIVE == 'Y' || ARCHIVE == 'y')
 	{
 	    snprintf(cmd, sizeof(cmd),
-			    "mkdir -p ~/.config/nvim && cd ~/.config/nvim && "
-	    		    "mv init.lua init-oldv%.1f.lua && "
-			    "mv lazy-lock.json lazy-lock-oldv%.1f.json",
+			    "mkdir -p ~/.config/nvim && "
+	    		    "mv ~/.config/nvim/init.lua ~/.config/nvim/init-oldv%.1f.lua && "
+			    "mv ~/.config/nvim/lazy-lock.json ~/.config/nvim/lazy-lock-oldv%.1f.json",
 			    pver, pver);
 	    system(cmd);
 	}
 	// export nvim config
         snprintf(cmd, sizeof(cmd),
+			"mkdir -p ~/.config/nvim && "
 			"cp -f dotfiles/nvim/init.lua ~/.config/nvim");
 			//" cp -rf lua ~/.config/nvim && "
 			//"cp -f lazy-lock.json ~/.config/nvim");
+			//make sure you don't change directory since this script relies on this assumption
         system(cmd);
 	return 0;
 }
@@ -399,9 +401,9 @@ char WAYB(char ARCHIVE)
 	}
         // export waybar config and appearance
 	snprintf(cmd, sizeof(cmd),
-			"cd ~/dotfiles/waybar && "
-               		"cp -f style.css ~/.config/waybar && "
-               		"cp -f config.jsonc ~/.config/waybar");
+			"mkdir -p ~/.config/waybar && "
+               		"cp -f dotfiles/waybar/style.css ~/.config/waybar && "
+               		"cp -f dotfiles/waybar/config.jsonc ~/.config/waybar && ");
 	system(cmd);
 	return 0;
 }
