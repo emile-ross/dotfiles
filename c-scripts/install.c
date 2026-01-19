@@ -8,15 +8,15 @@
 float pver = 0.0f;
 char HYPRI;
 
-void BTOP(char ARCHIVE);
-void CAVA(char ARCHIVE);
-void FAST(char ARCHIVE);
-void FUZZ(char ARCHIVE);
-void GTKL(char ARCHIVE);
-void HYPR(char ARCHIVE);
-void KITT(char ARCHIVE);
-void NVIM(char ARCHIVE);
-void WAYB(char ARCHIVE);
+char BTOP(char ARCHIVE);
+char CAVA(char ARCHIVE);
+char FAST(char ARCHIVE);
+char FUZZ(char ARCHIVE);
+char GTKL(char ARCHIVE);
+char HYPR(char ARCHIVE);
+char KITT(char ARCHIVE);
+char NVIM(char ARCHIVE);
+char WAYB(char ARCHIVE);
 
 int is_hyprland() 
 {
@@ -26,40 +26,40 @@ int is_hyprland()
     
     	// Return true if either check confirms Hyprland
     	return (hypr_sig != NULL) || (current_desktop != NULL && 
-            (strcasestr(current_desktop, "hyprland") != NULL));
+        	(strcasestr(current_desktop, "hyprland") != NULL));
 }
 
 int main() 
 {
     if (is_hyprland()) 
     {
-        printf("Current desktop is Hyprland\n");
-		char HYPRI = 'Y';
+	    printf("Current desktop is Hyprland\n");
+	    char HYPRI = 'Y';
     }
     else
     {
-        printf("Current desktop is NOT Hyprland\n");
-		printf("Would you like to install the Hyprland config? (Y/n)\n");
+	    printf("Current desktop is NOT Hyprland\n");
+	    printf("Would you like to install the Hyprland config? (Y/n)\n");
 	    scanf(" %c", &HYPRI);
     }
 	
-    int FIXINST;
-    printf("\n What do you want to do?");
-    printf("\n [1] proceed with installation");
-    printf("\n [2] fix your installation");
+	int FIXINST;
+	printf("\n What do you want to do?");
+	printf("\n [1] proceed with installation");
+	printf("\n [2] fix your installation");
 	printf("\n [3] prompt for every config");
 	printf("\n [4] exit this script\n");
-    scanf(" %d", &FIXINST);
-    if (FIXINST == '1')
+	scanf(" %d", &FIXINST);
+	if (FIXINST == '1')
 	{
-	    	char BTOP = 'y';
-		char CAVA ='y';
+		char BTOPI = 'y';
+		char CAVAI = 'y';
 	}
-    if (FIXINST == '2')
-    {
+    	if (FIXINST == '2')
+    	{
 		if (HYPRI == 'Y' || HYPRI == 'y')
-        {
-			system("sudo pacman -S waybar hyprland");
+        	{
+			system("sudo pacman -S waybar hyprland hypridle");
 		}
         // add commands for fixing script below
         system("sudo pacman -S --noconfim nvim git cava fuzzel");
@@ -68,16 +68,16 @@ int main()
         // make directories
         system("mkdir -p ~/.config/nvim/lua/config && mkdir -p ~/.config/nvim/lua/plugins && mkdir -p ~/.config/fastfetch && mkdir -p ~/.config/hypr");
         system("mkdir -p ~/.config/cava && mkdir -p ~/.config/fuzzel");
-    }
+	}
 	if (FIXINST == '3')
 	{
 	    // prompt for everything
-		char BTOPI;
-		char CAVAI;
-		char FASTI;
-		char FUZZI;
-		char HYPRI;
-		char GTKLI;
+		char BTOP(char ARCHIVE);
+		char CAVA(char ARCHIVE);
+		char FAST(char ARCHIVE);
+		char FUZZ(char ARCHIVE);
+		char HYPR(char ARCHIVE);
+		char GTKL(char ARCHIVE);
 
 
 		return 0;
@@ -176,8 +176,8 @@ int main()
 	char cmd[256];
         if (HYPRI == 'Y' || HYPRI == 'y')
         {
-            char cmd[512];
-
+            	//char cmd[512];
+		char HYPR(char ARCHIVE);
         }
 
     snprintf(cmd, sizeof(cmd),
@@ -191,8 +191,8 @@ int main()
     snprintf(cmd, sizeof(cmd),
 			"mv ~/.config/kitty/current-theme.conf "
 			"~/.config/kitty/current-theme-old%.1f.conf && "
-		    "mv ~/.config/kitty/kitty.conf "
-		    "~/.config/kitty/kitty-oldv%.1f.conf", pver);
+		    	"mv ~/.config/kitty/kitty.conf "
+		    	"~/.config/kitty/kitty-oldv%.1f.conf", pver);
 	system(cmd);
 		
     snprintf(cmd, sizeof(cmd),
@@ -208,17 +208,17 @@ int main()
     scanf(" %c", &DOTINSTALL);
     if (DOTINSTALL == 'Y' || DOTINSTALL == 'y')
     {
-	void BTOP(char ARCHIVE);
-	void CAVA(char ARCHIVE);
-	void FAST(char ARCHIVE);
-	void FUZZ(char ARCHIVE);
-	void GTKL(char ARCHIVE);
-	void KITT(char ARCHIVE);
-	void NVIM(char ARCHIVE);
+	char BTOP(char ARCHIVE);
+	char CAVA(char ARCHIVE);
+	char FAST(char ARCHIVE);
+	char FUZZ(char ARCHIVE);
+	char GTKL(char ARCHIVE);
+	char KITT(char ARCHIVE);
+	char NVIM(char ARCHIVE);
         if (HYPRI == 'Y' || HYPRI == 'y')
         {
-		void WAYB(char ARCHIVE);
-		void HYPR(char ARCHIVE);
+		char WAYB(char ARCHIVE);
+		char HYPR(char ARCHIVE);
         }
     }
         else
@@ -230,7 +230,7 @@ int main()
     return 0;
 }
 
-void BTOP(char ARCHIVE)
+char BTOP(char ARCHIVE)
 {
 	char cmd[256];
         if (ARCHIVE == 'Y' || ARCHIVE == 'y')
@@ -248,7 +248,7 @@ void BTOP(char ARCHIVE)
         system(cmd);
 	return 0;
 }
-void CAVA(char ARCHIVE)
+char CAVA(char ARCHIVE)
 {
 	char cmd[256];
         if (ARCHIVE == 'Y' || ARCHIVE == 'y')
@@ -266,7 +266,7 @@ void CAVA(char ARCHIVE)
         system(cmd);
 	return 0;
 }
-void FAST(char ARCHIVE)
+char FAST(char ARCHIVE)
 {
 	char cmd[256];
         if (ARCHIVE == 'Y' || ARCHIVE == 'y')
@@ -285,7 +285,7 @@ void FAST(char ARCHIVE)
         system(cmd);
 	return 0;
 }
-void FUZZ(char ARCHIVE)
+char FUZZ(char ARCHIVE)
 {
 	char cmd[256];
         if (ARCHIVE == 'Y' || ARCHIVE == 'y')
@@ -304,7 +304,7 @@ void FUZZ(char ARCHIVE)
         system(cmd);  		
 	return 0;
 }
-void GTKL(char ARCHIVE)
+char GTKL(char ARCHIVE)
 {
 	char cmd[256];
         if (ARCHIVE == 'Y' || ARCHIVE == 'y')
@@ -324,17 +324,17 @@ void GTKL(char ARCHIVE)
 	return 0;
 }
 
-void HYPR(char ARCHIVE)
+char HYPR(char ARCHIVE)
 {
 	char cmd[256];
         if (ARCHIVE == 'Y' || ARCHIVE == 'y')
 	{
 		// archive hyprland configs
                 snprintf(cmd, sizeof(cmd),
-                    "mkdir -p ~/.config/hypr && "
-                    "mv ~/.config/hypr/hyprland.conf ~/.config/hypr/hyprland-oldv%.1f.conf && "
-                    "mv ~/.config/hypr/hyprpaper.conf ~/.config/hypr/hyprpaper-oldv%.1f.conf && "
-                    "mv ~/.config/hypr/hypridle.conf ~/.config/hypr/hypridle-oldv%.1f.conf",
+				"mkdir -p ~/.config/hypr && "
+				"mv ~/.config/hypr/hyprland.conf ~/.config/hypr/hyprland-oldv%.1f.conf && "
+                    		"mv ~/.config/hypr/hyprpaper.conf ~/.config/hypr/hyprpaper-oldv%.1f.conf && "
+                    		"mv ~/.config/hypr/hypridle.conf ~/.config/hypr/hypridle-oldv%.1f.conf",
                 pver, pver, pver);
                 system(cmd);
 	}
@@ -346,7 +346,7 @@ void HYPR(char ARCHIVE)
         system(cmd);
 	return 0;
 }
-void KITT(char ARCHIVE)
+char KITT(char ARCHIVE)
 {
 	char cmd[256];
         if (ARCHIVE == 'Y' || ARCHIVE == 'y')
@@ -365,7 +365,7 @@ void KITT(char ARCHIVE)
 	return 0;
 }
 
-void NVIM(char ARCHIVE)
+char NVIM(char ARCHIVE)
 {
 	char cmd[256];
         if (ARCHIVE == 'Y' || ARCHIVE == 'y')
@@ -385,7 +385,7 @@ void NVIM(char ARCHIVE)
         system(cmd);
 	return 0;
 }
-void WAYB(char ARCHIVE)
+char WAYB(char ARCHIVE)
 {
 	char cmd[256];
         if (ARCHIVE == 'Y' || ARCHIVE == 'y')
