@@ -1,16 +1,16 @@
-/* Base styling */
 * {
     border: none;
-    font-family: "JetBrainsMono Nerd Font";
+    font-family: "Cascadia Mono";
     font-size: 14px;
     color: #ffffff;
 }
-/* Waybar container */
+
 window#waybar 
 {
-    background: rgba(5, 5, 5, 0.75);
+    background: rgba(5, 5, 5, 0.80);
     border-bottom: 1px solid #757575;
 }
+
 /* Module spacing */
 #workspaces,
 #clock,
@@ -26,10 +26,10 @@ window#waybar
 #custom-updates,
 #temperature 
 {
-    padding: 0 10px;   /* reduced from 0 10px */
-    margin: 0 2px;    /* reduced from 0 5px */
+    padding: 0 10px;
+    margin: 0 2px;
 }
-/* Module styling with tighter padding/margins */
+
 #workspaces button,
 #clock,
 #battery,
@@ -68,13 +68,11 @@ window#waybar
 {
     background-color: #575757;
 }
-/* Active workspace button */
 #workspaces button.active 
 {
     background-color: #50fa7b;
     color: #282a36;
 }
-/* Focused workspace */
 #workspaces button.focused 
 {
     background-color: #8be9fd;
