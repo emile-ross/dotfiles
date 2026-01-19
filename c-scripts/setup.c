@@ -112,7 +112,7 @@ int main()
 						printf(BOLD_S " [1] " STYLE_END "%s\n", kitty_color_text);
 						printf(BOLD_S " [2] " STYLE_END "%s\n", kitty_fonts_text);
 						printf(BOLD_S " [0] " STYLE_END "%s\n", opt_exit_text);
-						scanf("\n%c", kitty_config_choice);
+						scanf("\n%d", &kitty_config_choice);
 						fflush(stdin);
 						if (kitty_config_choice == 0)
 						{
