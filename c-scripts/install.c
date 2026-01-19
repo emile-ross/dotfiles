@@ -246,6 +246,7 @@ void BTOP(char ARCHIVE)
 			"mkdir -p ~/.config/btop && "
                 	"cp ~/dotfiles/btop/config.jsonc ~/.config/btop");
         system(cmd);
+	return 0;
 }
 void CAVA(char ARCHIVE)
 {
@@ -263,6 +264,7 @@ void CAVA(char ARCHIVE)
 			"mkdir -p ~/.config/cava && "
                 	"cp -f dotfiles/cava/config ~/.config/cava/ && ");
         system(cmd);
+	return 0;
 }
 void FAST(char ARCHIVE)
 {
@@ -281,6 +283,7 @@ void FAST(char ARCHIVE)
 			"cp dotfiles/fastfetch/config.jsonc "
 			"~/.config/fastfetch");
         system(cmd);
+	return 0;
 }
 void FUZZ(char ARCHIVE)
 {
@@ -299,6 +302,7 @@ void FUZZ(char ARCHIVE)
                 	"cp dotfiles/fuzzel/fuzzel.ini "
 			"~/.config/fuzzel");
         system(cmd);  		
+	return 0;
 }
 void GTKL(char ARCHIVE)
 {
@@ -317,6 +321,7 @@ void GTKL(char ARCHIVE)
                 	"cp -f dotfiles/gtklock/style.css ~/.config/gtklock && "
                 	"cp -f dotfiles/gtklock/lockscreen.jpg ~/.config/gtklock/assets");
         system(cmd);
+	return 0;
 }
 
 void HYPR(char ARCHIVE)
@@ -339,6 +344,7 @@ void HYPR(char ARCHIVE)
 			"cp -f dotfiles/hypr/hypridle.conf ~/.config/hypr && "
 			"cp -f dotfiles/hypr/hyprpaper.conf ~/.config/hypr");
         system(cmd);
+	return 0;
 }
 void KITT(char ARCHIVE)
 {
@@ -356,6 +362,7 @@ void KITT(char ARCHIVE)
 			"mkdir ~/.config/kitty && "
                 	"cp -f ~/dotfiles/kitty/kitty.conf ~/.config/kitty");
 	system(cmd);
+	return 0;
 }
 
 void NVIM(char ARCHIVE)
@@ -376,6 +383,7 @@ void NVIM(char ARCHIVE)
 			//" cp -rf lua ~/.config/nvim && "
 			//"cp -f lazy-lock.json ~/.config/nvim");
         system(cmd);
+	return 0;
 }
 void WAYB(char ARCHIVE)
 {
@@ -395,4 +403,5 @@ void WAYB(char ARCHIVE)
                		"cp -f style.css ~/.config/waybar && "
                		"cp -f config.jsonc ~/.config/waybar");
 	system(cmd);
+	return 0;
 }
