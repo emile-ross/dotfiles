@@ -27,10 +27,6 @@ If you want to **configure** your dotfiles, click [here](#Configure)
 - gtklock
   - (lockscreen options coming)
     
-- *Firefox* (not planned)
-- *LibreWolf* (not planned)
-- *Floorp* (not planned)
-- *Chromium* (not planned)
 
 --- 
 
@@ -50,41 +46,59 @@ gcc install.c -o cinstall
 Useful keybinds to know:
 (super = "Windows key")
  
- > super + Q -> **execute kitty**
+ super + Q -> **execute kitty**
 
 (the default terminal)
 
- > super + V -> **Toggle Floating Mode**
+super + M -> **exit hyprland**
 
-( Allows windoes to stack on top of each other)
+super + V -> **Toggle Floating Mode**
+> ( Allows windows to stack on top of each other)
 
- > super + C -> **Close Window**
+super + C -> **Close Window**
 
- > super + R -> **execute fuzzel**
 
-(fuzzel is the app launcher)
+### execute programs
 
- > super + E -> **execute [dolphin](https://github.com/KDE/dolphin)**
+super + R -> **execute [fuzzel](https://codeberg.org/dnkl/fuzzel)**
+> (fuzzel is the app launcher)
 
-(A gui file manager)
 
- > super + 1 -> **execute [Floorp](https://github.com/Floorp-Projects/Floorp)**
+super + E -> **execute [dolphin](https://github.com/KDE/dolphin)**
+> *(A gui file manager)*
 
-(firefox/gecko based browser)
- 
- > super + 2 -> **execute Firefox**
 
- > super + 3 -> **execute Chromium**
+super + 1 -> **execute [Floorp](https://github.com/Floorp-Projects/Floorp)**
+> *(firefox/gecko based web browser)*
 
- > super + 4 -> **execute LibreWolf**
- 
- > super + F1 -> **switch to Workspace 1**
 
- > super + shift + F1 -> **move window to Workspace 1** 
+super + 2 -> **execute [Firefox](https://github.com/mozilla-firefox/firefox)**
+
+
+super + 3 -> **execute [Chromium](https://source.chromium.org/chromium)**
+> *(Chromium is a DeGoogled Chromium browser)*
+
+
+super + 4 -> **execute [LibreWolf](https://codeberg.org/librewolf/source)**
+> *(firefox/gecko based web browser)*
+
+super + 0 -> **execute [OBS](https://github.com/obsproject/obs-studio)**
+
+## Multi Tasking
+super + F1 -> **switch to Workspace 1**
+
+super + shift + F1 -> **move window to Workspace 1** 
  
  > *super + (F1-F11) -> Workspaces (1-11)*
 
- > super + m -> **exit hyprland**
+ALT + Q -> **focus kitty**
+
+ALT + 1 -> **focus floorp**
+
+ALT + 2 -> **focus firefox**
+
+ALT + 0 -> **focus obs**
+
 
 If you ever encounter an issue please report it by providing the issue you are experiencing with a log, it helps me improve this script. 
 
@@ -94,17 +108,15 @@ After reading the code, you can paste this in your terminal in order to update.
 This will download the latest script from this github and it will then execute the newest updating script.
 
 ```sh 
-cd ~/dotfiles/c-scripts
-gcc new-update.c -o update
-./update
+gcc dotfiles/c-scripts/update.c -o dotfiles/update
+./dotfiles/update
 ```
 # Configure
 This is a script to help new users configure their system to tbeir liking.  
 For now you can only customize your kitty terminal but more features will come in tbe future
 ```sh
-cd dotfiles/c-scripts
-gcc setup.c -o setup
-./setup
+gcc dotfiles/c-scripts/setup.c -o dotfiles/setup
+./dotfiles/setup
 ```
 # Credits 
 
