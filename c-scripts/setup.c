@@ -183,12 +183,12 @@ char BTOP(char ARCHIVE)
 		snprintf(cmd, sizeof(cmd),
 				"mv ~/.config/btop/config.jsonc "
 				"~/.config/btop/config-oldv%.1f.jsonc", pver);
-        system(cmd);
+        	system(cmd);
 	}
         // export btop config
         snprintf(cmd, sizeof(cmd),
-			        "mkdir -p ~/.config/btop && "
-				"cp -f dotfiles/btop/config.jsonc ~/.config/btop");
+			"mkdir -p ~/.config/btop && "
+			"cp -f dotfiles/btop/config.jsonc ~/.config/btop");
         system(cmd);
 	return 0;
 }
@@ -275,10 +275,10 @@ char HYPR(char ARCHIVE)
 	{
 		// archive hyprland configs
                 snprintf(cmd, sizeof(cmd),
-                    "mkdir -p ~/.config/hypr && "
-                    "mv ~/.config/hypr/hyprland.conf ~/.config/hypr/hyprland-oldv%.1f.conf && "
-                    "mv ~/.config/hypr/hyprpaper.conf ~/.config/hypr/hyprpaper-oldv%.1f.conf && "
-                    "mv ~/.config/hypr/hypridle.conf ~/.config/hypr/hypridle-oldv%.1f.conf",
+				"mkdir -p ~/.config/hypr && "
+                    		"mv ~/.config/hypr/hyprland.conf ~/.config/hypr/hyprland-oldv%.1f.conf && "
+                    		"mv ~/.config/hypr/hyprpaper.conf ~/.config/hypr/hyprpaper-oldv%.1f.conf && "
+                    		"mv ~/.config/hypr/hypridle.conf ~/.config/hypr/hypridle-oldv%.1f.conf",
                 pver, pver, pver);
                 system(cmd);
 	}
@@ -318,8 +318,9 @@ char NVIM(char ARCHIVE)
 	    snprintf(cmd, sizeof(cmd),
 			    "mkdir -p ~/.config/nvim && "
 	    		    "mv ~/.config/nvim/init.lua ~/.config/nvim/init-oldv%.1f.lua && "
+			    "mv ~/.config/nvim/lua/config/lazy.lua ~/.config/nvim/lua/config/lazy-oldv%.1f.lua && "
 			    "mv ~/.config/nvim/lazy-lock.json ~/.config/nvim/lazy-lock-oldv%.1f.json",
-			    pver, pver);
+			    pver, pver, pver);
 	    system(cmd);
 	}
 	// export nvim config
@@ -357,7 +358,7 @@ char full_inst_noconfirm(char ARCHIVE)
 	printf("\nInstalling dotfiles...\n");
 	char cmd[256];
 	snprintf(cmd, sizeof(cmd),
-			"gcc install.c -o cinstall && " 
+			"gcc dotfiles/c-scripts/install.c -o cinstall && " 
 			"./cinstall");
 	system(cmd);
 	printf("\nInstalling dotfiles...\n");
