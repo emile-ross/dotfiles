@@ -38,7 +38,7 @@ Before executing the c script, you will need to compile it.
 ```bash
 git clone https://github.com/ImAwsumm/dotfiles.git
 cd dotfiles/c-scripts
-gcc install.c -o cinstall
+gcc dotfiles/c-scripts/install.c -o dotfiles/cinstall
 ./cinstall
 ```
 
