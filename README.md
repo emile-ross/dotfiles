@@ -37,9 +37,8 @@ If you want to **configure** your dotfiles, click [here](#Configure)
 Before executing the c script, you will need to compile it.  
 ```bash
 git clone https://github.com/ImAwsumm/dotfiles.git
-cd dotfiles/c-scripts
 gcc dotfiles/c-scripts/install.c -o dotfiles/cinstall
-./cinstall
+./dotfiles/cinstall
 ```
 
 ## after install 
@@ -47,8 +46,7 @@ Useful keybinds to know:
 (super = "Windows key")
  
  super + Q -> **execute kitty**
-
-(the default terminal)
+> (the default terminal)
 
 super + M -> **exit hyprland**
 
@@ -83,6 +81,7 @@ super + 4 -> **execute [LibreWolf](https://codeberg.org/librewolf/source)**
 > *(firefox/gecko based web browser)*
 
 super + 0 -> **execute [OBS](https://github.com/obsproject/obs-studio)**
+> *(an open source program to stream and record videos)*
 
 ## Multi Tasking
 super + F1 -> **switch to Workspace 1**
