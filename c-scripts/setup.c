@@ -162,6 +162,8 @@ int main()
 		}
 		else if (menu_one_i == '0')
 		{
+			clear();
+			printf("\nExiting..\n");
 			//printf("\n");
 			return 0;
 		}
@@ -243,6 +245,7 @@ char FUZZ(char ARCHIVE)
         // export fuzzel appearance
         snprintf(cmd, sizeof(cmd),
                 	"mkdir ~/.config/fuzzel && "
+                	"cp -f dotfiles/fuzzel/old-fuzzel.ini && "
                 	"cp -f dotfiles/fuzzel/fuzzel.ini "
 			"~/.config/fuzzel");
         system(cmd);  		
