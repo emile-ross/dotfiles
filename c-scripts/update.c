@@ -47,17 +47,23 @@ int main(void)
     {
         char cmd[256];
         snprintf(cmd, sizeof(cmd),
-			"cd ~ && " 
         		"git clone https://github.com/imawsumm/dotfiles && " // download the repo
         		"gcc dotfiles/c-scripts/local-update.c -o dotfiles/lupdate && " // compile the update script
-        		"./dotfiles/lupdate && "
-        		"cd .. && "
-        		"cd ..");
+        		"./dotfiles/lupdate && ");
 	system(cmd);
     	// add a prompt to ask if the user wants to remove the repo
     	char RM_REP;
 	printf("\nWould you like to remove this repo? (Y/n)\n");
 	scanf("%c", RM_REP);
+	if (RM_REP == 'Y' || RM_REP == 'y')
+	{
+		system("rm -rf dotfiles/");
+	}
+	else
+	{
+		printf("\nDeletion skipped\n");
+		break;
+	}
     }
     else
     {
