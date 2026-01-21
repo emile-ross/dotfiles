@@ -124,3 +124,10 @@ Many configs were directly from or inspired by [@kzndotsh](https://github.com/kz
 (fuzzel, cava, waybar...)
 
 You can find the original content at: [github.com/kzndotsh/dotfiles](https://github.com/kzndotsh/dotfiles)
+
+other credits:
+
+https://github.com/harilvfs/fastfetch
+
+*missing credits*
+
