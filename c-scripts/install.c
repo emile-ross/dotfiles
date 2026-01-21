@@ -52,8 +52,18 @@ int main()
 	scanf(" %d", &FIXINST);
 	if (FIXINST == '1')
 	{
-		char BTOPI = 'y';
-		char CAVAI = 'y';
+		//char BTOPI = 'y';
+		//char CAVAI = 'y';
+		char BTOP(char ARCHIVE);
+		char CAVA(char ARCHIVE);
+		char FAST(char ARCHIVE);
+		char FUZZ(char ARCHIVE);
+		char GTKL(char ARCHIVE);
+		char HYPR(char ARCHIVE);
+		char KITT(char ARCHIVE);
+		char NVIM(char ARCHIVE);
+		char WAYB(char ARCHIVE);
+		
 	}
     	if (FIXINST == '2')
     	{
@@ -79,7 +89,6 @@ int main()
 		char HYPR(char ARCHIVE);
 		char GTKL(char ARCHIVE);
 
-
 		return 0;
 	}
 	if (FIXINST == '4')
@@ -103,35 +112,35 @@ int main()
         scanf(" %c", &YAY); // asks the user if they wanna install yay (needed)
         if (YAY == 'Y' || YAY == 'y')
         {
-            // Check if makepkg is installed ( it is needed in order to compile yay )
-            if (system("command -v makepkg > /dev/null") != 0)
-            {
-                printf("\nMakepkg is not installed. Installing 'base-devel' package group to proceed...\n");
-                system("sudo pacman -S --noconfirm base-devel");
-
-                // Check if makepkg is available after installing the base-devel package
-                if (system("command -v makepkg > /dev/null") != 0)
-                {
-                    printf("Makepkg installation failed. Please check your system configuration.\n");
-                    return 1;
-                }
-                else
-                {
-                    printf("Makepkg has been successfully installed!\n");
-                }
-            }
-            else
-            {
-                printf("Makepkg is already installed.\n");
-            }
-            char cmd[256];
-            snprintf(cmd, sizeof(cmd),
-                "git clone https://aur.archlinux.org/yay.git &&"
-                "cd yay &&"
-                "makepkg -si &&"
-	    	"cd ..");
-            system(cmd);
-            printf("\nYay is installed, congrats!\n");
+		// Check if makepkg is installed ( it is needed in order to compile yay )
+            	if (system("command -v makepkg > /dev/null") != 0)
+            	{
+			printf("\nMakepkg is not installed. Installing 'base-devel' package group to proceed...\n");
+            	    	system("sudo pacman -S --noconfirm base-devel");
+                    	
+            	    	// Check if makepkg is available after installing the base-devel package
+            	    	if (system("command -v makepkg > /dev/null") != 0)
+            	    	{
+            	    	    	printf("Makepkg installation failed. Please check your system configuration.\n");
+            	    	    	return 1;
+            	    	}
+            	    	else
+            	    	{
+            	    	    	printf("Makepkg has been successfully installed!\n");
+            	    	}
+            	}
+            	else
+            	{
+            	    printf("Makepkg is already installed.\n");
+            	}
+            	char cmd[256];
+            	snprintf(cmd, sizeof(cmd),
+	    	    	    "git clone https://aur.archlinux.org/yay.git &&"
+	    	    	    "cd yay &&"
+	    	    	    "makepkg -si &&"
+	    	    	    "cd ..");
+            	system(cmd);
+            	printf("\nYay is installed, congrats!\n");
         }
         else
         {
@@ -152,17 +161,19 @@ int main()
         {
     	char cmd[256];
 	    snprintf(cmd, sizeof(cmd),
-		    "yay -S --noconfirm kitty btop gtklock hyprpaper floorp-bin librewolf-bin xclip wl-clipboard && "
-		    "sudo pacman -S --noconfirm ttf-jetbrains-mono nerd-fonts-jetbrains-mono ttf-ubuntu-font-family fastfetch");
-		system(cmd);
+			    "yay -S --noconfirm kitty btop gtklock hyprpaper "
+			    "floorp-bin librewolf-bin xclip wl-clipboard cava fastfetch && "
+			    "sudo pacman -S --noconfirm ttf-jetbrains-mono "
+			    "nerd-fonts-jetbrains-mono ttf-ubuntu-font-family")
+	    system(cmd);
         }
         else
         {
     	char cmd[256];
-	    snprintf(cmd, sizeof(cmd),
-		    "yay -S --noconfirm kitty floorp-bin btop librewolf-bin xclip wl-clipboard && "
-		    "sudo pacman -S --noconfirm ttf-jetbrains-mono nerd-fonts-jetbrains-mono fastfetch");
-		system(cmd);
+	snprintf(cmd, sizeof(cmd),
+			"yay -S --noconfirm kitty floorp-bin btop librewolf-bin xclip wl-clipboard fastfetch && "
+			"sudo pacman -S --noconfirm ttf-jetbrains-mono ttf-ibm-plex ttf-roboto nerd-fonts-jetbrains-mono");
+	system(cmd);
         }
     }
     // Propose saving the old config files before performing the update
@@ -180,11 +191,11 @@ int main()
 		char HYPR(char ARCHIVE);
         }
 
-    snprintf(cmd, sizeof(cmd),
-         "mkdir -p ~/.config/nvim && cd ~/.config/nvim && "
-         "mv init.lua init-oldv%.1f.lua && "
-         "mv lazy-lock.json lazy-lock-oldv%.1f.json",
-         pver, pver);
+	snprintf(cmd, sizeof(cmd),
+		    "mkdir -p ~/.config/nvim && cd ~/.config/nvim && "
+		    "mv init.lua init-oldv%.1f.lua && "
+		    "mv lazy-lock.json lazy-lock-oldv%.1f.json",
+	pver, pver);
     system(cmd);
 
 // backup kitty config
@@ -193,7 +204,7 @@ int main()
 			"~/.config/kitty/current-theme-old%.1f.conf && "
 		    	"mv ~/.config/kitty/kitty.conf "
 		    	"~/.config/kitty/kitty-oldv%.1f.conf", pver);
-	system(cmd);
+    system(cmd);
 		
     snprintf(cmd, sizeof(cmd),
 		    "mv ~/.config/cava/config "
@@ -330,10 +341,10 @@ char HYPR(char ARCHIVE)
 	{
 		// archive hyprland configs
                 snprintf(cmd, sizeof(cmd),
-                    "mkdir -p ~/.config/hypr && "
-                    "mv ~/.config/hypr/hyprland.conf ~/.config/hypr/hyprland-oldv%.1f.conf && "
-                    "mv ~/.config/hypr/hyprpaper.conf ~/.config/hypr/hyprpaper-oldv%.1f.conf && "
-                    "mv ~/.config/hypr/hypridle.conf ~/.config/hypr/hypridle-oldv%.1f.conf",
+				"mkdir -p ~/.config/hypr && "
+                    		"mv ~/.config/hypr/hyprland.conf ~/.config/hypr/hyprland-oldv%.1f.conf && "
+                    		"mv ~/.config/hypr/hyprpaper.conf ~/.config/hypr/hyprpaper-oldv%.1f.conf && "
+                    		"mv ~/.config/hypr/hypridle.conf ~/.config/hypr/hypridle-oldv%.1f.conf",
                 pver, pver, pver);
                 system(cmd);
 	}
