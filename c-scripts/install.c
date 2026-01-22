@@ -72,7 +72,12 @@ int main()
 			system("sudo pacman -S waybar hyprland hypridle");
 		}
         // add commands for fixing script below
-        system("sudo pacman -S --noconfim nvim git cava fuzzel");
+            	char cmd[256];
+            	snprintf(cmd, sizeof(cmd),
+					"sudo pacman -S --noconfim nvim git cava fastfetch fuzzel btop kitty gtop");
+		        system(cmd);
+			
+        // system("sudo pacman -S --noconfim nvim git cava fuzzel");
         // system("yay -S --noconfirm ");
 
         // make directories
