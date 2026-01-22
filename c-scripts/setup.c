@@ -16,6 +16,8 @@ void clear()
 	printf("\033[2J\033[H");
 }
 
+int update();
+
 char ARCHIVE;
 char confirm_full_inst;
 float pver = 0.0f;
@@ -365,5 +367,29 @@ char full_inst_noconfirm(char ARCHIVE)
 			"./cinstall");
 	system(cmd);
 	printf("\nInstalling dotfiles...\n");
+	return 0;
+}
+
+
+
+int update()
+{
+	// basic updating tool
+	char cmd[256];
+	snprintf(cmd, sizeof(cmd);
+			"cd dotfiles/hypr && "
+	    		"cp hyprland.conf ~/.config/hypr && "
+	    		"yay -S --noconfirm ttf-ubuntu-font-family ttf-ibmplex-mono-nerd ttf-blex-nerd-font-git ttf-victor-mono-nerd ttf-cascadia-mono-nerd && "
+	    		"cp hypridle.conf ~/.config/hypr && "
+	    		"cp hyprpaper.conf ~/.config/hypr && "
+	    		"cd .. && "
+	    		"cd .. && "
+			"cp -f dotfiles/nvim/init.lua ~/.config/nvim/init.lua && "
+	    		"cd dotfiles/waybar && "
+	    		"cp style.css ~/.config/waybar && "
+	    		"cp config.jsonc ~/.config/waybar && "
+	    		"cd .. && "
+	    		"cd .. ");
+	system(cmd);
 	return 0;
 }
