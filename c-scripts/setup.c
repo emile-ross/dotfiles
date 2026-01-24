@@ -31,6 +31,7 @@ char NVIM(char ARCHIVE);
 char WAYB(char ARCHIVE);
 
 char full_inst_noconfirm(char ARCHIVE);
+int update();
 
 int main()
 {
@@ -379,4 +380,39 @@ char full_inst_noconfirm(char ARCHIVE)
     system(cmd);
     printf("\nInstalling dotfiles...\n");
     return 0;
+}
+
+int update()
+{
+    FILE *f = fopen("hyprland.conf", "r");
+    if (!f) return 1; // exit with errcode 1 if it fails
+    char line[128]; // down from 512 bytes
+    char VAWSM[12] = {0}; // only loads the actual version
+
+    while (fgets(line, sizeof(line), f)) 
+    {
+        char *p = line;
+
+        // skip whitespace
+        while (isspace((unsigned char)*p)) p++;
+
+        // only check comments
+        if (*p != '#')
+            continue;
+
+        p++; // skip '#'
+        while (isspace((unsigned char)*p)) p++;
+
+        if (strncmp(p, "AWSMVERSION:", 12) == 0) 
+        {
+            p += 12;
+            while (isspace((unsigned char)*p)) p++;
+
+            p[strcspn(p, "\r\n")] = 0; // strip newline
+            strncpy(VAWSM, p, sizeof(VAWSM) - 1);
+            break;
+        }
+    }
+
+    fclose(f);
 }
