@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include <string.h>
+//#include <string.h>
 
 #define BOLD_S  	"\e[1m" // defines BOLD_S as a keyword to make text bold
 #define ITALICS_S 	"\e[3m"
@@ -127,14 +127,14 @@ int main()
     		    	    {
     		    	    	char cmd[256];
     		    	    	snprintf(cmd, sizeof(cmd),
-    		    	    			"kitten themes");
+					"kitten themes");
     		    	    	system(cmd);
     		    	    }
     		    	    else if (kitty_config_choice == 2)
     		    	    {
     		    	    	char cmd[256];
     		    	    	snprintf(cmd, sizeof(cmd),
-    		    	    			"kitty +list-fonts");
+					"kitty +list-fonts");
     		    	    	system(cmd);
     
     		    	    	printf("\nThe install script can be used to install more fonts.");
@@ -195,14 +195,14 @@ char BTOP(char ARCHIVE)
 	{
 		// archive btop config
 		snprintf(cmd, sizeof(cmd),
-				"mv ~/.config/btop/config.jsonc "
-				"~/.config/btop/config-oldv%.1f.jsonc", pver);
+			"mv ~/.config/btop/config.jsonc "
+			"~/.config/btop/config-oldv%.1f.jsonc", pver);
         	system(cmd);
 	}
         // export btop config
         snprintf(cmd, sizeof(cmd),
-			"mkdir -p ~/.config/btop && "
-			"cp -f dotfiles/btop/config.jsonc ~/.config/btop");
+		"mkdir -p ~/.config/btop && "
+		"cp -f dotfiles/btop/config.jsonc ~/.config/btop");
         system(cmd);
 	return 0;
 }
