@@ -60,11 +60,6 @@ int main()
     
     	if (menu_one_i == 1)
     	{
-	    char cmd[48];
-	    snprintf(cmd, sizeof(cmd),
-		    "yay -S activate-linux-git");
-	    system(cmd);
-		    
 	    clear();
     	    printf(BOLD_S "%s\n"STYLE_END, opt_one_text );
     	    printf("\nDo you want to backup your old dotfiles before proceeding? (Y/n)\n");
@@ -171,7 +166,9 @@ int main()
 	            "yay -S activate-linux-git && "
 		    "activate-linux-git");
 	    system(cmd);
-	    printf("\nUse ^C (Control+C)\n");
+	    printf("\nUse ^C (Control+C) to close the program.\n");
+	    printf("You can use a command like \"activate-linux -t Activate\\ Arch-Linux -m Go\\ to\\ archlinux.org/donate/\\ to\\ activate\" \n");
+	    printf("These flags allow you to add a custom message or title\n");
     	}
     	else if (menu_one_i == '0')
     	{
@@ -187,6 +184,7 @@ int main()
     }
     while(menu_one_i != 0);
     // exits the while loop when the user types 0
+    return 0;
 }
 
 char BTOP(char ARCHIVE)
@@ -412,6 +410,10 @@ int update()
             strncpy(VAWSM, p, sizeof(VAWSM) - 1);
             break;
         }
+	else
+	{
+	    return 1;
+	}
     }
 
     fclose(f);
