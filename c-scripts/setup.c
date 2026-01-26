@@ -20,6 +20,7 @@ char ARCHIVE;
 char confirm_full_inst;
 float pver = 0.0f;
 
+char BASH(char ARCHIVE);
 char BTOP(char ARCHIVE);
 char CAVA(char ARCHIVE);
 char FAST(char ARCHIVE);
