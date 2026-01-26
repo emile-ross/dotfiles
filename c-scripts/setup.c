@@ -1,6 +1,7 @@
-#include <stdlib.h>
+#include <ctype.h>
 #include <stdio.h>
-//#include <string.h>
+#include <stdlib.h>
+#include <string.h>
 
 #define BOLD_S  	"\e[1m" // defines BOLD_S as a keyword to make text bold
 #define ITALICS_S 	"\e[3m"
@@ -18,9 +19,9 @@ void clear()
 
 char ARCHIVE;
 char confirm_full_inst;
-float pver = 0.0f;
+float pver = 0.0f; // the user is presumed to be installing the dotfiles
 
-char BASH(char ARCHIVE);
+char BASH();
 char BTOP(char ARCHIVE);
 char CAVA(char ARCHIVE);
 char FAST(char ARCHIVE);
@@ -188,6 +189,23 @@ int main()
     return 0;
 }
 
+char BASH()
+{
+    char BRCNAME[12] = ".bashrc-new";
+    // prompt to let the user know the bashrc isn't exported/replaced
+    printf("\nThe .bashrc file plays a very important role therefore, it was not replaced.");
+    printf("\nYou can find the new .bashrc file under the name %s\n", BRCNAME);
+
+    char cmd[128];
+    // export .bashrc
+    snprintf(cmd, sizeof(cmd),
+    	"mv dotfiles/.bashrc dotfiles/%s && "
+    	"cp -f dotfiles/.bashrc ~", BRCNAME);
+    system(cmd);
+
+    return 0;
+}
+
 char BTOP(char ARCHIVE)
 {
 	char cmd[256];
@@ -206,6 +224,7 @@ char BTOP(char ARCHIVE)
         system(cmd);
 	return 0;
 }
+
 char CAVA(char ARCHIVE)
 {
 	char cmd[256];
@@ -416,6 +435,7 @@ int update()
 	    return 1;
 	}
     }
-
+    
+    return 0;
     fclose(f);
 }
