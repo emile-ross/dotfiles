@@ -4,6 +4,7 @@
 #include <string.h>
 
 #define BOLD_S  	"\e[1m" // defines BOLD_S as a keyword to make text bold
+#define UDRL_S  	"\e[4m" // UDRL_S starts an underline style
 #define ITALICS_S 	"\e[3m"
 #define ANSI_BLUE    	"\x1b[34m"
 #define ANSI_WHITE    	"\x1b[97m"
@@ -83,8 +84,16 @@ int main()
     	}
     	else if (menu_one_i == 3)
     	{
-    		clear();
-    		printf(BOLD_S "%s\n"STYLE_END, opt_the_text );
+    	    int update_config_menu;
+	    char updatecheck_opt_text[48] = "Template text";
+	    char update_opt_text[48] = "Template text";
+
+    	    clear();
+    	    printf(BOLD_S "%s\n"STYLE_END, opt_the_text );
+    	    printf(BOLD_S "\n [1] " STYLE_END "%s\n", update_opt_text);
+    	    printf(BOLD_S " [2] " STYLE_END "%s\n", updatecheck_opt_text);
+    	    printf(BOLD_S " [0] " STYLE_END "%s\n", opt_exit_text);
+	    scanf("%d", &update_config_menu);
     	}
     	else if (menu_one_i == 4)
     	{
@@ -123,14 +132,14 @@ int main()
     		    	    }
     		    	    else if (kitty_config_choice == 1)
     		    	    {
-    		    	    	char cmd[256];
+    		    	    	char cmd[24];
     		    	    	snprintf(cmd, sizeof(cmd),
 					"kitten themes");
     		    	    	system(cmd);
     		    	    }
     		    	    else if (kitty_config_choice == 2)
     		    	    {
-    		    	    	char cmd[256];
+    		    	    	char cmd[24];
     		    	    	snprintf(cmd, sizeof(cmd),
 					"kitty +list-fonts");
     		    	    	system(cmd);
@@ -159,18 +168,26 @@ int main()
     	}
     	else if (menu_one_i == 5)
     	{
-	    clear();
-    	    printf(BOLD_S "%s\n"STYLE_END, opt_fiv_text );
-    	    printf("\nHere is something cool!\n");
-	    
-	    char cmd[48];
-	    snprintf(cmd, sizeof(cmd),
-	            "yay -S activate-linux-git && "
-		    "activate-linux-git");
-	    system(cmd);
-	    printf("\nUse ^C (Control+C) to close the program.\n");
-	    printf("You can use a command like \"activate-linux -t Activate\\ Arch-Linux -m Go\\ to\\ archlinux.org/donate/\\ to\\ activate\" \n");
-	    printf("These flags allow you to add a custom message or title\n");
+	    int menu_activate_linux;
+	    do
+	    {
+		clear();
+    	    	printf(BOLD_S "%s\n"STYLE_END, opt_fiv_text );
+    	    	printf("\nHere is something cool!\n");
+    	    	printf("\nLook at the bottom right of your screen");
+	    	char cmd[48];
+	    	snprintf(cmd, sizeof(cmd),
+	    	        "yay -S activate-linux-git && "
+	    	        "activate-linux-git");
+	    	system(cmd);
+	    	printf("\nUse ^C (Control+C) to close the program.\n");
+	    	printf("You can use a command like \""UDRL_S"activate-linux -t Activate\\ Arch-Linux -m Go\\ to\\ archlinux.org/donate/\\ to\\ activate"STYLE_END"\" \n");
+	    	printf("These flags allow you to add a custom message or title\n");
+
+		printf(BOLD_S "\n [0] %s\n"STYLE_END, opt_exit_text);
+	    	scanf("%d", &menu_activate_linux);
+	    }
+	    while(menu_activate_linux != 0.0);
     	}
     	else if (menu_one_i == '0')
     	{
@@ -199,8 +216,8 @@ char BASH()
     char cmd[128];
     // export .bashrc
     snprintf(cmd, sizeof(cmd),
-    	"mv dotfiles/.bashrc dotfiles/%s && "
-    	"cp -f dotfiles/.bashrc ~", BRCNAME);
+	    "mv dotfiles/.bashrc dotfiles/%s && "
+	    "cp -f dotfiles/.bashrc ~", BRCNAME);
     system(cmd);
 
     return 0;
@@ -346,46 +363,46 @@ char KITT(char ARCHIVE)
 
 char NVIM(char ARCHIVE)
 {
-	char cmd[256];
-        if (ARCHIVE == 'Y' || ARCHIVE == 'y')
-	{
-	    snprintf(cmd, sizeof(cmd),
-		    "mkdir -p ~/.config/nvim && "
-		    "mv ~/.config/nvim/init.lua ~/.config/nvim/init-oldv%.1f.lua && "
-		    "mv ~/.config/nvim/lua/config/lazy.lua ~/.config/nvim/lua/config/lazy-oldv%.1f.lua && "
-		    "mv ~/.config/nvim/lazy-lock.json ~/.config/nvim/lazy-lock-oldv%.1f.json",
-		    pver, pver, pver);
-	    system(cmd);
-	}
-	// export nvim config
+    char cmd[256];
+    if (ARCHIVE == 'Y' || ARCHIVE == 'y')
+    {
         snprintf(cmd, sizeof(cmd),
 		"mkdir -p ~/.config/nvim && "
-		"cp -f dotfiles/nvim/init.lua ~/.config/nvim");
-		//" cp -rf lua ~/.config/nvim && "
-		//"cp -f lazy-lock.json ~/.config/nvim");
+    	    	"mv ~/.config/nvim/init.lua ~/.config/nvim/init-oldv%.1f.lua && "
+    	    	"mv ~/.config/nvim/lua/config/lazy.lua ~/.config/nvim/lua/config/lazy-oldv%.1f.lua && "
+    	    	"mv ~/.config/nvim/lazy-lock.json ~/.config/nvim/lazy-lock-oldv%.1f.json",
+    	    	pver, pver, pver);
         system(cmd);
-	return 0;
+    }
+    // export nvim config
+    snprintf(cmd, sizeof(cmd),
+	    "mkdir -p ~/.config/nvim && "
+    	    "cp -f dotfiles/nvim/init.lua ~/.config/nvim");
+    	    //" cp -rf lua ~/.config/nvim && "
+    	    //"cp -f lazy-lock.json ~/.config/nvim");
+    system(cmd);
+    return 0;
 }
 char WAYB(char ARCHIVE)
 {
-	char cmd[256];
-        if (ARCHIVE == 'Y' || ARCHIVE == 'y')
-	{
-		// archive waybar
-                snprintf(cmd, sizeof(cmd),
-			"mkdir -p ~/.config/waybar && "
-			"mv ~/.config/waybar/config.jsonc ~/.config/waybar/config-oldv%.1f.jsonc && "
-			"mv ~/.config/waybar/style.css ~/.config/waybar/style-oldv%.1f.css",
-                pver, pver);
-	}
-        // export waybar config and appearance
-	snprintf(cmd, sizeof(cmd),
-		"yay -S --noconfirm waybar && "
+    char cmd[256];
+    if (ARCHIVE == 'Y' || ARCHIVE == 'y')
+    {
+    	// archive waybar
+        snprintf(cmd, sizeof(cmd),
 		"mkdir -p ~/.config/waybar && "
-               	"cp -f dotfiles/waybar/style.css ~/.config/waybar && "
-               	"cp -f dotfiles/waybar/config.jsonc ~/.config/waybar && ");
-	system(cmd);
-	return 0;
+		"mv ~/.config/waybar/config.jsonc ~/.config/waybar/config-oldv%.1f.jsonc && "
+		"mv ~/.config/waybar/style.css ~/.config/waybar/style-oldv%.1f.css",
+        pver, pver);
+    }
+    // export waybar config and appearance
+    snprintf(cmd, sizeof(cmd),
+	    "yay -S --noconfirm waybar && "
+	    "mkdir -p ~/.config/waybar && "
+	    "cp -f dotfiles/waybar/style.css ~/.config/waybar && "
+            "cp -f dotfiles/waybar/config.jsonc ~/.config/waybar && ");
+    system(cmd);
+    return 0;
 }
 
 char full_inst_noconfirm(char ARCHIVE)
@@ -434,6 +451,7 @@ int update()
 	{
 	    return 1;
 	}
+
     }
     
     return 0;
