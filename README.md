@@ -17,15 +17,17 @@ If you want to **configure** your dotfiles, click [here](#Configure)
 - **neovim**
   - lazy, telescope and lualine
 - **hyprland**
+  - with hypridle
 - **waybar**
 - fastfetch
+- btop
 - cava
 - fuzzel
 - kitty
   - font options
   - color scheme
 - gtklock
-  - (lockscreen options coming)
+  - custom lockscreen background
     
 
 --- 
@@ -127,7 +129,11 @@ You can find the original content at: [github.com/kzndotsh/dotfiles](https://git
 
 other credits:
 
-https://github.com/harilvfs/fastfetch
+- https://github.com/harilvfs/fastfetch
+(fastfetch config)
+
+- https://github.com/torvalds/linux
+(linux ofc)
 
 *missing credits*
 
