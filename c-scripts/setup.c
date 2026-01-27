@@ -34,7 +34,7 @@ char NVIM(char ARCHIVE);
 char WAYB(char ARCHIVE);
 
 char full_inst_noconfirm(char ARCHIVE);
-char* update();
+float* update();
 
 int main()
 {
@@ -82,13 +82,13 @@ int main()
 	    int fix_install_menu;
 	    do
 	    {
-		char *version = update();
+	float *version = update();
 
     		clear();
 
     		printf(BOLD_S "%s\n"STYLE_END, opt_two_text );
 
-		printf(ANSI_GREY"\nDetected Version: %s\n"STYLE_END, version);
+		printf(ANSI_GREY"\nDetected Version: %f\n"STYLE_END, *version);
 		printf(UDRL_S"Are you sure you want to fix your dotfiles?\n"STYLE_END);
 		printf(BOLD_S"\n[1]"STYLE_END" %s\n", opt_two_text);
 		printf(BOLD_S"[0]"STYLE_END" %s\n", opt_exit_text);
@@ -107,14 +107,14 @@ int main()
     	}
     	else if (menu_one_i == 3)
     	{
-	    char *version = update();
+	    float *version = update();
 	    int update_config_menu;
 	    char updatecheck_opt_text[48] = "Template text";
 	    char update_opt_text[48] = "Template text";
 
     	    clear();
 
-	    printf("Detected Version: %s\n", version);
+	    printf("Detected Version: %f\n", *version);
 
     	    printf(BOLD_S "%s\n"STYLE_END, opt_the_text );
     	    printf(BOLD_S "\n [1] " STYLE_END "%s\n", update_opt_text);
@@ -445,7 +445,7 @@ char full_inst_noconfirm(char ARCHIVE)
     return 0;
 }
 
-char* update() 
+float* update() 
 {
     char *USERNAME = getenv("HOME");
 
@@ -471,13 +471,13 @@ char* update()
 	// returns null if the file can't be opened/found
         return NULL;
     }
-    static char VAWSM[32] = {0};
+    static float VAWSM[32] = {0};
 
     char line[256];
     while (fgets(line, sizeof(line), file)) 
     {
-        if (sscanf(line, "# AWSMVERSION: %31[0-9.]", VAWSM) == 1) 
-	{
+        if (sscanf(line, "# AWSMVERSION: %31f[0-9.]", VAWSM) == 1) 
+		{
             //printf("VAWSM: %s\n", VAWSM); // for troubleshooting purposes
             fclose(file);
             return VAWSM;
