@@ -79,8 +79,31 @@ int main()
     	}
     	else if (menu_one_i == 2)
     	{
+	    int fix_install_menu;
+	    do
+	    {
+		char *version = update();
+
     		clear();
+
     		printf(BOLD_S "%s\n"STYLE_END, opt_two_text );
+
+		printf(ANSI_GREY"\nDetected Version: %s\n"STYLE_END, version);
+		printf(UDRL_S"Are you sure you want to fix your dotfiles?\n"STYLE_END);
+		printf(BOLD_S"\n[1]"STYLE_END" %s\n", opt_two_text);
+		printf(BOLD_S"[0]"STYLE_END" %s\n", opt_exit_text);
+		scanf("%d", &fix_install_menu);
+		if ( fix_install_menu == 1)
+		{
+		    //do stuff
+		    return 0;
+		}
+		else
+		{
+		    return 0;
+		}
+	    }
+	    while(fix_install_menu != 0);
     	}
     	else if (menu_one_i == 3)
     	{
@@ -202,7 +225,8 @@ int main()
     	}
     	else
     	{
-    		return 1; // error code 1
+    	    printf("\nExiting..\n");
+    	    return 1; // error code 1
     	}
     }
     while(menu_one_i != 0);
@@ -425,14 +449,28 @@ char* update()
 {
     char *USERNAME = getenv("HOME");
 
+    // error message if username can't be fetched 
+    if (USERNAME == NULL) 
+    {
+        printf(BOLD_S UDRL_S"\nCan't find home directory\n"STYLE_END);
+        return NULL;
+    }
+
     // create path to config
     char HYPRPATH[256];
     snprintf(HYPRPATH, sizeof(HYPRPATH), 
-             "%s/.config/hypr/hyprland.conf", USERNAME);
+	    "%s/.config/hypr/hyprland.conf", USERNAME);
 
     // open the file with HYPRPATH
     FILE *file = fopen(HYPRPATH, "r");
-
+    
+    // error checking 
+    if (file == NULL) 
+    {
+	printf(BOLD_S UDRL_S"\nNo such file or directory\n"STYLE_END);
+	// returns null if the file can't be opened/found
+        return NULL;
+    }
     static char VAWSM[32] = {0};
 
     char line[256];
