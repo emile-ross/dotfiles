@@ -82,13 +82,13 @@ int main()
 	    int fix_install_menu;
 	    do
 	    {
-	float *version = update();
+		float *version = update();
 
     		clear();
 
     		printf(BOLD_S "%s\n"STYLE_END, opt_two_text );
 
-		printf(ANSI_GREY"\nDetected Version: %f\n"STYLE_END, *version);
+		printf(ANSI_GREY"\nDetected Version: %.2f\n"STYLE_END, *version);
 		printf(UDRL_S"Are you sure you want to fix your dotfiles?\n"STYLE_END);
 		printf(BOLD_S"\n[1]"STYLE_END" %s\n", opt_two_text);
 		printf(BOLD_S"[0]"STYLE_END" %s\n", opt_exit_text);
@@ -100,27 +100,45 @@ int main()
 		}
 		else
 		{
-		    return 0;
+		    break;
 		}
 	    }
 	    while(fix_install_menu != 0);
     	}
     	else if (menu_one_i == 3)
     	{
-	    float *version = update();
 	    int update_config_menu;
-	    char updatecheck_opt_text[48] = "Template text";
-	    char update_opt_text[48] = "Template text";
+	    do
+	    {
+		float *version = update();
+	    	char updatecheck_opt_text[48] = "Template text";
+	    	char update_opt_text[48] = "Template text";
 
-    	    clear();
+    	    	clear();
 
-	    printf("Detected Version: %f\n", *version);
+	    	printf("Detected Version: %.2f\n", *version);
 
-    	    printf(BOLD_S "%s\n"STYLE_END, opt_the_text );
-    	    printf(BOLD_S "\n [1] " STYLE_END "%s\n", update_opt_text);
-    	    printf(BOLD_S " [2] " STYLE_END "%s\n", updatecheck_opt_text);
-    	    printf(BOLD_S " [0] " STYLE_END "%s\n", opt_exit_text);
-	    scanf("%d", &update_config_menu);
+    	    	printf(BOLD_S "%s\n"STYLE_END, opt_the_text );
+    	    	printf(BOLD_S "\n [1] " STYLE_END "%s\n", update_opt_text);
+    	    	printf(BOLD_S " [2] " STYLE_END "%s\n", updatecheck_opt_text);
+    	    	printf(BOLD_S " [0] " STYLE_END "%s\n", opt_exit_text);
+	    	scanf("%d", &update_config_menu);
+	    	if (update_config_menu == 1)
+	    	{
+	    	    return 0;
+	    	}
+	    	else if (update_config_menu == 2)
+	    	{
+	    	    //update
+	    	    return 0;
+	    	}
+	    	else
+	    	{
+	    	    //return 0;
+	    	}
+	    }
+	    while(update_config_menu > 0);
+	     
     	}
     	else if (menu_one_i == 4)
     	{
@@ -178,6 +196,7 @@ int main()
     		    	    	// typo? perhaps?
     		    	    	clear();
     		    	    	fflush(stdin);
+				return 0;
     		    	    	break;
     		    	    }
     		    	}
