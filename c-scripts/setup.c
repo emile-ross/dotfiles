@@ -34,7 +34,7 @@ char NVIM(char ARCHIVE);
 char WAYB(char ARCHIVE);
 
 char full_inst_noconfirm(char ARCHIVE);
-int update();
+char* update();
 
 int main()
 {
@@ -84,11 +84,15 @@ int main()
     	}
     	else if (menu_one_i == 3)
     	{
-    	    int update_config_menu;
+	    char *version = update();
+	    int update_config_menu;
 	    char updatecheck_opt_text[48] = "Template text";
 	    char update_opt_text[48] = "Template text";
 
     	    clear();
+
+	    printf("Detected Version: %s\n", version);
+
     	    printf(BOLD_S "%s\n"STYLE_END, opt_the_text );
     	    printf(BOLD_S "\n [1] " STYLE_END "%s\n", update_opt_text);
     	    printf(BOLD_S " [2] " STYLE_END "%s\n", updatecheck_opt_text);
@@ -417,43 +421,31 @@ char full_inst_noconfirm(char ARCHIVE)
     return 0;
 }
 
-int update()
+char* update() 
 {
-    FILE *f = fopen("hyprland.conf", "r");
-    if (!f) return 1; // exit with errcode 1 if it fails
-    char line[128]; // down from 512 bytes
-    char VAWSM[12] = {0}; // only loads the actual version
+    char *USERNAME = getenv("HOME");
 
-    while (fgets(line, sizeof(line), f)) 
+    // create path to config
+    char HYPRPATH[256];
+    snprintf(HYPRPATH, sizeof(HYPRPATH), 
+             "%s/.config/hypr/hyprland.conf", USERNAME);
+
+    // open the file with HYPRPATH
+    FILE *file = fopen(HYPRPATH, "r");
+
+    static char VAWSM[32] = {0};
+
+    char line[256];
+    while (fgets(line, sizeof(line), file)) 
     {
-        char *p = line;
-
-        // skip whitespace
-        while (isspace((unsigned char)*p)) p++;
-
-        // only check comments
-        if (*p != '#')
-            continue;
-
-        p++; // skip '#'
-        while (isspace((unsigned char)*p)) p++;
-
-        if (strncmp(p, "AWSMVERSION:", 12) == 0) 
-        {
-            p += 12;
-            while (isspace((unsigned char)*p)) p++;
-
-            p[strcspn(p, "\r\n")] = 0; // strip newline
-            strncpy(VAWSM, p, sizeof(VAWSM) - 1);
-            break;
-        }
-	else
+        if (sscanf(line, "# AWSMVERSION: %31[0-9.]", VAWSM) == 1) 
 	{
-	    return 1;
-	}
-
+            //printf("VAWSM: %s\n", VAWSM); // for troubleshooting purposes
+            fclose(file);
+            return VAWSM;
+        }
     }
-    
+
+    fclose(file);
     return 0;
-    fclose(f);
 }
