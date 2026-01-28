@@ -116,7 +116,7 @@ int main()
 
     	    	clear();
 
-	    	printf("Detected Version: %.2f\n", *version);
+		printf(ANSI_GREY"\nDetected Version: %.2f\n"STYLE_END, *version);
 
     	    	printf(BOLD_S "%s\n"STYLE_END, opt_the_text );
     	    	printf(BOLD_S "\n [1] " STYLE_END "%s\n", update_opt_text);
@@ -219,19 +219,28 @@ int main()
 	    {
 		clear();
     	    	printf(BOLD_S "%s\n"STYLE_END, opt_fiv_text );
-    	    	printf("\nHere is something cool!\n");
-    	    	printf("\nLook at the bottom right of your screen");
-	    	char cmd[48];
-	    	snprintf(cmd, sizeof(cmd),
-	    	        "yay -S activate-linux-git && "
-	    	        "activate-linux-git");
-	    	system(cmd);
-	    	printf("\nUse ^C (Control+C) to close the program.\n");
-	    	printf("You can use a command like \""UDRL_S"activate-linux -t Activate\\ Arch-Linux -m Go\\ to\\ archlinux.org/donate/\\ to\\ activate"STYLE_END"\" \n");
-	    	printf("These flags allow you to add a custom message or title\n");
+		
+    		char act_linux_water_text[128] = "Do you want to add the \"Activate Linux\" watermark?";
 
-		printf(BOLD_S "\n [0] %s\n"STYLE_END, opt_exit_text);
+		printf(BOLD_S "\n [1] %s\n"STYLE_END, act_linux_water_text);
+		printf(BOLD_S "\n [0] %s (no)\n"STYLE_END, opt_exit_text);
 	    	scanf("%d", &menu_activate_linux);
+
+		if (menu_activate_linux == 1)
+		{
+		    char cmd[48];
+	    	    snprintf(cmd, sizeof(cmd),
+	    	            "yay -S activate-linux-git && "
+	    	            "activate-linux-git");
+	    	    system(cmd);
+
+    	    	    printf("\nHere is something cool!\n");
+    	    	    printf("\nLook at the bottom right of your screen");
+	    	    printf("\nUse ^C (Control+C) to close the program.\n");
+	    	    printf("You can use a command like \""UDRL_S"activate-linux -t Activate\\ Arch-Linux -m Go\\ to\\ archlinux.org/donate/\\ to\\ activate"STYLE_END"\" \n");
+	    	    printf("These flags allow you to add a custom message or title\n");
+		}
+		
 	    }
 	    while(menu_activate_linux != 0.0);
     	}
