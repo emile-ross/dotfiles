@@ -28,8 +28,7 @@ If you want to **configure** your dotfiles, click [here](#Configure)
   - color scheme
 - gtklock
   - custom lockscreen background
-
-- *sway (coming soon)*
+- sway (not fully implemented)
 
 --- 
 
