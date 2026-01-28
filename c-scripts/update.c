@@ -4,43 +4,59 @@
 #include <stdlib.h>
 
 #define BOLD_S	"\e[1m" // defines BOLD_S as a keyword to make text bold
+#define UDRL_S	"\e[4m" // defines BOLD_S as a keyword to make text bold
 #define STYLE_END   	"\e[m" // resets the styling
-int main(void) 
+
+float* update() 
 {
-	FILE *f = fopen("hyprland.conf", "r");
-	if (!f) return 1;
-    	char line[96]; // down from 512 bytes
-    	char VAWSM[8] = {0}; // only loads the actual version number
-    	
-    	while (fgets(line, sizeof(line), f)) 
-    	{
-    	    	char *p = line;
-    	    	
-    	    	// skip whitespace
-    	    	while (isspace((unsigned char)*p)) p++;
-    	    	
-    	    	// only check comments
-    	    	if (*p != '#')
-    	    	    continue;
-    	    	
-    	    	p++; // skip '#'
-    	    	while (isspace((unsigned char)*p)) p++;
-    	    	
-    	    	if (strncmp(p, "AWSMVERSION:", 12) == 0)
-    	    	{
-    	    	    	p += 12; // 12 bytes
-    	    	    	while (isspace((unsigned char)*p)) p++;
-    	    	
-    	    	    	p[strcspn(p, "\r\n")] = 0; // strip newline
-    	    	    	strncpy(VAWSM, p, sizeof(VAWSM) - 1);
-    	    	    	break;
-    	    	}
+    char *USERNAME = getenv("HOME");
+
+    // error message if username can't be fetched 
+    if (USERNAME == NULL) 
+    {
+        printf(BOLD_S UDRL_S"\nCan't find home directory\n"STYLE_END);
+        return NULL;
     }
-    fclose(f);
-							fflush(stdin);
+
+    // create path to config
+    char HYPRPATH[256];
+    snprintf(HYPRPATH, sizeof(HYPRPATH), 
+	    "%s/.config/hypr/hyprland.conf", USERNAME);
+
+    // open the file with HYPRPATH
+    FILE *file = fopen(HYPRPATH, "r");
+    
+    // error checking 
+    if (file == NULL) 
+    {
+	printf(BOLD_S UDRL_S"\nNo such file or directory\n"STYLE_END);
+	// returns null if the file can't be opened/found
+        return NULL;
+    }
+    static float VAWSM[32] = {0};
+
+    char line[256];
+    while (fgets(line, sizeof(line), file)) 
+    {
+        if (sscanf(line, "# AWSMVERSION: %31f[0-9.]", VAWSM) == 1) 
+		{
+            //printf("VAWSM: %s\n", VAWSM); // for troubleshooting purposes
+            fclose(file);
+            return VAWSM;
+        }
+    }
+
+    fclose(file);
+    return 0;
+}
+
+int main() 
+{
+
     // check if the current version of dotfiles is correct
+    float *version = update();
     char ACCURATEV;
-    printf("\nYour current version is %s", VAWSM);
+    printf("\nYour current version is %.1f", *version);
     printf("\nDoes this seem correct? (Y/n)\n");
     scanf("%c", ACCURATEV);
     if (ACCURATEV == 'Y' || ACCURATEV == 'y')
@@ -62,7 +78,6 @@ int main(void)
 	else
 	{
 		printf("\nDeletion skipped\n");
-		break;
 	}
     }
     else
