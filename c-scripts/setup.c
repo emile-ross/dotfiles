@@ -90,7 +90,7 @@ int main()
 
 		printf(ANSI_GREY"\nDetected Version: %.2f\n"STYLE_END, *version);
 		printf(UDRL_S"Are you sure you want to fix your dotfiles?\n"STYLE_END);
-		printf(BOLD_S"\n[1]"STYLE_END" %s\n", opt_two_text);
+		printf(BOLD_S"\n[1]"STYLE_END" %s", opt_two_text);
 		printf(BOLD_S"[0]"STYLE_END" %s\n", opt_exit_text);
 		scanf("%d", &fix_install_menu);
 		if ( fix_install_menu == 1)
@@ -132,9 +132,14 @@ int main()
 	    	    //update
 	    	    return 0;
 	    	}
+	    	else if (update_config_menu == 0)
+	    	{
+
+		}
 	    	else
 	    	{
-	    	    //return 0;
+		    // invalid character 
+		    return 0;
 	    	}
 	    }
 	    while(update_config_menu > 0);
@@ -162,8 +167,8 @@ int main()
     		    	do
     		    	{
 			    clear();
-    		    	    char kitty_color_text[128] = "Change Kitty color scheme";
-    		    	    char kitty_fonts_text[128] = "Change Kitty fonts";
+    		    	    char kitty_color_text[32] = "Change Kitty color scheme";
+    		    	    char kitty_fonts_text[32] = "Change Kitty fonts";
     		    	    
     		    	    printf(BOLD_S ANSI_WHITE "%s\n\n"STYLE_END, kitty_config_menu_text );
     		    	    printf(BOLD_S " [1] " STYLE_END "%s\n", kitty_color_text);
@@ -300,7 +305,7 @@ char BTOP(char ARCHIVE)
 
 char CAVA(char ARCHIVE)
 {
-	char cmd[256];
+	char cmd[128];
         if (ARCHIVE == 'Y' || ARCHIVE == 'y')
 	{
 		// backup cava config
@@ -337,23 +342,23 @@ char FAST(char ARCHIVE)
 }
 char FUZZ(char ARCHIVE)
 {
-	char cmd[256];
-        if (ARCHIVE == 'Y' || ARCHIVE == 'y')
-	{
-		// backup fuzzel config
-	    	snprintf(cmd, sizeof(cmd),
-                	"mv ~/.config/fuzzel/fuzzel.ini"
-			"~/.config/fuzzel/fuzzel-oldv%.1f.ini", pver);
-		system(cmd);
-	}
-        // export fuzzel appearance
+    char cmd[256];
+    if (ARCHIVE == 'Y' || ARCHIVE == 'y')
+    {
+    	// backup fuzzel config
         snprintf(cmd, sizeof(cmd),
-                "mkdir ~/.config/fuzzel && "
-                "cp -f dotfiles/fuzzel/old-fuzzel.ini && "
-                "cp -f dotfiles/fuzzel/fuzzel.ini "
-		"~/.config/fuzzel");
-        system(cmd);  		
-	return 0;
+		"mv ~/.config/fuzzel/fuzzel.ini"
+    		"~/.config/fuzzel/fuzzel-oldv%.1f.ini", pver);
+    	system(cmd);
+    }
+    // export fuzzel appearance
+    snprintf(cmd, sizeof(cmd),
+            "mkdir ~/.config/fuzzel && "
+            "cp -f dotfiles/fuzzel/old-fuzzel.ini && "
+            "cp -f dotfiles/fuzzel/fuzzel.ini "
+	    "~/.config/fuzzel");
+    system(cmd);  		
+    return 0;
 }
 char GTKL(char ARCHIVE)
 {
@@ -399,22 +404,22 @@ char HYPR(char ARCHIVE)
 }
 char KITT(char ARCHIVE)
 {
-	char cmd[256];
-        if (ARCHIVE == 'Y' || ARCHIVE == 'y')
-	{
-		// backup kitty config
-	    	snprintf(cmd, sizeof(cmd),
-			"mv ~/.config/kitty/kitty.conf "
-			"~/.config/kitty/kitty-oldv%.1f.conf", pver);
-		system(cmd);
-	}
-	// export kitty config
-	snprintf(cmd, sizeof(cmd),
-		"mkdir ~/.config/kitty && "
-		"cp -f dotfiles/kitty/current-theme.conf ~/.config/kitty && "
-		"cp -f dotfiles/kitty/kitty.conf ~/.config/kitty");
-	system(cmd);
-	return 0;
+    char cmd[256];
+    if (ARCHIVE == 'Y' || ARCHIVE == 'y')
+    {
+    	// backup kitty config
+        snprintf(cmd, sizeof(cmd),
+    		"mv ~/.config/kitty/kitty.conf "
+    		"~/.config/kitty/kitty-oldv%.1f.conf", pver);
+    	system(cmd);
+    }
+    // export kitty config
+    snprintf(cmd, sizeof(cmd),
+    	"mkdir ~/.config/kitty && "
+    	"cp -f dotfiles/kitty/current-theme.conf ~/.config/kitty && "
+    	"cp -f dotfiles/kitty/kitty.conf ~/.config/kitty");
+    system(cmd);
+    return 0;
 }
 
 char NVIM(char ARCHIVE)
@@ -464,7 +469,7 @@ char WAYB(char ARCHIVE)
 char full_inst_noconfirm(char ARCHIVE)
 {
     printf("\nInstalling dotfiles...\n");
-    char cmd[256];
+    char cmd[128];
     snprintf(cmd, sizeof(cmd),
 	    "gcc dotfiles/c-scripts/install.c -o cinstall && " 
     	    "./cinstall");
@@ -485,14 +490,14 @@ float* update()
     }
 
     // create path to config
-    char HYPRPATH[256];
+    char HYPRPATH[64];
     snprintf(HYPRPATH, sizeof(HYPRPATH), 
 	    "%s/.config/hypr/hyprland.conf", USERNAME);
 
     // open the file with HYPRPATH
     FILE *file = fopen(HYPRPATH, "r");
     
-    // error checking 
+    // return error message when file isn't found
     if (file == NULL) 
     {
 	printf(BOLD_S UDRL_S"\nNo such file or directory\n"STYLE_END);
@@ -501,11 +506,11 @@ float* update()
     }
     static float VAWSM[32] = {0};
 
-    char line[256];
+    char line[384];
     while (fgets(line, sizeof(line), file)) 
     {
         if (sscanf(line, "# AWSMVERSION: %31f[0-9.]", VAWSM) == 1) 
-		{
+	{
             //printf("VAWSM: %s\n", VAWSM); // for troubleshooting purposes
             fclose(file);
             return VAWSM;
