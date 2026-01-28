@@ -47,8 +47,7 @@ int main()
 	printf("\n What do you want to do?");
 	printf("\n [1] proceed with installation");
 	printf("\n [2] fix your installation");
-	printf("\n [3] prompt for every config");
-	printf("\n [4] exit this script\n");
+	printf("\n [0] exit this script\n");
 	scanf(" %d", &FIXINST);
 	if (FIXINST == '1')
 	{
@@ -65,7 +64,7 @@ int main()
 	    char WAYB(char ARCHIVE);
 	    
 	}
-    	if (FIXINST == '2')
+	else if (FIXINST == '2')
     	{
 	    if (HYPRI == 'Y' || HYPRI == 'y')
             {
@@ -74,7 +73,7 @@ int main()
         // add commands for fixing script below
             	char cmd[256];
             	snprintf(cmd, sizeof(cmd),
-			"sudo pacman -S --noconfim nvim git cava fastfetch fuzzel btop kitty gtop");
+			"sudo pacman -S --noconfim nvim git fastfetch fuzzel btop kitty gtop");
 		system(cmd);
 			
         // system("sudo pacman -S --noconfim nvim git cava fuzzel");
@@ -84,27 +83,23 @@ int main()
         system("mkdir -p ~/.config/nvim/lua/config && mkdir -p ~/.config/nvim/lua/plugins && mkdir -p ~/.config/fastfetch && mkdir -p ~/.config/hypr");
         system("mkdir -p ~/.config/cava && mkdir -p ~/.config/fuzzel");
 	}
-	if (FIXINST == '3')
+	else if (FIXINST == '0')
 	{
-		// prompt for everything
-		char BTOP(char ARCHIVE);
-		char CAVA(char ARCHIVE);
-		char FAST(char ARCHIVE);
-		char FUZZ(char ARCHIVE);
-		char HYPR(char ARCHIVE);
-		char GTKL(char ARCHIVE);
+	    printf("\nExiting install script.\n");
+	    return 0;
+	}
+	else
+	{
+	    printf("\nExiting install script.\n");
+	    return 1;
+	}
+    //
+    // (I have no clue what this is supposed to be)
+    // else
+    // {
+    //     printf("\n The installation is now starting. \n");
+    // }
 
-		return 0;
-	}
-	if (FIXINST == '4')
-	{
-		printf("\nExiting install script.\n");
-		return 0;
-	}
-    else
-    {
-	printf("\n The installation is now starting. \n");
-    }
     // Check if yay is installed
     if (system("test -f /sbin/yay") == 0)
     {
@@ -127,6 +122,7 @@ int main()
                 if (system("command -v makepkg > /dev/null") != 0)
                 {
 		    printf("Makepkg installation failed. Please check your system configuration.\n");
+		    printf("Helpful link: \"https://wiki.archlinux.org/title/Makepkg\"\n");
 		    return 1;
                 }
                 else
@@ -145,12 +141,13 @@ int main()
 		    "makepkg -si &&"
 	            "cd ..");
             system(cmd);
+
             printf("\nYay is installed, congrats!\n");
         }
         else
         {
             printf("\nYay is needed in order to proceed with the script.\n");
-            return 1;
+            return 0;
         }
     }
     // Install dependencies
@@ -176,7 +173,8 @@ int main()
         {
     	char cmd[256];
 	snprintf(cmd, sizeof(cmd),
-		"yay -S --noconfirm kitty floorp-bin btop librewolf-bin xclip wl-clipboard fastfetch && "
+		"yay -S --noconfirm kitty floorp-bin btop librewolf-bin xclip wl-clipboard fastfetch "
+		"sway swaylock ly cava wlroots && "
 		"sudo pacman -S --noconfirm ttf-jetbrains-mono ttf-ibm-plex ttf-roboto nerd-fonts-jetbrains-mono");
 	system(cmd);
         }
@@ -194,6 +192,7 @@ int main()
         {
             //char cmd[512];
 	    char HYPR(char ARCHIVE);
+	    printf("\nHyprland install completed\n");
         }
 
 	snprintf(cmd, sizeof(cmd),
