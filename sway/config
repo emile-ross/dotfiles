@@ -5,7 +5,6 @@
 # Read `man 5 sway` for a complete reference.
 
 ### Variables
-#
 # Logo key. Use Mod1 for Alt.
 # Logo key. Use Mod4 for Alt.
 
@@ -27,7 +26,6 @@ set $floorp floorp
 
 # output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 
-#
 # Example configuration:
 #
 #   output HDMI-A-1 resolution 1920x1080 position 1920,0
@@ -74,7 +72,6 @@ set $floorp floorp
     # bindsym $mod+Return exec $term
 
     bindsym $mod+Q exec $term
-
     bindsym $mod+1 exec $floorp
 
     # Kill focused window
@@ -148,6 +145,7 @@ set $floorp floorp
     bindsym $mod+Shift+F8 move container to workspace number 8
     bindsym $mod+Shift+F9 move container to workspace number 9
     bindsym $mod+Shift+F10 move container to workspace number 10
+
     # Note: workspaces can have any name you want, not just numbers.
     # We just use 1-10 as the default.
 #
@@ -226,11 +224,10 @@ mode "resize" {
     # Special key to take a screenshot with grim
     bindsym Print exec grim
 
-#
 # Status Bar:
-#
 # Read `man 5 sway-bar` for more information about this section.
 bar {
+    font pango: Jetbrains Mono 10
     position top
 
     # When the status_command prints a new line to stdout, swaybar updates.
@@ -238,9 +235,11 @@ bar {
     status_command while date +'%Y-%m-%d %X'; do sleep 1; done
 
     colors {
-        statusline #ffffff
-        background #323232
-        inactive_workspace #32323200 #32323200 #5c5c5c
+        statusline #cfcfffd0
+        background #3232324f
+        focused_workspace #5f5f5f #121212  #c0c0ffd0
+        inactive_workspace #cfcfff26 #000000 #cfcfff56
+	active_workspace #3400ff00 #5500ff40 #5500ff
     }
 }
 
