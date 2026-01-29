@@ -21,19 +21,19 @@ char ARCHIVE;
 char confirm_full_inst;
 float pver = 0.0f; // the user is presumed to be installing the dotfiles
 
-char BASH(char ARCHIVE);
-char SWAY(char ARCHIVE);
-char BTOP(char ARCHIVE);
-char CAVA(char ARCHIVE);
-char FAST(char ARCHIVE);
-char FUZZ(char ARCHIVE);
-char GTKL(char ARCHIVE);
-char HYPR(char ARCHIVE);
-char KITT(char ARCHIVE);
-char NVIM(char ARCHIVE);
-char WAYB(char ARCHIVE);
+void BASH(char ARCHIVE);
+void SWAY(char ARCHIVE);
+void BTOP(char ARCHIVE);
+void CAVA(char ARCHIVE);
+void FAST(char ARCHIVE);
+void FUZZ(char ARCHIVE);
+void GTKL(char ARCHIVE);
+void HYPR(char ARCHIVE);
+void KITT(char ARCHIVE);
+void NVIM(char ARCHIVE);
+void WAYB(char ARCHIVE);
 
-char full_inst_noconfirm(char ARCHIVE);
+void full_inst_noconfirm(char ARCHIVE);
 float* update();
 
 int main()
@@ -99,16 +99,16 @@ int main()
 		if ( fix_install_menu == 1)
 		{
 		    printf(BOLD_S"\nFixing dotfiles...\n"STYLE_END);
-		    char BTOP(char ARCHIVE);
-		    char CAVA(char ARCHIVE);
-		    char FAST(char ARCHIVE);
-		    char FUZZ(char ARCHIVE);
-		    char GTKL(char ARCHIVE);
-		    char HYPR(char ARCHIVE);
-		    char KITT(char ARCHIVE);
-		    char NVIM(char ARCHIVE);
-		    char SWAY(char ARCHIVE);
-		    char WAYB(char ARCHIVE);
+		    void BTOP(char ARCHIVE);
+		    void CAVA(char ARCHIVE);
+		    void FAST(char ARCHIVE);
+		    void FUZZ(char ARCHIVE);
+		    void GTKL(char ARCHIVE);
+		    void HYPR(char ARCHIVE);
+		    void KITT(char ARCHIVE);
+		    void NVIM(char ARCHIVE);
+		    void SWAY(char ARCHIVE);
+		    void WAYB(char ARCHIVE);
 		    printf(BOLD_S"\nInstall completed!...\n"STYLE_END);
 		}
 	    }
@@ -250,7 +250,7 @@ int main()
     return 0;
 }
 
-char BASH(char ARCHIVE)
+void BASH(char ARCHIVE)
 {
     char BRCNAME[12] = ".bashrc-new";
     // prompt to let the user know the bashrc isn't exported/replaced
@@ -264,10 +264,9 @@ char BASH(char ARCHIVE)
 	    "cp -f dotfiles/.bashrc ~", BRCNAME);
     system(cmd);
 
-    return 0;
 }
 
-char BTOP(char ARCHIVE)
+void BTOP(char ARCHIVE)
 {
 	char cmd[256];
         if (ARCHIVE == 'Y' || ARCHIVE == 'y')
@@ -283,10 +282,9 @@ char BTOP(char ARCHIVE)
 		"mkdir -p ~/.config/btop && "
 		"cp -f dotfiles/btop/config.jsonc ~/.config/btop");
         system(cmd);
-	return 0;
 }
 
-char CAVA(char ARCHIVE)
+void CAVA(char ARCHIVE)
 {
 	char cmd[128];
         if (ARCHIVE == 'Y' || ARCHIVE == 'y')
@@ -302,9 +300,8 @@ char CAVA(char ARCHIVE)
 		"mkdir -p ~/.config/cava && "
         	"cp -f dotfiles/cava/config ~/.config/cava/ && ");
         system(cmd);
-	return 0;
 }
-char FAST(char ARCHIVE)
+void FAST(char ARCHIVE)
 {
     char cmd[256];
     if (ARCHIVE == 'Y' || ARCHIVE == 'y')
@@ -321,9 +318,8 @@ char FAST(char ARCHIVE)
 	    "cp dotfiles/fastfetch/config.jsonc "
 	    "~/.config/fastfetch");
     system(cmd);
-    return 0;
 }
-char FUZZ(char ARCHIVE)
+void FUZZ(char ARCHIVE)
 {
     char cmd[256];
     if (ARCHIVE == 'Y' || ARCHIVE == 'y')
@@ -341,9 +337,8 @@ char FUZZ(char ARCHIVE)
             "cp -f dotfiles/fuzzel/fuzzel.ini "
 	    "~/.config/fuzzel");
     system(cmd);  		
-    return 0;
 }
-char GTKL(char ARCHIVE)
+void GTKL(char ARCHIVE)
 {
 	char cmd[256];
         if (ARCHIVE == 'Y' || ARCHIVE == 'y')
@@ -360,10 +355,9 @@ char GTKL(char ARCHIVE)
                 "cp -f dotfiles/gtklock/style.css ~/.config/gtklock && "
                 "cp -f dotfiles/gtklock/lockscreen.jpg ~/.config/gtklock/assets");
         system(cmd);
-	return 0;
 }
 
-char HYPR(char ARCHIVE)
+void HYPR(char ARCHIVE)
 {
 	char cmd[256];
         if (ARCHIVE == 'Y' || ARCHIVE == 'y')
@@ -383,9 +377,8 @@ char HYPR(char ARCHIVE)
 		"cp -f dotfiles/hypr/hypridle.conf ~/.config/hypr && "
 		"cp -f dotfiles/hypr/hyprpaper.conf ~/.config/hypr");
         system(cmd);
-	return 0;
 }
-char KITT(char ARCHIVE)
+void KITT(char ARCHIVE)
 {
     char cmd[256];
     if (ARCHIVE == 'Y' || ARCHIVE == 'y')
@@ -402,10 +395,9 @@ char KITT(char ARCHIVE)
     	"cp -f dotfiles/kitty/current-theme.conf ~/.config/kitty && "
     	"cp -f dotfiles/kitty/kitty.conf ~/.config/kitty");
     system(cmd);
-    return 0;
 }
 
-char NVIM(char ARCHIVE)
+void NVIM(char ARCHIVE)
 {
     char cmd[256];
     if (ARCHIVE == 'Y' || ARCHIVE == 'y')
@@ -422,10 +414,9 @@ char NVIM(char ARCHIVE)
 	    "mkdir -p ~/.config/nvim && "
     	    "cp -f dotfiles/nvim/init.lua ~/.config/nvim");
     system(cmd);
-    return 0;
 }
 
-char SWAY(char ARCHIVE)
+void SWAY(char ARCHIVE)
 {
     // sway window manager doesn't work without wlroots
     char cmd[128];
@@ -441,10 +432,9 @@ char SWAY(char ARCHIVE)
 	    "mkdir -p ~/.config/sway && "
     	    "cp -f dotfiles/sway/config ~/.config/sway");
     system(cmd);
-    return 0;
 }
 
-char WAYB(char ARCHIVE)
+void WAYB(char ARCHIVE)
 {
     char cmd[256];
     if (ARCHIVE == 'Y' || ARCHIVE == 'y')
@@ -462,19 +452,24 @@ char WAYB(char ARCHIVE)
 	    "cp -f dotfiles/waybar/style.css ~/.config/waybar && "
             "cp -f dotfiles/waybar/config.jsonc ~/.config/waybar && ");
     system(cmd);
-    return 0;
 }
 
-char full_inst_noconfirm(char ARCHIVE)
+void full_inst_noconfirm(char ARCHIVE)
 {
     printf("\nInstalling dotfiles...\n");
-    char cmd[128];
-    snprintf(cmd, sizeof(cmd),
-	    "gcc dotfiles/c-scripts/install.c -o cinstall && " 
-    	    "./cinstall");
-    system(cmd);
+
+	void BASH(char ARCHIVE);
+	void SWAY(char ARCHIVE);
+	void BTOP(char ARCHIVE);
+	void CAVA(char ARCHIVE);
+	void FAST(char ARCHIVE);
+	void FUZZ(char ARCHIVE);
+	void GTKL(char ARCHIVE);
+	void HYPR(char ARCHIVE);
+	void KITT(char ARCHIVE);
+	void NVIM(char ARCHIVE);
+	void WAYB(char ARCHIVE);
     printf("\nInstalling dotfiles...\n");
-    return 0;
 }
 
 float* update() 
