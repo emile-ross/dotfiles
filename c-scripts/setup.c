@@ -66,16 +66,22 @@ int main()
 	    clear();
     	    printf(BOLD_S "%s\n"STYLE_END, opt_one_text );
     	    printf("\nDo you want to backup your old dotfiles before proceeding? (Y/n)\n");
+
     	    scanf(" %c", &ARCHIVE);
-    	    printf(ANSI_RED BOLD_S"\nWARNING\n"STYLE_END BOLD_S"This will install every config.\n"STYLE_END);
-    	    printf(ITALICS_S"\nIn order to pick the configs you want, you need to use the custom configuration option\n"STYLE_END);
-    	    printf("\nProceed with installation (Y/n)\n");
-    	    fflush(stdin);
-    	    scanf(" %c", &confirm_full_inst);
-    	    if (confirm_full_inst == 'Y' || confirm_full_inst == 'y')
+	    do
 	    {
-    		full_inst_noconfirm(ARCHIVE);
+		printf(ANSI_RED BOLD_S"\nWARNING\n"STYLE_END BOLD_S"This will install every config.\n"STYLE_END);
+		printf(ITALICS_S"\nIn order to pick the configs you want, you need to use the custom configuration option\n"STYLE_END);
+		
+    	    	printf("\nProceed with installation (Y/n)\n");	// prompt user for imput
+    	    	fflush(stdin);
+    	    	scanf(" %c", &confirm_full_inst);
+    	    	if (confirm_full_inst == 'Y' || confirm_full_inst == 'y')
+	    	{
+    	    	    full_inst_noconfirm(ARCHIVE);
+	    	}
 	    }
+	    while (ARCHIVE == 'Y' || ARCHIVE == 'y');
     	}
     	else if (menu_one_i == 2)
     	{
@@ -101,7 +107,18 @@ int main()
 		{
 		    //do stuff
 		    printf(BOLD_S"\nFixing dotfiles...\n"STYLE_END);
-		    return 0;
+
+		    char BTOP(char ARCHIVE);
+		    char CAVA(char ARCHIVE);
+		    char FAST(char ARCHIVE);
+		    char FUZZ(char ARCHIVE);
+		    char GTKL(char ARCHIVE);
+		    char HYPR(char ARCHIVE);
+		    char KITT(char ARCHIVE);
+		    char NVIM(char ARCHIVE);
+		    char WAYB(char ARCHIVE);
+
+		    printf(BOLD_S"\nInstall completed!...\n"STYLE_END);
 		}
 		else if ( fix_install_menu == 2)
 		{
@@ -135,6 +152,7 @@ int main()
 	    	scanf("%d", &update_config_menu);
 	    	if (update_config_menu == 1)
 	    	{
+		    // fix install
 	    	    return 0;
 	    	}
 	    	else if (update_config_menu == 2)
@@ -144,7 +162,7 @@ int main()
 	    	}
 	    	else if (update_config_menu == 0)
 	    	{
-
+		    // exit I guess?? idk what im doing
 		}
 	    	else
 	    	{
@@ -170,8 +188,11 @@ int main()
     		    printf(BOLD_S " [0] " STYLE_END "%s\n", opt_exit_text);
     		    fflush(stdin);
     		    scanf(" %d", &dotfiles_config_menu);
-    		    
-    		    if (dotfiles_config_menu == 2)
+		    if (dotfiles_config_menu == 1)
+		    {
+			printf(BOLD_S "\n Option not available \n" STYLE_END);
+		    }
+		    else if (dotfiles_config_menu == 2)
     		    {
     		    	int kitty_config_choice;
     		    	do
