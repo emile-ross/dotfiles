@@ -65,7 +65,7 @@ int main()
     
     	if (menu_one_i == 1)
     	{
-	    char confirm_full_inst;
+	    char full_install_opt;
 	    clear();
     	    printf(BOLD_S "%s\n"STYLE_END, opt_one_text );
     	    printf("\nDo you want to backup your old dotfiles before proceeding? (Y/n)\n");
@@ -75,8 +75,8 @@ int main()
 	    printf(ITALICS_S"\nIn order to pick the configs you want, you need to use the custom configuration option\n"STYLE_END);
 	    
     	    printf("\nProceed with installation (Y/n)\n");	// prompt user for imput
-    	    scanf(" %c", &confirm_full_inst);
-    	    if (confirm_full_inst == 'Y' || confirm_full_inst == 'y')
+    	    scanf(" %c", &full_install_opt);
+    	    if (full_install_opt == 'Y' || full_install_opt == 'y')
 	    {
 		full_install(ARCHIVE, full_install_opt);
 	    }
@@ -84,6 +84,7 @@ int main()
     	else if (menu_one_i == 2)
     	{
 	    int fix_install_menu;
+	    int after_install;
 	    do
 	    {
 		while (getchar() != '\n'); // clear imput buffer
@@ -113,7 +114,14 @@ int main()
 		    NVIM(ARCHIVE);
 		    SWAY(ARCHIVE);
 		    WAYB(ARCHIVE);
+
 		    printf(BOLD_S"\nInstall completed!...\n"STYLE_END);
+		    scanf(" %d", &after_install);
+		    if (after_install == 0)
+		    {
+			return 0;
+		    } 
+		    // in other cases we just go back to the previous menu
 		}
 	    }
 	    while(fix_install_menu != 0);
