@@ -17,7 +17,6 @@ void clear()
 {
     printf("\033[2J\033[H");
 }
-
 char ARCHIVE;
 char confirm_full_inst;
 float pver = 0.0f; // the user is presumed to be installing the dotfiles
@@ -39,6 +38,7 @@ float* update();
 int main()
 {
     int menu_one_i;
+    int max_opt_n = 10;
     do
     {
     	clear();
@@ -91,19 +91,29 @@ int main()
 		printf(ANSI_GREY"\nDetected Version: %.2f\n"STYLE_END, *version);
 		printf(UDRL_S"Are you sure you want to fix your dotfiles?\n"STYLE_END);
 		printf(BOLD_S"\n[1]"STYLE_END" %s", opt_two_text);
-		printf(BOLD_S"[0]"STYLE_END" %s\n", opt_exit_text);
+		printf(BOLD_S"\n[0]"STYLE_END" %s\n", opt_exit_text);
+
 		scanf("%d", &fix_install_menu);
+
+		while (getchar() != '\n'); // Clear leftover characters from input buffer
+
 		if ( fix_install_menu == 1)
 		{
 		    //do stuff
+		    printf(BOLD_S"\nFixing dotfiles...\n"STYLE_END);
+		    return 0;
+		}
+		else if ( fix_install_menu == 2)
+		{
+
 		    return 0;
 		}
 		else
 		{
-		    break;
+		    return 0;
 		}
 	    }
-	    while(fix_install_menu != 0);
+	    while(fix_install_menu > 0 || fix_install_menu < max_opt_n);
     	}
     	else if (menu_one_i == 3)
     	{
@@ -245,20 +255,26 @@ int main()
 	    	    printf("You can use a command like \""UDRL_S"activate-linux -t Activate\\ Arch-Linux -m Go\\ to\\ archlinux.org/donate/\\ to\\ activate"STYLE_END"\" \n");
 	    	    printf("These flags allow you to add a custom message or title\n");
 		}
+		else if (menu_activate_linux == 0)
+		{
+		}
+		else
+		{
+		    return 0;
+		}
 		
 	    }
 	    while(menu_activate_linux != 0.0);
     	}
-    	else if (menu_one_i == '0')
+    	else if (menu_one_i == 0)
     	{
-    		clear();
     		printf("\nExiting..\n");
     		//printf("\n");
     		return 0;
     	}
     	else
     	{
-    	    printf("\nExiting..\n");
+    	    printf("\nExiting.. (invalid character)\n");
     	    return 1; // error code 1
     	}
     }
