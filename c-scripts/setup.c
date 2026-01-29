@@ -39,7 +39,7 @@ float* update();
 int main()
 {
     int menu_one_i;
-    int max_opt_n = 10;
+    //int max_opt_n = 10;
     do
     {
     	clear();
@@ -51,7 +51,6 @@ int main()
     	char opt_for_text[128] = "Custom configuration menu";
     	char opt_fiv_text[128] = "Something else";
     	char opt_exit_text[128] = "Exit";
-    
     
     	printf(BOLD_S ANSI_CYAN "%s\n" STYLE_END, main_menu_text );
     	printf(BOLD_S "\n [1] " STYLE_END "%s\n", opt_one_text);
@@ -69,26 +68,22 @@ int main()
     	    printf("\nDo you want to backup your old dotfiles before proceeding? (Y/n)\n");
 
     	    scanf(" %c", &ARCHIVE);
-	    do
+	    printf(ANSI_RED BOLD_S"\nWARNING\n"STYLE_END BOLD_S"This will install every config.\n"STYLE_END);
+	    printf(ITALICS_S"\nIn order to pick the configs you want, you need to use the custom configuration option\n"STYLE_END);
+	    
+    	    printf("\nProceed with installation (Y/n)\n");	// prompt user for imput
+    	    scanf(" %c", &confirm_full_inst);
+    	    if (confirm_full_inst == 'Y' || confirm_full_inst == 'y')
 	    {
-		printf(ANSI_RED BOLD_S"\nWARNING\n"STYLE_END BOLD_S"This will install every config.\n"STYLE_END);
-		printf(ITALICS_S"\nIn order to pick the configs you want, you need to use the custom configuration option\n"STYLE_END);
-		
-    	    	printf("\nProceed with installation (Y/n)\n");	// prompt user for imput
-    	    	fflush(stdin);
-    	    	scanf(" %c", &confirm_full_inst);
-    	    	if (confirm_full_inst == 'Y' || confirm_full_inst == 'y')
-	    	{
-    	    	    full_inst_noconfirm(ARCHIVE);
-	    	}
+    	        full_inst_noconfirm(ARCHIVE);
 	    }
-	    while (ARCHIVE == 'Y' || ARCHIVE == 'y');
     	}
     	else if (menu_one_i == 2)
     	{
 	    int fix_install_menu;
 	    do
 	    {
+		while (getchar() != '\n'); // clear imput buffer
 		float *version = update();
 
     		clear();
@@ -101,14 +96,9 @@ int main()
 		printf(BOLD_S"\n[0]"STYLE_END" %s\n", opt_exit_text);
 
 		scanf("%d", &fix_install_menu);
-
-		while (getchar() != '\n'); // Clear leftover characters from input buffer
-
 		if ( fix_install_menu == 1)
 		{
-		    //do stuff
 		    printf(BOLD_S"\nFixing dotfiles...\n"STYLE_END);
-
 		    char BTOP(char ARCHIVE);
 		    char CAVA(char ARCHIVE);
 		    char FAST(char ARCHIVE);
@@ -117,21 +107,12 @@ int main()
 		    char HYPR(char ARCHIVE);
 		    char KITT(char ARCHIVE);
 		    char NVIM(char ARCHIVE);
+		    char SWAY(char ARCHIVE);
 		    char WAYB(char ARCHIVE);
-
 		    printf(BOLD_S"\nInstall completed!...\n"STYLE_END);
 		}
-		else if ( fix_install_menu == 2)
-		{
-
-		    return 0;
-		}
-		else
-		{
-		    return 0;
-		}
 	    }
-	    while(fix_install_menu > 0 || fix_install_menu < max_opt_n);
+	    while(fix_install_menu != 0);
     	}
     	else if (menu_one_i == 3)
     	{
@@ -150,29 +131,18 @@ int main()
     	    	printf(BOLD_S "\n [1] " STYLE_END "%s\n", update_opt_text);
     	    	printf(BOLD_S " [2] " STYLE_END "%s\n", updatecheck_opt_text);
     	    	printf(BOLD_S " [0] " STYLE_END "%s\n", opt_exit_text);
+		while (getchar() != '\n');  // clear imput buffer 
 	    	scanf("%d", &update_config_menu);
 	    	if (update_config_menu == 1)
 	    	{
 		    // fix install
-	    	    return 0;
 	    	}
-	    	else if (update_config_menu == 2)
+	    	if (update_config_menu == 2)
 	    	{
 	    	    //update
-	    	    return 0;
-	    	}
-	    	else if (update_config_menu == 0)
-	    	{
-		    // exit I guess?? idk what im doing
-		}
-	    	else
-	    	{
-		    // invalid character 
-		    return 0;
 	    	}
 	    }
-	    while(update_config_menu > 0);
-	     
+	    while(update_config_menu != 0);
     	}
     	else if (menu_one_i == 4)
     	{
@@ -187,13 +157,13 @@ int main()
     		    printf(BOLD_S "\n [1] " STYLE_END "%s\n", hypr_config_menu_text);
     		    printf(BOLD_S " [2] " STYLE_END "%s\n", kitty_config_menu_text);
     		    printf(BOLD_S " [0] " STYLE_END "%s\n", opt_exit_text);
-    		    fflush(stdin);
+		    while (getchar() != '\n');  // clear imput buffer 
     		    scanf(" %d", &dotfiles_config_menu);
 		    if (dotfiles_config_menu == 1)
 		    {
 			printf(BOLD_S "\n Option not available \n" STYLE_END);
 		    }
-		    else if (dotfiles_config_menu == 2)
+		    if (dotfiles_config_menu == 2)
     		    {
     		    	int kitty_config_choice;
     		    	do
@@ -206,20 +176,17 @@ int main()
     		    	    printf(BOLD_S " [1] " STYLE_END "%s\n", kitty_color_text);
     		    	    printf(BOLD_S " [2] " STYLE_END "%s\n", kitty_fonts_text);
     		    	    printf(BOLD_S " [0] " STYLE_END "%s\n", opt_exit_text);
+			    while (getchar() != '\n');  // clear imput buffer 
+
     		    	    scanf("\n%d", &kitty_config_choice);
-    		    	    fflush(stdin);
-    		    	    if (kitty_config_choice == 0)
-    		    	    {
-    		    	    	break;
-    		    	    }
-    		    	    else if (kitty_config_choice == 1)
+    		    	    if (kitty_config_choice == 1)
     		    	    {
     		    	    	char cmd[24];
     		    	    	snprintf(cmd, sizeof(cmd),
 					"kitten themes");
     		    	    	system(cmd);
     		    	    }
-    		    	    else if (kitty_config_choice == 2)
+    		    	    if (kitty_config_choice == 2)
     		    	    {
     		    	    	char cmd[24];
     		    	    	snprintf(cmd, sizeof(cmd),
@@ -228,22 +195,9 @@ int main()
     
     		    	    	printf("\nThe install script can be used to install more fonts.");
     		    	    }
-    		    	    else 
-    		    	    {
-    		    	    	// typo? perhaps?
-    		    	    	clear();
-    		    	    	fflush(stdin);
-				return 0;
-    		    	    	break;
-    		    	    }
     		    	}
     		    	while(kitty_config_choice != 0.0);
     		    	// exits the while loop when the user types 0
-    		    }
-    		    else
-    		    {
-    		    	clear();
-    		    	fflush(stdin);
     		    }
     		} 
     		while(dotfiles_config_menu != 0.0);
@@ -254,6 +208,7 @@ int main()
 	    int menu_activate_linux;
 	    do
 	    {
+		while (getchar() != '\n');  // clear imput buffer 
 		clear();
     	    	printf(BOLD_S "%s\n"STYLE_END, opt_fiv_text );
 		
@@ -277,21 +232,12 @@ int main()
 	    	    printf("You can use a command like \""UDRL_S"activate-linux -t Activate\\ Arch-Linux -m Go\\ to\\ archlinux.org/donate/\\ to\\ activate"STYLE_END"\" \n");
 	    	    printf("These flags allow you to add a custom message or title\n");
 		}
-		else if (menu_activate_linux == 0)
-		{
-		}
-		else
-		{
-		    return 0;
-		}
-		
 	    }
 	    while(menu_activate_linux != 0.0);
     	}
     	else if (menu_one_i == 0)
     	{
     		printf("\nExiting..\n");
-    		//printf("\n");
     		return 0;
     	}
     	else
@@ -300,8 +246,7 @@ int main()
     	    return 1; // error code 1
     	}
     }
-    while(menu_one_i != 0);
-    // exits the while loop when the user types 0
+    while(menu_one_i != 0);	// exits the while loop when the user types 0
     return 0;
 }
 
@@ -366,13 +311,13 @@ char FAST(char ARCHIVE)
     {
     	// backup fastfetch config
     	snprintf(cmd, sizeof(cmd),
-		"mkdir -p ~/.config/fastfetch && "
 		"mv ~/.config/fastfetch/config.jsonc "
 		"~/.config/fastfetch/config-oldv%.1f.jsonc", pver);
     	system(cmd);
     }
     // export fastfetch config
     snprintf(cmd, sizeof(cmd),
+	    "mkdir -p ~/.config/fastfetch && "
 	    "cp dotfiles/fastfetch/config.jsonc "
 	    "~/.config/fastfetch");
     system(cmd);
@@ -425,7 +370,6 @@ char HYPR(char ARCHIVE)
 	{
 		// archive hyprland configs
                 snprintf(cmd, sizeof(cmd),
-			"mkdir -p ~/.config/hypr && "
                 	"mv ~/.config/hypr/hyprland.conf ~/.config/hypr/hyprland-oldv%.1f.conf && "
                 	"mv ~/.config/hypr/hyprpaper.conf ~/.config/hypr/hyprpaper-oldv%.1f.conf && "
                 	"mv ~/.config/hypr/hypridle.conf ~/.config/hypr/hypridle-oldv%.1f.conf",
@@ -434,6 +378,7 @@ char HYPR(char ARCHIVE)
 	}
 	// export hyprland configs
         snprintf(cmd, sizeof(cmd),
+		"mkdir -p ~/.config/hypr && "
 		"cp -f dotfiles/hypr/hyprland.conf ~/.config/hypr && "
 		"cp -f dotfiles/hypr/hypridle.conf ~/.config/hypr && "
 		"cp -f dotfiles/hypr/hyprpaper.conf ~/.config/hypr");
@@ -466,7 +411,6 @@ char NVIM(char ARCHIVE)
     if (ARCHIVE == 'Y' || ARCHIVE == 'y')
     {
         snprintf(cmd, sizeof(cmd),
-		"mkdir -p ~/.config/nvim && "
     	    	"mv ~/.config/nvim/init.lua ~/.config/nvim/init-oldv%.1f.lua && "
     	    	"mv ~/.config/nvim/lua/config/lazy.lua ~/.config/nvim/lua/config/lazy-oldv%.1f.lua && "
     	    	"mv ~/.config/nvim/lazy-lock.json ~/.config/nvim/lazy-lock-oldv%.1f.json",
@@ -477,8 +421,6 @@ char NVIM(char ARCHIVE)
     snprintf(cmd, sizeof(cmd),
 	    "mkdir -p ~/.config/nvim && "
     	    "cp -f dotfiles/nvim/init.lua ~/.config/nvim");
-    	    //" cp -rf lua ~/.config/nvim && "
-    	    //"cp -f lazy-lock.json ~/.config/nvim");
     system(cmd);
     return 0;
 }
@@ -486,13 +428,11 @@ char NVIM(char ARCHIVE)
 char SWAY(char ARCHIVE)
 {
     // sway window manager doesn't work without wlroots
-    //
     char cmd[128];
     if (ARCHIVE == 'Y' || ARCHIVE == 'y')
     {
         snprintf(cmd, sizeof(cmd),
-		"mkdir -p ~/.config/sway && "
-    	    	"mv ~/.config/sway/config ~/.config/sway/config-oldv%.1f && ",
+    	    	"mv ~/.config/sway/config ~/.config/sway/config-oldv%.1f ",
 		pver);
         system(cmd);
     }
@@ -501,7 +441,6 @@ char SWAY(char ARCHIVE)
 	    "mkdir -p ~/.config/sway && "
     	    "cp -f dotfiles/sway/config ~/.config/sway");
     system(cmd);
-    
     return 0;
 }
 
@@ -512,7 +451,6 @@ char WAYB(char ARCHIVE)
     {
     	// archive waybar
         snprintf(cmd, sizeof(cmd),
-		"mkdir -p ~/.config/waybar && "
 		"mv ~/.config/waybar/config.jsonc ~/.config/waybar/config-oldv%.1f.jsonc && "
 		"mv ~/.config/waybar/style.css ~/.config/waybar/style-oldv%.1f.css",
         pver, pver);
@@ -577,7 +515,6 @@ float* update()
             return VAWSM;
         }
     }
-
     fclose(file);
     return 0;
 }
