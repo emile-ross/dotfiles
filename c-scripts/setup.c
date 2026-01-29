@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 
 #define BOLD_S  	"\e[1m" // defines BOLD_S as a keyword to make text bold
 #define UDRL_S  	"\e[4m" // UDRL_S starts an underline style
@@ -78,7 +79,7 @@ int main()
     	    scanf(" %c", &full_install_opt);
     	    if (full_install_opt == 'Y' || full_install_opt == 'y')
 	    {
-		full_install(ARCHIVE, full_install_opt);
+		full_install(ARCHIVE, 'y');
 	    }
     	}
     	else if (menu_one_i == 2)
@@ -266,33 +267,32 @@ void BASH(char ARCHIVE)
 {
     char BRCNAME[12] = ".bashrc-new";
     // prompt to let the user know the bashrc isn't exported/replaced
-    printf("\nThe .bashrc file plays a very important role therefore, it was not replaced.");
-    printf("\nYou can find the new .bashrc file under the name %s\n", BRCNAME);
+    printf(UDRL_S"\nThe .bashrc file plays a very important role therefore, it was not replaced."STYLE_END);
+    printf(UDRL_S"\nYou can find the new .bashrc file under the name %s\n"STYLE_END, BRCNAME);
 
-    char cmd[128];
+    char cmd[64]; // BRCNAME has to be considered
     // export .bashrc
     snprintf(cmd, sizeof(cmd),
-	    "mv dotfiles/.bashrc dotfiles/%s && "
-	    "cp -f dotfiles/.bashrc ~", BRCNAME);
+	    "cp -f dotfiles/.bashrc ~/%s", BRCNAME);
     system(cmd);
 
 }
 
 void BTOP(char ARCHIVE)
 {
-	char cmd[256];
+	char cmd[128];
         if (ARCHIVE == 'Y' || ARCHIVE == 'y')
 	{
 		// archive btop config
 		snprintf(cmd, sizeof(cmd),
-			"mv ~/.config/btop/config.jsonc "
-			"~/.config/btop/config-oldv%.1f.jsonc", pver);
+			"mv ~/.config/btop/btop.conf "
+			"~/.config/btop/btop-oldv%.2f.conf", pver);
         	system(cmd);
 	}
         // export btop config
         snprintf(cmd, sizeof(cmd),
 		"mkdir -p ~/.config/btop && "
-		"cp -f dotfiles/btop/config.jsonc ~/.config/btop");
+		"cp -f dotfiles/btop/btop.conf ~/.config/btop");
         system(cmd);
 }
 
@@ -453,8 +453,8 @@ void WAYB(char ARCHIVE)
     {
     	// archive waybar
         snprintf(cmd, sizeof(cmd),
-		"mv ~/.config/waybar/config.jsonc ~/.config/waybar/config-oldv%.1f.jsonc && "
-		"mv ~/.config/waybar/style.css ~/.config/waybar/style-oldv%.1f.css",
+		"mv ~/.config/waybar/config.jsonc ~/.config/waybar/config-oldv%.2f.jsonc && "
+		"mv ~/.config/waybar/style.css ~/.config/waybar/style-oldv%.2f.css",
 		pver, pver);
 	system(cmd);
     }
@@ -463,7 +463,7 @@ void WAYB(char ARCHIVE)
 	    //"yay -S --noconfirm waybar && "
 	    "mkdir -p ~/.config/waybar && "
 	    "cp -f dotfiles/waybar/style.css ~/.config/waybar && "
-            "cp -f dotfiles/waybar/config.jsonc ~/.config/waybar && ");
+            "cp -f dotfiles/waybar/config.jsonc ~/.config/waybar");
     system(cmd);
 }
 
@@ -473,17 +473,17 @@ void full_install(char ARCHIVE, char full_install_opt)
     {
 	printf(BOLD_S"\nInstalling every configuration\n"STYLE_END);
 
-	void BASH(char ARCHIVE);
-	void SWAY(char ARCHIVE);
-	void BTOP(char ARCHIVE);
-	void CAVA(char ARCHIVE);
-	void FAST(char ARCHIVE);
-	void FUZZ(char ARCHIVE);
-	void GTKL(char ARCHIVE);
-	void HYPR(char ARCHIVE);
-	void KITT(char ARCHIVE);
-	void NVIM(char ARCHIVE);
-	void WAYB(char ARCHIVE);
+	BASH(ARCHIVE);
+	SWAY(ARCHIVE);
+	BTOP(ARCHIVE);
+	CAVA(ARCHIVE);
+	FAST(ARCHIVE);
+	FUZZ(ARCHIVE);
+	GTKL(ARCHIVE);
+	HYPR(ARCHIVE);
+	KITT(ARCHIVE);
+	NVIM(ARCHIVE);
+	WAYB(ARCHIVE);
     }
     else
     {
@@ -502,6 +502,8 @@ void full_install(char ARCHIVE, char full_install_opt)
     	//     void WAYB(char ARCHIVE);
     	// printf("\nInstalling dotfiles...\n");
     }
+    printf(BOLD_S"\nInstallation completed!\n"STYLE_END);
+
 }
 
 float* update() 
