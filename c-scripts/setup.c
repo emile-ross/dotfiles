@@ -21,7 +21,8 @@ char ARCHIVE;
 char confirm_full_inst;
 float pver = 0.0f; // the user is presumed to be installing the dotfiles
 
-char BASH();
+char BASH(char ARCHIVE);
+char SWAY(char ARCHIVE);
 char BTOP(char ARCHIVE);
 char CAVA(char ARCHIVE);
 char FAST(char ARCHIVE);
@@ -304,7 +305,7 @@ int main()
     return 0;
 }
 
-char BASH()
+char BASH(char ARCHIVE)
 {
     char BRCNAME[12] = ".bashrc-new";
     // prompt to let the user know the bashrc isn't exported/replaced
@@ -481,6 +482,29 @@ char NVIM(char ARCHIVE)
     system(cmd);
     return 0;
 }
+
+char SWAY(char ARCHIVE)
+{
+    // sway window manager doesn't work without wlroots
+    //
+    char cmd[128];
+    if (ARCHIVE == 'Y' || ARCHIVE == 'y')
+    {
+        snprintf(cmd, sizeof(cmd),
+		"mkdir -p ~/.config/sway && "
+    	    	"mv ~/.config/sway/config ~/.config/sway/config-oldv%.1f && ",
+		pver);
+        system(cmd);
+    }
+    // export sway config
+    snprintf(cmd, sizeof(cmd),
+	    "mkdir -p ~/.config/sway && "
+    	    "cp -f dotfiles/sway/config ~/.config/sway");
+    system(cmd);
+    
+    return 0;
+}
+
 char WAYB(char ARCHIVE)
 {
     char cmd[256];
