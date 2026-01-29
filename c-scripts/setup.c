@@ -18,9 +18,11 @@ void clear()
     printf("\033[2J\033[H");
 }
 char ARCHIVE;
-char confirm_full_inst;
+
+char full_install_opt; // if the user wants to install everything set to Y
 float pver = 0.0f; // the user is presumed to be installing the dotfiles
 
+// plans for adding char inst_pkgs in every configuration function below
 void BASH(char ARCHIVE);
 void SWAY(char ARCHIVE);
 void BTOP(char ARCHIVE);
@@ -33,7 +35,7 @@ void KITT(char ARCHIVE);
 void NVIM(char ARCHIVE);
 void WAYB(char ARCHIVE);
 
-void full_inst_noconfirm(char ARCHIVE);
+void full_install(char ARCHIVE, char full_install_opt);
 float* update();
 
 int main()
@@ -63,6 +65,7 @@ int main()
     
     	if (menu_one_i == 1)
     	{
+	    char confirm_full_inst;
 	    clear();
     	    printf(BOLD_S "%s\n"STYLE_END, opt_one_text );
     	    printf("\nDo you want to backup your old dotfiles before proceeding? (Y/n)\n");
@@ -75,7 +78,7 @@ int main()
     	    scanf(" %c", &confirm_full_inst);
     	    if (confirm_full_inst == 'Y' || confirm_full_inst == 'y')
 	    {
-    	        full_inst_noconfirm(ARCHIVE);
+		full_install(ARCHIVE, full_install_opt);
 	    }
     	}
     	else if (menu_one_i == 2)
@@ -99,16 +102,17 @@ int main()
 		if ( fix_install_menu == 1)
 		{
 		    printf(BOLD_S"\nFixing dotfiles...\n"STYLE_END);
-		    void BTOP(char ARCHIVE);
-		    void CAVA(char ARCHIVE);
-		    void FAST(char ARCHIVE);
-		    void FUZZ(char ARCHIVE);
-		    void GTKL(char ARCHIVE);
-		    void HYPR(char ARCHIVE);
-		    void KITT(char ARCHIVE);
-		    void NVIM(char ARCHIVE);
-		    void SWAY(char ARCHIVE);
-		    void WAYB(char ARCHIVE);
+		    // call install functions for every config
+		    BTOP(ARCHIVE);
+		    CAVA(ARCHIVE);
+		    FAST(ARCHIVE);
+		    FUZZ(ARCHIVE);
+		    GTKL(ARCHIVE);
+		    HYPR(ARCHIVE);
+		    KITT(ARCHIVE);
+		    NVIM(ARCHIVE);
+		    SWAY(ARCHIVE);
+		    WAYB(ARCHIVE);
 		    printf(BOLD_S"\nInstall completed!...\n"STYLE_END);
 		}
 	    }
@@ -346,7 +350,8 @@ void GTKL(char ARCHIVE)
 		// backup gtklock config
 	    	snprintf(cmd, sizeof(cmd),
                 	"mv ~/.config/gtklock/style.css "
-			"~/.config/gtklock/style-oldv%.1f.css", pver);
+			"~/.config/gtklock/style-oldv%.1f.css", 
+			pver);
 		system(cmd);
 	}
 	// export gtklock config
@@ -364,10 +369,9 @@ void HYPR(char ARCHIVE)
 	{
 		// archive hyprland configs
                 snprintf(cmd, sizeof(cmd),
-                	"mv ~/.config/hypr/hyprland.conf ~/.config/hypr/hyprland-oldv%.1f.conf && "
-                	"mv ~/.config/hypr/hyprpaper.conf ~/.config/hypr/hyprpaper-oldv%.1f.conf && "
-                	"mv ~/.config/hypr/hypridle.conf ~/.config/hypr/hypridle-oldv%.1f.conf",
-                pver, pver, pver);
+                	"mv ~/.config/hypr/hyprland.conf ~/.config/hypr/hyprland-oldv%.2f.conf && "
+                	"mv ~/.config/hypr/hyprpaper.conf ~/.config/hypr/hyprpaper-oldv%.2f.conf && "
+                	"mv ~/.config/hypr/hypridle.conf ~/.config/hypr/hypridle-oldv%.2f.conf", pver, pver, pver);
                 system(cmd);
 	}
 	// export hyprland configs
@@ -443,20 +447,23 @@ void WAYB(char ARCHIVE)
         snprintf(cmd, sizeof(cmd),
 		"mv ~/.config/waybar/config.jsonc ~/.config/waybar/config-oldv%.1f.jsonc && "
 		"mv ~/.config/waybar/style.css ~/.config/waybar/style-oldv%.1f.css",
-        pver, pver);
+		pver, pver);
+	system(cmd);
     }
     // export waybar config and appearance
     snprintf(cmd, sizeof(cmd),
-	    "yay -S --noconfirm waybar && "
+	    //"yay -S --noconfirm waybar && "
 	    "mkdir -p ~/.config/waybar && "
 	    "cp -f dotfiles/waybar/style.css ~/.config/waybar && "
             "cp -f dotfiles/waybar/config.jsonc ~/.config/waybar && ");
     system(cmd);
 }
 
-void full_inst_noconfirm(char ARCHIVE)
+void full_install(char ARCHIVE, char full_install_opt)
 {
-    printf("\nInstalling dotfiles...\n");
+    if (full_install_opt == 'Y' || full_install_opt == 'y')
+    {
+	printf(BOLD_S"\nInstalling every configuration\n"STYLE_END);
 
 	void BASH(char ARCHIVE);
 	void SWAY(char ARCHIVE);
@@ -469,7 +476,24 @@ void full_inst_noconfirm(char ARCHIVE)
 	void KITT(char ARCHIVE);
 	void NVIM(char ARCHIVE);
 	void WAYB(char ARCHIVE);
-    printf("\nInstalling dotfiles...\n");
+    }
+    else
+    {
+	// // this is completely useless at the moment
+	// printf("\nInstalling dotfiles...\n");
+    	//     void BASH(char ARCHIVE);
+    	//     void SWAY(char ARCHIVE);
+    	//     void BTOP(char ARCHIVE);
+    	//     void CAVA(char ARCHIVE);
+    	//     void FAST(char ARCHIVE);
+    	//     void FUZZ(char ARCHIVE);
+    	//     void GTKL(char ARCHIVE);
+    	//     void HYPR(char ARCHIVE);
+    	//     void KITT(char ARCHIVE);
+    	//     void NVIM(char ARCHIVE);
+    	//     void WAYB(char ARCHIVE);
+    	// printf("\nInstalling dotfiles...\n");
+    }
 }
 
 float* update() 
