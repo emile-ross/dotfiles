@@ -24,17 +24,17 @@ char full_install_opt; // if the user wants to install everything set to Y
 float pver = 0.0f; // the user is presumed to be installing the dotfiles
 
 // plans for adding char inst_pkgs in every configuration function below
-void BASH(char ARCHIVE);
-void SWAY(char ARCHIVE);
-void BTOP(char ARCHIVE);
-void CAVA(char ARCHIVE);
-void FAST(char ARCHIVE);
-void FUZZ(char ARCHIVE);
-void GTKL(char ARCHIVE);
-void HYPR(char ARCHIVE);
-void KITT(char ARCHIVE);
-void NVIM(char ARCHIVE);
-void WAYB(char ARCHIVE);
+void BASH(char ARCHIVE, float pver);
+void SWAY(char ARCHIVE, float pver);
+void BTOP(char ARCHIVE, float pver);
+void CAVA(char ARCHIVE, float pver);
+void FAST(char ARCHIVE, float pver);
+void FUZZ(char ARCHIVE, float pver);
+void GTKL(char ARCHIVE, float pver);
+void HYPR(char ARCHIVE, float pver);
+void KITT(char ARCHIVE, float pver);
+void NVIM(char ARCHIVE, float pver);
+void WAYB(char ARCHIVE, float pver);
 
 void full_install(char ARCHIVE, char full_install_opt);
 float* update();
@@ -105,16 +105,16 @@ int main()
 		{
 		    printf(BOLD_S"\nFixing dotfiles...\n"STYLE_END);
 		    // call install functions for every config
-		    BTOP(ARCHIVE);
-		    CAVA(ARCHIVE);
-		    FAST(ARCHIVE);
-		    FUZZ(ARCHIVE);
-		    GTKL(ARCHIVE);
-		    HYPR(ARCHIVE);
-		    KITT(ARCHIVE);
-		    NVIM(ARCHIVE);
-		    SWAY(ARCHIVE);
-		    WAYB(ARCHIVE);
+		    BTOP(ARCHIVE, pver);
+		    CAVA(ARCHIVE, pver);
+		    FAST(ARCHIVE, pver);
+		    FUZZ(ARCHIVE, pver);
+		    GTKL(ARCHIVE, pver);
+		    HYPR(ARCHIVE, pver);
+		    KITT(ARCHIVE, pver);
+		    NVIM(ARCHIVE, pver);
+		    SWAY(ARCHIVE, pver);
+		    WAYB(ARCHIVE, pver);
 
 		    printf(BOLD_S"\nInstall completed!...\n"STYLE_END);
 		    scanf(" %d", &after_install);
@@ -263,7 +263,7 @@ int main()
     return 0;
 }
 
-void BASH(char ARCHIVE)
+void BASH(char ARCHIVE, float pver)
 {
     char BRCNAME[12] = ".bashrc-new";
     // prompt to let the user know the bashrc isn't exported/replaced
@@ -278,7 +278,7 @@ void BASH(char ARCHIVE)
 
 }
 
-void BTOP(char ARCHIVE)
+void BTOP(char ARCHIVE, float pver)
 {
 	char cmd[128];
         if (ARCHIVE == 'Y' || ARCHIVE == 'y')
@@ -296,7 +296,7 @@ void BTOP(char ARCHIVE)
         system(cmd);
 }
 
-void CAVA(char ARCHIVE)
+void CAVA(char ARCHIVE, float pver)
 {
 	char cmd[128];
         if (ARCHIVE == 'Y' || ARCHIVE == 'y')
@@ -313,25 +313,28 @@ void CAVA(char ARCHIVE)
         	"cp -f dotfiles/cava/config ~/.config/cava/ && ");
         system(cmd);
 }
-void FAST(char ARCHIVE)
+void FAST(char ARCHIVE, float pver)
 {
-    char cmd[256];
+    char cmd[512];
     if (ARCHIVE == 'Y' || ARCHIVE == 'y')
     {
     	// backup fastfetch config
-    	snprintf(cmd, sizeof(cmd),
+    	snprintf(cmd, 96,
 		"mv ~/.config/fastfetch/config.jsonc "
-		"~/.config/fastfetch/config-oldv%.1f.jsonc", pver);
+		"~/.config/fastfetch/config-oldv%.2f.jsonc", pver);
     	system(cmd);
     }
     // export fastfetch config
     snprintf(cmd, sizeof(cmd),
-	    "mkdir -p ~/.config/fastfetch && "
-	    "cp dotfiles/fastfetch/config.jsonc "
-	    "~/.config/fastfetch");
+	    "rm ~/.config/fastfetch && "
+	    "mkdir -p ~/.config/fastfetch/assets && "
+	    "cp -f dotfiles/fastfetch/assets/*.png ~/.config/fastfetch/assets && "
+	    "cp -f dotfiles/fastfetch/config.jsonc ~/.config/fastfetch && "
+	    "cp -f dotfiles/fastfetch/config-other.jsonc ~/.config/fastfetch && "
+	    "cp -f dotfiles/fastfetch/config-(default).jsonc ~/.config/fastfetch");
     system(cmd);
 }
-void FUZZ(char ARCHIVE)
+void FUZZ(char ARCHIVE, float pver)
 {
     char cmd[256];
     if (ARCHIVE == 'Y' || ARCHIVE == 'y')
@@ -350,7 +353,7 @@ void FUZZ(char ARCHIVE)
 	    "~/.config/fuzzel");
     system(cmd);  		
 }
-void GTKL(char ARCHIVE)
+void GTKL(char ARCHIVE, float pver)
 {
 	char cmd[256];
         if (ARCHIVE == 'Y' || ARCHIVE == 'y')
@@ -370,27 +373,27 @@ void GTKL(char ARCHIVE)
         system(cmd);
 }
 
-void HYPR(char ARCHIVE)
+void HYPR(char ARCHIVE, float pver)
 {
-	char cmd[256];
-        if (ARCHIVE == 'Y' || ARCHIVE == 'y')
-	{
-		// archive hyprland configs
-                snprintf(cmd, sizeof(cmd),
-                	"mv ~/.config/hypr/hyprland.conf ~/.config/hypr/hyprland-oldv%.2f.conf && "
-                	"mv ~/.config/hypr/hyprpaper.conf ~/.config/hypr/hyprpaper-oldv%.2f.conf && "
-                	"mv ~/.config/hypr/hypridle.conf ~/.config/hypr/hypridle-oldv%.2f.conf", pver, pver, pver);
-                system(cmd);
-	}
-	// export hyprland configs
+    char cmd[256];
+    if (ARCHIVE == 'Y' || ARCHIVE == 'y')
+    {
+    	// archive hyprland configs
         snprintf(cmd, sizeof(cmd),
-		"mkdir -p ~/.config/hypr && "
-		"cp -f dotfiles/hypr/hyprland.conf ~/.config/hypr && "
-		"cp -f dotfiles/hypr/hypridle.conf ~/.config/hypr && "
-		"cp -f dotfiles/hypr/hyprpaper.conf ~/.config/hypr");
+		"mv ~/.config/hypr/hyprland.conf ~/.config/hypr/hyprland-oldv%.2f.conf && "
+        	"mv ~/.config/hypr/hyprpaper.conf ~/.config/hypr/hyprpaper-oldv%.2f.conf && "
+        	"mv ~/.config/hypr/hypridle.conf ~/.config/hypr/hypridle-oldv%.2f.conf", pver, pver, pver);
         system(cmd);
+    }
+    // export hyprland configs
+    snprintf(cmd, sizeof(cmd),
+	    "mkdir -p ~/.config/hypr && "
+	    "cp -f dotfiles/hypr/hyprland.conf ~/.config/hypr && "
+    	    "cp -f dotfiles/hypr/hypridle.conf ~/.config/hypr && "
+    	    "cp -f dotfiles/hypr/hyprpaper.conf ~/.config/hypr");
+    system(cmd);
 }
-void KITT(char ARCHIVE)
+void KITT(char ARCHIVE, float pver)
 {
     char cmd[256];
     if (ARCHIVE == 'Y' || ARCHIVE == 'y')
@@ -403,13 +406,13 @@ void KITT(char ARCHIVE)
     }
     // export kitty config
     snprintf(cmd, sizeof(cmd),
-    	"mkdir ~/.config/kitty && "
-    	"cp -f dotfiles/kitty/current-theme.conf ~/.config/kitty && "
-    	"cp -f dotfiles/kitty/kitty.conf ~/.config/kitty");
+	    "mkdir ~/.config/kitty && "
+	    "cp -f dotfiles/kitty/current-theme.conf ~/.config/kitty && "
+	    "cp -f dotfiles/kitty/kitty.conf ~/.config/kitty");
     system(cmd);
 }
 
-void NVIM(char ARCHIVE)
+void NVIM(char ARCHIVE, float pver)
 {
     char cmd[256];
     if (ARCHIVE == 'Y' || ARCHIVE == 'y')
@@ -428,7 +431,7 @@ void NVIM(char ARCHIVE)
     system(cmd);
 }
 
-void SWAY(char ARCHIVE)
+void SWAY(char ARCHIVE, float pver)
 {
     // sway window manager doesn't work without wlroots
     char cmd[128];
@@ -446,7 +449,7 @@ void SWAY(char ARCHIVE)
     system(cmd);
 }
 
-void WAYB(char ARCHIVE)
+void WAYB(char ARCHIVE, float pver)
 {
     char cmd[256];
     if (ARCHIVE == 'Y' || ARCHIVE == 'y')
@@ -473,33 +476,33 @@ void full_install(char ARCHIVE, char full_install_opt)
     {
 	printf(BOLD_S"\nInstalling every configuration\n"STYLE_END);
 
-	BASH(ARCHIVE);
-	SWAY(ARCHIVE);
-	BTOP(ARCHIVE);
-	CAVA(ARCHIVE);
-	FAST(ARCHIVE);
-	FUZZ(ARCHIVE);
-	GTKL(ARCHIVE);
-	HYPR(ARCHIVE);
-	KITT(ARCHIVE);
-	NVIM(ARCHIVE);
-	WAYB(ARCHIVE);
+	BASH(ARCHIVE, pver);
+	SWAY(ARCHIVE, pver);
+	BTOP(ARCHIVE, pver);
+	CAVA(ARCHIVE, pver);
+	FAST(ARCHIVE, pver);
+	FUZZ(ARCHIVE, pver);
+	GTKL(ARCHIVE, pver);
+	HYPR(ARCHIVE, pver);
+	KITT(ARCHIVE, pver);
+	NVIM(ARCHIVE, pver);
+	WAYB(ARCHIVE, pver);
     }
     else
     {
 	// // this is completely useless at the moment
 	// printf("\nInstalling dotfiles...\n");
-    	//     void BASH(char ARCHIVE);
-    	//     void SWAY(char ARCHIVE);
-    	//     void BTOP(char ARCHIVE);
-    	//     void CAVA(char ARCHIVE);
-    	//     void FAST(char ARCHIVE);
-    	//     void FUZZ(char ARCHIVE);
-    	//     void GTKL(char ARCHIVE);
-    	//     void HYPR(char ARCHIVE);
-    	//     void KITT(char ARCHIVE);
-    	//     void NVIM(char ARCHIVE);
-    	//     void WAYB(char ARCHIVE);
+    	//     void BASH(char ARCHIVE, float pver);
+    	//     void SWAY(char ARCHIVE, float pver);
+    	//     void BTOP(char ARCHIVE, float pver);
+    	//     void CAVA(char ARCHIVE, float pver);
+    	//     void FAST(char ARCHIVE, float pver);
+    	//     void FUZZ(char ARCHIVE, float pver);
+    	//     void GTKL(char ARCHIVE, float pver);
+    	//     void HYPR(char ARCHIVE, float pver);
+    	//     void KITT(char ARCHIVE, float pver);
+    	//     void NVIM(char ARCHIVE, float pver);
+    	//     void WAYB(char ARCHIVE, float pver);
     	// printf("\nInstalling dotfiles...\n");
     }
     printf(BOLD_S"\nInstallation completed!\n"STYLE_END);
