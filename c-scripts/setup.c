@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <time.h>
 
 #define BOLD_S  	"\e[1m" // defines BOLD_S as a keyword to make text bold
 #define UDRL_S  	"\e[4m" // UDRL_S starts an underline style
@@ -477,12 +478,31 @@ void full_install(char ARCHIVE, char full_install_opt)
     {
 	int timerinstall = 3;
 	printf(BOLD_S"\nInstalling every configuration\n"STYLE_END);
-	printf(BOLD_S"Starting in %d ..", timerinstall);
-	while (timerinstall > 0)
+	printf(BOLD_S"Starting in"STYLE_END);
+	
+	struct timespec install_timer;
+	for (int i = 0; i < 3; i++)
 	{
-	    printf("%d .. ", timerinstall);
-	    sleep(1);
+	    printf(" %d ", timerinstall);
+	    fflush(stdout);
+	    for (int j = 0; j < 2; j++)
+	    {
+		printf(".");
+		fflush(stdout);
+		install_timer.tv_sec = 0;
+	    	install_timer.tv_nsec = 500000000L;
+		nanosleep(&install_timer, NULL);
 
+	    }
+	    timerinstall--;
+	}
+	for (int i = 0; i < 3; i++)
+	{
+	    printf(" %d .. ", timerinstall);
+	    install_timer.tv_sec = 1;
+	    install_timer.tv_nsec = 0;
+	    nanosleep(&install_timer, NULL);
+	    timerinstall--;
 	}
 	BASH(ARCHIVE, pver);
 	SWAY(ARCHIVE, pver);
