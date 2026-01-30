@@ -474,8 +474,15 @@ void full_install(char ARCHIVE, char full_install_opt)
 {
     if (full_install_opt == 'Y' || full_install_opt == 'y')
     {
+	int timerinstall = 3;
 	printf(BOLD_S"\nInstalling every configuration\n"STYLE_END);
+	printf(BOLD_S"Starting in %d ..", timerinstall);
+	while (timerinstall > 0)
+	{
+	    printf("%d .. ", timerinstall);
+	    sleep(1);
 
+	}
 	BASH(ARCHIVE, pver);
 	SWAY(ARCHIVE, pver);
 	BTOP(ARCHIVE, pver);
