@@ -42,6 +42,16 @@ git clone https://github.com/ImAwsumm/dotfiles.git
 gcc dotfiles/c-scripts/install.c -o dotfiles/cinstall
 ./dotfiles/cinstall
 ```
+## Configure / Install*
+
+**the script does not install the required packages **yet*** but it installs the dotfiles and it gives the user customization options
+
+This is a script to help new users configure their system to tbeir liking.  
+For now you can only customize your kitty terminal but more features will come in tbe future
+```sh
+gcc dotfiles/c-scripts/setup.c -o dotfiles/setup
+./dotfiles/setup
+```
 
 ## after install 
 Useful keybinds to know:
@@ -111,13 +121,6 @@ This will download the latest script from this github and it will then execute t
 ```sh 
 gcc dotfiles/c-scripts/update.c -o dotfiles/update
 ./dotfiles/update
-```
-# Configure
-This is a script to help new users configure their system to tbeir liking.  
-For now you can only customize your kitty terminal but more features will come in tbe future
-```sh
-gcc dotfiles/c-scripts/setup.c -o dotfiles/setup
-./dotfiles/setup
 ```
 # Credits 
 
