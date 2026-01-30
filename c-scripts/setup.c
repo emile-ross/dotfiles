@@ -298,21 +298,22 @@ void BTOP(char ARCHIVE, float pver)
 
 void CAVA(char ARCHIVE, float pver)
 {
-	char cmd[128];
-        if (ARCHIVE == 'Y' || ARCHIVE == 'y')
-	{
-		// backup cava config
-	    	snprintf(cmd, sizeof(cmd),
-			"mv ~/.config/cava/config "
-			"~/.config/cava/config-oldv%.1f", pver);
-		system(cmd);
-	}
-	// export cava config
+    char cmd[128];
+    if (ARCHIVE == 'Y' || ARCHIVE == 'y')
+    {
+        // backup cava config
         snprintf(cmd, sizeof(cmd),
-		"mkdir -p ~/.config/cava && "
-        	"cp -f dotfiles/cava/config ~/.config/cava/ && ");
+		"mv ~/.config/cava/config "
+		"~/.config/cava/config-oldv%.1f", pver);
         system(cmd);
+    }
+    // export cava config
+    snprintf(cmd, sizeof(cmd),
+	    "mkdir -p ~/.config/cava && "
+	    "cp -f dotfiles/cava/config ~/.config/cava/ && ");
+    system(cmd);
 }
+
 void FAST(char ARCHIVE, float pver)
 {
     char cmd[512];
@@ -497,20 +498,41 @@ void full_install(char ARCHIVE, char full_install_opt)
     }
     else
     {
-	// // this is completely useless at the moment
-	// printf("\nInstalling dotfiles...\n");
-    	//     void BASH(char ARCHIVE, float pver);
-    	//     void SWAY(char ARCHIVE, float pver);
-    	//     void BTOP(char ARCHIVE, float pver);
-    	//     void CAVA(char ARCHIVE, float pver);
-    	//     void FAST(char ARCHIVE, float pver);
-    	//     void FUZZ(char ARCHIVE, float pver);
-    	//     void GTKL(char ARCHIVE, float pver);
-    	//     void HYPR(char ARCHIVE, float pver);
-    	//     void KITT(char ARCHIVE, float pver);
-    	//     void NVIM(char ARCHIVE, float pver);
-    	//     void WAYB(char ARCHIVE, float pver);
-    	// printf("\nInstalling dotfiles...\n");
+	do
+	{
+	    char install_pkg_opt;
+
+	    printf("\n[1] Install BASH ");
+	    printf("\n[2] Install SWAY ");
+	    printf("\n[3] Install BTOP ");
+	    printf("\n[4] Install CAVA ");
+	    printf("\n[5] Install FAST ");
+	    printf("\n[6] Install FUZZ ");
+	    printf("\n[7] Install GTKL ");
+	    printf("\n[8] Install HYPR ");
+	    printf("\n[9] Install KITT ");
+	    printf("\n[10] Install NVIM ");
+	    printf("\n[11] Install WAYB ");
+
+	    while (getchar() != '\n'); // clear imput buffer
+	    scanf(" %d", &install_pkg_opt);
+
+	    // // this is completely useless at the moment
+	    // printf("\nInstalling dotfiles...\n");
+    	    //     void BASH(char ARCHIVE, float pver);
+    	    //     void SWAY(char ARCHIVE, float pver);
+    	    //     void BTOP(char ARCHIVE, float pver);
+    	    //     void CAVA(char ARCHIVE, float pver);
+    	    //     void FAST(char ARCHIVE, float pver);
+    	    //     void FUZZ(char ARCHIVE, float pver);
+    	    //     void GTKL(char ARCHIVE, float pver);
+    	    //     void HYPR(char ARCHIVE, float pver);
+    	    //     void KITT(char ARCHIVE, float pver);
+    	    //     void NVIM(char ARCHIVE, float pver);
+    	    //     void WAYB(char ARCHIVE, float pver);
+    	    // printf("\nInstalling dotfiles...\n");
+	}
+	while (install_pkg_opt == 0)
     }
     printf(BOLD_S"\nInstallation completed!\n"STYLE_END);
 
