@@ -498,10 +498,9 @@ void full_install(char ARCHIVE, char full_install_opt)
     }
     else
     {
+	int install_pkg_opt;
 	do
 	{
-	    char install_pkg_opt;
-
 	    printf("\n[1] Install BASH ");
 	    printf("\n[2] Install SWAY ");
 	    printf("\n[3] Install BTOP ");
@@ -513,8 +512,7 @@ void full_install(char ARCHIVE, char full_install_opt)
 	    printf("\n[9] Install KITT ");
 	    printf("\n[10] Install NVIM ");
 	    printf("\n[11] Install WAYB ");
-
-	    while (getchar() != '\n'); // clear imput buffer
+	    
 	    scanf(" %d", &install_pkg_opt);
 
 	    // // this is completely useless at the moment
@@ -532,7 +530,7 @@ void full_install(char ARCHIVE, char full_install_opt)
     	    //     void WAYB(char ARCHIVE, float pver);
     	    // printf("\nInstalling dotfiles...\n");
 	}
-	while (install_pkg_opt == 0)
+	while (install_pkg_opt == 0);
     }
     printf(BOLD_S"\nInstallation completed!\n"STYLE_END);
 
