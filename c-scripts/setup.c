@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <unistd.h>
 #include <time.h>
 
 #define BOLD_S  	"\e[1m" // defines BOLD_S as a keyword to make text bold
@@ -20,22 +19,22 @@ void clear()
     printf("\033[2J\033[H");
 }
 char ARCHIVE;
-
+char PKGINSTALL;
 char full_install_opt; // if the user wants to install everything set to Y
 float pver = 0.0f; // the user is presumed to be installing the dotfiles
 
 // plans for adding char inst_pkgs in every configuration function below
-void BASH(char ARCHIVE, float pver);
-void SWAY(char ARCHIVE, float pver);
-void BTOP(char ARCHIVE, float pver);
-void CAVA(char ARCHIVE, float pver);
-void FAST(char ARCHIVE, float pver);
-void FUZZ(char ARCHIVE, float pver);
-void GTKL(char ARCHIVE, float pver);
-void HYPR(char ARCHIVE, float pver);
-void KITT(char ARCHIVE, float pver);
-void NVIM(char ARCHIVE, float pver);
-void WAYB(char ARCHIVE, float pver);
+void BASH(char ARCHIVE, float pver, char PKGINSTALL);
+void SWAY(char ARCHIVE, float pver, char PKGINSTALL);
+void BTOP(char ARCHIVE, float pver, char PKGINSTALL);
+void CAVA(char ARCHIVE, float pver, char PKGINSTALL);
+void FAST(char ARCHIVE, float pver, char PKGINSTALL);
+void FUZZ(char ARCHIVE, float pver, char PKGINSTALL);
+void GTKL(char ARCHIVE, float pver, char PKGINSTALL);
+void HYPR(char ARCHIVE, float pver, char PKGINSTALL);
+void KITT(char ARCHIVE, float pver, char PKGINSTALL);
+void NVIM(char ARCHIVE, float pver, char PKGINSTALL);
+void WAYB(char ARCHIVE, float pver, char PKGINSTALL);
 
 void full_install(char ARCHIVE, char full_install_opt);
 float* update();
@@ -106,16 +105,16 @@ int main()
 		{
 		    printf(BOLD_S"\nFixing dotfiles...\n"STYLE_END);
 		    // call install functions for every config
-		    BTOP(ARCHIVE, pver);
-		    CAVA(ARCHIVE, pver);
-		    FAST(ARCHIVE, pver);
-		    FUZZ(ARCHIVE, pver);
-		    GTKL(ARCHIVE, pver);
-		    HYPR(ARCHIVE, pver);
-		    KITT(ARCHIVE, pver);
-		    NVIM(ARCHIVE, pver);
-		    SWAY(ARCHIVE, pver);
-		    WAYB(ARCHIVE, pver);
+		    BTOP(ARCHIVE, pver, PKGINSTALL);
+		    CAVA(ARCHIVE, pver, PKGINSTALL);
+		    FAST(ARCHIVE, pver, PKGINSTALL);
+		    FUZZ(ARCHIVE, pver, PKGINSTALL);
+		    GTKL(ARCHIVE, pver, PKGINSTALL);
+		    HYPR(ARCHIVE, pver, PKGINSTALL);
+		    KITT(ARCHIVE, pver, PKGINSTALL);
+		    NVIM(ARCHIVE, pver, PKGINSTALL);
+		    SWAY(ARCHIVE, pver, PKGINSTALL);
+		    WAYB(ARCHIVE, pver, PKGINSTALL);
 
 		    printf(BOLD_S"\nInstall completed!...\n"STYLE_END);
 		    scanf(" %d", &after_install);
@@ -264,7 +263,7 @@ int main()
     return 0;
 }
 
-void BASH(char ARCHIVE, float pver)
+void BASH(char ARCHIVE, float pver, char PKGINSTALL)
 {
     char BRCNAME[12] = ".bashrc-new";
     // prompt to let the user know the bashrc isn't exported/replaced
@@ -279,7 +278,7 @@ void BASH(char ARCHIVE, float pver)
 
 }
 
-void BTOP(char ARCHIVE, float pver)
+void BTOP(char ARCHIVE, float pver, char PKGINSTALL)
 {
 	char cmd[128];
         if (ARCHIVE == 'Y' || ARCHIVE == 'y')
@@ -297,7 +296,7 @@ void BTOP(char ARCHIVE, float pver)
         system(cmd);
 }
 
-void CAVA(char ARCHIVE, float pver)
+void CAVA(char ARCHIVE, float pver, char PKGINSTALL)
 {
     char cmd[128];
     if (ARCHIVE == 'Y' || ARCHIVE == 'y')
@@ -315,7 +314,7 @@ void CAVA(char ARCHIVE, float pver)
     system(cmd);
 }
 
-void FAST(char ARCHIVE, float pver)
+void FAST(char ARCHIVE, float pver, char PKGINSTALL)
 {
     char cmd[512];
     if (ARCHIVE == 'Y' || ARCHIVE == 'y')
@@ -336,7 +335,7 @@ void FAST(char ARCHIVE, float pver)
 	    "cp -f dotfiles/fastfetch/config-(default).jsonc ~/.config/fastfetch");
     system(cmd);
 }
-void FUZZ(char ARCHIVE, float pver)
+void FUZZ(char ARCHIVE, float pver, char PKGINSTALL)
 {
     char cmd[256];
     if (ARCHIVE == 'Y' || ARCHIVE == 'y')
@@ -355,7 +354,7 @@ void FUZZ(char ARCHIVE, float pver)
 	    "~/.config/fuzzel");
     system(cmd);  		
 }
-void GTKL(char ARCHIVE, float pver)
+void GTKL(char ARCHIVE, float pver, char PKGINSTALL)
 {
 	char cmd[256];
         if (ARCHIVE == 'Y' || ARCHIVE == 'y')
@@ -375,7 +374,7 @@ void GTKL(char ARCHIVE, float pver)
         system(cmd);
 }
 
-void HYPR(char ARCHIVE, float pver)
+void HYPR(char ARCHIVE, float pver, char PKGINSTALL)
 {
     char cmd[256];
     if (ARCHIVE == 'Y' || ARCHIVE == 'y')
@@ -395,7 +394,7 @@ void HYPR(char ARCHIVE, float pver)
     	    "cp -f dotfiles/hypr/hyprpaper.conf ~/.config/hypr");
     system(cmd);
 }
-void KITT(char ARCHIVE, float pver)
+void KITT(char ARCHIVE, float pver, char PKGINSTALL)
 {
     char cmd[256];
     if (ARCHIVE == 'Y' || ARCHIVE == 'y')
@@ -414,7 +413,7 @@ void KITT(char ARCHIVE, float pver)
     system(cmd);
 }
 
-void NVIM(char ARCHIVE, float pver)
+void NVIM(char ARCHIVE, float pver, char PKGINSTALL)
 {
     char cmd[256];
     if (ARCHIVE == 'Y' || ARCHIVE == 'y')
@@ -433,7 +432,7 @@ void NVIM(char ARCHIVE, float pver)
     system(cmd);
 }
 
-void SWAY(char ARCHIVE, float pver)
+void SWAY(char ARCHIVE, float pver, char PKGINSTALL)
 {
     // sway window manager doesn't work without wlroots
     char cmd[128];
@@ -451,8 +450,9 @@ void SWAY(char ARCHIVE, float pver)
     system(cmd);
 }
 
-void WAYB(char ARCHIVE, float pver)
+void WAYB(char ARCHIVE, float pver, char PKGINSTALL)
 {
+    
     char cmd[256];
     if (ARCHIVE == 'Y' || ARCHIVE == 'y')
     {
@@ -461,6 +461,12 @@ void WAYB(char ARCHIVE, float pver)
 		"mv ~/.config/waybar/config.jsonc ~/.config/waybar/config-oldv%.2f.jsonc && "
 		"mv ~/.config/waybar/style.css ~/.config/waybar/style-oldv%.2f.css",
 		pver, pver);
+	system(cmd);
+    }
+    if ( PKGINSTALL == 'Y'|| PKGINSTALL == 'y')
+    {
+        snprintf(cmd, 32,
+		"yay -S --noconfirm waybar");
 	system(cmd);
     }
     // export waybar config and appearance
@@ -504,17 +510,18 @@ void full_install(char ARCHIVE, char full_install_opt)
 	    nanosleep(&install_timer, NULL);
 	    timerinstall--;
 	}
-	BASH(ARCHIVE, pver);
-	SWAY(ARCHIVE, pver);
-	BTOP(ARCHIVE, pver);
-	CAVA(ARCHIVE, pver);
-	FAST(ARCHIVE, pver);
-	FUZZ(ARCHIVE, pver);
-	GTKL(ARCHIVE, pver);
-	HYPR(ARCHIVE, pver);
-	KITT(ARCHIVE, pver);
-	NVIM(ARCHIVE, pver);
-	WAYB(ARCHIVE, pver);
+	// actually install the dotfiles
+	BASH(ARCHIVE, pver, PKGINSTALL);
+	SWAY(ARCHIVE, pver, PKGINSTALL);
+	BTOP(ARCHIVE, pver, PKGINSTALL);
+	CAVA(ARCHIVE, pver, PKGINSTALL);
+	FAST(ARCHIVE, pver, PKGINSTALL);
+	FUZZ(ARCHIVE, pver, PKGINSTALL);
+	GTKL(ARCHIVE, pver, PKGINSTALL);
+	HYPR(ARCHIVE, pver, PKGINSTALL);
+	KITT(ARCHIVE, pver, PKGINSTALL);
+	NVIM(ARCHIVE, pver, PKGINSTALL);
+	WAYB(ARCHIVE, pver, PKGINSTALL);
     }
     else
     {
@@ -537,17 +544,17 @@ void full_install(char ARCHIVE, char full_install_opt)
 
 	    // // this is completely useless at the moment
 	    // printf("\nInstalling dotfiles...\n");
-    	    //     void BASH(char ARCHIVE, float pver);
-    	    //     void SWAY(char ARCHIVE, float pver);
-    	    //     void BTOP(char ARCHIVE, float pver);
-    	    //     void CAVA(char ARCHIVE, float pver);
-    	    //     void FAST(char ARCHIVE, float pver);
-    	    //     void FUZZ(char ARCHIVE, float pver);
-    	    //     void GTKL(char ARCHIVE, float pver);
-    	    //     void HYPR(char ARCHIVE, float pver);
-    	    //     void KITT(char ARCHIVE, float pver);
-    	    //     void NVIM(char ARCHIVE, float pver);
-    	    //     void WAYB(char ARCHIVE, float pver);
+    	    //     void BASH(char ARCHIVE, float pver, char PKGINSTALL);
+    	    //     void SWAY(char ARCHIVE, float pver, char PKGINSTALL);
+    	    //     void BTOP(char ARCHIVE, float pver, char PKGINSTALL);
+    	    //     void CAVA(char ARCHIVE, float pver, char PKGINSTALL);
+    	    //     void FAST(char ARCHIVE, float pver, char PKGINSTALL);
+    	    //     void FUZZ(char ARCHIVE, float pver, char PKGINSTALL);
+    	    //     void GTKL(char ARCHIVE, float pver, char PKGINSTALL);
+    	    //     void HYPR(char ARCHIVE, float pver, char PKGINSTALL);
+    	    //     void KITT(char ARCHIVE, float pver, char PKGINSTALL);
+    	    //     void NVIM(char ARCHIVE, float pver, char PKGINSTALL);
+    	    //     void WAYB(char ARCHIVE, float pver, char PKGINSTALL);
     	    // printf("\nInstalling dotfiles...\n");
 	}
 	while (install_pkg_opt == 0);
