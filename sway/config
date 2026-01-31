@@ -6,30 +6,28 @@
 
 ### Variables
 # Logo key. Use Mod1 for Alt.
-# Logo key. Use Mod4 for Alt.
+# Logo key. Use Mod4 for Super.
 
 set $mod Mod4
+set $alt Mod1
 
 # Home row direction keys, like vim
 set $left h
 set $down j
 set $up k
 set $right l
-
 # Your preferred terminal emulator
 set $term kitty
 # Your preferred application launcher
 set $menu fuzzel
-
-# set variables for applications/programs you launch/open frequently
 set $floorp floorp
-set $firefox firefox
-set $chrome chromium
-
-set $obs obs
-
+# set $lock swaylock
+set $lock gtklock
 ### Output configuration
 #
+set $firefox firefox
+set $chrome chromium
+set $obs obs
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 
 # output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
@@ -82,10 +80,10 @@ set $obs obs
     bindsym $mod+Q exec $term
     bindsym $mod+1 exec $floorp
     bindsym $mod+2 exec $firefox
-    bindsym $mod+1 exec $chrome
-    bindsym $mod+1 exec $obs
-    bindsym $mod+1 exec $
-
+	
+    #bindsym $mod+1 exec $chrome
+	
+    #bindsym $mod+1 exec $obs
     # Kill focused window
     bindsym $mod+C kill
 
@@ -93,6 +91,7 @@ set $obs obs
     # bindsym $mod+R exec $menu
     bindsym $mod+D exec $menu
 
+    bindsym $alt+L exec $lock
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
     # Despite the name, also works for non-floating windows.
@@ -238,7 +237,6 @@ mode "resize" {
 
 # Status Bar:
 # Read `man 5 sway-bar` for more information about this section.
-
 bar {
     font pango: Jetbrains Mono 10
     position top
