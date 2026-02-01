@@ -16,7 +16,11 @@
 #define ANSI_RED 	"\x1b[31m"
 #define STYLE_END   	"\e[m" // resets the styling
 
-void clear();
+void clear()
+{
+    printf("\033[2J\033[H");
+}
+
 char ARCHIVE;
 char PKGINSTALL;
 char full_install_opt; // if the user wants to install everything set to Y
