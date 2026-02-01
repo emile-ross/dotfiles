@@ -11,23 +11,36 @@
 set $mod Mod4
 set $alt Mod1
 
-# Home row direction keys, like vim
+## Home row direction keys, like vim
 set $left h
 set $down j
 set $up k
 set $right l
-# Your preferred terminal emulator
+
+## Your preferred terminal emulator
+
 set $term kitty
-# Your preferred application launcher
+
+
+## Your preferred application launcher
 set $menu fuzzel
-set $floorp floorp
+
+## Your lockscreen
+
 # set $lock swaylock
-set $lock gtklock
+set $lock gtklock -c ~/.config/gtklock/style.css
+
+
+## set keybinds for common programs
+set $floorp floorp
 ### Output configuration
 #
 set $firefox firefox
 set $chrome chromium
 set $obs obs
+
+
+
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 
 # output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
