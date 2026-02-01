@@ -19,13 +19,14 @@ int main()
     	char opt_fiv_text[128] = "Something else";
     	char opt_exit_text[128] = "Exit";
     
-    	printf(BOLD_S ANSI_CYAN "%s\n" STYLE_END, main_menu_text );
-    	printf(BOLD_S "\n [1] " STYLE_END "%s\n", opt_one_text);
+    	printf(BOLD_S ANSI_CYAN "%s\n\n" STYLE_END, main_menu_text );
+    	printf(BOLD_S " [1] " STYLE_END "%s\n", opt_one_text);
     	printf(BOLD_S " [2] " STYLE_END "%s\n", opt_two_text);
     	printf(BOLD_S " [3] " STYLE_END "%s\n", opt_the_text);
     	printf(BOLD_S " [4] " STYLE_END "%s\n", opt_for_text);
-    	printf(BOLD_S " [5] " STYLE_END "%s\n", opt_fiv_text);
-    	printf(BOLD_S "\n [0] " STYLE_END "%s\n", opt_exit_text);
+    	printf(BOLD_S " [5] " STYLE_END "%s\n\n", opt_fiv_text);
+    	printf(BOLD_S " [0] " STYLE_END "%s\n", opt_exit_text);
+
     	scanf(" %d", &menu_one_i);
     
     	if (menu_one_i == 1)
@@ -389,6 +390,15 @@ void NVIM(char ARCHIVE, float pver, char PKGINSTALL)
     	    	pver, pver, pver);
         system(cmd);
     }
+    if ( PKGINSTALL == 'Y'|| PKGINSTALL == 'y')
+    {
+	// install neovim (nvim) package
+	// nvim is most likely already installed 
+        snprintf(cmd, 32,
+		"yay -S --noconfirm nvim");
+	system(cmd);
+    }
+
     // export nvim config
     snprintf(cmd, sizeof(cmd),
 	    "mkdir -p ~/.config/nvim && "
@@ -406,6 +416,14 @@ void SWAY(char ARCHIVE, float pver, char PKGINSTALL)
     	    	"mv ~/.config/sway/config ~/.config/sway/config-oldv%.1f ",
 		pver);
         system(cmd);
+    }
+    if ( PKGINSTALL == 'Y'|| PKGINSTALL == 'y')
+    {
+	// install sway package
+        snprintf(cmd, 32,
+		"yay -S --noconfirm wlroots sway");
+	system(cmd);
+	// a system update is strongly recommended 
     }
     // export sway config
     snprintf(cmd, sizeof(cmd),
