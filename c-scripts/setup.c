@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include "dotfileshead.h"
 
 #define BOLD_S  	"\e[1m" // defines BOLD_S as a keyword to make text bold
 #define UDRL_S  	"\e[4m" // UDRL_S starts an underline style
@@ -332,7 +333,7 @@ void FAST(char ARCHIVE, float pver, char PKGINSTALL)
 	    "cp -f dotfiles/fastfetch/assets/*.png ~/.config/fastfetch/assets && "
 	    "cp -f dotfiles/fastfetch/config.jsonc ~/.config/fastfetch && "
 	    "cp -f dotfiles/fastfetch/config-other.jsonc ~/.config/fastfetch && "
-	    "cp -f dotfiles/fastfetch/config-(default).jsonc ~/.config/fastfetch");
+	    "cp -f dotfiles/fastfetch/config-default.jsonc ~/.config/fastfetch");
     system(cmd);
 }
 void FUZZ(char ARCHIVE, float pver, char PKGINSTALL)
