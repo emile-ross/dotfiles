@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "dotfileshead.h"
+
 #define UDRL_S  	"\e[4m" // UDRL_S starts an underline style
 #define STYLE_END   	"\e[m" // resets the styling
 #define MAX_CMD 512
