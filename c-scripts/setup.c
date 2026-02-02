@@ -370,6 +370,14 @@ void KITT(char ARCHIVE, float pver, char PKGINSTALL)
     		"~/.config/kitty/kitty-oldv%.1f.conf", pver);
     	system(cmd);
     }
+    if ( PKGINSTALL == 'Y'|| PKGINSTALL == 'y')
+    {
+	// install kitty package
+	//  the kitty terminal is most likely already installed on your system
+        snprintf(cmd, 32,
+		"yay -S --noconfirm kitty");
+	system(cmd);
+    }
     // export kitty config
     snprintf(cmd, sizeof(cmd),
 	    "mkdir ~/.config/kitty && "
@@ -495,6 +503,58 @@ void full_install(char ARCHIVE, char full_install_opt)
 	    timerinstall--;
 	}
 	
+	    if (system("test -f /sbin/yay") == 0)
+    	    {
+    	        printf("Yay is now installed, congrats!\n");
+    	    }
+    	    else
+    	    {
+    	        char YAY;
+    	        printf("Yay is not installed, do you want to install it? (Y/n): ");
+    	        scanf(" %c", &YAY); // asks the user if they wanna install yay (needed)
+    	        if (YAY == 'Y' || YAY == 'y')
+    	        {
+    	            // Check if makepkg is installed ( it is needed in order to compile yay )
+    	            if (system("command -v makepkg > /dev/null") != 0)
+    	            {
+    	            	printf("\nMakepkg is not installed. Installing 'base-devel' package group to proceed...\n");
+
+			char cmd[128];
+			snprintf(cmd, sizeof(cmd),
+				"sudo pacman -S --noconfirm base-devel");
+			system(cmd);
+    	                
+    	                // Check if makepkg is available after installing the base-devel package
+    	                if (system("command -v makepkg > /dev/null") != 0)
+    	                {
+    	        	    printf("Makepkg installation failed. Please check your system configuration.\n");
+    	        	    printf("Helpful link: \"https://wiki.archlinux.org/title/Makepkg\"\n");
+    	                }
+    	                else
+    	                {
+    	        	    printf("Makepkg has been successfully installed!\n");
+    	                }
+    	            }
+    	            else
+    	            {
+    	                printf("Makepkg is already installed.\n");
+    	            }
+		    // install yay \/
+    	            char cmd[256];
+    	            snprintf(cmd, sizeof(cmd),
+    	        	    "git clone https://aur.archlinux.org/yay.git &&"	// download yay from aur
+    	                    "cd yay &&"						//
+    	        	    "makepkg -si &&"					// build package from source
+    	                    "cd ..");						//
+    	            system(cmd);
+
+    	            printf("\nYay is installed, congrats!\n");
+    	        }
+    	        else
+    	        {
+    	            printf("\nYay is needed in order to proceed with the script.\n");
+		}
+	    }
 	// actually install the dotfiles
 	BASH(ARCHIVE, pver, PKGINSTALL);
 	SWAY(ARCHIVE, pver, PKGINSTALL);
