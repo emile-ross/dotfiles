@@ -66,22 +66,44 @@ int main()
 		printf(BOLD_S"\n[0]"STYLE_END" %s\n", opt_exit_text);
 
 		scanf("%d", &fix_install_menu);
+		printf("\n");
+		char PKGINSTALL;
+		scanf("%c", &PKGINSTALL);
 		if ( fix_install_menu == 1)
 		{
+			if ( PKGINSTALL = 'Y' || PKGINSTALL = 'y')
+			{
 		    printf(BOLD_S"\nFixing dotfiles...\n"STYLE_END);
 		    // call install functions for every config
-		    BTOP(ARCHIVE, pver, PKGINSTALL);
-		    CAVA(ARCHIVE, pver, PKGINSTALL);
-		    FAST(ARCHIVE, pver, PKGINSTALL);
-		    FUZZ(ARCHIVE, pver, PKGINSTALL);
-		    GTKL(ARCHIVE, pver, PKGINSTALL);
-		    HYPR(ARCHIVE, pver, PKGINSTALL);
-		    KITT(ARCHIVE, pver, PKGINSTALL);
-		    NVIM(ARCHIVE, pver, PKGINSTALL);
-		    SWAY(ARCHIVE, pver, PKGINSTALL);
-		    WAYB(ARCHIVE, pver, PKGINSTALL);
-
+		    BTOP(ARCHIVE, pver, 'y');
+		    CAVA(ARCHIVE, pver, 'y');
+		    FAST(ARCHIVE, pver, 'y');
+		    FUZZ(ARCHIVE, pver, 'y');
+		    GTKL(ARCHIVE, pver, 'y');
+		    HYPR(ARCHIVE, pver, 'y');
+		    KITT(ARCHIVE, pver, 'y');
+		    NVIM(ARCHIVE, pver, 'y');
+		    SWAY(ARCHIVE, pver, 'y');
+		    WAYB(ARCHIVE, pver, 'y');
+			}
+			else
+			{
+				printf(BOLD_S"\nFixing dotfiles...\n"STYLE_END);
+		        // call install functions for every config
+				BTOP(ARCHIVE, pver, PKGINSTALL);
+		        CAVA(ARCHIVE, pver, PKGINSTALL);
+		        FAST(ARCHIVE, pver, PKGINSTALL);
+		        FUZZ(ARCHIVE, pver, PKGINSTALL);
+		        GTKL(ARCHIVE, pver, PKGINSTALL);
+		        HYPR(ARCHIVE, pver, PKGINSTALL);
+		        KITT(ARCHIVE, pver, PKGINSTALL);
+		        NVIM(ARCHIVE, pver, PKGINSTALL);
+		        SWAY(ARCHIVE, pver, PKGINSTALL);
+		        WAYB(ARCHIVE, pver, PKGINSTALL);
+			}
+				
 		    printf(BOLD_S"\nInstall completed!...\n"STYLE_END);
+			
 		    scanf(" %d", &after_install);
 		    if (after_install == 0)
 		    {
