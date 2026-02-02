@@ -109,7 +109,7 @@ int main()
     	    	printf(BOLD_S "\n [1] " STYLE_END "%s\n", update_opt_text);
     	    	printf(BOLD_S " [2] " STYLE_END "%s\n", updatecheck_opt_text);
     	    	printf(BOLD_S " [0] " STYLE_END "%s\n", opt_exit_text);
-		while (getchar() != '\n')  // clear imput buffer 
+		while (getchar() != '\n');  // clear imput buffer 
 	    	scanf("%d", &update_config_menu);
 	    	if (update_config_menu == 1)
 	    	{
@@ -135,7 +135,7 @@ int main()
     		    printf(BOLD_S "\n [1] " STYLE_END "%s\n", hypr_config_menu_text);
     		    printf(BOLD_S " [2] " STYLE_END "%s\n", kitty_config_menu_text);
     		    printf(BOLD_S " [0] " STYLE_END "%s\n", opt_exit_text);
-		    while (getchar() != '\n')  // clear imput buffer 
+		    while (getchar() != '\n');  // clear imput buffer 
     		    scanf(" %d", &dotfiles_config_menu);
 		    if (dotfiles_config_menu == 1)
 		    {
@@ -154,7 +154,7 @@ int main()
     		    	    printf(BOLD_S " [1] " STYLE_END "%s\n", kitty_color_text);
     		    	    printf(BOLD_S " [2] " STYLE_END "%s\n", kitty_fonts_text);
     		    	    printf(BOLD_S " [0] " STYLE_END "%s\n", opt_exit_text);
-			    while (getchar() != '\n')  // clear imput buffer 
+			    while (getchar() != '\n');  // clear imput buffer 
 
     		    	    scanf("\n%d", &kitty_config_choice);
     		    	    if (kitty_config_choice == 1)
