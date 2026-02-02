@@ -1,12 +1,7 @@
 # ImAwsum's dotfiles
 Dotfiles are files used to customize your system to your liking.  You can modify them by editing config files using a text editor ([Neovim](https://github.com/neovim/neovim)).
 
-
-If you want to **install** your dotfiles, click [here](#install)
-
-If you want to **update** your dotfiles, click [here](#Update)
-
-If you want to **configure** your dotfiles, click [here](#Configure)
+If you want to **Install** your dotfiles, click [here](#Install)
 
 ## requirements
 - an Arch based distribution of linux (Windows will **never** get support)
@@ -37,18 +32,14 @@ If you want to **configure** your dotfiles, click [here](#Configure)
 >  **Warning** Be careful running scripts found on the internet!
 
 Before executing the c script, you will need to compile it.  
-```bash
-git clone https://github.com/ImAwsumm/dotfiles.git
-gcc dotfiles/c-scripts/install.c -o dotfiles/cinstall
-./dotfiles/cinstall
-```
-## Configure / Install*
-
-**the script does not install the required packages **yet*** but it installs the dotfiles and it gives the user customization options
 
 This is a script to help new users configure their system to tbeir liking.  
-For now you can only customize your kitty terminal but more features will come in tbe future
+You can use this script to install your dotfiles, update your dotfiles and configure your environment! 
+
+More features will come in the future
+
 ```sh
+git clone https://github.com/imawsumm/dotfiles
 gcc dotfiles/c-scripts/setup.c -o dotfiles/setup
 ./dotfiles/setup
 ```
@@ -113,15 +104,6 @@ ALT + 0 -> **focus obs**
 
 If you ever encounter an issue please report it by providing the issue you are experiencing with a log, it helps me improve this script. 
 
-# Update
-
-After reading the code, you can paste this in your terminal in order to update.  
-This will download the latest script from this github and it will then execute the newest updating script.
-
-```sh 
-gcc dotfiles/c-scripts/update.c -o dotfiles/update
-./dotfiles/update
-```
 # Credits 
 
 Many configs were directly from or inspired by [@kzndotsh](https://github.com/kzndotsh)
