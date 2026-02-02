@@ -1,3 +1,5 @@
+#define HSETUP_DOT_H
+
 #include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -21,7 +23,10 @@ void clear()
 
 char ARCHIVE;
 char PKGINSTALL;
+
 char full_install_opt; // if the user wants to install everything set to Y
+char full_update_opt; 
+
 float pver; // the user is presumed to be installing the dotfiles
 
 void BASH(char ARCHIVE, float pver, char PKGINSTALL);
@@ -37,4 +42,6 @@ void NVIM(char ARCHIVE, float pver, char PKGINSTALL);
 void WAYB(char ARCHIVE, float pver, char PKGINSTALL);
 
 void full_install(char ARCHIVE, char full_install_opt);
+void full_update(char ARCHIVE, char full_update_opt);
+
 float* update();
