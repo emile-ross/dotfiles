@@ -36,23 +36,57 @@ int full_update(char ARCHIVE, float pver)
 	// do not break because we are also installing everything below
     case 120:
     
-	printf("\nUpdating from v1.2%d\n", VAWSM);
+	//printf("\nUpdating from v1.2%d\n", VAWSM);
 	
+	snprintf(cmd, sizeof(cmd),
+		"cp -f dotfiles/fuzzel/fuzzel.ini ~/.config/fuzzel/ && "
+		"cp -f dotfiles/fuzzel/old-fuzzel.ini ~/.config/fuzzel/ ");
+	system(cmd);
+
 	// do not break because we are also installing everything below
     case 130:
 	printf("\nUpdating from asiodjhasidj%d\n", VAWSM);
+	if (ARCHIVE == 'Y' || ARCHIVE == 'y')
+	{
+	    char cmd[512];
+	    snprintf(cmd, 64,
+		    "mv -f ~/.config/cava/config ~/.config/cava/config-oldv%.2f", pver);
+	    system(cmd);
+	}
+
+	// export cava + kitty + hyprland
+	snprintf(cmd, sizeof(cmd),
+		"yay -S --noconfirm ttf-ubuntu-font-family ttf-ibmplex-mono-nerd "
+		"ttf-blex-nerd-font-git ttf-victor-mono-nerd ttf-cascadia-mono-nerd &&"
+		"cp -f dotfiles/kitty/kitty.conf ~/.config/kitty/ && "
+		"cp -f dotfiles/kitty/current-theme.conf ~/.config/kitty/ &&"
+		"cp -f dotfiles/hypr/hyprland.conf ~/.config/hypr/ && "
+		"mkdir -p ~/.config/cava/ && "
+		"rm ~/.config/cava/config && "
+		"cp -f dotfiles/cava/config ~/.config/cava/ &&");
+	system(cmd);
+
 
 	// do not break because we are also installing everything below
     case 140:
 
+	// do not break because we are also installing everything below
+    case 200:
 
 
 	// do not break because we are also installing everything below
-    case 200:
-	//"yay -S --noconfirm ttf-ubuntu-font-family ttf-ibmplex-mono-nerd ttf-blex-nerd-font-git ttf-victor-mono-nerd ttf-cascadia-mono-nerd && "
+    case 210:
+	
 
-
+	// do not break because we are also installing everything below
+    case 220:
+	
     goto end;
+
+    case 230:
+	printf("\nYou are running the latest version.\n");
+    goto end;
+
     default:
 	printf("\nUnknown version\n");
 	return 1;
