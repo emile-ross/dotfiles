@@ -16,18 +16,8 @@
 #define ANSI_RED 	"\x1b[31m"
 #define STYLE_END   	"\e[m" // resets the styling
 
-void clear()
-{
-    printf("\033[2J\033[H");
-}
 
-char ARCHIVE;
-char PKGINSTALL;
 
-char full_install_opt; // if the user wants to install everything set to Y
-char full_update_opt; 
-
-float pver; // the user is presumed to be installing the dotfiles
 
 void BASH(char ARCHIVE, float pver, char PKGINSTALL);
 void SWAY(char ARCHIVE, float pver, char PKGINSTALL);
@@ -42,6 +32,7 @@ void NVIM(char ARCHIVE, float pver, char PKGINSTALL);
 void WAYB(char ARCHIVE, float pver, char PKGINSTALL);
 
 void full_install(char ARCHIVE, char full_install_opt);
-void full_update(char ARCHIVE, char full_update_opt);
+int full_update(char ARCHIVE, float pver);
 
 float* update();
+
