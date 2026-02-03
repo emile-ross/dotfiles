@@ -12,10 +12,9 @@ int full_update(char ARCHIVE, float pver)
 	printf("\nUpdating from %d\n", VAWSM);
 	char cmd[512];
 	snprintf(cmd, sizeof(cmd),
-		"yay -S --noconfirm btop gtklock cava fuzzel kitty fastfetch nvim waybar && "
+		"yay -S --noconfirm btop cava fuzzel kitty fastfetch nvim waybar && "
 		"cp -f dotfiles/kitty/kitty.conf ~/.config/kitty && "
-		"cp -f dotfiles/kitty/current-theme.conf ~/.config/current-theme.conf && "
-		"mv ~/.config/nvim/init.lua ~/.config/nvim/init-v%.2f.lua", pver);
+		"cp -f dotfiles/kitty/current-theme.conf ~/.config/current-theme.conf ");
 	system(cmd);
 
 	snprintf(cmd, sizeof(cmd),
@@ -24,10 +23,6 @@ int full_update(char ARCHIVE, float pver)
 		"cp dotfiles/hypr/hyprpaper.conf ~/.config/hypr ");
 	system(cmd);
 
-        // nvim config
-	snprintf(cmd, sizeof(cmd),
-		"cp dotfiles/nvim/init.lua ~/.config/nvim");
-	system(cmd);
 	
 	// do not break because we are also installing everything below
     case 120:
@@ -53,7 +48,6 @@ int full_update(char ARCHIVE, float pver)
 	snprintf(cmd, sizeof(cmd),
 		"yay -S --noconfirm ttf-ubuntu-font-family ttf-ibmplex-mono-nerd "
 		"ttf-blex-nerd-font-git ttf-victor-mono-nerd ttf-cascadia-mono-nerd &&"
-		"cp -f dotfiles/kitty/kitty.conf ~/.config/kitty/ && "
 		"cp -f dotfiles/kitty/current-theme.conf ~/.config/kitty/ &&"
 		"cp -f dotfiles/hypr/hyprland.conf ~/.config/hypr/ && "
 		"mkdir -p ~/.config/cava/ && "
@@ -64,31 +58,50 @@ int full_update(char ARCHIVE, float pver)
 	// do not break because we are also installing everything below
     case 140:
 
+	snprintf(cmd, sizeof(cmd),
+		"mv ~/.config/btop/btop.conf ~/.config/btop/btop-oldv%.2f && "
+		"mkdir -p ~/.config/btop/ && "
+		"cp -f dotfiles/btop/btop.conf ~/.config/btop/ ");
+	system(cmd);
+		
 	// do not break because we are also installing everything below
     case 200:
 
 
 	snprintf(cmd, sizeof(cmd),
 		"mkdir ~/.config/gtklock && "
-		"yay -S --noconfirm nvim && "
-		"mv ~/.config/gtklock/style.css ~/.config/gtklock/style-v%.2f.css && "
+		"yay -S --noconfirm nvim gtklock && "
+		"mv ~/.config/gtklock/style.css ~/.config/gtklock/style-v%.2f.css && "	// gtklock exporting
 		"cp -f dotfiles/gtklock/style.css ~/.config/gtklock/style.css && "
-		"cp -f dotfiles/nvim/init.lua ~/.config/nvim/init.lua && "
-		"mv ~/.config/hypr/hyprland.conf ~/.config/hypr/hyprland-v%.2f.conf && ", pver, pver);
+		"mv ~/.config/nvim/init.lua ~/.config/nvim/init-v%.2f.lua && "		// nvim exporting
+		"cp -f dotfiles/nvim/init.lua ~/.config/nvim/init.lua ", pver, pver);
 	system(cmd);
 
 	// do not break because we are also installing everything below
     case 210:
 	
 	snprintf(cmd, sizeof(cmd),
-		"mkdir ~/.config/sway && "
+		"mkdir -p ~/.config/sway && "
+		"mkdir ~/.config/nvim && "
 		"yay -S --noconfirm sway && "
+		"mv ~/.config/nvim/init.lua ~/.config/nvim/init-oldv%.2f.lua && "
+		"cp -f dotfiles/nvim/init.lua ~/.config/nvim && "
 		"mv ~/.config/gtklock/style.css ~/.config/gtklock/style-v%.2f.css && "
-		"cp dotfiles/gtklock/style.css ~/.config/gtklock/style.css && "
-		"mv ~/.config/hypr/hyprland.conf ~/.config/hypr/hyprland-v%.2f.conf && ");
+		"cp -f dotfiles/gtklock/style.css ~/.config/gtklock/style.css && "
+		"mv ~/.config/kitty/kitty.conf ~/.config/kitty/kitty-oldv%.2f.conf && "
+		"cp -f dotfiles/kitty/kitty.conf ~/.config/kitty/ && "	// update kitty config
+		"mv ~/.config/hypr/hyprland.conf ~/.config/hypr/hyprland-v%.2f.conf && "
+		"cp -f dotfiles/hypr/hyprland.conf ~/.config/hypr/", pver, pver, pver, pver);
+	system(cmd);
 	// do not break because we are also installing everything below
     case 220:
 	
+	snprintf(cmd, sizeof(cmd),
+		"mv ~/.config/sway/config ~/.config/sway/config-oldv%.2f && "
+		"cp dotfiles/sway/config ~/.config/sway/ && "	// update sway config
+		"cp dotfiles/sway/config-default ~/.config/sway/ ");
+	system(cmd);
+
     goto end;
 
     case 230:
