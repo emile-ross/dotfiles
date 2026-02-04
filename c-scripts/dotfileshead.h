@@ -13,6 +13,7 @@
 #define ANSI_WHITE    	"\x1b[97m"
 #define ANSI_GREY    	"\x1b[90m"
 #define ANSI_CYAN    	"\x1b[36m"
+#define ANSI_LCYAN    	"\x1b[96m"
 #define ANSI_RED 	"\x1b[31m"
 #define ANSI_GREEN 	"\x1b[32m"
 #define ANSI_LGREEN 	"\x1b[92m"
@@ -34,6 +35,8 @@ void WAYB(char ARCHIVE, float pver, char PKGINSTALL);
 
 void full_install(char ARCHIVE, char full_install_opt);
 int full_update(char ARCHIVE, float pver);
+
+void install_configs(float pver); // the partial install script (configure which package or configuration to install)
 
 float* update();
 
