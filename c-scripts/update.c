@@ -11,13 +11,13 @@ int full_update(char ARCHIVE, float pver)
     case 100:
 	printf("\nUpdating from %d\n", VAWSM);
 	char cmd[512];
-	snprintf(cmd, sizeof(cmd),
+	snprintf(cmd, 192,
 		"yay -S --noconfirm btop cava fuzzel kitty fastfetch nvim waybar && "
 		"cp -f dotfiles/kitty/kitty.conf ~/.config/kitty && "
 		"cp -f dotfiles/kitty/current-theme.conf ~/.config/current-theme.conf ");
 	system(cmd);
 
-	snprintf(cmd, sizeof(cmd),
+	snprintf(cmd, 192,
 		"cp dotfiles/hypr/hyprland.conf ~/.config/hypr && "
 		"cp dotfiles/hypr/hypridle.conf ~/.config/hypr && "
 		"cp dotfiles/hypr/hyprpaper.conf ~/.config/hypr ");
@@ -26,10 +26,9 @@ int full_update(char ARCHIVE, float pver)
 	
 	// do not break because we are also installing everything below
     case 120:
-	snprintf(cmd, sizeof(cmd),
+	snprintf(cmd, 256,
 		"cp -f dotfiles/fuzzel/fuzzel.ini ~/.config/fuzzel/ && "
 		"cp -f dotfiles/fuzzel/old-fuzzel.ini ~/.config/fuzzel/ && "
-		"cp dotfiles/hypr/hyprland.conf ~/.config/hypr && "
 		"cp dotfiles/waybar/style.css ~/.config/waybar && "
 		"cp dotfiles/waybar/config.jsonc ~/.config/waybar");
 	system(cmd);
@@ -58,10 +57,10 @@ int full_update(char ARCHIVE, float pver)
 	// do not break because we are also installing everything below
     case 140:
 
-	snprintf(cmd, sizeof(cmd),
+	snprintf(cmd, 192,
 		"mv ~/.config/btop/btop.conf ~/.config/btop/btop-oldv%.2f && "
 		"mkdir -p ~/.config/btop/ && "
-		"cp -f dotfiles/btop/btop.conf ~/.config/btop/ ");
+		"cp -f dotfiles/btop/btop.conf ~/.config/btop/ ", pver);
 	system(cmd);
 		
 	// do not break because we are also installing everything below
@@ -80,7 +79,7 @@ int full_update(char ARCHIVE, float pver)
 	// do not break because we are also installing everything below
     case 210:
 	
-	snprintf(cmd, sizeof(cmd),
+	snprintf(cmd, 2048,
 		"mkdir -p ~/.config/sway && "
 		"mkdir ~/.config/nvim && "
 		"yay -S --noconfirm sway && "
