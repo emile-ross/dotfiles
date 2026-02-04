@@ -17,8 +17,6 @@
 #define STYLE_END   	"\e[m" // resets the styling
 
 
-
-
 void BASH(char ARCHIVE, float pver, char PKGINSTALL);
 void SWAY(char ARCHIVE, float pver, char PKGINSTALL);
 void BTOP(char ARCHIVE, float pver, char PKGINSTALL);
@@ -28,6 +26,7 @@ void FUZZ(char ARCHIVE, float pver, char PKGINSTALL);
 void GTKL(char ARCHIVE, float pver, char PKGINSTALL);
 void HYPR(char ARCHIVE, float pver, char PKGINSTALL);
 void KITT(char ARCHIVE, float pver, char PKGINSTALL);
+void MPVF(char ARCHIVE, float pver, char PKGINSTALL);
 void NVIM(char ARCHIVE, float pver, char PKGINSTALL);
 void WAYB(char ARCHIVE, float pver, char PKGINSTALL);
 
