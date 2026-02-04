@@ -99,7 +99,10 @@ int full_update(char ARCHIVE, float pver)
 	snprintf(cmd, sizeof(cmd),
 		"mv ~/.config/sway/config ~/.config/sway/config-oldv%.2f && "
 		"cp dotfiles/sway/config ~/.config/sway/ && "	// update sway config
-		"cp dotfiles/sway/config-default ~/.config/sway/ ");
+		"cp dotfiles/sway/config-default ~/.config/sway/ && "
+		"mkdir -p ~/.config/mpv/ && "
+		"mv ~/.config/mpv/mpv.conf ~/.config/mpv/mpv-oldv%.2f.conf && "
+		"cp dotfiles/mpv/mpv.conf ~/.config/mpv/ ", pver, pver);
 	system(cmd);
 
     goto end;
