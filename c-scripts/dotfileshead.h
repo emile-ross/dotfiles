@@ -7,16 +7,24 @@
 #include <time.h>
 
 #define BOLD_S  	"\e[1m" // defines BOLD_S as a keyword to make text bold
-#define UDRL_S  	"\e[4m" // UDRL_S starts an underline style
+#define UDRL_S  	"\e[4m" // UDRL_S starts an underline style (does not work in kitty by default)
 #define ITALICS_S 	"\e[3m"
+#define SLOWBLINK_S 	"\e[5m"
+#define FASTBLINK_S 	"\e[6m"
+#define STRIKE_S 	"\e[9m"
+
+
+#define ANSI_RED 	"\x1b[31m"
+#define ANSI_GREEN 	"\x1b[32m"
+#define ANSI_LGREEN 	"\x1b[92m"
+#define ANSI_YELLOW 	"\x1b[33m"
+#define ANSI_LYELLOW 	"\x1b[93m"
 #define ANSI_BLUE    	"\x1b[34m"
 #define ANSI_WHITE    	"\x1b[97m"
 #define ANSI_GREY    	"\x1b[90m"
 #define ANSI_CYAN    	"\x1b[36m"
 #define ANSI_LCYAN    	"\x1b[96m"
-#define ANSI_RED 	"\x1b[31m"
-#define ANSI_GREEN 	"\x1b[32m"
-#define ANSI_LGREEN 	"\x1b[92m"
+
 #define STYLE_END   	"\e[m" // resets the styling
 
 
@@ -39,4 +47,3 @@ int full_update(char ARCHIVE, float pver);
 void install_configs(float pver); // the partial install script (configure which package or configuration to install)
 
 float* update();
-
