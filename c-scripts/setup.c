@@ -95,6 +95,7 @@ int main()
 		    	HYPR(ARCHIVE, pver, 'y');
 		    	KITT(ARCHIVE, pver, 'y');
 		    	NVIM(ARCHIVE, pver, 'y');
+		    	MPVF(ARCHIVE, pver, 'y');
 		    	SWAY(ARCHIVE, pver, 'y');
 		    	WAYB(ARCHIVE, pver, 'y');
 		    }
@@ -107,6 +108,7 @@ int main()
 		    	GTKL(ARCHIVE, pver, 'y');
 		    	HYPR(ARCHIVE, pver, 'y');
 		    	KITT(ARCHIVE, pver, 'y');
+		    	MPVF(ARCHIVE, pver, 'y');
 		    	NVIM(ARCHIVE, pver, 'y');
 		    	SWAY(ARCHIVE, pver, 'y');
 		    	WAYB(ARCHIVE, pver, 'y');
@@ -624,6 +626,7 @@ void full_install(char ARCHIVE, char full_install_opt)
 	GTKL(ARCHIVE, pver, PKGINSTALL);
 	HYPR(ARCHIVE, pver, PKGINSTALL);
 	KITT(ARCHIVE, pver, PKGINSTALL);
+	MPVF(ARCHIVE, pver, PKGINSTALL);
 	NVIM(ARCHIVE, pver, PKGINSTALL);
 	WAYB(ARCHIVE, pver, PKGINSTALL);
     }
@@ -632,6 +635,19 @@ void full_install(char ARCHIVE, char full_install_opt)
 	int install_pkg_opt;
 	do
 	{
+	    char TEXT_C_BASH = ".bashrc";
+            char TEXT_C_SWAY = "Sway-WM configs";
+            char TEXT_C_BTOP = "btop config";
+            char TEXT_C_CAVA = "cava config";
+            char TEXT_C_FAST = "fastfetch configs";
+            char TEXT_C_FUZZ = "fuzzel configs";
+            char TEXT_C_GTKL = "gtklock config and style (appearance) ";
+            char TEXT_C_HYPR = "Hyprland-WM config + Hypridle config";
+            char TEXT_C_KITT = "kitty terminal";
+            char TEXT_C_MPVF = "mpv config";
+            char TEXT_C_NVIM = "neovim config with lazy";
+            char TEXT_C_WAYB = "waybar config and style (appearance)";
+
 	    printf("\n[1] Install BASH ");
 	    printf("\n[2] Install SWAY ");
 	    printf("\n[3] Install BTOP ");
@@ -641,8 +657,9 @@ void full_install(char ARCHIVE, char full_install_opt)
 	    printf("\n[7] Install GTKL ");
 	    printf("\n[8] Install HYPR ");
 	    printf("\n[9] Install KITT ");
-	    printf("\n[10] Install NVIM ");
-	    printf("\n[11] Install WAYB ");
+	    printf("\n[10] Install MPV ");
+	    printf("\n[11] Install NVIM ");
+	    printf("\n[12] Install WAYB ");
 	    
 	    scanf(" %d", &install_pkg_opt);
 
@@ -657,6 +674,7 @@ void full_install(char ARCHIVE, char full_install_opt)
     	    //     void GTKL(char ARCHIVE, float pver, char PKGINSTALL);
     	    //     void HYPR(char ARCHIVE, float pver, char PKGINSTALL);
     	    //     void KITT(char ARCHIVE, float pver, char PKGINSTALL);
+    	    //     void MPVF(char ARCHIVE, float pver, char PKGINSTALL);
     	    //     void NVIM(char ARCHIVE, float pver, char PKGINSTALL);
     	    //     void WAYB(char ARCHIVE, float pver, char PKGINSTALL);
     	    // printf("\nInstalling dotfiles...\n");
