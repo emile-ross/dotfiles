@@ -418,6 +418,32 @@ void KITT(char ARCHIVE, float pver, char PKGINSTALL)
     system(cmd);
 }
 
+void MPVF(char ARCHIVE, float pver, char PKGINSTALL)
+{
+    char cmd[128];
+    if (ARCHIVE == 'Y' || ARCHIVE == 'y')
+    {
+    	// archive mpv config
+        snprintf(cmd, sizeof(cmd),
+		"mv ~/.config/mpv/mpv.conf ~/.config/mpv/mpv-oldv%.2f.conf ", pver);
+	system(cmd);
+	printf(BOLD_S"\nThe old "UDRL_S"mpv"STYLE_END BOLD_S" config was archived\n"STYLE_END);
+    }
+    if ( PKGINSTALL == 'Y'|| PKGINSTALL == 'y')
+    {
+        snprintf(cmd, 32,
+		"yay -S --noconfirm mpv");
+	system(cmd);
+
+	printf(BOLD_S"\nMPV was installed!\n"STYLE_END);
+    }
+    // export mpv config with shaders
+    snprintf(cmd, 96,
+	    "mkdir -p ~/.config/mpv/ && "
+            "cp -f dotfiles/mpv/mpv.conf ~/.config/mpv ");
+    system(cmd);
+}
+
 void NVIM(char ARCHIVE, float pver, char PKGINSTALL)
 {
     char cmd[256];
