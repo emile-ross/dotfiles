@@ -24,6 +24,7 @@ If you want to **Install** your dotfiles, click [here](#Install)
 - gtklock
   - custom lockscreen background
 - sway (not fully implemented)
+- mpv
 
 --- 
 
@@ -107,6 +108,8 @@ If you ever encounter an issue please report it by providing the issue you are e
 # Credits 
 
 Many configs were directly from or inspired by [@kzndotsh](https://github.com/kzndotsh)
+
+amd fsr: https://github.com/haasn/fsrcnn-mpv
 
 (fuzzel, cava, waybar...)
 
