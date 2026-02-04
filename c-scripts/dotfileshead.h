@@ -14,6 +14,8 @@
 #define ANSI_GREY    	"\x1b[90m"
 #define ANSI_CYAN    	"\x1b[36m"
 #define ANSI_RED 	"\x1b[31m"
+#define ANSI_GREEN 	"\x1b[32m"
+#define ANSI_LGREEN 	"\x1b[92m"
 #define STYLE_END   	"\e[m" // resets the styling
 
 
