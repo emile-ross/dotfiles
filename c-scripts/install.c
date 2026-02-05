@@ -4,13 +4,10 @@ void clear()
 {
     printf("\033[2J\033[H");
 }
-//char ARCHIVE;
-//char PKGINSTALL;
-//
-int main()
+
+void install_configs(float pver)  // the partial install script (configure which package or configuration to install)
 {
     int cust_conf_inst_opt;
-
     struct timespec install_timer;
 
     do
@@ -25,6 +22,7 @@ int main()
     	        temp_conf_installed = (char*)(TEXT_C_BASH);
     	        printf("\nInstalling %s \n", temp_conf_installed);
 
+		clear();
     	        printf(UDRL_S"\nInstalled %s successfully.\n"STYLE_END, temp_conf_installed);
 
     		goto installmessage;
@@ -32,6 +30,7 @@ int main()
     	        temp_conf_installed = (char*)(TEXT_C_BTOP);
     	        printf("\nInstalling %s \n", temp_conf_installed);
 
+		clear();
     	        printf(UDRL_S"\nInstalled %s successfully.\n"STYLE_END, temp_conf_installed);
     		    	
     		goto installmessage;
@@ -39,6 +38,7 @@ int main()
     	        temp_conf_installed = (char*)(TEXT_C_CAVA);
     	        printf("\nInstalling %s \n", temp_conf_installed);
 
+		clear();
     	        printf(UDRL_S"\nInstalled %s successfully.\n"STYLE_END, temp_conf_installed);
     	    
     		goto installmessage;
@@ -46,6 +46,7 @@ int main()
     	        temp_conf_installed = (char*)(TEXT_C_FAST);
     	        printf("\nInstalling %s \n", temp_conf_installed);
 
+		clear();
     	        printf(UDRL_S"\nInstalled %s successfully.\n"STYLE_END, temp_conf_installed);
     		    
     		goto installmessage;
@@ -53,6 +54,7 @@ int main()
     	        temp_conf_installed = (char*)(TEXT_C_FUZZ);
     	        printf("\nInstalling %s \n", temp_conf_installed);
 
+		clear();
     	        printf(UDRL_S"\nInstalled %s successfully.\n"STYLE_END, temp_conf_installed);
 
     		goto installmessage;
@@ -60,6 +62,7 @@ int main()
     	        temp_conf_installed = (char*)(TEXT_C_GTKL);
     	        printf("\nInstalling %s \n", temp_conf_installed);
 
+		clear();
     	        printf(UDRL_S"\nInstalled %s successfully.\n"STYLE_END, temp_conf_installed);
     		    	
     		goto installmessage;
@@ -67,6 +70,7 @@ int main()
     	        temp_conf_installed = (char*)(TEXT_C_HYPR);
     	        printf("\nInstalling %s \n", temp_conf_installed);
 
+		clear();
     	        printf(UDRL_S"\nInstalled %s successfully.\n"STYLE_END, temp_conf_installed);
     		    	
     		goto installmessage;
@@ -74,6 +78,7 @@ int main()
     	        temp_conf_installed = (char*)(TEXT_C_KITT);
     	        printf("\nInstalling %s \n", temp_conf_installed);
 
+		clear();
     	        printf(UDRL_S"\nInstalled %s successfully.\n"STYLE_END, temp_conf_installed);
     		    	
     		goto installmessage;
@@ -81,6 +86,7 @@ int main()
     	        temp_conf_installed = (char*)(TEXT_C_MPVF);
     	        printf("\nInstalling %s \n", temp_conf_installed);
 
+		clear();
     	        printf(UDRL_S"\nInstalled %s successfully.\n"STYLE_END, temp_conf_installed);
     		    	
     		goto installmessage;
@@ -88,6 +94,7 @@ int main()
     	        temp_conf_installed = (char*)(TEXT_C_NVIM);
     	        printf("\nInstalling %s \n", temp_conf_installed);
 
+		clear();
     	        printf(UDRL_S"\nInstalled %s successfully.\n"STYLE_END, temp_conf_installed);
 
     		goto installmessage;
@@ -95,6 +102,7 @@ int main()
     	        temp_conf_installed = (char*)(TEXT_C_SWAY);
     	        printf("\nInstalling %s \n", temp_conf_installed);
 
+		clear();
     	        printf(UDRL_S"\nInstalled %s successfully.\n"STYLE_END, temp_conf_installed);
     		    	
     		goto installmessage;
@@ -102,6 +110,7 @@ int main()
     	        temp_conf_installed = (char*)(TEXT_C_WAYB);
     	        printf("\nInstalling %s \n", temp_conf_installed);
 
+		clear();
     	        printf(UDRL_S"\nInstalled %s successfully.\n"STYLE_END, temp_conf_installed);
     		
     		goto installmessage;
@@ -122,9 +131,4 @@ int main()
     }
     while(cust_conf_inst_opt > 0 && cust_conf_inst_opt < max_menu_opt_n);
 
-    	    install_timer.tv_sec = 5;
-    	    install_timer.tv_nsec = 000000000L;
-  
-    	    nanosleep(&install_timer, NULL);
-    return 0;
 }
