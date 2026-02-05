@@ -1,4 +1,4 @@
-# ImAwsum's dotfiles
+# Configuration du système
 Dotfiles are files used to customize your system to your liking.  You can modify them by editing config files using a text editor ([Neovim](https://github.com/neovim/neovim)).
 
 [Voir cette page en francais][fr]
@@ -124,10 +124,10 @@ other credits:
 - https://github.com/harilvfs/fastfetch
 (fastfetch config)
 
-- https://github.com/torvalds/linux
-(linux ofc)
+- https://github.com/torvalds/linux 
+(linux bien sûr)
 
-*missing credits*
+*veulliez noter que certains crédits sont manquants*
 
 
 [fr]: README.fr.md
