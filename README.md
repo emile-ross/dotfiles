@@ -1,6 +1,8 @@
 # ImAwsum's dotfiles
 Dotfiles are files used to customize your system to your liking.  You can modify them by editing config files using a text editor ([Neovim](https://github.com/neovim/neovim)).
 
+[Voir cette page en francais][fr]
+
 If you want to **Install** your dotfiles, click [here](#Install)
 
 ## requirements
@@ -43,7 +45,9 @@ More features will come in the future
 git clone https://github.com/imawsumm/dotfiles
 gcc dotfiles/c-scripts/setup.c -o dotfiles/setup
 ./dotfiles/setup
-```
+``` 
+note: This only compiles the code necessary for the install script. 
+
 
 ## after install 
 Useful keybinds to know:
@@ -125,3 +129,5 @@ other credits:
 
 *missing credits*
 
+
+[fr]: README.fr.md
