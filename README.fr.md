@@ -10,23 +10,24 @@ Si vous voulez **Installer** vos configurations, cliquez [ici](#Installer)
 - Hyprland n'est pas nécessaire mais il est toutefois recommandé afin de bénéficier de toutes les configurations
   
 
-## programs modified
+## programmes modifiés
 - **neovim**
-  - lazy, telescope and lualine
+  - lazy, telescope et lualine
 - **hyprland**
-  - with hypridle
+  - avec hypridle
 - **waybar**
 - fastfetch
 - btop
 - cava
 - fuzzel
 - kitty
-  - font options
-  - color scheme
+  - options de police
+  - palette de couleurs
 - gtklock
   - custom lockscreen background
-- sway (not fully implemented)
-- mpv
+- sway (pas complètement mis en place)
+- mpv 
+  - intégrer des shaders
 
 --- 
 
