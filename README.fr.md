@@ -93,11 +93,11 @@ super + 0 -> **execute [OBS](https://github.com/obsproject/obs-studio)**
 > *(an open source program to stream and record videos)*
 
 ## Multi Tasking
-super + F1 -> **switch to Workspace 1**
+super + F1 -> **espace de travail 1**
 
-super + shift + F1 -> **move window to Workspace 1** 
+super + shift + F1 -> **déplacer la fenètre vers l'espace de travail 1** 
  
- > *super + (F1-F11) -> Workspaces (1-11)*
+ > *super + (F1-F11) -> espace de travail (1-11)*
 
 ALT + Q -> **focus kitty**
 
@@ -108,22 +108,23 @@ ALT + 2 -> **focus firefox**
 ALT + 0 -> **focus obs**
 
 
-If you ever encounter an issue please report it by providing the issue you are experiencing with a log, it helps me improve this script. 
+Si jamais vous rencontrez un problème, veuillez le signaler en fournissant un "log", cela m'aide à améliorer ce script.
 
-# Credits 
+# Crédits
 
-Many configs were directly from or inspired by [@kzndotsh](https://github.com/kzndotsh)
+Plusieurs configurations sont inspirées directement ou indirectement de [@kzndotsh](https://github.com/kzndotsh)
 
-amd fsr: https://github.com/haasn/fsrcnn-mpv
+AMD FSR: https://github.com/haasn/fsrcnn-mpv
 
 (fuzzel, cava, waybar...)
 
-You can find the original content at: [github.com/kzndotsh/dotfiles](https://github.com/kzndotsh/dotfiles)
+Vous pouvez trouver le contenu original à: [github.com/kzndotsh/dotfiles](https://github.com/kzndotsh/dotfiles)
 
-other credits:
+autres crédits:
+
 
 - https://github.com/harilvfs/fastfetch
-(fastfetch config)
+(configurations fastfetch)
 
 - https://github.com/torvalds/linux 
 (linux bien sûr)
