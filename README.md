@@ -5,7 +5,7 @@ Dotfiles are files used to customize your system to your liking.  You can modify
 
 If you want to **Install** your dotfiles, click [here](#Install)
 
-## requirements
+## prerequisites
 - an Arch based distribution of linux (Windows will **never** get support)
 - Hyprland isn't required but still recomended in order to benefit from all configurations
   
@@ -27,6 +27,7 @@ If you want to **Install** your dotfiles, click [here](#Install)
   - custom lockscreen background
 - sway (not fully implemented)
 - mpv
+  - with shaders
 
 --- 
 
