@@ -3,11 +3,11 @@ Dotfiles are files used to customize your system to your liking.  You can modify
 
 [Voir cette page en francais][fr]
 
-If you want to **Install** your dotfiles, click [here](#Install)
+Si vous voulez **Installer** vos configurations, cliquez [ici](#Installer)
 
-## requirements
-- an Arch based distribution of linux (Windows will **never** get support)
-- Hyprland isn't required but still recomended in order to benefit from all configurations
+## prérequis
+- une distribution basée sur Arch Linux (Windows ne sera **jamais** supporté)
+- Hyprland n'est pas nécessaire mais il est toutefois recommandé afin de bénéficier de toutes les configurations
   
 
 ## programs modified
@@ -30,9 +30,9 @@ If you want to **Install** your dotfiles, click [here](#Install)
 
 --- 
 
-## Install
+## Installer
 
->  **Warning** Be careful running scripts found on the internet!
+>  **Attention** Be careful running scripts found on the internet!
 
 Before executing the c script, you will need to compile it.  
 
