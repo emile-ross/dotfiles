@@ -15,17 +15,18 @@ If you want to **Install** your dotfiles, click [here](#Install)
   - lazy, telescope and lualine
 - **hyprland**
   - with hypridle
+- sway (not fully implemented)
+  - with swaybar confguration
 - **waybar**
-- fastfetch
 - btop
 - cava
+- fastfetch
 - fuzzel
+- gtklock
+  - custom lockscreen background
 - kitty
   - font options
   - color scheme
-- gtklock
-  - custom lockscreen background
-- sway (not fully implemented)
 - mpv
   - with shaders
 
@@ -114,7 +115,7 @@ If you ever encounter an issue please report it by providing the issue you are e
 
 Many configs were directly from or inspired by [@kzndotsh](https://github.com/kzndotsh)
 
-amd fsr: https://github.com/haasn/fsrcnn-mpv
+AMD FSR: https://github.com/haasn/fsrcnn-mpv
 
 (fuzzel, cava, waybar...)
 
@@ -126,7 +127,7 @@ other credits:
 (fastfetch config)
 
 - https://github.com/torvalds/linux
-(linux ofc)
+(Linux ofc)
 
 *missing credits*
 
