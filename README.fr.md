@@ -1,9 +1,9 @@
 # Configuration du système
-Dotfiles are files used to customize your system to your liking.  You can modify them by editing config files using a text editor ([Neovim](https://github.com/neovim/neovim)).
+Les (dotfiles) sont des fichiers utilisés pour modifier votre système.  Vous pouvez les modifier en utilisant un éditeur de texte comme ([Neovim](https://github.com/neovim/neovim)).
 
-[Voir cette page en francais][fr]
+[View this page in english](https://github.com/imawsumm/dotfiles)
 
-Si vous voulez **Installer** vos configurations, cliquez [ici](#Installer)
+Si vous voulez **Installer** vos configurations, cliquez [ici](##Installer)
 
 ## prérequis
 - une distribution basée sur Arch Linux (Windows ne sera **jamais** supporté)
@@ -31,26 +31,26 @@ Si vous voulez **Installer** vos configurations, cliquez [ici](#Installer)
 
 --- 
 
-## Installer
+# Installer
 
->  **Attention** Be careful running scripts found on the internet!
+>  **Attention** Faites attention lorsque vous exécutez du code trouvé sur internet!
 
-Before executing the c script, you will need to compile it.  
+Avant d'exécuter le script en c, vous devez le compiler. 
 
 This is a script to help new users configure their system to tbeir liking.  
 You can use this script to install your dotfiles, update your dotfiles and configure your environment! 
 
-More features will come in the future
+Plus de fonctionnalités sont à venir.
 
 ```sh
 git clone https://github.com/imawsumm/dotfiles
 gcc dotfiles/c-scripts/setup.c -o dotfiles/setup
 ./dotfiles/setup
 ``` 
-note: This only compiles the code necessary for the install script. 
+Veuillez noter que ceci ne compile que le code nécessaire pour le script d'installation.
 
 
-## after install 
+## Après avoir installé
 Useful keybinds to know:
 (super = "Windows key")
  
@@ -65,7 +65,7 @@ super + V -> **Toggle Floating Mode**
 super + C -> **Close Window**
 
 
-### execute programs
+### ouvrir les applications
 
 super + R -> **execute [fuzzel](https://codeberg.org/dnkl/fuzzel)**
 > (fuzzel is the app launcher)
@@ -130,6 +130,3 @@ autres crédits:
 (linux bien sûr)
 
 *veulliez noter que certains crédits sont manquants*
-
-
-[fr]: README.fr.md
