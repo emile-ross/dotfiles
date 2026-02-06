@@ -3,7 +3,7 @@ Les (dotfiles) sont des fichiers utilisés pour modifier votre système.  Vous p
 
 [View this page in english](https://github.com/imawsumm/dotfiles)
 
-Si vous voulez **Installer** vos configurations, cliquez [ici](##Installer)
+Si vous voulez **Installer** vos configurations, cliquez [ici](#Installer)
 
 ## prérequis
 - une distribution basée sur Arch Linux (Windows ne sera **jamais** supporté)
