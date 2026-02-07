@@ -5,13 +5,27 @@ void clear()
     printf("\033[2J\033[H");
 }
 
-void install_configs(float pver)  // the partial install script (configure which package or configuration to install)
+void install_configs()  // the partial install script (configure which package or configuration to install)
 {
     int cust_conf_inst_opt;
     struct timespec install_timer;
 
     do
     {
+	printf(BOLD_S" [1] "STYLE_END"Install "BOLD_S"%s\n"STYLE_END, TEXT_C_BASH);
+	printf(BOLD_S" [2] "STYLE_END"Install "BOLD_S"%s\n"STYLE_END, TEXT_C_SWAY);
+	printf(BOLD_S" [3] "STYLE_END"Install "BOLD_S"%s\n"STYLE_END, TEXT_C_BTOP);
+	printf(BOLD_S" [4] "STYLE_END"Install "BOLD_S"%s\n"STYLE_END, TEXT_C_CAVA);
+	printf(BOLD_S" [5] "STYLE_END"Install "BOLD_S"%s\n"STYLE_END, TEXT_C_FAST);
+	printf(BOLD_S" [6] "STYLE_END"Install "BOLD_S"%s\n"STYLE_END, TEXT_C_FUZZ);
+	printf(BOLD_S" [7] "STYLE_END"Install "BOLD_S"%s\n"STYLE_END, TEXT_C_GTKL);
+	printf(BOLD_S" [8] "STYLE_END"Install "BOLD_S"%s\n"STYLE_END, TEXT_C_HYPR);
+	printf(BOLD_S" [9] "STYLE_END"Install "BOLD_S"%s\n"STYLE_END, TEXT_C_KITT);
+	printf(BOLD_S" [10] "STYLE_END"Install "BOLD_S"%s\n"STYLE_END, TEXT_C_MPVF);
+	printf(BOLD_S" [11] "STYLE_END"Install "BOLD_S"%s\n"STYLE_END, TEXT_C_NVIM);
+	printf(BOLD_S" [12] "STYLE_END"Install "BOLD_S"%s\n"STYLE_END, TEXT_C_WAYB);
+	printf(BOLD_S"\n [0] Exit \n"STYLE_END);
+
     	char* temp_conf_installed = NULL;
 
     	scanf(" %i", &cust_conf_inst_opt);
@@ -123,12 +137,12 @@ void install_configs(float pver)  // the partial install script (configure which
     		default:
     		    printf(ANSI_RED"\nInvalid character\n"STYLE_END);
     	        goto end;
+
     		installmessage:
-    	    printf(FASTBLINK_S ANSI_GREEN"Installed %s\n"STYLE_END, temp_conf_installed);
+		    printf(FASTBLINK_S ANSI_GREEN"Installed %s\n"STYLE_END, temp_conf_installed);
 
     	    end:
     	}
     }
     while(cust_conf_inst_opt > 0 && cust_conf_inst_opt < max_menu_opt_n);
-
 }
