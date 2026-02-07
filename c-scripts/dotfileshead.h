@@ -46,7 +46,7 @@ int full_update(char ARCHIVE, float pver);
 
 const int max_menu_opt_n = 12;
 
-void install_configs(float pver); // the partial install script (configure which package or configuration to install)
+void install_configs(); // the partial install script (configure which package or configuration to install)
 
 float* update();
 
