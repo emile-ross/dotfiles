@@ -54,6 +54,13 @@ void install_configs()  // the partial install script (configure which package o
     		goto installmessage;
     	    case 2:
     	        temp_conf_installed = (char*)(TEXT_C_BTOP);
+
+		printf("Do you want to archive your dotfiles "BOLD_S"(Y/n)\n"STYLE_END);
+		scanf(" %c", &ARCHIVE);
+
+		printf("Do you want to install the package "BOLD_S"(Y/n)\n"STYLE_END);
+		scanf(" %c", &PKGINSTALL);
+
     	        printf("\nInstalling %s \n", temp_conf_installed);
 		BTOP(ARCHIVE, pver, PKGINSTALL);
 
@@ -63,6 +70,13 @@ void install_configs()  // the partial install script (configure which package o
     		goto installmessage;
     	    case 3:
     	        temp_conf_installed = (char*)(TEXT_C_CAVA);
+
+		printf("Do you want to archive your dotfiles "BOLD_S"(Y/n)\n"STYLE_END);
+		scanf(" %c", &ARCHIVE);
+
+		printf("Do you want to install the package "BOLD_S"(Y/n)\n"STYLE_END);
+		scanf(" %c", &PKGINSTALL);
+
     	        printf("\nInstalling %s \n", temp_conf_installed);
 		CAVA(ARCHIVE, pver, PKGINSTALL);
 
@@ -72,6 +86,13 @@ void install_configs()  // the partial install script (configure which package o
     		goto installmessage;
     	    case 4:
     	        temp_conf_installed = (char*)(TEXT_C_FAST);
+
+		printf("Do you want to archive your dotfiles "BOLD_S"(Y/n)\n"STYLE_END);
+		scanf(" %c", &ARCHIVE);
+
+		printf("Do you want to install the package "BOLD_S"(Y/n)\n"STYLE_END);
+		scanf(" %c", &PKGINSTALL);
+
     	        printf("\nInstalling %s \n", temp_conf_installed);
 		FAST(ARCHIVE, pver, PKGINSTALL);
 
@@ -81,6 +102,13 @@ void install_configs()  // the partial install script (configure which package o
     		goto installmessage;
     	    case 5:
     	        temp_conf_installed = (char*)(TEXT_C_FUZZ);
+
+		printf("Do you want to archive your dotfiles "BOLD_S"(Y/n)\n"STYLE_END);
+		scanf(" %c", &ARCHIVE);
+
+		printf("Do you want to install the package "BOLD_S"(Y/n)\n"STYLE_END);
+		scanf(" %c", &PKGINSTALL);
+
     	        printf("\nInstalling %s \n", temp_conf_installed);
 		FUZZ(ARCHIVE, pver, PKGINSTALL);
 
@@ -90,6 +118,13 @@ void install_configs()  // the partial install script (configure which package o
     		goto installmessage;
     	    case 6:
     	        temp_conf_installed = (char*)(TEXT_C_GTKL);
+
+		printf("Do you want to archive your dotfiles "BOLD_S"(Y/n)\n"STYLE_END);
+		scanf(" %c", &ARCHIVE);
+
+		printf("Do you want to install the package "BOLD_S"(Y/n)\n"STYLE_END);
+		scanf(" %c", &PKGINSTALL);
+
     	        printf("\nInstalling %s \n", temp_conf_installed);
 		GTKL(ARCHIVE, pver, PKGINSTALL);
 
@@ -99,6 +134,13 @@ void install_configs()  // the partial install script (configure which package o
     		goto installmessage;
     	    case 7:
     	        temp_conf_installed = (char*)(TEXT_C_HYPR);
+
+		printf("Do you want to archive your dotfiles "BOLD_S"(Y/n)\n"STYLE_END);
+		scanf(" %c", &ARCHIVE);
+
+		printf("Do you want to install the package "BOLD_S"(Y/n)\n"STYLE_END);
+		scanf(" %c", &PKGINSTALL);
+
     	        printf("\nInstalling %s \n", temp_conf_installed);
 		HYPR(ARCHIVE, pver, PKGINSTALL);
 
@@ -108,6 +150,13 @@ void install_configs()  // the partial install script (configure which package o
     		goto installmessage;
     	    case 8:
     	        temp_conf_installed = (char*)(TEXT_C_KITT);
+
+		printf("Do you want to archive your dotfiles "BOLD_S"(Y/n)\n"STYLE_END);
+		scanf(" %c", &ARCHIVE);
+
+		printf("Do you want to install the package "BOLD_S"(Y/n)\n"STYLE_END);
+		scanf(" %c", &PKGINSTALL);
+
     	        printf("\nInstalling %s \n", temp_conf_installed);
 		KITT(ARCHIVE, pver, PKGINSTALL);
 
@@ -117,6 +166,13 @@ void install_configs()  // the partial install script (configure which package o
     		goto installmessage;
     	    case 9:
     	        temp_conf_installed = (char*)(TEXT_C_MPVF);
+
+		printf("Do you want to archive your dotfiles "BOLD_S"(Y/n)\n"STYLE_END);
+		scanf(" %c", &ARCHIVE);
+
+		printf("Do you want to install the package "BOLD_S"(Y/n)\n"STYLE_END);
+		scanf(" %c", &PKGINSTALL);
+
     	        printf("\nInstalling %s \n", temp_conf_installed);
 		MPVF(ARCHIVE, pver, PKGINSTALL);
 
@@ -126,6 +182,13 @@ void install_configs()  // the partial install script (configure which package o
     		goto installmessage;
     	    case 10:
     	        temp_conf_installed = (char*)(TEXT_C_NVIM);
+
+		printf("Do you want to archive your dotfiles "BOLD_S"(Y/n)\n"STYLE_END);
+		scanf(" %c", &ARCHIVE);
+
+		printf("Do you want to install the package "BOLD_S"(Y/n)\n"STYLE_END);
+		scanf(" %c", &PKGINSTALL);
+
     	        printf("\nInstalling %s \n", temp_conf_installed);
 		NVIM(ARCHIVE, pver, PKGINSTALL);
 
@@ -135,6 +198,13 @@ void install_configs()  // the partial install script (configure which package o
     		goto installmessage;
     	    case 11:
     	        temp_conf_installed = (char*)(TEXT_C_SWAY);
+
+		printf("Do you want to archive your dotfiles "BOLD_S"(Y/n)\n"STYLE_END);
+		scanf(" %c", &ARCHIVE);
+
+		printf("Do you want to install the package "BOLD_S"(Y/n)\n"STYLE_END);
+		scanf(" %c", &PKGINSTALL);
+
     	        printf("\nInstalling %s \n", temp_conf_installed);
 		SWAY(ARCHIVE, pver, PKGINSTALL);
 
@@ -144,6 +214,13 @@ void install_configs()  // the partial install script (configure which package o
     		goto installmessage;
     	    case 12:
     	        temp_conf_installed = (char*)(TEXT_C_WAYB);
+
+		printf("Do you want to archive your dotfiles "BOLD_S"(Y/n)\n"STYLE_END);
+		scanf(" %c", &ARCHIVE);
+
+		printf("Do you want to install the package "BOLD_S"(Y/n)\n"STYLE_END);
+		scanf(" %c", &PKGINSTALL);
+
     	        printf("\nInstalling %s \n", temp_conf_installed);
 		WAYB(ARCHIVE, pver, PKGINSTALL);
 
