@@ -43,9 +43,12 @@ You can use this script to install your dotfiles, update your dotfiles and confi
 Plus de fonctionnalités sont à venir.
 
 ```sh
+cd ~
 git clone https://github.com/imawsumm/dotfiles
-gcc dotfiles/c-scripts/setup.c -o dotfiles/setup
-./dotfiles/setup
+cd dotfiles/c-scripts
+gcc -c setup.c
+gcc -c install.c
+gcc setup.o install.o -o setup
 ``` 
 Veuillez noter que ceci ne compile que le code nécessaire pour le script d'installation.
 
