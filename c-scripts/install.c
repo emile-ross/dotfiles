@@ -13,7 +13,9 @@ void install_configs()  // the partial install script (configure which package o
     do
     {
 	char ARCHIVE;
-	float pver=0.0;
+	char PKGINSTALL;
+	float pver = 0.0f; // assumes the user doesn't have the dotfiles
+
 	printf(BOLD_S" [1] "STYLE_END"Install "BOLD_S"%s\n"STYLE_END, TEXT_C_BASH);
 	printf(BOLD_S" [2] "STYLE_END"Install "BOLD_S"%s\n"STYLE_END, TEXT_C_SWAY);
 	printf(BOLD_S" [3] "STYLE_END"Install "BOLD_S"%s\n"STYLE_END, TEXT_C_BTOP);
@@ -37,8 +39,11 @@ void install_configs()  // the partial install script (configure which package o
     	    case 1:
     	        temp_conf_installed = (char*)(TEXT_C_BASH);
 
-		printf("\nDo you want to archive your dotfiles\n");
+		printf("Do you want to archive your dotfiles "BOLD_S"(Y/n)\n"STYLE_END);
 		scanf(" %c", &ARCHIVE);
+
+		printf("Do you want to install the package "BOLD_S"(Y/n)\n"STYLE_END);
+		scanf(" %c", &PKGINSTALL);
 
     	        printf("\nInstalling %s \n", temp_conf_installed);
 		BASH(ARCHIVE, pver, PKGINSTALL);
