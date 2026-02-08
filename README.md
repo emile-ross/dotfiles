@@ -45,9 +45,8 @@ More features will come in the future
 
 ```sh
 git clone https://github.com/imawsumm/dotfiles
-cd dotfiles/c-scripts
-gcc -c setup.c
-gcc -c install.c
+gcc -c dotfiles/c-scripts/setup.c
+gcc -c dotfiles/c-scripts/install.c
 gcc setup.o install.o -o setup
 ``` 
 note: This only compiles the code necessary for the install script. 
