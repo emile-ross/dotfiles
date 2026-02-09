@@ -5,11 +5,35 @@ Dotfiles are files used to customize your system to your liking.  You can modify
 
 If you want to **Install** your dotfiles, click [here](#Install)
 
-<img src="assets/1.png" alt="desktop">
 
-<img src="assets/2.png" alt="neovim with telescope">
 
-<img src="assets/3.png" alt="nvim with cava">
+<table>
+  <tr>
+    <th>desktop with kitty</th>
+    <th>neovim with telescope</th>
+  </tr>
+  <tr>
+    <td align="center">
+       <img src="assets/1.png" alt="desktop" width=400>
+    </td>
+    <td align="center">
+      <img src="assets/2.png" alt="neovim with telescope" width=400>
+    </td>
+  </tr>
+  <tr>
+    <th>neovim</th>
+    <th>fuzzel</th>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="assets/3.png" alt="neovim" width="400">
+    </td>
+    <td align="center">
+    </td>
+  </tr>
+</table>
+
+
 
 ## prerequisites
 - an Arch based distribution of linux (Windows will **never** get support)
