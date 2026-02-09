@@ -13,6 +13,10 @@
 #define FASTBLINK_S 	"\e[6m"
 #define STRIKE_S 	"\e[9m"
 
+void clear()
+{
+    printf("\033[2J\033[H");
+}
 
 #define ANSI_RED 	"\x1b[31m"
 #define ANSI_GREEN 	"\x1b[32m"
