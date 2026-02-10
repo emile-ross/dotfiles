@@ -5,6 +5,35 @@ Les (dotfiles) sont des fichiers utilisés pour modifier votre système.  Vous p
 
 Si vous voulez **Installer** vos configurations, cliquez [ici](#Installer)
 
+<table>
+  <tr>
+    <th>le bureau avec kitty</th>
+    <!-- "desktop" -> le bureau?? l'interface generale?? -->
+    <th>neovim avec telescope</th>
+  </tr>
+  <tr>
+    <td align="center">
+       <img src="assets/1.png" alt="desktop" width=400>
+    </td>
+    <td align="center">
+      <img src="assets/2.png" alt="neovim with telescope" width=400>
+    </td>
+  </tr>
+  <tr>
+    <th>neovim</th>
+    <th>fuzzel</th>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="assets/3.png" alt="neovim" width="400">
+    </td>
+    <td align="center">
+      <img src="assets/4.png" alt="neovim" width="400">
+    </td>
+  </tr>
+</table>
+
+
 ## prérequis
 - une distribution basée sur Arch Linux (Windows ne sera **jamais** supporté)
 - Hyprland n'est pas nécessaire mais il est toutefois recommandé afin de bénéficier de toutes les configurations
@@ -54,8 +83,8 @@ Veuillez noter que ceci ne compile que le code nécessaire pour le script d'inst
 
 
 ## Après avoir installé
-Useful keybinds to know:
-(super = "Windows key")
+des touches utiles a connaitre:
+(super = "la touche Windows")
  
  super + Q -> **execute kitty**
 > (the default terminal)
@@ -71,29 +100,29 @@ super + C -> **Close Window**
 ### ouvrir les applications
 
 super + R -> **execute [fuzzel](https://codeberg.org/dnkl/fuzzel)**
-> (fuzzel is the app launcher)
+> (fuzzel exécute les applications présentes sur le système)
 
 
 super + E -> **execute [dolphin](https://github.com/KDE/dolphin)**
-> *(A gui file manager)*
+> *(un gestionnaire de fichiers avec interface graphique)*
 
 
 super + 1 -> **execute [Floorp](https://github.com/Floorp-Projects/Floorp)**
-> *(firefox/gecko based web browser)*
+> *(un navigateur web basé sur firefox/gecko)*
 
 
 super + 2 -> **execute [Firefox](https://github.com/mozilla-firefox/firefox)**
 
 
 super + 3 -> **execute [Chromium](https://source.chromium.org/chromium)**
-> *(Chromium is a DeGoogled Chromium browser)*
+> *(Chromium est google Chrome sans google (DeGoogled) )*
 
 
 super + 4 -> **execute [LibreWolf](https://codeberg.org/librewolf/source)**
-> *(firefox/gecko based web browser)*
+> *(un navigateur web basé sur firefox/gecko)*
 
 super + 0 -> **execute [OBS](https://github.com/obsproject/obs-studio)**
-> *(an open source program to stream and record videos)*
+> *(un programme open source permettant de diffuser et d'enregistrer des vidéos)*
 
 ## Multi Tasking
 super + F1 -> **espace de travail 1**
