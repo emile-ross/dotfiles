@@ -1,10 +1,6 @@
 #include "dotfileshead.h"
 
-void clear()
-{
-    printf("\033[2J\033[H");
-}
-
+struct timespec install_timer;
 char ARCHIVE;
 char PKGINSTALL;
 
@@ -162,18 +158,47 @@ int main()
     		do
     		{
 		    clear();
-    		    char hypr_config_menu_text[128] = "NOT COMPLETE Edit hyprland config";
+    		    char fastfetch_config_menu_text[128] = "Edit fastfetch config";
     		    char kitty_config_menu_text[128] = "Edit kitty appearance and behavior";
     		    
     		    printf(BOLD_S ANSI_WHITE "%s\n"STYLE_END, opt_for_text );
-    		    printf(BOLD_S "\n [1] " STYLE_END "%s\n", hypr_config_menu_text);
+    		    printf(BOLD_S "\n [1] " STYLE_END "%s\n", fastfetch_config_menu_text);
     		    printf(BOLD_S " [2] " STYLE_END "%s\n", kitty_config_menu_text);
     		    printf(BOLD_S " [0] " STYLE_END "%s\n", opt_exit_text);
 		    while (getchar() != '\n');  // clear imput buffer 
     		    scanf(" %d", &dotfiles_config_menu);
 		    if (dotfiles_config_menu == 1)
 		    {
-			printf(BOLD_S "\n Option not available \n" STYLE_END);
+			int fastfetch_config_choice;
+    		    	do
+    		    	{
+			    clear();
+    		    	    char fastfetch_edit_config_text[48] = "Change the config fastfetch uses by default";
+    		    	    char fastfetch_preview_text[32] = "Preview fastfetch output";
+    		    	    
+    		    	    printf(BOLD_S ANSI_WHITE "%s\n\n"STYLE_END, fastfetch_config_menu_text );
+    		    	    printf(BOLD_S " [1] " STYLE_END "%s\n", fastfetch_edit_config_text);
+    		    	    printf(BOLD_S " [2] " STYLE_END "%s\n", fastfetch_preview_text);
+    		    	    printf(BOLD_S " [0] " STYLE_END "%s\n", opt_exit_text);
+			    while (getchar() != '\n');  // clear imput buffer 
+
+    		    	    scanf("\n%d", &fastfetch_config_choice);
+    		    	    char cmd[128];
+    		    	    if (fastfetch_config_choice == 1)
+    		    	    {
+    		    	    	//snprintf(cmd, 128,
+				//	"mv current old");
+    		    	    	//system(cmd);
+    		    	    }
+			    if (fastfetch_config_choice == 2)
+    		    	    {
+    		    	    	//snprintf(cmd, 128,
+				//	"  something else");
+    		    	    	//system(cmd);
+    		    	    }
+    		    	}
+    		    	while(fastfetch_config_choice > 0.0);
+    		    	// exits the while loop when the user types 0
 		    }
 		    if (dotfiles_config_menu == 2)
     		    {
@@ -533,7 +558,6 @@ void full_install(char ARCHIVE, char full_install_opt)
     if (full_install_opt == 'Y' || full_install_opt == 'y')
     {
 	float pver = 0.0f; // the user is presumed to be installing the dotfiles
-	struct timespec install_timer;
 	int timerinstall = 3;
 	printf(BOLD_S"\nInstalling every configuration\n"STYLE_END);
 	printf(BOLD_S"\nStarting in:\n"STYLE_END);
