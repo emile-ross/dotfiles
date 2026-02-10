@@ -29,6 +29,7 @@ If you want to **Install** your dotfiles, click [here](#Install)
       <img src="assets/3.png" alt="neovim" width="400">
     </td>
     <td align="center">
+      <img src="assets/4.png" alt="neovim" width="400">
     </td>
   </tr>
 </table>
