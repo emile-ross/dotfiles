@@ -44,6 +44,8 @@ Si vous voulez **Installer** vos configurations, cliquez [ici](#Installer)
   - lazy, telescope et lualine
 - **hyprland**
   - avec hypridle
+- sway (pas complètement mis en place)
+  - avec une configuration pour la «swaybar»
 - **waybar**
 - fastfetch
 - btop
@@ -54,7 +56,6 @@ Si vous voulez **Installer** vos configurations, cliquez [ici](#Installer)
   - palette de couleurs
 - gtklock
   - custom lockscreen background
-- sway (pas complètement mis en place)
 - mpv 
   - intégrer des shaders
 
@@ -72,11 +73,9 @@ You can use this script to install your dotfiles, update your dotfiles and confi
 Plus de fonctionnalités sont à venir.
 
 ```sh
-cd ~
 git clone https://github.com/imawsumm/dotfiles
-cd dotfiles/c-scripts
-gcc -c setup.c
-gcc -c install.c
+gcc -c dotfiles/c-scripts/setup.c
+gcc -c dotfiles/c-scripts/install.c
 gcc setup.o install.o -o setup
 ``` 
 Veuillez noter que ceci ne compile que le code nécessaire pour le script d'installation.
