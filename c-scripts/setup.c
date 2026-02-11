@@ -168,30 +168,41 @@ int main()
 			    clear();
     		    	    char fastfetch_edit_config_text[48] = "Change the config fastfetch uses by default";
     		    	    char fastfetch_preview_text[32] = "Preview fastfetch output";
+
+			    char cmd[128];
     		    	    
     		    	    printf(BOLD_S ANSI_WHITE "%s\n\n"STYLE_END, fastfetch_config_menu_text );
-    		    	    printf(BOLD_S " [1] " STYLE_END "%s\n", fastfetch_edit_config_text);
-    		    	    printf(BOLD_S " [2] " STYLE_END "%s\n", fastfetch_preview_text);
+    		    	    printf(BOLD_S " [1] " STYLE_END "%s\n", fastfetch_preview_text);
+    		    	    printf(BOLD_S " [2] " STYLE_END "%s\n", fastfetch_edit_config_text);
     		    	    printf(BOLD_S " [0] " STYLE_END "%s\n", opt_exit_text);
 			    while (getchar() != '\n');  // clear imput buffer 
 
     		    	    scanf("\n%d", &fastfetch_config_choice);
     		    	    if (fastfetch_config_choice == 1)
     		    	    {
-    		    	    	//snprintf(cmd, 128,
-				//	"mv current old");
-    		    	    	//system(cmd);
+    		    	    	snprintf(cmd, 128,
+					"fastfetch");
+    		    	    	system(cmd);
+
+				install_timer.tv_sec = 2;
+	        		install_timer.tv_nsec = 000000000L;
+	        		nanosleep(&install_timer, NULL);
     		    	    }
 			    if (fastfetch_config_choice == 2)
     		    	    {
-				printf("\nWhat file would you like to use as your fastfetch config?\n");
-				printf(BOLD_S " [1] "STYLE_END"config-default.jsonc\n");
-				printf(BOLD_S " [2] "STYLE_END"config-default.jsonc\n");
-				printf(BOLD_S " [3] "STYLE_END"config-default.jsonc\n");
-				printf(BOLD_S " [0] "STYLE_END "%s\n", opt_exit_text);
-				
-				fastfetch_conf_export = -1;
-				scanf(" %d", &fastfetch_conf_export);
+				do
+				{
+				    clear();
+				    printf("\nWhat file would you like to use as your fastfetch config?\n");
+				    printf(BOLD_S " [1] "STYLE_END"config-default.jsonc\n");
+				    printf(BOLD_S " [2] "STYLE_END"config-default.jsonc\n");
+				    printf(BOLD_S " [3] "STYLE_END"config-default.jsonc\n");
+				    printf(BOLD_S " [0] "STYLE_END "%s\n", opt_exit_text);
+				    
+				    fastfetch_conf_export = -1;
+				    scanf(" %d", &fastfetch_conf_export);
+				}
+				while (fastfetch_conf_export > 0.0);
     		    	    }
     		    	}
     		    	while(fastfetch_config_choice > 0.0);
@@ -352,6 +363,7 @@ void FAST(char ARCHIVE, float pver, char PKGINSTALL)
 	    "mkdir -p ~/.config/fastfetch/assets && "
 	    "cp -f dotfiles/fastfetch/assets/*.png ~/.config/fastfetch/assets && "
 	    "cp -f dotfiles/fastfetch/config.jsonc ~/.config/fastfetch && "
+	    "cp -f ~/.config/fastfetch/config.jsonc ~/.config/fastfetch/config-duplicated.jsonc && "
 	    "cp -f dotfiles/fastfetch/config-other.jsonc ~/.config/fastfetch && "
 	    "cp -f dotfiles/fastfetch/config-default.jsonc ~/.config/fastfetch");
     system(cmd);
