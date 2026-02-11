@@ -201,6 +201,7 @@ int main()
 				    
 				    fastfetch_conf_export = -1;
 				    scanf(" %d", &fastfetch_conf_export);
+				    copyfiles(fastfetch_conf_export);
 				}
 				while (fastfetch_conf_export > 0.0);
     		    	    }
@@ -749,7 +750,7 @@ float* update()
     return 0;
 }
 
-void copyfiles (int fastfetch_conf_export)
+void copyfiles(int fastfetch_conf_export)
 {
     char cmd[32];
     snprintf(cmd, sizeof(cmd),
@@ -812,4 +813,5 @@ void copyfiles (int fastfetch_conf_export)
 
     close(sourceFd);
     close(destFd);
+    printf("\nThe fastfetch config was modified sucessfully\n");
 }
