@@ -176,7 +176,6 @@ int main()
 			    while (getchar() != '\n');  // clear imput buffer 
 
     		    	    scanf("\n%d", &fastfetch_config_choice);
-    		    	    char cmd[128];
     		    	    if (fastfetch_config_choice == 1)
     		    	    {
     		    	    	//snprintf(cmd, 128,
@@ -214,17 +213,17 @@ int main()
 			    while (getchar() != '\n');  // clear imput buffer 
 
     		    	    scanf("\n%d", &kitty_config_choice);
+
+    		    	    char cmd[24];
     		    	    if (kitty_config_choice == 1)
     		    	    {
-    		    	    	char cmd[24];
-    		    	    	snprintf(cmd, sizeof(cmd),
+    		    	    	snprintf(cmd, 24,
 					"kitten themes");
     		    	    	system(cmd);
     		    	    }
     		    	    if (kitty_config_choice == 2)
     		    	    {
-    		    	    	char cmd[24];
-    		    	    	snprintf(cmd, sizeof(cmd),
+    		    	    	snprintf(cmd, 24,
 					"kitty +list-fonts");
     		    	    	system(cmd);
     
@@ -594,6 +593,8 @@ void full_install(char ARCHIVE, char full_install_opt)
     	    {
     	        char YAY;
     	        printf("Yay is not installed, do you want to install it? (Y/n): ");
+
+		while (getchar() != '\n');  // clear imput buffer 
     	        scanf(" %c", &YAY); // asks the user if they wanna install yay (needed)
     	        if (YAY == 'Y' || YAY == 'y')
     	        {
