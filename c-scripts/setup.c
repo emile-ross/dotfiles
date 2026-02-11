@@ -1,12 +1,5 @@
 #include "dotfileshead.h"
 
-struct timespec install_timer;
-char ARCHIVE;
-char PKGINSTALL;
-
-char full_install_opt; // if the user wants to install everything set to Y
-char full_update_opt; 
-
 int main()
 {
     int menu_one_i;
@@ -192,9 +185,14 @@ int main()
     		    	    }
 			    if (fastfetch_config_choice == 2)
     		    	    {
-    		    	    	//snprintf(cmd, 128,
-				//	"  something else");
-    		    	    	//system(cmd);
+				printf("\nWhat file would you like to use as your fastfetch config?\n");
+				printf(BOLD_S " [1] "STYLE_END"config-default.jsonc\n");
+				printf(BOLD_S " [2] "STYLE_END"config-default.jsonc\n");
+				printf(BOLD_S " [3] "STYLE_END"config-default.jsonc\n");
+				printf(BOLD_S " [0] "STYLE_END "%s\n", opt_exit_text);
+				
+				fastfetch_conf_export = -1;
+				scanf(" %d", &fastfetch_conf_export);
     		    	    }
     		    	}
     		    	while(fastfetch_config_choice > 0.0);
@@ -736,4 +734,69 @@ float* update()
     }
     fclose(file);
     return 0;
+}
+
+void copyfiles (int fastfetch_conf_export)
+{
+    char cmd[32];
+    snprintf(cmd, sizeof(cmd),
+	    "cd ~ ");
+    system(cmd);
+
+    int sourceFd, destFd;
+    ssize_t bytesRead;
+    char buffer[1024];
+
+    char imputfilename[256];
+    char outputfilename[256];
+
+    // using strcpy to assign string literals to character arrays 
+    if (fastfetch_conf_export == 1)
+    {
+	strcpy(imputfilename, ".config/fastfetch/config-default.jsonc");
+    	strcpy(outputfilename, ".config/fastfetch/config.jsonc");
+    }
+    else if (fastfetch_conf_export == 2)
+    {
+	strcpy(imputfilename, ".config/fastfetch/config-other.jsonc");
+    	strcpy(outputfilename, ".config/fastfetch/config.jsonc");
+    }
+    else if (fastfetch_conf_export == 3)
+    {
+	strcpy(imputfilename, ".config/fastfetch/config-duplicated.jsonc");
+    	strcpy(outputfilename, ".config/fastfetch/config.jsonc");
+    }
+
+    sourceFd = open(imputfilename, O_RDONLY);
+    if (sourceFd == -1) 
+    {
+        perror("Error opening source file");
+    }
+
+    destFd = open(outputfilename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+    if (destFd == -1) 
+    {
+        perror("Error opening destination file");
+        close(sourceFd);
+    }
+
+    while ((bytesRead = read(sourceFd, buffer, sizeof(buffer))) > 0) 
+    {
+        if (write(destFd, buffer, bytesRead) != bytesRead) 
+        {
+            perror("Error writing to destination file");
+            close(sourceFd);
+            close(destFd);
+        }
+    }
+
+    if (bytesRead == -1) 
+    {
+        perror("Error reading source file");
+        close(sourceFd);
+        close(destFd);
+    }
+
+    close(sourceFd);
+    close(destFd);
 }
