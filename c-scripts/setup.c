@@ -195,13 +195,13 @@ int main()
 				    clear();
 				    printf("\nWhat file would you like to use as your fastfetch config?\n");
 				    printf(BOLD_S " [1] "STYLE_END"config-default.jsonc\n");
-				    printf(BOLD_S " [2] "STYLE_END"config-default.jsonc\n");
-				    printf(BOLD_S " [3] "STYLE_END"config-default.jsonc\n");
+				    printf(BOLD_S " [2] "STYLE_END"config-other.jsonc\n");
+				    printf(BOLD_S " [3] "STYLE_END"config-duplicated.jsonc\n");
 				    printf(BOLD_S " [0] "STYLE_END "%s\n", opt_exit_text);
 				    
+				    copyfiles(-1);
 				    fastfetch_conf_export = -1;
-				    scanf(" %d", &fastfetch_conf_export);
-				    copyfiles(fastfetch_conf_export);
+				    //copyfiles(fastfetch_conf_export);
 				}
 				while (fastfetch_conf_export > 0.0);
     		    	    }
@@ -750,12 +750,14 @@ float* update()
     return 0;
 }
 
-void copyfiles(int fastfetch_conf_export)
+void copyfiles (int fastfetch_conf_export)
 {
     char cmd[32];
     snprintf(cmd, sizeof(cmd),
 	    "cd ~ ");
     system(cmd);
+
+    scanf(" %d", &fastfetch_conf_export);
 
     int sourceFd, destFd;
     ssize_t bytesRead;
