@@ -35,7 +35,6 @@ void clear()
 
 #define STYLE_END   	"\e[m" // resets the styling
 
-
 void BASH(char ARCHIVE, float pver, char PKGINSTALL);
 void SWAY(char ARCHIVE, float pver, char PKGINSTALL);
 void BTOP(char ARCHIVE, float pver, char PKGINSTALL);
@@ -55,6 +54,7 @@ int full_update(char ARCHIVE, float pver);
 const int max_menu_opt_n = 12;
 
 void install_configs(); // the partial install script (configure which package or configuration to install)
+void copyfiles (int fastfetch_conf_export);
 
 float* update();
 
