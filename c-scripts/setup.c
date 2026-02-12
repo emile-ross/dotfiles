@@ -1,7 +1,5 @@
 #include "dotfileshead.h"
 
-void link_fastfetch_configs();
-
 int main()
 {
     int menu_one_i;
@@ -202,48 +200,34 @@ int main()
 				    printf(BOLD_S " [0] "STYLE_END "%s\n", opt_exit_text);
 
 				    int link_fastfetch_configs_opt = -1;
-    				    do
+    				    char cmd[128];
+    				    while (getchar() != '\n');  // clear imput buffer 
+    				    scanf("%d", &link_fastfetch_configs_opt);
+
+    				    if (link_fastfetch_configs_opt == 1)
     				    {
-    				    	char cmd[128];
-
-    				    	while (getchar() != '\n');  // clear imput buffer 
-    				    	scanf("%d", &link_fastfetch_configs_opt);
-
-    				    	if (link_fastfetch_configs_opt == 1)
-    				    	{
-    				    	    snprintf(cmd, sizeof(cmd),
-    				    	    	"ln -fs ~/.config/fastfetch/config-default.jsonc ~/.config/fastfetch/config.jsonc");
-    				    	    system(cmd);
-
-    				    	    printf("\nThe fastfetch config was applied successfully\n");
-					    install_timer.tv_sec = 0;
-	        			    install_timer.tv_nsec = 250000000L;
-	        			    nanosleep(&install_timer, NULL);
-    				    	}
-    				    	else if (link_fastfetch_configs_opt == 2)
-    				    	{
-    				    	    snprintf(cmd, sizeof(cmd),
-    				    	    	"ln -fs ~/.config/fastfetch/config-other.jsonc ~/.config/fastfetch/config.jsonc");
-    				    	    system(cmd);
-
-    				    	    printf("\nThe fastfetch config was applied successfully\n");
-					    install_timer.tv_sec = 0;
-	        			    install_timer.tv_nsec = 250000000L;
-	        			    nanosleep(&install_timer, NULL);
-    				    	}
-    				    	else if (link_fastfetch_configs_opt == 3)
-    				    	{
-    				    	    snprintf(cmd, sizeof(cmd),
-    				    	    	"ln -fs ~/.config/fastfetch/config-duplicated.jsonc ~/.config/fastfetch/config.jsonc");
-    				    	    system(cmd);
-
-    				    	    printf("\nThe fastfetch config was applied successfully\n");
-					    install_timer.tv_sec = 0;
-	        			    install_timer.tv_nsec = 250000000L;
-	        			    nanosleep(&install_timer, NULL);
-    				    	}
+    				        snprintf(cmd, sizeof(cmd),
+    				        	"ln -fs ~/.config/fastfetch/config-default.jsonc ~/.config/fastfetch/config.jsonc");
+    				        system(cmd);
+    				        printf("\nThe fastfetch config was applied successfully\n");
+					wait_for_timeout();
     				    }
-    				    while (link_fastfetch_configs_opt > 0.0);
+    				    else if (link_fastfetch_configs_opt == 2)
+    				    {
+    				        snprintf(cmd, sizeof(cmd),
+    				        	"ln -fs ~/.config/fastfetch/config-other.jsonc ~/.config/fastfetch/config.jsonc");
+    				        system(cmd);
+    				        printf("\nThe fastfetch config was applied successfully\n");
+					wait_for_timeout();
+    				    }
+    				    else if (link_fastfetch_configs_opt == 3)
+    				    {
+    				        snprintf(cmd, sizeof(cmd),
+    				        	"ln -fs ~/.config/fastfetch/config-duplicated.jsonc ~/.config/fastfetch/config.jsonc");
+    				        system(cmd);
+    				        printf("\nThe fastfetch config was applied successfully\n");
+					wait_for_timeout();
+    				    }
 				}
 				while (fastfetch_conf_export > 0.0);
     		    	    }
@@ -791,111 +775,8 @@ float* update()
     fclose(file);
     return 0;
 }
-
-void copyfiles (int fastfetch_conf_export)
-{
-    char cmd[32];
-    snprintf(cmd, sizeof(cmd),
-	    "cd ~ ");
-    system(cmd);
-
-    scanf(" %d", &fastfetch_conf_export);
-
-    int sourceFd, destFd;
-    ssize_t bytesRead;
-    char buffer[1024];
-
-    char imputfilename[256];
-    char outputfilename[256];
-
-    // using strcpy to assign string literals to character arrays 
-    if (fastfetch_conf_export == 1)
-    {
-	strcpy(imputfilename, ".config/fastfetch/config-default.jsonc");
-    	strcpy(outputfilename, ".config/fastfetch/config.jsonc");
-    }
-    else if (fastfetch_conf_export == 2)
-    {
-	strcpy(imputfilename, ".config/fastfetch/config-other.jsonc");
-    	strcpy(outputfilename, ".config/fastfetch/config.jsonc");
-    }
-    else if (fastfetch_conf_export == 3)
-    {
-	strcpy(imputfilename, ".config/fastfetch/config-duplicated.jsonc");
-    	strcpy(outputfilename, ".config/fastfetch/config.jsonc");
-    }
-
-    sourceFd = open(imputfilename, O_RDONLY);
-    if (sourceFd == -1) 
-    {
-        perror("Error opening source file");
-    }
-
-    destFd = open(outputfilename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-    if (destFd == -1) 
-    {
-        perror("Error opening destination file");
-        close(sourceFd);
-    }
-
-    while ((bytesRead = read(sourceFd, buffer, sizeof(buffer))) > 0) 
-    {
-        if (write(destFd, buffer, bytesRead) != bytesRead) 
-        {
-            perror("Error writing to destination file");
-            close(sourceFd);
-            close(destFd);
-        }
-    }
-
-    if (bytesRead == -1) 
-    {
-        perror("Error reading source file");
-        close(sourceFd);
-        close(destFd);
-    }
-
-    close(sourceFd);
-    close(destFd);
-    printf("\nThe fastfetch config was modified sucessfully\n");
-}
-void link_fastfetch_configs()
-{
-    int link_fastfetch_configs_opt = -1;
-    do
-    {
-    	char cmd[128];
-
-    	while (getchar() != '\n');  // clear imput buffer 
-    	scanf("%d", &link_fastfetch_configs_opt);
-
-    	if (link_fastfetch_configs_opt == 1)
-    	{
-    	    snprintf(cmd, sizeof(cmd),
-    	    	"ln -fs ~/.config/fastfetch/config-default.jsonc ~/.config/fastfetch/config.jsonc");
-    	    system(cmd);
-
-    	    printf("\nThe fastfetch config was applied successfully\n");
-
-    	}
-    	else if (link_fastfetch_configs_opt == 2)
-    	{
-    	    snprintf(cmd, sizeof(cmd),
-    	    	"ln -fs ~/.config/fastfetch/config-other.jsonc ~/.config/fastfetch/config.jsonc");
-    	    system(cmd);
-
-    	    printf("\nThe fastfetch config was applied successfully\n");
-
-    	}
-    	else if (link_fastfetch_configs_opt == 3)
-    	{
-    	    snprintf(cmd, sizeof(cmd),
-    	    	"ln -fs ~/.config/fastfetch/config-duplicated.jsonc ~/.config/fastfetch/config.jsonc");
-    	    system(cmd);
-
-    	    printf("\nThe fastfetch config was applied successfully\n");
-
-    	}
-    }
-    while (link_fastfetch_configs_opt > 0);
+void wait_for_timeout(){
+    install_timer.tv_sec = 0;
+    install_timer.tv_nsec = 500000000L;
+    nanosleep(&install_timer, NULL);
 }
