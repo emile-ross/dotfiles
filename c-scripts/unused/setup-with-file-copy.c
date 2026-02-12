@@ -1,0 +1,901 @@
+#include "dotfileshead.h"
+
+void link_fastfetch_configs();
+
+int main()
+{
+    int menu_one_i;
+    //int max_opt_n = 10;
+    do
+    {
+    	clear();
+    	// sets the text for each option and each menu title
+    	char main_menu_text[128] = "Welcome to the setup utility for ImAwsumm's dotfiles";
+    	char opt_one_text[128] = "Install the dotfiles";
+    	char opt_two_text[128] = "Fix the dotfiles";
+    	char opt_the_text[128] = "Update your dotfiles";
+    	char opt_for_text[128] = "Custom configuration menu";
+    	char opt_fiv_text[128] = "Something else";
+    	char opt_exit_text[128] = "Exit";
+    
+    	printf(BOLD_S ANSI_CYAN "%s\n\n" STYLE_END, main_menu_text );
+    	printf(BOLD_S " [1] " STYLE_END "%s\n", opt_one_text);
+    	printf(BOLD_S " [2] " STYLE_END "%s\n", opt_two_text);
+    	printf(BOLD_S " [3] " STYLE_END "%s\n", opt_the_text);
+    	printf(BOLD_S " [4] " STYLE_END "%s\n", opt_for_text);
+    	printf(BOLD_S " [5] " STYLE_END "%s\n\n", opt_fiv_text);
+    	printf(BOLD_S " [0] " STYLE_END "%s\n", opt_exit_text);
+
+    	scanf(" %d", &menu_one_i);
+    
+    	if (menu_one_i == 1)
+    	{
+	    char full_install_opt;
+	    clear();
+    	    printf(BOLD_S "%s\n"STYLE_END, opt_one_text );
+    	    printf("\nDo you want to backup your old dotfiles before proceeding? (Y/n)\n");
+
+    	    scanf(" %c", &ARCHIVE);
+	    printf(ANSI_RED BOLD_S"\nWARNING\n"STYLE_END BOLD_S"This will install every config.\n"STYLE_END);
+	    printf(ITALICS_S"\nIn order to pick the configs you want, you need to use the custom configuration option\n"STYLE_END);
+	    
+    	    printf("\nProceed with installation (Y/n)\n");	// prompt user for imput
+    	    scanf(" %c", &full_install_opt);
+    	    if (full_install_opt == 'Y' || full_install_opt == 'y')
+	    {
+		full_install(ARCHIVE, 'y');
+	    }
+    	}
+    	else if (menu_one_i == 2)
+    	{
+	    int fix_install_menu;
+	    int after_install;
+	    do
+	    {
+		while (getchar() != '\n'); // clear imput buffer
+		float *version = update();
+		float pver = 0.0f; // the user is presumed to be installing the dotfiles
+				   
+    		clear();
+
+    		printf(BOLD_S "%s\n"STYLE_END, opt_two_text );
+
+
+		printf(ANSI_GREY"\nDetected Version: %.2f\n"STYLE_END, *version);
+		printf(UDRL_S"Are you sure you want to fix your dotfiles?\n"STYLE_END);
+		printf(BOLD_S"\n[1]"STYLE_END" %s", opt_two_text);
+		printf(BOLD_S"\n[0]"STYLE_END" %s\n", opt_exit_text);
+
+		scanf("%d", &fix_install_menu);
+
+		printf("\n");
+		char PKGINSTALL;
+		scanf("%c", &PKGINSTALL);
+
+		if ( fix_install_menu == 1)
+		{
+		    if ( PKGINSTALL == 'Y' || PKGINSTALL == 'y')
+		    {
+		    printf(BOLD_S"\nFixing dotfiles...\n"STYLE_END);
+		    // call install functions for every config
+			BTOP(ARCHIVE, pver, 'y');
+		    	CAVA(ARCHIVE, pver, 'y');
+		    	FAST(ARCHIVE, pver, 'y');
+		    	FUZZ(ARCHIVE, pver, 'y');
+		    	GTKL(ARCHIVE, pver, 'y');
+		    	HYPR(ARCHIVE, pver, 'y');
+		    	KITT(ARCHIVE, pver, 'y');
+		    	NVIM(ARCHIVE, pver, 'y');
+		    	MPVF(ARCHIVE, pver, 'y');
+		    	SWAY(ARCHIVE, pver, 'y');
+		    	WAYB(ARCHIVE, pver, 'y');
+		    }
+		    else
+		    {
+			BTOP(ARCHIVE, pver, 'y');
+		    	CAVA(ARCHIVE, pver, 'y');
+		    	FAST(ARCHIVE, pver, 'y');
+		    	FUZZ(ARCHIVE, pver, 'y');
+		    	GTKL(ARCHIVE, pver, 'y');
+		    	HYPR(ARCHIVE, pver, 'y');
+		    	KITT(ARCHIVE, pver, 'y');
+		    	MPVF(ARCHIVE, pver, 'y');
+		    	NVIM(ARCHIVE, pver, 'y');
+		    	SWAY(ARCHIVE, pver, 'y');
+		    	WAYB(ARCHIVE, pver, 'y');
+		    }
+
+
+		    printf(BOLD_S"\nInstall completed!...\n"STYLE_END);
+		    scanf(" %d", &after_install);
+		    if (after_install == 0)
+		    {
+			return 0;
+		    } 
+		    // in other cases we just go back to the previous menu
+		}
+	    }
+	    while(fix_install_menu != 0);
+    	}
+    	else if (menu_one_i == 3)
+    	{
+	    int update_config_menu;
+	    do
+	    {
+		float *version = update();
+	    	char updatecheck_opt_text[48] = "Template text";
+	    	char update_opt_text[48] = "Template text";
+
+    	    	clear();
+
+		printf(ANSI_GREY"\nDetected Version: %.2f\n"STYLE_END, *version);
+
+    	    	printf(BOLD_S "%s\n"STYLE_END, opt_the_text );
+    	    	printf(BOLD_S "\n [1] " STYLE_END "%s\n", update_opt_text);
+    	    	printf(BOLD_S " [2] " STYLE_END "%s\n", updatecheck_opt_text);
+    	    	printf(BOLD_S " [0] " STYLE_END "%s\n", opt_exit_text);
+		while (getchar() != '\n');  // clear imput buffer 
+	    	scanf("%d", &update_config_menu);
+	    	if (update_config_menu == 1)
+	    	{
+		    // fix install
+	    	}
+	    	if (update_config_menu == 2)
+	    	{
+	    	    //update
+	    	}
+	    }
+	    while(update_config_menu != 0);
+    	}
+    	else if (menu_one_i == 4)
+    	{
+    		int dotfiles_config_menu;
+    		do
+    		{
+		    clear();
+    		    char fastfetch_config_menu_text[128] = "Edit fastfetch config";
+    		    char kitty_config_menu_text[128] = "Edit kitty appearance and behavior";
+    		    
+    		    printf(BOLD_S ANSI_WHITE "%s\n"STYLE_END, opt_for_text );
+    		    printf(BOLD_S "\n [1] " STYLE_END "%s\n", fastfetch_config_menu_text);
+    		    printf(BOLD_S " [2] " STYLE_END "%s\n", kitty_config_menu_text);
+    		    printf(BOLD_S " [0] " STYLE_END "%s\n", opt_exit_text);
+		    while (getchar() != '\n');  // clear imput buffer 
+    		    scanf(" %d", &dotfiles_config_menu);
+		    if (dotfiles_config_menu == 1)
+		    {
+			int fastfetch_config_choice;
+    		    	do
+    		    	{
+			    clear();
+    		    	    char fastfetch_edit_config_text[48] = "Change the config fastfetch uses by default";
+    		    	    char fastfetch_preview_text[32] = "Preview fastfetch output";
+
+			    char cmd[128];
+    		    	    
+    		    	    printf(BOLD_S ANSI_WHITE "%s\n\n"STYLE_END, fastfetch_config_menu_text );
+    		    	    printf(BOLD_S " [1] " STYLE_END "%s\n", fastfetch_preview_text);
+    		    	    printf(BOLD_S " [2] " STYLE_END "%s\n", fastfetch_edit_config_text);
+    		    	    printf(BOLD_S " [0] " STYLE_END "%s\n", opt_exit_text);
+			    while (getchar() != '\n');  // clear imput buffer 
+
+    		    	    scanf("\n%d", &fastfetch_config_choice);
+    		    	    if (fastfetch_config_choice == 1)
+    		    	    {
+    		    	    	snprintf(cmd, 128,
+					"fastfetch");
+    		    	    	system(cmd);
+
+				install_timer.tv_sec = 2;
+	        		install_timer.tv_nsec = 000000000L;
+	        		nanosleep(&install_timer, NULL);
+    		    	    }
+			    if (fastfetch_config_choice == 2)
+    		    	    {
+				do
+				{
+				    clear();
+				    printf("\nWhat file would you like to use as your fastfetch config?\n");
+				    printf(BOLD_S " [1] "STYLE_END"config-default.jsonc\n");
+				    printf(BOLD_S " [2] "STYLE_END"config-other.jsonc\n");
+				    printf(BOLD_S " [3] "STYLE_END"config-duplicated.jsonc\n");
+				    printf(BOLD_S " [0] "STYLE_END "%s\n", opt_exit_text);
+
+				    int link_fastfetch_configs_opt = -1;
+    				    do
+    				    {
+    				    	char cmd[128];
+
+    				    	while (getchar() != '\n');  // clear imput buffer 
+    				    	scanf("%d", &link_fastfetch_configs_opt);
+
+    				    	if (link_fastfetch_configs_opt == 1)
+    				    	{
+    				    	    snprintf(cmd, sizeof(cmd),
+    				    	    	"ln -fs ~/.config/fastfetch/config-default.jsonc ~/.config/fastfetch/config.jsonc");
+    				    	    system(cmd);
+
+    				    	    printf("\nThe fastfetch config was applied successfully\n");
+					    install_timer.tv_sec = 0;
+	        			    install_timer.tv_nsec = 250000000L;
+	        			    nanosleep(&install_timer, NULL);
+    				    	}
+    				    	else if (link_fastfetch_configs_opt == 2)
+    				    	{
+    				    	    snprintf(cmd, sizeof(cmd),
+    				    	    	"ln -fs ~/.config/fastfetch/config-other.jsonc ~/.config/fastfetch/config.jsonc");
+    				    	    system(cmd);
+
+    				    	    printf("\nThe fastfetch config was applied successfully\n");
+					    install_timer.tv_sec = 0;
+	        			    install_timer.tv_nsec = 250000000L;
+	        			    nanosleep(&install_timer, NULL);
+    				    	}
+    				    	else if (link_fastfetch_configs_opt == 3)
+    				    	{
+    				    	    snprintf(cmd, sizeof(cmd),
+    				    	    	"ln -fs ~/.config/fastfetch/config-duplicated.jsonc ~/.config/fastfetch/config.jsonc");
+    				    	    system(cmd);
+
+    				    	    printf("\nThe fastfetch config was applied successfully\n");
+					    install_timer.tv_sec = 0;
+	        			    install_timer.tv_nsec = 250000000L;
+	        			    nanosleep(&install_timer, NULL);
+    				    	}
+    				    }
+    				    while (link_fastfetch_configs_opt > 0.0);
+				}
+				while (fastfetch_conf_export > 0.0);
+    		    	    }
+    		    	}
+    		    	while(fastfetch_config_choice > 0.0);
+    		    	// exits the while loop when the user types 0
+		    }
+		    if (dotfiles_config_menu == 2)
+    		    {
+    		    	int kitty_config_choice;
+    		    	do
+    		    	{
+			    clear();
+    		    	    char kitty_color_text[32] = "Change Kitty color scheme";
+    		    	    char kitty_fonts_text[32] = "Change Kitty fonts";
+    		    	    
+    		    	    printf(BOLD_S ANSI_WHITE "%s\n\n"STYLE_END, kitty_config_menu_text );
+    		    	    printf(BOLD_S " [1] " STYLE_END "%s\n", kitty_color_text);
+    		    	    printf(BOLD_S " [2] " STYLE_END "%s\n", kitty_fonts_text);
+    		    	    printf(BOLD_S " [0] " STYLE_END "%s\n", opt_exit_text);
+			    while (getchar() != '\n');  // clear imput buffer 
+
+    		    	    scanf("\n%d", &kitty_config_choice);
+
+    		    	    char cmd[24];
+    		    	    if (kitty_config_choice == 1)
+    		    	    {
+    		    	    	snprintf(cmd, 24,
+					"kitten themes");
+    		    	    	system(cmd);
+    		    	    }
+    		    	    if (kitty_config_choice == 2)
+    		    	    {
+    		    	    	snprintf(cmd, 24,
+					"kitty +list-fonts");
+    		    	    	system(cmd);
+    
+    		    	    	printf("\nThe install script can be used to install more fonts.");
+    		    	    }
+    		    	}
+    		    	while(kitty_config_choice != 0.0);
+    		    	// exits the while loop when the user types 0
+    		    }
+    		} 
+    		while(dotfiles_config_menu != 0.0);
+    		// exits the while loop when the user types 0
+    	}
+    	else if (menu_one_i == 5)
+    	{
+	    int menu_activate_linux;
+	    do
+	    {
+		while (getchar() != '\n');  // clear imput buffer 
+		clear();
+    	    	printf(BOLD_S "%s\n"STYLE_END, opt_fiv_text );
+		
+    		char act_linux_water_text[128] = "Do you want to add the \"Activate Linux\" watermark?";
+
+		printf(BOLD_S "\n [1] %s\n"STYLE_END, act_linux_water_text);
+		printf(BOLD_S "\n [0] %s (no)\n"STYLE_END, opt_exit_text);
+	    	scanf("%d", &menu_activate_linux);
+
+		if (menu_activate_linux == 1)
+		{
+		    char cmd[48];
+	    	    snprintf(cmd, sizeof(cmd),
+	    	            "yay -S activate-linux-git && "
+	    	            "activate-linux-git");
+	    	    system(cmd);
+
+    	    	    printf("\nHere is something cool!\n");
+    	    	    printf("\nLook at the bottom right of your screen");
+	    	    printf("\nUse ^C (Control+C) to close the program.\n");
+	    	    printf("You can use a command like \""UDRL_S"activate-linux -t Activate\\ Arch-Linux -m Go\\ to\\ archlinux.org/donate/\\ to\\ activate"STYLE_END"\" \n");
+	    	    printf("These flags allow you to add a custom message or title\n");
+		}
+	    }
+	    while(menu_activate_linux != 0.0);
+    	}
+    	else if (menu_one_i == 0)
+    	{
+    		printf("\nExiting..\n");
+    		return 0;
+    	}
+    	else
+    	{
+    	    printf("\nExiting.. (invalid character)\n");
+    	    return 1; // error code 1
+    	}
+    }
+    while(menu_one_i != 0);	// exits the while loop when the user types 0
+    return 0;
+}
+
+void BASH(char ARCHIVE, float pver, char PKGINSTALL)
+{
+    char BRCNAME[12] = ".bashrc-new";
+    // prompt to let the user know the bashrc isn't exported/replaced
+    printf(UDRL_S"\nThe .bashrc file plays a very important role therefore, it was not replaced."STYLE_END);
+    printf(UDRL_S"\nYou can find the new .bashrc file under the name %s\n"STYLE_END, BRCNAME);
+
+    char cmd[64]; // BRCNAME has to be considered
+    // export .bashrc
+    snprintf(cmd, sizeof(cmd),
+	    "cp -f dotfiles/.bashrc ~/%s", BRCNAME);
+    system(cmd);
+
+}
+
+void BTOP(char ARCHIVE, float pver, char PKGINSTALL)
+{
+	char cmd[128];
+        if (ARCHIVE == 'Y' || ARCHIVE == 'y')
+	{
+		// archive btop config
+		snprintf(cmd, sizeof(cmd),
+			"mv ~/.config/btop/btop.conf "
+			"~/.config/btop/btop-oldv%.2f.conf", pver);
+        	system(cmd);
+	}
+        // export btop config
+        snprintf(cmd, sizeof(cmd),
+		"mkdir -p ~/.config/btop && "
+		"cp -f dotfiles/btop/btop.conf ~/.config/btop");
+        system(cmd);
+}
+
+void CAVA(char ARCHIVE, float pver, char PKGINSTALL)
+{
+    char cmd[128];
+    if (ARCHIVE == 'Y' || ARCHIVE == 'y')
+    {
+        // backup cava config
+        snprintf(cmd, sizeof(cmd),
+		"mv ~/.config/cava/config "
+		"~/.config/cava/config-oldv%.1f", pver);
+        system(cmd);
+    }
+    // export cava config
+    snprintf(cmd, sizeof(cmd),
+	    "mkdir -p ~/.config/cava && "
+	    "cp -f dotfiles/cava/config ~/.config/cava/ && ");
+    system(cmd);
+}
+
+void FAST(char ARCHIVE, float pver, char PKGINSTALL)
+{
+    char cmd[512];
+    if (ARCHIVE == 'Y' || ARCHIVE == 'y')
+    {
+    	// backup fastfetch config
+    	snprintf(cmd, 96,
+		"mv ~/.config/fastfetch/config.jsonc "
+		"~/.config/fastfetch/config-oldv%.2f.jsonc", pver);
+    	system(cmd);
+    }
+    // export fastfetch config
+    snprintf(cmd, sizeof(cmd),
+	    "rm ~/.config/fastfetch && "
+	    "mkdir -p ~/.config/fastfetch/assets && "
+	    "cp -f dotfiles/fastfetch/assets/*.png ~/.config/fastfetch/assets && "
+	    "cp -f dotfiles/fastfetch/config.jsonc ~/.config/fastfetch && "
+	    "cp -f ~/.config/fastfetch/config.jsonc ~/.config/fastfetch/config-duplicated.jsonc && "
+	    "cp -f dotfiles/fastfetch/config-other.jsonc ~/.config/fastfetch && "
+	    "cp -f dotfiles/fastfetch/config-default.jsonc ~/.config/fastfetch");
+    system(cmd);
+}
+void FUZZ(char ARCHIVE, float pver, char PKGINSTALL)
+{
+    char cmd[256];
+    if (ARCHIVE == 'Y' || ARCHIVE == 'y')
+    {
+    	// backup fuzzel config
+        snprintf(cmd, sizeof(cmd),
+		"mv ~/.config/fuzzel/fuzzel.ini"
+    		"~/.config/fuzzel/fuzzel-oldv%.1f.ini", pver);
+    	system(cmd);
+    }
+    // export fuzzel appearance
+    snprintf(cmd, sizeof(cmd),
+            "mkdir ~/.config/fuzzel && "
+            "cp -f dotfiles/fuzzel/old-fuzzel.ini && "
+            "cp -f dotfiles/fuzzel/fuzzel.ini "
+	    "~/.config/fuzzel");
+    system(cmd);  		
+}
+void GTKL(char ARCHIVE, float pver, char PKGINSTALL)
+{
+	char cmd[256];
+        if (ARCHIVE == 'Y' || ARCHIVE == 'y')
+	{
+		// backup gtklock config
+	    	snprintf(cmd, sizeof(cmd),
+                	"mv ~/.config/gtklock/style.css "
+			"~/.config/gtklock/style-oldv%.1f.css", 
+			pver);
+		system(cmd);
+	}
+	// export gtklock config
+        snprintf(cmd, sizeof(cmd),
+	        "mkdir -p ~/.config/gtklock/assets && "
+                "cp -f dotfiles/gtklock/style.css ~/.config/gtklock && "
+                "cp -f dotfiles/gtklock/lockscreen.jpg ~/.config/gtklock/assets");
+        system(cmd);
+}
+
+void HYPR(char ARCHIVE, float pver, char PKGINSTALL)
+{
+    char cmd[256];
+    if (ARCHIVE == 'Y' || ARCHIVE == 'y')
+    {
+    	// archive hyprland configs
+        snprintf(cmd, sizeof(cmd),
+		"mv ~/.config/hypr/hyprland.conf ~/.config/hypr/hyprland-oldv%.2f.conf && "
+        	"mv ~/.config/hypr/hyprpaper.conf ~/.config/hypr/hyprpaper-oldv%.2f.conf && "
+        	"mv ~/.config/hypr/hypridle.conf ~/.config/hypr/hypridle-oldv%.2f.conf", pver, pver, pver);
+        system(cmd);
+    }
+    // export hyprland configs
+    snprintf(cmd, sizeof(cmd),
+	    "mkdir -p ~/.config/hypr && "
+	    "cp -f dotfiles/hypr/hyprland.conf ~/.config/hypr && "
+    	    "cp -f dotfiles/hypr/hypridle.conf ~/.config/hypr && "
+    	    "cp -f dotfiles/hypr/hyprpaper.conf ~/.config/hypr");
+    system(cmd);
+}
+void KITT(char ARCHIVE, float pver, char PKGINSTALL)
+{
+    char cmd[256];
+    if (ARCHIVE == 'Y' || ARCHIVE == 'y')
+    {
+    	// backup kitty config
+        snprintf(cmd, sizeof(cmd),
+    		"mv ~/.config/kitty/kitty.conf "
+    		"~/.config/kitty/kitty-oldv%.1f.conf", pver);
+    	system(cmd);
+    }
+    if ( PKGINSTALL == 'Y'|| PKGINSTALL == 'y')
+    {
+	// install kitty package
+	//  the kitty terminal is most likely already installed on your system
+        snprintf(cmd, 32,
+		"yay -S --noconfirm kitty");
+	system(cmd);
+    }
+    // export kitty config
+    snprintf(cmd, sizeof(cmd),
+	    "mkdir ~/.config/kitty && "
+	    "cp -f dotfiles/kitty/current-theme.conf ~/.config/kitty && "
+	    "cp -f dotfiles/kitty/kitty.conf ~/.config/kitty");
+    system(cmd);
+}
+
+void MPVF(char ARCHIVE, float pver, char PKGINSTALL)
+{
+    char cmd[128];
+    if (ARCHIVE == 'Y' || ARCHIVE == 'y')
+    {
+    	// archive mpv config
+        snprintf(cmd, sizeof(cmd),
+		"mv ~/.config/mpv/mpv.conf ~/.config/mpv/mpv-oldv%.2f.conf ", pver);
+	system(cmd);
+	printf(BOLD_S"\nThe old "UDRL_S"mpv"STYLE_END BOLD_S" config was archived\n"STYLE_END);
+    }
+    if ( PKGINSTALL == 'Y'|| PKGINSTALL == 'y')
+    {
+        snprintf(cmd, 32,
+		"yay -S --noconfirm mpv");
+	system(cmd);
+
+	printf(BOLD_S"\nMPV was installed!\n"STYLE_END);
+    }
+    // export mpv config with shaders
+    snprintf(cmd, 96,
+	    "mkdir -p ~/.config/mpv/ && "
+            "cp -f dotfiles/mpv/mpv.conf ~/.config/mpv ");
+    system(cmd);
+}
+
+void NVIM(char ARCHIVE, float pver, char PKGINSTALL)
+{
+    char cmd[256];
+    if (ARCHIVE == 'Y' || ARCHIVE == 'y')
+    {
+        snprintf(cmd, sizeof(cmd),
+    	    	"mv ~/.config/nvim/init.lua ~/.config/nvim/init-oldv%.1f.lua && "
+    	    	"mv ~/.config/nvim/lua/config/lazy.lua ~/.config/nvim/lua/config/lazy-oldv%.1f.lua && "
+    	    	"mv ~/.config/nvim/lazy-lock.json ~/.config/nvim/lazy-lock-oldv%.1f.json",
+    	    	pver, pver, pver);
+        system(cmd);
+    }
+    if ( PKGINSTALL == 'Y'|| PKGINSTALL == 'y')
+    {
+	// install neovim (nvim) package
+	// nvim is most likely already installed 
+        snprintf(cmd, 32,
+		"yay -S --noconfirm nvim");
+	system(cmd);
+    }
+
+    // export nvim config
+    snprintf(cmd, sizeof(cmd),
+	    "mkdir -p ~/.config/nvim && "
+    	    "cp -f dotfiles/nvim/init.lua ~/.config/nvim");
+    system(cmd);
+}
+
+void SWAY(char ARCHIVE, float pver, char PKGINSTALL)
+{
+    // sway window manager doesn't work without wlroots
+    char cmd[128];
+    if (ARCHIVE == 'Y' || ARCHIVE == 'y')
+    {
+        snprintf(cmd, sizeof(cmd),
+    	    	"mv ~/.config/sway/config ~/.config/sway/config-oldv%.1f ",
+		pver);
+        system(cmd);
+    }
+    if ( PKGINSTALL == 'Y'|| PKGINSTALL == 'y')
+    {
+	// install sway package
+        snprintf(cmd, 32,
+		"yay -S --noconfirm wlroots sway");
+	system(cmd);
+	// a system update is strongly recommended 
+    }
+    // export sway config
+    snprintf(cmd, sizeof(cmd),
+	    "mkdir -p ~/.config/sway && "
+    	    "cp -f dotfiles/sway/config ~/.config/sway");
+    system(cmd);
+}
+
+void WAYB(char ARCHIVE, float pver, char PKGINSTALL)
+{
+    
+    char cmd[256];
+    if (ARCHIVE == 'Y' || ARCHIVE == 'y')
+    {
+    	// archive waybar
+        snprintf(cmd, sizeof(cmd),
+		"mv ~/.config/waybar/config.jsonc ~/.config/waybar/config-oldv%.2f.jsonc && "
+		"mv ~/.config/waybar/style.css ~/.config/waybar/style-oldv%.2f.css",
+		pver, pver);
+	system(cmd);
+    }
+    if ( PKGINSTALL == 'Y'|| PKGINSTALL == 'y')
+    {
+        snprintf(cmd, 32,
+		"yay -S --noconfirm waybar");
+	system(cmd);
+    }
+    // export waybar config and appearance
+    snprintf(cmd, sizeof(cmd),
+	    //"yay -S --noconfirm waybar && "
+	    "mkdir -p ~/.config/waybar && "
+	    "cp -f dotfiles/waybar/style.css ~/.config/waybar && "
+            "cp -f dotfiles/waybar/config.jsonc ~/.config/waybar");
+    system(cmd);
+}
+
+void full_install(char ARCHIVE, char full_install_opt)
+{
+    if (full_install_opt == 'Y' || full_install_opt == 'y')
+    {
+	float pver = 0.0f; // the user is presumed to be installing the dotfiles
+	int timerinstall = 3;
+	printf(BOLD_S"\nInstalling every configuration\n"STYLE_END);
+	printf(BOLD_S"\nStarting in:\n"STYLE_END);
+	
+	for (int i = 0; i < 3; i++)
+	{
+	    printf("%d ", timerinstall);
+	
+	    for (int j = 0; j < 3; j++)
+	    {
+	        printf(".");
+	        fflush(stdout);
+	
+	        install_timer.tv_sec = 0;
+	        install_timer.tv_nsec = 250000000L;
+	        nanosleep(&install_timer, NULL);
+	    }
+	    for (int k = 0; k < 1; k++)
+	    {
+		printf("\n");
+	
+	        install_timer.tv_sec = 0;
+	        install_timer.tv_nsec = 172100000L;
+	        nanosleep(&install_timer, NULL);
+	    }
+	
+	
+	    timerinstall--;
+	}
+	
+	    if (system("test -f /sbin/yay") == 0)
+    	    {
+    	        printf("Yay is now installed, congrats!\n");
+    	    }
+    	    else
+    	    {
+    	        char YAY;
+    	        printf("Yay is not installed, do you want to install it? (Y/n): ");
+
+		while (getchar() != '\n');  // clear imput buffer 
+    	        scanf(" %c", &YAY); // asks the user if they wanna install yay (needed)
+    	        if (YAY == 'Y' || YAY == 'y')
+    	        {
+    	            // Check if makepkg is installed ( it is needed in order to compile yay )
+    	            if (system("command -v makepkg > /dev/null") != 0)
+    	            {
+    	            	printf("\nMakepkg is not installed. Installing 'base-devel' package group to proceed...\n");
+
+			char cmd[128];
+			snprintf(cmd, sizeof(cmd),
+				"sudo pacman -S --noconfirm base-devel");
+			system(cmd);
+    	                
+    	                // Check if makepkg is available after installing the base-devel package
+    	                if (system("command -v makepkg > /dev/null") != 0)
+    	                {
+    	        	    printf("Makepkg installation failed. Please check your system configuration.\n");
+    	        	    printf("Helpful link: \"https://wiki.archlinux.org/title/Makepkg\"\n");
+    	                }
+    	                else
+    	                {
+    	        	    printf("Makepkg has been successfully installed!\n");
+    	                }
+    	            }
+    	            else
+    	            {
+    	                printf("Makepkg is already installed.\n");
+    	            }
+		    // install yay \/
+    	            char cmd[256];
+    	            snprintf(cmd, sizeof(cmd),
+    	        	    "git clone https://aur.archlinux.org/yay.git &&"	// download yay from aur
+    	                    "cd yay &&"						//
+    	        	    "makepkg -si &&"					// build package from source
+    	                    "cd ..");						//
+    	            system(cmd);
+
+    	            printf("\nYay is installed, congrats!\n");
+    	        }
+    	        else
+    	        {
+    	            printf("\nYay is needed in order to proceed with the script.\n");
+		}
+	    }
+	// actually install the dotfiles
+	BASH(ARCHIVE, pver, PKGINSTALL);
+	SWAY(ARCHIVE, pver, PKGINSTALL);
+	BTOP(ARCHIVE, pver, PKGINSTALL);
+	CAVA(ARCHIVE, pver, PKGINSTALL);
+	FAST(ARCHIVE, pver, PKGINSTALL);
+	FUZZ(ARCHIVE, pver, PKGINSTALL);
+	GTKL(ARCHIVE, pver, PKGINSTALL);
+	HYPR(ARCHIVE, pver, PKGINSTALL);
+	KITT(ARCHIVE, pver, PKGINSTALL);
+	MPVF(ARCHIVE, pver, PKGINSTALL);
+	NVIM(ARCHIVE, pver, PKGINSTALL);
+	WAYB(ARCHIVE, pver, PKGINSTALL);
+    }
+    else
+    {
+	int install_pkg_opt;
+	do
+	{
+	    printf("\n[1] Install BASH ");
+	    printf("\n[2] Install SWAY ");
+	    printf("\n[3] Install BTOP ");
+	    printf("\n[4] Install CAVA ");
+	    printf("\n[5] Install FAST ");
+	    printf("\n[6] Install FUZZ ");
+	    printf("\n[7] Install GTKL ");
+	    printf("\n[8] Install HYPR ");
+	    printf("\n[9] Install KITT ");
+	    printf("\n[10] Install MPV ");
+	    printf("\n[11] Install NVIM ");
+	    printf("\n[12] Install WAYB ");
+	    
+	    scanf(" %d", &install_pkg_opt);
+
+	    // // this is completely useless at the moment
+	    // printf("\nInstalling dotfiles...\n");
+    	    //     void BASH(char ARCHIVE, float pver, char PKGINSTALL);
+    	    //     void SWAY(char ARCHIVE, float pver, char PKGINSTALL);
+    	    //     void BTOP(char ARCHIVE, float pver, char PKGINSTALL);
+    	    //     void CAVA(char ARCHIVE, float pver, char PKGINSTALL);
+    	    //     void FAST(char ARCHIVE, float pver, char PKGINSTALL);
+    	    //     void FUZZ(char ARCHIVE, float pver, char PKGINSTALL);
+    	    //     void GTKL(char ARCHIVE, float pver, char PKGINSTALL);
+    	    //     void HYPR(char ARCHIVE, float pver, char PKGINSTALL);
+    	    //     void KITT(char ARCHIVE, float pver, char PKGINSTALL);
+    	    //     void MPVF(char ARCHIVE, float pver, char PKGINSTALL);
+    	    //     void NVIM(char ARCHIVE, float pver, char PKGINSTALL);
+    	    //     void WAYB(char ARCHIVE, float pver, char PKGINSTALL);
+    	    // printf("\nInstalling dotfiles...\n");
+	}
+	while (install_pkg_opt == 0);
+    }
+    printf(BOLD_S"\nInstallation completed!\n"STYLE_END);
+
+}
+
+float* update() 
+{
+    char *USERNAME = getenv("HOME");
+
+    // error message if username can't be fetched 
+    if (USERNAME == NULL) 
+    {
+        printf(BOLD_S UDRL_S"\nCan't find home directory\n"STYLE_END);
+        return NULL;
+    }
+
+    // create path to config
+    char HYPRPATH[64];
+    snprintf(HYPRPATH, sizeof(HYPRPATH), 
+	    "%s/.config/hypr/hyprland.conf", USERNAME);
+
+    // open the file with HYPRPATH
+    FILE *file = fopen(HYPRPATH, "r");
+    
+    // return error message when file isn't found
+    if (file == NULL) 
+    {
+	printf(BOLD_S UDRL_S"\nNo such file or directory\n"STYLE_END);
+	// returns null if the file can't be opened/found
+        return NULL;
+    }
+    static float VAWSM[32] = {0};
+
+    char line[384];
+    while (fgets(line, sizeof(line), file)) 
+    {
+        if (sscanf(line, "# AWSMVERSION: %31f[0-9.]", VAWSM) == 1) 
+	{
+            //printf("VAWSM: %s\n", VAWSM); // for troubleshooting purposes
+            fclose(file);
+            return VAWSM;
+        }
+    }
+    fclose(file);
+    return 0;
+}
+
+void copyfiles (int fastfetch_conf_export)
+{
+    char cmd[32];
+    snprintf(cmd, sizeof(cmd),
+	    "cd ~ ");
+    system(cmd);
+
+    scanf(" %d", &fastfetch_conf_export);
+
+    int sourceFd, destFd;
+    ssize_t bytesRead;
+    char buffer[1024];
+
+    char imputfilename[256];
+    char outputfilename[256];
+
+    // using strcpy to assign string literals to character arrays 
+    if (fastfetch_conf_export == 1)
+    {
+	strcpy(imputfilename, ".config/fastfetch/config-default.jsonc");
+    	strcpy(outputfilename, ".config/fastfetch/config.jsonc");
+    }
+    else if (fastfetch_conf_export == 2)
+    {
+	strcpy(imputfilename, ".config/fastfetch/config-other.jsonc");
+    	strcpy(outputfilename, ".config/fastfetch/config.jsonc");
+    }
+    else if (fastfetch_conf_export == 3)
+    {
+	strcpy(imputfilename, ".config/fastfetch/config-duplicated.jsonc");
+    	strcpy(outputfilename, ".config/fastfetch/config.jsonc");
+    }
+
+    sourceFd = open(imputfilename, O_RDONLY);
+    if (sourceFd == -1) 
+    {
+        perror("Error opening source file");
+    }
+
+    destFd = open(outputfilename, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+    if (destFd == -1) 
+    {
+        perror("Error opening destination file");
+        close(sourceFd);
+    }
+
+    while ((bytesRead = read(sourceFd, buffer, sizeof(buffer))) > 0) 
+    {
+        if (write(destFd, buffer, bytesRead) != bytesRead) 
+        {
+            perror("Error writing to destination file");
+            close(sourceFd);
+            close(destFd);
+        }
+    }
+
+    if (bytesRead == -1) 
+    {
+        perror("Error reading source file");
+        close(sourceFd);
+        close(destFd);
+    }
+
+    close(sourceFd);
+    close(destFd);
+    printf("\nThe fastfetch config was modified sucessfully\n");
+}
+void link_fastfetch_configs()
+{
+    int link_fastfetch_configs_opt = -1;
+    do
+    {
+    	char cmd[128];
+
+    	while (getchar() != '\n');  // clear imput buffer 
+    	scanf("%d", &link_fastfetch_configs_opt);
+
+    	if (link_fastfetch_configs_opt == 1)
+    	{
+    	    snprintf(cmd, sizeof(cmd),
+    	    	"ln -fs ~/.config/fastfetch/config-default.jsonc ~/.config/fastfetch/config.jsonc");
+    	    system(cmd);
+
+    	    printf("\nThe fastfetch config was applied successfully\n");
+
+    	}
+    	else if (link_fastfetch_configs_opt == 2)
+    	{
+    	    snprintf(cmd, sizeof(cmd),
+    	    	"ln -fs ~/.config/fastfetch/config-other.jsonc ~/.config/fastfetch/config.jsonc");
+    	    system(cmd);
+
+    	    printf("\nThe fastfetch config was applied successfully\n");
+
+    	}
+    	else if (link_fastfetch_configs_opt == 3)
+    	{
+    	    snprintf(cmd, sizeof(cmd),
+    	    	"ln -fs ~/.config/fastfetch/config-duplicated.jsonc ~/.config/fastfetch/config.jsonc");
+    	    system(cmd);
+
+    	    printf("\nThe fastfetch config was applied successfully\n");
+
+    	}
+    }
+    while (link_fastfetch_configs_opt > 0);
+}
