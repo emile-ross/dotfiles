@@ -79,3 +79,6 @@ char PKGINSTALL;
 
 char full_install_opt; // if the user wants to install everything set to Y
 char full_update_opt; 
+
+void wait_for_timeout();
+void link_fastfetch_configs();
