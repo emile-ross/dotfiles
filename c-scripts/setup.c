@@ -201,7 +201,49 @@ int main()
 				    printf(BOLD_S " [3] "STYLE_END"config-duplicated.jsonc\n");
 				    printf(BOLD_S " [0] "STYLE_END "%s\n", opt_exit_text);
 
-				    void link_fastfetch_configs();
+				    int link_fastfetch_configs_opt = -1;
+    				    do
+    				    {
+    				    	char cmd[128];
+
+    				    	while (getchar() != '\n');  // clear imput buffer 
+    				    	scanf("%d", &link_fastfetch_configs_opt);
+
+    				    	if (link_fastfetch_configs_opt == 1)
+    				    	{
+    				    	    snprintf(cmd, sizeof(cmd),
+    				    	    	"ln -fs ~/.config/fastfetch/config-default.jsonc ~/.config/fastfetch/config.jsonc");
+    				    	    system(cmd);
+
+    				    	    printf("\nThe fastfetch config was applied successfully\n");
+					    install_timer.tv_sec = 0;
+	        			    install_timer.tv_nsec = 250000000L;
+	        			    nanosleep(&install_timer, NULL);
+    				    	}
+    				    	else if (link_fastfetch_configs_opt == 2)
+    				    	{
+    				    	    snprintf(cmd, sizeof(cmd),
+    				    	    	"ln -fs ~/.config/fastfetch/config-other.jsonc ~/.config/fastfetch/config.jsonc");
+    				    	    system(cmd);
+
+    				    	    printf("\nThe fastfetch config was applied successfully\n");
+					    install_timer.tv_sec = 0;
+	        			    install_timer.tv_nsec = 250000000L;
+	        			    nanosleep(&install_timer, NULL);
+    				    	}
+    				    	else if (link_fastfetch_configs_opt == 3)
+    				    	{
+    				    	    snprintf(cmd, sizeof(cmd),
+    				    	    	"ln -fs ~/.config/fastfetch/config-duplicated.jsonc ~/.config/fastfetch/config.jsonc");
+    				    	    system(cmd);
+
+    				    	    printf("\nThe fastfetch config was applied successfully\n");
+					    install_timer.tv_sec = 0;
+	        			    install_timer.tv_nsec = 250000000L;
+	        			    nanosleep(&install_timer, NULL);
+    				    	}
+    				    }
+    				    while (link_fastfetch_configs_opt > 0.0);
 				}
 				while (fastfetch_conf_export > 0.0);
     		    	    }
@@ -819,37 +861,41 @@ void copyfiles (int fastfetch_conf_export)
 }
 void link_fastfetch_configs()
 {
-    int link_fastfetch_configs;
-    char cmd[128];
-
-    while (getchar() != '\n');  // clear imput buffer 
-    scanf("%d", &link_fastfetch_configs);
-
-    if (link_fastfetch_configs == 1)
+    int link_fastfetch_configs_opt = -1;
+    do
     {
-	snprintf(cmd, sizeof(cmd),
-		"ln -fs ~/.config/fastfetch/config-default.jsonc ~/.config/fastfetch/config.jsonc");
-	system(cmd);
+    	char cmd[128];
 
-	printf("\nThe fastfetch config was applied successfully\n");
+    	while (getchar() != '\n');  // clear imput buffer 
+    	scanf("%d", &link_fastfetch_configs_opt);
 
+    	if (link_fastfetch_configs_opt == 1)
+    	{
+    	    snprintf(cmd, sizeof(cmd),
+    	    	"ln -fs ~/.config/fastfetch/config-default.jsonc ~/.config/fastfetch/config.jsonc");
+    	    system(cmd);
+
+    	    printf("\nThe fastfetch config was applied successfully\n");
+
+    	}
+    	else if (link_fastfetch_configs_opt == 2)
+    	{
+    	    snprintf(cmd, sizeof(cmd),
+    	    	"ln -fs ~/.config/fastfetch/config-other.jsonc ~/.config/fastfetch/config.jsonc");
+    	    system(cmd);
+
+    	    printf("\nThe fastfetch config was applied successfully\n");
+
+    	}
+    	else if (link_fastfetch_configs_opt == 3)
+    	{
+    	    snprintf(cmd, sizeof(cmd),
+    	    	"ln -fs ~/.config/fastfetch/config-duplicated.jsonc ~/.config/fastfetch/config.jsonc");
+    	    system(cmd);
+
+    	    printf("\nThe fastfetch config was applied successfully\n");
+
+    	}
     }
-    else if (link_fastfetch_configs == 2)
-    {
-	snprintf(cmd, sizeof(cmd),
-		"ln -fs ~/.config/fastfetch/config-other.jsonc ~/.config/fastfetch/config.jsonc");
-	system(cmd);
-
-	printf("\nThe fastfetch config was applied successfully\n");
-
-    }
-    else if (link_fastfetch_configs == 3)
-    {
-	snprintf(cmd, sizeof(cmd),
-		"ln -fs ~/.config/fastfetch/config-duplicated.jsonc ~/.config/fastfetch/config.jsonc");
-	system(cmd);
-
-	printf("\nThe fastfetch config was applied successfully\n");
-
-    }
+    while (link_fastfetch_configs_opt > 0);
 }
