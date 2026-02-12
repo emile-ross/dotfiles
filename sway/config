@@ -32,13 +32,13 @@ set $lock gtklock -c ~/.config/gtklock/style.css
 
 
 ## set keybinds for common programs
-set $floorp floorp
 ### Output configuration
-#
+
+set $floorp floorp
 set $firefox firefox
 set $chrome chromium
 set $obs obs
-
+set $fileManager dolphin
 
 
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
@@ -91,12 +91,13 @@ set $obs obs
     # bindsym $mod+Return exec $term
 
     bindsym $mod+Q exec $term
+    bindsym $mod+X exec xterm
     bindsym $mod+1 exec $floorp
     bindsym $mod+2 exec $firefox
-	
-    #bindsym $mod+1 exec $chrome
-	
+    bindsym $mod+3 exec $chrome
+
     #bindsym $mod+1 exec $obs
+
     # Kill focused window
     bindsym $mod+C kill
 
@@ -104,7 +105,10 @@ set $obs obs
     # bindsym $mod+R exec $menu
     bindsym $mod+D exec $menu
 
+    # execute the default locking program
     bindsym $alt+L exec $lock
+
+
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
     # Despite the name, also works for non-floating windows.
