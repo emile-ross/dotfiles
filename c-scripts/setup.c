@@ -1,5 +1,7 @@
 #include "dotfileshead.h"
 
+void link_fastfetch_configs();
+
 int main()
 {
     int menu_one_i;
@@ -198,10 +200,8 @@ int main()
 				    printf(BOLD_S " [2] "STYLE_END"config-other.jsonc\n");
 				    printf(BOLD_S " [3] "STYLE_END"config-duplicated.jsonc\n");
 				    printf(BOLD_S " [0] "STYLE_END "%s\n", opt_exit_text);
-				    
-				    copyfiles(-1);
-				    fastfetch_conf_export = -1;
-				    //copyfiles(fastfetch_conf_export);
+
+				    void link_fastfetch_configs();
 				}
 				while (fastfetch_conf_export > 0.0);
     		    	    }
@@ -816,4 +816,40 @@ void copyfiles (int fastfetch_conf_export)
     close(sourceFd);
     close(destFd);
     printf("\nThe fastfetch config was modified sucessfully\n");
+}
+void link_fastfetch_configs()
+{
+    int link_fastfetch_configs;
+    char cmd[128];
+
+    while (getchar() != '\n');  // clear imput buffer 
+    scanf("%d", &link_fastfetch_configs);
+
+    if (link_fastfetch_configs == 1)
+    {
+	snprintf(cmd, sizeof(cmd),
+		"ln -fs ~/.config/fastfetch/config-default.jsonc ~/.config/fastfetch/config.jsonc");
+	system(cmd);
+
+	printf("\nThe fastfetch config was applied successfully\n");
+
+    }
+    else if (link_fastfetch_configs == 2)
+    {
+	snprintf(cmd, sizeof(cmd),
+		"ln -fs ~/.config/fastfetch/config-other.jsonc ~/.config/fastfetch/config.jsonc");
+	system(cmd);
+
+	printf("\nThe fastfetch config was applied successfully\n");
+
+    }
+    else if (link_fastfetch_configs == 3)
+    {
+	snprintf(cmd, sizeof(cmd),
+		"ln -fs ~/.config/fastfetch/config-duplicated.jsonc ~/.config/fastfetch/config.jsonc");
+	system(cmd);
+
+	printf("\nThe fastfetch config was applied successfully\n");
+
+    }
 }
