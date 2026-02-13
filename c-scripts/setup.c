@@ -340,20 +340,20 @@ void BASH(char ARCHIVE, float pver, char PKGINSTALL)
 
 void BTOP(char ARCHIVE, float pver, char PKGINSTALL)
 {
-	char cmd[128];
-        if (ARCHIVE == 'Y' || ARCHIVE == 'y')
-	{
-		// archive btop config
-		snprintf(cmd, sizeof(cmd),
-			"mv ~/.config/btop/btop.conf "
-			"~/.config/btop/btop-oldv%.2f.conf", pver);
-        	system(cmd);
-	}
-        // export btop config
-        snprintf(cmd, sizeof(cmd),
-		"mkdir -p ~/.config/btop && "
-		"cp -f dotfiles/btop/btop.conf ~/.config/btop");
-        system(cmd);
+    char cmd[128];
+    if (ARCHIVE == 'Y' || ARCHIVE == 'y')
+    {
+    	// archive btop config
+    	snprintf(cmd, sizeof(cmd),
+    		"mv ~/.config/btop/btop.conf "
+    		"~/.config/btop/btop-oldv%.2f.conf", pver);
+    	system(cmd);
+    }
+    // export btop config
+    snprintf(cmd, sizeof(cmd),
+    	"mkdir -p ~/.config/btop && "
+    	"cp -f dotfiles/btop/btop.conf ~/.config/btop");
+    system(cmd);
 }
 
 void CAVA(char ARCHIVE, float pver, char PKGINSTALL)
@@ -417,22 +417,22 @@ void FUZZ(char ARCHIVE, float pver, char PKGINSTALL)
 }
 void GTKL(char ARCHIVE, float pver, char PKGINSTALL)
 {
-	char cmd[256];
-        if (ARCHIVE == 'Y' || ARCHIVE == 'y')
-	{
-		// backup gtklock config
-	    	snprintf(cmd, sizeof(cmd),
-                	"mv ~/.config/gtklock/style.css "
-			"~/.config/gtklock/style-oldv%.1f.css", 
-			pver);
-		system(cmd);
-	}
-	// export gtklock config
+    char cmd[256];
+    if (ARCHIVE == 'Y' || ARCHIVE == 'y')
+    {
+    	// backup gtklock config
         snprintf(cmd, sizeof(cmd),
-	        "mkdir -p ~/.config/gtklock/assets && "
-                "cp -f dotfiles/gtklock/style.css ~/.config/gtklock && "
-                "cp -f dotfiles/gtklock/lockscreen.jpg ~/.config/gtklock/assets");
-        system(cmd);
+            	"mv ~/.config/gtklock/style.css "
+    		"~/.config/gtklock/style-oldv%.1f.css", 
+    		pver);
+    	system(cmd);
+    }
+    // export gtklock config
+    snprintf(cmd, sizeof(cmd),
+            "mkdir -p ~/.config/gtklock/assets && "
+            "cp -f dotfiles/gtklock/style.css ~/.config/gtklock && "
+            "cp -f dotfiles/gtklock/lockscreen.jpg ~/.config/gtklock/assets");
+    system(cmd);
 }
 
 void HYPR(char ARCHIVE, float pver, char PKGINSTALL)
@@ -621,7 +621,6 @@ void full_install(char ARCHIVE, char full_install_opt)
 	        nanosleep(&install_timer, NULL);
 	    }
 	
-	
 	    timerinstall--;
 	}
 	
@@ -698,18 +697,18 @@ void full_install(char ARCHIVE, char full_install_opt)
 	int install_pkg_opt;
 	do
 	{
-	    printf("\n[1] Install BASH ");
-	    printf("\n[2] Install SWAY ");
-	    printf("\n[3] Install BTOP ");
-	    printf("\n[4] Install CAVA ");
-	    printf("\n[5] Install FAST ");
-	    printf("\n[6] Install FUZZ ");
-	    printf("\n[7] Install GTKL ");
-	    printf("\n[8] Install HYPR ");
-	    printf("\n[9] Install KITT ");
-	    printf("\n[10] Install MPV ");
-	    printf("\n[11] Install NVIM ");
-	    printf("\n[12] Install WAYB ");
+	    printf("\n[1] Install %s ", TEXT_C_BASH);
+	    printf("\n[2] Install %s ", TEXT_C_SWAY);
+	    printf("\n[3] Install %s ", TEXT_C_BTOP);
+	    printf("\n[4] Install %s ", TEXT_C_CAVA);
+	    printf("\n[5] Install %s ", TEXT_C_FAST);
+	    printf("\n[6] Install %s ", TEXT_C_FUZZ);
+	    printf("\n[7] Install %s ", TEXT_C_GTKL);
+	    printf("\n[8] Install %s ", TEXT_C_HYPR);
+	    printf("\n[9] Install %s ", TEXT_C_KITT);
+	    printf("\n[10] Install %s ", TEXT_C_MPVF);
+	    printf("\n[11] Install %s ", TEXT_C_NVIM);
+	    printf("\n[12] Install %s ", TEXT_C_WAYB);
 	    
 	    scanf(" %d", &install_pkg_opt);
 
