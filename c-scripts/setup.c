@@ -3,7 +3,6 @@
 int main()
 {
     int menu_one_i;
-    //int max_opt_n = 10;
     do
     {
     	clear();
@@ -137,10 +136,12 @@ int main()
 	    	if (update_config_menu == 1)
 	    	{
 		    // fix install
+				printf("\nFix install script unavailable use the install script instead\n");
 	    	}
 	    	if (update_config_menu == 2)
 	    	{
 	    	    //update
+				
 	    	}
 	    }
 	    while(update_config_menu != 0);
