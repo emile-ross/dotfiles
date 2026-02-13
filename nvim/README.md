@@ -9,4 +9,9 @@
  - catppuccin (theme
     
 
-  You can run ``nvim ~/.config/nvim/init.lua`` in order to make changes to your configuration file.  
+  You can edit the file located at ``~/.config/nvim/init.lua`` in order to make changes to neovim.
+
+  In order to edit the file you can use:
+```bash
+  nvim ~/.config/nvim/init.lua
+  ```
