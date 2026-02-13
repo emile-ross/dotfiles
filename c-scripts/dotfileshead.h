@@ -58,18 +58,18 @@ void copyfiles (int fastfetch_conf_export);
 
 float* update();
 
-char* TEXT_C_BASH = ".bashrc";
-char* TEXT_C_SWAY = "Sway-WM configs";
-char* TEXT_C_BTOP = "btop config";
-char* TEXT_C_CAVA = "cava config";
-char* TEXT_C_FAST = "fastfetch configs";
-char* TEXT_C_FUZZ = "fuzzel configs";
-char* TEXT_C_GTKL = "gtklock config and style (appearance) ";
-char* TEXT_C_HYPR = "Hyprland-WM config + Hypridle config";
-char* TEXT_C_KITT = "kitty terminal";
-char* TEXT_C_MPVF = "mpv config";
-char* TEXT_C_NVIM = "neovim config with lazy";
-char* TEXT_C_WAYB = "waybar config and style (appearance)";
+extern const char* TEXT_C_BASH;
+extern const char* TEXT_C_SWAY;
+extern const char* TEXT_C_BTOP;
+extern const char* TEXT_C_CAVA;
+extern const char* TEXT_C_FAST;
+extern const char* TEXT_C_FUZZ;
+extern const char* TEXT_C_GTKL;
+extern const char* TEXT_C_HYPR;
+extern const char* TEXT_C_KITT;
+extern const char* TEXT_C_MPVF;
+extern const char* TEXT_C_NVIM;
+extern const char* TEXT_C_WAYB;
 
 int fastfetch_conf_export;
 
