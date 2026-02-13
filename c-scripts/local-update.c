@@ -126,8 +126,6 @@ int main(void)
 				"cp -f dotfiles/cava/config ~/.config/cava/ && "
 				"yay -S --noconfirm ttf-ubuntu-font-family && "
 				"mv ~/.config/kitty/kitty.conf ~/.config/kitty/kitty-oldv0.conf && "
-				"mv ~/.config/hypr/hyprland.conf ~/.config/hypr/hyprland-oldv1.4.conf && "
-				"cp -f dotfiles/hypr/hyprland.conf ~/.config/hypr/ && "
 				"cp -f dotfiles/kitty/kitty.conf ~/.config/kitty && "
 				"cp -f dotfiles/kitty/current-theme.conf ~/.config/current-theme.conf");
 			system(cmd);
@@ -143,8 +141,6 @@ int main(void)
 			    	"mkdir ~/.config/cava && "
 			    	"cp -f ~/dotfiles/cava/config ~/.config/cava/ && "
 			    	"mv ~/.config/kitty/kitty.conf ~/.config/kitty/kitty-oldv0.conf && "
-			    	"mv ~/.config/hypr/hyprland.conf ~/.config/hypr/hyprland-oldv1.4.conf && "
-			    	"cp -f ~/dotfiles/hypr/hyprland.conf ~/.config/hypr/ && "
 			    	"cp -f ~/dotfiles/kitty/kitty.conf ~/.config/kitty && "
 			    	"cp -f ~/dotfiles/kitty/current-theme.conf ~/.config/current-theme.conf");
 			system(cmd);
@@ -161,6 +157,23 @@ int main(void)
 				{
 				    return 0;
 				}
+		}
+		else if (strcmp(VAWSM, "2.0") == 0)
+		{
+		    char cmd[1024];
+		    snprintf(cmd, sizeof(cmd),
+			    "sudo pacman --noconfirm sway mpv && "
+		            "yay -S --noconfirm btop gtklock && "
+		            "yay -S --noconfirm ttf-ubuntu-font-family ttf-ibmplex-mono-nerd ttf-blex-nerd-font-git ttf-victor-mono-nerd ttf-cascadia-mono-nerd && "
+		            "rm ~/.config/cava && "
+		            "mkdir ~/.config/cava && "
+		            "cp -f ~/dotfiles/cava/config ~/.config/cava/ && "
+		            "mv ~/.config/kitty/kitty.conf ~/.config/kitty/kitty-oldv0.conf && "
+		            "cp -f ~/dotfiles/kitty/kitty.conf ~/.config/kitty && "
+		            "cp -f ~/dotfiles/kitty/current-theme.conf ~/.config/current-theme.conf");
+		    system(cmd);
+
+		    printf("\n Update completed.");
 		}
 		else if (strcmp(VAWSM, "2.0") == 0) // check if latest version is installed
 		{
