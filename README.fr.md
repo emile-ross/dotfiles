@@ -55,7 +55,7 @@ Si vous voulez **Installer** vos configurations, cliquez [ici](#Installer)
   - options de police
   - palette de couleurs
 - gtklock
-  - custom lockscreen background
+  - arriere plan modifié
 - mpv 
   - intégrer des shaders
 
@@ -91,7 +91,7 @@ des touches utiles a connaitre:
 super + M -> **sortir de hyprland**
 
 super + V -> **Basculer le mode Flottant**
-> ( Allows windows to stack on top of each other)
+> (permet aux fenetres de s'empiler les unes par dessus les autres)
 
 super + C -> **Fermer la fenêtre**
 
@@ -126,7 +126,7 @@ super + 0 -> **execute [OBS](https://github.com/obsproject/obs-studio)**
 ## Multi Tasking
 super + F1 -> **espace de travail 1**
 
-super + shift + F1 -> **déplacer la fenètre vers l'espace de travail 1** 
+super + MAJ + F1 -> **déplacer la fenètre vers l'espace de travail 1** 
  
  > *super + (F1-F11) -> espace de travail (1-11)*
 
