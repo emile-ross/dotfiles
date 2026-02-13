@@ -86,14 +86,14 @@ des touches utiles a connaitre:
 (super = "la touche Windows")
  
  super + Q -> **execute kitty**
-> (the default terminal)
+> (le terminal par utilisé par défaut)
 
-super + M -> **exit hyprland**
+super + M -> **sortir de hyprland**
 
-super + V -> **Toggle Floating Mode**
+super + V -> **Basculer le mode Flottant**
 > ( Allows windows to stack on top of each other)
 
-super + C -> **Close Window**
+super + C -> **Fermer la fenêtre**
 
 
 ### ouvrir les applications
