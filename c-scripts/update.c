@@ -17,8 +17,7 @@ int full_update(char ARCHIVE, float pver)
 		"cp -f dotfiles/kitty/current-theme.conf ~/.config/current-theme.conf ");
 	system(cmd);
 
-	snprintf(cmd, 192,
-		"cp dotfiles/hypr/hyprland.conf ~/.config/hypr && "
+	snprintf(cmd, 128,
 		"cp dotfiles/hypr/hypridle.conf ~/.config/hypr && "
 		"cp dotfiles/hypr/hyprpaper.conf ~/.config/hypr ");
 	system(cmd);
@@ -48,7 +47,6 @@ int full_update(char ARCHIVE, float pver)
 		"yay -S --noconfirm ttf-ubuntu-font-family ttf-ibmplex-mono-nerd "
 		"ttf-blex-nerd-font-git ttf-victor-mono-nerd ttf-cascadia-mono-nerd &&"
 		"cp -f dotfiles/kitty/current-theme.conf ~/.config/kitty/ &&"
-		"cp -f dotfiles/hypr/hyprland.conf ~/.config/hypr/ && "
 		"mkdir -p ~/.config/cava/ && "
 		"rm ~/.config/cava/config && "
 		"cp -f dotfiles/cava/config ~/.config/cava/ &&");
@@ -99,9 +97,11 @@ int full_update(char ARCHIVE, float pver)
 		"mv ~/.config/sway/config ~/.config/sway/config-oldv%.2f && "
 		"cp dotfiles/sway/config ~/.config/sway/ && "	// update sway config
 		"cp dotfiles/sway/config-default ~/.config/sway/ && "
+		"mv ~/.config/hypr/hyprland.conf ~/.config/hypr/hyprland-v%.2f.conf && "
+		"cp -f dotfiles/hyprland/hyprland.conf ~/.config/hypr/ && "
 		"mkdir -p ~/.config/mpv/ && "
 		"mv ~/.config/mpv/mpv.conf ~/.config/mpv/mpv-oldv%.2f.conf && "
-		"cp dotfiles/mpv/mpv.conf ~/.config/mpv/ ", pver, pver);
+		"cp dotfiles/mpv/mpv.conf ~/.config/mpv/ ", pver, pver, pver);
 	system(cmd);
 
     goto end;
