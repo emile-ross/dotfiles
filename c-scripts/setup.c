@@ -73,8 +73,9 @@ int main()
 		{
 		    if ( PKGINSTALL == 'Y' || PKGINSTALL == 'y')
 		    {
-		    printf(BOLD_S"\nFixing dotfiles...\n"STYLE_END);
-		    // call install functions for every config
+			printf(BOLD_S"\nFixing dotfiles...\n"STYLE_END);
+		    	// call install functions for every config
+			BASH(ARCHIVE, pver, 'y');
 			BTOP(ARCHIVE, pver, 'y');
 		    	CAVA(ARCHIVE, pver, 'y');
 		    	FAST(ARCHIVE, pver, 'y');
@@ -89,19 +90,19 @@ int main()
 		    }
 		    else
 		    {
-			BTOP(ARCHIVE, pver, 'y');
-		    	CAVA(ARCHIVE, pver, 'y');
-		    	FAST(ARCHIVE, pver, 'y');
-		    	FUZZ(ARCHIVE, pver, 'y');
-		    	GTKL(ARCHIVE, pver, 'y');
-		    	HYPR(ARCHIVE, pver, 'y');
-		    	KITT(ARCHIVE, pver, 'y');
-		    	MPVF(ARCHIVE, pver, 'y');
-		    	NVIM(ARCHIVE, pver, 'y');
-		    	SWAY(ARCHIVE, pver, 'y');
-		    	WAYB(ARCHIVE, pver, 'y');
+			BASH(ARCHIVE, pver, 'n');
+			BTOP(ARCHIVE, pver, 'n');
+		    	CAVA(ARCHIVE, pver, 'n');
+		    	FAST(ARCHIVE, pver, 'n');
+		    	FUZZ(ARCHIVE, pver, 'n');
+		    	GTKL(ARCHIVE, pver, 'n');
+		    	HYPR(ARCHIVE, pver, 'n');
+		    	KITT(ARCHIVE, pver, 'n');
+		    	MPVF(ARCHIVE, pver, 'n');
+		    	NVIM(ARCHIVE, pver, 'n');
+		    	SWAY(ARCHIVE, pver, 'n');
+		    	WAYB(ARCHIVE, pver, 'n');
 		    }
-
 
 		    printf(BOLD_S"\nInstall completed!...\n"STYLE_END);
 		    scanf(" %d", &after_install);
@@ -127,21 +128,27 @@ int main()
 
 		printf(ANSI_GREY"\nDetected Version: %.2f\n"STYLE_END, *version);
 
-    	    	printf(BOLD_S "%s\n"STYLE_END, opt_the_text );
-    	    	printf(BOLD_S "\n [1] " STYLE_END "%s\n", update_opt_text);
+    	    	printf(BOLD_S "%s\n\n"STYLE_END, opt_the_text );
+    	    	printf(BOLD_S " [1] " STYLE_END "%s\n", update_opt_text);
     	    	printf(BOLD_S " [2] " STYLE_END "%s\n", updatecheck_opt_text);
     	    	printf(BOLD_S " [0] " STYLE_END "%s\n", opt_exit_text);
+
 		while (getchar() != '\n');  // clear imput buffer 
 	    	scanf("%d", &update_config_menu);
 	    	if (update_config_menu == 1)
 	    	{
-		    // fix install
-				printf("\nFix install script unavailable use the install script instead\n");
+		    printf("\nFix install script unavailable use the install script instead\n");
 	    	}
 	    	if (update_config_menu == 2)
 	    	{
-	    	    //update
-				
+		    char cmd[1024];
+		    snprintf(cmd, sizeof(cmd),
+			    "gcc ~/dotfiles/c-scripts/setup.c "
+			    "~/dotfiles/c-scripts/update.c "
+			    "~/dotfiles/c-scripts/install.c "
+			    "~/dotfiles/c-scripts/functions.c "
+			    "-o setup -Wall");
+		    system(cmd);
 	    	}
 	    }
 	    while(update_config_menu != 0);
