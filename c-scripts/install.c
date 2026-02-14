@@ -1,10 +1,5 @@
 #include "dotfileshead.h"
 
-void clear()
-{
-    printf("\033[2J\033[H");
-}
-
 void install_configs()  // the partial install script (configure which package or configuration to install)
 {
     int cust_conf_inst_opt;
