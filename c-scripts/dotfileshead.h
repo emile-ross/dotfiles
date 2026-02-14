@@ -58,18 +58,18 @@ void copyfiles (int fastfetch_conf_export);
 
 float* update();
 
-extern const char* TEXT_C_BASH;
-extern const char* TEXT_C_SWAY;
-extern const char* TEXT_C_BTOP;
-extern const char* TEXT_C_CAVA;
-extern const char* TEXT_C_FAST;
-extern const char* TEXT_C_FUZZ;
-extern const char* TEXT_C_GTKL;
-extern const char* TEXT_C_HYPR;
-extern const char* TEXT_C_KITT;
-extern const char* TEXT_C_MPVF;
-extern const char* TEXT_C_NVIM;
-extern const char* TEXT_C_WAYB;
+char* TEXT_C_BASH;
+char* TEXT_C_SWAY;
+char* TEXT_C_BTOP;
+char* TEXT_C_CAVA;
+char* TEXT_C_FAST;
+char* TEXT_C_FUZZ;
+char* TEXT_C_GTKL;
+char* TEXT_C_HYPR;
+char* TEXT_C_KITT;
+char* TEXT_C_MPVF;
+char* TEXT_C_NVIM;
+char* TEXT_C_WAYB;
 
 int fastfetch_conf_export;
 
