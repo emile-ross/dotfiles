@@ -1,12 +1,14 @@
 #include "dotfileshead.h"
 
+float* update();
+
 int main()
 {
     int menu_one_i;
     do
     {
-    	clear();
     	// sets the text for each option and each menu title
+    	clear();
     	char main_menu_text[128] = "Welcome to the setup utility for ImAwsumm's dotfiles";
     	char opt_one_text[128] = "Install the dotfiles";
     	char opt_two_text[128] = "Fix the dotfiles";
@@ -56,6 +58,7 @@ int main()
 
     		printf(BOLD_S "%s\n"STYLE_END, opt_two_text );
 
+		float *version = update();
 		printf(ANSI_GREY"\nDetected Version: %.2f\n"STYLE_END, *version);
 		printf(UDRL_S"Are you sure you want to fix your dotfiles?\n"STYLE_END);
 		printf(BOLD_S"\n[1]"STYLE_END" %s", opt_two_text);
@@ -123,6 +126,7 @@ int main()
 
     	    	clear();
 
+		float *version = update();
 		printf(ANSI_GREY"\nDetected Version: %.2f\n"STYLE_END, *version);
 
     	    	printf(BOLD_S "%s\n\n"STYLE_END, opt_the_text );
@@ -253,8 +257,8 @@ int main()
     	        	    printf(BOLD_S " [1] " STYLE_END "%s\n", kitty_color_text);
     	        	    printf(BOLD_S " [2] " STYLE_END "%s\n", kitty_fonts_text);
     	        	    printf(BOLD_S " [0] " STYLE_END "%s\n", opt_exit_text);
-	    	    while (getchar() != '\n');  // clear imput buffer 
 
+			    while (getchar() != '\n');  // clear imput buffer 
     	        	    scanf("\n%d", &kitty_config_choice);
 
     	        	    char cmd[24];
