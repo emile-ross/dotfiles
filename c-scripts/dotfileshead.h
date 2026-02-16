@@ -49,6 +49,12 @@ int full_update(char ARCHIVE, float pver);
 void install_configs(); // the partial install script (configure which package or configuration to install)
 void copyfiles (int fastfetch_conf_export);
 
+void clear();
+void wait_for_timeout();
+
+void link_fastfetch_configs();
+
+// data 
 
 extern char* TEXT_C_BASH;
 extern char* TEXT_C_SWAY;
@@ -64,14 +70,12 @@ extern char* TEXT_C_NVIM;
 extern char* TEXT_C_WAYB;
 
 extern const int max_menu_opt_n;
-int fastfetch_conf_export;
+extern int fastfetch_conf_export;
 
-struct timespec install_timer;
-char ARCHIVE;
-char PKGINSTALL;
+extern struct timespec install_timer;
 
-char full_install_opt; // if the user wants to install everything set to Y
-char full_update_opt; 
+extern char ARCHIVE;
+extern char PKGINSTALL;
+extern char full_install_opt; // if the user wants to install everything set to Y
+extern char full_update_opt; 
 
-void wait_for_timeout();
-void link_fastfetch_configs();
