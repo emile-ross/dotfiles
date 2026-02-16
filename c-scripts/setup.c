@@ -1,4 +1,4 @@
-\#include "dotfileshead.h"
+#include "dotfileshead.h"
 
 float* update();
 
@@ -160,133 +160,155 @@ int main()
     	    do
     	    {
 	        clear();
-    	        char fastfetch_config_menu_text[128] = "Edit fastfetch config";
-    	        char kitty_config_menu_text[128] = "Edit kitty appearance and behavior";
+    	        char fastfetch_config_menu_text[64] = "Edit fastfetch config";
+    	        char kitty_config_menu_text[64] = "Edit kitty appearance and behavior";
+    	        char fuzzel_config_menu_text[64] = "Edit fuzzel config";
     	        
     	        printf(BOLD_S ANSI_WHITE "%s\n"STYLE_END, opt_for_text );
     	        printf(BOLD_S "\n [1] " STYLE_END "%s\n", fastfetch_config_menu_text);
     	        printf(BOLD_S " [2] " STYLE_END "%s\n", kitty_config_menu_text);
     	        printf(BOLD_S " [0] " STYLE_END "%s\n", opt_exit_text);
+
 	        while (getchar() != '\n');  // clear imput buffer 
     	        scanf(" %d", &dotfiles_config_menu);
 	        if (dotfiles_config_menu == 1)
 	        {
-	    	int fastfetch_config_choice;
-    	        	do
-    	        	{
-			    clear();
-    	        	    char fastfetch_edit_config_text[48] = "Change the config fastfetch uses by default";
-    	        	    char fastfetch_preview_text[32] = "Preview fastfetch output";
+		    int fastfetch_config_choice;
+    	            do
+    	            {
+		        clear();
+    	                char fastfetch_edit_config_text[48] = "Change the config fastfetch uses by default";
+    	                char fastfetch_preview_text[32] = "Preview fastfetch output";
 
-			    char cmd[128];
-    	        	    
-    	        	    printf(BOLD_S ANSI_WHITE "%s\n\n"STYLE_END, fastfetch_config_menu_text );
-    	        	    printf(BOLD_S " [1] " STYLE_END "%s\n", fastfetch_preview_text);
-    	        	    printf(BOLD_S " [2] " STYLE_END "%s\n", fastfetch_edit_config_text);
-    	        	    printf(BOLD_S " [0] " STYLE_END "%s\n", opt_exit_text);
-			    while (getchar() != '\n');  // clear imput buffer 
+		        char cmd[128];
+    	                
+    	                printf(BOLD_S ANSI_WHITE "%s\n\n"STYLE_END, fastfetch_config_menu_text );
+    	                printf(BOLD_S " [1] " STYLE_END "%s\n", fastfetch_preview_text);
+    	                printf(BOLD_S " [2] " STYLE_END "%s\n", fastfetch_edit_config_text);
+    	                printf(BOLD_S " [0] " STYLE_END "%s\n", opt_exit_text);
+		        while (getchar() != '\n');  // clear imput buffer 
 
-    	        	    scanf("\n%d", &fastfetch_config_choice);
-    	        	    if (fastfetch_config_choice == 1)
-    	        	    {
-    	        	    	snprintf(cmd, 128,
-				    "fastfetch");
-    	        	    	system(cmd);
+    	                scanf("\n%d", &fastfetch_config_choice);
+    	                if (fastfetch_config_choice == 1)
+    	                {
+    	                    snprintf(cmd, 128,
+				"fastfetch");
+    	                    system(cmd);
 
-				install_timer.tv_sec = 2;
-				install_timer.tv_nsec = 000000000L;
-				nanosleep(&install_timer, NULL);
-    	        	    }
-			    if (fastfetch_config_choice == 2)
-    	        	    {
-				do
-	    		    	{
-	    		    	    clear();
-	    		    	    printf("\nWhat file would you like to use as your fastfetch config?\n");
-	    		    	    printf(BOLD_S " [1] "STYLE_END"config-default.jsonc\n");
-	    		    	    printf(BOLD_S " [2] "STYLE_END"config-other.jsonc\n");
-	    		    	    printf(BOLD_S " [3] "STYLE_END"config-duplicated.jsonc\n");
-	    		    	    printf(BOLD_S " [0] "STYLE_END "%s\n", opt_exit_text);
+			    install_timer.tv_sec = 2;
+			    install_timer.tv_nsec = 000000000L;
+			    nanosleep(&install_timer, NULL);
+    	                }
+		        if (fastfetch_config_choice == 2)
+    	                {
+			    do
+	    	            {
+				clear();
+	    	            	printf(BOLD_S"What file would you like to use as your fastfetch config?\n\n"STYLE_END);
+	    	            	printf(BOLD_S " [1] "STYLE_END"config-default.jsonc\n");
+	    	            	printf(BOLD_S " [2] "STYLE_END"config-other.jsonc\n");
+	    	            	printf(BOLD_S " [3] "STYLE_END"config-duplicated.jsonc\n");
+	    	            	printf(BOLD_S " [0] "STYLE_END "%s\n", opt_exit_text);
 
-	    		    	    int link_fastfetch_configs_opt = -1;
-    	    		    	    char cmd[128];
+	    	            	int link_fastfetch_configs_opt = -1;
+    	    	            	char cmd[128];
 
-    	    		    	    while (getchar() != '\n');  // clear imput buffer 
-    	    		    	    scanf("%d", &link_fastfetch_configs_opt);
+    	    	            	while (getchar() != '\n');  // clear imput buffer 
+    	    	            	scanf("%d", &link_fastfetch_configs_opt);
 
-    	    		    	    if (link_fastfetch_configs_opt == 1)
-    	    		    	    {
-    	    		    	        snprintf(cmd, sizeof(cmd),
-    	    		    	        	"ln -fs ~/.config/fastfetch/config-default.jsonc ~/.config/fastfetch/config.jsonc");
-    	    		    	        system(cmd);
-    	    		    	        printf("\nThe fastfetch config was applied successfully\n");
+    	    	            	if (link_fastfetch_configs_opt == 1)
+    	    	            	{
+    	    	            	    snprintf(cmd, sizeof(cmd),
+    	    	            	    	"ln -fs ~/.config/fastfetch/config-default.jsonc ~/.config/fastfetch/config.jsonc");
+    	    	            	    system(cmd);
+    	    	            	    printf("\nThe fastfetch config was applied successfully\n");
 
-	    		    		wait_for_timeout();
-    	    		    	    }
-    	    		    	    else if (link_fastfetch_configs_opt == 2)
-    	    		    	    {
-    	    		    	        snprintf(cmd, sizeof(cmd),
-    	    		    	        	"ln -fs ~/.config/fastfetch/config-other.jsonc ~/.config/fastfetch/config.jsonc");
-    	    		    	        system(cmd);
-    	    		    	        printf("\nThe fastfetch config was applied successfully\n");
+	    	            	    wait_for_timeout();
+    	    	            	}
+    	    	            	else if (link_fastfetch_configs_opt == 2)
+    	    	            	{
+    	    	            	    snprintf(cmd, sizeof(cmd),
+    	    	            	    	"ln -fs ~/.config/fastfetch/config-other.jsonc ~/.config/fastfetch/config.jsonc");
+    	    	            	    system(cmd);
+    	    	            	    printf("\nThe fastfetch config was applied successfully\n");
 
-	    		    		wait_for_timeout();
-    	    		    	    }
-    	    		    	    else if (link_fastfetch_configs_opt == 3)
-    	    		    	    {
-    	    		    	        snprintf(cmd, sizeof(cmd),
-    	    		    	        	"ln -fs ~/.config/fastfetch/config-duplicated.jsonc ~/.config/fastfetch/config.jsonc");
-    	    		    	        system(cmd);
+	    	            	    wait_for_timeout();
+    	    	            	}
+    	    	            	else if (link_fastfetch_configs_opt == 3)
+    	    	            	{
+    	    	            	    snprintf(cmd, sizeof(cmd),
+    	    	            	    	"ln -fs ~/.config/fastfetch/config-duplicated.jsonc ~/.config/fastfetch/config.jsonc");
+    	    	            	    system(cmd);
 
-    	    		    	        printf("\nThe fastfetch config was applied successfully\n");
+    	    	            	    printf("\nThe fastfetch config was applied successfully\n");
 
-	    		    		wait_for_timeout();
-    	    		    	    }
-				    else
-				    {}
-	    		    	}
-	    		    	while (fastfetch_conf_export > 0.0);
-    	        	    }
-    	        	}
-    	        	while(fastfetch_config_choice > 0.0);
-    	        	// exits the while loop when the user types 0
+	    	            	    wait_for_timeout();
+    	    	            	}
+		    	    	else
+		    	    	{}
+	    	            }
+	    	            while (fastfetch_conf_export > 0.0);
+    	                }
+    	            }
+    	            while(fastfetch_config_choice > 0.0);
+    	            // exits the while loop when the user types 0
 	        }
-	        if (dotfiles_config_menu == 2)
+		else if (dotfiles_config_menu == 2)
     	        {
-    	        	int kitty_config_choice;
-    	        	do
-    	        	{
-			    clear();
-    	        	    char kitty_color_text[32] = "Change Kitty color scheme";
-    	        	    char kitty_fonts_text[32] = "Change Kitty fonts";
-    	        	    
-    	        	    printf(BOLD_S ANSI_WHITE "%s\n\n"STYLE_END, kitty_config_menu_text );
-    	        	    printf(BOLD_S " [1] " STYLE_END "%s\n", kitty_color_text);
-    	        	    printf(BOLD_S " [2] " STYLE_END "%s\n", kitty_fonts_text);
-    	        	    printf(BOLD_S " [0] " STYLE_END "%s\n", opt_exit_text);
+		    int kitty_config_choice;
+		    do
+    	            {
+		        clear();
+    	                char kitty_color_text[32] = "Change Kitty color scheme";
+    	                char kitty_fonts_text[32] = "Change Kitty fonts";
+    	                
+    	                printf(BOLD_S ANSI_WHITE "%s\n\n"STYLE_END, kitty_config_menu_text );
+    	                printf(BOLD_S " [1] " STYLE_END "%s\n", kitty_color_text);
+    	                printf(BOLD_S " [2] " STYLE_END "%s\n", kitty_fonts_text);
+    	                printf(BOLD_S " [0] " STYLE_END "%s\n", opt_exit_text);
 
-			    while (getchar() != '\n');  // clear imput buffer 
-    	        	    scanf("%d", &kitty_config_choice);
+		        while (getchar() != '\n');  // clear imput buffer 
+    	                scanf("%d", &kitty_config_choice);
 
-    	        	    char cmd[24];
-    	        	    if (kitty_config_choice == 1)
-    	        	    {
-    	        	    	snprintf(cmd, 24,
-					"kitten themes");
-    	        	    	system(cmd);
-    	        	    }
-    	        	    if (kitty_config_choice == 2)
-    	        	    {
-    	        	    	snprintf(cmd, 24,
-					"kitty +list-fonts");
-    	        	    	system(cmd);
+    	                char cmd[24];
+    	                if (kitty_config_choice == 1)
+    	                {
+			    snprintf(cmd, 24,
+				"kitten themes");
+    	                    system(cmd);
+    	                }
+    	                if (kitty_config_choice == 2)
+    	                {
+			    snprintf(cmd, 24,
+				"kitty +list-fonts");
+    	                    system(cmd);
     
-    	        	    	printf("\nThe install script can be used to install more fonts.");
-    	        	    }
-    	        	}
-    	        	while(kitty_config_choice != 0.0);
-    	        	// exits the while loop when the user types 0
+    	                    printf("\nThe install script can be used to install more fonts.");
+    	                }
+    	            }
+    	            while(kitty_config_choice != 0.0);
+    	            // exits the while loop when the user types 0
     	        }
+		else if (dotfiles_config_menu == 3)
+		{
+		    int fuzzel_config_menu_choice;
+		    do
+		    {
+		        clear();
+    	                char fuzzel_view_config_text[32] = "Preview Fuzzel appearance";
+    	                char fuzzel_edit_config_text[32] = "Edit Fuzzel config";
+
+			printf(BOLD_S ANSI_WHITE "%s\n\n"STYLE_END, fuzzel_config_menu_text);
+    	            	printf(BOLD_S " [1] " STYLE_END "%s\n", fuzzel_view_config_text);
+    	            	printf(BOLD_S " [2] " STYLE_END "%s\n",	fuzzel_edit_config_text);
+    	            	printf(BOLD_S " [0] " STYLE_END "%s\n", opt_exit_text);
+
+			while (getchar() != '\n');  // clear imput buffer 
+			scanf(" %d", &fuzzel_config_menu_choice);
+		    }
+		    while (fuzzel_config_menu_choice > 0);
+		}
+		    
     	    } 
     	    while(dotfiles_config_menu != 0.0);
     	    // exits the while loop when the user types 0
