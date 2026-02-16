@@ -167,10 +167,12 @@ int main()
     	        printf(BOLD_S ANSI_WHITE "%s\n"STYLE_END, opt_for_text );
     	        printf(BOLD_S "\n [1] " STYLE_END "%s\n", fastfetch_config_menu_text);
     	        printf(BOLD_S " [2] " STYLE_END "%s\n", kitty_config_menu_text);
+    	        printf(BOLD_S " [3] " STYLE_END "%s\n", fuzzel_config_menu_text);
     	        printf(BOLD_S " [0] " STYLE_END "%s\n", opt_exit_text);
 
 	        while (getchar() != '\n');  // clear imput buffer 
     	        scanf(" %d", &dotfiles_config_menu);
+
 	        if (dotfiles_config_menu == 1)
 	        {
 		    int fastfetch_config_choice;
@@ -305,10 +307,38 @@ int main()
 
 			while (getchar() != '\n');  // clear imput buffer 
 			scanf(" %d", &fuzzel_config_menu_choice);
+			if (fuzzel_config_menu_choice == 1)
+			{
+			    char cmd[128];
+			    snprintf(cmd, 16,
+				"fuzzel");
+    	                    system(cmd);
+
+			    wait_for_timeout();
+			}
+			else if (fuzzel_config_menu_choice == 2)
+			{
+			    int fuzzel_edit_menu_choice;
+			    do
+			    {
+				char fuzzel_config_one[32] = "Use fuzzel-duplicated.ini";
+    	                	char fuzzel_config_old[32] = "Use old-fuzzel.ini";
+
+				printf(BOLD_S ANSI_WHITE "%s\n\n"STYLE_END, fuzzel_edit_config_text);
+    	            		printf(BOLD_S " [1] " STYLE_END "%s\n", fuzzel_config_one);
+    	            		printf(BOLD_S " [2] " STYLE_END "%s\n",	fuzzel_config_old);
+    	            		printf(BOLD_S " [0] " STYLE_END "%s\n", opt_exit_text);
+
+				while (getchar() != '\n');  // clear imput buffer 
+				scanf(" %d", &fuzzel_edit_menu_choice);
+
+				// add fuzzel editing  commands here
+			    }
+			    while (fuzzel_edit_menu_choice > 0);
+			}
 		    }
 		    while (fuzzel_config_menu_choice > 0);
 		}
-		    
     	    } 
     	    while(dotfiles_config_menu != 0.0);
     	    // exits the while loop when the user types 0
