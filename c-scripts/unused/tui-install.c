@@ -53,67 +53,66 @@ int menu()
 
     while (1) 
     {
-	    clear();
-        	for (int i = 0; i < n_options; ++i) 
-        	{	if (i == highlight) 
-			attron(A_REVERSE);
-			mvprintw(i + 1, 1, menu[i]);
-        	    	if (i == highlight) 
-        	        attroff(A_REVERSE);
-        	}
-        	refresh();
-        	choice = getch();
+        clear();
+    	for (int i = 0; i < n_options; ++i) 
+    	{	if (i == highlight) 
+	    attron(A_REVERSE);
+	    mvprintw(i + 1, 1, menu[i]);
+	    if (i == highlight) 
+	    attroff(A_REVERSE);
+    	}
+    	refresh();
+    	choice = getch();
+    
+    	switch (choice) 
+    	{
+	    case KEY_UP:
+		    highlight = (highlight == 0) ? n_options - 1 : highlight - 1;
+		    break;
+	    case KEY_DOWN:
+    	            highlight = (highlight == n_options - 1) ? 0 : highlight + 1;
+    	            break;
+    	    case 10: // Enter key
+	        if (highlight == 0) 
+    	        {
+		    BTOP('Y');
+		    CAVA('Y');
 
-        	switch (choice) 
-        	{
-        	    	case KEY_UP:
-		    	        highlight = (highlight == 0) ? n_options - 1 : highlight - 1;
-        	    	        break;
-        	    	case KEY_DOWN:
-        	    	        highlight = (highlight == n_options - 1) ? 0 : highlight + 1;
-        	    	        break;
-        	    	case 10: // Enter key
-				 if (highlight == 0) 
-				 {
-					        BTOP('Y');
-					        CAVA('Y');
-					 
-        	    	        install_script();
-		    	         	install_noconfirm();
-				 } 
-				 else if (highlight == 1)
-				 {
-		    	    		
-		    	    		fix_script();   // display a prompt
-		    	    		install_yay();  // Check if yay is installed
+    	            install_script();
+    	            install_noconfirm();
+    	        } 
+    	        else if (highlight == 1)
+    	        {
+	    	fix_script();   // display a prompt
+	    	install_yay();  // Check if yay is installed
+    
+    	        	// update after yay was checked
+	    	char cmd[256];
+    	        	snprintf(cmd, sizeof(cmd),
+	    		"yay -Syu && "
+    	        	    	"yay -S --noconfirm fastfetch cava btop gtklock");
+    	        	system(cmd);
 
-		    	    		// update after yay was checked
-					
-		    	    		       	char cmd[256];
-		    	    		       	snprintf(cmd, sizeof(cmd),
-		    	    					"yay -Syu && "
-		    	    		       	    		"yay -S --noconfirm fastfetch cava btop gtklock");
-		    	    		       	system(cmd);
-		    	    			printw("\nInstall was fixed\n");
-        	    	    } 
-        	    	    else if (highlight == 2) 
-        	    	    {
-		    	    	endwin();
-		    	    	char cmd[256];
-		    	    	snprintf(cmd, sizeof(cmd),
-		    	    			"cd dotfiles/c-scripts && "
-		    	    			"gcc install.c -o cinstall && "
-		    	    			"./cinstall");
-		    	    	system(cmd);
-
-		    	    } 
-        	    	    else if (highlight == 3) 
-        	    	    {
-		    	    	fexit();
-        	    	        return 0;
-        	    	    }
-        	    	    break;
-		}
+    	        	printw("\nInstall was fixed\n");
+    	        } 
+    	        else if (highlight == 2) 
+    	        {
+    	        	endwin();
+    	        	char cmd[256];
+    	        	snprintf(cmd, sizeof(cmd),
+	    		"cd dotfiles/c-scripts && "
+    	        		"gcc install.c -o cinstall && "
+    	        		"./cinstall");
+    	        	system(cmd);
+    
+    	        } 
+    	        else if (highlight == 3) 
+    	        {
+    	        	fexit();
+    	            return 0;
+    	        }
+    	        break;
+    	}
     }
 
     endwin();
@@ -364,8 +363,7 @@ void advanced_mode()
 	getch(); // Wait for user input
 }
 
-int install_noconfirm()
+void install_noconfirm()
 {
-	printw("\nInstalling\n");
-	return 0;
+    printw("\nInstalling\n");
 }
