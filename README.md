@@ -6,7 +6,6 @@ Dotfiles are files used to customize your system to your liking.  You can modify
 If you want to **Install** your dotfiles, click [here](#Install)
 
 
-
 <table>
   <tr>
     <th>desktop with kitty</th>
@@ -76,11 +75,8 @@ More features will come in the future
 
 ```sh
 git clone https://github.com/imawsumm/dotfiles
-gcc -c dotfiles/c-scripts/setup.c
-gcc -c dotfiles/c-scripts/install.c
-gcc setup.o install.o -o setup
-gcc setup.c functions.c install.c update.c -o setup -Wall
-./install
+gcc dotfiles/c-scripts/setup.c dotfiles/c-scripts/functions.c dotfiles/c-scripts/install.c dotfiles/c-scripts/update.c -o setup -Wall
+./setup
 ``` 
 note: This only compiles the code necessary for the install script. 
 
