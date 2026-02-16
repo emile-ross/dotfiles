@@ -17,11 +17,6 @@
 #define FASTBLINK_S 	"\e[6m"
 #define STRIKE_S 	"\e[9m"
 
-void clear()
-{
-    printf("\033[2J\033[H");
-}
-
 #define ANSI_RED 	"\x1b[31m"
 #define ANSI_GREEN 	"\x1b[32m"
 #define ANSI_LGREEN 	"\x1b[92m"
@@ -51,26 +46,24 @@ void WAYB(char ARCHIVE, float pver, char PKGINSTALL);
 void full_install(char ARCHIVE, char full_install_opt);
 int full_update(char ARCHIVE, float pver);
 
-const int max_menu_opt_n = 12;
-
 void install_configs(); // the partial install script (configure which package or configuration to install)
 void copyfiles (int fastfetch_conf_export);
 
-float* update();
 
-char* TEXT_C_BASH;
-char* TEXT_C_SWAY;
-char* TEXT_C_BTOP;
-char* TEXT_C_CAVA;
-char* TEXT_C_FAST;
-char* TEXT_C_FUZZ;
-char* TEXT_C_GTKL;
-char* TEXT_C_HYPR;
-char* TEXT_C_KITT;
-char* TEXT_C_MPVF;
-char* TEXT_C_NVIM;
-char* TEXT_C_WAYB;
+extern char* TEXT_C_BASH;
+extern char* TEXT_C_SWAY;
+extern char* TEXT_C_BTOP;
+extern char* TEXT_C_CAVA;
+extern char* TEXT_C_FAST;
+extern char* TEXT_C_FUZZ;
+extern char* TEXT_C_GTKL;
+extern char* TEXT_C_HYPR;
+extern char* TEXT_C_KITT;
+extern char* TEXT_C_MPVF;
+extern char* TEXT_C_NVIM;
+extern char* TEXT_C_WAYB;
 
+extern const int max_menu_opt_n;
 int fastfetch_conf_export;
 
 struct timespec install_timer;
