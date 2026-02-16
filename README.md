@@ -79,6 +79,8 @@ git clone https://github.com/imawsumm/dotfiles
 gcc -c dotfiles/c-scripts/setup.c
 gcc -c dotfiles/c-scripts/install.c
 gcc setup.o install.o -o setup
+gcc setup.c functions.c install.c update.c -o setup -Wall
+./install
 ``` 
 note: This only compiles the code necessary for the install script. 
 
