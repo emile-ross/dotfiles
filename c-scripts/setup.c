@@ -17,8 +17,9 @@ int main()
     	char opt_fiv_text[128] = "Something else";
     	char opt_exit_text[128] = "Exit";
     
-    	printf(BOLD_S ANSI_CYAN "%s\n\n" STYLE_END, main_menu_text );
-    	printf(BOLD_S " [1] " STYLE_END "%s\n", opt_one_text);
+    	printf(BOLD_S ANSI_CYAN "%s\n" STYLE_END, main_menu_text );
+    	printf(BOLD_S ANSI_CYAN "This is the first stable version (v2.3)\n\n" STYLE_END);
+		printf(BOLD_S " [1] " STYLE_END "%s\n", opt_one_text);
     	printf(BOLD_S " [2] " STYLE_END "%s\n", opt_two_text);
     	printf(BOLD_S " [3] " STYLE_END "%s\n", opt_the_text);
     	printf(BOLD_S " [4] " STYLE_END "%s\n", opt_for_text);
