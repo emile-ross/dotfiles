@@ -1,7 +1,5 @@
 #include "dotfileshead.h"
 
-float* update();
-
 int main()
 {
     int menu_one_i;
@@ -152,7 +150,7 @@ int main()
 		    system(cmd);
 	    	}
 	    }
-	    while(update_config_menu != 0);
+	    while(update_config_menu > 0);
     	}
     	else if (menu_one_i == 4)
     	{
@@ -311,7 +309,7 @@ int main()
 			{
 			    char cmd[128];
 			    snprintf(cmd, 16,
-				"fuzzel");
+				    "fuzzel");
     	                    system(cmd);
 
 			    wait_for_timeout();
@@ -652,7 +650,7 @@ void NVIM(char ARCHIVE, float pver, char PKGINSTALL)
 	// install neovim (nvim) package
 	// nvim is most likely already installed 
         snprintf(cmd, 32,
-		"yay -S --noconfirm nvim");
+		"yay -S --noconfirm nvim lazygit");
 	system(cmd);
     }
 
