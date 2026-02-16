@@ -1,4 +1,4 @@
-#include "dotfileshead.h"
+\#include "dotfileshead.h"
 
 float* update();
 
@@ -190,7 +190,7 @@ int main()
     	        	    if (fastfetch_config_choice == 1)
     	        	    {
     	        	    	snprintf(cmd, 128,
-	    			"fastfetch");
+				    "fastfetch");
     	        	    	system(cmd);
 
 				install_timer.tv_sec = 2;
@@ -210,6 +210,7 @@ int main()
 
 	    		    	    int link_fastfetch_configs_opt = -1;
     	    		    	    char cmd[128];
+
     	    		    	    while (getchar() != '\n');  // clear imput buffer 
     	    		    	    scanf("%d", &link_fastfetch_configs_opt);
 
@@ -219,6 +220,7 @@ int main()
     	    		    	        	"ln -fs ~/.config/fastfetch/config-default.jsonc ~/.config/fastfetch/config.jsonc");
     	    		    	        system(cmd);
     	    		    	        printf("\nThe fastfetch config was applied successfully\n");
+
 	    		    		wait_for_timeout();
     	    		    	    }
     	    		    	    else if (link_fastfetch_configs_opt == 2)
@@ -227,6 +229,7 @@ int main()
     	    		    	        	"ln -fs ~/.config/fastfetch/config-other.jsonc ~/.config/fastfetch/config.jsonc");
     	    		    	        system(cmd);
     	    		    	        printf("\nThe fastfetch config was applied successfully\n");
+
 	    		    		wait_for_timeout();
     	    		    	    }
     	    		    	    else if (link_fastfetch_configs_opt == 3)
@@ -234,9 +237,13 @@ int main()
     	    		    	        snprintf(cmd, sizeof(cmd),
     	    		    	        	"ln -fs ~/.config/fastfetch/config-duplicated.jsonc ~/.config/fastfetch/config.jsonc");
     	    		    	        system(cmd);
+
     	    		    	        printf("\nThe fastfetch config was applied successfully\n");
+
 	    		    		wait_for_timeout();
     	    		    	    }
+				    else
+				    {}
 	    		    	}
 	    		    	while (fastfetch_conf_export > 0.0);
     	        	    }
@@ -249,7 +256,7 @@ int main()
     	        	int kitty_config_choice;
     	        	do
     	        	{
-	    	    clear();
+			    clear();
     	        	    char kitty_color_text[32] = "Change Kitty color scheme";
     	        	    char kitty_fonts_text[32] = "Change Kitty fonts";
     	        	    
@@ -259,19 +266,19 @@ int main()
     	        	    printf(BOLD_S " [0] " STYLE_END "%s\n", opt_exit_text);
 
 			    while (getchar() != '\n');  // clear imput buffer 
-    	        	    scanf("\n%d", &kitty_config_choice);
+    	        	    scanf("%d", &kitty_config_choice);
 
     	        	    char cmd[24];
     	        	    if (kitty_config_choice == 1)
     	        	    {
     	        	    	snprintf(cmd, 24,
-	    			"kitten themes");
+					"kitten themes");
     	        	    	system(cmd);
     	        	    }
     	        	    if (kitty_config_choice == 2)
     	        	    {
     	        	    	snprintf(cmd, 24,
-	    			"kitty +list-fonts");
+					"kitty +list-fonts");
     	        	    	system(cmd);
     
     	        	    	printf("\nThe install script can be used to install more fonts.");
@@ -718,25 +725,10 @@ void full_install(char ARCHIVE, char full_install_opt)
 	    printf("\n[11] Install %s ", TEXT_C_NVIM);
 	    printf("\n[12] Install %s ", TEXT_C_WAYB);
 	    
+	    while (getchar() != '\n');  // clear imput buffer 
 	    scanf(" %d", &install_pkg_opt);
-
-	    // // this is completely useless at the moment
-	    // printf("\nInstalling dotfiles...\n");
-    	    //     void BASH(char ARCHIVE, float pver, char PKGINSTALL);
-    	    //     void SWAY(char ARCHIVE, float pver, char PKGINSTALL);
-    	    //     void BTOP(char ARCHIVE, float pver, char PKGINSTALL);
-    	    //     void CAVA(char ARCHIVE, float pver, char PKGINSTALL);
-    	    //     void FAST(char ARCHIVE, float pver, char PKGINSTALL);
-    	    //     void FUZZ(char ARCHIVE, float pver, char PKGINSTALL);
-    	    //     void GTKL(char ARCHIVE, float pver, char PKGINSTALL);
-    	    //     void HYPR(char ARCHIVE, float pver, char PKGINSTALL);
-    	    //     void KITT(char ARCHIVE, float pver, char PKGINSTALL);
-    	    //     void MPVF(char ARCHIVE, float pver, char PKGINSTALL);
-    	    //     void NVIM(char ARCHIVE, float pver, char PKGINSTALL);
-    	    //     void WAYB(char ARCHIVE, float pver, char PKGINSTALL);
-    	    // printf("\nInstalling dotfiles...\n");
 	}
-	while (install_pkg_opt == 0);
+	while (install_pkg_opt > 0);
     }
     printf(BOLD_S"\nInstallation completed!\n"STYLE_END);
 
@@ -757,6 +749,7 @@ float* update()
     char HYPRPATH[64];
     snprintf(HYPRPATH, sizeof(HYPRPATH), 
 	    "%s/.config/hypr/hyprland.conf", USERNAME);
+	    // set the hyprland path with username
 
     // open the file with HYPRPATH
     FILE *file = fopen(HYPRPATH, "r");
@@ -775,7 +768,6 @@ float* update()
     {
         if (sscanf(line, "# AWSMVERSION: %31f[0-9.]", VAWSM) == 1) 
 	{
-            //printf("VAWSM: %s\n", VAWSM); // for troubleshooting purposes
             fclose(file);
             return VAWSM;
         }
@@ -783,7 +775,8 @@ float* update()
     fclose(file);
     return 0;
 }
-void wait_for_timeout(){
+void wait_for_timeout()
+{
     install_timer.tv_sec = 0;
     install_timer.tv_nsec = 500000000L;
     nanosleep(&install_timer, NULL);
