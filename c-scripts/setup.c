@@ -1046,7 +1046,18 @@ void fuzzel_config_importing()
         {
             printf("Try again.\n");
         }
-        printf("%s %s\n", theme_colour_text, theme_type_text);
-
+	    if (theme_colour_user_opt > 0 && theme_type_user_opt > 0)
+		{
+            //printf("%s %s\n", theme_colour_text, theme_type_text);
+			char fuz_theme_path[256];
+			snprintf(fuz_theme_path, sizeof(fuz_theme_path),
+				"%s/.config/fuzzel/imported/fuzzel/themes/%s/%s.ini", home, theme_type_text, theme_colour_text);
+			printf("%s", fuz_theme_path);
+			/*
+			    "mv ~/.config/fuzzel/fuzzel.ini ~/.config/fuzzel/before-link-fuzzel.ini && "
+			    "ln -sf %s ~/.config/fuzzel/fuzzel.ini");
+            */
+			
+		}
 	wait_for_timeout();
 }
