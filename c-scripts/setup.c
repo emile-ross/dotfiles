@@ -2,7 +2,6 @@
 
 int main()
 {
-    int menu_one_i;
     do
     {
     	// sets the text for each option and each menu title
@@ -297,10 +296,13 @@ int main()
 		        clear();
     	                char fuzzel_view_config_text[32] = "Preview Fuzzel appearance";
     	                char fuzzel_edit_config_text[32] = "Edit Fuzzel config";
+    	                char fuzzel_catppuccin_text[32] = "Configure Catppuccin themes";
 
 			printf(BOLD_S ANSI_WHITE "%s\n\n"STYLE_END, fuzzel_config_menu_text);
     	            	printf(BOLD_S " [1] " STYLE_END "%s\n", fuzzel_view_config_text);
     	            	printf(BOLD_S " [2] " STYLE_END "%s\n",	fuzzel_edit_config_text);
+    	            	printf(BOLD_S " [3] " STYLE_END "%s\n",	fuzzel_catppuccin_text);
+
     	            	printf(BOLD_S " [0] " STYLE_END "%s\n", opt_exit_text);
 
 			while (getchar() != '\n');  // clear imput buffer 
@@ -390,6 +392,11 @@ int main()
 				}
 			    }
 			    while (fuzzel_edit_menu_choice > 0);
+			}
+			else if (fuzzel_config_menu_choice == 3)
+			{
+			    fuzzel_config_importing();
+			    wait_for_timeout();
 			}
 		    }
 		    while (fuzzel_config_menu_choice > 0);
@@ -890,4 +897,156 @@ void wait_for_timeout()
     install_timer.tv_sec = 0;
     install_timer.tv_nsec = 500000000L;
     nanosleep(&install_timer, NULL);
+}
+
+void fuzzel_config_importing()
+{
+    // check if the configs were already downloaded 
+    char path[512];
+    char *home = getenv("HOME");
+    snprintf(path, sizeof(path), "%s/.config/fuzzel/imported/fuzzel", home);
+
+    struct stat st;
+    char cmd[512];
+    if (stat(path, &st) == 0 && S_ISDIR(st.st_mode)) 
+    {
+        printf("The fuzzel themes are already installed.\n");
+    }
+    else 
+    {
+    	snprintf(cmd, sizeof(cmd),
+    	        "mkdir -p ~/.config/fuzzel/imported/ && " 
+    	        "cd ~/.config/fuzzel/imported/ && "
+    	        "git clone https://github.com/catppuccin/fuzzel.git");
+    	system(cmd);
+    }
+
+    snprintf(cmd, sizeof(cmd),
+	    "cd ~/.config/fuzzel/imported/fuzzel/themes");
+    system(cmd);
+
+    int theme_type_user_opt;
+
+    char* theme_type_text;
+    
+    clear();
+    printf(BOLD_S"Choose your fuzzel theme type\n"STYLE_END);
+    
+    printf(BOLD_S"[1]"STYLE_END" catppuccin-latte (light mode)\n");
+    printf(BOLD_S"[2]"STYLE_END" catppuccin-frappe (grey)\n");
+    printf(BOLD_S"[3]"STYLE_END" catppuccin-macchiato (dark)\n");
+    printf(BOLD_S"[4]"STYLE_END" catppuccin-mocha (very dark)\n");
+    
+    while (getchar() != '\n'); // clear imput buffer
+    scanf(" %d", &theme_type_user_opt);
+    
+    if (theme_type_user_opt == 1)
+    {
+        theme_type_text = "catppuccin-latte";
+    }
+    else if (theme_type_user_opt == 2)
+    {
+        theme_type_text = "catppuccin-frappe";
+    }
+    else if (theme_type_user_opt == 3)
+    {
+        theme_type_text = "catppuccin-macchiato";
+    }
+    else if (theme_type_user_opt == 4)
+    {
+        theme_type_text = "catppuccin-mocha";
+    }
+    else
+    {
+        printf("Try again.\n");
+    }
+    // theme color
+    int theme_colour_user_opt;
+        // this looks so bad... 
+        
+        printf(BOLD_S"Set the colour for your fuzzel config\n"STYLE_END);
+        
+        printf(BOLD_S"[1] "STYLE_END" Use the colour "BOLD_S"bluee"STYLE_END"\n");
+        printf(BOLD_S"[2] "STYLE_END" Use the colour "BOLD_S"flamingo"STYLE_END"\n");
+        printf(BOLD_S"[3] "STYLE_END" Use the colour "BOLD_S"green"STYLE_END"\n");
+        printf(BOLD_S"[4] "STYLE_END" Use the colour "BOLD_S"lavender"STYLE_END"\n");
+        printf(BOLD_S"[5] "STYLE_END" Use the colour "BOLD_S"maroon"STYLE_END"\n");
+        printf(BOLD_S"[6] "STYLE_END" Use the colour "BOLD_S"mauve"STYLE_END"\n");
+        printf(BOLD_S"[7] "STYLE_END" Use the colour "BOLD_S"peach"STYLE_END"\n");
+        printf(BOLD_S"[8] "STYLE_END" Use the colour "BOLD_S"pink"STYLE_END"\n");
+        printf(BOLD_S"[9] "STYLE_END" Use the colour "BOLD_S"red"STYLE_END"\n");
+        printf(BOLD_S"[10]"STYLE_END" Use the colour "BOLD_S"rosewater"STYLE_END"\n");
+        printf(BOLD_S"[11]"STYLE_END" Use the colour "BOLD_S"sapphire"STYLE_END"\n");
+        printf(BOLD_S"[12]"STYLE_END" Use the colour "BOLD_S"sky"STYLE_END"\n");
+        printf(BOLD_S"[13]"STYLE_END" Use the colour "BOLD_S"teal"STYLE_END"\n");
+        printf(BOLD_S"[14]"STYLE_END" Use the colour "BOLD_S"yellow"STYLE_END"\n");
+    
+        while (getchar() != '\n'); // clear imput buffer
+        scanf(" %d", &theme_colour_user_opt);
+    
+        char* theme_colour_text;
+    
+        if (theme_colour_user_opt == 1)
+        {
+            theme_colour_text = "blue";
+        }
+        else if (theme_colour_user_opt == 2)
+        {
+            theme_colour_text = "flamingo";
+        }
+        else if (theme_colour_user_opt == 3)
+        {
+            theme_colour_text = "green";
+        }
+        else if (theme_colour_user_opt == 4)
+        {
+            theme_colour_text = "lavender";
+        }
+        else if (theme_colour_user_opt == 5)
+        {
+            theme_colour_text = "maroon";
+        }
+        else if (theme_colour_user_opt == 6)
+        {
+            theme_colour_text = "mauve";
+        }
+        else if (theme_colour_user_opt == 7)
+        {
+            theme_colour_text = "peach";
+        }
+        else if (theme_colour_user_opt == 8)
+        {
+            theme_colour_text = "pink";
+        }
+        else if (theme_colour_user_opt == 9)
+        {
+            theme_colour_text = "red";
+        }
+        else if (theme_colour_user_opt == 10)
+        {
+            theme_colour_text = "rosewater";
+        }
+        else if (theme_colour_user_opt == 11)
+        {
+            theme_colour_text = "sapphire";
+        }
+        else if (theme_colour_user_opt == 12)
+        {
+            theme_colour_text = "sky";
+        }
+        else if (theme_colour_user_opt == 13)
+        {
+            theme_colour_text = "teal";
+        }
+        else if (theme_colour_user_opt == 14)
+        {
+            theme_colour_text = "yellow";
+        }
+        else
+        {
+            printf("Try again.\n");
+        }
+        printf("%s %s\n", theme_colour_text, theme_type_text);
+
+	wait_for_timeout();
 }
