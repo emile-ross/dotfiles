@@ -3,12 +3,9 @@
 void install_configs()  // the partial install script (configure which package or configuration to install)
 {
     int cust_conf_inst_opt;
-    struct timespec install_timer;
 
     do
     {
-	char ARCHIVE;
-	char PKGINSTALL;
 	float pver = 0.0f; // assumes the user doesn't have the dotfiles
 
 	printf(BOLD_S" [1] "STYLE_END"Install "BOLD_S"%s\n"STYLE_END, TEXT_C_BASH);
