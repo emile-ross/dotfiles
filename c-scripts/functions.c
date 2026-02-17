@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <time.h>
 
 const int max_menu_opt_n = 12;
@@ -23,8 +24,11 @@ char* TEXT_C_WAYB = "waybar config and style (appearance)";
 
 char ARCHIVE;
 char PKGINSTALL;
+int menu_one_i;
+
 char full_install_opt; // if the user wants to install everything set to Y
 char full_update_opt; 
 
 struct timespec install_timer;
 int fastfetch_conf_export;
+
