@@ -72,10 +72,16 @@ extern char* TEXT_C_WAYB;
 extern const int max_menu_opt_n;
 extern int fastfetch_conf_export;
 
+extern const char *home;
+
 extern struct timespec install_timer;
 
 extern char ARCHIVE;
 extern char PKGINSTALL;
 extern char full_install_opt; // if the user wants to install everything set to Y
 extern char full_update_opt; 
+extern int menu_one_i;
 
+float* update();
+
+void fuzzel_config_importing();
