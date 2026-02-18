@@ -745,9 +745,7 @@ void full_install(char ARCHIVE, char full_install_opt)
 	    {
 		printf("\n");
 	
-	        install_timer.tv_sec = 0;
-	        install_timer.tv_nsec = 172100000L;
-	        nanosleep(&install_timer, NULL);
+        wait_for_timeout();
 	    }
 	
 	    timerinstall--;
