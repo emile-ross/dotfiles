@@ -1051,7 +1051,6 @@ void fuzzel_config_importing()
 		"%s/.config/fuzzel/imported/fuzzel/themes/%s/%s.ini", home, theme_type_text, theme_colour_text);
 
 	snprintf(cmd, sizeof(cmd),
-		"mv ~/.config/fuzzel/fuzzel.ini ~/.config/fuzzel/before-link-fuzzel.ini && "
 		"ln -sf %s ~/.config/fuzzel/fuzzel.ini", fuz_theme_path);
 	system(cmd);
 
