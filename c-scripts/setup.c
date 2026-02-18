@@ -962,25 +962,28 @@ void fuzzel_config_importing()
     }
     // theme color
     int theme_colour_user_opt;
-        // this looks so bad... 
-        
-        printf(BOLD_S"Set the colour for your fuzzel config\n"STYLE_END);
-        
-        printf(BOLD_S"[1] "STYLE_END" Use the colour "BOLD_S"bluee"STYLE_END"\n");
-        printf(BOLD_S"[2] "STYLE_END" Use the colour "BOLD_S"flamingo"STYLE_END"\n");
-        printf(BOLD_S"[3] "STYLE_END" Use the colour "BOLD_S"green"STYLE_END"\n");
-        printf(BOLD_S"[4] "STYLE_END" Use the colour "BOLD_S"lavender"STYLE_END"\n");
-        printf(BOLD_S"[5] "STYLE_END" Use the colour "BOLD_S"maroon"STYLE_END"\n");
-        printf(BOLD_S"[6] "STYLE_END" Use the colour "BOLD_S"mauve"STYLE_END"\n");
-        printf(BOLD_S"[7] "STYLE_END" Use the colour "BOLD_S"peach"STYLE_END"\n");
-        printf(BOLD_S"[8] "STYLE_END" Use the colour "BOLD_S"pink"STYLE_END"\n");
-        printf(BOLD_S"[9] "STYLE_END" Use the colour "BOLD_S"red"STYLE_END"\n");
-        printf(BOLD_S"[10]"STYLE_END" Use the colour "BOLD_S"rosewater"STYLE_END"\n");
-        printf(BOLD_S"[11]"STYLE_END" Use the colour "BOLD_S"sapphire"STYLE_END"\n");
-        printf(BOLD_S"[12]"STYLE_END" Use the colour "BOLD_S"sky"STYLE_END"\n");
-        printf(BOLD_S"[13]"STYLE_END" Use the colour "BOLD_S"teal"STYLE_END"\n");
-        printf(BOLD_S"[14]"STYLE_END" Use the colour "BOLD_S"yellow"STYLE_END"\n");
-    
+
+	// this looks so bad... 
+	
+	printf(BOLD_S"Set the colour for your fuzzel config\n"STYLE_END);
+	
+	char colour_message_text[16] = "Use the colour";
+	
+	printf(BOLD_S"[1] "STYLE_END" %s "BOLD_S"bluee"STYLE_END"\n", colour_message_text);
+	printf(BOLD_S"[2] "STYLE_END" %s "BOLD_S"flamingo"STYLE_END"\n", colour_message_text);
+	printf(BOLD_S"[3] "STYLE_END" %s "BOLD_S"green"STYLE_END"\n", colour_message_text);
+	printf(BOLD_S"[4] "STYLE_END" %s "BOLD_S"lavender"STYLE_END"\n", colour_message_text);
+	printf(BOLD_S"[5] "STYLE_END" %s "BOLD_S"maroon"STYLE_END"\n", colour_message_text);
+	printf(BOLD_S"[6] "STYLE_END" %s "BOLD_S"mauve"STYLE_END"\n", colour_message_text);
+	printf(BOLD_S"[7] "STYLE_END" %s "BOLD_S"peach"STYLE_END"\n", colour_message_text);
+	printf(BOLD_S"[8] "STYLE_END" %s "BOLD_S"pink"STYLE_END"\n", colour_message_text);
+	printf(BOLD_S"[9] "STYLE_END" %s "BOLD_S"red"STYLE_END"\n", colour_message_text);
+	printf(BOLD_S"[10]"STYLE_END" %s "BOLD_S"rosewater"STYLE_END"\n", colour_message_text);
+	printf(BOLD_S"[11]"STYLE_END" %s "BOLD_S"sapphire"STYLE_END"\n", colour_message_text);
+	printf(BOLD_S"[12]"STYLE_END" %s "BOLD_S"sky"STYLE_END"\n", colour_message_text);
+	printf(BOLD_S"[13]"STYLE_END" %s "BOLD_S"teal"STYLE_END"\n", colour_message_text);
+	printf(BOLD_S"[14]"STYLE_END" %s "BOLD_S"yellow"STYLE_END"\n", colour_message_text);
+
         while (getchar() != '\n'); // clear imput buffer
         scanf(" %d", &theme_colour_user_opt);
     
@@ -1046,18 +1049,21 @@ void fuzzel_config_importing()
         {
             printf("Try again.\n");
         }
-	    if (theme_colour_user_opt > 0 && theme_type_user_opt > 0)
-		{
-            //printf("%s %s\n", theme_colour_text, theme_type_text);
-			char fuz_theme_path[256];
-			snprintf(fuz_theme_path, sizeof(fuz_theme_path),
-				"%s/.config/fuzzel/imported/fuzzel/themes/%s/%s.ini", home, theme_type_text, theme_colour_text);
-			printf("%s", fuz_theme_path);
-			/*
-			    "mv ~/.config/fuzzel/fuzzel.ini ~/.config/fuzzel/before-link-fuzzel.ini && "
-			    "ln -sf %s ~/.config/fuzzel/fuzzel.ini");
-            */
-			
-		}
+
+        //printf("%s %s\n", theme_colour_text, theme_type_text);
+	char fuz_theme_path[256];
+	snprintf(fuz_theme_path, sizeof(fuz_theme_path),
+		"%s/.config/fuzzel/imported/fuzzel/themes/%s/%s.ini", home, theme_type_text, theme_colour_text);
+
+	snprintf(cmd, sizeof(cmd),
+		"mv ~/.config/fuzzel/fuzzel.ini ~/.config/fuzzel/before-link-fuzzel.ini && "
+		"ln -sf %s ~/.config/fuzzel/fuzzel.ini", fuz_theme_path);
+	system(cmd);
+
+
+	//printf("%s", fuz_theme_path);
+	fflush(stdout);
+
+
 	wait_for_timeout();
 }
