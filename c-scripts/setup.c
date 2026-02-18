@@ -48,7 +48,6 @@ int main()
 	    int after_install;
 	    do
 	    {
-		while (getchar() != '\n'); // clear imput buffer
 		float pver = 0.0f; // the user is presumed to be installing the dotfiles
 				   
     		clear();
@@ -61,10 +60,10 @@ int main()
 		printf(BOLD_S"\n[1]"STYLE_END" %s", opt_two_text);
 		printf(BOLD_S"\n[0]"STYLE_END" %s\n", opt_exit_text);
 
+		while (getchar() != '\n'); // clear imput buffer
 		scanf("%d", &fix_install_menu);
 
 		printf("\n");
-		char PKGINSTALL;
 		scanf("%c", &PKGINSTALL);
 
 		if ( fix_install_menu == 1)
@@ -294,9 +293,6 @@ int main()
 		    do
 		    {
 		        clear();
-    	                char fuzzel_view_config_text[32] = "Preview Fuzzel appearance";
-    	                char fuzzel_edit_config_text[32] = "Edit Fuzzel config";
-    	                char fuzzel_catppuccin_text[32] = "Configure Catppuccin themes";
 
 			printf(BOLD_S ANSI_WHITE "%s\n\n"STYLE_END, fuzzel_config_menu_text);
     	            	printf(BOLD_S " [1] " STYLE_END "%s\n", fuzzel_view_config_text);
@@ -307,6 +303,7 @@ int main()
 
 			while (getchar() != '\n');  // clear imput buffer 
 			scanf(" %d", &fuzzel_config_menu_choice);
+
 			if (fuzzel_config_menu_choice == 1)
 			{
 			    char cmd[128];
@@ -1060,10 +1057,8 @@ void fuzzel_config_importing()
 		"ln -sf %s ~/.config/fuzzel/fuzzel.ini", fuz_theme_path);
 	system(cmd);
 
-
 	//printf("%s", fuz_theme_path);
 	fflush(stdout);
-
 
 	wait_for_timeout();
 }
