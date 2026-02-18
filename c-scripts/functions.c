@@ -32,3 +32,6 @@ char full_update_opt;
 struct timespec install_timer;
 int fastfetch_conf_export;
 
+char fuzzel_view_config_text[32] = "Preview Fuzzel appearance";
+char fuzzel_edit_config_text[32] = "Edit Fuzzel config";
+char fuzzel_catppuccin_text[32] = "Configure Catppuccin themes";
