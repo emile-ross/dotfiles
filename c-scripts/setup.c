@@ -292,7 +292,7 @@ int main()
 		    int fuzzel_config_menu_choice;
 		    do
 		    {
-		        //clear();
+		        clear();
 
 			printf(BOLD_S ANSI_WHITE "%s\n\n"STYLE_END, fuzzel_config_menu_text);
     	            	printf(BOLD_S " [1] " STYLE_END "%s\n", fuzzel_view_config_text);
@@ -477,7 +477,7 @@ void BTOP(char ARCHIVE, float pver, char PKGINSTALL)
     }
     // export btop config
     snprintf(cmd, sizeof(cmd),
-    	"mkdir -p ~/.config/btop && "
+    	"mkdir -p ~/.config/btop ; "
     	"cp -f dotfiles/btop/btop.conf ~/.config/btop");
     system(cmd);
 }
@@ -495,8 +495,8 @@ void CAVA(char ARCHIVE, float pver, char PKGINSTALL)
     }
     // export cava config
     snprintf(cmd, sizeof(cmd),
-	    "mkdir -p ~/.config/cava && "
-	    "cp -f dotfiles/cava/config ~/.config/cava/ && ");
+	    "mkdir -p ~/.config/cava ; "
+	    "cp -f dotfiles/cava/config ~/.config/cava/ ");
     system(cmd);
 }
 
@@ -513,12 +513,12 @@ void FAST(char ARCHIVE, float pver, char PKGINSTALL)
     }
     // export fastfetch config
     snprintf(cmd, sizeof(cmd),
-	    "rm ~/.config/fastfetch && "
-	    "mkdir -p ~/.config/fastfetch/assets && "
-	    "cp -f dotfiles/fastfetch/assets/*.png ~/.config/fastfetch/assets && "
-	    "cp -f dotfiles/fastfetch/config.jsonc ~/.config/fastfetch && "
-	    "cp -f ~/.config/fastfetch/config.jsonc ~/.config/fastfetch/config-duplicated.jsonc && "
-	    "cp -f dotfiles/fastfetch/config-other.jsonc ~/.config/fastfetch && "
+	    "rm ~/.config/fastfetch ; "
+	    "mkdir -p ~/.config/fastfetch/assets ; "
+	    "cp -f dotfiles/fastfetch/assets/*.png ~/.config/fastfetch/assets ; "
+	    "cp -f dotfiles/fastfetch/config.jsonc ~/.config/fastfetch ; "
+	    "cp -f ~/.config/fastfetch/config.jsonc ~/.config/fastfetch/config-duplicated.jsonc ; "
+	    "cp -f dotfiles/fastfetch/config-other.jsonc ~/.config/fastfetch ; "
 	    "cp -f dotfiles/fastfetch/config-default.jsonc ~/.config/fastfetch");
     system(cmd);
 }
@@ -536,11 +536,11 @@ void FUZZ(char ARCHIVE, float pver, char PKGINSTALL)
     // export fuzzel appearance
     snprintf(cmd, sizeof(cmd),
             "mkdir ~/.config/fuzzel && "
-            "cp -f dotfiles/fuzzel/old-fuzzel.ini ~/.config/fuzzel && "
-            "cp -f dotfiles/fuzzel/default-fuzzel.ini ~/.config/fuzzel && "
-	    "cp -f ~/.config/fuzzel/default-fuzzel.ini ~/.config/fuzzel/custom-edited-fuzzel.ini && "
-            "cp -f dotfiles/fuzzel/fuzzel.ini ~/.config/fuzzel && "
-	    "mv ~/.config/fuzzel/fuzzel.ini ~/.config/fuzzel/fuzzel-duplicated.ini && "
+            "cp -f dotfiles/fuzzel/old-fuzzel.ini ~/.config/fuzzel ; "
+            "cp -f dotfiles/fuzzel/default-fuzzel.ini ~/.config/fuzzel ; "
+	    "cp -f ~/.config/fuzzel/default-fuzzel.ini ~/.config/fuzzel/custom-edited-fuzzel.ini ; "
+            "cp -f dotfiles/fuzzel/fuzzel.ini ~/.config/fuzzel ; "
+	    "mv ~/.config/fuzzel/fuzzel.ini ~/.config/fuzzel/fuzzel-duplicated.ini ; "
 	    "ln -sf ~/.config/fuzzel/fuzzel-duplicated.ini ~/.config/fuzzel/fuzzel.ini ");
     system(cmd);  		
 }
@@ -558,8 +558,8 @@ void GTKL(char ARCHIVE, float pver, char PKGINSTALL)
     }
     // export gtklock config
     snprintf(cmd, sizeof(cmd),
-            "mkdir -p ~/.config/gtklock/assets && "
-            "cp -f dotfiles/gtklock/style.css ~/.config/gtklock && "
+            "mkdir -p ~/.config/gtklock/assets ; "
+            "cp -f dotfiles/gtklock/style.css ~/.config/gtklock ; "
             "cp -f dotfiles/gtklock/lockscreen.jpg ~/.config/gtklock/assets");
     system(cmd);
 }
@@ -571,16 +571,16 @@ void HYPR(char ARCHIVE, float pver, char PKGINSTALL)
     {
     	// archive hyprland configs
         snprintf(cmd, sizeof(cmd),
-		"mv ~/.config/hypr/hyprland.conf ~/.config/hypr/hyprland-oldv%.2f.conf && "
-        	"mv ~/.config/hypr/hyprpaper.conf ~/.config/hypr/hyprpaper-oldv%.2f.conf && "
+		"mv ~/.config/hypr/hyprland.conf ~/.config/hypr/hyprland-oldv%.2f.conf ; "
+        	"mv ~/.config/hypr/hyprpaper.conf ~/.config/hypr/hyprpaper-oldv%.2f.conf ; "
         	"mv ~/.config/hypr/hypridle.conf ~/.config/hypr/hypridle-oldv%.2f.conf", pver, pver, pver);
         system(cmd);
     }
     // export hyprland configs
     snprintf(cmd, sizeof(cmd),
 	    "mkdir -p ~/.config/hypr && "
-	    "cp -f dotfiles/hypr/hyprland.conf ~/.config/hypr && "
-    	    "cp -f dotfiles/hypr/hypridle.conf ~/.config/hypr && "
+	    "cp -f dotfiles/hypr/hyprland.conf ~/.config/hypr ; "
+    	    "cp -f dotfiles/hypr/hypridle.conf ~/.config/hypr ; "
     	    "cp -f dotfiles/hypr/hyprpaper.conf ~/.config/hypr");
     system(cmd);
 }
@@ -606,7 +606,7 @@ void KITT(char ARCHIVE, float pver, char PKGINSTALL)
     // export kitty config
     snprintf(cmd, sizeof(cmd),
 	    "mkdir ~/.config/kitty && "
-	    "cp -f dotfiles/kitty/current-theme.conf ~/.config/kitty && "
+	    "cp -f dotfiles/kitty/current-theme.conf ~/.config/kitty ; "
 	    "cp -f dotfiles/kitty/kitty.conf ~/.config/kitty");
     system(cmd);
 }
@@ -632,7 +632,7 @@ void MPVF(char ARCHIVE, float pver, char PKGINSTALL)
     }
     // export mpv config with shaders
     snprintf(cmd, 96,
-	    "mkdir -p ~/.config/mpv/ && "
+	    "mkdir -p ~/.config/mpv/ ; "
             "cp -f dotfiles/mpv/mpv.conf ~/.config/mpv ");
     system(cmd);
 }
@@ -643,8 +643,8 @@ void NVIM(char ARCHIVE, float pver, char PKGINSTALL)
     if (ARCHIVE == 'Y' || ARCHIVE == 'y')
     {
         snprintf(cmd, sizeof(cmd),
-    	    	"mv ~/.config/nvim/init.lua ~/.config/nvim/init-oldv%.1f.lua && "
-    	    	"mv ~/.config/nvim/lua/config/lazy.lua ~/.config/nvim/lua/config/lazy-oldv%.1f.lua && "
+    	    	"mv ~/.config/nvim/init.lua ~/.config/nvim/init-oldv%.1f.lua ; "
+    	    	"mv ~/.config/nvim/lua/config/lazy.lua ~/.config/nvim/lua/config/lazy-oldv%.1f.lua ; "
     	    	"mv ~/.config/nvim/lazy-lock.json ~/.config/nvim/lazy-lock-oldv%.1f.json",
     	    	pver, pver, pver);
         system(cmd);
@@ -660,7 +660,7 @@ void NVIM(char ARCHIVE, float pver, char PKGINSTALL)
 
     // export nvim config
     snprintf(cmd, sizeof(cmd),
-	    "mkdir -p ~/.config/nvim && "
+	    "mkdir -p ~/.config/nvim ; "
     	    "cp -f dotfiles/nvim/init.lua ~/.config/nvim");
     system(cmd);
 }
@@ -686,7 +686,7 @@ void SWAY(char ARCHIVE, float pver, char PKGINSTALL)
     }
     // export sway config
     snprintf(cmd, sizeof(cmd),
-	    "mkdir -p ~/.config/sway && "
+	    "mkdir -p ~/.config/sway ; "
     	    "cp -f dotfiles/sway/config ~/.config/sway");
     system(cmd);
 }
@@ -699,7 +699,7 @@ void WAYB(char ARCHIVE, float pver, char PKGINSTALL)
     {
     	// archive waybar
         snprintf(cmd, sizeof(cmd),
-		"mv ~/.config/waybar/config.jsonc ~/.config/waybar/config-oldv%.2f.jsonc && "
+		"mv ~/.config/waybar/config.jsonc ~/.config/waybar/config-oldv%.2f.jsonc ; "
 		"mv ~/.config/waybar/style.css ~/.config/waybar/style-oldv%.2f.css",
 		pver, pver);
 	system(cmd);
@@ -713,8 +713,8 @@ void WAYB(char ARCHIVE, float pver, char PKGINSTALL)
     // export waybar config and appearance
     snprintf(cmd, sizeof(cmd),
 	    //"yay -S --noconfirm waybar && "
-	    "mkdir -p ~/.config/waybar && "
-	    "cp -f dotfiles/waybar/style.css ~/.config/waybar && "
+	    "mkdir -p ~/.config/waybar ; "
+	    "cp -f dotfiles/waybar/style.css ~/.config/waybar ; "
             "cp -f dotfiles/waybar/config.jsonc ~/.config/waybar");
     system(cmd);
 }
@@ -1069,7 +1069,8 @@ void fuzzel_config_importing()
 	}
 	else
 	{
-		printf("This is a bug\n");
+	    printf(ANSI_RED BOLD_S"Could not apply Fuzzel theme for some reason\n"STYLE_END);
+	    printf(ANSI_RED BOLD_S"This is a bug\n"STYLE_END);
 	}
 	wait_for_timeout();
 }
