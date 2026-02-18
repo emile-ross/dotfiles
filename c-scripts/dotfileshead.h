@@ -69,6 +69,10 @@ extern char* TEXT_C_MPVF;
 extern char* TEXT_C_NVIM;
 extern char* TEXT_C_WAYB;
 
+extern char fuzzel_view_config_text[32];
+extern char fuzzel_edit_config_text[32];
+extern char fuzzel_catppuccin_text[32];
+
 extern const int max_menu_opt_n;
 extern int fastfetch_conf_export;
 
