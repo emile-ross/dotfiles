@@ -1063,12 +1063,13 @@ void fuzzel_config_importing()
 
 	if (lstat(fuz_conf_path, &st) == 0 && S_ISLNK(st.st_mode)) 
 	{
-	    printf("Config exists\n");
+	    printf("Successfully applied Fuzzel theme\n");
+	    printf("Theme type:"BOLD_S UDRL_S" %s \n"STYLE_END, theme_type_text);
+	    printf("Theme colour:"BOLD_S UDRL_S" %s \n"STYLE_END, theme_colour_text);
 	}
 	else
 	{
-	    printf("Error\n");
+		printf("This is a bug\n");
 	}
 	wait_for_timeout();
-
 }
