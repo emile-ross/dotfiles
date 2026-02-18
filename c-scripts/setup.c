@@ -292,7 +292,7 @@ int main()
 		    int fuzzel_config_menu_choice;
 		    do
 		    {
-		        clear();
+		        //clear();
 
 			printf(BOLD_S ANSI_WHITE "%s\n\n"STYLE_END, fuzzel_config_menu_text);
     	            	printf(BOLD_S " [1] " STYLE_END "%s\n", fuzzel_view_config_text);
@@ -1051,11 +1051,24 @@ void fuzzel_config_importing()
 		"%s/.config/fuzzel/imported/fuzzel/themes/%s/%s.ini", home, theme_type_text, theme_colour_text);
 
 	snprintf(cmd, sizeof(cmd),
-		"ln -sf %s ~/.config/fuzzel/fuzzel.ini", fuz_theme_path);
+		"mv -f %s/.config/fuzzel/fuzzel.ini %s/.config/fuzzel/before-link-fuzzel.ini ; "
+		"ln -sf %s %s/.config/fuzzel/fuzzel.ini", home, home, fuz_theme_path, home);
 	system(cmd);
 
 	//printf("%s", fuz_theme_path);
 	fflush(stdout);
+	
+	char fuz_conf_path[64];
+	snprintf(fuz_conf_path, sizeof(fuz_conf_path), "%s/.config/fuzzel/fuzzel.ini", home);
 
+	if (lstat(fuz_conf_path, &st) == 0 && S_ISLNK(st.st_mode)) 
+	{
+	    printf("Config exists\n");
+	}
+	else
+	{
+	    printf("Error\n");
+	}
 	wait_for_timeout();
+
 }
