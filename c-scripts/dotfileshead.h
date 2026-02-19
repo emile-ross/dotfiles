@@ -55,7 +55,6 @@ void wait_for_timeout();
 void link_fastfetch_configs();
 
 // data 
-
 extern char* TEXT_C_BASH;
 extern char* TEXT_C_SWAY;
 extern char* TEXT_C_BTOP;
@@ -89,3 +88,9 @@ extern int menu_one_i;
 float* update();
 
 void fuzzel_config_importing();
+
+
+// errors
+
+extern char errcode;
+int error_message(int err_code);
