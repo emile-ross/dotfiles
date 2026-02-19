@@ -746,9 +746,9 @@ void full_install(char ARCHIVE, char full_install_opt)
     	    }
     	    else
     	    {
-    	        char YAY;
     	        printf("Yay is not installed, do you want to install it? (Y/n): ");
 
+    	        char YAY;
 		while (getchar() != '\n');  // clear imput buffer 
     	        scanf(" %c", &YAY); // asks the user if they wanna install yay (needed)
     	        if (YAY == 'Y' || YAY == 'y')
@@ -875,13 +875,6 @@ float* update()
     fclose(file);
     return 0;
 }
-void wait_for_timeout()
-{
-    install_timer.tv_sec = 0;
-    install_timer.tv_nsec = 500000000L;
-    nanosleep(&install_timer, NULL);
-}
-
 void fuzzel_config_importing()
 {
     // check if the configs were already downloaded 
@@ -950,7 +943,7 @@ void fuzzel_config_importing()
     
     char colour_message_text[16] = "Use the colour";
     
-    printf(BOLD_S"[1] "STYLE_END" %s "BOLD_S"bluee"STYLE_END"\n", colour_message_text);
+    printf(BOLD_S"[1] "STYLE_END" %s "BOLD_S"blue"STYLE_END"\n", colour_message_text);
     printf(BOLD_S"[2] "STYLE_END" %s "BOLD_S"flamingo"STYLE_END"\n", colour_message_text);
     printf(BOLD_S"[3] "STYLE_END" %s "BOLD_S"green"STYLE_END"\n", colour_message_text);
     printf(BOLD_S"[4] "STYLE_END" %s "BOLD_S"lavender"STYLE_END"\n", colour_message_text);
