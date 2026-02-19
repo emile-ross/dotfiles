@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "dotfileshead.h"
 #include <stdlib.h>
 #include <time.h>
 
@@ -35,3 +36,30 @@ int fastfetch_conf_export;
 char fuzzel_view_config_text[32] = "Preview Fuzzel appearance";
 char fuzzel_edit_config_text[32] = "Edit Fuzzel config";
 char fuzzel_catppuccin_text[32] = "Configure Catppuccin themes";
+
+
+int error_message(int err_code)
+{
+    printf(ANSI_RED BOLD_S"This is a bug\n"STYLE_END);
+    printf(ANSI_RED BOLD_S"Error code: %d \n"STYLE_END, err_code);
+
+    char err_text_temp[128];
+    char err_solution_temp[128];
+    
+    switch (err_code)
+    {
+	case 51:
+	    snprintf(err_text_temp, sizeof(err_text_temp), "Makepkg installation failed. Please check your system configuration.");
+	    snprintf(err_solution_temp, sizeof(err_solution_temp), "Helpful link: \"https://wiki.archlinux.org/title/Makepkg\"");
+	    break;
+	case 103:
+	    snprintf(err_text_temp, sizeof(err_text_temp), "Could not apply fuzzel theme");
+	    break;
+	case 104:
+	    printf("This error should never display (in theory) \n");
+	    break;
+    }
+    printf(ANSI_RED BOLD_S"%s \n"STYLE_END, err_text_temp);
+    printf(ANSI_RED BOLD_S"%s \n"STYLE_END, err_solution_temp);
+    return 0;
+}
