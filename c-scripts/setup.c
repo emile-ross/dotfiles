@@ -49,7 +49,6 @@ int main()
 	    do
 	    {
 		float pver = 0.0f; // the user is presumed to be installing the dotfiles
-				   
     		clear();
 
     		printf(BOLD_S "%s\n"STYLE_END, opt_two_text );
@@ -63,11 +62,13 @@ int main()
 		while (getchar() != '\n'); // clear imput buffer
 		scanf("%d", &fix_install_menu);
 
-		printf("\n");
-		scanf("%c", &PKGINSTALL);
-
 		if ( fix_install_menu == 1)
 		{
+		    printf(UDRL_S"\nDo you want to install the packages needed for the full configuration? (Y/n)\n"STYLE_END);
+
+		    while (getchar() != '\n'); // clear imput buffer
+		    scanf("%c", &PKGINSTALL);
+
 		    if ( PKGINSTALL == 'Y' || PKGINSTALL == 'y')
 		    {
 			printf(BOLD_S"\nFixing dotfiles...\n"STYLE_END);
@@ -102,6 +103,11 @@ int main()
 		    }
 
 		    printf(BOLD_S"\nInstall completed!...\n"STYLE_END);
+
+	    	    wait_for_timeout();
+	    	    wait_for_timeout();
+		    // I will implement something in order to fix this ^^ mark my words
+
 		    scanf(" %d", &after_install);
 		    if (after_install == 0)
 		    {
@@ -110,7 +116,7 @@ int main()
 		    // in other cases we just go back to the previous menu
 		}
 	    }
-	    while(fix_install_menu != 0);
+	    while(fix_install_menu = 1);
     	}
     	else if (menu_one_i == 3)
     	{
@@ -441,8 +447,8 @@ int main()
     	}
     	else
     	{
-    	    printf("\nExiting.. (invalid character)\n");
-    	    return 1; // error code 1
+	    error_message(2);
+    	    return 2;
     	}
     }
     while(menu_one_i != 0);	// exits the while loop when the user types 0
@@ -801,7 +807,7 @@ void full_install(char ARCHIVE, char full_install_opt)
     	        }
     	        else
     	        {
-    	            printf("\nYay is needed in order to proceed with the script.\n");
+		    error_message(5);
 		}
 	    }
 	// actually install the dotfiles
@@ -852,7 +858,7 @@ float* update()
     // error message if username can't be fetched 
     if (USERNAME == NULL) 
     {
-        printf(BOLD_S UDRL_S"\nCan't find home directory\n"STYLE_END);
+	error_message(204);
         return NULL;
     }
 
@@ -868,7 +874,7 @@ float* update()
     // return error message when file isn't found
     if (file == NULL) 
     {
-	printf(BOLD_S UDRL_S"\nNo such file or directory\n"STYLE_END);
+	error_message(205);
 	// returns null if the file can't be opened/found
         return NULL;
     }
@@ -956,119 +962,117 @@ void fuzzel_config_importing()
     }
     // theme color
     int theme_colour_user_opt;
-
-	// this looks so bad... 
-	
-	printf(BOLD_S"Set the colour for your fuzzel config\n"STYLE_END);
-	
-	char colour_message_text[16] = "Use the colour";
-	
-	printf(BOLD_S"[1] "STYLE_END" %s "BOLD_S"bluee"STYLE_END"\n", colour_message_text);
-	printf(BOLD_S"[2] "STYLE_END" %s "BOLD_S"flamingo"STYLE_END"\n", colour_message_text);
-	printf(BOLD_S"[3] "STYLE_END" %s "BOLD_S"green"STYLE_END"\n", colour_message_text);
-	printf(BOLD_S"[4] "STYLE_END" %s "BOLD_S"lavender"STYLE_END"\n", colour_message_text);
-	printf(BOLD_S"[5] "STYLE_END" %s "BOLD_S"maroon"STYLE_END"\n", colour_message_text);
-	printf(BOLD_S"[6] "STYLE_END" %s "BOLD_S"mauve"STYLE_END"\n", colour_message_text);
-	printf(BOLD_S"[7] "STYLE_END" %s "BOLD_S"peach"STYLE_END"\n", colour_message_text);
-	printf(BOLD_S"[8] "STYLE_END" %s "BOLD_S"pink"STYLE_END"\n", colour_message_text);
-	printf(BOLD_S"[9] "STYLE_END" %s "BOLD_S"red"STYLE_END"\n", colour_message_text);
-	printf(BOLD_S"[10]"STYLE_END" %s "BOLD_S"rosewater"STYLE_END"\n", colour_message_text);
-	printf(BOLD_S"[11]"STYLE_END" %s "BOLD_S"sapphire"STYLE_END"\n", colour_message_text);
-	printf(BOLD_S"[12]"STYLE_END" %s "BOLD_S"sky"STYLE_END"\n", colour_message_text);
-	printf(BOLD_S"[13]"STYLE_END" %s "BOLD_S"teal"STYLE_END"\n", colour_message_text);
-	printf(BOLD_S"[14]"STYLE_END" %s "BOLD_S"yellow"STYLE_END"\n", colour_message_text);
-
-        while (getchar() != '\n'); // clear imput buffer
-        scanf(" %d", &theme_colour_user_opt);
     
-        char* theme_colour_text;
+    printf(BOLD_S"Set the colour for your fuzzel config\n"STYLE_END);
     
-        if (theme_colour_user_opt == 1)
-        {
-            theme_colour_text = "blue";
-        }
-        else if (theme_colour_user_opt == 2)
-        {
-            theme_colour_text = "flamingo";
-        }
-        else if (theme_colour_user_opt == 3)
-        {
-            theme_colour_text = "green";
-        }
-        else if (theme_colour_user_opt == 4)
-        {
-            theme_colour_text = "lavender";
-        }
-        else if (theme_colour_user_opt == 5)
-        {
-            theme_colour_text = "maroon";
-        }
-        else if (theme_colour_user_opt == 6)
-        {
-            theme_colour_text = "mauve";
-        }
-        else if (theme_colour_user_opt == 7)
-        {
-            theme_colour_text = "peach";
-        }
-        else if (theme_colour_user_opt == 8)
-        {
-            theme_colour_text = "pink";
-        }
-        else if (theme_colour_user_opt == 9)
-        {
-            theme_colour_text = "red";
-        }
-        else if (theme_colour_user_opt == 10)
-        {
-            theme_colour_text = "rosewater";
-        }
-        else if (theme_colour_user_opt == 11)
-        {
-            theme_colour_text = "sapphire";
-        }
-        else if (theme_colour_user_opt == 12)
-        {
-            theme_colour_text = "sky";
-        }
-        else if (theme_colour_user_opt == 13)
-        {
-            theme_colour_text = "teal";
-        }
-        else if (theme_colour_user_opt == 14)
-        {
-            theme_colour_text = "yellow";
-        }
-        else
-        {
-            printf("Try again.\n");
-        }
-
-        //printf("%s %s\n", theme_colour_text, theme_type_text);
-	char fuz_theme_path[256];
-	snprintf(fuz_theme_path, sizeof(fuz_theme_path),
-		"%s/.config/fuzzel/imported/fuzzel/themes/%s/%s.ini", home, theme_type_text, theme_colour_text);
-
-	snprintf(cmd, sizeof(cmd),
-		"mv -f %s/.config/fuzzel/fuzzel.ini %s/.config/fuzzel/before-link-fuzzel.ini ; "
-		"ln -sf %s %s/.config/fuzzel/fuzzel.ini", home, home, fuz_theme_path, home);
-	system(cmd);
-
-	//printf("%s", fuz_theme_path);
-	fflush(stdout);
-	
-	char fuz_conf_path[64];
-	snprintf(fuz_conf_path, sizeof(fuz_conf_path), "%s/.config/fuzzel/fuzzel.ini", home);
-
-	if (lstat(fuz_conf_path, &st) == 0 && S_ISLNK(st.st_mode)) 
-	{
-	    printf("Successfully applied Fuzzel theme\n");
-	    printf("Theme type:"BOLD_S UDRL_S" %s \n"STYLE_END, theme_type_text);
-	    printf("Theme colour:"BOLD_S UDRL_S" %s \n"STYLE_END, theme_colour_text);
-	}
-	else
-	{
-	    error_message(103);
-	}
+    char colour_message_text[16] = "Use the colour";
+    
+    printf(BOLD_S"[1] "STYLE_END" %s "BOLD_S"bluee"STYLE_END"\n", colour_message_text);
+    printf(BOLD_S"[2] "STYLE_END" %s "BOLD_S"flamingo"STYLE_END"\n", colour_message_text);
+    printf(BOLD_S"[3] "STYLE_END" %s "BOLD_S"green"STYLE_END"\n", colour_message_text);
+    printf(BOLD_S"[4] "STYLE_END" %s "BOLD_S"lavender"STYLE_END"\n", colour_message_text);
+    printf(BOLD_S"[5] "STYLE_END" %s "BOLD_S"maroon"STYLE_END"\n", colour_message_text);
+    printf(BOLD_S"[6] "STYLE_END" %s "BOLD_S"mauve"STYLE_END"\n", colour_message_text);
+    printf(BOLD_S"[7] "STYLE_END" %s "BOLD_S"peach"STYLE_END"\n", colour_message_text);
+    printf(BOLD_S"[8] "STYLE_END" %s "BOLD_S"pink"STYLE_END"\n", colour_message_text);
+    printf(BOLD_S"[9] "STYLE_END" %s "BOLD_S"red"STYLE_END"\n", colour_message_text);
+    printf(BOLD_S"[10]"STYLE_END" %s "BOLD_S"rosewater"STYLE_END"\n", colour_message_text);
+    printf(BOLD_S"[11]"STYLE_END" %s "BOLD_S"sapphire"STYLE_END"\n", colour_message_text);
+    printf(BOLD_S"[12]"STYLE_END" %s "BOLD_S"sky"STYLE_END"\n", colour_message_text);
+    printf(BOLD_S"[13]"STYLE_END" %s "BOLD_S"teal"STYLE_END"\n", colour_message_text);
+    printf(BOLD_S"[14]"STYLE_END" %s "BOLD_S"yellow"STYLE_END"\n", colour_message_text);
+    
+    while (getchar() != '\n'); // clear imput buffer
+    scanf(" %d", &theme_colour_user_opt);
+    
+    char* theme_colour_text;
+    
+    if (theme_colour_user_opt == 1)
+    {
+        theme_colour_text = "blue";
+    }
+    else if (theme_colour_user_opt == 2)
+    {
+        theme_colour_text = "flamingo";
+    }
+    else if (theme_colour_user_opt == 3)
+    {
+        theme_colour_text = "green";
+    }
+    else if (theme_colour_user_opt == 4)
+    {
+        theme_colour_text = "lavender";
+    }
+    else if (theme_colour_user_opt == 5)
+    {
+        theme_colour_text = "maroon";
+    }
+    else if (theme_colour_user_opt == 6)
+    {
+        theme_colour_text = "mauve";
+    }
+    else if (theme_colour_user_opt == 7)
+    {
+        theme_colour_text = "peach";
+    }
+    else if (theme_colour_user_opt == 8)
+    {
+        theme_colour_text = "pink";
+    }
+    else if (theme_colour_user_opt == 9)
+    {
+        theme_colour_text = "red";
+    }
+    else if (theme_colour_user_opt == 10)
+    {
+        theme_colour_text = "rosewater";
+    }
+    else if (theme_colour_user_opt == 11)
+    {
+        theme_colour_text = "sapphire";
+    }
+    else if (theme_colour_user_opt == 12)
+    {
+        theme_colour_text = "sky";
+    }
+    else if (theme_colour_user_opt == 13)
+    {
+        theme_colour_text = "teal";
+    }
+    else if (theme_colour_user_opt == 14)
+    {
+        theme_colour_text = "yellow";
+    }
+    else
+    {
+        printf("Try again.\n");
+    }
+    
+    //printf("%s %s\n", theme_colour_text, theme_type_text);
+    char fuz_theme_path[256];
+    snprintf(fuz_theme_path, sizeof(fuz_theme_path),
+    	"%s/.config/fuzzel/imported/fuzzel/themes/%s/%s.ini", home, theme_type_text, theme_colour_text);
+    
+    snprintf(cmd, sizeof(cmd),
+	    "mv -f %s/.config/fuzzel/fuzzel.ini %s/.config/fuzzel/before-link-fuzzel.ini ; "
+	    "ln -sf %s %s/.config/fuzzel/fuzzel.ini", home, home, fuz_theme_path, home);
+    system(cmd);
+    
+    //printf("%s", fuz_theme_path);
+    fflush(stdout);
+    
+    char fuz_conf_path[64];
+    snprintf(fuz_conf_path, sizeof(fuz_conf_path), "%s/.config/fuzzel/fuzzel.ini", home);
+    
+    if (lstat(fuz_conf_path, &st) == 0 && S_ISLNK(st.st_mode)) 
+    {
+        printf("Successfully applied Fuzzel theme\n");
+        printf("Theme type:"BOLD_S UDRL_S" %s \n"STYLE_END, theme_type_text);
+        printf("Theme colour:"BOLD_S UDRL_S" %s \n"STYLE_END, theme_colour_text);
 	wait_for_timeout();
+    }
+    else
+    {
+        error_message(103);
+    }
 }
