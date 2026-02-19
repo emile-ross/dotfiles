@@ -67,40 +67,23 @@ int main()
 		    printf(UDRL_S"\nDo you want to install the packages needed for the full configuration? (Y/n)\n"STYLE_END);
 
 		    while (getchar() != '\n'); // clear imput buffer
-		    scanf("%c", &PKGINSTALL);
+		    char pkgtemp;
+		    scanf("%c", &pkgtemp);
 
-		    if ( PKGINSTALL == 'Y' || PKGINSTALL == 'y')
-		    {
-			printf(BOLD_S"\nFixing dotfiles...\n"STYLE_END);
-		    	// call install functions for every config
-			BASH(ARCHIVE, pver, 'y');
-			BTOP(ARCHIVE, pver, 'y');
-		    	CAVA(ARCHIVE, pver, 'y');
-		    	FAST(ARCHIVE, pver, 'y');
-		    	FUZZ(ARCHIVE, pver, 'y');
-		    	GTKL(ARCHIVE, pver, 'y');
-		    	HYPR(ARCHIVE, pver, 'y');
-		    	KITT(ARCHIVE, pver, 'y');
-		    	NVIM(ARCHIVE, pver, 'y');
-		    	MPVF(ARCHIVE, pver, 'y');
-		    	SWAY(ARCHIVE, pver, 'y');
-		    	WAYB(ARCHIVE, pver, 'y');
-		    }
-		    else
-		    {
-			BASH(ARCHIVE, pver, 'n');
-			BTOP(ARCHIVE, pver, 'n');
-		    	CAVA(ARCHIVE, pver, 'n');
-		    	FAST(ARCHIVE, pver, 'n');
-		    	FUZZ(ARCHIVE, pver, 'n');
-		    	GTKL(ARCHIVE, pver, 'n');
-		    	HYPR(ARCHIVE, pver, 'n');
-		    	KITT(ARCHIVE, pver, 'n');
-		    	MPVF(ARCHIVE, pver, 'n');
-		    	NVIM(ARCHIVE, pver, 'n');
-		    	SWAY(ARCHIVE, pver, 'n');
-		    	WAYB(ARCHIVE, pver, 'n');
-		    }
+		    printf(BOLD_S"\nFixing dotfiles...\n"STYLE_END);
+		    // call install functions for every config
+		    BASH(ARCHIVE, pver, pkgtemp);
+		    BTOP(ARCHIVE, pver, pkgtemp);
+		    CAVA(ARCHIVE, pver, pkgtemp);
+		    FAST(ARCHIVE, pver, pkgtemp);
+		    FUZZ(ARCHIVE, pver, pkgtemp);
+		    GTKL(ARCHIVE, pver, pkgtemp);
+		    HYPR(ARCHIVE, pver, pkgtemp);
+		    KITT(ARCHIVE, pver, pkgtemp);
+		    NVIM(ARCHIVE, pver, pkgtemp);
+		    MPVF(ARCHIVE, pver, pkgtemp);
+		    SWAY(ARCHIVE, pver, pkgtemp);
+		    WAYB(ARCHIVE, pver, pkgtemp);
 
 		    printf(BOLD_S"\nInstall completed!...\n"STYLE_END);
 
@@ -116,7 +99,7 @@ int main()
 		    // in other cases we just go back to the previous menu
 		}
 	    }
-	    while(fix_install_menu = 1);
+	    while(fix_install_menu > 0);
     	}
     	else if (menu_one_i == 3)
     	{
