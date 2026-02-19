@@ -23,10 +23,11 @@ char* TEXT_C_MPVF = "mpv config";
 char* TEXT_C_NVIM = "neovim config with lazy";
 char* TEXT_C_WAYB = "waybar config and style (appearance)";
 
+int timer_multiply;
+
 char ARCHIVE;
 char PKGINSTALL;
 int menu_one_i;
-
 char full_install_opt; // if the user wants to install everything set to Y
 char full_update_opt; 
 
@@ -89,3 +90,11 @@ int error_message(int err_code)
     getchar(); 
     return 0;
 }
+
+void wait_for_timeout()
+{
+    install_timer.tv_sec = 0;
+    install_timer.tv_nsec = 500000000L;
+    nanosleep(&install_timer, NULL);
+}
+
