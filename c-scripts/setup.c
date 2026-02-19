@@ -777,8 +777,7 @@ void full_install(char ARCHIVE, char full_install_opt)
     	                // Check if makepkg is available after installing the base-devel package
     	                if (system("command -v makepkg > /dev/null") != 0)
     	                {
-    	        	    printf("Makepkg installation failed. Please check your system configuration.\n");
-    	        	    printf("Helpful link: \"https://wiki.archlinux.org/title/Makepkg\"\n");
+			    error_message(51);
     	                }
     	                else
     	                {
@@ -1069,8 +1068,7 @@ void fuzzel_config_importing()
 	}
 	else
 	{
-	    printf(ANSI_RED BOLD_S"Could not apply Fuzzel theme for some reason\n"STYLE_END);
-	    printf(ANSI_RED BOLD_S"This is a bug\n"STYLE_END);
+	    error_message(103);
 	}
 	wait_for_timeout();
 }
