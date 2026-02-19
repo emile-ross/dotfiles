@@ -40,7 +40,7 @@ char fuzzel_catppuccin_text[32] = "Configure Catppuccin themes";
 
 int error_message(int err_code)
 {
-    printf(ANSI_RED BOLD_S"This is a bug\n"STYLE_END);
+    printf(ANSI_RED UDRL_S BOLD_S"Error\n"STYLE_END);
     printf(ANSI_RED BOLD_S"Error code: %d \n"STYLE_END, err_code);
 
     char err_text_temp[128];
@@ -48,18 +48,44 @@ int error_message(int err_code)
     
     switch (err_code)
     {
+	case 2:
+	    snprintf(err_text_temp, sizeof(err_text_temp), "Exiting.. (invalid character)");
+	    break;
+
+	case 5:
+	    snprintf(err_text_temp, sizeof(err_text_temp), "Yay is needed for the installation");
+	    snprintf(err_solution_temp, sizeof(err_solution_temp), "Give the script permission to install Yay");
+	    break;
+
 	case 51:
 	    snprintf(err_text_temp, sizeof(err_text_temp), "Makepkg installation failed. Please check your system configuration.");
 	    snprintf(err_solution_temp, sizeof(err_solution_temp), "Helpful link: \"https://wiki.archlinux.org/title/Makepkg\"");
 	    break;
+
 	case 103:
 	    snprintf(err_text_temp, sizeof(err_text_temp), "Could not apply fuzzel theme");
 	    break;
-	case 104:
+
+	case 204:
+	    snprintf(err_text_temp, sizeof(err_text_temp), "Can't find home directory");
+	    snprintf(err_solution_temp, sizeof(err_solution_temp), "Try running \"ls /home/\"\nif that doesn't do it \"useradd -m -d /home/[YOUR_USERNAME]/ -s /bin/bash -G sudo [YOUR_USERNAME]\"");
+	    break;
+
+	case 205:
+	    snprintf(err_text_temp, sizeof(err_text_temp), "No such file or directory"); // for hyprland.conf (when looking for version # )
+	    snprintf(err_solution_temp, sizeof(err_solution_temp), "Make sure you have installed the dotfiles");
+	    break;
+
+	case 909:
 	    printf("This error should never display (in theory) \n");
 	    break;
     }
     printf(ANSI_RED BOLD_S"%s \n"STYLE_END, err_text_temp);
     printf(ANSI_RED BOLD_S"%s \n"STYLE_END, err_solution_temp);
+    printf("Press "UDRL_S"CTRL + C"STYLE_END BOLD_S" to exit\n"STYLE_END);
+    printf("Press any key to continue\n");
+
+    while (getchar() != '\n');  // clear imput buffer 
+    getchar(); 
     return 0;
 }
