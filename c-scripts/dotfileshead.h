@@ -45,14 +45,11 @@ void WAYB(char ARCHIVE, float pver, char PKGINSTALL);
 
 void full_install(char ARCHIVE, char full_install_opt);
 int full_update(char ARCHIVE, float pver);
-
 void install_configs(); // the partial install script (configure which package or configuration to install)
 void copyfiles (int fastfetch_conf_export);
-
-void clear();
-void wait_for_timeout();
-
+void wait_for_timeout(int timer_quarters, int timer_seconds);
 void link_fastfetch_configs();
+void clear();
 
 // data 
 extern char* TEXT_C_BASH;
@@ -74,11 +71,8 @@ extern char fuzzel_catppuccin_text[32];
 
 extern const int max_menu_opt_n;
 extern int fastfetch_conf_export;
-
 extern const char *home;
-
 extern struct timespec install_timer;
-
 extern char ARCHIVE;
 extern char PKGINSTALL;
 extern char full_install_opt; // if the user wants to install everything set to Y
@@ -86,13 +80,12 @@ extern char full_update_opt;
 extern int menu_one_i;
 extern int timer_quarters; // max is 4
 extern int timer_seconds;
+extern int fuzzel_config_menu_choice;
 
 float* update();
 
 void fuzzel_config_importing();
 
-
 // errors
-
 extern char errcode;
 int error_message(int err_code);
