@@ -23,7 +23,11 @@ char* TEXT_C_MPVF = "mpv config";
 char* TEXT_C_NVIM = "neovim config with lazy";
 char* TEXT_C_WAYB = "waybar config and style (appearance)";
 
-int timer_multiply;
+int timer_quarters;
+int timer_seconds;
+
+long int time_timer_quarters;
+long int time_timer_seconds;
 
 char ARCHIVE;
 char PKGINSTALL;
@@ -91,10 +95,13 @@ int error_message(int err_code)
     return 0;
 }
 
-void wait_for_timeout()
+void wait_for_timeout(int timer_quarters, int timer_seconds)
 {
-    install_timer.tv_sec = 0;
-    install_timer.tv_nsec = 500000000L;
+    time_timer_quarters = timer_quarters * 250000000;
+    time_timer_seconds = timer_seconds * 1;
+
+    install_timer.tv_nsec = time_timer_quarters;
+    install_timer.tv_sec = time_timer_seconds;
     nanosleep(&install_timer, NULL);
 }
 
