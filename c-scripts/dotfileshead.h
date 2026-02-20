@@ -84,6 +84,8 @@ extern char PKGINSTALL;
 extern char full_install_opt; // if the user wants to install everything set to Y
 extern char full_update_opt; 
 extern int menu_one_i;
+extern int timer_quarters; // max is 4
+extern int timer_seconds;
 
 float* update();
 
