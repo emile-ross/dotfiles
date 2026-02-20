@@ -22,7 +22,6 @@ int full_update(char ARCHIVE, float pver)
 		"cp dotfiles/hypr/hyprpaper.conf ~/.config/hypr ");
 	system(cmd);
 
-	
 	// do not break because we are also installing everything below
     case 120:
 	snprintf(cmd, 256,
@@ -114,7 +113,8 @@ int full_update(char ARCHIVE, float pver)
 	printf("\nUnknown version\n");
 	return 1;
     end:
-	printf("Update completed!\n");
+	printf(BOLD_S"Update completed!\n"STYLE_END);
+	wait_for_timeout(2, 0);
     }
     return 0;
 }
