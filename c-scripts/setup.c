@@ -87,10 +87,9 @@ int main()
 
 		    printf(BOLD_S"\nInstall completed!...\n"STYLE_END);
 
-	    	    wait_for_timeout();
-	    	    wait_for_timeout();
+	    	    wait_for_timeout(2, 0);
 		    // I will implement something in order to fix this ^^ mark my words
-
+		    // ^^ I did it :D
 		    scanf(" %d", &after_install);
 		    if (after_install == 0)
 		    {
@@ -181,10 +180,7 @@ int main()
     	                    snprintf(cmd, 128,
 				"fastfetch");
     	                    system(cmd);
-
-			    install_timer.tv_sec = 2;
-			    install_timer.tv_nsec = 000000000L;
-			    nanosleep(&install_timer, NULL);
+			    wait_for_timeout(0, 2);
     	                }
 		        if (fastfetch_config_choice == 2)
     	                {
@@ -209,8 +205,7 @@ int main()
     	    	            	    	"ln -fs ~/.config/fastfetch/config-default.jsonc ~/.config/fastfetch/config.jsonc");
     	    	            	    system(cmd);
     	    	            	    printf("\nThe fastfetch config was applied successfully\n");
-
-	    	            	    wait_for_timeout();
+	    	            	    wait_for_timeout(1, 0);
     	    	            	}
     	    	            	else if (link_fastfetch_configs_opt == 2)
     	    	            	{
@@ -218,8 +213,7 @@ int main()
     	    	            	    	"ln -fs ~/.config/fastfetch/config-other.jsonc ~/.config/fastfetch/config.jsonc");
     	    	            	    system(cmd);
     	    	            	    printf("\nThe fastfetch config was applied successfully\n");
-
-	    	            	    wait_for_timeout();
+	    	            	    wait_for_timeout(1, 0);
     	    	            	}
     	    	            	else if (link_fastfetch_configs_opt == 3)
     	    	            	{
@@ -228,8 +222,7 @@ int main()
     	    	            	    system(cmd);
 
     	    	            	    printf("\nThe fastfetch config was applied successfully\n");
-
-	    	            	    wait_for_timeout();
+	    	            	    wait_for_timeout(1, 0);
     	    	            	}
 		    	    	else
 		    	    	{}
@@ -300,7 +293,7 @@ int main()
 				    "fuzzel");
     	                    system(cmd);
 
-			    wait_for_timeout();
+	    	            wait_for_timeout(1, 0);
 			}
 			else if (fuzzel_config_menu_choice == 2)
 			{
@@ -374,7 +367,7 @@ int main()
 					    "nvim ~/.config/fuzzel/custom-edited-fuzzel.ini ");
 				    system(cmd);
 				    printf("The custom config was saved successfully\n");
-				    wait_for_timeout();
+				    wait_for_timeout(1, 0);
 				}
 			    }
 			    while (fuzzel_edit_menu_choice > 0);
@@ -382,7 +375,7 @@ int main()
 			else if (fuzzel_config_menu_choice == 3)
 			{
 			    fuzzel_config_importing();
-			    wait_for_timeout();
+			    wait_for_timeout(1, 0);
 			}
 		    }
 		    while (fuzzel_config_menu_choice > 0);
@@ -726,73 +719,69 @@ void full_install(char ARCHIVE, char full_install_opt)
 	        printf(".");
 	        fflush(stdout);
 	
-	        install_timer.tv_sec = 0;
-	        install_timer.tv_nsec = 250000000L;
-	        nanosleep(&install_timer, NULL);
+		wait_for_timeout(1, 0);
 	    }
 	    for (int k = 0; k < 1; k++)
 	    {
 		printf("\n");
-	
-        wait_for_timeout();
+		wait_for_timeout(1, 0);
 	    }
-	
 	    timerinstall--;
 	}
 	
-	    if (system("test -f /sbin/yay") == 0)
-    	    {
-    	        printf("Yay is now installed, congrats!\n");
-    	    }
-    	    else
-    	    {
-    	        printf("Yay is not installed, do you want to install it? (Y/n): ");
+	if (system("test -f /sbin/yay") == 0)
+    	{
+    	    printf("Yay is now installed, congrats!\n");
+    	}
+    	else
+    	{
+    	    printf("Yay is not installed, do you want to install it? (Y/n): ");
 
-    	        char YAY;
-		while (getchar() != '\n');  // clear imput buffer 
-    	        scanf(" %c", &YAY); // asks the user if they wanna install yay (needed)
-    	        if (YAY == 'Y' || YAY == 'y')
+    	    char YAY;
+	    while (getchar() != '\n');  // clear imput buffer 
+    	    scanf(" %c", &YAY); // asks the user if they wanna install yay (needed)
+    	    if (YAY == 'Y' || YAY == 'y')
+    	    {
+    	        // Check if makepkg is installed ( it is needed in order to compile yay )
+    	        if (system("command -v makepkg > /dev/null") != 0)
     	        {
-    	            // Check if makepkg is installed ( it is needed in order to compile yay )
+    	        	printf("\nMakepkg is not installed. Installing 'base-devel' package group to proceed...\n");
+
+	    	char cmd[128];
+	    	snprintf(cmd, sizeof(cmd),
+	    		"sudo pacman -S --noconfirm base-devel");
+	    	system(cmd);
+    	            
+    	            // Check if makepkg is available after installing the base-devel package
     	            if (system("command -v makepkg > /dev/null") != 0)
     	            {
-    	            	printf("\nMakepkg is not installed. Installing 'base-devel' package group to proceed...\n");
-
-			char cmd[128];
-			snprintf(cmd, sizeof(cmd),
-				"sudo pacman -S --noconfirm base-devel");
-			system(cmd);
-    	                
-    	                // Check if makepkg is available after installing the base-devel package
-    	                if (system("command -v makepkg > /dev/null") != 0)
-    	                {
-			    error_message(51);
-    	                }
-    	                else
-    	                {
-    	        	    printf("Makepkg has been successfully installed!\n");
-    	                }
+			error_message(51);
     	            }
     	            else
     	            {
-    	                printf("Makepkg is already installed.\n");
+			printf("Makepkg has been successfully installed!\n");
     	            }
-		    // install yay \/
-    	            char cmd[256];
-    	            snprintf(cmd, sizeof(cmd),
-    	        	    "git clone https://aur.archlinux.org/yay.git &&"	// download yay from aur
-    	                    "cd yay &&"						//
-    	        	    "makepkg -si &&"					// build package from source
-    	                    "cd ..");						//
-    	            system(cmd);
-
-    	            printf("\nYay is installed, congrats!\n");
     	        }
     	        else
     	        {
-		    error_message(5);
-		}
+    	            printf("Makepkg is already installed.\n");
+    	        }
+	        // install yay \/
+    	        char cmd[256];
+    	        snprintf(cmd, sizeof(cmd),
+			"git clone https://aur.archlinux.org/yay.git &&"	// download yay from aur
+    	                "cd yay &&"						//
+			"makepkg -si &&"					// build package from source
+    	                "cd ..");						//
+    	        system(cmd);
+
+    	        printf("\nYay is installed, congrats!\n");
+    	    }
+    	    else
+    	    {
+	        error_message(5);
 	    }
+	}
 	// actually install the dotfiles
 	BASH(ARCHIVE, pver, PKGINSTALL);
 	SWAY(ARCHIVE, pver, PKGINSTALL);
@@ -1024,17 +1013,14 @@ void fuzzel_config_importing()
         printf("Try again.\n");
     }
     
-    //printf("%s %s\n", theme_colour_text, theme_type_text);
     char fuz_theme_path[256];
     snprintf(fuz_theme_path, sizeof(fuz_theme_path),
-    	"%s/.config/fuzzel/imported/fuzzel/themes/%s/%s.ini", home, theme_type_text, theme_colour_text);
+	    "%s/.config/fuzzel/imported/fuzzel/themes/%s/%s.ini", home, theme_type_text, theme_colour_text);
     
     snprintf(cmd, sizeof(cmd),
 	    "mv -f %s/.config/fuzzel/fuzzel.ini %s/.config/fuzzel/before-link-fuzzel.ini ; "
 	    "ln -sf %s %s/.config/fuzzel/fuzzel.ini", home, home, fuz_theme_path, home);
     system(cmd);
-    
-    //printf("%s", fuz_theme_path);
     fflush(stdout);
     
     char fuz_conf_path[64];
@@ -1045,7 +1031,7 @@ void fuzzel_config_importing()
         printf("Successfully applied Fuzzel theme\n");
         printf("Theme type:"BOLD_S UDRL_S" %s \n"STYLE_END, theme_type_text);
         printf("Theme colour:"BOLD_S UDRL_S" %s \n"STYLE_END, theme_colour_text);
-	wait_for_timeout();
+	wait_for_timeout(0, 1);
     }
     else
     {
