@@ -78,31 +78,12 @@ int main()
 		    {
 		    printf(BOLD_S"\nFixing dotfiles...\n"STYLE_END);
 		    // call install functions for every config
-			BTOP(ARCHIVE, pver, 'y');
-		    	CAVA(ARCHIVE, pver, 'y');
-		    	FAST(ARCHIVE, pver, 'y');
-		    	FUZZ(ARCHIVE, pver, 'y');
-		    	GTKL(ARCHIVE, pver, 'y');
-		    	HYPR(ARCHIVE, pver, 'y');
-		    	KITT(ARCHIVE, pver, 'y');
-		    	NVIM(ARCHIVE, pver, 'y');
-		    	MPVF(ARCHIVE, pver, 'y');
-		    	SWAY(ARCHIVE, pver, 'y');
-		    	WAYB(ARCHIVE, pver, 'y');
+		    //
+			full_install(ARCHIVE, pver, 'y');
 		    }
 		    else
 		    {
-			BTOP(ARCHIVE, pver, 'y');
-		    	CAVA(ARCHIVE, pver, 'y');
-		    	FAST(ARCHIVE, pver, 'y');
-		    	FUZZ(ARCHIVE, pver, 'y');
-		    	GTKL(ARCHIVE, pver, 'y');
-		    	HYPR(ARCHIVE, pver, 'y');
-		    	KITT(ARCHIVE, pver, 'y');
-		    	MPVF(ARCHIVE, pver, 'y');
-		    	NVIM(ARCHIVE, pver, 'y');
-		    	SWAY(ARCHIVE, pver, 'y');
-		    	WAYB(ARCHIVE, pver, 'y');
+			full_install(ARCHIVE, pver, 'n');
 		    }
 
 
@@ -112,7 +93,6 @@ int main()
 		    {
 			return 0;
 		    } 
-		    // in other cases we just go back to the previous menu
 		}
 	    }
 	    while(fix_install_menu != 0);
@@ -635,8 +615,6 @@ void full_install(char ARCHIVE, char full_install_opt)
 	        install_timer.tv_nsec = 172100000L;
 	        nanosleep(&install_timer, NULL);
 	    }
-	
-	
 	    timerinstall--;
 	}
 	
@@ -727,22 +705,6 @@ void full_install(char ARCHIVE, char full_install_opt)
 	    printf("\n[12] Install WAYB ");
 	    
 	    scanf(" %d", &install_pkg_opt);
-
-	    // // this is completely useless at the moment
-	    // printf("\nInstalling dotfiles...\n");
-    	    //     void BASH(char ARCHIVE, float pver, char PKGINSTALL);
-    	    //     void SWAY(char ARCHIVE, float pver, char PKGINSTALL);
-    	    //     void BTOP(char ARCHIVE, float pver, char PKGINSTALL);
-    	    //     void CAVA(char ARCHIVE, float pver, char PKGINSTALL);
-    	    //     void FAST(char ARCHIVE, float pver, char PKGINSTALL);
-    	    //     void FUZZ(char ARCHIVE, float pver, char PKGINSTALL);
-    	    //     void GTKL(char ARCHIVE, float pver, char PKGINSTALL);
-    	    //     void HYPR(char ARCHIVE, float pver, char PKGINSTALL);
-    	    //     void KITT(char ARCHIVE, float pver, char PKGINSTALL);
-    	    //     void MPVF(char ARCHIVE, float pver, char PKGINSTALL);
-    	    //     void NVIM(char ARCHIVE, float pver, char PKGINSTALL);
-    	    //     void WAYB(char ARCHIVE, float pver, char PKGINSTALL);
-    	    // printf("\nInstalling dotfiles...\n");
 	}
 	while (install_pkg_opt == 0);
     }
@@ -783,7 +745,6 @@ float* update()
     {
         if (sscanf(line, "# AWSMVERSION: %31f[0-9.]", VAWSM) == 1) 
 	{
-            //printf("VAWSM: %s\n", VAWSM); // for troubleshooting purposes
             fclose(file);
             return VAWSM;
         }
@@ -876,7 +837,6 @@ void link_fastfetch_configs()
     	    system(cmd);
 
     	    printf("\nThe fastfetch config was applied successfully\n");
-
     	}
     	else if (link_fastfetch_configs_opt == 2)
     	{
@@ -894,7 +854,6 @@ void link_fastfetch_configs()
     	    system(cmd);
 
     	    printf("\nThe fastfetch config was applied successfully\n");
-
     	}
     }
     while (link_fastfetch_configs_opt > 0);
