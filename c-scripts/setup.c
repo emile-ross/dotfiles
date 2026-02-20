@@ -8,7 +8,6 @@ int main()
     	clear();
     	char main_menu_text[128] = "Welcome to the setup utility for ImAwsumm's dotfiles";
     	char opt_one_text[128] = "Install the dotfiles";
-    	char opt_two_text[128] = "Fix the dotfiles";
     	char opt_the_text[128] = "Update your dotfiles";
     	char opt_for_text[128] = "Custom configuration menu";
     	char opt_fiv_text[128] = "Something else";
@@ -16,10 +15,9 @@ int main()
     
     	printf(BOLD_S ANSI_CYAN "%s\n\n" STYLE_END, main_menu_text );
     	printf(BOLD_S " [1] " STYLE_END "%s\n", opt_one_text);
-    	printf(BOLD_S " [2] " STYLE_END "%s\n", opt_two_text);
-    	printf(BOLD_S " [3] " STYLE_END "%s\n", opt_the_text);
-    	printf(BOLD_S " [4] " STYLE_END "%s\n", opt_for_text);
-    	printf(BOLD_S " [5] " STYLE_END "%s\n\n", opt_fiv_text);
+    	printf(BOLD_S " [2] " STYLE_END "%s\n", opt_the_text);
+    	printf(BOLD_S " [3] " STYLE_END "%s\n", opt_for_text);
+    	printf(BOLD_S " [4] " STYLE_END "%s\n\n", opt_fiv_text);
     	printf(BOLD_S " [0] " STYLE_END "%s\n", opt_exit_text);
 
     	scanf(" %d", &menu_one_i);
@@ -44,101 +42,18 @@ int main()
     	}
     	else if (menu_one_i == 2)
     	{
-	    int fix_install_menu;
-	    int after_install;
-	    do
-	    {
-		float pver = 0.0f; // the user is presumed to be installing the dotfiles
-    		clear();
+	    clear();
+	    float *version = update();
+	    printf(ANSI_GREY"\nDetected Version: %.2f\n"STYLE_END, *version);
+    	    printf(BOLD_S "%s\n\n"STYLE_END, opt_the_text );
+	    printf("\nDo you want to backup your old dotfiles before updating? (Y/n)\n");
+	    char backuptemp;
 
-    		printf(BOLD_S "%s\n"STYLE_END, opt_two_text );
-
-		float *version = update();
-		printf(ANSI_GREY"\nDetected Version: %.2f\n"STYLE_END, *version);
-		printf(UDRL_S"Are you sure you want to fix your dotfiles?\n"STYLE_END);
-		printf(BOLD_S"\n[1]"STYLE_END" %s", opt_two_text);
-		printf(BOLD_S"\n[0]"STYLE_END" %s\n", opt_exit_text);
-
-		while (getchar() != '\n'); // clear imput buffer
-		scanf("%d", &fix_install_menu);
-
-		if ( fix_install_menu == 1)
-		{
-		    printf(UDRL_S"\nDo you want to install the packages needed for the full configuration? (Y/n)\n"STYLE_END);
-
-		    while (getchar() != '\n'); // clear imput buffer
-		    char pkgtemp;
-		    scanf("%c", &pkgtemp);
-
-		    printf(BOLD_S"\nFixing dotfiles...\n"STYLE_END);
-		    // call install functions for every config
-		    BASH(ARCHIVE, pver, pkgtemp);
-		    BTOP(ARCHIVE, pver, pkgtemp);
-		    CAVA(ARCHIVE, pver, pkgtemp);
-		    FAST(ARCHIVE, pver, pkgtemp);
-		    FUZZ(ARCHIVE, pver, pkgtemp);
-		    GTKL(ARCHIVE, pver, pkgtemp);
-		    HYPR(ARCHIVE, pver, pkgtemp);
-		    KITT(ARCHIVE, pver, pkgtemp);
-		    NVIM(ARCHIVE, pver, pkgtemp);
-		    MPVF(ARCHIVE, pver, pkgtemp);
-		    SWAY(ARCHIVE, pver, pkgtemp);
-		    WAYB(ARCHIVE, pver, pkgtemp);
-
-		    printf(BOLD_S"\nInstall completed!...\n"STYLE_END);
-
-	    	    wait_for_timeout(2, 0);
-		    // I will implement something in order to fix this ^^ mark my words
-		    // ^^ I did it :D
-		    scanf(" %d", &after_install);
-		    if (after_install == 0)
-		    {
-			return 0;
-		    } 
-		    // in other cases we just go back to the previous menu
-		}
-	    }
-	    while(fix_install_menu > 0);
+	    while (getchar() != '\n');  // clear imput buffer 
+	    scanf("%c", &backuptemp);
+	    full_update(backuptemp, *version);
     	}
     	else if (menu_one_i == 3)
-    	{
-	    int update_config_menu;
-	    do
-	    {
-	    	char updatecheck_opt_text[48] = "Template text";
-	    	char update_opt_text[48] = "Template text";
-
-    	    	clear();
-
-		float *version = update();
-		printf(ANSI_GREY"\nDetected Version: %.2f\n"STYLE_END, *version);
-
-    	    	printf(BOLD_S "%s\n\n"STYLE_END, opt_the_text );
-    	    	printf(BOLD_S " [1] " STYLE_END "%s\n", update_opt_text);
-    	    	printf(BOLD_S " [2] " STYLE_END "%s\n", updatecheck_opt_text);
-    	    	printf(BOLD_S " [0] " STYLE_END "%s\n", opt_exit_text);
-
-		while (getchar() != '\n');  // clear imput buffer 
-	    	scanf("%d", &update_config_menu);
-	    	if (update_config_menu == 1)
-	    	{
-		    printf("\nFix install script unavailable use the install script instead\n");
-	    	}
-	    	if (update_config_menu == 2)
-	    	{
-		    char cmd[1024];
-		    snprintf(cmd, sizeof(cmd),
-			    "gcc ~/dotfiles/c-scripts/setup.c "
-			    "~/dotfiles/c-scripts/update.c "
-			    "~/dotfiles/c-scripts/install.c "
-			    "~/dotfiles/c-scripts/functions.c "
-			    "-o setup -Wall");
-		    system(cmd);
-	    	}
-	    }
-	    while(update_config_menu > 0);
-    	}
-    	else if (menu_one_i == 4)
     	{
 	    int dotfiles_config_menu;
     	    do
@@ -384,7 +299,7 @@ int main()
     	    while(dotfiles_config_menu != 0.0);
     	    // exits the while loop when the user types 0
     	}
-    	else if (menu_one_i == 5)
+    	else if (menu_one_i == 6)
     	{
 	    int menu_activate_linux;
 	    do
@@ -820,7 +735,6 @@ void full_install(char ARCHIVE, char full_install_opt)
 	while (install_pkg_opt > 0);
     }
     printf(BOLD_S"\nInstallation completed!\n"STYLE_END);
-
 }
 
 float* update() 
