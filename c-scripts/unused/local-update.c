@@ -6,217 +6,115 @@
 
 int main() 
 {
-    FILE *f = fopen("hyprland.conf", "r");
-    if (!f) return 1; // exit with errcode 1 if it fails
-    char line[128]; // down from 512 bytes
-    char VAWSM[12] = {0}; // only loads the actual version
-
-    while (fgets(line, sizeof(line), f)) 
+    switch (VAWSM)
     {
-        char *p = line;
-
-        // skip whitespace
-        while (isspace((unsigned char)*p)) p++;
-
-        // only check comments
-        if (*p != '#')
-            continue;
-
-        p++; // skip '#'
-        while (isspace((unsigned char)*p)) p++;
-
-        if (strncmp(p, "AWSMVERSION:", 12) == 0) 
-        {
-            p += 12;
-            while (isspace((unsigned char)*p)) p++;
-
-            p[strcspn(p, "\r\n")] = 0; // strip newline
-            strncpy(VAWSM, p, sizeof(VAWSM) - 1);
-            break;
-        }
-    }
-
-    fclose(f);
-
-    if (VAWSM[0]) 
-    {
-        printf("VAWSM = %s\n", VAWSM);
-
-        // Only execute if version is exactly 1.0
-        if (strcmp(VAWSM, "1.0") == 0) 
-        {
-		char cmd[512];
-		snprintf(cmd, sizeof(cmd),
-				"mv ~/.config/hypr/hyprland.conf ~/.config/hypr/hyprland-v%s.conf", VAWSM);
-		system(cmd);
-			
-            // system("cd ~/.config/hypr && mv hyprland.conf hyprland-oldv0.conf && mv hyprpaper.conf hyprpaper-oldv0.conf && mv hypridle.conf hypridle-oldv0.conf");
-	snprintf(cmd, sizeof(cmd),
-		"yay -S --noconfirm btop gtklock cava fuzzel kitty fastfetch nvim waybar && "
+    case 100:
+	printf("\nUpdating from %d\n", VAWSM);
+	char cmd[512];
+	snprintf(cmd, 192,
+		"yay -S --noconfirm btop cava fuzzel kitty fastfetch nvim waybar && "
 		"cp -f dotfiles/kitty/kitty.conf ~/.config/kitty && "
-		"cp -f dotfiles/kitty/current-theme.conf ~/.config/current-theme.conf && "
-		"mv ~/.config/nvim/init.lua ~/.config/nvim/init-v%s.lua", VAWSM);
+		"cp -f dotfiles/kitty/current-theme.conf ~/.config/current-theme.conf ");
 	system(cmd);
-            // system("cd ~/.config/hypr && mv hyprland.conf");
-            
-            // backup old configs with the current version name 
-            // only the modifed files are backed up
 
-            // hyprland + waybar config
+	snprintf(cmd, 128,
+		"cp dotfiles/hypr/hypridle.conf ~/.config/hypr && "
+		"cp dotfiles/hypr/hyprpaper.conf ~/.config/hypr ");
+	system(cmd);
+
+	// do not break because we are also installing everything below
+    case 120:
+	snprintf(cmd, 256,
+		"cp -f dotfiles/fuzzel/fuzzel.ini ~/.config/fuzzel/ && "
+		"cp -f dotfiles/fuzzel/old-fuzzel.ini ~/.config/fuzzel/ && "
+		"cp dotfiles/waybar/style.css ~/.config/waybar && "
+		"cp dotfiles/waybar/config.jsonc ~/.config/waybar");
+	system(cmd);
+
+	// do not break because we are also installing everything below
+    case 130:
+	if (ARCHIVE == 'Y' || ARCHIVE == 'y')
+	{
+	    char cmd[512];
+	    snprintf(cmd, 64,
+		    "mv -f ~/.config/cava/config ~/.config/cava/config-oldv%.2f", pver);
+	    system(cmd);
+	}
+
+	// export cava + kitty + hyprland
 	snprintf(cmd, sizeof(cmd),
-		"cd dotfiles/hypr && "
-		"cp hyprland.conf ~/.config/hypr && "
-		"yay -S --noconfirm ttf-ubuntu-font-family ttf-ibmplex-mono-nerd ttf-blex-nerd-font-git ttf-victor-mono-nerd ttf-cascadia-mono-nerd && "
-		"cp hypridle.conf ~/.config/hypr && "
-		"mkdir ~/.config/cava && "
-		"cp -f ~/dotfiles/cava/config ~/.config/cava/ && "
-		"mv ~/.config/kitty/kitty.conf ~/.config/kitty/kitty-oldv0.conf && "
-		"mv ~/.config/mpv/mpv.conf ~/.config/mpv/mpv-oldv2-1.conf && "
+		"yay -S --noconfirm ttf-ubuntu-font-family ttf-ibmplex-mono-nerd ; "
+		"ttf-blex-nerd-font-git ttf-victor-mono-nerd ttf-cascadia-mono-nerd ;"
+		"cp -f dotfiles/kitty/current-theme.conf ~/.config/kitty/ ; "
+		"mkdir -p ~/.config/cava/ ; "
+		"rm ~/.config/cava/config ;  "
+		"cp -f dotfiles/cava/config ~/.config/cava/");
+	system(cmd);
+
+	// do not break because we are also installing everything below
+    case 140:
+
+	snprintf(cmd, 192,
+		"mv ~/.config/btop/btop.conf ~/.config/btop/btop-oldv%.2f && "
+		"mkdir -p ~/.config/btop/ ; "
+		"cp -f dotfiles/btop/btop.conf ~/.config/btop/ ", pver);
+	system(cmd);
+		
+	// do not break because we are also installing everything below
+    case 200:
+
+
+	snprintf(cmd, sizeof(cmd),
+		"mkdir ~/.config/gtklock && "
+		"yay -S --noconfirm nvim gtklock && "
+		"mv ~/.config/gtklock/style.css ~/.config/gtklock/style-v%.2f.css ; "	// gtklock exporting
+		"cp -f dotfiles/gtklock/style.css ~/.config/gtklock/style.css ; "
+		"mv ~/.config/nvim/init.lua ~/.config/nvim/init-v%.2f.lua ; "		// nvim exporting
+		"cp -f dotfiles/nvim/init.lua ~/.config/nvim/init.lua ", pver, pver);
+	system(cmd);
+
+	// do not break because we are also installing everything below
+    case 210:
+	
+	snprintf(cmd, 2048,
+		"mkdir -p ~/.config/sway && "
+		"mkdir ~/.config/nvim && "
+		"yay -S --noconfirm sway && "
+		"mv ~/.config/nvim/init.lua ~/.config/nvim/init-oldv%.2f.lua && "
+		"cp -f dotfiles/nvim/init.lua ~/.config/nvim && "
+		"mv ~/.config/gtklock/style.css ~/.config/gtklock/style-v%.2f.css && "
+		"cp -f dotfiles/gtklock/style.css ~/.config/gtklock/style.css && "
+		"mv ~/.config/kitty/kitty.conf ~/.config/kitty/kitty-oldv%.2f.conf && "
+		"cp -f dotfiles/kitty/kitty.conf ~/.config/kitty/ && "	// update kitty config
+		"mv ~/.config/hypr/hyprland.conf ~/.config/hypr/hyprland-v%.2f.conf && "
+		"cp -f dotfiles/hypr/hyprland.conf ~/.config/hypr/", pver, pver, pver, pver);
+	system(cmd);
+	// do not break because we are also installing everything below
+    case 220:
+	
+	snprintf(cmd, sizeof(cmd),
+		"mv ~/.config/sway/config ~/.config/sway/config-oldv%.2f && "
+		"cp dotfiles/sway/config ~/.config/sway/ && "	// update sway config
+		"cp dotfiles/sway/config-default ~/.config/sway/ && "
+		"mv ~/.config/hypr/hyprland.conf ~/.config/hypr/hyprland-v%.2f.conf && "
+		"cp -f dotfiles/hyprland/hyprland.conf ~/.config/hypr/ && "
 		"mkdir -p ~/.config/mpv/ && "
-		"cp -f ~/dotfiles/mpv/mpv.conf ~/.config/mpv/ && "
-		"cp -f ~/dotfiles/kitty/kitty.conf ~/.config/kitty && "
-		"cp hyprpaper.conf ~/.config/hypr && "
-		"cd .. && "
-		"cd .. && "
-		"cd dotfiles/waybar && "
-		"cp style.css ~/.config/waybar && "
-		"cp config.jsonc ~/.config/waybar && "
-		"cd .. && "
-		"cd .. ");
+		"mv ~/.config/mpv/mpv.conf ~/.config/mpv/mpv-oldv%.2f.conf && "
+		"cp dotfiles/mpv/mpv.conf ~/.config/mpv/ ", pver, pver, pver);
 	system(cmd);
-	// this whole thing is so stupid
 
-        // nvim config
-	snprintf(cmd, sizeof(cmd),
-		"cd dotfiles/nvim && "
-		"cp init.lua ~/.config/nvim && "
-		"cp -rf lua ~/.config/nvim && "
-		"cp lazy-lock.json ~/.config/nvim"
-		"cd .. && "
-		"cd .. ");
-	system(cmd);
-            //system("cd ~/dotfiles/nvim && cp init.lua ~/.config/nvim && cp -rf lua ~/.config/nvim && cp lazy-lock.json ~/.config/nvim");
+    goto end;
 
-            // waybar config
-            // system("cd ~/dotfiles/waybar && cp style.css ~/.config/waybar && cp config.jsonc ~/.config/waybar");
+    case 230:
+	printf("\nYou are running the latest version.\n");
+    goto end;
 
-            // fastfetch config
-            system("cd ~/dotfiles/fastfetch && cp config.jsonc ~/.config/fastfetch");
-        } 
-        else if (strcmp(VAWSM, "1.2") == 0) 
-        {	
-		char cmd[1024];
-		snprintf(cmd, sizeof(cmd),
-			"sudo pacman --noconfirm btop cava fuzzel kitty hyprland && "
-		    	"yay -S --noconfirm ttf-ubuntu-font-family ttf-ibmplex-mono-nerd ttf-blex-nerd-font-git ttf-victor-mono-nerd ttf-cascadia-mono-nerd && "
-		    	"rm ~/.config/cava && "
-		    	"mkdir ~/.config/cava && "
-		    	"cp -f ~/dotfiles/cava/config ~/.config/cava/ && "
-		    	"mv ~/.config/kitty/kitty.conf ~/.config/kitty/kitty-oldv0.conf && "
-		    	"mv ~/.config/hypr/hyprland.conf ~/.config/hypr/hyprland-oldv1.4.conf && "
-		    	"cp -f ~/dotfiles/hypr/hyprland.conf ~/.config/hypr/ && "
-		    	"cp -f ~/dotfiles/fuzzel/fuzzel.ini ~/.config/fuzzel && "
-			"cp -f dotfiles/kitty/kitty.conf ~/.config/kitty && "
-			"cp -f dotfiles/kitty/current-theme.conf ~/.config/current-theme.conf");
-		system(cmd);
-		system("yay -S --noconfirm btop gtklock cava fuzzel kitty && ");
-    	// import fuzzel config	
-	    system("cd ~/dotfiles/ && cp -r fuzzel");
-        }
-        else if (strcmp(VAWSM, "1.3") == 0)
-        {
-	    char cmd[1024];
-	    snprintf(cmd, sizeof(cmd),
-		    "sudo pacman --noconfirm btop cava fuzzel kitty hyprland && "
-	    	    "yay -S --noconfirm ttf-ubuntu-font-family ttf-ibmplex-mono-nerd ttf-blex-nerd-font-git ttf-victor-mono-nerd ttf-cascadia-mono-nerd && "
-	    	    "rm ~/.config/cava && "
-	    	    "mkdir ~/.config/cava && "
-	    	    "cp -f dotfiles/cava/config ~/.config/cava/ && "
-	    	    "yay -S --noconfirm ttf-ubuntu-font-family && "
-	    	    "mv ~/.config/kitty/kitty.conf ~/.config/kitty/kitty-oldv0.conf && "
-	    	    "cp -f dotfiles/kitty/kitty.conf ~/.config/kitty && "
-	    	    "cp -f dotfiles/kitty/current-theme.conf ~/.config/current-theme.conf");
-	    system(cmd);
-        }
-	else if (strcmp(VAWSM, "1.4") == 0)
-	{
-		char cmd[1024];
-		snprintf(cmd, sizeof(cmd),
-			"sudo pacman --noconfirm btop kitty && "
-		    	"yay -S --noconfirm btop gtklock && "
-		    	"yay -S --noconfirm ttf-ubuntu-font-family ttf-ibmplex-mono-nerd ttf-blex-nerd-font-git ttf-victor-mono-nerd ttf-cascadia-mono-nerd && "
-		    	"rm ~/.config/cava && "
-		    	"mkdir ~/.config/cava && "
-		    	"cp -f ~/dotfiles/cava/config ~/.config/cava/ && "
-		    	"mv ~/.config/kitty/kitty.conf ~/.config/kitty/kitty-oldv0.conf && "
-			"mv ~/.config/mpv/mpv.conf ~/.config/mpv/mpv-oldv2-1.conf && "
-		    	"mkdir -p ~/.config/mpv/ && "
-		    	"cp -f ~/dotfiles/mpv/mpv.conf ~/.config/mpv/ && "
-		    	"cp -f ~/dotfiles/kitty/kitty.conf ~/.config/kitty && "
-		    	"cp -f ~/dotfiles/kitty/current-theme.conf ~/.config/current-theme.conf");
-		system(cmd);
-
-		printf("\n Update completed.");
-		printf("\n Would you like to install the Neovim plugins? (Y/n)\n");
-		char ENVIM;
-		scanf(" %c", &ENVIM);
-			if (ENVIM == 'Y' || ENVIM == 'y')
-			{
-			    system("nvim");
-			}
-			    else
-			{
-			    return 0;
-			}
-	}
-	else if (strcmp(VAWSM, "2.0") == 0)
-	{
-	    char cmd[1024];
-	    snprintf(cmd, sizeof(cmd),
-		    "sudo pacman --noconfirm btop hyprland sway mpv && "
-	            "yay -S --noconfirm btop gtklock && "
-	            "yay -S --noconfirm ttf-ubuntu-font-family ttf-ibmplex-mono-nerd ttf-blex-nerd-font-git ttf-victor-mono-nerd ttf-cascadia-mono-nerd && "
-	            "rm ~/.config/cava && "
-	            "mkdir ~/.config/cava && "
-	            "cp -f ~/dotfiles/cava/config ~/.config/cava/ && "
-	            "mv ~/.config/kitty/kitty.conf ~/.config/kitty/kitty-oldv0.conf && "
-	            "cp -f ~/dotfiles/kitty/kitty.conf ~/.config/kitty && "
-		    "mv ~/.config/mpv/mpv.conf ~/.config/mpv/mpv-oldv2-1.conf && "
-		    "mkdir -p ~/.config/mpv/ && "
-		    "cp -f ~/dotfiles/mpv/mpv.conf ~/.config/mpv/ && "
-	            "cp -f ~/dotfiles/kitty/current-theme.conf ~/.config/current-theme.conf");
-	    system(cmd);
-
-	    printf("\n Update completed.");
-	}
-	else if (strcmp(VAWSM, "2.1") == 0)
-	{
-	    char cmd[1024];
-	    snprintf(cmd, sizeof(cmd),
-		    "sudo pacman --noconfirm sway mpv && "
-	            "mv ~/.config/kitty/kitty.conf ~/.config/kitty/kitty-oldv0.conf && "
-	            "cp -f ~/dotfiles/kitty/kitty.conf ~/.config/kitty && "
-		    "mv ~/.config/mpv/mpv.conf ~/.config/mpv/mpv-oldv2-1.conf && "
-		    "mkdir -p ~/.config/mpv/ && "
-		    "cp -f ~/dotfiles/mpv/mpv.conf ~/.config/mpv/ && "
-	            "cp -f ~/dotfiles/kitty/current-theme.conf ~/.config/current-theme.conf");
-	    system(cmd);
-
-	}
-	else if (strcmp(VAWSM, "2.2") == 0) 
-	{
-		printf("\n Your dotfiles are up to date\n");
-	}
-	else 
-        {
-            printf("\nUnsupported VAWSM version. No files were copied.\n");
-	    printf("This message can also appear if you have a newer version than 2.2\n");
-        }
-    } 
-    else 
-    {
-            printf("You need to install the dotfiles before updating them.\n");
+    default:
+	printf("\nUnknown version\n");
+	return 1;
+    end:
+	printf(BOLD_S"Update completed!\n"STYLE_END);
+	wait_for_timeout(2, 0);
     }
-printf("\n If you encountered any issues, you can execute the install.c script and use the fixing option.\n");
     return 0;
 }
