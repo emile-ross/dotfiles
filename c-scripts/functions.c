@@ -1,7 +1,4 @@
-#include <stdio.h>
 #include "dotfileshead.h"
-#include <stdlib.h>
-#include <time.h>
 
 const int max_menu_opt_n = 12;
 
@@ -26,6 +23,7 @@ char* TEXT_C_WAYB = "waybar config and style (appearance)";
 int timer_quarters;
 int timer_seconds;
 
+char* theme_colour_text;
 long int time_timer_quarters;
 long int time_timer_seconds;
 
@@ -34,6 +32,8 @@ char PKGINSTALL;
 int menu_one_i;
 char full_install_opt; // if the user wants to install everything set to Y
 char full_update_opt; 
+int fuzzel_config_menu_choice;
+
 
 struct timespec install_timer;
 int fastfetch_conf_export;
@@ -97,11 +97,18 @@ int error_message(int err_code)
 
 void wait_for_timeout(int timer_quarters, int timer_seconds)
 {
-    time_timer_quarters = timer_quarters * 250000000;
-    time_timer_seconds = timer_seconds * 1;
+    if (timer_quarters < 4)
+    {
+	time_timer_quarters = timer_quarters * 250000000;
+	time_timer_seconds = timer_seconds;
+    }
+    else
+    {
+	time_timer_quarters = 0;
+	time_timer_seconds = timer_seconds + 1;
+    }
 
     install_timer.tv_nsec = time_timer_quarters;
     install_timer.tv_sec = time_timer_seconds;
     nanosleep(&install_timer, NULL);
 }
-
