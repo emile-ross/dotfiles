@@ -5,9 +5,9 @@ int full_update(char ARCHIVE, float pver)
     int VAWSM = (int)(pver * 100);
     switch (VAWSM)
     {
+    char cmd[512];
     case 100:
 	printf("\nUpdating from %d\n", VAWSM);
-	char cmd[512];
 	snprintf(cmd, 192,
 		"yay -S --noconfirm btop cava fuzzel kitty fastfetch nvim waybar ; "
 		"cp -f dotfiles/kitty/kitty.conf ~/.config/kitty ; "
@@ -29,7 +29,6 @@ int full_update(char ARCHIVE, float pver)
     case 130:
 	if (ARCHIVE == 'Y' || ARCHIVE == 'y')
 	{
-	    char cmd[512];
 	    snprintf(cmd, 64,
 		    "mv -f ~/.config/cava/config ~/.config/cava/config-oldv%.2f", pver);
 	    system(cmd);
@@ -67,7 +66,7 @@ int full_update(char ARCHIVE, float pver)
     case 210:
 	snprintf(cmd, 2048,
 		"mkdir -p ~/.config/sway ; "
-		"mkdir ~/.config/nvim ; "
+		"mkdir -p ~/.config/nvim ; "
 		"yay -S --noconfirm sway ; "
 		"mv ~/.config/nvim/init.lua ~/.config/nvim/init-oldv%.2f.lua ; "
 		"cp -f dotfiles/nvim/init.lua ~/.config/nvim ; "
@@ -75,11 +74,10 @@ int full_update(char ARCHIVE, float pver)
 		"cp -f dotfiles/gtklock/style.css ~/.config/gtklock/style.css ; "
 		"mv ~/.config/kitty/kitty.conf ~/.config/kitty/kitty-oldv%.2f.conf ; "
 		"cp -f dotfiles/kitty/kitty.conf ~/.config/kitty/ ; "	// update kitty config
-		, pver, pver, pver, pver);
+		, pver, pver, pver);
 	system(cmd);
 	// do not break because we are also installing everything below
     case 220:
-	
 	snprintf(cmd, sizeof(cmd),
 		"mv ~/.config/sway/config ~/.config/sway/config-oldv%.2f ; "
 		"cp dotfiles/sway/config ~/.config/sway/ ; "	// update sway config
@@ -90,18 +88,29 @@ int full_update(char ARCHIVE, float pver)
 		"cp -f dotfiles/hypr/hyprland.conf ~/.config/hypr/ ; "
 		"cp dotfiles/mpv/mpv.conf ~/.config/mpv/ ", pver, pver, pver);
 	system(cmd);
-
     goto end;
-
     case 230:
+	snprintf(cmd, sizeof(cmd),
+		"mv ~/.config/hypr/hyprland.conf ~/.config/hypr/hyprland-v%.2f.conf ; "
+		"cp -f dotfiles/hypr/hyprland.conf ~/.config/hypr/ ; "
+		"cp -f dotfiles/fuzzel/default-fuzzel.ini ~/.config/fuzzel/ ; "
+		"cp -f dotfiles/fuzzel/fuzzel.ini ~/.config/fuzzel/ ; "
+		"cp -f dotfiles/fuzzel/old-fuzzel.ini ~/.config/fuzzel/ ; "
+		"mv ~/.config/fastfetch/config.jsonc ~/.config/fastfetch/config-v%.2f.jsonc ; "
+		"cp -f dotfiles/fastfetch/config.jsonc ~/.config/fastfetch/ ", pver, pver);
+	system(cmd);
+	goto end;
+    case 240:
 	printf("\nYou are running the latest version.\n");
-    goto end;
+	goto exit;
 
     default:
 	printf("\nUnknown version\n");
 	return 1;
     end:
 	printf("Update completed!\n");
+	goto exit;
+    exit:
     }
     return 0;
 }
