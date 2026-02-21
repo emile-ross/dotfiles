@@ -6,8 +6,8 @@
     /* adds the arch linux logo to fastfetch */
     "source": "~/.config/fastfetch/assets/archlinux.png",
     /*the directory above can be changed to anything you want*/
-    "width": 34,
-    "height": 20
+    "width": 32,
+    "height": 15
  /* make sure the width and the height is well ajusted in order for your icon to have the same aspect ratio */
   },
 
@@ -19,7 +19,7 @@
     "uptime",
     "packages",
     "display",
-    "de",
+    //"de",
     "wm",
     "cpu",
     "gpu",
@@ -28,7 +28,7 @@
     "disk",
     "localip",
     "battery",
-    "poweradapter",
+    //"poweradapter",
     "break",
     //"colors"
   ]
