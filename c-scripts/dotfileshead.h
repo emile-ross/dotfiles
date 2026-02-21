@@ -81,6 +81,7 @@ extern int menu_one_i;
 extern int timer_quarters; // max is 4
 extern int timer_seconds;
 extern int fuzzel_config_menu_choice;
+extern char* theme_colour_text;
 
 float* update();
 
