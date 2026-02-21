@@ -232,7 +232,7 @@ void install_configs()  // the partial install script (configure which package o
 
     	    installmessage:
 		    printf(FASTBLINK_S ANSI_GREEN"Installed %s\n"STYLE_END, temp_conf_installed);
-
+		    wait_for_timeout(0, 1);
     	    end:
     	}
     }
