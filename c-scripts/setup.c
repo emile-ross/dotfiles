@@ -21,7 +21,6 @@ int main()
     	printf(BOLD_S " [0] " STYLE_END "%s\n", opt_exit_text);
 
     	scanf(" %d", &menu_one_i);
-    
     	if (menu_one_i == 1)
     	{
 	    char full_install_opt;
@@ -33,7 +32,7 @@ int main()
 	    printf(ANSI_RED BOLD_S"\nWARNING\n"STYLE_END BOLD_S"This will install every config.\n"STYLE_END);
 	    printf(ITALICS_S"\nIn order to pick the configs you want, you need to use the custom configuration option\n"STYLE_END);
 	    
-    	    printf("\nProceed with installation (Y/n)\n");	// prompt user for imput
+    	    printf(BOLD_S"\nProceed with installation (Y/n)\n"STYLE_END);	// prompt user for imput
     	    scanf(" %c", &full_install_opt);
     	    if (full_install_opt == 'Y' || full_install_opt == 'y')
 	    {
@@ -63,15 +62,14 @@ int main()
     	        char kitty_config_menu_text[32] = "Customize kitty";
     	        char fuzzel_config_menu_text[32] = "Customize fuzzel";
     	        
-    	        printf(BOLD_S ANSI_WHITE "%s\n"STYLE_END, opt_for_text );
-    	        printf(BOLD_S "\n [1] " STYLE_END UDRL_S"%s"STYLE_END"\n", fastfetch_config_menu_text);
+    	        printf(BOLD_S ANSI_WHITE "%s\n\n"STYLE_END, opt_for_text );
+    	        printf(BOLD_S " [1] " STYLE_END UDRL_S"%s"STYLE_END"\n", fastfetch_config_menu_text);
     	        printf(BOLD_S " [2] " STYLE_END UDRL_S"%s"STYLE_END"\n", kitty_config_menu_text);
     	        printf(BOLD_S " [3] " STYLE_END UDRL_S"%s"STYLE_END"\n", fuzzel_config_menu_text);
     	        printf(BOLD_S " [0] " STYLE_END "%s\n", opt_exit_text);
 
 	        while (getchar() != '\n');  // clear imput buffer 
     	        scanf(" %d", &dotfiles_config_menu);
-
 	        if (dotfiles_config_menu == 1)
 	        {
 		    int fastfetch_config_choice;
@@ -80,7 +78,6 @@ int main()
 		        clear();
     	                char fastfetch_edit_config_text[48] = "Change the config fastfetch uses by default";
     	                char fastfetch_preview_text[32] = "Preview fastfetch output";
-
 		        char cmd[128];
     	                
     	                printf(BOLD_S ANSI_WHITE "%s\n\n"STYLE_END, fastfetch_config_menu_text );
@@ -92,8 +89,8 @@ int main()
     	                scanf("\n%d", &fastfetch_config_choice);
     	                if (fastfetch_config_choice == 1)
     	                {
-    	                    snprintf(cmd, 128,
-				"fastfetch");
+    	                    snprintf(cmd, 16,
+				    "fastfetch");
     	                    system(cmd);
 			    wait_for_timeout(0, 2);
     	                }
@@ -117,7 +114,7 @@ int main()
     	    	            	if (link_fastfetch_configs_opt == 1)
     	    	            	{
     	    	            	    snprintf(cmd, sizeof(cmd),
-    	    	            	    	"ln -fs ~/.config/fastfetch/config-default.jsonc ~/.config/fastfetch/config.jsonc");
+					    "ln -fs ~/.config/fastfetch/config-default.jsonc ~/.config/fastfetch/config.jsonc");
     	    	            	    system(cmd);
     	    	            	    printf("\nThe fastfetch config was applied successfully\n");
 	    	            	    wait_for_timeout(1, 0);
@@ -125,7 +122,7 @@ int main()
     	    	            	else if (link_fastfetch_configs_opt == 2)
     	    	            	{
     	    	            	    snprintf(cmd, sizeof(cmd),
-    	    	            	    	"ln -fs ~/.config/fastfetch/config-other.jsonc ~/.config/fastfetch/config.jsonc");
+					    "ln -fs ~/.config/fastfetch/config-other.jsonc ~/.config/fastfetch/config.jsonc");
     	    	            	    system(cmd);
     	    	            	    printf("\nThe fastfetch config was applied successfully\n");
 	    	            	    wait_for_timeout(1, 0);
@@ -133,7 +130,7 @@ int main()
     	    	            	else if (link_fastfetch_configs_opt == 3)
     	    	            	{
     	    	            	    snprintf(cmd, sizeof(cmd),
-    	    	            	    	"ln -fs ~/.config/fastfetch/config-duplicated.jsonc ~/.config/fastfetch/config.jsonc");
+					    "ln -fs ~/.config/fastfetch/config-duplicated.jsonc ~/.config/fastfetch/config.jsonc");
     	    	            	    system(cmd);
 
     	    	            	    printf("\nThe fastfetch config was applied successfully\n");
@@ -169,13 +166,13 @@ int main()
     	                if (kitty_config_choice == 1)
     	                {
 			    snprintf(cmd, 24,
-				"kitten themes");
+				    "kitten themes");
     	                    system(cmd);
     	                }
     	                if (kitty_config_choice == 2)
     	                {
 			    snprintf(cmd, 24,
-				"kitty +list-fonts");
+				    "kitty +list-fonts");
     	                    system(cmd);
     
     	                    printf("\nThe install script can be used to install more fonts.");
@@ -186,7 +183,6 @@ int main()
     	        }
 		else if (dotfiles_config_menu == 3)
 		{
-		    int fuzzel_config_menu_choice;
 		    do
 		    {
 		        clear();
@@ -195,7 +191,6 @@ int main()
     	            	printf(BOLD_S " [1] " STYLE_END "%s\n", fuzzel_view_config_text);
     	            	printf(BOLD_S " [2] " STYLE_END "%s\n",	fuzzel_edit_config_text);
     	            	printf(BOLD_S " [3] " STYLE_END "%s\n",	fuzzel_catppuccin_text);
-
     	            	printf(BOLD_S " [0] " STYLE_END "%s\n", opt_exit_text);
 
 			while (getchar() != '\n');  // clear imput buffer 
@@ -242,14 +237,14 @@ int main()
 				if (fuzzel_edit_menu_choice == 1)
 				{
 				    snprintf(cmd, sizeof(cmd),
-					    "mv ~/.config/fuzzel/fuzzel.ini ~/.config/fuzzel/fuzzel-backup.ini && "
+					    "mv ~/.config/fuzzel/fuzzel.ini ~/.config/fuzzel/fuzzel-backup.ini ; "
 					    "ln -sf ~/.config/fuzzel/fuzzel-duplicated.ini ~/.config/fuzzel/fuzzel.ini");
 				    system(cmd);
 				}
 				else if (fuzzel_edit_menu_choice == 2)
 				{
 				    snprintf(cmd, 192,
-					    "mv ~/.config/fuzzel/fuzzel.ini ~/.config/fuzzel/fuzzel-backup.ini && "
+					    "mv ~/.config/fuzzel/fuzzel.ini ~/.config/fuzzel/fuzzel-backup.ini ; "
 					    "ln -sf ~/.config/fuzzel/old-fuzzel.ini ~/.config/fuzzel/fuzzel.ini");
 				    system(cmd);
 				}
@@ -257,21 +252,21 @@ int main()
 				{
 				    float pver = 0.0f;
 				    snprintf(cmd, sizeof(cmd),
-					    "mv ~/.config/fuzzel/fuzzel.ini ~/.config/fuzzel/fuzzel-backup.ini && "
+					    "mv ~/.config/fuzzel/fuzzel.ini ~/.config/fuzzel/fuzzel-backup.ini ; "
 					    "ln -sf ~/.config/fuzzel/fuzzel-oldv%.1f.ini ~/.config/fuzzel/fuzzel.ini", pver);
 				    system(cmd);
 				}
 				else if (fuzzel_edit_menu_choice == 4)
 				{
 				    snprintf(cmd, 192,
-					    "mv ~/.config/fuzzel/fuzzel.ini ~/.config/fuzzel/fuzzel-backup.ini && "
+					    "mv ~/.config/fuzzel/fuzzel.ini ~/.config/fuzzel/fuzzel-backup.ini ; "
 					    "ln -sf ~/.config/fuzzel/default-fuzzel.ini ~/.config/fuzzel/fuzzel.ini");
 				    system(cmd);
 				}
 				else if (fuzzel_edit_menu_choice == 5)
 				{
 				    snprintf(cmd, 192,
-					    "mv ~/.config/fuzzel/fuzzel.ini ~/.config/fuzzel/fuzzel-backup.ini && "
+					    "mv ~/.config/fuzzel/fuzzel.ini ~/.config/fuzzel/fuzzel-backup.ini ; "
 					    "ln -sf ~/.config/fuzzel/custom-edited-fuzzel.ini ~/.config/fuzzel/fuzzel.ini");
 				    system(cmd);
 				}
@@ -318,7 +313,7 @@ int main()
 		{
 		    char cmd[48];
 	    	    snprintf(cmd, sizeof(cmd),
-	    	            "yay -S activate-linux-git && "
+	    	            "yay -S activate-linux-git ; "
 	    	            "activate-linux-git");
 	    	    system(cmd);
 
@@ -374,8 +369,8 @@ void BTOP(char ARCHIVE, float pver, char PKGINSTALL)
     }
     // export btop config
     snprintf(cmd, sizeof(cmd),
-    	"mkdir -p ~/.config/btop ; "
-    	"cp -f dotfiles/btop/btop.conf ~/.config/btop");
+	   "mkdir -p ~/.config/btop ; "
+	   "cp -f dotfiles/btop/btop.conf ~/.config/btop");
     system(cmd);
 }
 
@@ -432,7 +427,7 @@ void FUZZ(char ARCHIVE, float pver, char PKGINSTALL)
     }
     // export fuzzel appearance
     snprintf(cmd, sizeof(cmd),
-            "mkdir ~/.config/fuzzel && "
+            "mkdir ~/.config/fuzzel ; "
             "cp -f dotfiles/fuzzel/old-fuzzel.ini ~/.config/fuzzel ; "
             "cp -f dotfiles/fuzzel/default-fuzzel.ini ~/.config/fuzzel ; "
 	    "cp -f ~/.config/fuzzel/default-fuzzel.ini ~/.config/fuzzel/custom-edited-fuzzel.ini ; "
@@ -475,7 +470,7 @@ void HYPR(char ARCHIVE, float pver, char PKGINSTALL)
     }
     // export hyprland configs
     snprintf(cmd, sizeof(cmd),
-	    "mkdir -p ~/.config/hypr && "
+	    "mkdir -p ~/.config/hypr ; "
 	    "cp -f dotfiles/hypr/hyprland.conf ~/.config/hypr ; "
     	    "cp -f dotfiles/hypr/hypridle.conf ~/.config/hypr ; "
     	    "cp -f dotfiles/hypr/hyprpaper.conf ~/.config/hypr");
@@ -502,7 +497,7 @@ void KITT(char ARCHIVE, float pver, char PKGINSTALL)
     }
     // export kitty config
     snprintf(cmd, sizeof(cmd),
-	    "mkdir ~/.config/kitty && "
+	    "mkdir ~/.config/kitty ; "
 	    "cp -f dotfiles/kitty/current-theme.conf ~/.config/kitty ; "
 	    "cp -f dotfiles/kitty/kitty.conf ~/.config/kitty");
     system(cmd);
@@ -684,9 +679,9 @@ void full_install(char ARCHIVE, char full_install_opt)
 	        // install yay \/
     	        char cmd[256];
     	        snprintf(cmd, sizeof(cmd),
-			"git clone https://aur.archlinux.org/yay.git &&"	// download yay from aur
-    	                "cd yay &&"						//
-			"makepkg -si &&"					// build package from source
+			"git clone https://aur.archlinux.org/yay.git ; "	// download yay from aur
+    	                "cd yay ; "						//
+			"makepkg -si ; "					// build package from source
     	                "cd ..");						//
     	        system(cmd);
 
@@ -794,8 +789,8 @@ void fuzzel_config_importing()
     else 
     {
     	snprintf(cmd, sizeof(cmd),
-    	        "mkdir -p ~/.config/fuzzel/imported/ && " 
-    	        "cd ~/.config/fuzzel/imported/ && "
+    	        "mkdir -p ~/.config/fuzzel/imported/ ; " 
+    	        "cd ~/.config/fuzzel/imported/ ; "
     	        "git clone https://github.com/catppuccin/fuzzel.git");
     	system(cmd);
     }
@@ -864,7 +859,6 @@ void fuzzel_config_importing()
     while (getchar() != '\n'); // clear imput buffer
     scanf(" %d", &theme_colour_user_opt);
     
-    char* theme_colour_text;
     
     if (theme_colour_user_opt == 1)
     {
