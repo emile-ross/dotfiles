@@ -51,6 +51,13 @@ void CAVA(char ARCHIVE, float pver, char PKGINSTALL)
 		"~/.config/cava/config-oldv%.1f", pver);
         system(cmd);
     }
+    if ( PKGINSTALL == 'Y'|| PKGINSTALL == 'y')
+    {
+	// install fuzzel package
+        snprintf(cmd, 32,
+		"yay -S --noconfirm cava");
+	system(cmd);
+    }
     // export cava config
     snprintf(cmd, sizeof(cmd),
 	    "mkdir -p ~/.config/cava ; "
@@ -68,6 +75,13 @@ void FAST(char ARCHIVE, float pver, char PKGINSTALL)
 		"mv ~/.config/fastfetch/config.jsonc "
 		"~/.config/fastfetch/config-oldv%.2f.jsonc", pver);
     	system(cmd);
+    }
+    if ( PKGINSTALL == 'Y'|| PKGINSTALL == 'y')
+    {
+	// install fuzzel package
+        snprintf(cmd, 32,
+		"yay -S --noconfirm fastfetch");
+	system(cmd);
     }
     // export fastfetch config
     snprintf(cmd, sizeof(cmd),
@@ -155,7 +169,7 @@ void HYPR(char ARCHIVE, float pver, char PKGINSTALL)
     if ( PKGINSTALL == 'Y'|| PKGINSTALL == 'y')
     {
 	// install Hyprland package
-        snprintf(cmd, 32,
+        snprintf(cmd, 48,
 		"yay -S --noconfirm hypridle hyprpaper hyprland");
 	system(cmd);
     }
@@ -226,9 +240,9 @@ void NVIM(char ARCHIVE, float pver, char PKGINSTALL)
     if (ARCHIVE == 'Y' || ARCHIVE == 'y')
     {
         snprintf(cmd, sizeof(cmd),
-    	    	"mv ~/.config/nvim/init.lua ~/.config/nvim/init-oldv%.1f.lua ; "
-    	    	"mv ~/.config/nvim/lua/config/lazy.lua ~/.config/nvim/lua/config/lazy-oldv%.1f.lua ; "
-    	    	"mv ~/.config/nvim/lazy-lock.json ~/.config/nvim/lazy-lock-oldv%.1f.json",
+    	    	"mv ~/.config/nvim/init.lua ~/.config/nvim/init-oldv%.2f.lua ; "
+    	    	"mv ~/.config/nvim/lua/config/lazy.lua ~/.config/nvim/lua/config/lazy-oldv%.2f.lua ; "
+    	    	"mv ~/.config/nvim/lazy-lock.json ~/.config/nvim/lazy-lock-oldv%.2f.json",
     	    	pver, pver, pver);
         system(cmd);
     }
@@ -255,14 +269,14 @@ void SWAY(char ARCHIVE, float pver, char PKGINSTALL)
     if (ARCHIVE == 'Y' || ARCHIVE == 'y')
     {
         snprintf(cmd, sizeof(cmd),
-    	    	"mv ~/.config/sway/config ~/.config/sway/config-oldv%.1f ",
+    	    	"mv ~/.config/sway/config ~/.config/sway/config-oldv%.2f ",
 		pver);
         system(cmd);
     }
     if ( PKGINSTALL == 'Y'|| PKGINSTALL == 'y')
     {
 	// install sway package
-        snprintf(cmd, 32,
+        snprintf(cmd, 48,
 		"yay -S --noconfirm wlroots swaylock sway");
 	system(cmd);
 	// a system update is strongly recommended 
@@ -297,7 +311,29 @@ void WAYB(char ARCHIVE, float pver, char PKGINSTALL)
     snprintf(cmd, sizeof(cmd),
 	    //"yay -S --noconfirm waybar && "
 	    "mkdir -p ~/.config/waybar ; "
-	    "cp -f dotfiles/waybar/style.css ~/.config/waybar ; "
-            "cp -f dotfiles/waybar/config.jsonc ~/.config/waybar");
+	    "cp -f ~/dotfiles/waybar/style.css ~/.config/waybar ; "
+            "cp -f ~/dotfiles/waybar/config.jsonc ~/.config/waybar");
+    system(cmd);
+}
+
+void ZSHH(char ARCHIVE, float pver, char PKGINSTALL)
+{
+    char cmd[128];
+    if (ARCHIVE == 'Y' || ARCHIVE == 'y')
+    {
+    	// archive old zsh config
+        snprintf(cmd, sizeof(cmd),
+		"mv ~/.zshrc ~/.zshrc-old-v%.2f", pver);
+	system(cmd);
+    }
+    if ( PKGINSTALL == 'Y'|| PKGINSTALL == 'y')
+    {
+        snprintf(cmd, 32,
+		"yay -S --noconfirm zsh");
+	system(cmd);
+    }
+    // export waybar config and appearance
+    snprintf(cmd, 48,
+	    "cp -f ~/dotfiles/shell/zsh/.zshrc ~/ ; ");
     system(cmd);
 }
