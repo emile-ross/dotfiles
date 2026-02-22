@@ -26,6 +26,13 @@ void BTOP(char ARCHIVE, float pver, char PKGINSTALL)
     		"~/.config/btop/btop-oldv%.2f.conf", pver);
     	system(cmd);
     }
+    if ( PKGINSTALL == 'Y'|| PKGINSTALL == 'y')
+    {
+	// install btop package
+        snprintf(cmd, 32,
+		"yay -S --noconfirm btop");
+	system(cmd);
+    }
     // export btop config
     snprintf(cmd, sizeof(cmd),
 	   "mkdir -p ~/.config/btop ; "
@@ -88,6 +95,13 @@ void FUZZ(char ARCHIVE, float pver, char PKGINSTALL)
     		"~/.config/fuzzel/fuzzel-oldv%.1f.ini", pver, pver, pver);
     	system(cmd);
     }
+    if ( PKGINSTALL == 'Y'|| PKGINSTALL == 'y')
+    {
+	// install fuzzel package
+        snprintf(cmd, 32,
+		"yay -S --noconfirm fuzzel");
+	system(cmd);
+    }
     // export fuzzel appearance
     snprintf(cmd, sizeof(cmd),
             "mkdir -p ~/.config/fuzzel ; "
@@ -110,6 +124,13 @@ void GTKL(char ARCHIVE, float pver, char PKGINSTALL)
     		"~/.config/gtklock/style-oldv%.1f.css", 
     		pver);
     	system(cmd);
+    }
+    if ( PKGINSTALL == 'Y'|| PKGINSTALL == 'y')
+    {
+	// install gtklock package
+        snprintf(cmd, 32,
+		"yay -S --noconfirm gtklock");
+	system(cmd);
     }
     // export gtklock config
     snprintf(cmd, sizeof(cmd),
@@ -135,7 +156,7 @@ void HYPR(char ARCHIVE, float pver, char PKGINSTALL)
     {
 	// install Hyprland package
         snprintf(cmd, 32,
-		"yay -S --noconfirm hyprland");
+		"yay -S --noconfirm hypridle hyprpaper hyprland");
 	system(cmd);
     }
     // export hyprland configs
@@ -242,7 +263,7 @@ void SWAY(char ARCHIVE, float pver, char PKGINSTALL)
     {
 	// install sway package
         snprintf(cmd, 32,
-		"yay -S --noconfirm wlroots sway");
+		"yay -S --noconfirm wlroots swaylock sway");
 	system(cmd);
 	// a system update is strongly recommended 
     }
