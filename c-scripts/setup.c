@@ -294,7 +294,7 @@ int main()
     	    while(dotfiles_config_menu != 0.0);
     	    // exits the while loop when the user types 0
     	}
-    	else if (menu_one_i == 6)
+    	else if (menu_one_i == 4)
     	{
 	    int menu_activate_linux;
 	    do
@@ -435,6 +435,7 @@ void full_install(char ARCHIVE, char full_install_opt)
 	MPVF(ARCHIVE, pver, PKGINSTALL);
 	NVIM(ARCHIVE, pver, PKGINSTALL);
 	WAYB(ARCHIVE, pver, PKGINSTALL);
+	ZSHH(ARCHIVE, pver, PKGINSTALL);
     }
     else
     {
@@ -453,6 +454,7 @@ void full_install(char ARCHIVE, char full_install_opt)
 	    printf("\n[10] Install %s ", TEXT_C_MPVF);
 	    printf("\n[11] Install %s ", TEXT_C_NVIM);
 	    printf("\n[12] Install %s ", TEXT_C_WAYB);
+	    printf("\n[13] Install %s ", TEXT_C_ZSHH);
 	    
 	    while (getchar() != '\n');  // clear imput buffer 
 	    scanf(" %d", &install_pkg_opt);
@@ -588,7 +590,6 @@ void fuzzel_config_importing()
     
     while (getchar() != '\n'); // clear imput buffer
     scanf(" %d", &theme_colour_user_opt);
-    
     
     if (theme_colour_user_opt == 1)
     {
