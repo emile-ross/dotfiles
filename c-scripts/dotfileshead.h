@@ -42,6 +42,7 @@ void KITT(char ARCHIVE, float pver, char PKGINSTALL);
 void MPVF(char ARCHIVE, float pver, char PKGINSTALL);
 void NVIM(char ARCHIVE, float pver, char PKGINSTALL);
 void WAYB(char ARCHIVE, float pver, char PKGINSTALL);
+void ZSHH(char ARCHIVE, float pver, char PKGINSTALL);
 
 void full_install(char ARCHIVE, char full_install_opt);
 int full_update(char ARCHIVE, float pver);
@@ -64,6 +65,7 @@ extern char* TEXT_C_KITT;
 extern char* TEXT_C_MPVF;
 extern char* TEXT_C_NVIM;
 extern char* TEXT_C_WAYB;
+extern char* TEXT_C_ZSHH;
 
 extern char fuzzel_view_config_text[32];
 extern char fuzzel_edit_config_text[32];
