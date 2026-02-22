@@ -590,68 +590,54 @@ void fuzzel_config_importing()
     
     while (getchar() != '\n'); // clear imput buffer
     scanf(" %d", &theme_colour_user_opt);
-    
-    if (theme_colour_user_opt == 1)
+    switch(theme_colour_user_opt)
     {
-        theme_colour_text = "blue";
+	case 1:
+	    theme_colour_text = "blue";
+	    goto end;
+	case 2:
+	    theme_colour_text = "flamingo";
+	    goto end;
+	case 3:
+	    theme_colour_text = "green";
+	    goto end;
+	case 4:
+	    theme_colour_text = "lavender";
+	    goto end;
+	case 5:
+	    theme_colour_text = "maroon";
+	    goto end;
+	case 6:
+	    theme_colour_text = "mauve";
+	    goto end;
+	case 7:
+	    theme_colour_text = "peach";
+	    goto end;
+	case 8:
+	    theme_colour_text = "pink";
+	    goto end;
+	case 9:
+	    theme_colour_text = "red";
+	    goto end;
+	case 10:
+	    theme_colour_text = "rosewater";
+	    goto end;
+	case 11:
+	    theme_colour_text = "sapphire";
+	    goto end;
+	case 12:
+	    theme_colour_text = "sky";
+	    goto end;
+	case 13:
+	    theme_colour_text = "teal";
+	    goto end;
+	case 14:
+	    theme_colour_text = "yellow";
+	    goto end;
+	default:
+	    printf("Try again.\n");
+	end:
     }
-    else if (theme_colour_user_opt == 2)
-    {
-        theme_colour_text = "flamingo";
-    }
-    else if (theme_colour_user_opt == 3)
-    {
-        theme_colour_text = "green";
-    }
-    else if (theme_colour_user_opt == 4)
-    {
-        theme_colour_text = "lavender";
-    }
-    else if (theme_colour_user_opt == 5)
-    {
-        theme_colour_text = "maroon";
-    }
-    else if (theme_colour_user_opt == 6)
-    {
-        theme_colour_text = "mauve";
-    }
-    else if (theme_colour_user_opt == 7)
-    {
-        theme_colour_text = "peach";
-    }
-    else if (theme_colour_user_opt == 8)
-    {
-        theme_colour_text = "pink";
-    }
-    else if (theme_colour_user_opt == 9)
-    {
-        theme_colour_text = "red";
-    }
-    else if (theme_colour_user_opt == 10)
-    {
-        theme_colour_text = "rosewater";
-    }
-    else if (theme_colour_user_opt == 11)
-    {
-        theme_colour_text = "sapphire";
-    }
-    else if (theme_colour_user_opt == 12)
-    {
-        theme_colour_text = "sky";
-    }
-    else if (theme_colour_user_opt == 13)
-    {
-        theme_colour_text = "teal";
-    }
-    else if (theme_colour_user_opt == 14)
-    {
-        theme_colour_text = "yellow";
-    }
-    else
-    {
-        printf("Try again.\n");
-    }
-    
     char fuz_theme_path[256];
     snprintf(fuz_theme_path, sizeof(fuz_theme_path),
 	    "%s/.config/fuzzel/imported/fuzzel/themes/%s/%s.ini", home, theme_type_text, theme_colour_text);
