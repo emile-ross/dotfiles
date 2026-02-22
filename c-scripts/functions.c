@@ -19,6 +19,7 @@ char* TEXT_C_KITT = "kitty terminal";
 char* TEXT_C_MPVF = "mpv config";
 char* TEXT_C_NVIM = "neovim config with lazy";
 char* TEXT_C_WAYB = "waybar config and style (appearance)";
+char* TEXT_C_ZSHH = "zsh config (.zshrc)";
 
 int timer_quarters;
 int timer_seconds;
