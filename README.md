@@ -75,7 +75,7 @@ More features will come in the future
 
 ```sh
 git clone https://github.com/imawsumm/dotfiles
-gcc dotfiles/c-scripts/setup.c dotfiles/c-scripts/functions.c dotfiles/c-scripts/install.c dotfiles/c-scripts/update.c -o setup -Wall
+gcc dotfiles/c-scripts/setup.c dotfiles/c-scripts/functions.c dotfiles/c-scripts/install.c dotfiles/c-scripts/update.c dotfiles/c-scripts/programs.c -o setup -Wall
 ./setup
 ``` 
 note: This only compiles the code necessary for the install script. 
