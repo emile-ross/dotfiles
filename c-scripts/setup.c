@@ -231,50 +231,51 @@ int main()
 				while (getchar() != '\n');  // clear imput buffer 
 				scanf(" %d", &fuzzel_edit_menu_choice);
 
-				if (fuzzel_edit_menu_choice == 1)
+				switch(fuzzel_edit_menu_choice)
 				{
-				    snprintf(cmd, sizeof(cmd),
-					    "mv ~/.config/fuzzel/fuzzel.ini ~/.config/fuzzel/fuzzel-backup.ini ; "
-					    "ln -sf ~/.config/fuzzel/fuzzel-duplicated.ini ~/.config/fuzzel/fuzzel.ini");
-				    system(cmd);
-				}
-				else if (fuzzel_edit_menu_choice == 2)
-				{
-				    snprintf(cmd, 192,
-					    "mv ~/.config/fuzzel/fuzzel.ini ~/.config/fuzzel/fuzzel-backup.ini ; "
-					    "ln -sf ~/.config/fuzzel/old-fuzzel.ini ~/.config/fuzzel/fuzzel.ini");
-				    system(cmd);
-				}
-				else if (fuzzel_edit_menu_choice == 3)
-				{
-				    float pver = 0.0f;
-				    snprintf(cmd, sizeof(cmd),
-					    "mv ~/.config/fuzzel/fuzzel.ini ~/.config/fuzzel/fuzzel-backup.ini ; "
-					    "ln -sf ~/.config/fuzzel/fuzzel-oldv%.1f.ini ~/.config/fuzzel/fuzzel.ini", pver);
-				    system(cmd);
-				}
-				else if (fuzzel_edit_menu_choice == 4)
-				{
-				    snprintf(cmd, 192,
-					    "mv ~/.config/fuzzel/fuzzel.ini ~/.config/fuzzel/fuzzel-backup.ini ; "
-					    "ln -sf ~/.config/fuzzel/default-fuzzel.ini ~/.config/fuzzel/fuzzel.ini");
-				    system(cmd);
-				}
-				else if (fuzzel_edit_menu_choice == 5)
-				{
-				    snprintf(cmd, 192,
-					    "mv ~/.config/fuzzel/fuzzel.ini ~/.config/fuzzel/fuzzel-backup.ini ; "
-					    "ln -sf ~/.config/fuzzel/custom-edited-fuzzel.ini ~/.config/fuzzel/fuzzel.ini");
-				    system(cmd);
-				}
-				else if (fuzzel_edit_menu_choice == 6)
-				{
-				    // edit config
-				    snprintf(cmd, 64,
-					    "nvim ~/.config/fuzzel/custom-edited-fuzzel.ini ");
-				    system(cmd);
-				    printf("The custom config was saved successfully\n");
-				    wait_for_timeout(1, 0);
+				    case 1:
+					snprintf(cmd, sizeof(cmd),
+				    	        "mv ~/.config/fuzzel/fuzzel.ini ~/.config/fuzzel/fuzzel-backup.ini ; "
+				    	        "ln -sf ~/.config/fuzzel/fuzzel-duplicated.ini ~/.config/fuzzel/fuzzel.ini");
+				    	system(cmd);
+				    goto endthree;
+				    case 2:
+					snprintf(cmd, 192,
+				    	        "mv ~/.config/fuzzel/fuzzel.ini ~/.config/fuzzel/fuzzel-backup.ini ; "
+				    	        "ln -sf ~/.config/fuzzel/old-fuzzel.ini ~/.config/fuzzel/fuzzel.ini");
+				    	system(cmd);
+				    	goto endthree;
+				    case 3:
+					float pver = 0.0f;
+				    	snprintf(cmd, sizeof(cmd),
+				    	        "mv ~/.config/fuzzel/fuzzel.ini ~/.config/fuzzel/fuzzel-backup.ini ; "
+				    	        "ln -sf ~/.config/fuzzel/fuzzel-oldv%.1f.ini ~/.config/fuzzel/fuzzel.ini", pver);
+				    	system(cmd);
+				    	goto endthree;
+				    case 4:
+					snprintf(cmd, 192,
+				    	        "mv ~/.config/fuzzel/fuzzel.ini ~/.config/fuzzel/fuzzel-backup.ini ; "
+				    	        "ln -sf ~/.config/fuzzel/default-fuzzel.ini ~/.config/fuzzel/fuzzel.ini");
+				    	system(cmd);
+				    	goto endthree;
+				    case 5:
+					snprintf(cmd, 192,
+				    	        "mv ~/.config/fuzzel/fuzzel.ini ~/.config/fuzzel/fuzzel-backup.ini ; "
+				    	        "ln -sf ~/.config/fuzzel/custom-edited-fuzzel.ini ~/.config/fuzzel/fuzzel.ini");
+				    	system(cmd);
+				    	goto endthree;
+				    case 6:
+					// edit config
+				    	snprintf(cmd, 64,
+				    	        "nvim ~/.config/fuzzel/custom-edited-fuzzel.ini ");
+				    	system(cmd);
+				    	printf("The custom config was saved successfully\n");
+				    	wait_for_timeout(1, 0);
+				    	goto endthree;
+				    default:
+					goto endthree;
+
+				    endthree:
 				}
 			    }
 			    while (fuzzel_edit_menu_choice > 0);
@@ -342,7 +343,6 @@ void full_install(char ARCHIVE, char full_install_opt)
 {
     if (full_install_opt == 'Y' || full_install_opt == 'y')
     {
-	float pver = 0.0f; // the user is presumed to be installing the dotfiles
 	int timerinstall = 3;
 	printf(BOLD_S"\nInstalling every configuration\n"STYLE_END);
 	printf(BOLD_S"\nStarting in:\n"STYLE_END);
@@ -420,7 +420,7 @@ void full_install(char ARCHIVE, char full_install_opt)
 	    }
 	}
 	// actually install the dotfiles
-	BASH(ARCHIVE, 0.0, 'Y');
+	BASH();
 	SWAY(ARCHIVE, 0.0, 'Y');
 	BTOP(ARCHIVE, 0.0, 'Y');
 	CAVA(ARCHIVE, 0.0, 'Y');
