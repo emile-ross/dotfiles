@@ -334,6 +334,6 @@ void ZSHH(char ARCHIVE, float pver, char PKGINSTALL)
     }
     // export waybar config and appearance
     snprintf(cmd, 48,
-	    "cp -f ~/dotfiles/shell/zsh/.zshrc ~/ ; ");
+	    "cp -f ~/dotfiles/shell/zsh/.zshrc ~/ ");
     system(cmd);
 }
