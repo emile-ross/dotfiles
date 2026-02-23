@@ -46,7 +46,7 @@ void ZSHH(char ARCHIVE, float pver, char PKGINSTALL);
 
 void full_install(char ARCHIVE, char full_install_opt);
 int full_update(char ARCHIVE, float pver);
-void install_configs(); // the partial install script (configure which package or configuration to install)
+void install_configs(int custom_package_install); // the partial install script (configure which package or configuration to install)
 void copyfiles (int fastfetch_conf_export);
 void wait_for_timeout(int timer_quarters, int timer_seconds);
 void link_fastfetch_configs();
