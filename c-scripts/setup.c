@@ -178,8 +178,7 @@ int main()
     	                    printf("\nThe install script can be used to install more fonts.");
     	                }
     	            }
-    	            while(kitty_config_choice != 0.0);
-    	            // exits the while loop when the user types 0
+    	            while(kitty_config_choice != 0.0); // exits the while loop when the user types 0
     	        }
 		else if (dotfiles_config_menu == 3)
 		{
@@ -202,7 +201,6 @@ int main()
 			    snprintf(cmd, 16,
 				    "fuzzel");
     	                    system(cmd);
-
 	    	            wait_for_timeout(1, 0);
 			}
 			else if (fuzzel_config_menu_choice == 2)
@@ -228,7 +226,6 @@ int main()
     	            		printf(BOLD_S " [5] " STYLE_END "%s\n",	fuzzel_config_custom);
     	            		printf(BOLD_S " [6] " STYLE_END "%s\n\n", fuzzel_config_edit_custom);
     	            		printf(BOLD_S " [0] " STYLE_END "%s\n", opt_exit_text);
-				
 				// might clone this in the future https://github.com/catppuccin/fuzzel.git
 
 				while (getchar() != '\n');  // clear imput buffer 
@@ -423,19 +420,19 @@ void full_install(char ARCHIVE, char full_install_opt)
 	    }
 	}
 	// actually install the dotfiles
-	BASH(ARCHIVE, pver, PKGINSTALL);
-	SWAY(ARCHIVE, pver, PKGINSTALL);
-	BTOP(ARCHIVE, pver, PKGINSTALL);
-	CAVA(ARCHIVE, pver, PKGINSTALL);
-	FAST(ARCHIVE, pver, PKGINSTALL);
-	FUZZ(ARCHIVE, pver, PKGINSTALL);
-	GTKL(ARCHIVE, pver, PKGINSTALL);
-	HYPR(ARCHIVE, pver, PKGINSTALL);
-	KITT(ARCHIVE, pver, PKGINSTALL);
-	MPVF(ARCHIVE, pver, PKGINSTALL);
-	NVIM(ARCHIVE, pver, PKGINSTALL);
-	WAYB(ARCHIVE, pver, PKGINSTALL);
-	ZSHH(ARCHIVE, pver, PKGINSTALL);
+	BASH(ARCHIVE, 0.0, 'Y');
+	SWAY(ARCHIVE, 0.0, 'Y');
+	BTOP(ARCHIVE, 0.0, 'Y');
+	CAVA(ARCHIVE, 0.0, 'Y');
+	FAST(ARCHIVE, 0.0, 'Y');
+	FUZZ(ARCHIVE, 0.0, 'Y');
+	GTKL(ARCHIVE, 0.0, 'Y');
+	HYPR(ARCHIVE, 0.0, 'Y');
+	KITT(ARCHIVE, 0.0, 'Y');
+	MPVF(ARCHIVE, 0.0, 'Y');
+	NVIM(ARCHIVE, 0.0, 'Y');
+	WAYB(ARCHIVE, 0.0, 'Y');
+	ZSHH(ARCHIVE, 0.0, 'Y');
     }
     else
     {
@@ -458,6 +455,7 @@ void full_install(char ARCHIVE, char full_install_opt)
 	    
 	    while (getchar() != '\n');  // clear imput buffer 
 	    scanf(" %d", &install_pkg_opt);
+	    install_configs(install_pkg_opt);
 	}
 	while (install_pkg_opt > 0);
     }
@@ -546,33 +544,31 @@ void fuzzel_config_importing()
     while (getchar() != '\n'); // clear imput buffer
     scanf(" %d", &theme_type_user_opt);
     
-    if (theme_type_user_opt == 1)
+    switch(theme_type_user_opt)
     {
-        theme_type_text = "catppuccin-latte";
-    }
-    else if (theme_type_user_opt == 2)
-    {
-        theme_type_text = "catppuccin-frappe";
-    }
-    else if (theme_type_user_opt == 3)
-    {
-        theme_type_text = "catppuccin-macchiato";
-    }
-    else if (theme_type_user_opt == 4)
-    {
-        theme_type_text = "catppuccin-mocha";
-    }
-    else
-    {
-        printf("Try again.\n");
+	case 1:
+    	    theme_type_text = "catppuccin-latte";
+    	    goto endone;
+    	case 2:
+    	    theme_type_text = "catppuccin-frappe";
+    	    goto endone;
+    	case 3:
+    	    theme_type_text = "catppuccin-macchiato";
+    	    goto endone;
+    	case 4:
+    	    theme_type_text = "catppuccin-mocha";
+    	    goto endone;
+    	default:
+    	    printf("Try again.\n");
+    	    goto endone;
+    	endone:
     }
     // theme color
-    int theme_colour_user_opt;
-    
     printf(BOLD_S"Set the colour for your fuzzel config\n"STYLE_END);
-    
+
+    int theme_colour_user_opt;
     char colour_message_text[16] = "Use the colour";
-    
+
     printf(BOLD_S"[1] "STYLE_END" %s "BOLD_S"blue"STYLE_END"\n", colour_message_text);
     printf(BOLD_S"[2] "STYLE_END" %s "BOLD_S"flamingo"STYLE_END"\n", colour_message_text);
     printf(BOLD_S"[3] "STYLE_END" %s "BOLD_S"green"STYLE_END"\n", colour_message_text);
