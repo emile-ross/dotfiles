@@ -20,7 +20,7 @@ void install_configs(int custom_package_install)  // the partial install script 
     	    case 1:
     	        temp_conf_installed = (char*)(TEXT_C_BASH);
     	        printf("\nInstalling %s \n", temp_conf_installed);
-		BASH(ARCHIVE, pver, PKGINSTALL);
+		BASH();
 
 		clear();
     	        printf(UDRL_S"\nInstalled %s successfully.\n"STYLE_END, temp_conf_installed);
@@ -140,7 +140,6 @@ void install_configs(int custom_package_install)  // the partial install script 
     		goto exit;
     	    exit:
     	        break;
-		
     	    default:
     		    printf(ANSI_RED"\nInvalid character\n"STYLE_END);
     	        goto end;
