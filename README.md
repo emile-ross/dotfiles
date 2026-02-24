@@ -71,7 +71,7 @@ Before executing the c script, you will need to compile it.
 This is a script to help new users configure their system to tbeir liking.  
 You can use this script to install your dotfiles, update your dotfiles and configure your environment! 
 
-More features will come in the future
+Makefile coming maybe..
 
 ```sh
 git clone https://github.com/imawsumm/dotfiles
