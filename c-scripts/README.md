@@ -5,7 +5,7 @@ c source code
 make sure you compile the c-scripts using this command
 
 ```bash
-gcc setup.c functions.c install.c update.c -o setup -Wall
+gcc setup.c functions.c install.c update.c programs.c -o setup -Wall
 ./setup
 
 ```
