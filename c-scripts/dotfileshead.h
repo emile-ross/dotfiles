@@ -30,7 +30,7 @@
 
 #define STYLE_END   	"\e[m" // resets the styling
 
-void BASH(char ARCHIVE, float pver, char PKGINSTALL);
+void BASH();
 void SWAY(char ARCHIVE, float pver, char PKGINSTALL);
 void BTOP(char ARCHIVE, float pver, char PKGINSTALL);
 void CAVA(char ARCHIVE, float pver, char PKGINSTALL);
