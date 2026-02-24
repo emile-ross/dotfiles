@@ -61,11 +61,13 @@ int main()
     	        char fastfetch_config_menu_text[32] = "Customize fastfetch";
     	        char kitty_config_menu_text[32] = "Customize kitty";
     	        char fuzzel_config_menu_text[32] = "Customize fuzzel";
+    	        char zshforhumans_config_menu_text[32] = "Set up zsh";
     	        
     	        printf(BOLD_S ANSI_WHITE "%s\n\n"STYLE_END, opt_for_text );
     	        printf(BOLD_S " [1] " STYLE_END UDRL_S"%s"STYLE_END"\n", fastfetch_config_menu_text);
     	        printf(BOLD_S " [2] " STYLE_END UDRL_S"%s"STYLE_END"\n", kitty_config_menu_text);
     	        printf(BOLD_S " [3] " STYLE_END UDRL_S"%s"STYLE_END"\n", fuzzel_config_menu_text);
+    	        printf(BOLD_S " [4] " STYLE_END UDRL_S"%s"STYLE_END"\n", zshforhumans_config_menu_text);
     	        printf(BOLD_S " [0] " STYLE_END "%s\n", opt_exit_text);
 
 	        while (getchar() != '\n');  // clear imput buffer 
@@ -288,6 +290,33 @@ int main()
 		    }
 		    while (fuzzel_config_menu_choice > 0);
 		}
+		else if (dotfiles_config_menu == 4)
+		{
+		    int zshforhumans_choice;
+		    do
+		    {
+		        clear();
+
+			printf(ANSI_CYAN BOLD_S "%s\n"STYLE_END, zshforhumans_config_menu_text);
+			printf(BOLD_S "This will execute the zsh for humans script\n"STYLE_END);
+			printf(BOLD_S "Do you want to proceed with the configuration?\n\n"STYLE_END);
+    	            	printf(BOLD_S " [1] " STYLE_END "Yes\n");
+    	            	printf(BOLD_S " [0] " STYLE_END "%s (no)\n", opt_exit_text);
+			scanf(" %d", &zshforhumans_choice);
+			if (zshforhumans_choice == 1)
+			{
+			    clear();
+			    system("if command -v curl >/dev/null 2>&1; then "
+				    "  sh -c \"$(curl -fsSL https://raw.githubusercontent.com/romkatv/zsh4humans/v5/install)\"; "
+				    "else "
+				    "  sh -c \"$(wget -O- https://raw.githubusercontent.com/romkatv/zsh4humans/v5/install)\"; " 
+				    "fi");
+			    while (getchar() != '\n');  // clear imput buffer 
+			    getchar();
+			}
+		    }
+		    while (zshforhumans_choice > 0);
+		}
     	    } 
     	    while(dotfiles_config_menu != 0.0);
     	    // exits the while loop when the user types 0
@@ -382,12 +411,11 @@ void full_install(char ARCHIVE, char full_install_opt)
     	        // Check if makepkg is installed ( it is needed in order to compile yay )
     	        if (system("command -v makepkg > /dev/null") != 0)
     	        {
-    	        	printf("\nMakepkg is not installed. Installing 'base-devel' package group to proceed...\n");
-
-	    	char cmd[128];
-	    	snprintf(cmd, sizeof(cmd),
-	    		"sudo pacman -S --noconfirm base-devel");
-	    	system(cmd);
+    	            printf("\nMakepkg is not installed. Installing 'base-devel' package group to proceed...\n");
+		    char cmd[128];
+		    snprintf(cmd, sizeof(cmd),
+			    "sudo pacman -S --noconfirm base-devel");
+	    	    system(cmd);
     	            
     	            // Check if makepkg is available after installing the base-devel package
     	            if (system("command -v makepkg > /dev/null") != 0)
@@ -406,6 +434,7 @@ void full_install(char ARCHIVE, char full_install_opt)
 	        // install yay \/
     	        char cmd[256];
     	        snprintf(cmd, sizeof(cmd),
+			"sudo pacman -S --noconfirm base-devel ; "
 			"git clone https://aur.archlinux.org/yay.git ; "	// download yay from aur
     	                "cd yay ; "						//
 			"makepkg -si ; "					// build package from source
