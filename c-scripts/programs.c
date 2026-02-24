@@ -1,6 +1,6 @@
 #include "dotfileshead.h"
 
-void BASH(char ARCHIVE, float pver, char PKGINSTALL)
+void BASH()
 {
     char BRCNAME[12] = ".bashrc-new";
     // prompt to let the user know the bashrc isn't exported/replaced
@@ -336,4 +336,5 @@ void ZSHH(char ARCHIVE, float pver, char PKGINSTALL)
     snprintf(cmd, 48,
 	    "cp -f ~/dotfiles/shell/zsh/.zshrc ~/ ");
     system(cmd);
+    printf("Refer to the dotfiles configuration menu in order to use zsh proprely\n");
 }
