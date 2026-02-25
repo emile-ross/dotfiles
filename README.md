@@ -159,7 +159,7 @@ other credits:
 - https://github.com/torvalds/linux
 (Linux ofc)
 
-*missing credits*
-
+- https://github.com/Matt-FTW/dotfiles
+(nvim ascii art)
 
 [fr]: README.fr.md
