@@ -2,6 +2,7 @@
 
 int main()
 {
+    pre_startup();
     do
     {
     	// sets the text for each option and each menu title
@@ -71,6 +72,7 @@ int main()
     	        printf(BOLD_S " [0] " STYLE_END "%s\n", opt_exit_text);
 
 	        while (getchar() != '\n');  // clear imput buffer 
+		;
     	        scanf(" %d", &dotfiles_config_menu);
 	        if (dotfiles_config_menu == 1)
 	        {
@@ -87,7 +89,7 @@ int main()
     	                printf(BOLD_S " [2] " STYLE_END "%s\n", fastfetch_edit_config_text);
     	                printf(BOLD_S " [0] " STYLE_END "%s\n", opt_exit_text);
 		        while (getchar() != '\n');  // clear imput buffer 
-
+			;
     	                scanf("\n%d", &fastfetch_config_choice);
     	                if (fastfetch_config_choice == 1)
     	                {
@@ -162,6 +164,7 @@ int main()
     	                printf(BOLD_S " [0] " STYLE_END "%s\n", opt_exit_text);
 
 		        while (getchar() != '\n');  // clear imput buffer 
+			;
     	                scanf("%d", &kitty_config_choice);
 
     	                char cmd[24];
@@ -228,7 +231,6 @@ int main()
     	            		printf(BOLD_S " [5] " STYLE_END "%s\n",	fuzzel_config_custom);
     	            		printf(BOLD_S " [6] " STYLE_END "%s\n\n", fuzzel_config_edit_custom);
     	            		printf(BOLD_S " [0] " STYLE_END "%s\n", opt_exit_text);
-				// might clone this in the future https://github.com/catppuccin/fuzzel.git
 
 				while (getchar() != '\n');  // clear imput buffer 
 				scanf(" %d", &fuzzel_edit_menu_choice);
@@ -248,7 +250,7 @@ int main()
 				    	system(cmd);
 				    	goto endthree;
 				    case 3:
-					float pver = 0.0f;
+					pver = 0.0f;
 				    	snprintf(cmd, sizeof(cmd),
 				    	        "mv ~/.config/fuzzel/fuzzel.ini ~/.config/fuzzel/fuzzel-backup.ini ; "
 				    	        "ln -sf ~/.config/fuzzel/fuzzel-oldv%.1f.ini ~/.config/fuzzel/fuzzel.ini", pver);
@@ -278,6 +280,7 @@ int main()
 					goto endthree;
 
 				    endthree:
+				    ;
 				}
 			    }
 			    while (fuzzel_edit_menu_choice > 0);
@@ -405,6 +408,7 @@ void full_install(char ARCHIVE, char full_install_opt)
 
     	    char YAY;
 	    while (getchar() != '\n');  // clear imput buffer 
+	    ;
     	    scanf(" %c", &YAY); // asks the user if they wanna install yay (needed)
     	    if (YAY == 'Y' || YAY == 'y')
     	    {
@@ -591,6 +595,7 @@ void fuzzel_config_importing()
     	    printf("Try again.\n");
     	    goto endone;
     	endone:
+	;
     }
     // theme color
     printf(BOLD_S"Set the colour for your fuzzel config\n"STYLE_END);
@@ -662,6 +667,7 @@ void fuzzel_config_importing()
 	default:
 	    printf("Try again.\n");
 	end:
+	;
     }
     char fuz_theme_path[256];
     snprintf(fuz_theme_path, sizeof(fuz_theme_path),
