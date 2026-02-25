@@ -5,11 +5,11 @@ int full_update(char ARCHIVE, float pver)
     int VAWSM = (int)(pver * 100);
     switch (VAWSM)
     {
-    char cmd[512];
+    char cmd[2048];
     case 100:
 	printf("\nUpdating from %d\n", VAWSM);
 	snprintf(cmd, 192,
-		"yay -S --noconfirm btop cava fuzzel kitty fastfetch nvim waybar ; "
+		"yay -S --noconfirm btop cava fuzzel kitty fastfetch waybar ; "
 		"cp -f ~/dotfiles/kitty/kitty.conf ~/.config/kitty ; "
 		"cp -f ~/dotfiles/kitty/current-theme.conf ~/.config/current-theme.conf ");
 	system(cmd);
@@ -36,7 +36,7 @@ int full_update(char ARCHIVE, float pver)
 	    system(cmd);
 	}
 	// export cava + kitty
-	snprintf(cmd, sizeof(cmd),
+	snprintf(cmd, 512,
 		"yay -S --noconfirm ttf-ubuntu-font-family ttf-ibmplex-mono-nerd ; "
 		"ttf-blex-nerd-font-git ttf-victor-mono-nerd ttf-cascadia-mono-nerd ; "
 		"cp -f dotfiles/kitty/current-theme.conf ~/.config/kitty/ ; "
@@ -55,18 +55,16 @@ int full_update(char ARCHIVE, float pver)
 	__attribute__ ((fallthrough));
 	// do not break because we are also installing everything below
     case 200:
-	snprintf(cmd, sizeof(cmd),
+	snprintf(cmd, 192,
 		"mkdir ~/.config/gtklock ; "
-		"yay -S --noconfirm nvim gtklock ; "
+		"yay -S --noconfirm gtklock ; "
 		"mv ~/.config/gtklock/style.css ~/.config/gtklock/style-v%.2f.css ; "	// gtklock exporting
-		"cp -f dotfiles/gtklock/style.css ~/.config/gtklock/style.css ; "
-		"mv ~/.config/nvim/init.lua ~/.config/nvim/init-v%.2f.lua ; "		// nvim exporting
-		"cp -f dotfiles/nvim/init.lua ~/.config/nvim/init.lua ", pver, pver);
+		"cp -f %sdotfiles/gtklock/style.css ~/.config/gtklock/style.css ", pver, inpath);
 	system(cmd);
 	__attribute__ ((fallthrough));
 	// do not break because we are also installing everything below
     case 210:
-	snprintf(cmd, 2048,
+	snprintf(cmd, 512,
 		"mkdir -p ~/.config/sway ; "
 		"mkdir -p ~/.config/nvim ; "
 		"yay -S --noconfirm sway ; "
@@ -81,39 +79,47 @@ int full_update(char ARCHIVE, float pver)
 	__attribute__ ((fallthrough));
 	// do not break because we are also installing everything below
     case 220:
-	snprintf(cmd, sizeof(cmd),
+	snprintf(cmd, 512,
 		"mv ~/.config/sway/config ~/.config/sway/config-oldv%.2f ; "
-		"cp ~/dotfiles/sway/config ~/.config/sway/ ; "	// update sway config
-		"cp ~/dotfiles/sway/config-default ~/.config/sway/ ; "
+		"cp -f %sdotfiles/sway/config ~/.config/sway/ ; "	// update sway config
+		"cp -f %sdotfiles/sway/config-default ~/.config/sway/ ; "
 		"mkdir -p ~/.config/mpv/ ; "
 		"mv ~/.config/mpv/mpv.conf ~/.config/mpv/mpv-oldv%.2f.conf ; "
-		"cp ~/dotfiles/mpv/mpv.conf ~/.config/mpv/ ", pver, pver);
+		"cp -f %sdotfiles/mpv/mpv.conf ~/.config/mpv/ ", pver, inpath, inpath, pver, inpath);
 	system(cmd);
 	__attribute__ ((fallthrough));
     case 230:
-	snprintf(cmd, sizeof(cmd),
+	snprintf(cmd, 1024,
+		"yay -S --noconfirm nvim ; "
 		"mv ~/.config/hypr/hyprland.conf ~/.config/hypr/hyprland-v%.2f.conf ; "
-		"cp -f dotfiles/hypr/hyprland.conf ~/.config/hypr/ ; "
-		"cp -f dotfiles/fuzzel/default-fuzzel.ini ~/.config/fuzzel/ ; "
-		"cp -f dotfiles/fuzzel/fuzzel.ini ~/.config/fuzzel/ ; "
-		"cp -f dotfiles/fuzzel/old-fuzzel.ini ~/.config/fuzzel/ ; "
+		"cp -f %sdotfiles/hypr/hyprland.conf ~/.config/hypr/ ; "
+		"cp -f %sdotfiles/fuzzel/default-fuzzel.ini ~/.config/fuzzel/ ; "
+		"cp -f %sdotfiles/fuzzel/fuzzel.ini ~/.config/fuzzel/ ; "
+		"cp -f %sdotfiles/fuzzel/old-fuzzel.ini ~/.config/fuzzel/ ; "
 		"mv ~/.config/fastfetch/config.jsonc ~/.config/fastfetch/config-v%.2f.jsonc ; "
 		"mv ~/.zshrc ~/.zshrc-oldv%.2f ; "
-		"cp -f ~/dotfiles/shell/zsh/.zshrc ~/ ; "
-		"cp -f dotfiles/fastfetch/config.jsonc ~/.config/fastfetch/ ", pver, pver, pver);
+		"cp -f %sdotfiles/shell/zsh/.zshrc ~/ ; "
+		"mv ~/.config/nvim/init.lua ~/.config/nvim/init-v%.2f.lua ; "	// nvim exporting
+		"cp -f %sdotfiles/nvim/init.lua ~/.config/nvim/init.lua ; "
+		"cp -f %sdotfiles/shell/bash/.bashrc ~/.bashrc-new ; "
+		"cp -f %sdotfiles/fastfetch/config.jsonc ~/.config/fastfetch/ "
+		, pver, inpath, inpath, inpath, inpath, pver, pver, inpath, pver, inpath, inpath, inpath);
 	system(cmd);
 	goto end;
     case 240:
 	printf("\nYou are running the latest version.\n");
+	wait_for_timeout(2, 0);
 	goto exit;
 
     default:
 	printf("\nUnknown version\n");
+	wait_for_timeout(2, 0);
 	return 1;
     end:
 	printf("Update completed!\n");
 	goto exit;
     exit:
+    ;
     }
     return 0;
 }
