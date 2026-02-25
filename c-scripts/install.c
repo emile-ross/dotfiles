@@ -142,12 +142,15 @@ void install_configs(int custom_package_install)  // the partial install script 
     	        break;
     	    default:
     		    printf(ANSI_RED"\nInvalid character\n"STYLE_END);
+		    wait_for_timeout(2, 0);
     	        goto end;
 
     	    installmessage:
 		    printf(FASTBLINK_S ANSI_GREEN"Installed %s\n"STYLE_END, temp_conf_installed);
 		    wait_for_timeout(0, 1);
     	    end:
+		;
+
     	}
     }
     while(custom_package_install > 0 && custom_package_install < max_menu_opt_n);
