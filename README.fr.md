@@ -71,15 +71,13 @@ This is a script to help new users configure their system to tbeir liking.
 You can use this script to install your dotfiles, update your dotfiles and configure your environment! 
 
 Plus de fonctionnalités sont à venir.
-
 ```sh
 git clone https://github.com/imawsumm/dotfiles
-gcc -c dotfiles/c-scripts/setup.c
-gcc -c dotfiles/c-scripts/install.c
-gcc setup.o install.o -o setup
+gcc dotfiles/c-scripts/setup.c dotfiles/c-scripts/functions.c dotfiles/c-scripts/install.c dotfiles/c-scripts/update.c dotfiles/c-scripts/programs.c -o setup -Wall
+./setup
 ``` 
-Veuillez noter que ceci ne compile que le code nécessaire pour le script d'installation.
 
+Veuillez noter que ceci ne compile que le code nécessaire pour le script d'installation.
 
 ## Après avoir installé
 des touches utiles a connaitre:
@@ -159,5 +157,8 @@ autres crédits:
 
 - https://github.com/torvalds/linux 
 (linux bien sûr)
+
+- https://github.com/Matt-FTW/dotfiles
+  (de l'art en symboles ASCII)
 
 *veulliez noter que certains crédits sont manquants*
