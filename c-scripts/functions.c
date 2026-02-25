@@ -21,6 +21,10 @@ char* TEXT_C_NVIM = "neovim config with lazy";
 char* TEXT_C_WAYB = "waybar config and style (appearance)";
 char* TEXT_C_ZSHH = "zsh config (.zshrc)";
 
+char fuzzel_view_config_text[32] = "Preview Fuzzel appearance";
+char fuzzel_edit_config_text[32] = "Edit Fuzzel config";
+char fuzzel_catppuccin_text[32] = "Configure Catppuccin themes";
+
 int timer_quarters;
 int timer_seconds;
 
@@ -34,15 +38,36 @@ int menu_one_i;
 char full_install_opt; // if the user wants to install everything set to Y
 char full_update_opt; 
 int fuzzel_config_menu_choice;
-
+float pver;
 
 struct timespec install_timer;
 int fastfetch_conf_export;
 
-char fuzzel_view_config_text[32] = "Preview Fuzzel appearance";
-char fuzzel_edit_config_text[32] = "Edit Fuzzel config";
-char fuzzel_catppuccin_text[32] = "Configure Catppuccin themes";
+char initial_path[64];
+char inpath[64];
+char *get_initial_path()
+{
+    FILE *fp;
+    
+    fp = popen("pwd", "r");
+    
+    if (fp == NULL) 
+    {
+	error_message(206);
+        return NULL;
+    }
+ 
+    if (fgets(initial_path, sizeof(initial_path), fp) == NULL)
+    {
+        pclose(fp);
+        return NULL;
+    }
 
+    initial_path[strcspn(initial_path, "\n")] = '\0';
+
+    pclose(fp);
+    return initial_path;
+}
 
 int error_message(int err_code)
 {
@@ -82,6 +107,11 @@ int error_message(int err_code)
 	    snprintf(err_solution_temp, sizeof(err_solution_temp), "Make sure you have installed the dotfiles");
 	    break;
 
+	case 206:
+	    snprintf(err_text_temp, sizeof(err_text_temp), "popen failed");
+	    //snprintf(err_solution_temp, sizeof(err_solution_temp), "NULL");
+	    break;
+
 	case 909:
 	    printf("This error should never display (in theory) \n");
 	    break;
@@ -112,4 +142,9 @@ void wait_for_timeout(int timer_quarters, int timer_seconds)
     install_timer.tv_nsec = time_timer_quarters;
     install_timer.tv_sec = time_timer_seconds;
     nanosleep(&install_timer, NULL);
+}
+
+void pre_startup()
+{
+    snprintf(inpath, sizeof(inpath), "%s", get_initial_path());
 }
