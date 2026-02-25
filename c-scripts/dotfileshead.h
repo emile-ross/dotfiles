@@ -44,13 +44,17 @@ void NVIM(char ARCHIVE, float pver, char PKGINSTALL);
 void WAYB(char ARCHIVE, float pver, char PKGINSTALL);
 void ZSHH(char ARCHIVE, float pver, char PKGINSTALL);
 
+
+void clear();
+void pre_startup();
+
+
 void full_install(char ARCHIVE, char full_install_opt);
 int full_update(char ARCHIVE, float pver);
 void install_configs(int custom_package_install); // the partial install script (configure which package or configuration to install)
 void copyfiles (int fastfetch_conf_export);
 void wait_for_timeout(int timer_quarters, int timer_seconds);
 void link_fastfetch_configs();
-void clear();
 
 // data 
 extern char* TEXT_C_BASH;
@@ -71,6 +75,9 @@ extern char fuzzel_view_config_text[32];
 extern char fuzzel_edit_config_text[32];
 extern char fuzzel_catppuccin_text[32];
 
+extern char initial_path[64];
+extern char inpath[64];
+char *get_initial_path();
 extern const int max_menu_opt_n;
 extern int fastfetch_conf_export;
 extern const char *home;
@@ -84,6 +91,7 @@ extern int timer_quarters; // max is 4
 extern int timer_seconds;
 extern int fuzzel_config_menu_choice;
 extern char* theme_colour_text;
+extern float pver;
 
 float* update();
 
