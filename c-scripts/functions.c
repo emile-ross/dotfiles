@@ -30,6 +30,13 @@ char kitty_config_menu_text[32] = "Customize kitty";
 char fuzzel_config_menu_text[32] = "Customize fuzzel";
 char zshforhumans_config_menu_text[32] = "Set up zsh";
 
+char main_menu_text[128] = "Welcome to the setup utility for ImAwsumm's dotfiles";
+char opt_one_text[128] = "Install the dotfiles";
+char opt_the_text[128] = "Update your dotfiles";
+char opt_for_text[128] = "Custom configuration menu";
+char opt_fiv_text[128] = "Something else";
+char opt_exit_text[128] = "Exit";
+
 int timer_quarters;
 int timer_seconds;
 
