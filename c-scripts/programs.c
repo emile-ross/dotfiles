@@ -86,8 +86,8 @@ void FAST(char ARCHIVE, float pver, char PKGINSTALL)
     snprintf(cmd, sizeof(cmd),
 	    "rm ~/.config/fastfetch ; "
 	    "mkdir -p ~/.config/fastfetch/assets ; "
-	    "cp -f %sfastfetch/assets/*.png ~/.config/fastfetch/assets ; "
-	    "cp -f %sfastfetch/config.jsonc ~/.config/fastfetch ; "
+	    "cp -f %s/fastfetch/assets/*.png ~/.config/fastfetch/assets ; "
+	    "cp -f %s/fastfetch/config.jsonc ~/.config/fastfetch ; "
 	    "cp -f ~/.config/fastfetch/config.jsonc ~/.config/fastfetch/config-duplicated.jsonc ; "
 	    "cp -f %s/fastfetch/config-other.jsonc ~/.config/fastfetch ; "
 	    "cp -f %s/fastfetch/config-default.jsonc ~/.config/fastfetch", inpath, inpath, inpath, inpath);
