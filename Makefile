@@ -8,7 +8,6 @@ full_recompilation:
 	gcc $(U_FLAGS) -c c-scripts/install.c -o c-scripts/install.o
 	gcc $(U_FLAGS) -c c-scripts/update.c -o c-scripts/update.o
 	@echo "Compiling full application"
-	@#@echo "Linking ..."
 
 clean: 
 	@rm c-scripts/programs.o \
@@ -22,3 +21,4 @@ setup: full_recompilation
 
 full: full_recompilation
 	gcc $(FLAGS) c-scripts/setup.o c-scripts/functions.o c-scripts/install.o c-scripts/update.o c-scripts/programs.o -o setup
+	@echo "Compiled successfully"
