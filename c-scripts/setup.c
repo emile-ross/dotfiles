@@ -7,13 +7,6 @@ int main()
     {
     	// sets the text for each option and each menu title
     	clear();
-    	char main_menu_text[128] = "Welcome to the setup utility for ImAwsumm's dotfiles";
-    	char opt_one_text[128] = "Install the dotfiles";
-    	char opt_the_text[128] = "Update your dotfiles";
-    	char opt_for_text[128] = "Custom configuration menu";
-    	char opt_fiv_text[128] = "Something else";
-    	char opt_exit_text[128] = "Exit";
-    
     	printf(BOLD_S ANSI_CYAN "%s\n\n" STYLE_END, main_menu_text );
     	printf(BOLD_S " [1] " STYLE_END "%s\n", opt_one_text);
     	printf(BOLD_S " [2] " STYLE_END "%s\n", opt_the_text);
