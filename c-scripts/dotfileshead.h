@@ -75,8 +75,14 @@ extern char fuzzel_view_config_text[32];
 extern char fuzzel_edit_config_text[32];
 extern char fuzzel_catppuccin_text[32];
 
+extern char fastfetch_config_menu_text[32];
+extern char kitty_config_menu_text[32];
+extern char fuzzel_config_menu_text[32];
+extern char zshforhumans_config_menu_text[32];
+
 extern char initial_path[64];
 extern char inpath[64];
+
 char *get_initial_path();
 extern const int max_menu_opt_n;
 extern int fastfetch_conf_export;
