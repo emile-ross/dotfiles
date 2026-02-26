@@ -25,6 +25,11 @@ char fuzzel_view_config_text[32] = "Preview Fuzzel appearance";
 char fuzzel_edit_config_text[32] = "Edit Fuzzel config";
 char fuzzel_catppuccin_text[32] = "Configure Catppuccin themes";
 
+char fastfetch_config_menu_text[32] = "Customize fastfetch";
+char kitty_config_menu_text[32] = "Customize kitty";
+char fuzzel_config_menu_text[32] = "Customize fuzzel";
+char zshforhumans_config_menu_text[32] = "Set up zsh";
+
 int timer_quarters;
 int timer_seconds;
 
@@ -47,6 +52,11 @@ char initial_path[64];
 char inpath[64];
 char *get_initial_path()
 {
+    char cd_init[16];
+    snprintf(cd_init, sizeof(cd_init), // this should fail. User is supposed to be at dotfiles/
+	    "cd dotfiles/");
+    system(cd_init);
+
     FILE *fp;
     
     fp = popen("pwd", "r");
@@ -95,6 +105,10 @@ int error_message(int err_code)
 
 	case 103:
 	    snprintf(err_text_temp, sizeof(err_text_temp), "Could not apply fuzzel theme");
+	    break;
+
+	case 104:
+	    snprintf(err_text_temp, sizeof(err_text_temp), "Could not find kitty package");
 	    break;
 
 	case 204:
