@@ -10,21 +10,21 @@ int full_update(char ARCHIVE, float pver)
 	printf("\nUpdating from %d\n", VAWSM);
 	snprintf(cmd, 192,
 		"yay -S --noconfirm btop cava fuzzel kitty fastfetch waybar ; "
-		"cp -f ~/dotfiles/kitty/kitty.conf ~/.config/kitty ; "
-		"cp -f ~/dotfiles/kitty/current-theme.conf ~/.config/current-theme.conf ");
+		"cp -f kitty/kitty.conf ~/.config/kitty ; "
+		"cp -f kitty/current-theme.conf ~/.config/current-theme.conf ");
 	system(cmd);
 	snprintf(cmd, 192,
-		"cp ~/dotfiles/hypr/hypridle.conf ~/.config/hypr ; "
-		"cp ~/dotfiles/hypr/hyprpaper.conf ~/.config/hypr ");
+		"cp hypr/hypridle.conf ~/.config/hypr ; "
+		"cp hypr/hyprpaper.conf ~/.config/hypr ");
 	system(cmd);
 	__attribute__ ((fallthrough));
 	// do not break because we are also installing everything below
     case 120:
 	snprintf(cmd, 256,
-		"cp -f dotfiles/fuzzel/fuzzel.ini ~/.config/fuzzel/ ; "
-		"cp -f dotfiles/fuzzel/old-fuzzel.ini ~/.config/fuzzel/ ; "
-		"cp dotfiles/waybar/style.css ~/.config/waybar ; "
-		"cp dotfiles/waybar/config.jsonc ~/.config/waybar");
+		"cp -f fuzzel/fuzzel.ini ~/.config/fuzzel/ ; "
+		"cp -f fuzzel/old-fuzzel.ini ~/.config/fuzzel/ ; "
+		"cp waybar/style.css ~/.config/waybar ; "
+		"cp waybar/config.jsonc ~/.config/waybar");
 	system(cmd);
 	__attribute__ ((fallthrough));
 	// do not break because we are also installing everything below
@@ -39,10 +39,10 @@ int full_update(char ARCHIVE, float pver)
 	snprintf(cmd, 512,
 		"yay -S --noconfirm ttf-ubuntu-font-family ttf-ibmplex-mono-nerd ; "
 		"ttf-blex-nerd-font-git ttf-victor-mono-nerd ttf-cascadia-mono-nerd ; "
-		"cp -f dotfiles/kitty/current-theme.conf ~/.config/kitty/ ; "
+		"cp -f kitty/current-theme.conf ~/.config/kitty/ ; "
 		"mkdir -p ~/.config/cava/ ; "
 		"rm ~/.config/cava/config ; "
-		"cp -f dotfiles/cava/config ~/.config/cava/ ");
+		"cp -f cava/config ~/.config/cava/ ");
 	system(cmd);
 	__attribute__ ((fallthrough));
 	// do not break because we are also installing everything below
@@ -50,7 +50,7 @@ int full_update(char ARCHIVE, float pver)
 	snprintf(cmd, 192,
 		"mv ~/.config/btop/btop.conf ~/.config/btop/btop-oldv%.2f ; "
 		"mkdir -p ~/.config/btop/ ; "
-		"cp -f dotfiles/btop/btop.conf ~/.config/btop/ ", pver);
+		"cp -f btop/btop.conf ~/.config/btop/ ", pver);
 	system(cmd);
 	__attribute__ ((fallthrough));
 	// do not break because we are also installing everything below
@@ -59,7 +59,7 @@ int full_update(char ARCHIVE, float pver)
 		"mkdir ~/.config/gtklock ; "
 		"yay -S --noconfirm gtklock ; "
 		"mv ~/.config/gtklock/style.css ~/.config/gtklock/style-v%.2f.css ; "	// gtklock exporting
-		"cp -f %sdotfiles/gtklock/style.css ~/.config/gtklock/style.css ", pver, inpath);
+		"cp -f %s/gtklock/style.css ~/.config/gtklock/style.css ", pver, inpath);
 	system(cmd);
 	__attribute__ ((fallthrough));
 	// do not break because we are also installing everything below
@@ -69,11 +69,11 @@ int full_update(char ARCHIVE, float pver)
 		"mkdir -p ~/.config/nvim ; "
 		"yay -S --noconfirm sway ; "
 		"mv ~/.config/nvim/init.lua ~/.config/nvim/init-oldv%.2f.lua ; "
-		"cp -f dotfiles/nvim/init.lua ~/.config/nvim ; "
+		"cp -f nvim/init.lua ~/.config/nvim ; "
 		"mv ~/.config/gtklock/style.css ~/.config/gtklock/style-v%.2f.css ; "
-		"cp -f dotfiles/gtklock/style.css ~/.config/gtklock/style.css ; "
+		"cp -f gtklock/style.css ~/.config/gtklock/style.css ; "
 		"mv ~/.config/kitty/kitty.conf ~/.config/kitty/kitty-oldv%.2f.conf ; "
-		"cp -f dotfiles/kitty/kitty.conf ~/.config/kitty/ ; "	// update kitty config
+		"cp -f kitty/kitty.conf ~/.config/kitty/ ; "	// update kitty config
 		, pver, pver, pver);
 	system(cmd);
 	__attribute__ ((fallthrough));
@@ -81,28 +81,28 @@ int full_update(char ARCHIVE, float pver)
     case 220:
 	snprintf(cmd, 512,
 		"mv ~/.config/sway/config ~/.config/sway/config-oldv%.2f ; "
-		"cp -f %sdotfiles/sway/config ~/.config/sway/ ; "	// update sway config
-		"cp -f %sdotfiles/sway/config-default ~/.config/sway/ ; "
+		"cp -f %s/sway/config ~/.config/sway/ ; "	// update sway config
+		"cp -f %s/sway/config-default ~/.config/sway/ ; "
 		"mkdir -p ~/.config/mpv/ ; "
 		"mv ~/.config/mpv/mpv.conf ~/.config/mpv/mpv-oldv%.2f.conf ; "
-		"cp -f %sdotfiles/mpv/mpv.conf ~/.config/mpv/ ", pver, inpath, inpath, pver, inpath);
+		"cp -f %s/mpv/mpv.conf ~/.config/mpv/ ", pver, inpath, inpath, pver, inpath);
 	system(cmd);
 	__attribute__ ((fallthrough));
     case 230:
 	snprintf(cmd, 1024,
 		"yay -S --noconfirm nvim ; "
 		"mv ~/.config/hypr/hyprland.conf ~/.config/hypr/hyprland-v%.2f.conf ; "
-		"cp -f %sdotfiles/hypr/hyprland.conf ~/.config/hypr/ ; "
-		"cp -f %sdotfiles/fuzzel/default-fuzzel.ini ~/.config/fuzzel/ ; "
-		"cp -f %sdotfiles/fuzzel/fuzzel.ini ~/.config/fuzzel/ ; "
-		"cp -f %sdotfiles/fuzzel/old-fuzzel.ini ~/.config/fuzzel/ ; "
+		"cp -f %s/hypr/hyprland.conf ~/.config/hypr/ ; "
+		"cp -f %s/fuzzel/default-fuzzel.ini ~/.config/fuzzel/ ; "
+		"cp -f %s/fuzzel/fuzzel.ini ~/.config/fuzzel/ ; "
+		"cp -f %s/fuzzel/old-fuzzel.ini ~/.config/fuzzel/ ; "
 		"mv ~/.config/fastfetch/config.jsonc ~/.config/fastfetch/config-v%.2f.jsonc ; "
 		"mv ~/.zshrc ~/.zshrc-oldv%.2f ; "
-		"cp -f %sdotfiles/shell/zsh/.zshrc ~/ ; "
+		"cp -f %s/shell/zsh/.zshrc ~/ ; "
 		"mv ~/.config/nvim/init.lua ~/.config/nvim/init-v%.2f.lua ; "	// nvim exporting
-		"cp -f %sdotfiles/nvim/init.lua ~/.config/nvim/init.lua ; "
-		"cp -f %sdotfiles/shell/bash/.bashrc ~/.bashrc-new ; "
-		"cp -f %sdotfiles/fastfetch/config.jsonc ~/.config/fastfetch/ "
+		"cp -f %s/nvim/init.lua ~/.config/nvim/init.lua ; "
+		"cp -f %s/shell/bash/.bashrc ~/.bashrc-new ; "
+		"cp -f %s/fastfetch/config.jsonc ~/.config/fastfetch/ "
 		, pver, inpath, inpath, inpath, inpath, pver, pver, inpath, pver, inpath, inpath, inpath);
 	system(cmd);
 	goto end;
