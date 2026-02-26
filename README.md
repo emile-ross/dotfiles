@@ -71,13 +71,23 @@ Before executing the c script, you will need to compile it.
 This is a script to help new users configure their system to tbeir liking.  
 You can use this script to install your dotfiles, update your dotfiles and configure your environment! 
 
-Makefile coming maybe..
+### Compile with make
+```sh
+git clone https://github.com/imawsumm/dotfiles
+cd dotfiles/
+make setup
+./setup
+```
 
+**or**
+
+**Compile using GCC**
 ```sh
 git clone https://github.com/imawsumm/dotfiles
 gcc dotfiles/c-scripts/setup.c dotfiles/c-scripts/functions.c dotfiles/c-scripts/install.c dotfiles/c-scripts/update.c dotfiles/c-scripts/programs.c -o setup -Wall
 ./setup
 ``` 
+
 note: This only compiles the code necessary for the install script. 
 
 
