@@ -10,7 +10,7 @@ void BASH()
     char cmd[64]; // BRCNAME has to be considered
     // export .bashrc
     snprintf(cmd, sizeof(cmd),
-	    "cp -f %sdotfiles/shell/bash/.bashrc ~/%s", inpath, BRCNAME);
+	    "cp -f %s/shell/bash/.bashrc ~/%s", inpath, BRCNAME);
     system(cmd);
 }
 
@@ -35,7 +35,7 @@ void BTOP(char ARCHIVE, float pver, char PKGINSTALL)
     // export btop config
     snprintf(cmd, sizeof(cmd),
 	   "mkdir -p ~/.config/btop ; "
-	   "cp -f %s/dotfiles/btop/btop.conf ~/.config/btop", inpath);
+	   "cp -f %s/btop/btop.conf ~/.config/btop", inpath);
     system(cmd);
 }
 
@@ -60,7 +60,7 @@ void CAVA(char ARCHIVE, float pver, char PKGINSTALL)
     // export cava config
     snprintf(cmd, sizeof(cmd),
 	    "mkdir -p ~/.config/cava ; "
-	    "cp -f %sdotfiles/cava/config ~/.config/cava/ ", inpath);
+	    "cp -f %s/cava/config ~/.config/cava/ ", inpath);
     system(cmd);
 }
 
@@ -86,11 +86,11 @@ void FAST(char ARCHIVE, float pver, char PKGINSTALL)
     snprintf(cmd, sizeof(cmd),
 	    "rm ~/.config/fastfetch ; "
 	    "mkdir -p ~/.config/fastfetch/assets ; "
-	    "cp -f %sdotfiles/fastfetch/assets/*.png ~/.config/fastfetch/assets ; "
-	    "cp -f %sdotfiles/fastfetch/config.jsonc ~/.config/fastfetch ; "
+	    "cp -f %sfastfetch/assets/*.png ~/.config/fastfetch/assets ; "
+	    "cp -f %sfastfetch/config.jsonc ~/.config/fastfetch ; "
 	    "cp -f ~/.config/fastfetch/config.jsonc ~/.config/fastfetch/config-duplicated.jsonc ; "
-	    "cp -f %sdotfiles/fastfetch/config-other.jsonc ~/.config/fastfetch ; "
-	    "cp -f %sdotfiles/fastfetch/config-default.jsonc ~/.config/fastfetch", inpath, inpath, inpath, inpath);
+	    "cp -f %s/fastfetch/config-other.jsonc ~/.config/fastfetch ; "
+	    "cp -f %s/fastfetch/config-default.jsonc ~/.config/fastfetch", inpath, inpath, inpath, inpath);
     system(cmd);
 }
 void FUZZ(char ARCHIVE, float pver, char PKGINSTALL)
@@ -118,10 +118,10 @@ void FUZZ(char ARCHIVE, float pver, char PKGINSTALL)
     // export fuzzel appearance
     snprintf(cmd, sizeof(cmd),
             "mkdir -p ~/.config/fuzzel ; "
-            "cp -f %sdotfiles/fuzzel/old-fuzzel.ini ~/.config/fuzzel ; "
-            "cp -f %sdotfiles/fuzzel/default-fuzzel.ini ~/.config/fuzzel ; "
+            "cp -f %s/fuzzel/old-fuzzel.ini ~/.config/fuzzel ; "
+            "cp -f %s/fuzzel/default-fuzzel.ini ~/.config/fuzzel ; "
 	    "cp -f ~/.config/fuzzel/default-fuzzel.ini ~/.config/fuzzel/custom-edited-fuzzel.ini ; "
-            "cp -f %sdotfiles/fuzzel/fuzzel.ini ~/.config/fuzzel ; "
+            "cp -f %s/fuzzel/fuzzel.ini ~/.config/fuzzel ; "
 	    "mv ~/.config/fuzzel/fuzzel.ini ~/.config/fuzzel/fuzzel-duplicated.ini ; "
 	    "ln -sf ~/.config/fuzzel/fuzzel-duplicated.ini ~/.config/fuzzel/fuzzel.ini ", inpath, inpath, inpath);
     system(cmd);  		
@@ -148,8 +148,8 @@ void GTKL(char ARCHIVE, float pver, char PKGINSTALL)
     // export gtklock config
     snprintf(cmd, sizeof(cmd),
             "mkdir -p ~/.config/gtklock/assets ; "
-            "cp -f %sdotfiles/gtklock/style.css ~/.config/gtklock ; "
-            "cp -f %sdotfiles/gtklock/lockscreen.jpg ~/.config/gtklock/assets", inpath, inpath);
+            "cp -f %s/gtklock/style.css ~/.config/gtklock ; "
+            "cp -f %s/gtklock/lockscreen.jpg ~/.config/gtklock/assets", inpath, inpath);
     system(cmd);
 }
 
@@ -175,9 +175,9 @@ void HYPR(char ARCHIVE, float pver, char PKGINSTALL)
     // export hyprland configs
     snprintf(cmd, sizeof(cmd),
 	    "mkdir -p ~/.config/hypr ; "
-	    "cp -f %sdotfiles/hypr/hyprland.conf ~/.config/hypr ; "
-    	    "cp -f %sdotfiles/hypr/hypridle.conf ~/.config/hypr ; "
-    	    "cp -f %sdotfiles/hypr/hyprpaper.conf ~/.config/hypr", inpath, inpath, inpath);
+	    "cp -f %s/hypr/hyprland.conf ~/.config/hypr ; "
+    	    "cp -f %s/hypr/hypridle.conf ~/.config/hypr ; "
+    	    "cp -f %s/hypr/hyprpaper.conf ~/.config/hypr", inpath, inpath, inpath);
     system(cmd);
 }
 void KITT(char ARCHIVE, float pver, char PKGINSTALL)
@@ -202,8 +202,8 @@ void KITT(char ARCHIVE, float pver, char PKGINSTALL)
     // export kitty config
     snprintf(cmd, sizeof(cmd),
 	    "mkdir ~/.config/kitty ; "
-	    "cp -f %sdotfiles/kitty/current-theme.conf ~/.config/kitty ; "
-	    "cp -f %sdotfiles/kitty/kitty.conf ~/.config/kitty", inpath, inpath);
+	    "cp -f %s/kitty/current-theme.conf ~/.config/kitty ; "
+	    "cp -f %s/kitty/kitty.conf ~/.config/kitty", inpath, inpath);
     system(cmd);
 }
 
@@ -229,7 +229,7 @@ void MPVF(char ARCHIVE, float pver, char PKGINSTALL)
     // export mpv config with shaders
     snprintf(cmd, 96,
 	    "mkdir -p ~/.config/mpv/ ; "
-            "cp -f %sdotfiles/mpv/mpv.conf ~/.config/mpv ", inpath);
+            "cp -f %s/mpv/mpv.conf ~/.config/mpv ", inpath);
     system(cmd);
 }
 
@@ -257,7 +257,7 @@ void NVIM(char ARCHIVE, float pver, char PKGINSTALL)
     // export nvim config
     snprintf(cmd, sizeof(cmd),
 	    "mkdir -p ~/.config/nvim ; "
-    	    "cp -f %sdotfiles/nvim/init.lua ~/.config/nvim", inpath);
+    	    "cp -f %s/nvim/init.lua ~/.config/nvim", inpath);
     system(cmd);
 }
 
@@ -283,7 +283,7 @@ void SWAY(char ARCHIVE, float pver, char PKGINSTALL)
     // export sway config
     snprintf(cmd, sizeof(cmd),
 	    "mkdir -p ~/.config/sway ; "
-    	    "cp -f %sdotfiles/sway/config ~/.config/sway", inpath);
+    	    "cp -f %s/sway/config ~/.config/sway", inpath);
     system(cmd);
 }
 
@@ -309,8 +309,8 @@ void WAYB(char ARCHIVE, float pver, char PKGINSTALL)
     // export waybar config and appearance
     snprintf(cmd, sizeof(cmd),
 	    "mkdir -p ~/.config/waybar ; "
-	    "cp -f %sdotfiles/waybar/style.css ~/.config/waybar ; "
-            "cp -f %sdotfiles/waybar/config.jsonc ~/.config/waybar", inpath, inpath);
+	    "cp -f %s/waybar/style.css ~/.config/waybar ; "
+            "cp -f %s/waybar/config.jsonc ~/.config/waybar", inpath, inpath);
     system(cmd);
 }
 
@@ -332,7 +332,7 @@ void ZSHH(char ARCHIVE, float pver, char PKGINSTALL)
     }
     // export waybar config and appearance
     snprintf(cmd, 48,
-	    "cp -f %sdotfiles/shell/zsh/.zshrc ~/ ", inpath);
+	    "cp -f %s/shell/zsh/.zshrc ~/ ", inpath);
     system(cmd);
     printf("Refer to the dotfiles configuration menu in order to use zsh proprely\n");
 }
