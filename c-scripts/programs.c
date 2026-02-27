@@ -19,7 +19,7 @@ char *cmd = malloc(mem_needed + 1);
              "cp -f %s/shell/bash/.bashrc ~/%s",
              inpath, BRCNAME);
     system(cmd);
-    
+
     free(cmd);
 }
 
@@ -92,7 +92,7 @@ void FAST(char ARCHIVE, float pver, char PKGINSTALL)
 	system(cmd);
     }
     // export fastfetch config
-    snprintf(cmd, sizeof(cmd),
+    snprintf(cmd, sizeof(cmd) + 128,
 	    "rm ~/.config/fastfetch ; "
 	    "mkdir -p ~/.config/fastfetch/assets ; "
 	    "cp -f %s/fastfetch/assets/*.png ~/.config/fastfetch/assets ; "
@@ -126,7 +126,7 @@ void FUZZ(char ARCHIVE, float pver, char PKGINSTALL)
     }
     // export fuzzel appearance
 
-    snprintf(cmd, 128,
+    snprintf(cmd, sizeof(cmd),
             "mkdir -p ~/.config/fuzzel ; "
             "cp -f %s/fuzzel/old-fuzzel.ini ~/.config/fuzzel", inpath);
     system(cmd);  		
@@ -180,7 +180,7 @@ void HYPR(char ARCHIVE, float pver, char PKGINSTALL)
     }
     if ( PKGINSTALL == 'Y'|| PKGINSTALL == 'y')
     {
-	// install Hyprland package
+	// install Hyprland packages
 	char cmd[256];
         snprintf(cmd, 48,
 		"yay -S --noconfirm hypridle hyprpaper hyprland");
@@ -348,7 +348,7 @@ void ZSHH(char ARCHIVE, float pver, char PKGINSTALL)
     }
     if ( PKGINSTALL == 'Y'|| PKGINSTALL == 'y')
     {
-        snprintf(cmd, 32,
+        snprintf(cmd, 24,
 		"yay -S --noconfirm zsh");
 	system(cmd);
     }
@@ -356,5 +356,6 @@ void ZSHH(char ARCHIVE, float pver, char PKGINSTALL)
     snprintf(cmd, 96,
 	    "cp -f %s/shell/zsh/.zshrc ~/ ", inpath);
     system(cmd);
-    printf("Refer to the dotfiles configuration menu in order to use zsh proprely\n");
+
+    printf("Refer to the dotfiles configuration menu in order to configure zsh proprely (using zsh for humans)\n");
 }
