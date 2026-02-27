@@ -123,3 +123,45 @@ int full_update(char ARCHIVE, float pver)
     }
     return 0;
 }
+
+float* update() 
+{
+    char *USERNAME = getenv("HOME");
+
+    // error message if username can't be fetched 
+    if (USERNAME == NULL) 
+    {
+	error_message(204);
+        return NULL;
+    }
+
+    // create path to config
+    char HYPRPATH[64];
+    snprintf(HYPRPATH, sizeof(HYPRPATH), 
+	    "%s/.config/hypr/hyprland.conf", USERNAME);
+	    // set the hyprland path with username
+
+    // open the file with HYPRPATH
+    FILE *file = fopen(HYPRPATH, "r");
+    
+    // return error message when file isn't found
+    if (file == NULL) 
+    {
+	error_message(205);
+	// returns null if the file can't be opened/found
+        return NULL;
+    }
+    static float VAWSM[32] = {0};
+
+    char line[384];
+    while (fgets(line, sizeof(line), file)) 
+    {
+        if (sscanf(line, "# AWSMVERSION: %31f[0-9.]", VAWSM) == 1) 
+	{
+            fclose(file);
+            return VAWSM;
+        }
+    }
+    fclose(file);
+    return 0;
+}
