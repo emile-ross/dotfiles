@@ -9,7 +9,7 @@ int full_update(char ARCHIVE, float pver)
     case 100:
 	printf("\nUpdating from %d\n", VAWSM);
 	snprintf(cmd, 192,
-		"yay -S --noconfirm btop cava fuzzel kitty fastfetch waybar ; "
+		"yay -S --noconfirm cava fuzzel kitty fastfetch waybar ; "
 		"cp -f kitty/kitty.conf ~/.config/kitty ; "
 		"cp -f kitty/current-theme.conf ~/.config/current-theme.conf ");
 	system(cmd);
@@ -37,12 +37,12 @@ int full_update(char ARCHIVE, float pver)
 	}
 	// export cava + kitty
 	snprintf(cmd, 512,
-		"yay -S --noconfirm ttf-ubuntu-font-family ttf-ibmplex-mono-nerd ; "
+		"yay -S --noconfirm ttf-ubuntu-font-family btop ttf-ibmplex-mono-nerd ; "
 		"ttf-blex-nerd-font-git ttf-victor-mono-nerd ttf-cascadia-mono-nerd ; "
 		"cp -f kitty/current-theme.conf ~/.config/kitty/ ; "
 		"mkdir -p ~/.config/cava/ ; "
 		"rm ~/.config/cava/config ; "
-		"cp -f cava/config ~/.config/cava/ ");
+		"cp -f %s/cava/config ~/.config/cava/ ", inpath);
 	system(cmd);
 	__attribute__ ((fallthrough));
 	// do not break because we are also installing everything below
@@ -55,12 +55,13 @@ int full_update(char ARCHIVE, float pver)
 	__attribute__ ((fallthrough));
 	// do not break because we are also installing everything below
     case 200:
-	snprintf(cmd, 192,
+	snprintf(cmd, 256,
 		"mkdir ~/.config/gtklock ; "
 		"yay -S --noconfirm gtklock ; "
 		"mv ~/.config/gtklock/style.css ~/.config/gtklock/style-v%.2f.css ; "	// gtklock exporting
 		"cp -f %s/gtklock/style.css ~/.config/gtklock/style.css ", pver, inpath);
 	system(cmd);
+
 	__attribute__ ((fallthrough));
 	// do not break because we are also installing everything below
     case 210:
@@ -89,7 +90,7 @@ int full_update(char ARCHIVE, float pver)
 	system(cmd);
 	__attribute__ ((fallthrough));
     case 230:
-	snprintf(cmd, 1024,
+	snprintf(cmd, sizeof(cmd),
 		"yay -S --noconfirm nvim ; "
 		"mv ~/.config/hypr/hyprland.conf ~/.config/hypr/hyprland-v%.2f.conf ; "
 		"cp -f %s/hypr/hyprland.conf ~/.config/hypr/ ; "
