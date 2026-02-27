@@ -15,6 +15,8 @@ user_compilation:
 	@gcc $(U_FLAGS) -c c-scripts/setup.c -o c-scripts/setup.o
 	@gcc $(U_FLAGS) -c c-scripts/install.c -o c-scripts/install.o
 	@gcc $(U_FLAGS) -c c-scripts/update.c -o c-scripts/update.o
+	@echo "Compiled full package"
+	@echo "execute it with: ./setup"
 clean: 
 	@rm c-scripts/programs.o \
 		c-scripts/functions.o \
