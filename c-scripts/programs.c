@@ -7,11 +7,20 @@ void BASH()
     printf(UDRL_S"\nThe .bashrc file plays a very important role therefore, it was not replaced."STYLE_END);
     printf(UDRL_S"\nYou can find the new .bashrc file under the name %s\n"STYLE_END, BRCNAME);
 
-    char cmd[64]; // BRCNAME has to be considered
     // export .bashrc
-    snprintf(cmd, sizeof(cmd),
-	    "cp -f %s/shell/bash/.bashrc ~/%s", inpath, BRCNAME);
+    //
+    int mem_needed = snprintf(NULL, 0,
+	    "cp -f %s/shell/bash/.bashrc ~/%s", 
+	    inpath, BRCNAME);
+
+char *cmd = malloc(mem_needed + 1);
+
+    snprintf(cmd, mem_needed + 1,
+             "cp -f %s/shell/bash/.bashrc ~/%s",
+             inpath, BRCNAME);
     system(cmd);
+    
+    free(cmd);
 }
 
 void BTOP(char ARCHIVE, float pver, char PKGINSTALL)
@@ -116,14 +125,18 @@ void FUZZ(char ARCHIVE, float pver, char PKGINSTALL)
 	system(cmd);
     }
     // export fuzzel appearance
-    snprintf(cmd, sizeof(cmd),
+
+    snprintf(cmd, 128,
             "mkdir -p ~/.config/fuzzel ; "
-            "cp -f %s/fuzzel/old-fuzzel.ini ~/.config/fuzzel ; "
+            "cp -f %s/fuzzel/old-fuzzel.ini ~/.config/fuzzel", inpath);
+    system(cmd);  		
+    
+    snprintf(cmd, sizeof(cmd),
             "cp -f %s/fuzzel/default-fuzzel.ini ~/.config/fuzzel ; "
 	    "cp -f ~/.config/fuzzel/default-fuzzel.ini ~/.config/fuzzel/custom-edited-fuzzel.ini ; "
             "cp -f %s/fuzzel/fuzzel.ini ~/.config/fuzzel ; "
 	    "mv ~/.config/fuzzel/fuzzel.ini ~/.config/fuzzel/fuzzel-duplicated.ini ; "
-	    "ln -sf ~/.config/fuzzel/fuzzel-duplicated.ini ~/.config/fuzzel/fuzzel.ini ", inpath, inpath, inpath);
+	    "ln -sf ~/.config/fuzzel/fuzzel-duplicated.ini ~/.config/fuzzel/fuzzel.ini ", inpath, inpath);
     system(cmd);  		
 }
 void GTKL(char ARCHIVE, float pver, char PKGINSTALL)
@@ -146,7 +159,7 @@ void GTKL(char ARCHIVE, float pver, char PKGINSTALL)
 	system(cmd);
     }
     // export gtklock config
-    snprintf(cmd, sizeof(cmd),
+    snprintf(cmd, 384,
             "mkdir -p ~/.config/gtklock/assets ; "
             "cp -f %s/gtklock/style.css ~/.config/gtklock ; "
             "cp -f %s/gtklock/lockscreen.jpg ~/.config/gtklock/assets", inpath, inpath);
@@ -155,10 +168,10 @@ void GTKL(char ARCHIVE, float pver, char PKGINSTALL)
 
 void HYPR(char ARCHIVE, float pver, char PKGINSTALL)
 {
-    char cmd[256];
     if (ARCHIVE == 'Y' || ARCHIVE == 'y')
     {
     	// archive hyprland configs
+	char cmd[256];
         snprintf(cmd, sizeof(cmd),
 		"mv ~/.config/hypr/hyprland.conf ~/.config/hypr/hyprland-oldv%.2f.conf ; "
         	"mv ~/.config/hypr/hyprpaper.conf ~/.config/hypr/hyprpaper-oldv%.2f.conf ; "
@@ -168,12 +181,21 @@ void HYPR(char ARCHIVE, float pver, char PKGINSTALL)
     if ( PKGINSTALL == 'Y'|| PKGINSTALL == 'y')
     {
 	// install Hyprland package
+	char cmd[256];
         snprintf(cmd, 48,
 		"yay -S --noconfirm hypridle hyprpaper hyprland");
 	system(cmd);
     }
     // export hyprland configs
-    snprintf(cmd, sizeof(cmd),
+    int mem_needed = snprintf(NULL, 0,
+	    "mkdir -p ~/.config/hypr ; "
+	    "cp -f %s/hypr/hyprland.conf ~/.config/hypr ; "
+    	    "cp -f %s/hypr/hypridle.conf ~/.config/hypr ; "
+    	    "cp -f %s/hypr/hyprpaper.conf ~/.config/hypr", inpath, inpath, inpath);
+
+    char *cmd = malloc(mem_needed + 1);
+
+    snprintf(cmd, mem_needed + 1,
 	    "mkdir -p ~/.config/hypr ; "
 	    "cp -f %s/hypr/hyprland.conf ~/.config/hypr ; "
     	    "cp -f %s/hypr/hypridle.conf ~/.config/hypr ; "
@@ -209,7 +231,7 @@ void KITT(char ARCHIVE, float pver, char PKGINSTALL)
 
 void MPVF(char ARCHIVE, float pver, char PKGINSTALL)
 {
-    char cmd[128];
+    char cmd[256];
     if (ARCHIVE == 'Y' || ARCHIVE == 'y')
     {
     	// archive mpv config
@@ -227,7 +249,7 @@ void MPVF(char ARCHIVE, float pver, char PKGINSTALL)
 	printf(BOLD_S"\nMPV was installed!\n"STYLE_END);
     }
     // export mpv config with shaders
-    snprintf(cmd, 96,
+    snprintf(cmd, 128,
 	    "mkdir -p ~/.config/mpv/ ; "
             "cp -f %s/mpv/mpv.conf ~/.config/mpv ", inpath);
     system(cmd);
@@ -331,7 +353,7 @@ void ZSHH(char ARCHIVE, float pver, char PKGINSTALL)
 	system(cmd);
     }
     // export waybar config and appearance
-    snprintf(cmd, 48,
+    snprintf(cmd, 96,
 	    "cp -f %s/shell/zsh/.zshrc ~/ ", inpath);
     system(cmd);
     printf("Refer to the dotfiles configuration menu in order to use zsh proprely\n");
