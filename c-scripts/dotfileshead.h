@@ -80,12 +80,12 @@ extern char kitty_config_menu_text[32];
 extern char fuzzel_config_menu_text[32];
 extern char zshforhumans_config_menu_text[32];
 
-extern char main_menu_text[128] = "Welcome to the setup utility for ImAwsumm's dotfiles";
-extern char opt_one_text[128] = "Install the dotfiles";
-extern char opt_the_text[128] = "Update your dotfiles";
-extern char opt_for_text[128] = "Custom configuration menu";
-extern char opt_fiv_text[128] = "Something else";
-extern char opt_exit_text[128] = "Exit";
+extern char main_menu_text[128];
+extern char opt_one_text[128];
+extern char opt_the_text[128];
+extern char opt_for_text[128];
+extern char opt_fiv_text[128];
+extern char opt_exit_text[16];
 
 extern char initial_path[64];
 extern char inpath[64];
