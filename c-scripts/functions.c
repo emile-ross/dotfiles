@@ -35,7 +35,7 @@ char opt_one_text[128] = "Install the dotfiles";
 char opt_the_text[128] = "Update your dotfiles";
 char opt_for_text[128] = "Custom configuration menu";
 char opt_fiv_text[128] = "Something else";
-char opt_exit_text[128] = "Exit";
+char opt_exit_text[16] = "Exit";
 
 int timer_quarters;
 int timer_seconds;
@@ -136,6 +136,10 @@ int error_message(int err_code)
 	case 909:
 	    printf("This error should never display (in theory) \n");
 	    break;
+		
+	default:
+		snprintf(err_text_temp, sizeof(err_text_temp), "This error code isn't known");
+		break;
     }
     printf(ANSI_RED BOLD_S"%s \n"STYLE_END, err_text_temp);
     printf(ANSI_RED BOLD_S"%s \n"STYLE_END, err_solution_temp);
