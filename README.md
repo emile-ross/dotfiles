@@ -172,4 +172,18 @@ other credits:
 - https://github.com/Matt-FTW/dotfiles
 (nvim ascii art)
 
-[fr]: README.fr.md
+Hyprland WM [github.com/hyprwm/Hyprland](https://github.com/hyprwm/Hyprland)
+
+SwayWM [github.com/swaywm/sway](https://github.com/swaywm/sway)
+
+wlroots [gitlab.freedesktop.org/wlroots/wlroots](https://gitlab.freedesktop.org/wlroots/wlroots)
+
+Waybar [github.com/Alexays/Waybar](https://github.com/Alexays/Waybar)
+
+Catppuccin Neovim theme [github.com/catppuccin/nvim](https://github.com/catppuccin/nvim)
+
+Catppuccin Fuzzel theme [github.com/catppuccin/fuzzel](https://github.com/catppuccin/fuzzel)
+
+Catppuccin Hyprlock theme (not in use) [github.com/catppuccin/hyprlock](https://github.com/catppuccin/hyprlock)
+
+[fr]: assets/README.fr.md
