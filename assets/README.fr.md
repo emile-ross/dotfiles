@@ -71,6 +71,18 @@ This is a script to help new users configure their system to tbeir liking.
 You can use this script to install your dotfiles, update your dotfiles and configure your environment! 
 
 Plus de fonctionnalités sont à venir.
+
+### Compiler avec make
+```sh
+git clone https://github.com/imawsumm/dotfiles
+cd dotfiles/
+make setup
+./setup
+```
+
+**ou**
+
+**Compiler avec GCC**
 ```sh
 git clone https://github.com/imawsumm/dotfiles
 gcc dotfiles/c-scripts/setup.c dotfiles/c-scripts/functions.c dotfiles/c-scripts/install.c dotfiles/c-scripts/update.c dotfiles/c-scripts/programs.c -o setup -Wall
@@ -96,29 +108,29 @@ super + C -> **Fermer la fenêtre**
 
 ### ouvrir les applications
 
-super + R -> **execute [fuzzel](https://codeberg.org/dnkl/fuzzel)**
+super + R -> **exécuter [fuzzel](https://codeberg.org/dnkl/fuzzel)**
 > (fuzzel exécute les applications présentes sur le système)
 
 
-super + E -> **execute [dolphin](https://github.com/KDE/dolphin)**
+super + E -> **exécuter [dolphin](https://github.com/KDE/dolphin)**
 > *(un gestionnaire de fichiers avec interface graphique)*
 
 
-super + 1 -> **execute [Floorp](https://github.com/Floorp-Projects/Floorp)**
+super + 1 -> **exécuter [Floorp](https://github.com/Floorp-Projects/Floorp)**
 > *(un navigateur web basé sur firefox/gecko)*
 
 
-super + 2 -> **execute [Firefox](https://github.com/mozilla-firefox/firefox)**
+super + 2 -> **exécuter [Firefox](https://github.com/mozilla-firefox/firefox)**
 
 
-super + 3 -> **execute [Chromium](https://source.chromium.org/chromium)**
+super + 3 -> **exécuter [Chromium](https://source.chromium.org/chromium)**
 > *(Chromium est google Chrome sans google (DeGoogled) )*
 
 
-super + 4 -> **execute [LibreWolf](https://codeberg.org/librewolf/source)**
+super + 4 -> **exécuter [LibreWolf](https://codeberg.org/librewolf/source)**
 > *(un navigateur web basé sur firefox/gecko)*
 
-super + 0 -> **execute [OBS](https://github.com/obsproject/obs-studio)**
+super + 0 -> **exécuter [OBS](https://github.com/obsproject/obs-studio)**
 > *(un programme open source permettant de diffuser et d'enregistrer des vidéos)*
 
 ## Multi Tasking
