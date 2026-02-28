@@ -54,7 +54,7 @@ void CAVA(char ARCHIVE, float pver, char PKGINSTALL)
     if (ARCHIVE == 'Y' || ARCHIVE == 'y')
     {
         // backup cava config
-        snprintf(cmd, 64,
+        snprintf(cmd, sizeof(cmd),
 		"mv ~/.config/cava/config "
 		"~/.config/cava/config-oldv%.2f", pver);
         system(cmd);
@@ -67,7 +67,7 @@ void CAVA(char ARCHIVE, float pver, char PKGINSTALL)
 	system(cmd);
     }
     // export cava config
-    snprintf(cmd, 128,
+    snprintf(cmd, sizeof(cmd),
 	    "mkdir -p ~/.config/cava ; "
 	    "cp -f %s/cava/config ~/.config/cava/ ", inpath);
     system(cmd);
@@ -75,7 +75,7 @@ void CAVA(char ARCHIVE, float pver, char PKGINSTALL)
 
 void FAST(char ARCHIVE, float pver, char PKGINSTALL)
 {
-    char cmd[512];
+    char cmd[768];
     if (ARCHIVE == 'Y' || ARCHIVE == 'y')
     {
     	// backup fastfetch config
@@ -159,7 +159,7 @@ void GTKL(char ARCHIVE, float pver, char PKGINSTALL)
 	system(cmd);
     }
     // export gtklock config
-    snprintf(cmd, sizeof(cmd),
+    snprintf(cmd, 384,
             "mkdir -p ~/.config/gtklock/assets ; "
             "cp -f %s/gtklock/style.css ~/.config/gtklock ; "
             "cp -f %s/gtklock/lockscreen.jpg ~/.config/gtklock/assets", inpath, inpath);
@@ -171,35 +171,42 @@ void HYPR(char ARCHIVE, float pver, char PKGINSTALL)
     if (ARCHIVE == 'Y' || ARCHIVE == 'y')
     {
     	// archive hyprland configs
-	char cmd[256];
+	char cmd[1536];
         snprintf(cmd, sizeof(cmd),
 		"mv ~/.config/hypr/hyprland.conf ~/.config/hypr/hyprland-oldv%.2f.conf ; "
         	"mv ~/.config/hypr/hyprpaper.conf ~/.config/hypr/hyprpaper-oldv%.2f.conf ; "
-        	"mv ~/.config/hypr/hypridle.conf ~/.config/hypr/hypridle-oldv%.2f.conf", pver, pver, pver);
+        	"mv ~/.config/hypr/hyprlock.conf ~/.config/hypr/hyprlock-oldv%.2f.conf ; "
+        	"mv ~/.config/hypr/hypridle.conf ~/.config/hypr/hypridle-oldv%.2f.conf", pver, pver, pver, pver);
         system(cmd);
     }
     if ( PKGINSTALL == 'Y'|| PKGINSTALL == 'y')
     {
 	// install Hyprland packages
-	char cmd[64];
-        snprintf(cmd, 48,
-		"yay -S --noconfirm hypridle hyprpaper hyprland");
+	char cmd[256];
+        snprintf(cmd, 64,
+		"yay -S --noconfirm hyprlock hypridle hyprpaper hyprland");
 	system(cmd);
     }
     // export hyprland configs
     int mem_needed = snprintf(NULL, 0,
-	    "mkdir -p ~/.config/hypr ; "
+	    "mkdir -p ~/.config/hypr/assets ; "
+    	    "cp -f %s/hypr/assets/lockscreen.png ~/.config/hypr/assets/ ; "
 	    "cp -f %s/hypr/hyprland.conf ~/.config/hypr ; "
     	    "cp -f %s/hypr/hypridle.conf ~/.config/hypr ; "
-    	    "cp -f %s/hypr/hyprpaper.conf ~/.config/hypr", inpath, inpath, inpath);
+    	    "cp -f %s/hypr/hyprlock.conf ~/.config/hypr ; "
+    	    "cp -f %s/hypr/hyprpaper.conf ~/.config/hypr",
+	    inpath, inpath, inpath, inpath, inpath);
 
-    char *cmd = malloc(mem_needed + 1);
+    char *cmd = malloc(mem_needed + 1); // allocate just enough memory for the buffer size
 
     snprintf(cmd, mem_needed + 1,
-	    "mkdir -p ~/.config/hypr ; "
+	    "mkdir -p ~/.config/hypr/assets ; "
+    	    "cp -f %s/hypr/assets/lockscreen.png ~/.config/hypr/assets/ ; "
 	    "cp -f %s/hypr/hyprland.conf ~/.config/hypr ; "
     	    "cp -f %s/hypr/hypridle.conf ~/.config/hypr ; "
-    	    "cp -f %s/hypr/hyprpaper.conf ~/.config/hypr", inpath, inpath, inpath);
+    	    "cp -f %s/hypr/hyprlock.conf ~/.config/hypr ; "
+    	    "cp -f %s/hypr/hyprpaper.conf ~/.config/hypr",
+	    inpath, inpath, inpath, inpath, inpath);
     system(cmd);
 }
 void KITT(char ARCHIVE, float pver, char PKGINSTALL)
@@ -208,7 +215,7 @@ void KITT(char ARCHIVE, float pver, char PKGINSTALL)
     if (ARCHIVE == 'Y' || ARCHIVE == 'y')
     {
     	// backup kitty config
-        snprintf(cmd, 128,
+        snprintf(cmd, sizeof(cmd),
     		"mv ~/.config/kitty/kitty.conf "
     		"~/.config/kitty/kitty-oldv%.2f.conf", pver);
     	system(cmd);
@@ -290,7 +297,8 @@ void SWAY(char ARCHIVE, float pver, char PKGINSTALL)
     if (ARCHIVE == 'Y' || ARCHIVE == 'y')
     {
         snprintf(cmd, sizeof(cmd),
-    	    	"mv ~/.config/sway/config ~/.config/sway/config-oldv%.2f ", pver);
+    	    	"mv ~/.config/sway/config ~/.config/sway/config-oldv%.2f ",
+		pver);
         system(cmd);
     }
     if ( PKGINSTALL == 'Y'|| PKGINSTALL == 'y')
