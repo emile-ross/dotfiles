@@ -13,10 +13,10 @@ Si vous voulez **Installer** vos configurations, cliquez [ici](#Installer)
   </tr>
   <tr>
     <td align="center">
-       <img src="assets/1.png" alt="desktop" width=400>
+       <img src="1.png" alt="desktop" width=400>
     </td>
     <td align="center">
-      <img src="assets/2.png" alt="neovim with telescope" width=400>
+      <img src="2.png" alt="neovim with telescope" width=400>
     </td>
   </tr>
   <tr>
@@ -25,10 +25,10 @@ Si vous voulez **Installer** vos configurations, cliquez [ici](#Installer)
   </tr>
   <tr>
     <td align="center">
-      <img src="assets/3.png" alt="neovim" width="400">
+      <img src="3.png" alt="neovim" width="400">
     </td>
     <td align="center">
-      <img src="assets/4.png" alt="neovim" width="400">
+      <img src="4.png" alt="neovim" width="400">
     </td>
   </tr>
 </table>
