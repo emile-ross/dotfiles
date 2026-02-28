@@ -8,7 +8,7 @@ void BASH()
     printf(UDRL_S"\nYou can find the new .bashrc file under the name %s\n"STYLE_END, BRCNAME);
 
     // export .bashrc
-    //
+    
     int mem_needed = snprintf(NULL, 0,
 	    "cp -f %s/shell/bash/.bashrc ~/%s", 
 	    inpath, BRCNAME);
@@ -54,9 +54,9 @@ void CAVA(char ARCHIVE, float pver, char PKGINSTALL)
     if (ARCHIVE == 'Y' || ARCHIVE == 'y')
     {
         // backup cava config
-        snprintf(cmd, sizeof(cmd),
+        snprintf(cmd, 64,
 		"mv ~/.config/cava/config "
-		"~/.config/cava/config-oldv%.1f", pver);
+		"~/.config/cava/config-oldv%.2f", pver);
         system(cmd);
     }
     if ( PKGINSTALL == 'Y'|| PKGINSTALL == 'y')
@@ -67,7 +67,7 @@ void CAVA(char ARCHIVE, float pver, char PKGINSTALL)
 	system(cmd);
     }
     // export cava config
-    snprintf(cmd, sizeof(cmd),
+    snprintf(cmd, 128,
 	    "mkdir -p ~/.config/cava ; "
 	    "cp -f %s/cava/config ~/.config/cava/ ", inpath);
     system(cmd);
@@ -92,7 +92,7 @@ void FAST(char ARCHIVE, float pver, char PKGINSTALL)
 	system(cmd);
     }
     // export fastfetch config
-    snprintf(cmd, sizeof(cmd) + 128,
+    snprintf(cmd, sizeof(cmd),
 	    "rm ~/.config/fastfetch ; "
 	    "mkdir -p ~/.config/fastfetch/assets ; "
 	    "cp -f %s/fastfetch/assets/*.png ~/.config/fastfetch/assets ; "
@@ -159,7 +159,7 @@ void GTKL(char ARCHIVE, float pver, char PKGINSTALL)
 	system(cmd);
     }
     // export gtklock config
-    snprintf(cmd, 384,
+    snprintf(cmd, sizeof(cmd),
             "mkdir -p ~/.config/gtklock/assets ; "
             "cp -f %s/gtklock/style.css ~/.config/gtklock ; "
             "cp -f %s/gtklock/lockscreen.jpg ~/.config/gtklock/assets", inpath, inpath);
@@ -181,7 +181,7 @@ void HYPR(char ARCHIVE, float pver, char PKGINSTALL)
     if ( PKGINSTALL == 'Y'|| PKGINSTALL == 'y')
     {
 	// install Hyprland packages
-	char cmd[256];
+	char cmd[64];
         snprintf(cmd, 48,
 		"yay -S --noconfirm hypridle hyprpaper hyprland");
 	system(cmd);
@@ -208,9 +208,9 @@ void KITT(char ARCHIVE, float pver, char PKGINSTALL)
     if (ARCHIVE == 'Y' || ARCHIVE == 'y')
     {
     	// backup kitty config
-        snprintf(cmd, sizeof(cmd),
+        snprintf(cmd, 128,
     		"mv ~/.config/kitty/kitty.conf "
-    		"~/.config/kitty/kitty-oldv%.1f.conf", pver);
+    		"~/.config/kitty/kitty-oldv%.2f.conf", pver);
     	system(cmd);
     }
     if ( PKGINSTALL == 'Y'|| PKGINSTALL == 'y')
@@ -290,8 +290,7 @@ void SWAY(char ARCHIVE, float pver, char PKGINSTALL)
     if (ARCHIVE == 'Y' || ARCHIVE == 'y')
     {
         snprintf(cmd, sizeof(cmd),
-    	    	"mv ~/.config/sway/config ~/.config/sway/config-oldv%.2f ",
-		pver);
+    	    	"mv ~/.config/sway/config ~/.config/sway/config-oldv%.2f ", pver);
         system(cmd);
     }
     if ( PKGINSTALL == 'Y'|| PKGINSTALL == 'y')
