@@ -163,6 +163,19 @@ Vous pouvez trouver le contenu original à: [github.com/kzndotsh/dotfiles](https
 
 autres crédits:
 
+Hyprland WM [github.com/hyprwm/Hyprland](https://github.com/hyprwm/Hyprland)
+
+SwayWM [github.com/swaywm/sway](https://github.com/swaywm/sway)
+
+wlroots [gitlab.freedesktop.org/wlroots/wlroots](https://gitlab.freedesktop.org/wlroots/wlroots)
+
+Waybar [github.com/Alexays/Waybar](https://github.com/Alexays/Waybar)
+
+Thème Catppuccin de Neovim [github.com/catppuccin/nvim](https://github.com/catppuccin/nvim)
+
+Thème Catppuccin de Fuzzel [github.com/catppuccin/fuzzel](https://github.com/catppuccin/fuzzel)
+
+Thème Catppuccin de Hyprlock (pas utilisé) [github.com/catppuccin/hyprlock](https://github.com/catppuccin/hyprlock)
 
 - https://github.com/harilvfs/fastfetch
 (configurations fastfetch)
