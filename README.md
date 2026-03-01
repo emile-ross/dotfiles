@@ -186,4 +186,6 @@ Catppuccin Fuzzel theme [github.com/catppuccin/fuzzel](https://github.com/catppu
 
 Catppuccin Hyprlock theme (not in use) [github.com/catppuccin/hyprlock](https://github.com/catppuccin/hyprlock)
 
+Current Hyprlock theme based on [github.com/MrVivekRajan/Hyprlock-Styles/](https://github.com/MrVivekRajan/Hyprlock-Styles/blob/main/Style-2/hyprlock.conf)
+
 [fr]: assets/README.fr.md
