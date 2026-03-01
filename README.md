@@ -84,6 +84,7 @@ make setup
 **Compile using GCC**
 ```sh
 git clone https://github.com/imawsumm/dotfiles
+cd dotfiles/
 gcc dotfiles/c-scripts/setup.c dotfiles/c-scripts/functions.c dotfiles/c-scripts/install.c dotfiles/c-scripts/update.c dotfiles/c-scripts/programs.c -o setup -Wall
 ./setup
 ``` 
