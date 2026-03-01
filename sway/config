@@ -28,7 +28,8 @@ set $menu fuzzel
 ## Your lockscreen
 
 # set $lock swaylock
-set $lock gtklock -c ~/.config/gtklock/style.css
+# set $lock gtklock -c ~/.config/gtklock/style.css
+set $lock hyprlock
 
 
 ## set keybinds for common programs
@@ -39,7 +40,6 @@ set $firefox firefox
 set $chrome chromium
 set $obs obs
 set $fileManager dolphin
-
 
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 
