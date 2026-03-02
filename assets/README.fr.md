@@ -163,13 +163,13 @@ Vous pouvez trouver le contenu original à: [github.com/kzndotsh/dotfiles](https
 
 autres crédits:
 
-Hyprland WM [github.com/hyprwm/Hyprland](https://github.com/hyprwm/Hyprland)
+Hyprland WM source code: [github.com/hyprwm/Hyprland](https://github.com/hyprwm/Hyprland)
 
-SwayWM [github.com/swaywm/sway](https://github.com/swaywm/sway)
+SwayWM source code: [github.com/swaywm/sway](https://github.com/swaywm/sway)
 
-wlroots [gitlab.freedesktop.org/wlroots/wlroots](https://gitlab.freedesktop.org/wlroots/wlroots)
+wlroots source code: [gitlab.freedesktop.org/wlroots/wlroots](https://gitlab.freedesktop.org/wlroots/wlroots)
 
-Waybar [github.com/Alexays/Waybar](https://github.com/Alexays/Waybar)
+Waybar source code: [github.com/Alexays/Waybar](https://github.com/Alexays/Waybar)
 
 Thème Catppuccin de Neovim [github.com/catppuccin/nvim](https://github.com/catppuccin/nvim)
 
