@@ -164,22 +164,22 @@ You can find the original content at: [github.com/kzndotsh/dotfiles](https://git
 
 other credits:
 
-- https://github.com/harilvfs/fastfetch
-(fastfetch config)
+fastfetch config: [github.com/harilvfs/fastfetch](https://github.com/harilvfs/fastfetch)
 
-- https://github.com/torvalds/linux
-(Linux ofc)
+
+linux kernel source code: [github.com/torvalds/linux](https://github.com/torvalds/linux)
+
 
 - https://github.com/Matt-FTW/dotfiles
 (nvim ascii art)
 
-Hyprland WM [github.com/hyprwm/Hyprland](https://github.com/hyprwm/Hyprland)
+Hyprland WM source code: [github.com/hyprwm/Hyprland](https://github.com/hyprwm/Hyprland)
 
-SwayWM [github.com/swaywm/sway](https://github.com/swaywm/sway)
+SwayWM source code: [github.com/swaywm/sway](https://github.com/swaywm/sway)
 
-wlroots [gitlab.freedesktop.org/wlroots/wlroots](https://gitlab.freedesktop.org/wlroots/wlroots)
+wlroots source code: [gitlab.freedesktop.org/wlroots/wlroots](https://gitlab.freedesktop.org/wlroots/wlroots)
 
-Waybar [github.com/Alexays/Waybar](https://github.com/Alexays/Waybar)
+Waybar source code: [github.com/Alexays/Waybar](https://github.com/Alexays/Waybar)
 
 Catppuccin Neovim theme [github.com/catppuccin/nvim](https://github.com/catppuccin/nvim)
 
