@@ -87,6 +87,9 @@ extern char opt_for_text[128];
 extern char opt_fiv_text[128];
 extern char opt_exit_text[16];
 
+extern char kitty_color_text[32];
+extern char kitty_fonts_text[32];
+
 extern char initial_path[64];
 extern char inpath[64];
 
