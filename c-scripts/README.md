@@ -4,6 +4,12 @@ c source code
 
 make sure you compile the c-scripts
 
+## Compile using make 
+
+```bash
+make full
+```
+
 ## Compile using GCC 
 
 ```bash
