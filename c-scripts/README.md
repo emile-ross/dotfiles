@@ -9,10 +9,7 @@ Compile before executing.
 ```bash
 make full
 ```
-or ``make setup`` if you don't want any warnings
-```bash
-make setup
-```
+or ``make setup`` if you don't want any warning
 
 ## Compile using GCC 
 
