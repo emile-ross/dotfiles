@@ -18,3 +18,7 @@ clean:
 full: full_recompilation
 	gcc $(FLAGS) setup.o functions.o install.o update.o programs.o -o setup
 	@echo "Compiled successfully"
+
+setup: full_recompilation
+	gcc setup.o functions.o install.o update.o programs.o -o setup
+	@echo "Compiled successfully"
