@@ -1,8 +1,8 @@
 # c-scripts 
 
-c source code
+C source code
 
-make sure you compile the c-scripts
+Compile before executing. 
 
 ## Compile using make 
 
@@ -13,7 +13,7 @@ make full
 ## Compile using GCC 
 
 ```bash
-gcc setup.c functions.c install.c update.c programs.c -o setup -Wall
+gcc setup.c functions.c install.c update.c programs.c -o setup -Wall -Wextra
 ./setup
 ```
 ## Compile using zig 
