@@ -1,12 +1,22 @@
 #include "dotfileshead.h"
 
-int main()
+int main(int argc, char *argv[])
 {
     pre_startup();
+    
+    if (argc > 1) // checks how many arguments were used
+    {
+	// checks if the command was ran with the --noconfirm flag
+	if (strcmp(argv[1], "--noconfirm") == 0) 
+	{
+	    printf(BOLD_S"Proceeding with full install\n"STYLE_END);
+	}
+    }
+
     do
     {
     	// sets the text for each option and each menu title
-    	clear();
+    	//clear();
     	printf(BOLD_S ANSI_CYAN "%s\n\n" STYLE_END, main_menu_text );
     	printf(BOLD_S " [1] " STYLE_END "%s\n", opt_one_text);
     	printf(BOLD_S " [2] " STYLE_END "%s\n", opt_the_text);
