@@ -23,6 +23,31 @@ char *cmd = malloc(mem_needed + 1);
     free(cmd);
 }
 
+void BPYT(char ARCHIVE, float pver, char PKGINSTALL)
+{
+    char cmd[128];
+    if (ARCHIVE == 'Y' || ARCHIVE == 'y')
+    {
+    	// archive btop config
+    	snprintf(cmd, sizeof(cmd),
+    		"mv ~/.config/bpytop/bpytop.conf "
+    		"~/.config/bpytop/bpytop-oldv%.2f.conf", pver);
+    	system(cmd);
+    }
+    if ( PKGINSTALL == 'Y'|| PKGINSTALL == 'y')
+    {
+	// install btop package
+        snprintf(cmd, 32,
+		"yay -S --noconfirm bpytop");
+	system(cmd);
+    }
+    // export btop config
+    snprintf(cmd, sizeof(cmd),
+	   "mkdir -p ~/.config/bpytop ; "
+	   "cp -f %s/bpytop/bpytop.conf ~/.config/btop", inpath);
+    system(cmd);
+}
+
 void BTOP(char ARCHIVE, float pver, char PKGINSTALL)
 {
     char cmd[128];
