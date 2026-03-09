@@ -28,7 +28,7 @@ void BPYT(char ARCHIVE, float pver, char PKGINSTALL)
     char cmd[128];
     if (ARCHIVE == 'Y' || ARCHIVE == 'y')
     {
-    	// archive btop config
+    	// archive bpytop config
     	snprintf(cmd, sizeof(cmd),
     		"mv ~/.config/bpytop/bpytop.conf "
     		"~/.config/bpytop/bpytop-oldv%.2f.conf", pver);
@@ -36,15 +36,15 @@ void BPYT(char ARCHIVE, float pver, char PKGINSTALL)
     }
     if ( PKGINSTALL == 'Y'|| PKGINSTALL == 'y')
     {
-	// install btop package
+	// install bpytop package
         snprintf(cmd, 32,
 		"yay -S --noconfirm bpytop");
 	system(cmd);
     }
-    // export btop config
+    // export bpytop config
     snprintf(cmd, sizeof(cmd),
 	   "mkdir -p ~/.config/bpytop ; "
-	   "cp -f %s/bpytop/bpytop.conf ~/.config/btop", inpath);
+	   "cp -f %s/bpytop/bpytop.conf ~/.config/bpytop", inpath);
     system(cmd);
 }
 
