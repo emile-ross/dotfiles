@@ -9,6 +9,7 @@ void clear()
 
 char* TEXT_C_BASH = ".bashrc";
 char* TEXT_C_SWAY = "Sway-WM configs";
+char* TEXT_C_BPYT = "bpytop config";
 char* TEXT_C_BTOP = "btop config";
 char* TEXT_C_CAVA = "cava config";
 char* TEXT_C_FAST = "fastfetch configs";
@@ -420,6 +421,7 @@ void full_install(char ARCHIVE, char full_install_opt)
 	BASH();
 	SWAY(ARCHIVE, 0.0, 'Y');
 	BTOP(ARCHIVE, 0.0, 'Y');
+	BPYT(ARCHIVE, 0.0, 'Y');
 	CAVA(ARCHIVE, 0.0, 'Y');
 	FAST(ARCHIVE, 0.0, 'Y');
 	FUZZ(ARCHIVE, 0.0, 'Y');
@@ -437,7 +439,7 @@ void full_install(char ARCHIVE, char full_install_opt)
 	do
 	{
 	    printf("\n[1] Install %s ", TEXT_C_BASH);
-	    printf("\n[2] Install %s ", TEXT_C_SWAY);
+	    printf("\n[2] Install %s ", TEXT_C_BPYT);
 	    printf("\n[3] Install %s ", TEXT_C_BTOP);
 	    printf("\n[4] Install %s ", TEXT_C_CAVA);
 	    printf("\n[5] Install %s ", TEXT_C_FAST);
@@ -447,8 +449,9 @@ void full_install(char ARCHIVE, char full_install_opt)
 	    printf("\n[9] Install %s ", TEXT_C_KITT);
 	    printf("\n[10] Install %s ", TEXT_C_MPVF);
 	    printf("\n[11] Install %s ", TEXT_C_NVIM);
-	    printf("\n[12] Install %s ", TEXT_C_WAYB);
-	    printf("\n[13] Install %s ", TEXT_C_ZSHH);
+	    printf("\n[12] Install %s ", TEXT_C_SWAY);
+	    printf("\n[13] Install %s ", TEXT_C_WAYB);
+	    printf("\n[14] Install %s ", TEXT_C_ZSHH);
 	    
 	    while (getchar() != '\n');  // clear imput buffer 
 	    scanf(" %d", &install_pkg_opt);
