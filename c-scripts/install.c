@@ -26,6 +26,14 @@ void install_configs(int custom_package_install)  // the partial install script 
     	        printf(UDRL_S"\nInstalled %s successfully.\n"STYLE_END, temp_conf_installed);
 		break;
     	    case 2:
+    	        temp_conf_installed = (char*)(TEXT_C_BPYT);
+
+    	        printf("\nInstalling %s \n", temp_conf_installed);
+		BPYT(ARCHIVE, pver, PKGINSTALL);
+		clear();
+    	        printf(UDRL_S"\nInstalled %s successfully.\n"STYLE_END, temp_conf_installed);
+		break;
+    	    case 3:
     	        temp_conf_installed = (char*)(TEXT_C_BTOP);
 
     	        printf("\nInstalling %s \n", temp_conf_installed);
@@ -33,7 +41,7 @@ void install_configs(int custom_package_install)  // the partial install script 
 		clear();
     	        printf(UDRL_S"\nInstalled %s successfully.\n"STYLE_END, temp_conf_installed);
 		break;
-    	    case 3:
+	    case 4:
     	        temp_conf_installed = (char*)(TEXT_C_CAVA);
 
     	        printf("\nInstalling %s \n", temp_conf_installed);
@@ -41,7 +49,7 @@ void install_configs(int custom_package_install)  // the partial install script 
 		clear();
     	        printf(UDRL_S"\nInstalled %s successfully.\n"STYLE_END, temp_conf_installed);
 		break;
-    	    case 4:
+    	    case 5:
     	        temp_conf_installed = (char*)(TEXT_C_FAST);
 
     	        printf("\nInstalling %s \n", temp_conf_installed);
@@ -49,7 +57,7 @@ void install_configs(int custom_package_install)  // the partial install script 
 		clear();
     	        printf(UDRL_S"\nInstalled %s successfully.\n"STYLE_END, temp_conf_installed);
 		break;
-    	    case 5:
+    	    case 6:
     	        temp_conf_installed = (char*)(TEXT_C_FUZZ);
 
     	        printf("\nInstalling %s \n", temp_conf_installed);
@@ -57,7 +65,7 @@ void install_configs(int custom_package_install)  // the partial install script 
 		clear();
     	        printf(UDRL_S"\nInstalled %s successfully.\n"STYLE_END, temp_conf_installed);
 		break;
-    	    case 6:
+    	    case 7:
     	        temp_conf_installed = (char*)(TEXT_C_GTKL);
 
     	        printf("\nInstalling %s \n", temp_conf_installed);
@@ -65,7 +73,7 @@ void install_configs(int custom_package_install)  // the partial install script 
 		clear();
     	        printf(UDRL_S"\nInstalled %s successfully.\n"STYLE_END, temp_conf_installed);
 		break;
-    	    case 7:
+    	    case 8:
     	        temp_conf_installed = (char*)(TEXT_C_HYPR);
 
     	        printf("\nInstalling %s \n", temp_conf_installed);
@@ -73,7 +81,7 @@ void install_configs(int custom_package_install)  // the partial install script 
 		clear();
     	        printf(UDRL_S"\nInstalled %s successfully.\n"STYLE_END, temp_conf_installed);
 		break;
-    	    case 8:
+    	    case 9:
     	        temp_conf_installed = (char*)(TEXT_C_KITT);
 
     	        printf("\nInstalling %s \n", temp_conf_installed);
@@ -81,7 +89,7 @@ void install_configs(int custom_package_install)  // the partial install script 
 		clear();
     	        printf(UDRL_S"\nInstalled %s successfully.\n"STYLE_END, temp_conf_installed);
 		break;
-    	    case 9:
+    	    case 10:
     	        temp_conf_installed = (char*)(TEXT_C_MPVF);
 
     	        printf("\nInstalling %s \n", temp_conf_installed);
@@ -89,7 +97,7 @@ void install_configs(int custom_package_install)  // the partial install script 
 		clear();
     	        printf(UDRL_S"\nInstalled %s successfully.\n"STYLE_END, temp_conf_installed);
 		break;
-    	    case 10:
+    	    case 11:
     	        temp_conf_installed = (char*)(TEXT_C_NVIM);
 
     	        printf("\nInstalling %s \n", temp_conf_installed);
@@ -97,7 +105,7 @@ void install_configs(int custom_package_install)  // the partial install script 
 		clear();
     	        printf(UDRL_S"\nInstalled %s successfully.\n"STYLE_END, temp_conf_installed);
 		break;
-    	    case 11:
+    	    case 12:
     	        temp_conf_installed = (char*)(TEXT_C_SWAY);
 
     	        printf("\nInstalling %s \n", temp_conf_installed);
@@ -105,7 +113,7 @@ void install_configs(int custom_package_install)  // the partial install script 
 		clear();
     	        printf(UDRL_S"\nInstalled %s successfully.\n"STYLE_END, temp_conf_installed);
 		break;
-    	    case 12:
+    	    case 13:
     	        temp_conf_installed = (char*)(TEXT_C_WAYB);
 
     	        printf("\nInstalling %s \n", temp_conf_installed);
