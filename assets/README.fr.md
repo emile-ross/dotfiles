@@ -47,9 +47,10 @@ Si vous voulez **Installer** vos configurations, cliquez [ici](#Installer)
 - sway (pas complètement mis en place)
   - avec une configuration pour la «swaybar»
 - **waybar**
-- fastfetch
 - btop
+- bpytop
 - cava
+- fastfetch
 - fuzzel
 - kitty
   - options de police
