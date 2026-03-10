@@ -155,13 +155,13 @@ Vous pouvez trouver le contenu original à: [github.com/kzndotsh/dotfiles](https
 
 autres crédits:
 
-Hyprland WM source code: [github.com/hyprwm/Hyprland](https://github.com/hyprwm/Hyprland)
+le code source pour Hyprland WM: [github.com/hyprwm/Hyprland](https://github.com/hyprwm/Hyprland)
 
-SwayWM source code: [github.com/swaywm/sway](https://github.com/swaywm/sway)
+le code source pour SwayWM: [github.com/swaywm/sway](https://github.com/swaywm/sway)
 
-wlroots source code: [gitlab.freedesktop.org/wlroots/wlroots](https://gitlab.freedesktop.org/wlroots/wlroots)
+le code source pour wlroots: [gitlab.freedesktop.org/wlroots/wlroots](https://gitlab.freedesktop.org/wlroots/wlroots)
 
-Waybar source code: [github.com/Alexays/Waybar](https://github.com/Alexays/Waybar)
+le code source pour Waybar: [github.com/Alexays/Waybar](https://github.com/Alexays/Waybar)
 
 Thème Catppuccin de Neovim [github.com/catppuccin/nvim](https://github.com/catppuccin/nvim)
 
@@ -177,5 +177,3 @@ Thème Catppuccin de Hyprlock (pas utilisé) [github.com/catppuccin/hyprlock](ht
 
 - https://github.com/Matt-FTW/dotfiles
   (de l'art en symboles ASCII)
-
-*veulliez noter que certains crédits sont manquants*
