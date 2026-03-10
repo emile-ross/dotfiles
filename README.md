@@ -49,6 +49,7 @@ If you want to **Install** your dotfiles, click [here](#Install)
   - with swaybar confguration
 - **waybar**
 - btop
+- bpytop 
 - cava
 - fastfetch
 - fuzzel
