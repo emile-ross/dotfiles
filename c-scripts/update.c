@@ -109,11 +109,12 @@ int full_update(char ARCHIVE, float pver)
 	goto end;
     case 240:
 	snprintf(cmd, sizeof(cmd),
-		"cp -f %s/bpytop/bpytop.conf ~/.config/bpytop/ ");
+		"cp -f %s/bpytop/bpytop.conf ~/.config/bpytop/ ", inpath);
 	system(cmd);
 
 	goto end;
     case 250:
+    case 300:
 	printf("\nYou are running the latest version.\n");
 	wait_for_timeout(2, 0);
 	goto exit;
