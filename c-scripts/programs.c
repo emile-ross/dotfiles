@@ -25,7 +25,7 @@ char *cmd = malloc(mem_needed + 1);
 
 void BPYT(char ARCHIVE, float pver, char PKGINSTALL)
 {
-    char cmd[128];
+    char cmd[192];
     if (ARCHIVE == 'Y' || ARCHIVE == 'y')
     {
     	// archive bpytop config
@@ -44,7 +44,8 @@ void BPYT(char ARCHIVE, float pver, char PKGINSTALL)
     // export bpytop config
     snprintf(cmd, sizeof(cmd),
 	   "mkdir -p ~/.config/bpytop ; "
-	   "cp -f %s/bpytop/bpytop.conf ~/.config/bpytop", inpath);
+	   "cp -f %s/bpytop/bpytop.conf ~/.config/bpytop"
+	   , inpath);
     system(cmd);
 }
 
