@@ -80,15 +80,6 @@ make setup
 ./setup
 ```
 
-**ou**
-
-**Compiler avec GCC**
-```sh
-git clone https://github.com/imawsumm/dotfiles
-gcc dotfiles/c-scripts/setup.c dotfiles/c-scripts/functions.c dotfiles/c-scripts/install.c dotfiles/c-scripts/update.c dotfiles/c-scripts/programs.c -o setup -Wall
-./setup
-``` 
-
 Veuillez noter que ceci ne compile que le code nécessaire pour le script d'installation.
 
 ## Après avoir installé
