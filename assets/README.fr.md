@@ -66,10 +66,10 @@ Si vous voulez **Installer** vos configurations, cliquez [ici](#Installer)
 
 >  **Attention** Faites attention lorsque vous exécutez du code trouvé sur internet!
 
-Avant d'exécuter le script en c, vous devez le compiler. 
-
-This is a script to help new users configure their system to tbeir liking.  
-You can use this script to install your dotfiles, update your dotfiles and configure your environment! 
+Avant d'exécuter le script en C, vous devez le compiler. 
+ 
+Ce programme est concu pour aider les nouveaux utilisateurs à configurer leur système selon leurs préférences.
+Vous pouvez utiliser cette routine afin d'installer vos dotfiles, afin de les mettre à jour et pour configurer les fichiers qui sont déja existants.  
 
 Plus de fonctionnalités sont à venir.
 
@@ -87,43 +87,40 @@ Veuillez noter que ceci ne compile que le code nécessaire pour le script d'inst
 des touches utiles a connaitre:
 (super = "la touche Windows")
  
- super + Q -> **execute kitty**
-> (le terminal par utilisé par défaut)
+  super + Q -> **execute kitty**
+>  (le terminal par utilisé par défaut)
 
-super + M -> **sortir de hyprland**
+  super + M -> **sortir de hyprland**
 
-super + V -> **Basculer le mode Flottant**
-> (permet aux fenetres de s'empiler les unes par dessus les autres)
+  super + V -> **Basculer le mode Flottant**
+>  (permet aux fenetres de s'empiler les unes par dessus les autres)
 
-super + C -> **Fermer la fenêtre**
+  super + C -> **Fermer la fenêtre**
 
 
 ### ouvrir les applications
 
-super + R -> **exécuter [fuzzel](https://codeberg.org/dnkl/fuzzel)**
-> (fuzzel exécute les applications présentes sur le système)
+  super + R -> **exécuter [fuzzel](https://codeberg.org/dnkl/fuzzel)**
+>  (fuzzel exécute les applications présentes sur le système)
 
 
-super + E -> **exécuter [dolphin](https://github.com/KDE/dolphin)**
-> *(un gestionnaire de fichiers avec interface graphique)*
+  super + E -> **exécuter [dolphin](https://github.com/KDE/dolphin)**
+>  *(un gestionnaire de fichiers avec interface graphique)*
 
 
-super + 1 -> **exécuter [Floorp](https://github.com/Floorp-Projects/Floorp)**
-> *(un navigateur web basé sur firefox/gecko)*
-
-
-super + 2 -> **exécuter [Firefox](https://github.com/mozilla-firefox/firefox)**
-
-
-super + 3 -> **exécuter [Chromium](https://source.chromium.org/chromium)**
-> *(Chromium est google Chrome sans google (DeGoogled) )*
-
-
-super + 4 -> **exécuter [LibreWolf](https://codeberg.org/librewolf/source)**
-> *(un navigateur web basé sur firefox/gecko)*
-
-super + 0 -> **exécuter [OBS](https://github.com/obsproject/obs-studio)**
-> *(un programme open source permettant de diffuser et d'enregistrer des vidéos)*
+  super + 1 -> **exécuter [Floorp](https://github.com/Floorp-Projects/Floorp)**
+>  *(un navigateur web basé sur firefox/gecko)*
+ 
+  super + 2 -> **exécuter [Firefox](https://github.com/mozilla-firefox/firefox)**
+ 
+  super + 3 -> **exécuter [Chromium](https://source.chromium.org/chromium)**
+>  *(Chromium est google Chrome sans google (DeGoogled) )*
+ 
+  super + 4 -> **exécuter [LibreWolf](https://codeberg.org/librewolf/source)**
+>  *(un navigateur web basé sur firefox/gecko)*
+ 
+  super + 0 -> **exécuter [OBS](https://github.com/obsproject/obs-studio)**
+>  *(un programme open source permettant de diffuser et d'enregistrer des vidéos)*
 
 ## Multi Tasking
 super + F1 -> **espace de travail 1**
