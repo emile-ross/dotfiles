@@ -33,6 +33,7 @@
 void BASH();
 void SWAY(char ARCHIVE, float pver, char PKGINSTALL);
 void BTOP(char ARCHIVE, float pver, char PKGINSTALL);
+void BPYT(char ARCHIVE, float pver, char PKGINSTALL);
 void CAVA(char ARCHIVE, float pver, char PKGINSTALL);
 void FAST(char ARCHIVE, float pver, char PKGINSTALL);
 void FUZZ(char ARCHIVE, float pver, char PKGINSTALL);
