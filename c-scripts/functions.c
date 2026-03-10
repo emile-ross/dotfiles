@@ -136,7 +136,11 @@ int error_message(int err_code)
 	    snprintf(err_text_temp, sizeof(err_text_temp), "popen failed");
 	    //snprintf(err_solution_temp, sizeof(err_solution_temp), "NULL");
 	    break;
-
+	    
+	case 207:
+		snprintf(err_text_temp, sizeof(err_text_temp), "Unknown version")
+	    snprintf(err_solution_temp, sizeof(err_solution_temp), "Try installing the dotfiles in order to fix the unknown version");snprintf(err_text_temp, sizeof(err_text_temp), "popen failed");
+		break;
 	case 909:
 	    printf("This error should never display (in theory) \n");
 	    break;
