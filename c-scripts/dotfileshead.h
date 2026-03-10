@@ -59,7 +59,7 @@ void link_fastfetch_configs();
 
 // data 
 extern char* TEXT_C_BASH;
-extern char* TEXT_C_SWAY;
+extern char* TEXT_C_BPYT;
 extern char* TEXT_C_BTOP;
 extern char* TEXT_C_CAVA;
 extern char* TEXT_C_FAST;
@@ -69,6 +69,7 @@ extern char* TEXT_C_HYPR;
 extern char* TEXT_C_KITT;
 extern char* TEXT_C_MPVF;
 extern char* TEXT_C_NVIM;
+extern char* TEXT_C_SWAY;
 extern char* TEXT_C_WAYB;
 extern char* TEXT_C_ZSHH;
 
