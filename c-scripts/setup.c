@@ -343,9 +343,9 @@ int main(int argc, char *argv[])
 
 		if (menu_activate_linux == 1)
 		{
-		    char cmd[48];
+		    char cmd[64];
 	    	    snprintf(cmd, sizeof(cmd),
-	    	            "yay -S activate-linux-git ; "
+	    	            "yay -S activate-linux-git --noconfirm ; "
 	    	            "activate-linux-git");
 	    	    system(cmd);
 
