@@ -90,6 +90,8 @@ gcc dotfiles/c-scripts/setup.c dotfiles/c-scripts/functions.c dotfiles/c-scripts
 ./setup
 ``` 
 
+You can also append the ``--noconfirm`` flag in order to install without any prompts.
+
 note: This only compiles the code necessary for the install script. 
 
 
