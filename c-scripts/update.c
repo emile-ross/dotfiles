@@ -117,11 +117,11 @@ int full_update(char ARCHIVE, float pver)
     case 300:
 	printf("\nYou are running the latest version.\n");
 	wait_for_timeout(2, 0);
-	goto exit;
+	break;
 
-	default:
-		error_message(207);
-		return 1;
+    default:
+	error_message(207);
+	return 1;
     end:
 	printf("Update completed!\n");
 	goto exit;
