@@ -392,3 +392,13 @@ void ZSHH(char ARCHIVE, float pver, char PKGINSTALL)
 
     printf("Refer to the dotfiles configuration menu in order to configure zsh proprely (using zsh for humans)\n");
 }
+
+int install_package(char *pkginstallname)
+{
+    //printf("yay -S %s\n", pkginstallname);
+    char cmd[256];
+    snprintf(cmd, sizeof(cmd),
+            "yay -S %s", pkginstallname);
+    system(cmd);
+    return 0;
+}
