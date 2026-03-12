@@ -109,6 +109,11 @@ int error_message(int err_code)
 	    snprintf(err_solution_temp, sizeof(err_solution_temp), "Give the script permission to install Yay");
 	    break;
 
+	case 6:
+	    snprintf(err_text_temp, sizeof(err_text_temp), "This feature hasn't been implemented");
+	    snprintf(err_solution_temp, sizeof(err_solution_temp), "Try updating the dotfiles");
+	    break;
+
 	case 51:
 	    snprintf(err_text_temp, sizeof(err_text_temp), "Makepkg installation failed. Please check your system configuration.");
 	    snprintf(err_solution_temp, sizeof(err_solution_temp), "Helpful link: \"https://wiki.archlinux.org/title/Makepkg\"");
