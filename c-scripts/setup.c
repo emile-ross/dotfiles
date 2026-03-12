@@ -14,19 +14,18 @@ int main(int argc, char *argv[])
 	}
 	else if (strcmp(argv[1], "-p") == 0)
 	{
-	    char *pkg_to_install = argv[2];
-	    if (argc == 3)
+	    if (argc >= 3)
 	    {
-		install_package(pkg_to_install);
+		for (int i = 2; i < argc; i++)
+		{
+		    install_package(argv[i]);
+		}
 		return 0;
-	    }
-	    else if (argc > 3)
-	    {
-		error_message(6);
 	    }
 	    else
 	    {
-		printf(BOLD_S ANSI_RED"%s: missing arguments after -- '%s'\n"STYLE_END, argv[0], argv[1]);
+		// prints an error message if there isn't a package specified in the command
+		printf(BOLD_S ANSI_RED"%s: missing packages after -- '%s'\n"STYLE_END, argv[0], argv[1]);
 		return 1;
 	    }
 	}
