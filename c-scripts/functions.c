@@ -270,50 +270,48 @@ void fuzzel_config_importing()
     {
 	case 1:
 	    theme_colour_text = "blue";
-	    goto end;
+	    break;
 	case 2:
 	    theme_colour_text = "flamingo";
-	    goto end;
+	    break;
 	case 3:
 	    theme_colour_text = "green";
-	    goto end;
+	    break;
 	case 4:
 	    theme_colour_text = "lavender";
-	    goto end;
+	    break;
 	case 5:
 	    theme_colour_text = "maroon";
-	    goto end;
+	    break;
 	case 6:
 	    theme_colour_text = "mauve";
-	    goto end;
+	    break;
 	case 7:
 	    theme_colour_text = "peach";
-	    goto end;
+	    break;
 	case 8:
 	    theme_colour_text = "pink";
-	    goto end;
+	    break;
 	case 9:
 	    theme_colour_text = "red";
-	    goto end;
+	    break;
 	case 10:
 	    theme_colour_text = "rosewater";
-	    goto end;
+	    break;
 	case 11:
 	    theme_colour_text = "sapphire";
-	    goto end;
+	    break;
 	case 12:
 	    theme_colour_text = "sky";
-	    goto end;
+	    break;
 	case 13:
 	    theme_colour_text = "teal";
-	    goto end;
+	    break;
 	case 14:
 	    theme_colour_text = "yellow";
-	    goto end;
+	    break;
 	default:
 	    printf("Try again.\n");
-	end:
-	;
     }
     char fuz_theme_path[256];
     snprintf(fuz_theme_path, sizeof(fuz_theme_path),
