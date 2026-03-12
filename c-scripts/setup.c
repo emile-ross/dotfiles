@@ -12,6 +12,10 @@ int main(int argc, char *argv[])
 	    printf(BOLD_S"Proceeding with full install\n"STYLE_END);
 	    full_install('y', 'y');
 	}
+	else if (strcmp(argv[1], "-p") == 0)
+	{
+	    error_message(6);
+	}
 	else
 	{
 	    // prints an error message if the argument is invalid
