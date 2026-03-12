@@ -14,7 +14,21 @@ int main(int argc, char *argv[])
 	}
 	else if (strcmp(argv[1], "-p") == 0)
 	{
-	    error_message(6);
+	    char *pkg_to_install = argv[2];
+	    if (argc == 3)
+	    {
+		install_package(pkg_to_install);
+		return 0;
+	    }
+	    else if (argc > 3)
+	    {
+		error_message(6);
+	    }
+	    else
+	    {
+		printf(BOLD_S ANSI_RED"%s: missing arguments after -- '%s'\n"STYLE_END, argv[0], argv[1]);
+		return 1;
+	    }
 	}
 	else
 	{
