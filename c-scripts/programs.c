@@ -393,12 +393,25 @@ void ZSHH(char ARCHIVE, float pver, char PKGINSTALL)
     printf("Refer to the dotfiles configuration menu in order to configure zsh proprely (using zsh for humans)\n");
 }
 
-int install_package(char *pkginstallname)
+int install_package(char *pkg_type_distro, char *pkginstallname)
 {
+	char cmd[256];
+	if (strcmp(pkg_type_distro, "arch") == 0)
+	{
     //printf("yay -S %s\n", pkginstallname);
-    char cmd[256];
+
     snprintf(cmd, sizeof(cmd),
             "yay -S %s", pkginstallname);
     system(cmd);
+	}
+	else if (strcmp(pkg_type_distro, "apt") == 0)
+	{
+        error_message(6);
+	}
+	else 
+	{
+		printf("Your distribution is not supported.\n")
+		wait_for_timeout(0, 1);
+	}
     return 0;
 }
