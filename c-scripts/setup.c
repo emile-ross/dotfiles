@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
 	    else
 	    {
 		// prints an error message if there isn't a package specified in the command
-		printf(BOLD_S ANSI_RED"%s: missing packages after -- '%s'\n"STYLE_END, argv[0], argv[1]);
+		cli_arg_missing(argv[0], argv[1]);
 		return 1;
 	    }
 	}
@@ -35,11 +35,35 @@ int main(int argc, char *argv[])
 	    {
 		for (int i = 2; i < argc; i++)
 		{
+		    // support for different operating systems might come in the future...
 		    // will print the arguments instead of executing the command (useless)
-		    // maybe will add support for different operating systems...
 		    config_description(argv[i]);
 		}
 		return 0;
+	    }
+	    else
+	    {
+		// prints an error message if there isn't a package specified in the command
+		cli_arg_missing(argv[0], argv[1]);
+		return 1;
+	    }
+	}
+	else if (strcmp(argv[1], "-i") == 0 || strcmp(argv[1], "-I") == 0)
+	{
+	    if (argc >= 3)
+	    {
+		for (int i = 2; i < argc; i++)
+		{
+		    // will print a short description for the package
+		    config_description(argv[i]);
+		}
+		return 0;
+	    }
+	    else
+	    {
+		// prints an error message if there isn't a package specified in the command
+		cli_arg_missing(argv[0], argv[1]);
+		return 1;
 	    }
 	}
 	else
