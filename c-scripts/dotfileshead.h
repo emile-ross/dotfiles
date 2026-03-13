@@ -58,7 +58,7 @@ void wait_for_timeout(int timer_quarters, int timer_seconds);
 void link_fastfetch_configs();
 
 int install_package(char *pkginstallname);
-void print_correct_msg(char *conf_user_input);
+void config_description(char *package_t);
 
 typedef enum 
 {
