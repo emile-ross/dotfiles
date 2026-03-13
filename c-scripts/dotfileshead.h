@@ -47,6 +47,7 @@ void ZSHH(char ARCHIVE, float pver, char PKGINSTALL);
 
 
 void clear();
+void bufclear();
 void pre_startup();
 
 
@@ -57,10 +58,6 @@ void copyfiles (int fastfetch_conf_export);
 void wait_for_timeout(int timer_quarters, int timer_seconds);
 void link_fastfetch_configs();
 
-int install_package(char *pkginstallname);
-void config_description(char *package_t);
-
-void cli_arg_missing(char *first_command, char *user_flag_t);
 
 typedef enum 
 {
@@ -82,6 +79,12 @@ typedef enum
 } pkg_conf_name;
 
 pkg_conf_name detect_config_name(char *input);
+
+extern int n_to_arg;
+
+int install_package(char *pkg_type_distro, char *pkginstallname);
+void config_description(char *package_t);
+void cli_arg_missing(char *first_command, char *type_of_missing_arg, char *user_flag_t);
 
 // data 
 extern char* TEXT_C_BASH;
@@ -140,6 +143,8 @@ extern float pver;
 float* update();
 
 void fuzzel_config_importing();
+
+
 
 // errors
 extern char errcode;
