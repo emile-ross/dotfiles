@@ -6,6 +6,8 @@ int main(int argc, char *argv[])
     
     if (argc > 1) // checks how many arguments were used
     {
+
+
 	// checks if the command was ran with the --noconfirm flag
 	if (strcmp(argv[1], "--noconfirm") == 0) 
 	{
@@ -14,26 +16,27 @@ int main(int argc, char *argv[])
 	}
 	else if (strcmp(argv[1], "-p") == 0 || strcmp(argv[1], "-P") == 0)
 	{
-	    if (argc >= 3)
+	    if (argc >= n_to_arg)
 	    {
-		for (int i = 2; i < argc; i++)
+		for (int i = n_to_arg - 1; i < argc; i++)
 		{
-		    install_package(argv[i]);
+		    // arch is currently hardcoded since the distro parser isn't complete
+		    install_package("arch", argv[i]); 
 		}
 		return 0;
 	    }
 	    else
 	    {
 		// prints an error message if there isn't a package specified in the command
-		cli_arg_missing(argv[0], argv[1]);
-		return 1;
+		cli_arg_missing(argv[0], "package", argv[1]);
+		return -1;
 	    }
 	}
 	else if (strcmp(argv[1], "-c") == 0 || strcmp(argv[1], "-C") == 0)
 	{
-	    if (argc >= 3)
+	    if (argc >= n_to_arg)
 	    {
-		for (int i = 2; i < argc; i++)
+		for (int i = n_to_arg - 1; i < argc; i++)
 		{
 		    // support for different operating systems might come in the future...
 		    // will print the arguments instead of executing the command (useless)
@@ -43,16 +46,17 @@ int main(int argc, char *argv[])
 	    }
 	    else
 	    {
-		// prints an error message if there isn't a package specified in the command
-		cli_arg_missing(argv[0], argv[1]);
-		return 1;
+		// prints an error message if there isn't any config name specified in the command
+		cli_arg_missing(argv[0], "config name", argv[1]);
+		return -1;
 	    }
 	}
 	else if (strcmp(argv[1], "-i") == 0 || strcmp(argv[1], "-I") == 0)
 	{
-	    if (argc >= 3)
+	    // loops through the arguments in order to pass them one at a time
+	    if (argc >= n_to_arg)
 	    {
-		for (int i = 2; i < argc; i++)
+		for (int i = n_to_arg - 1; i < argc; i++)
 		{
 		    // will print a short description for the package
 		    config_description(argv[i]);
@@ -62,15 +66,15 @@ int main(int argc, char *argv[])
 	    else
 	    {
 		// prints an error message if there isn't a package specified in the command
-		cli_arg_missing(argv[0], argv[1]);
-		return 1;
+		cli_arg_missing(argv[0], "package", argv[1]);
+		return -1;
 	    }
 	}
 	else
 	{
 	    // prints an error message if the argument is invalid
 	    printf(BOLD_S ANSI_RED"%s: invalid option -- '%s'\n"STYLE_END, argv[0], argv[1]);
-	    return 1;
+	    return -2;
 	}
     }
 
