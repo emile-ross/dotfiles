@@ -534,3 +534,8 @@ void config_description(char *package_t)
             printf("Unknown program.\n");
     }
 }
+void cli_arg_missing(char *first_command, char *user_flag_t)
+{
+    // prints an error message if there isn't a package specified in the command
+    printf(BOLD_S ANSI_RED"%s: missing packages after -- '%s'\n"STYLE_END, first_command, user_flag_t);
+}
