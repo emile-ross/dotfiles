@@ -7,6 +7,11 @@ void clear()
     printf("\033[2J\033[H");
 }
 
+void clearbuffer()
+{
+    while (getchar() != '\n');
+}
+
 char* TEXT_C_BASH = ".bashrc";
 char* TEXT_C_SWAY = "Sway-WM configs";
 char* TEXT_C_BPYT = "bpytop config";
@@ -56,11 +61,26 @@ char full_update_opt;
 int fuzzel_config_menu_choice;
 float pver;
 
+// the position of the first argument in a command
+// example: ``./setup -i nvim``
+// nvim is the 3rd argument
+int n_to_arg = 3;
+
 struct timespec install_timer;
 int fastfetch_conf_export;
 
+char distro[64] = "";
+char parent[64] = "";
+
 char initial_path[64];
 char inpath[64];
+
+void pre_startup()
+{
+    // gets the current working directory
+    snprintf(inpath, sizeof(inpath), "%s", get_initial_path());
+}
+
 char *get_initial_path()
 {
     chdir("dotfiles/");
@@ -136,12 +156,11 @@ int error_message(int err_code)
 
 	case 206:
 	    snprintf(err_text_temp, sizeof(err_text_temp), "popen failed");
-	    //snprintf(err_solution_temp, sizeof(err_solution_temp), "NULL");
 	    break;
 	    
 	case 207:
 		snprintf(err_text_temp, sizeof(err_text_temp), "Unknown version");
-	    snprintf(err_solution_temp, sizeof(err_solution_temp), "Try installing the dotfiles in order to fix the unknown version");snprintf(err_text_temp, sizeof(err_text_temp), "popen failed");
+		snprintf(err_solution_temp, sizeof(err_solution_temp), "Try installing the dotfiles in order to fix the unknown version");
 		break;
 	case 909:
 	    printf("This error should never display (in theory) \n");
@@ -177,12 +196,6 @@ void wait_for_timeout(int timer_quarters, int timer_seconds)
     install_timer.tv_nsec = time_timer_quarters;
     install_timer.tv_sec = time_timer_seconds;
     nanosleep(&install_timer, NULL);
-}
-
-void pre_startup()
-{
-    // gets the current working directory
-    snprintf(inpath, sizeof(inpath), "%s", get_initial_path());
 }
 
 void fuzzel_config_importing()
@@ -342,130 +355,6 @@ void fuzzel_config_importing()
     }
 }
 
-void full_install(char ARCHIVE, char full_install_opt)
-{
-    if (full_install_opt == 'Y' || full_install_opt == 'y')
-    {
-	int timerinstall = 3;
-	printf(BOLD_S"\nInstalling every configuration\n"STYLE_END);
-	printf(BOLD_S"\nStarting in:\n"STYLE_END);
-	
-	for (int i = 0; i < 3; i++)
-	{
-	    printf("%d ", timerinstall);
-	
-	    for (int j = 0; j < 3; j++)
-	    {
-	        printf(".");
-	        fflush(stdout);
-	
-		wait_for_timeout(1, 0);
-	    }
-	    for (int k = 0; k < 1; k++)
-	    {
-		printf("\n");
-		wait_for_timeout(1, 0);
-	    }
-	    timerinstall--;
-	}
-	
-	if (system("test -f /sbin/yay") == 0)
-    	{
-    	    printf("Yay already installed, congrats!\n");
-    	}
-    	else
-    	{
-    	    printf("Yay is not installed, do you want to install it? (Y/n): ");
-
-    	    char YAY;
-	    while (getchar() != '\n');  // clear imput buffer 
-	    ;
-    	    scanf(" %c", &YAY); // asks the user if they wanna install yay (needed)
-    	    if (YAY == 'Y' || YAY == 'y')
-    	    {
-    	        // Check if makepkg is installed ( it is needed in order to compile yay )
-    	        if (system("command -v makepkg > /dev/null") != 0)
-    	        {
-    	            printf("\nMakepkg is not installed. Installing 'base-devel' package group to proceed...\n");
-		    char cmd[128];
-		    snprintf(cmd, sizeof(cmd),
-			    "sudo pacman -S --noconfirm base-devel");
-	    	    system(cmd);
-    	            
-    	            // Check if makepkg is available after installing the base-devel package
-    	            if (system("command -v makepkg > /dev/null") != 0)
-    	            {
-			error_message(51);
-    	            }
-    	            else
-    	            {
-			printf("Makepkg has been successfully installed!\n");
-    	            }
-    	        }
-    	        else
-    	        {
-    	            printf("Makepkg is already installed.\n");
-    	        }
-	        // install yay \/
-    	        char cmd[256];
-    	        snprintf(cmd, sizeof(cmd),
-			"sudo pacman -S --noconfirm base-devel ; "
-			"git clone https://aur.archlinux.org/yay.git ; "	// download yay from aur
-    	                "cd yay ; "						//
-			"makepkg -si ; "					// build package from source
-    	                "cd ..");						//
-    	        system(cmd);
-    	        printf("\nYay is installed, congrats!\n");
-    	    }
-    	    else
-    	    {
-	        error_message(5);
-	    }
-	}
-	// actually install the dotfiles
-	BASH();
-	SWAY(ARCHIVE, 0.0, 'Y');
-	BTOP(ARCHIVE, 0.0, 'Y');
-	BPYT(ARCHIVE, 0.0, 'Y');
-	CAVA(ARCHIVE, 0.0, 'Y');
-	FAST(ARCHIVE, 0.0, 'Y');
-	FUZZ(ARCHIVE, 0.0, 'Y');
-	GTKL(ARCHIVE, 0.0, 'Y');
-	HYPR(ARCHIVE, 0.0, 'Y');
-	KITT(ARCHIVE, 0.0, 'Y');
-	MPVF(ARCHIVE, 0.0, 'Y');
-	NVIM(ARCHIVE, 0.0, 'Y');
-	WAYB(ARCHIVE, 0.0, 'Y');
-	ZSHH(ARCHIVE, 0.0, 'Y');
-    }
-    else
-    {
-	int install_pkg_opt;
-	do
-	{
-	    printf("\n[1] Install %s ", TEXT_C_BASH);
-	    printf("\n[2] Install %s ", TEXT_C_BPYT);
-	    printf("\n[3] Install %s ", TEXT_C_BTOP);
-	    printf("\n[4] Install %s ", TEXT_C_CAVA);
-	    printf("\n[5] Install %s ", TEXT_C_FAST);
-	    printf("\n[6] Install %s ", TEXT_C_FUZZ);
-	    printf("\n[7] Install %s ", TEXT_C_GTKL);
-	    printf("\n[8] Install %s ", TEXT_C_HYPR);
-	    printf("\n[9] Install %s ", TEXT_C_KITT);
-	    printf("\n[10] Install %s ", TEXT_C_MPVF);
-	    printf("\n[11] Install %s ", TEXT_C_NVIM);
-	    printf("\n[12] Install %s ", TEXT_C_SWAY);
-	    printf("\n[13] Install %s ", TEXT_C_WAYB);
-	    printf("\n[14] Install %s ", TEXT_C_ZSHH);
-	    
-	    while (getchar() != '\n');  // clear imput buffer 
-	    scanf(" %d", &install_pkg_opt);
-	    install_configs(install_pkg_opt);
-	}
-	while (install_pkg_opt > 0);
-    }
-    printf(BOLD_S"\nInstallation completed!\n"STYLE_END);
-}
 
 pkg_conf_name detect_config_name(char *input) 
 {
@@ -534,8 +423,9 @@ void config_description(char *package_t)
             printf("Unknown program.\n");
     }
 }
-void cli_arg_missing(char *first_command, char *user_flag_t)
+
+void cli_arg_missing(char *first_command, char *type_of_missing_arg, char *user_flag_t)
 {
     // prints an error message if there isn't a package specified in the command
-    printf(BOLD_S ANSI_RED"%s: missing packages after -- '%s'\n"STYLE_END, first_command, user_flag_t);
+    printf(BOLD_S ANSI_RED"%s: missing %s after -- '%s'\n"STYLE_END, first_command, type_of_missing_arg, user_flag_t);
 }
