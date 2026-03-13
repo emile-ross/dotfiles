@@ -37,11 +37,10 @@ int main(int argc, char *argv[])
 		{
 		    // will print the arguments instead of executing the command (useless)
 		    // maybe will add support for different operating systems...
-		    print_correct_msg(argv[i]);
+		    config_description(argv[i]);
 		}
 		return 0;
 	    }
-
 	}
 	else
 	{
@@ -91,6 +90,7 @@ int main(int argc, char *argv[])
 	    char backuptemp;
 
 	    while (getchar() != '\n');  // clear imput buffer 
+	    ;
 	    scanf("%c", &backuptemp);
 	    full_update(backuptemp, *version);
     	}
@@ -116,6 +116,7 @@ int main(int argc, char *argv[])
     	            do
     	            {
 		        clear();
+
     	                char fastfetch_edit_config_text[48] = "Change the config fastfetch uses by default";
     	                char fastfetch_preview_text[32] = "Preview fastfetch output";
 		        char cmd[128];
@@ -127,6 +128,7 @@ int main(int argc, char *argv[])
 		        while (getchar() != '\n');  // clear imput buffer 
 			;
     	                scanf("\n%d", &fastfetch_config_choice);
+
     	                if (fastfetch_config_choice == 1)
     	                {
     	                    snprintf(cmd, 16,
@@ -149,6 +151,7 @@ int main(int argc, char *argv[])
     	    	            	char cmd[128];
 
     	    	            	while (getchar() != '\n');  // clear imput buffer 
+				;
     	    	            	scanf("%d", &link_fastfetch_configs_opt);
 
     	    	            	if (link_fastfetch_configs_opt == 1)
@@ -176,8 +179,6 @@ int main(int argc, char *argv[])
     	    	            	    printf("\nThe fastfetch config was applied successfully\n");
 	    	            	    wait_for_timeout(1, 0);
     	    	            	}
-		    	    	else
-		    	    	{}
 	    	            }
 	    	            while (fastfetch_conf_export > 0.0);
     	                }
@@ -231,6 +232,7 @@ int main(int argc, char *argv[])
     	            	printf(BOLD_S " [0] " STYLE_END "%s\n", opt_exit_text);
 
 			while (getchar() != '\n');  // clear imput buffer 
+			;
 			scanf(" %d", &fuzzel_config_menu_choice);
 
 			if (fuzzel_config_menu_choice == 1)
@@ -247,7 +249,7 @@ int main(int argc, char *argv[])
 			    do
 			    {
 				clear();
-				char cmd[256];
+
 				char fuzzel_config_one[32] = "Use fuzzel-duplicated.ini";
     	                	char fuzzel_config_old[32] = "Use old-fuzzel.ini";
     	                	char fuzzel_config_vzero[32] = "Use fuzzel-v0.0.ini";
@@ -266,8 +268,11 @@ int main(int argc, char *argv[])
     	            		printf(BOLD_S " [0] " STYLE_END "%s\n", opt_exit_text);
 
 				while (getchar() != '\n');  // clear imput buffer 
+				;
 				scanf(" %d", &fuzzel_edit_menu_choice);
 
+				// create a 256 bytes buffer for the commands below
+				char cmd[256]; 
 				switch(fuzzel_edit_menu_choice)
 				{
 				    case 1:
@@ -342,13 +347,16 @@ int main(int argc, char *argv[])
 			if (zshforhumans_choice == 1)
 			{
 			    clear();
+			    // using curl to download a program is not a good practice 
+			    // but it's the recommended installation method
 			    system("if command -v curl >/dev/null 2>&1; then "
 				    "  sh -c \"$(curl -fsSL https://raw.githubusercontent.com/romkatv/zsh4humans/v5/install)\"; "
 				    "else "
 				    "  sh -c \"$(wget -O- https://raw.githubusercontent.com/romkatv/zsh4humans/v5/install)\"; " 
 				    "fi");
 			    while (getchar() != '\n');  // clear imput buffer 
-			    getchar();
+			    ;
+			    getchar(); // intended blocking behaviour
 			}
 		    }
 		    while (zshforhumans_choice > 0);
@@ -363,6 +371,7 @@ int main(int argc, char *argv[])
 	    do
 	    {
 		while (getchar() != '\n');  // clear imput buffer 
+		;
 		clear();
     	    	printf(BOLD_S "%s\n"STYLE_END, opt_fiv_text );
 		
