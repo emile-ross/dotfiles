@@ -44,7 +44,6 @@ char opt_exit_text[16] = "Exit";
 int timer_quarters;
 int timer_seconds;
 
-
 char* theme_colour_text;
 long int time_timer_quarters;
 long int time_timer_seconds;
@@ -488,12 +487,36 @@ pkg_conf_name detect_config_name(char *input)
 }
 
 
-void print_correct_msg(char *conf_user_input)
+void config_description(char *package_t)
 {
-    switch (detect_config_name(conf_user_input)) 
+    switch (detect_config_name(package_t)) 
     {
+        case CONF_BASH:
+            printf("Bash, (Bourne Again SHell) is the default shell on most Linux distributions.\n");
+            break;
+
+        case CONF_BPYT:
+            printf("bpytop is a system resource monitor.\n");
+            break;
+
         case CONF_BTOP:
             printf("btop is a system resource monitor.\n");
+            break;
+
+        case CONF_CAVA:
+            printf("Cava is a Cross-platform Audio Visualizer.\n");
+            break;
+
+        case CONF_FAST:
+            printf("Fastfetch is a fast system information tool made in C.\n");
+            break;
+
+        case CONF_FUZZ:
+            printf("Fuzzel is an App launcher and fuzzy finder based on rofi & dmenu.\n");
+            break;
+
+        case CONF_GTKL:
+            printf("Gtklock is a GTK lockscreen for Wayland.\n");
             break;
 
         case CONF_HYPR:
@@ -505,7 +528,7 @@ void print_correct_msg(char *conf_user_input)
             break;
 
 	case CONF_ZSHH:
-            printf("Zsh \(Z shell\) is a command line interpreter focused on speed and efficiency.\n");
+            printf("Zsh (Z shell) is a command line interpreter focused on speed and efficiency.\n");
 	    break;
         default:
             printf("Unknown program.\n");
