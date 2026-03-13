@@ -57,6 +57,30 @@ void copyfiles (int fastfetch_conf_export);
 void wait_for_timeout(int timer_quarters, int timer_seconds);
 void link_fastfetch_configs();
 
+int install_package(char *pkginstallname);
+void print_correct_msg(char *conf_user_input);
+
+typedef enum 
+{
+    CONF_UNKNOWN,
+    CONF_BASH,
+    CONF_BTOP,
+    CONF_BPYT,
+    CONF_CAVA,
+    CONF_FAST,
+    CONF_FUZZ,
+    CONF_GTKL,
+    CONF_HYPR,
+    CONF_KITT,
+    CONF_MPVF,
+    CONF_NVIM,
+    CONF_SWAY,
+    CONF_WAYB,
+    CONF_ZSHH
+} pkg_conf_name;
+
+pkg_conf_name detect_config_name(char *input);
+
 // data 
 extern char* TEXT_C_BASH;
 extern char* TEXT_C_BPYT;
