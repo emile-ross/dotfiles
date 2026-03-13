@@ -395,23 +395,23 @@ void ZSHH(char ARCHIVE, float pver, char PKGINSTALL)
 
 int install_package(char *pkg_type_distro, char *pkginstallname)
 {
-	char cmd[256];
-	if (strcmp(pkg_type_distro, "arch") == 0)
-	{
-    //printf("yay -S %s\n", pkginstallname);
-
-    snprintf(cmd, sizeof(cmd),
-            "yay -S %s", pkginstallname);
-    system(cmd);
-	}
-	else if (strcmp(pkg_type_distro, "apt") == 0)
-	{
-        error_message(6);
-	}
-	else 
-	{
-		printf("Your distribution is not supported.\n");
-		wait_for_timeout(0, 1);
-	}
+    char cmd[256];
+    if (strcmp(pkg_type_distro, "arch") == 0)
+    {
+        snprintf(cmd, sizeof(cmd),
+                "yay -S %s", pkginstallname);
+        system(cmd);
+    }
+    else if (strcmp(pkg_type_distro, "debian") == 0)
+    {
+        snprintf(cmd, sizeof(cmd),
+                "sudo apt install %s", pkginstallname);
+        system(cmd);
+    }
+    else 
+    {
+    	printf("Your distribution is not supported.\n");
+    	wait_for_timeout(0, 1);
+    }
     return 0;
 }
