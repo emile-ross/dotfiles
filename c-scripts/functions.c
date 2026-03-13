@@ -44,6 +44,7 @@ char opt_exit_text[16] = "Exit";
 int timer_quarters;
 int timer_seconds;
 
+
 char* theme_colour_text;
 long int time_timer_quarters;
 long int time_timer_seconds;
@@ -63,10 +64,7 @@ char initial_path[64];
 char inpath[64];
 char *get_initial_path()
 {
-    char cd_init[16];
-    snprintf(cd_init, sizeof(cd_init), // this should fail. User is supposed to be at dotfiles/
-	    "cd dotfiles/");
-    system(cd_init);
+    chdir("dotfiles/");
 
     FILE *fp;
     
@@ -184,6 +182,7 @@ void wait_for_timeout(int timer_quarters, int timer_seconds)
 
 void pre_startup()
 {
+    // gets the current working directory
     snprintf(inpath, sizeof(inpath), "%s", get_initial_path());
 }
 
@@ -467,4 +466,45 @@ void full_install(char ARCHIVE, char full_install_opt)
 	while (install_pkg_opt > 0);
     }
     printf(BOLD_S"\nInstallation completed!\n"STYLE_END);
+}
+
+pkg_conf_name detect_config_name(char *input) 
+{
+    if (strcmp(input, "BASH") == 0) return CONF_BASH;
+    if (strcmp(input, "BTOP") == 0) return CONF_BTOP;
+    if (strcmp(input, "BPYT") == 0) return CONF_BPYT;
+    if (strcmp(input, "CAVA") == 0) return CONF_CAVA;
+    if (strcmp(input, "FAST") == 0) return CONF_FAST;
+    if (strcmp(input, "FUZZ") == 0) return CONF_FUZZ;
+    if (strcmp(input, "GTKL") == 0) return CONF_GTKL;
+    if (strcmp(input, "HYPR") == 0) return CONF_HYPR;
+    if (strcmp(input, "KITT") == 0) return CONF_KITT;
+    if (strcmp(input, "MPVF") == 0) return CONF_MPVF;
+    if (strcmp(input, "NVIM") == 0) return CONF_NVIM;
+    if (strcmp(input, "SWAY") == 0) return CONF_SWAY;
+    if (strcmp(input, "WAYB") == 0) return CONF_WAYB;
+    if (strcmp(input, "ZSHH") == 0) return CONF_ZSHH;
+    return CONF_UNKNOWN;
+}
+
+
+void print_correct_msg(char *conf_user_input)
+{
+    switch (detect_config_name(conf_user_input)) 
+    {
+        case CONF_BTOP:
+            printf("btop is a system resource monitor.\n");
+            break;
+
+        case CONF_HYPR:
+            printf("htop is an interactive process viewer.\n");
+            break;
+
+        case CONF_NVIM:
+            printf("Neovim is a modern Vim-based text editor.\n");
+            break;
+
+        default:
+            printf("Unknown program.\n");
+    }
 }
