@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
 	    printf(BOLD_S"Proceeding with full install\n"STYLE_END);
 	    full_install('y', 'y');
 	}
-	else if (strcmp(argv[1], "-p") == 0)
+	else if (strcmp(argv[1], "-p") == 0 || strcmp(argv[1], "-P") == 0)
 	{
 	    if (argc >= 3)
 	    {
@@ -28,6 +28,20 @@ int main(int argc, char *argv[])
 		printf(BOLD_S ANSI_RED"%s: missing packages after -- '%s'\n"STYLE_END, argv[0], argv[1]);
 		return 1;
 	    }
+	}
+	else if (strcmp(argv[1], "-c") == 0 || strcmp(argv[1], "-C") == 0)
+	{
+	    if (argc >= 3)
+	    {
+		for (int i = 2; i < argc; i++)
+		{
+		    // will print the arguments instead of executing the command (useless)
+		    // maybe will add support for different operating systems...
+		    print_correct_msg(argv[i]);
+		}
+		return 0;
+	    }
+
 	}
 	else
 	{
