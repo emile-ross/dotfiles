@@ -60,6 +60,8 @@ void link_fastfetch_configs();
 int install_package(char *pkginstallname);
 void config_description(char *package_t);
 
+void cli_arg_missing(char *first_command, char *user_flag_t);
+
 typedef enum 
 {
     CONF_UNKNOWN,
