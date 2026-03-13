@@ -34,7 +34,6 @@ If you want to **Install** your dotfiles, click [here](#Install)
 </table>
 
 
-
 ## prerequisites
 - an Arch based distribution of linux (Windows will **never** get support)
 - Hyprland isn't required but still recomended in order to benefit from all configurations
@@ -88,12 +87,15 @@ git clone https://github.com/imawsumm/dotfiles
 cd dotfiles/
 gcc dotfiles/c-scripts/setup.c dotfiles/c-scripts/functions.c dotfiles/c-scripts/install.c dotfiles/c-scripts/update.c dotfiles/c-scripts/programs.c -o setup -Wall
 ./setup
-``` 
-
-You can also append the ``--noconfirm`` flag in order to install without any prompts.
+```
 
 note: This only compiles the code necessary for the install script. 
 
+You can also append the ``--noconfirm`` flag in order to install without any prompts.
+
+```bash
+./setup --noconfirm
+```
 
 ## after install 
 Useful keybinds to know:
@@ -112,30 +114,27 @@ super + C -> **Close Window**
 
 ### execute programs
 
-super + R -> **execute [fuzzel](https://codeberg.org/dnkl/fuzzel)**
-> (fuzzel is the app launcher)
 
+super + R -> **execute [Fuzzel](https://codeberg.org/dnkl/fuzzel)**
+> (fuzzel is an App launcher and fuzzy finder for Wayland)
+   
+super + E -> **execute [Dolphin](https://github.com/KDE/dolphin)**
+> (A GUI file manager)
+    
+super + 1 -> **execute [Floorp](https://github.com/Floorp-Projects/Floorp)** 
+> (firefox/gecko based web browser) 
+   
+super + 2 -> **execute [Firefox](https://github.com/mozilla-firefox/firefox)** 
+> (a web browser using the gecko engine)
 
-super + E -> **execute [dolphin](https://github.com/KDE/dolphin)**
-> *(A gui file manager)*
-
-
-super + 1 -> **execute [Floorp](https://github.com/Floorp-Projects/Floorp)**
-> *(firefox/gecko based web browser)*
-
-
-super + 2 -> **execute [Firefox](https://github.com/mozilla-firefox/firefox)**
-
-
-super + 3 -> **execute [Chromium](https://source.chromium.org/chromium)**
-> *(Chromium is a DeGoogled Chromium browser)*
-
+super + 3 -> **execute [Chromium](https://source.chromium.org/chromium)** 
+> (Chromium is a DeGoogled Chromium based browser)
 
 super + 4 -> **execute [LibreWolf](https://codeberg.org/librewolf/source)**
-> *(firefox/gecko based web browser)*
+> (firefox/gecko based web browser)
 
 super + 0 -> **execute [OBS](https://github.com/obsproject/obs-studio)**
-> *(an open source program to stream and record videos)*
+> (an open source program to stream and record videos)
 
 ## Multi Tasking
 super + F1 -> **switch to Workspace 1**
@@ -172,9 +171,7 @@ fastfetch config: [github.com/harilvfs/fastfetch](https://github.com/harilvfs/fa
 
 linux kernel source code: [github.com/torvalds/linux](https://github.com/torvalds/linux)
 
-
-- https://github.com/Matt-FTW/dotfiles
-(nvim ascii art)
+nvim ascii art [github.com/Matt-FTW/dotfiles](https://github.com/Matt-FTW/dotfiles)
 
 Hyprland WM source code: [github.com/hyprwm/Hyprland](https://github.com/hyprwm/Hyprland)
 
