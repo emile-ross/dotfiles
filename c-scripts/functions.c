@@ -470,20 +470,20 @@ void full_install(char ARCHIVE, char full_install_opt)
 
 pkg_conf_name detect_config_name(char *input) 
 {
-    if (strcmp(input, "BASH") == 0) return CONF_BASH;
-    if (strcmp(input, "BTOP") == 0) return CONF_BTOP;
-    if (strcmp(input, "BPYT") == 0) return CONF_BPYT;
-    if (strcmp(input, "CAVA") == 0) return CONF_CAVA;
-    if (strcmp(input, "FAST") == 0) return CONF_FAST;
-    if (strcmp(input, "FUZZ") == 0) return CONF_FUZZ;
-    if (strcmp(input, "GTKL") == 0) return CONF_GTKL;
-    if (strcmp(input, "HYPR") == 0) return CONF_HYPR;
-    if (strcmp(input, "KITT") == 0) return CONF_KITT;
-    if (strcmp(input, "MPVF") == 0) return CONF_MPVF;
-    if (strcmp(input, "NVIM") == 0) return CONF_NVIM;
-    if (strcmp(input, "SWAY") == 0) return CONF_SWAY;
-    if (strcmp(input, "WAYB") == 0) return CONF_WAYB;
-    if (strcmp(input, "ZSHH") == 0) return CONF_ZSHH;
+    if (strcmp(input, "bash") == 0) return CONF_BASH;
+    if (strcmp(input, "btop") == 0) return CONF_BTOP;
+    if (strcmp(input, "bpytop") == 0) return CONF_BPYT;
+    if (strcmp(input, "cava") == 0) return CONF_CAVA;
+    if (strcmp(input, "fastfetch") == 0) return CONF_FAST;
+    if (strcmp(input, "fuzzel") == 0) return CONF_FUZZ;
+    if (strcmp(input, "gtklock") == 0) return CONF_GTKL;
+    if (strcmp(input, "hyprland") == 0) return CONF_HYPR;
+    if (strcmp(input, "kitty") == 0) return CONF_KITT;
+    if (strcmp(input, "mpv") == 0) return CONF_MPVF;
+    if (strcmp(input, "nvim") == 0) return CONF_NVIM;
+    if (strcmp(input, "sway") == 0) return CONF_SWAY;
+    if (strcmp(input, "waybar") == 0) return CONF_WAYB;
+    if (strcmp(input, "zsh") == 0) return CONF_ZSHH;
     return CONF_UNKNOWN;
 }
 
@@ -497,13 +497,16 @@ void print_correct_msg(char *conf_user_input)
             break;
 
         case CONF_HYPR:
-            printf("htop is an interactive process viewer.\n");
+            printf("Hyprland is a dynamic tiling window manager made for Wayland.\n");
             break;
 
         case CONF_NVIM:
-            printf("Neovim is a modern Vim-based text editor.\n");
+            printf("Neovim is a modern Vi-based text editor.\n");
             break;
 
+	case CONF_ZSHH:
+            printf("Zsh \(Z shell\) is a command line interpreter focused on speed and efficiency.\n");
+	    break;
         default:
             printf("Unknown program.\n");
     }
