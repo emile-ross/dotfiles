@@ -410,7 +410,7 @@ int install_package(char *pkg_type_distro, char *pkginstallname)
 	}
 	else 
 	{
-		printf("Your distribution is not supported.\n")
+		printf("Your distribution is not supported.\n");
 		wait_for_timeout(0, 1);
 	}
     return 0;
