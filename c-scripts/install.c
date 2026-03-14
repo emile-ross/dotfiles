@@ -121,6 +121,14 @@ void install_configs(int custom_package_install)  // the partial install script 
 		clear();
     	        printf(UDRL_S"\nInstalled %s successfully.\n"STYLE_END, temp_conf_installed);
 		break;
+    	    case 14:
+    	        temp_conf_installed = (char*)(TEXT_C_ZSHH);
+
+    	        printf("\nInstalling %s \n", temp_conf_installed);
+		ZSHH(ARCHIVE, pver, PKGINSTALL);
+		clear();
+    	        printf(UDRL_S"\nInstalled %s successfully.\n"STYLE_END, temp_conf_installed);
+		break;
     	    default:
     		    printf(ANSI_RED"\nInvalid character\n"STYLE_END);
 		    wait_for_timeout(2, 0);
