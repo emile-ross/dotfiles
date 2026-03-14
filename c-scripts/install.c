@@ -7,11 +7,11 @@ void install_configs(int custom_package_install)  // the partial install script 
 	float pver = 0.0f; // assumes the user doesn't have the dotfiles
     	char* temp_conf_installed = NULL;
 
-	while (getchar() != '\n');  // clear imput buffer 
+	clearbuffer();
 	printf("Do you want to archive your old config?"BOLD_S"(Y/n)\n"STYLE_END);
 	scanf(" %c", &ARCHIVE);
 
-	while (getchar() != '\n');  // clear imput buffer 
+	clearbuffer();
 	printf("Do you want to install the package "BOLD_S"(Y/n)\n"STYLE_END);
 	scanf(" %c", &PKGINSTALL);
 
@@ -167,8 +167,7 @@ void full_install(char install_ARCHIVE, char full_install_opt)
     	    printf("Yay is not installed, do you want to install it? (Y/n): ");
 
     	    char YAY;
-	    while (getchar() != '\n');  // clear imput buffer 
-	    ;
+	    clearbuffer();
     	    scanf(" %c", &YAY); // asks the user if they wanna install yay (needed)
     	    if (YAY == 'Y' || YAY == 'y')
     	    {
@@ -247,7 +246,7 @@ void full_install(char install_ARCHIVE, char full_install_opt)
 	    printf("\n[13] Install %s ", TEXT_C_WAYB);
 	    printf("\n[14] Install %s ", TEXT_C_ZSHH);
 	    
-	    while (getchar() != '\n');  // clear imput buffer 
+	    clearbuffer();
 	    scanf(" %d", &install_pkg_opt);
 	    install_configs(install_pkg_opt);
 	}
