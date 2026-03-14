@@ -304,9 +304,7 @@ void NVIM(char ARCHIVE, float pver, char PKGINSTALL)
     {
 	// install neovim (nvim) package
 	// nvim is most likely already installed 
-        snprintf(cmd, 32,
-		"yay -S --noconfirm nvim lazygit");
-	system(cmd);
+	install_package("arch", "nvim lazygit"); // hard coded distro
     }
 
     // export nvim config
@@ -330,9 +328,8 @@ void SWAY(char ARCHIVE, float pver, char PKGINSTALL)
     if ( PKGINSTALL == 'Y'|| PKGINSTALL == 'y')
     {
 	// install sway package
-        snprintf(cmd, 48,
-		"yay -S --noconfirm wlroots swaylock sway");
-	system(cmd);
+
+	install_package("arch", "wlroots swaylock sway");
 	// a system update is strongly recommended 
     }
     // export sway config
@@ -357,9 +354,7 @@ void WAYB(char ARCHIVE, float pver, char PKGINSTALL)
     }
     if ( PKGINSTALL == 'Y'|| PKGINSTALL == 'y')
     {
-        snprintf(cmd, 32,
-		"yay -S --noconfirm waybar");
-	system(cmd);
+	install_package("arch", "waybar");
     }
     // export waybar config and appearance
     snprintf(cmd, sizeof(cmd),
@@ -381,9 +376,7 @@ void ZSHH(char ARCHIVE, float pver, char PKGINSTALL)
     }
     if ( PKGINSTALL == 'Y'|| PKGINSTALL == 'y')
     {
-        snprintf(cmd, 24,
-		"yay -S --noconfirm zsh");
-	system(cmd);
+	install_package("arch", "zsh");
     }
     // export waybar config and appearance
     snprintf(cmd, 96,
@@ -395,7 +388,7 @@ void ZSHH(char ARCHIVE, float pver, char PKGINSTALL)
 
 int install_package(char *pkg_type_distro, char *pkginstallname)
 {
-    char cmd[256];
+    char cmd[512];
     if (strcmp(pkg_type_distro, "arch") == 0)
     {
         snprintf(cmd, sizeof(cmd),
@@ -413,5 +406,6 @@ int install_package(char *pkg_type_distro, char *pkginstallname)
     	printf("Your distribution is not supported.\n");
     	wait_for_timeout(0, 1);
     }
+
     return 0;
 }
