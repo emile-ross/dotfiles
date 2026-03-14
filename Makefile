@@ -7,6 +7,7 @@ full_recompilation:
 	gcc $(FLAGS) -c c-scripts/setup.c -o c-scripts/setup.o
 	gcc $(FLAGS) -c c-scripts/install.c -o c-scripts/install.o
 	gcc $(FLAGS) -c c-scripts/update.c -o c-scripts/update.o
+	gcc $(FLAGS) -c c-scripts/arguments.c -o c-scripts/arguments.o
 	@echo "Compiling full application"
 
 user_compilation:
@@ -15,6 +16,7 @@ user_compilation:
 	@gcc $(U_FLAGS) -c c-scripts/setup.c -o c-scripts/setup.o
 	@gcc $(U_FLAGS) -c c-scripts/install.c -o c-scripts/install.o
 	@gcc $(U_FLAGS) -c c-scripts/update.c -o c-scripts/update.o
+	@gcc $(U_FLAGS) -c c-scripts/arguments.c -o c-scripts/arguments.o
 	@echo "Compiled full package"
 	@echo "execute it with: ./setup"
 clean: 
@@ -22,11 +24,12 @@ clean:
 		c-scripts/functions.o \
 		c-scripts/setup.o \
 		c-scripts/install.o \
-		c-scripts/update.o
+		c-scripts/update.o \
+		c-scripts/arguments.o
 
 setup: user_compilation
-	@gcc $(U_FLAGS) c-scripts/setup.o c-scripts/functions.o c-scripts/install.o c-scripts/update.o c-scripts/programs.o -o setup
+	@gcc $(U_FLAGS) c-scripts/setup.o c-scripts/functions.o c-scripts/install.o c-scripts/update.o c-scripts/programs.o c-scripts/arguments.c -o setup
 
 full: full_recompilation
-	gcc $(FLAGS) c-scripts/setup.o c-scripts/functions.o c-scripts/install.o c-scripts/update.o c-scripts/programs.o -o setup
+	gcc $(FLAGS) c-scripts/setup.o c-scripts/functions.o c-scripts/install.o c-scripts/update.o c-scripts/programs.o c-scripts/arguments.c -o setup
 	@echo "Compiled successfully"
