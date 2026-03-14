@@ -47,7 +47,7 @@ void ZSHH(char ARCHIVE, float pver, char PKGINSTALL);
 
 
 void clear();
-void bufclear();
+void clearbuffer();
 void pre_startup();
 
 
