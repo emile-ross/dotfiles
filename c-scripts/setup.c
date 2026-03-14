@@ -117,8 +117,7 @@ int main(int argc, char *argv[])
 	    printf("\nDo you want to backup your old dotfiles before updating? (Y/n)\n");
 	    char backuptemp;
 
-	    while (getchar() != '\n');  // clear imput buffer 
-	    ;
+	    clearbuffer();
 	    scanf("%c", &backuptemp);
 	    full_update(backuptemp, *version);
     	}
@@ -135,8 +134,7 @@ int main(int argc, char *argv[])
     	        printf(BOLD_S " [4] " STYLE_END UDRL_S"%s"STYLE_END"\n", zshforhumans_config_menu_text);
     	        printf(BOLD_S " [0] " STYLE_END "%s\n", opt_exit_text);
 
-	        while (getchar() != '\n');  // clear imput buffer 
-		;
+		clearbuffer();
     	        scanf(" %d", &dotfiles_config_menu);
 	        if (dotfiles_config_menu == 1)
 	        {
@@ -153,8 +151,8 @@ int main(int argc, char *argv[])
     	                printf(BOLD_S " [1] " STYLE_END "%s\n", fastfetch_preview_text);
     	                printf(BOLD_S " [2] " STYLE_END "%s\n", fastfetch_edit_config_text);
     	                printf(BOLD_S " [0] " STYLE_END "%s\n", opt_exit_text);
-		        while (getchar() != '\n');  // clear imput buffer 
-			;
+
+			clearbuffer();
     	                scanf("\n%d", &fastfetch_config_choice);
 
     	                if (fastfetch_config_choice == 1)
@@ -178,8 +176,7 @@ int main(int argc, char *argv[])
 	    	            	int link_fastfetch_configs_opt = -1;
     	    	            	char cmd[128];
 
-    	    	            	while (getchar() != '\n');  // clear imput buffer 
-				;
+				clearbuffer();
     	    	            	scanf("%d", &link_fastfetch_configs_opt);
 
     	    	            	if (link_fastfetch_configs_opt == 1)
@@ -225,8 +222,7 @@ int main(int argc, char *argv[])
     	                printf(BOLD_S " [2] " STYLE_END "%s\n", kitty_fonts_text);
     	                printf(BOLD_S " [0] " STYLE_END "%s\n", opt_exit_text);
 
-		        while (getchar() != '\n');  // clear imput buffer 
-			;
+			clearbuffer();
     	                scanf("%d", &kitty_config_choice);
 
     	                char cmd[24];
@@ -306,32 +302,32 @@ int main(int argc, char *argv[])
 				    	        "mv ~/.config/fuzzel/fuzzel.ini ~/.config/fuzzel/fuzzel-backup.ini ; "
 				    	        "ln -sf ~/.config/fuzzel/fuzzel-duplicated.ini ~/.config/fuzzel/fuzzel.ini");
 				    	system(cmd);
-				    goto endthree;
+					break;
 				    case 2:
 					snprintf(cmd, 192,
 				    	        "mv ~/.config/fuzzel/fuzzel.ini ~/.config/fuzzel/fuzzel-backup.ini ; "
 				    	        "ln -sf ~/.config/fuzzel/old-fuzzel.ini ~/.config/fuzzel/fuzzel.ini");
 				    	system(cmd);
-				    	goto endthree;
+					break;
 				    case 3:
 					pver = 0.0f;
 				    	snprintf(cmd, sizeof(cmd),
 				    	        "mv ~/.config/fuzzel/fuzzel.ini ~/.config/fuzzel/fuzzel-backup.ini ; "
 				    	        "ln -sf ~/.config/fuzzel/fuzzel-oldv%.1f.ini ~/.config/fuzzel/fuzzel.ini", pver);
 				    	system(cmd);
-				    	goto endthree;
+					break;
 				    case 4:
 					snprintf(cmd, 192,
 				    	        "mv ~/.config/fuzzel/fuzzel.ini ~/.config/fuzzel/fuzzel-backup.ini ; "
 				    	        "ln -sf ~/.config/fuzzel/default-fuzzel.ini ~/.config/fuzzel/fuzzel.ini");
 				    	system(cmd);
-				    	goto endthree;
+					break;
 				    case 5:
 					snprintf(cmd, 192,
 				    	        "mv ~/.config/fuzzel/fuzzel.ini ~/.config/fuzzel/fuzzel-backup.ini ; "
 				    	        "ln -sf ~/.config/fuzzel/custom-edited-fuzzel.ini ~/.config/fuzzel/fuzzel.ini");
 				    	system(cmd);
-				    	goto endthree;
+					break;
 				    case 6:
 					// edit config
 				    	snprintf(cmd, 64,
@@ -339,12 +335,9 @@ int main(int argc, char *argv[])
 				    	system(cmd);
 				    	printf("The custom config was saved successfully\n");
 				    	wait_for_timeout(1, 0);
-				    	goto endthree;
+					break;
 				    default:
-					goto endthree;
-
-				    endthree:
-				    ;
+					break;
 				}
 			    }
 			    while (fuzzel_edit_menu_choice > 0);
@@ -424,13 +417,14 @@ int main(int argc, char *argv[])
 	    }
 	    while(menu_activate_linux != 0.0);
     	}
-    	else if (menu_one_i == 0)
+    	else if (menu_one_i == 0 || menu_one_i > 4)
     	{
     		printf("\nExiting..\n");
     		return 0;
     	}
     	else
     	{
+	    // idk what causes this..
 	    error_message(2);
     	    return 2;
     	}
