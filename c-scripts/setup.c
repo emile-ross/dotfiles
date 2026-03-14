@@ -259,8 +259,7 @@ int main(int argc, char *argv[])
     	            	printf(BOLD_S " [3] " STYLE_END "%s\n",	fuzzel_catppuccin_text);
     	            	printf(BOLD_S " [0] " STYLE_END "%s\n", opt_exit_text);
 
-			while (getchar() != '\n');  // clear imput buffer 
-			;
+			clearbuffer();
 			scanf(" %d", &fuzzel_config_menu_choice);
 
 			if (fuzzel_config_menu_choice == 1)
@@ -295,8 +294,7 @@ int main(int argc, char *argv[])
     	            		printf(BOLD_S " [6] " STYLE_END "%s\n\n", fuzzel_config_edit_custom);
     	            		printf(BOLD_S " [0] " STYLE_END "%s\n", opt_exit_text);
 
-				while (getchar() != '\n');  // clear imput buffer 
-				;
+				clearbuffer();
 				scanf(" %d", &fuzzel_edit_menu_choice);
 
 				// create a 256 bytes buffer for the commands below
@@ -382,8 +380,7 @@ int main(int argc, char *argv[])
 				    "else "
 				    "  sh -c \"$(wget -O- https://raw.githubusercontent.com/romkatv/zsh4humans/v5/install)\"; " 
 				    "fi");
-			    while (getchar() != '\n');  // clear imput buffer 
-			    ;
+			    clearbuffer();
 			    getchar(); // intended blocking behaviour
 			}
 		    }
@@ -398,8 +395,6 @@ int main(int argc, char *argv[])
 	    int menu_activate_linux;
 	    do
 	    {
-		while (getchar() != '\n');  // clear imput buffer 
-		;
 		clear();
     	    	printf(BOLD_S "%s\n"STYLE_END, opt_fiv_text );
 		
@@ -407,13 +402,16 @@ int main(int argc, char *argv[])
 
 		printf(BOLD_S "\n [1] %s\n"STYLE_END, act_linux_water_text);
 		printf(BOLD_S "\n [0] %s (no)\n"STYLE_END, opt_exit_text);
+
+		clearbuffer();
 	    	scanf("%d", &menu_activate_linux);
 
 		if (menu_activate_linux == 1)
 		{
-		    char cmd[64];
+		    char cmd[24];
+		    install_package("arch", "activate-linux-git");
+
 	    	    snprintf(cmd, sizeof(cmd),
-	    	            "yay -S activate-linux-git --noconfirm ; "
 	    	            "activate-linux-git");
 	    	    system(cmd);
 
