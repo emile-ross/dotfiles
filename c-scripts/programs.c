@@ -146,9 +146,7 @@ void FUZZ(char ARCHIVE, float pver, char PKGINSTALL)
     if ( PKGINSTALL == 'Y'|| PKGINSTALL == 'y')
     {
 	// install fuzzel package
-        snprintf(cmd, 32,
-		"yay -S --noconfirm fuzzel");
-	system(cmd);
+	install_package(parent, "fuzzel");
     }
     // export fuzzel appearance
 
@@ -180,9 +178,7 @@ void GTKL(char ARCHIVE, float pver, char PKGINSTALL)
     if ( PKGINSTALL == 'Y'|| PKGINSTALL == 'y')
     {
 	// install gtklock package
-        snprintf(cmd, 32,
-		"yay -S --noconfirm gtklock");
-	system(cmd);
+	install_package(parent, "gtklock");
     }
     // export gtklock config
     snprintf(cmd, 384,
@@ -208,10 +204,7 @@ void HYPR(char ARCHIVE, float pver, char PKGINSTALL)
     if ( PKGINSTALL == 'Y'|| PKGINSTALL == 'y')
     {
 	// install Hyprland packages
-	char cmd[256];
-        snprintf(cmd, 64,
-		"yay -S --noconfirm hyprlock hypridle hyprpaper hyprland");
-	system(cmd);
+	install_package(parent, "hyprlock hypridle hyprpaper hyprland");
     }
     // export hyprland configs
     int mem_needed = snprintf(NULL, 0,
@@ -250,9 +243,7 @@ void KITT(char ARCHIVE, float pver, char PKGINSTALL)
     {
 	// install kitty package
 	//  the kitty terminal is most likely already installed on your system
-        snprintf(cmd, 32,
-		"yay -S --noconfirm kitty");
-	system(cmd);
+	install_package(parent, "mpv");
     }
     // export kitty config
     snprintf(cmd, sizeof(cmd),
@@ -275,11 +266,7 @@ void MPVF(char ARCHIVE, float pver, char PKGINSTALL)
     }
     if ( PKGINSTALL == 'Y'|| PKGINSTALL == 'y')
     {
-        snprintf(cmd, 32,
-		"yay -S --noconfirm mpv");
-	system(cmd);
-
-	printf(BOLD_S"\nMPV was installed!\n"STYLE_END);
+	install_package(parent, "mpv");
     }
     // export mpv config with shaders
     snprintf(cmd, 128,
@@ -304,7 +291,7 @@ void NVIM(char ARCHIVE, float pver, char PKGINSTALL)
     {
 	// install neovim (nvim) package
 	// nvim is most likely already installed 
-	install_package("arch", "nvim lazygit"); // hard coded distro
+	install_package(parent, "nvim lazygit");
     }
 
     // export nvim config
@@ -329,7 +316,7 @@ void SWAY(char ARCHIVE, float pver, char PKGINSTALL)
     {
 	// install sway package
 
-	install_package("arch", "wlroots swaylock sway");
+	install_package(parent, "wlroots swaylock sway");
 	// a system update is strongly recommended 
     }
     // export sway config
@@ -354,7 +341,7 @@ void WAYB(char ARCHIVE, float pver, char PKGINSTALL)
     }
     if ( PKGINSTALL == 'Y'|| PKGINSTALL == 'y')
     {
-	install_package("arch", "waybar");
+	install_package(parent, "waybar");
     }
     // export waybar config and appearance
     snprintf(cmd, sizeof(cmd),
@@ -376,7 +363,7 @@ void ZSHH(char ARCHIVE, float pver, char PKGINSTALL)
     }
     if ( PKGINSTALL == 'Y'|| PKGINSTALL == 'y')
     {
-	install_package("arch", "zsh");
+	install_package(parent, "zsh");
     }
     // export waybar config and appearance
     snprintf(cmd, 96,
