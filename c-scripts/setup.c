@@ -4,86 +4,12 @@ int main(int argc, char *argv[])
 {
     pre_startup();
 
-    if (argc > 1) // checks how many arguments were used
-    {
-
-
-	// checks if the command was ran with the --noconfirm flag
-	if (strcmp(argv[1], "--noconfirm") == 0) 
-	{
-	    printf(BOLD_S"Proceeding with full install\n"STYLE_END);
-	    full_install('y', 'y');
-	}
-	else if (strcmp(argv[1], "-p") == 0 || strcmp(argv[1], "-P") == 0)
-	{
-	    if (argc >= n_to_arg)
-	    {
-		for (int i = n_to_arg - 1; i < argc; i++)
-		{
-		    // arch is currently hardcoded since the distro parser isn't complete
-		    printf("Distro: %s\n", distro);
-		    printf("Parent distro: %s\n", parent);
-		    install_package(parent, argv[i]); 
-		}
-		return 0;
-	    }
-	    else
-	    {
-		// prints an error message if there isn't a package specified in the command
-		cli_arg_missing(argv[0], "package", argv[1]);
-		return -1;
-	    }
-	}
-	else if (strcmp(argv[1], "-c") == 0 || strcmp(argv[1], "-C") == 0)
-	{
-	    if (argc >= n_to_arg)
-	    {
-		for (int i = n_to_arg - 1; i < argc; i++)
-		{
-		    // support for different operating systems might come in the future...
-		    // will print the arguments instead of executing the command (useless)
-		    config_description(argv[i]);
-		}
-		return 0;
-	    }
-	    else
-	    {
-		// prints an error message if there isn't any config name specified in the command
-		cli_arg_missing(argv[0], "config name", argv[1]);
-		return -1;
-	    }
-	}
-	else if (strcmp(argv[1], "-i") == 0 || strcmp(argv[1], "-I") == 0)
-	{
-	    // loops through the arguments in order to pass them one at a time
-	    if (argc >= n_to_arg)
-	    {
-		for (int i = n_to_arg - 1; i < argc; i++)
-		{
-		    // will print a short description for the package
-		    config_description(argv[i]);
-		}
-		return 0;
-	    }
-	    else
-	    {
-		// prints an error message if there isn't a package specified in the command
-		cli_arg_missing(argv[0], "package", argv[1]);
-		return -1;
-	    }
-	}
-	else
-	{
-	    // prints an error message if the argument is invalid
-	    printf(BOLD_S ANSI_RED"%s: invalid option -- '%s'\n"STYLE_END, argv[0], argv[1]);
-	    return -2;
-	}
-    }
+    parse_arguments(argc, argv);
 
     do
     {
     	// sets the text for each option and each menu title
-    	clear();
+    	//clear();
     	printf(BOLD_S ANSI_CYAN "%s\n\n" STYLE_END, main_menu_text );
     	printf(BOLD_S " [1] " STYLE_END "%s\n", opt_one_text);
     	printf(BOLD_S " [2] " STYLE_END "%s\n", opt_the_text);
