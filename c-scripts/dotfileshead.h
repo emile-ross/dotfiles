@@ -50,6 +50,9 @@ void clear();
 void clearbuffer();
 void pre_startup();
 
+extern char distro[128];
+extern char parent[128];
+
 
 void full_install(char ARCHIVE, char full_install_opt);
 int full_update(char ARCHIVE, float pver);
@@ -125,6 +128,7 @@ extern char initial_path[64];
 extern char inpath[64];
 
 char *get_initial_path();
+int get_os_name();
 extern const int max_menu_opt_n;
 extern int fastfetch_conf_export;
 extern const char *home;
