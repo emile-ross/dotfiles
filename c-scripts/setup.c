@@ -4,6 +4,9 @@ int main(int argc, char *argv[])
 {
     pre_startup();
     
+    printf("ID: %s\n", distro);
+    printf("ID_LIKE: %s\n", parent);
+
     if (argc > 1) // checks how many arguments were used
     {
 
@@ -380,7 +383,7 @@ int main(int argc, char *argv[])
 		    while (zshforhumans_choice > 0);
 		}
     	    } 
-    	    while(dotfiles_config_menu != 0.0);
+    	    while(dotfiles_config_menu > 0.0);
     	    // exits the while loop when the user types 0
     	}
     	else if (menu_one_i == 4)
@@ -415,7 +418,7 @@ int main(int argc, char *argv[])
 	    	    printf("These flags allow you to add a custom message or title\n");
 		}
 	    }
-	    while(menu_activate_linux != 0.0);
+	    while(menu_activate_linux > 0.0);
     	}
     	else if (menu_one_i == 0 || menu_one_i > 4)
     	{
