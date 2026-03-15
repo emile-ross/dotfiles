@@ -4,11 +4,13 @@ const int max_menu_opt_n = 12;
 
 void clear()
 {
+    // clears the screen
     printf("\033[2J\033[H");
 }
 
 void clearbuffer()
 {
+    // clears the imput buffer 
     while (getchar() != '\n');
 }
 
@@ -81,6 +83,20 @@ void pre_startup()
     // gets the current working directory
     snprintf(inpath, sizeof(inpath), "%s", get_initial_path());
     get_os_name();
+
+    if (strcmp(distro, "debian") == 0) 
+    {
+	//sets debian as the parent distro of (debian)
+	snprintf(parent, sizeof(parent),
+		"%s", distro);
+    }
+    else if (strcmp(distro, "arch") == 0) 
+    {
+	// sets arch as the parent distro of (arch)
+	snprintf(parent, sizeof(parent),
+		"%s", distro);
+    }
+
 }
 
 char *get_initial_path()
