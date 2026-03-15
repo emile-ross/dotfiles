@@ -3,9 +3,6 @@
 int main(int argc, char *argv[])
 {
     pre_startup();
-    
-    printf("ID: %s\n", distro);
-    printf("ID_LIKE: %s\n", parent);
 
     if (argc > 1) // checks how many arguments were used
     {
@@ -24,7 +21,9 @@ int main(int argc, char *argv[])
 		for (int i = n_to_arg - 1; i < argc; i++)
 		{
 		    // arch is currently hardcoded since the distro parser isn't complete
-		    install_package("arch", argv[i]); 
+		    printf("Distro: %s\n", distro);
+		    printf("Parent distro: %s\n", parent);
+		    install_package(parent, argv[i]); 
 		}
 		return 0;
 	    }
