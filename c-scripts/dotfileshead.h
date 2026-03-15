@@ -49,6 +49,7 @@ void ZSHH(char ARCHIVE, float pver, char PKGINSTALL);
 void clear();
 void clearbuffer();
 void pre_startup();
+int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[]);
 
 extern char distro[128];
 extern char parent[128];
@@ -147,7 +148,6 @@ extern float pver;
 float* update();
 
 void fuzzel_config_importing();
-
 
 
 // errors
