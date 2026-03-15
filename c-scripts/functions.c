@@ -39,6 +39,7 @@ char zshforhumans_config_menu_text[32] = "Set up zsh";
 char kitty_color_text[32] = "Change Kitty color scheme";
 char kitty_fonts_text[32] = "Change Kitty fonts";
 
+
 char main_menu_text[128] = "Welcome to the setup utility for ImAwsumm's dotfiles";
 char opt_one_text[128] = "Install the dotfiles";
 char opt_the_text[128] = "Update your dotfiles";
@@ -69,8 +70,8 @@ int n_to_arg = 3;
 struct timespec install_timer;
 int fastfetch_conf_export;
 
-char distro[64] = "";
-char parent[64] = "";
+char distro[128] = "";
+char parent[128] = "";
 
 char initial_path[64];
 char inpath[64];
@@ -79,6 +80,7 @@ void pre_startup()
 {
     // gets the current working directory
     snprintf(inpath, sizeof(inpath), "%s", get_initial_path());
+    get_os_name();
 }
 
 char *get_initial_path()
@@ -278,4 +280,33 @@ void config_description(char *package_t)
         default:
             printf("Unknown program.\n");
     }
+}
+
+int get_os_name()
+{
+    // open /etc/os-release
+    FILE *fp = fopen("/etc/os-release", "r");
+
+    // fallback to /usr/lib if /etc/ fails
+    if (!fp) fp = fopen("/usr/lib/os-release", "r"); 
+    // error checking
+    if (!fp) error_message(52);
+
+    char t_line[256];
+
+    while (fgets(t_line, sizeof(t_line), fp)) 
+    {
+	// store the value after '=' in char val
+        char *val = strchr(t_line, '=') + 1;
+
+	// remove trailing newline
+        val[strcspn(val, "\"\n")] = '\0'; 
+
+        if (strncmp(t_line, "ID=", 3) == 0) strcpy(distro, val);	    // store the value in char distro
+        else if (strncmp(t_line, "ID_LIKE=", 8) == 0) strcpy(parent, val);  // store the value in char parent
+    }
+
+    // close file since it won't be used anymore
+    fclose(fp);
+    return 0;
 }
