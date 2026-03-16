@@ -9,7 +9,7 @@ int main(int argc, char *argv[])
     do
     {
     	// sets the text for each option and each menu title
-    	//clear();
+    	clear();
     	printf(BOLD_S ANSI_CYAN "%s\n\n" STYLE_END, main_menu_text );
     	printf(BOLD_S " [1] " STYLE_END "%s\n", opt_one_text);
     	printf(BOLD_S " [2] " STYLE_END "%s\n", opt_the_text);
@@ -136,7 +136,7 @@ int main(int argc, char *argv[])
 	    	            while (fastfetch_conf_export > 0.0);
     	                }
     	            }
-    	            while(fastfetch_config_choice > 0.0);
+    	            while (fastfetch_config_choice > 0.0);
     	            // exits the while loop when the user types 0
 	        }
 		else if (dotfiles_config_menu == 2)
@@ -308,7 +308,7 @@ int main(int argc, char *argv[])
 		    while (zshforhumans_choice > 0);
 		}
     	    } 
-    	    while(dotfiles_config_menu > 0.0);
+    	    while (dotfiles_config_menu > 0.0);
     	    // exits the while loop when the user types 0
     	}
     	else if (menu_one_i == 4)
