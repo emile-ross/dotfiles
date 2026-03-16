@@ -2,6 +2,15 @@
 
 ## flags
 
+## full install
+``--noconfirm``
+
+Proceed with the full installation of the dotfiles without any warnings.
+
+```bash
+./setup --noconfirm
+```
+
 ### install a package
 ``-p`` or ``-P``
 
