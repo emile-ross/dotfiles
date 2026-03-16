@@ -166,56 +166,58 @@ void full_install(char install_ARCHIVE, char full_install_opt)
 	    timerinstall--;
 	}
 	
-	if (system("test -f /sbin/yay") == 0)
-    	{
-    	    printf("Yay already installed, congrats!\n");
-    	}
-    	else
-    	{
-    	    printf("Yay is not installed, do you want to install it? (Y/n): ");
-
-    	    char YAY;
-	    clearbuffer();
-    	    scanf(" %c", &YAY); // asks the user if they wanna install yay (needed)
-    	    if (YAY == 'Y' || YAY == 'y')
+	if (strcmp(parent, "arch") == 0)
+	{
+	    if (system("test -f /sbin/yay") == 0)
     	    {
-    	        // Check if makepkg is installed ( it is needed in order to compile yay )
-    	        if (system("command -v makepkg > /dev/null") != 0)
-    	        {
-    	            printf("\nMakepkg is not installed. Installing 'base-devel' package group to proceed...\n");
-		    char cmd[128];
-		    snprintf(cmd, sizeof(cmd),
-			    "sudo pacman -S --noconfirm base-devel");
-	    	    system(cmd);
-    	            
-    	            // Check if makepkg is available after installing the base-devel package
-    	            if (system("command -v makepkg > /dev/null") != 0)
-    	            {
-			error_message(51);
-    	            }
-    	            else
-    	            {
-			printf("Makepkg has been successfully installed!\n");
-    	            }
-    	        }
-    	        else
-    	        {
-    	            printf("Makepkg is already installed.\n");
-    	        }
-	        // install yay \/
-    	        char cmd[256];
-    	        snprintf(cmd, sizeof(cmd),
-			"sudo pacman -S --noconfirm base-devel ; "
-			"git clone https://aur.archlinux.org/yay.git ; "	// download yay from aur
-    	                "cd yay ; "						//
-			"makepkg -si ; "					// build package from source
-    	                "cd ..");						//
-    	        system(cmd);
-    	        printf("\nYay is installed, congrats!\n");
+    	        printf("Yay already installed, congrats!\n");
     	    }
     	    else
     	    {
-	        error_message(5);
+    	        printf("Yay is not installed, do you want to install it? (Y/n): ");
+
+    	        char YAY;
+	        clearbuffer();
+    	        scanf(" %c", &YAY); // asks the user if they wanna install yay (needed)
+    	        if (YAY == 'Y' || YAY == 'y')
+    	        {
+    	            // Check if makepkg is installed ( it is needed in order to compile yay )
+    	            if (system("command -v makepkg > /dev/null") != 0)
+    	            {
+    	                printf("\nMakepkg is not installed. Installing 'base-devel' package group to proceed...\n");
+			char cmd[128];
+			snprintf(cmd, sizeof(cmd),
+				"sudo pacman -S --noconfirm base-devel");
+			system(cmd);
+    	                
+    	                // Check if makepkg is available after installing the base-devel package
+    	                if (system("command -v makepkg > /dev/null") != 0)
+    	                {
+			    error_message(51);
+    	                }
+    	                else
+    	                {
+	    		printf("Makepkg has been successfully installed!\n");
+    	                }
+    	            }
+    	            else
+    	            {
+    	                printf("Makepkg is already installed.\n");
+    	            }
+    	            char cmd[256];
+    	            snprintf(cmd, sizeof(cmd),
+			    "sudo pacman -S --noconfirm base-devel ; "
+			    "git clone https://aur.archlinux.org/yay.git ; "	// download yay from aur
+			    "cd yay ; "						//
+			    "makepkg -si ; "					// build package from source
+    	                    "cd ..");						//
+    	            system(cmd);
+    	            printf("\nYay is installed, congrats!\n");
+    	        }
+    	        else
+    	        {
+	            error_message(5);
+	        }
 	    }
 	}
 	// actually install the dotfiles
