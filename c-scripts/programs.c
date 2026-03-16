@@ -13,7 +13,7 @@ void BASH()
 	    "cp -f %s/shell/bash/.bashrc ~/%s", 
 	    inpath, BRCNAME);
 
-char *cmd = malloc(mem_needed + 1);
+    char *cmd = malloc(mem_needed + 1);
 
     snprintf(cmd, mem_needed + 1,
              "cp -f %s/shell/bash/.bashrc ~/%s",
@@ -36,16 +36,12 @@ void BPYT(char ARCHIVE, float pver, char PKGINSTALL)
     }
     if ( PKGINSTALL == 'Y'|| PKGINSTALL == 'y')
     {
-	// install bpytop package
-        snprintf(cmd, 32,
-		"yay -S --noconfirm bpytop");
-	system(cmd);
+	install_package(parent, "bpytop"); // install bpytop package
     }
     // export bpytop config
     snprintf(cmd, sizeof(cmd),
 	   "mkdir -p ~/.config/bpytop ; "
-	   "cp -f %s/bpytop/bpytop.conf ~/.config/bpytop"
-	   , inpath);
+	   "cp -f %s/bpytop/bpytop.conf ~/.config/bpytop", inpath);
     system(cmd);
 }
 
@@ -62,10 +58,7 @@ void BTOP(char ARCHIVE, float pver, char PKGINSTALL)
     }
     if ( PKGINSTALL == 'Y'|| PKGINSTALL == 'y')
     {
-	// install btop package
-        snprintf(cmd, 32,
-		"yay -S --noconfirm btop");
-	system(cmd);
+	install_package(parent, "btop"); // install btop package
     }
     // export btop config
     snprintf(cmd, sizeof(cmd),
@@ -87,10 +80,7 @@ void CAVA(char ARCHIVE, float pver, char PKGINSTALL)
     }
     if ( PKGINSTALL == 'Y'|| PKGINSTALL == 'y')
     {
-	// install fuzzel package
-        snprintf(cmd, 32,
-		"yay -S --noconfirm cava");
-	system(cmd);
+	install_package(parent, "cava"); // install cava package
     }
     // export cava config
     snprintf(cmd, sizeof(cmd),
@@ -112,10 +102,7 @@ void FAST(char ARCHIVE, float pver, char PKGINSTALL)
     }
     if ( PKGINSTALL == 'Y'|| PKGINSTALL == 'y')
     {
-	// install fuzzel package
-        snprintf(cmd, 32,
-		"yay -S --noconfirm fastfetch");
-	system(cmd);
+	install_package(parent, "fastfetch"); // install fastfetch
     }
     // export fastfetch config
     snprintf(cmd, sizeof(cmd),
@@ -130,7 +117,7 @@ void FAST(char ARCHIVE, float pver, char PKGINSTALL)
 }
 void FUZZ(char ARCHIVE, float pver, char PKGINSTALL)
 {
-    char cmd[512];
+    char cmd[1024];
     if (ARCHIVE == 'Y' || ARCHIVE == 'y')
     {
     	// backup fuzzel config
@@ -149,18 +136,14 @@ void FUZZ(char ARCHIVE, float pver, char PKGINSTALL)
 	install_package(parent, "fuzzel");
     }
     // export fuzzel appearance
-
-    snprintf(cmd, sizeof(cmd),
+    snprintf(cmd, 768,
             "mkdir -p ~/.config/fuzzel ; "
-            "cp -f %s/fuzzel/old-fuzzel.ini ~/.config/fuzzel", inpath);
-    system(cmd);  		
-    
-    snprintf(cmd, sizeof(cmd),
+            "cp -f %s/fuzzel/old-fuzzel.ini ~/.config/fuzzel ; "
             "cp -f %s/fuzzel/default-fuzzel.ini ~/.config/fuzzel ; "
 	    "cp -f ~/.config/fuzzel/default-fuzzel.ini ~/.config/fuzzel/custom-edited-fuzzel.ini ; "
             "cp -f %s/fuzzel/fuzzel.ini ~/.config/fuzzel ; "
 	    "mv ~/.config/fuzzel/fuzzel.ini ~/.config/fuzzel/fuzzel-duplicated.ini ; "
-	    "ln -sf ~/.config/fuzzel/fuzzel-duplicated.ini ~/.config/fuzzel/fuzzel.ini ", inpath, inpath);
+	    "ln -sf ~/.config/fuzzel/fuzzel-duplicated.ini ~/.config/fuzzel/fuzzel.ini ", inpath, inpath, inpath);
     system(cmd);  		
 }
 void GTKL(char ARCHIVE, float pver, char PKGINSTALL)
@@ -304,25 +287,23 @@ void NVIM(char ARCHIVE, float pver, char PKGINSTALL)
 void SWAY(char ARCHIVE, float pver, char PKGINSTALL)
 {
     // sway window manager doesn't work without wlroots
-    char cmd[128];
+    char cmd[256];
     if (ARCHIVE == 'Y' || ARCHIVE == 'y')
     {
-        snprintf(cmd, sizeof(cmd),
-    	    	"mv ~/.config/sway/config ~/.config/sway/config-oldv%.2f ",
-		pver);
+        snprintf(cmd, 64,
+    	    	"mv ~/.config/sway/config ~/.config/sway/config-oldv%.2f ", pver);
         system(cmd);
     }
     if ( PKGINSTALL == 'Y'|| PKGINSTALL == 'y')
     {
-	// install sway package
-
+	// install sway package -- a system update is strongly recommended 
 	install_package(parent, "wlroots swaylock sway");
-	// a system update is strongly recommended 
     }
     // export sway config
     snprintf(cmd, sizeof(cmd),
 	    "mkdir -p ~/.config/sway ; "
-    	    "cp -f %s/sway/config ~/.config/sway", inpath);
+	    "cp -f %s/sway/config ~/.config/sway/ ; "
+    	    "cp -f %s/sway/config-default ~/.config/sway", inpath, inpath);
     system(cmd);
 }
 
@@ -335,8 +316,7 @@ void WAYB(char ARCHIVE, float pver, char PKGINSTALL)
     	// archive waybar
         snprintf(cmd, sizeof(cmd),
 		"mv ~/.config/waybar/config.jsonc ~/.config/waybar/config-oldv%.2f.jsonc ; "
-		"mv ~/.config/waybar/style.css ~/.config/waybar/style-oldv%.2f.css",
-		pver, pver);
+		"mv ~/.config/waybar/style.css ~/.config/waybar/style-oldv%.2f.css", pver, pver);
 	system(cmd);
     }
     if ( PKGINSTALL == 'Y'|| PKGINSTALL == 'y')
@@ -365,8 +345,7 @@ void ZSHH(char ARCHIVE, float pver, char PKGINSTALL)
     {
 	install_package(parent, "zsh");
     }
-    // export waybar config and appearance
-    snprintf(cmd, 96,
+    snprintf(cmd, 128, 
 	    "cp -f %s/shell/zsh/.zshrc ~/ ", inpath);
     system(cmd);
 
