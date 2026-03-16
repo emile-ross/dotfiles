@@ -8,12 +8,14 @@ int full_update(char ARCHIVE, float pver)
     char cmd[2048];
     case 100:
 	printf("\nUpdating from %d\n", VAWSM);
-	snprintf(cmd, 192,
-		"yay -S --noconfirm cava fuzzel kitty fastfetch waybar ; "
+
+	install_package(parent, "cava fuzzel kitty fastfetch waybar");
+
+	snprintf(cmd, 128,
 		"cp -f kitty/kitty.conf ~/.config/kitty ; "
 		"cp -f kitty/current-theme.conf ~/.config/current-theme.conf ");
 	system(cmd);
-	snprintf(cmd, 192,
+	snprintf(cmd, 96,
 		"cp hypr/hypridle.conf ~/.config/hypr ; "
 		"cp hypr/hyprpaper.conf ~/.config/hypr ");
 	system(cmd);
@@ -36,8 +38,8 @@ int full_update(char ARCHIVE, float pver)
 	    system(cmd);
 	}
 	// export cava + kitty
-	snprintf(cmd, 512,
-		"yay -S --noconfirm ttf-ubuntu-font-family btop ttf-ibmplex-mono-nerd ; "
+	install_package(parent, "ttf-ubuntu-font-family btop ttf-ibmplex-mono-nerd");
+	snprintf(cmd, 320,
 		"ttf-blex-nerd-font-git ttf-victor-mono-nerd ttf-cascadia-mono-nerd ; "
 		"cp -f kitty/current-theme.conf ~/.config/kitty/ ; "
 		"mkdir -p ~/.config/cava/ ; "
@@ -55,9 +57,9 @@ int full_update(char ARCHIVE, float pver)
 	__attribute__ ((fallthrough));
 	// do not break because we are also installing everything below
     case 200:
-	snprintf(cmd, 256,
+	install_package(parent, "gtklock");
+	snprintf(cmd, 320,
 		"mkdir ~/.config/gtklock ; "
-		"yay -S --noconfirm gtklock ; "
 		"mv ~/.config/gtklock/style.css ~/.config/gtklock/style-v%.2f.css ; "	// gtklock exporting
 		"cp -f %s/gtklock/style.css ~/.config/gtklock/style.css ", pver, inpath);
 	system(cmd);
@@ -65,10 +67,10 @@ int full_update(char ARCHIVE, float pver)
 	__attribute__ ((fallthrough));
 	// do not break because we are also installing everything below
     case 210:
+	install_package(parent, "sway");
 	snprintf(cmd, 512,
 		"mkdir -p ~/.config/sway ; "
 		"mkdir -p ~/.config/nvim ; "
-		"yay -S --noconfirm sway ; "
 		"mv ~/.config/nvim/init.lua ~/.config/nvim/init-oldv%.2f.lua ; "
 		"cp -f nvim/init.lua ~/.config/nvim ; "
 		"mv ~/.config/gtklock/style.css ~/.config/gtklock/style-v%.2f.css ; "
@@ -90,8 +92,8 @@ int full_update(char ARCHIVE, float pver)
 	system(cmd);
 	__attribute__ ((fallthrough));
     case 230:
+	install_package(parent, "nvim");
 	snprintf(cmd, sizeof(cmd),
-		"yay -S --noconfirm nvim ; "
 		"mv ~/.config/hypr/hyprland.conf ~/.config/hypr/hyprland-v%.2f.conf ; "
 		"cp -f %s/hypr/hyprland.conf ~/.config/hypr/ ; "
 		"cp -f %s/fuzzel/default-fuzzel.ini ~/.config/fuzzel/ ; "
