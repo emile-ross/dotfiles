@@ -2,13 +2,21 @@
 
 ## flags
 
--i 
+### install a package
+``-p`` or ``-P``
 
--d
+Install a package using the method appropriate for the distro
 
--c
+### description for a package
+``-d`` or ``-D``
 
--p
+Provides a short description for the specified package
+
+### Installs a config
+``-c`` or ``-C``
+
+Will install the specified config along with the package
+
 
 ## features
 
