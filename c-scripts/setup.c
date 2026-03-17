@@ -92,6 +92,7 @@ int main(int argc, char *argv[])
 			    do
 	    	            {
 				clear();
+
 	    	            	printf(BOLD_S"What file would you like to use as your fastfetch config?\n\n"STYLE_END);
 	    	            	printf(BOLD_S " [1] "STYLE_END"config-default.jsonc\n");
 	    	            	printf(BOLD_S " [2] "STYLE_END"config-other.jsonc\n");
@@ -161,7 +162,7 @@ int main(int argc, char *argv[])
     	                    printf("\nThe install script can be used to install more fonts.");
     	                }
     	            }
-    	            while(kitty_config_choice != 0.0); // exits the while loop when the user types 0
+    	            while(kitty_config_choice > 0.0); // exits the while loop when the user types 0
     	        }
 		else if (dotfiles_config_menu == 3)
 		{
@@ -193,7 +194,8 @@ int main(int argc, char *argv[])
 				char fuzzel_config_one[32] = "Use fuzzel-duplicated.ini";
     	                	char fuzzel_config_old[32] = "Use old-fuzzel.ini";
     	                	char fuzzel_config_vzero[32] = "Use fuzzel-v0.0.ini";
-    	                	char fuzzel_config_default[32] = "Use default fuzzel config";
+    	                	char fuzzel_config_default[32] = "Use default config";
+    	                	char fuzzel_config_catp[48] = "Use the customized Catppuccin theme";
     	                	char fuzzel_config_custom[32] = "Use custom config";
 				char fuzzel_config_edit_custom[32] = "Edit custom config";
 
@@ -202,9 +204,10 @@ int main(int argc, char *argv[])
     	            		printf(BOLD_S " [2] " STYLE_END "%s\n",	fuzzel_config_old);
     	            		printf(BOLD_S " [3] " STYLE_END "%s\n",	fuzzel_config_vzero);
     	            		printf(BOLD_S " [4] " STYLE_END "%s\n\n", fuzzel_config_default);
+    	            		printf(BOLD_S " [5] " STYLE_END "%s\n\n", fuzzel_config_catp);
 
-    	            		printf(BOLD_S " [5] " STYLE_END "%s\n",	fuzzel_config_custom);
-    	            		printf(BOLD_S " [6] " STYLE_END "%s\n\n", fuzzel_config_edit_custom);
+    	            		printf(BOLD_S " [6] " STYLE_END "%s\n",	fuzzel_config_custom);
+    	            		printf(BOLD_S " [7] " STYLE_END "%s\n\n", fuzzel_config_edit_custom);
     	            		printf(BOLD_S " [0] " STYLE_END "%s\n", opt_exit_text);
 
 				clearbuffer();
@@ -242,13 +245,18 @@ int main(int argc, char *argv[])
 				    case 5:
 					snprintf(cmd, 192,
 				    	        "mv ~/.config/fuzzel/fuzzel.ini ~/.config/fuzzel/fuzzel-backup.ini ; "
-				    	        "ln -sf ~/.config/fuzzel/custom-edited-fuzzel.ini ~/.config/fuzzel/fuzzel.ini");
+				    	        "ln -sf ~/.config/fuzzel/catppucin-fuzzel.ini ~/.config/fuzzel/fuzzel.ini");
 				    	system(cmd);
 					break;
 				    case 6:
-					// edit config
-				    	snprintf(cmd, 64,
-				    	        "nvim ~/.config/fuzzel/custom-edited-fuzzel.ini ");
+					snprintf(cmd, 192,
+				    	        "mv ~/.config/fuzzel/fuzzel.ini ~/.config/fuzzel/fuzzel-backup.ini ; "
+				    	        "ln -sf ~/.config/fuzzel/custom-edited-fuzzel.ini ~/.config/fuzzel/fuzzel.ini");
+				    	system(cmd);
+					break;
+				    case 7:
+				    	snprintf(cmd, 48, // requires 48 bytes exactly
+				    	        "nvim ~/.config/fuzzel/custom-edited-fuzzel.ini "); // command to edit config (with nvim)
 				    	system(cmd);
 				    	printf("The custom config was saved successfully\n");
 				    	wait_for_timeout(1, 0);
