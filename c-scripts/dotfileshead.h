@@ -13,8 +13,6 @@
 #define BOLD_S  	"\e[1m" // defines BOLD_S as a keyword to make text bold
 #define UDRL_S  	"\e[4m" // UDRL_S starts an underline style (does not work in kitty by default)
 #define ITALICS_S 	"\e[3m"
-#define SLOWBLINK_S 	"\e[5m"
-#define FASTBLINK_S 	"\e[6m"
 #define STRIKE_S 	"\e[9m"
 
 #define ANSI_RED 	"\x1b[31m"
@@ -51,9 +49,11 @@ void clearbuffer();
 void pre_startup();
 int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[]);
 
+// Mandatory global variables
 extern char distro[128];
 extern char parent[128];
-
+extern char initial_path[64];
+extern char inpath[64];
 
 void full_install(char ARCHIVE, char full_install_opt);
 int full_update(char ARCHIVE, float pver);
@@ -127,9 +127,6 @@ extern char opt_exit_text[16];
 extern char kitty_color_text[32];
 extern char kitty_fonts_text[32];
 
-extern char initial_path[64];
-extern char inpath[64];
-
 // needs to be global
 char *get_initial_path();
 int get_os_name();
@@ -137,8 +134,6 @@ extern const int max_menu_opt_n;
 extern int fastfetch_conf_export;
 extern const char *home;
 extern struct timespec install_timer;
-extern char ARCHIVE;
-extern char PKGINSTALL;
 extern char full_install_opt; // if the user wants to install everything set to Y
 extern char full_update_opt; 
 extern int menu_one_i;
@@ -151,7 +146,7 @@ extern float pver;
 float* update();
 
 void fuzzel_config_importing();
-
+void apply_fuzzel_config(int config_choice_t);
 
 // errors
 extern char errcode;
