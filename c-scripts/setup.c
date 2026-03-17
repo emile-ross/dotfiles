@@ -73,7 +73,6 @@ int main(int argc, char *argv[])
 
     	                char fastfetch_edit_config_text[48] = "Change the config fastfetch uses by default";
     	                char fastfetch_preview_text[32] = "Preview fastfetch output";
-		        char cmd[128];
     	                
     	                printf(BOLD_S ANSI_WHITE "%s\n\n"STYLE_END, fastfetch_config_menu_text );
     	                printf(BOLD_S " [1] " STYLE_END "%s\n", fastfetch_preview_text);
@@ -85,12 +84,10 @@ int main(int argc, char *argv[])
 
     	                if (fastfetch_config_choice == 1)
     	                {
-    	                    snprintf(cmd, 16,
-				    "fastfetch");
-    	                    system(cmd);
+			    exec_cmd(16, "fastfetch");
 			    wait_for_timeout(0, 2);
     	                }
-		        if (fastfetch_config_choice == 2)
+			else if (fastfetch_config_choice == 2)
     	                {
 			    do
 	    	            {
@@ -153,18 +150,13 @@ int main(int argc, char *argv[])
 			clearbuffer();
     	                scanf("%d", &kitty_config_choice);
 
-    	                char cmd[24];
     	                if (kitty_config_choice == 1)
     	                {
-			    snprintf(cmd, 24,
-				    "kitten themes");
-    	                    system(cmd);
+			    exec_cmd(24, "kitten themes");
     	                }
     	                if (kitty_config_choice == 2)
     	                {
-			    snprintf(cmd, 24,
-				    "kitty +list-fonts");
-    	                    system(cmd);
+			    exec_cmd(24, "kitty +list-fonts");
     
     	                    printf("\nThe install script can be used to install more fonts.");
     	                }
@@ -188,10 +180,7 @@ int main(int argc, char *argv[])
 
 			if (fuzzel_config_menu_choice == 1)
 			{
-			    char cmd[128];
-			    snprintf(cmd, 16,
-				    "fuzzel");
-    	                    system(cmd);
+			    exec_cmd(24, "fuzzel");
 	    	            wait_for_timeout(1, 0);
 			}
 			else if (fuzzel_config_menu_choice == 2)
@@ -329,12 +318,8 @@ int main(int argc, char *argv[])
 
 		if (menu_activate_linux == 1)
 		{
-		    char cmd[24];
 		    install_package("arch", "activate-linux-git");
-
-	    	    snprintf(cmd, sizeof(cmd),
-	    	            "activate-linux-git");
-	    	    system(cmd);
+		    exec_cmd(24, "activate-linux-git");
 
     	    	    printf("\nHere is something cool!\n\n");
     	    	    printf("Look at the bottom right of your screen\n");
