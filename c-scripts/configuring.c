@@ -2,33 +2,27 @@
 
 void fuzzel_config_importing()
 {
-    // check if the configs were already downloaded 
-
     char path[512];
     char *home = getenv("HOME");
     snprintf(path, sizeof(path), "%s/.config/fuzzel/imported/fuzzel", home);
 
     struct stat st;
     char cmd[768];
-    if (stat(path, &st) == 0 && S_ISDIR(st.st_mode)) 
+    if (stat(path, &st) == 0 && S_ISDIR(st.st_mode)) // check if the configs were already downloaded
     {
         printf("The fuzzel themes are already installed.\n");
     }
     else 
     {
-    	snprintf(cmd, 128,
+    	snprintf(cmd, 256,
     	        "mkdir -p ~/.config/fuzzel/imported/ ; " 
     	        "cd ~/.config/fuzzel/imported/ ; "
-    	        "git clone https://github.com/catppuccin/fuzzel.git");
+    	        "git clone https://github.com/catppuccin/fuzzel.git ; "
+		"cd %s ", inpath);
     	system(cmd);
     }
 
-    snprintf(cmd, 48,
-	    "cd ~/.config/fuzzel/imported/fuzzel/themes");
-    system(cmd);
-
     int theme_type_user_opt;
-
     char* theme_type_text;
     
     clear();
@@ -158,5 +152,60 @@ void fuzzel_config_importing()
     else
     {
         error_message(103);
+    }
+}
+
+void apply_fuzzel_config(int config_choice_t)
+{
+    // create a 256 bytes buffer for the commands below
+    char cmd[256]; 
+    switch(config_choice_t)
+    {
+        case 1:
+	    snprintf(cmd, sizeof(cmd),
+		    "mv ~/.config/fuzzel/fuzzel.ini ~/.config/fuzzel/fuzzel-backup.ini ; "
+		    "ln -sf ~/.config/fuzzel/fuzzel-duplicated.ini ~/.config/fuzzel/fuzzel.ini");
+            system(cmd);
+    	    break;
+        case 2:
+	    snprintf(cmd, 192,
+        	    "mv ~/.config/fuzzel/fuzzel.ini ~/.config/fuzzel/fuzzel-backup.ini ; "
+        	    "ln -sf ~/.config/fuzzel/old-fuzzel.ini ~/.config/fuzzel/fuzzel.ini");
+            system(cmd);
+	    break;
+        case 3:
+	    pver = 0.00f;
+            snprintf(cmd, sizeof(cmd),
+        	    "mv ~/.config/fuzzel/fuzzel.ini ~/.config/fuzzel/fuzzel-backup.ini ; "
+        	    "ln -sf ~/.config/fuzzel/fuzzel-oldv%.2f.ini ~/.config/fuzzel/fuzzel.ini", pver);
+            system(cmd);
+	    break;
+        case 4:
+	    snprintf(cmd, 192,
+        	    "mv ~/.config/fuzzel/fuzzel.ini ~/.config/fuzzel/fuzzel-backup.ini ; "
+        	    "ln -sf ~/.config/fuzzel/default-fuzzel.ini ~/.config/fuzzel/fuzzel.ini");
+            system(cmd);
+	    break;
+        case 5:
+	    snprintf(cmd, 192,
+        	    "mv ~/.config/fuzzel/fuzzel.ini ~/.config/fuzzel/fuzzel-backup.ini ; "
+        	    "ln -sf ~/.config/fuzzel/catppucin-fuzzel.ini ~/.config/fuzzel/fuzzel.ini");
+	    system(cmd);
+	    break;
+        case 6:
+	    snprintf(cmd, 192,
+        	    "mv ~/.config/fuzzel/fuzzel.ini ~/.config/fuzzel/fuzzel-backup.ini ; "
+        	    "ln -sf ~/.config/fuzzel/custom-edited-fuzzel.ini ~/.config/fuzzel/fuzzel.ini");
+            system(cmd);
+	    break;
+        case 7:
+	    snprintf(cmd, 48, // requires 48 bytes exactly
+        	    "nvim ~/.config/fuzzel/custom-edited-fuzzel.ini "); // command to edit config (with nvim)
+            system(cmd);
+            printf("The custom config was saved successfully\n");
+            wait_for_timeout(1, 0);
+	    break;
+        default:
+	    break;
     }
 }
