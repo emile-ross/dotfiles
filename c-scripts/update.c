@@ -13,8 +13,8 @@ int full_update(char ARCHIVE, float pver)
 	__attribute__ ((fallthrough));
     case 120:
     case 130:
-	install_package(parent, "btop");
-	CAVA(ARCHIVE, 1.3, 'Y');
+	install_package(parent, "hyprpaper btop");
+	CAVA(ARCHIVE, 1.3, 'N');
 	__attribute__ ((fallthrough));
 	// do not break because we are also installing everything below
     case 140:
@@ -36,7 +36,7 @@ int full_update(char ARCHIVE, float pver)
     case 220:
 	SWAY('Y', VAWSM, 'N');
 	GTKL('Y', VAWSM, 'N');
-	install_package(parent, "mpv");
+	install_package(parent, "mpv swaylock");
 	__attribute__ ((fallthrough));
 	// do not break because we are also installing everything below
     case 230:
@@ -48,7 +48,7 @@ int full_update(char ARCHIVE, float pver)
 	__attribute__ ((fallthrough));
 	// do not break because we are also installing everything below
     case 240:
-	install_package(parent, "hyprland bpytop");
+	install_package(parent, "hyprland bpytop hyprlock");
 	BPYT('Y', VAWSM, 'N');
 	ZSHH('Y', VAWSM, 'N');
 	HYPR('Y', VAWSM, 'N');
