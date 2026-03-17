@@ -1,6 +1,5 @@
 #include "dotfileshead.h"
 
-
 void fuzzel_config_importing()
 {
     // check if the configs were already downloaded 
@@ -10,21 +9,21 @@ void fuzzel_config_importing()
     snprintf(path, sizeof(path), "%s/.config/fuzzel/imported/fuzzel", home);
 
     struct stat st;
-    char cmd[512];
+    char cmd[768];
     if (stat(path, &st) == 0 && S_ISDIR(st.st_mode)) 
     {
         printf("The fuzzel themes are already installed.\n");
     }
     else 
     {
-    	snprintf(cmd, sizeof(cmd),
+    	snprintf(cmd, 128,
     	        "mkdir -p ~/.config/fuzzel/imported/ ; " 
     	        "cd ~/.config/fuzzel/imported/ ; "
     	        "git clone https://github.com/catppuccin/fuzzel.git");
     	system(cmd);
     }
 
-    snprintf(cmd, sizeof(cmd),
+    snprintf(cmd, 48,
 	    "cd ~/.config/fuzzel/imported/fuzzel/themes");
     system(cmd);
 
@@ -140,7 +139,9 @@ void fuzzel_config_importing()
     
     snprintf(cmd, sizeof(cmd),
 	    "mv -f %s/.config/fuzzel/fuzzel.ini %s/.config/fuzzel/before-link-fuzzel.ini ; "
-	    "ln -sf %s %s/.config/fuzzel/fuzzel.ini", home, home, fuz_theme_path, home);
+	    "ln -sf %s %s/.config/fuzzel/fuzzel.ini ; " // apply theme
+	    "ln -sf %s %s/.config/fuzzel/catppucin-fuzzel.ini" // keep track of the correct config with a symlink
+	    , home, home, fuz_theme_path, home, fuz_theme_path, home);
     system(cmd);
     fflush(stdout);
     
