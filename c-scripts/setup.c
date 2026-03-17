@@ -25,7 +25,8 @@ int main(int argc, char *argv[])
     	    printf(BOLD_S "%s\n"STYLE_END, opt_one_text );
     	    printf("\nDo you want to backup your old dotfiles before proceeding? (Y/n)\n");
 
-    	    scanf(" %c", &ARCHIVE);
+	    char archive_before_install;
+    	    scanf(" %c", &archive_before_install);
 	    printf(ANSI_RED BOLD_S"\nWARNING\n"STYLE_END BOLD_S"This will install every config.\n"STYLE_END);
 	    printf(ITALICS_S"\nIn order to pick the configs you want, you need to use the custom configuration option\n"STYLE_END);
 	    
@@ -33,7 +34,7 @@ int main(int argc, char *argv[])
     	    scanf(" %c", &full_install_opt);
     	    if (full_install_opt == 'Y' || full_install_opt == 'y')
 	    {
-		full_install(ARCHIVE, 'y');
+		full_install(archive_before_install, 'y');
 	    }
     	}
     	else if (menu_one_i == 2)
@@ -92,7 +93,6 @@ int main(int argc, char *argv[])
 			    do
 	    	            {
 				clear();
-
 	    	            	printf(BOLD_S"What file would you like to use as your fastfetch config?\n\n"STYLE_END);
 	    	            	printf(BOLD_S " [1] "STYLE_END"config-default.jsonc\n");
 	    	            	printf(BOLD_S " [2] "STYLE_END"config-other.jsonc\n");
@@ -212,58 +212,8 @@ int main(int argc, char *argv[])
 
 				clearbuffer();
 				scanf(" %d", &fuzzel_edit_menu_choice);
-
-				// create a 256 bytes buffer for the commands below
-				char cmd[256]; 
-				switch(fuzzel_edit_menu_choice)
-				{
-				    case 1:
-					snprintf(cmd, sizeof(cmd),
-				    	        "mv ~/.config/fuzzel/fuzzel.ini ~/.config/fuzzel/fuzzel-backup.ini ; "
-				    	        "ln -sf ~/.config/fuzzel/fuzzel-duplicated.ini ~/.config/fuzzel/fuzzel.ini");
-				    	system(cmd);
-					break;
-				    case 2:
-					snprintf(cmd, 192,
-				    	        "mv ~/.config/fuzzel/fuzzel.ini ~/.config/fuzzel/fuzzel-backup.ini ; "
-				    	        "ln -sf ~/.config/fuzzel/old-fuzzel.ini ~/.config/fuzzel/fuzzel.ini");
-				    	system(cmd);
-					break;
-				    case 3:
-					pver = 0.0f;
-				    	snprintf(cmd, sizeof(cmd),
-				    	        "mv ~/.config/fuzzel/fuzzel.ini ~/.config/fuzzel/fuzzel-backup.ini ; "
-				    	        "ln -sf ~/.config/fuzzel/fuzzel-oldv%.1f.ini ~/.config/fuzzel/fuzzel.ini", pver);
-				    	system(cmd);
-					break;
-				    case 4:
-					snprintf(cmd, 192,
-				    	        "mv ~/.config/fuzzel/fuzzel.ini ~/.config/fuzzel/fuzzel-backup.ini ; "
-				    	        "ln -sf ~/.config/fuzzel/default-fuzzel.ini ~/.config/fuzzel/fuzzel.ini");
-				    	system(cmd);
-					break;
-				    case 5:
-					snprintf(cmd, 192,
-				    	        "mv ~/.config/fuzzel/fuzzel.ini ~/.config/fuzzel/fuzzel-backup.ini ; "
-				    	        "ln -sf ~/.config/fuzzel/catppucin-fuzzel.ini ~/.config/fuzzel/fuzzel.ini");
-				    	system(cmd);
-					break;
-				    case 6:
-					snprintf(cmd, 192,
-				    	        "mv ~/.config/fuzzel/fuzzel.ini ~/.config/fuzzel/fuzzel-backup.ini ; "
-				    	        "ln -sf ~/.config/fuzzel/custom-edited-fuzzel.ini ~/.config/fuzzel/fuzzel.ini");
-				    	system(cmd);
-					break;
-				    case 7:
-				    	snprintf(cmd, 48, // requires 48 bytes exactly
-				    	        "nvim ~/.config/fuzzel/custom-edited-fuzzel.ini "); // command to edit config (with nvim)
-				    	system(cmd);
-				    	printf("The custom config was saved successfully\n");
-				    	wait_for_timeout(1, 0);
-					break;
-				    default:
-					break;
-				}
+				
+				apply_fuzzel_config(fuzzel_edit_menu_choice);
 			    }
 			    while (fuzzel_edit_menu_choice > 0);
 			}
