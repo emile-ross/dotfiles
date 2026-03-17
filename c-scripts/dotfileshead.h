@@ -59,7 +59,9 @@ void full_install(char ARCHIVE, char full_install_opt);
 int full_update(char ARCHIVE, float pver);
 void install_configs(int custom_package_install); // the partial install script (configure which package or configuration to install)
 void copyfiles (int fastfetch_conf_export);
+void check_for_yay();
 void wait_for_timeout(int timer_quarters, int timer_seconds);
+void exec_cmd(int buffer_size, char *command_to_execute);
 void link_fastfetch_configs();
 
 
@@ -128,6 +130,7 @@ extern char kitty_fonts_text[32];
 extern char initial_path[64];
 extern char inpath[64];
 
+// needs to be global
 char *get_initial_path();
 int get_os_name();
 extern const int max_menu_opt_n;
