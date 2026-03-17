@@ -9,11 +9,13 @@ void install_configs(int custom_package_install)  // the partial install script 
 
 	clearbuffer();
 	printf("Do you want to archive your old config?"BOLD_S"(Y/n)\n"STYLE_END);
-	scanf(" %c", &ARCHIVE);
+	char ARCHIVE_T;
+	scanf(" %c", &ARCHIVE_T);
 
 	clearbuffer();
 	printf("Do you want to install the package "BOLD_S"(Y/n)\n"STYLE_END);
-	scanf(" %c", &PKGINSTALL);
+	char PKGINSTALL_T;
+	scanf(" %c", &PKGINSTALL_T);
 
     	switch (custom_package_install)
     	{
@@ -29,7 +31,7 @@ void install_configs(int custom_package_install)  // the partial install script 
     	        temp_conf_installed = (char*)(TEXT_C_BPYT);
 
     	        printf("\nInstalling %s \n", temp_conf_installed);
-		BPYT(ARCHIVE, pver, PKGINSTALL);
+		BPYT(ARCHIVE_T, pver, PKGINSTALL_T);
 		clear();
     	        printf(UDRL_S"\nInstalled %s successfully.\n"STYLE_END, temp_conf_installed);
 		break;
@@ -37,7 +39,7 @@ void install_configs(int custom_package_install)  // the partial install script 
     	        temp_conf_installed = (char*)(TEXT_C_BTOP);
 
     	        printf("\nInstalling %s \n", temp_conf_installed);
-		BTOP(ARCHIVE, pver, PKGINSTALL);
+		BTOP(ARCHIVE_T, pver, PKGINSTALL_T);
 		clear();
     	        printf(UDRL_S"\nInstalled %s successfully.\n"STYLE_END, temp_conf_installed);
 		break;
@@ -45,7 +47,7 @@ void install_configs(int custom_package_install)  // the partial install script 
     	        temp_conf_installed = (char*)(TEXT_C_CAVA);
 
     	        printf("\nInstalling %s \n", temp_conf_installed);
-		CAVA(ARCHIVE, pver, PKGINSTALL);
+		CAVA(ARCHIVE_T, pver, PKGINSTALL_T);
 		clear();
     	        printf(UDRL_S"\nInstalled %s successfully.\n"STYLE_END, temp_conf_installed);
 		break;
@@ -53,7 +55,7 @@ void install_configs(int custom_package_install)  // the partial install script 
     	        temp_conf_installed = (char*)(TEXT_C_FAST);
 
     	        printf("\nInstalling %s \n", temp_conf_installed);
-		FAST(ARCHIVE, pver, PKGINSTALL);
+		FAST(ARCHIVE_T, pver, PKGINSTALL_T);
 		clear();
     	        printf(UDRL_S"\nInstalled %s successfully.\n"STYLE_END, temp_conf_installed);
 		break;
@@ -61,7 +63,7 @@ void install_configs(int custom_package_install)  // the partial install script 
     	        temp_conf_installed = (char*)(TEXT_C_FUZZ);
 
     	        printf("\nInstalling %s \n", temp_conf_installed);
-		FUZZ(ARCHIVE, pver, PKGINSTALL);
+		FUZZ(ARCHIVE_T, pver, PKGINSTALL_T);
 		clear();
     	        printf(UDRL_S"\nInstalled %s successfully.\n"STYLE_END, temp_conf_installed);
 		break;
@@ -69,7 +71,7 @@ void install_configs(int custom_package_install)  // the partial install script 
     	        temp_conf_installed = (char*)(TEXT_C_GTKL);
 
     	        printf("\nInstalling %s \n", temp_conf_installed);
-		GTKL(ARCHIVE, pver, PKGINSTALL);
+		GTKL(ARCHIVE_T, pver, PKGINSTALL_T);
 		clear();
     	        printf(UDRL_S"\nInstalled %s successfully.\n"STYLE_END, temp_conf_installed);
 		break;
@@ -77,7 +79,7 @@ void install_configs(int custom_package_install)  // the partial install script 
     	        temp_conf_installed = (char*)(TEXT_C_HYPR);
 
     	        printf("\nInstalling %s \n", temp_conf_installed);
-		HYPR(ARCHIVE, pver, PKGINSTALL);
+		HYPR(ARCHIVE_T, pver, PKGINSTALL_T);
 		clear();
     	        printf(UDRL_S"\nInstalled %s successfully.\n"STYLE_END, temp_conf_installed);
 		break;
@@ -85,7 +87,7 @@ void install_configs(int custom_package_install)  // the partial install script 
     	        temp_conf_installed = (char*)(TEXT_C_KITT);
 
     	        printf("\nInstalling %s \n", temp_conf_installed);
-		KITT(ARCHIVE, pver, PKGINSTALL);
+		KITT(ARCHIVE_T, pver, PKGINSTALL_T);
 		clear();
     	        printf(UDRL_S"\nInstalled %s successfully.\n"STYLE_END, temp_conf_installed);
 		break;
@@ -93,7 +95,7 @@ void install_configs(int custom_package_install)  // the partial install script 
     	        temp_conf_installed = (char*)(TEXT_C_MPVF);
 
     	        printf("\nInstalling %s \n", temp_conf_installed);
-		MPVF(ARCHIVE, pver, PKGINSTALL);
+		MPVF(ARCHIVE_T, pver, PKGINSTALL_T);
 		clear();
     	        printf(UDRL_S"\nInstalled %s successfully.\n"STYLE_END, temp_conf_installed);
 		break;
@@ -101,7 +103,7 @@ void install_configs(int custom_package_install)  // the partial install script 
     	        temp_conf_installed = (char*)(TEXT_C_NVIM);
 
     	        printf("\nInstalling %s \n", temp_conf_installed);
-		NVIM(ARCHIVE, pver, PKGINSTALL);
+		NVIM(ARCHIVE_T, pver, PKGINSTALL_T);
 		clear();
     	        printf(UDRL_S"\nInstalled %s successfully.\n"STYLE_END, temp_conf_installed);
 		break;
@@ -109,7 +111,7 @@ void install_configs(int custom_package_install)  // the partial install script 
     	        temp_conf_installed = (char*)(TEXT_C_SWAY);
 
     	        printf("\nInstalling %s \n", temp_conf_installed);
-		SWAY(ARCHIVE, pver, PKGINSTALL);
+		SWAY(ARCHIVE_T, pver, PKGINSTALL_T);
 		clear();
     	        printf(UDRL_S"\nInstalled %s successfully.\n"STYLE_END, temp_conf_installed);
 		break;
@@ -117,7 +119,7 @@ void install_configs(int custom_package_install)  // the partial install script 
     	        temp_conf_installed = (char*)(TEXT_C_WAYB);
 
     	        printf("\nInstalling %s \n", temp_conf_installed);
-		WAYB(ARCHIVE, pver, PKGINSTALL);
+		WAYB(ARCHIVE_T, pver, PKGINSTALL_T);
 		clear();
     	        printf(UDRL_S"\nInstalled %s successfully.\n"STYLE_END, temp_conf_installed);
 		break;
@@ -125,7 +127,7 @@ void install_configs(int custom_package_install)  // the partial install script 
     	        temp_conf_installed = (char*)(TEXT_C_ZSHH);
 
     	        printf("\nInstalling %s \n", temp_conf_installed);
-		ZSHH(ARCHIVE, pver, PKGINSTALL);
+		ZSHH(ARCHIVE_T, pver, PKGINSTALL_T);
 		clear();
     	        printf(UDRL_S"\nInstalled %s successfully.\n"STYLE_END, temp_conf_installed);
 		break;
@@ -133,7 +135,7 @@ void install_configs(int custom_package_install)  // the partial install script 
     		    printf(ANSI_RED"\nInvalid character\n"STYLE_END);
 		    wait_for_timeout(2, 0);
     	}
-	printf(FASTBLINK_S ANSI_GREEN"Installed %s\n"STYLE_END, temp_conf_installed);
+	printf(ANSI_GREEN"Installed %s\n"STYLE_END, temp_conf_installed);
 	wait_for_timeout(0, 1);
     }
     while(custom_package_install > 0 && custom_package_install < max_menu_opt_n);
