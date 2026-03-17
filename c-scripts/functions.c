@@ -41,7 +41,6 @@ char zshforhumans_config_menu_text[32] = "Set up zsh";
 char kitty_color_text[32] = "Change Kitty color scheme";
 char kitty_fonts_text[32] = "Change Kitty fonts";
 
-
 char main_menu_text[128] = "Welcome to the setup utility for ImAwsumm's dotfiles";
 char opt_one_text[128] = "Install the dotfiles";
 char opt_the_text[128] = "Update your dotfiles";
@@ -344,10 +343,7 @@ void check_for_yay()
             if (system("command -v makepkg > /dev/null") != 0)
             {
 		printf("\nMakepkg is not installed. Installing 'base-devel' package group to proceed...\n");
-		char cmd[128];
-		snprintf(cmd, sizeof(cmd),
-			"sudo pacman -S --noconfirm base-devel");
-		system(cmd);
+		exec_cmd(48, "sudo pacman -S --noconfirm base-devel");
                  
                 // Check if makepkg is available after installing the base-devel package
                 if (system("command -v makepkg > /dev/null") != 0)
@@ -362,10 +358,10 @@ void check_for_yay()
             else
             {
 		printf("Makepkg is already installed.\n");
+		exec_cmd(48, "sudo pacman -S --noconfirm base-devel"); // update base-devel
             }
 		char cmd[256];
 		snprintf(cmd, sizeof(cmd),
-			"sudo pacman -S --noconfirm base-devel ; "
 			"git clone https://aur.archlinux.org/yay.git ; "	// download yay from aur
 			"cd yay ; "						//
 			"makepkg -si ; "					// build package from source
@@ -378,4 +374,11 @@ void check_for_yay()
             error_message(5);
         }
     }
+}
+
+void exec_cmd(int buffer_size, char *command_to_execute)
+{
+    char command_exec[buffer_size];
+    snprintf(command_exec, sizeof(command_exec), "%s", command_to_execute);
+    system(command_exec);
 }
