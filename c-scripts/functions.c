@@ -96,7 +96,6 @@ void pre_startup()
 	snprintf(parent, sizeof(parent),
 		"%s", distro);
     }
-
 }
 
 char *get_initial_path()
@@ -193,8 +192,8 @@ int error_message(int err_code)
     printf("Press "UDRL_S"CTRL + C"STYLE_END BOLD_S" to exit\n"STYLE_END);
     printf("Press any key to continue\n");
 
-    while (getchar() != '\n');  // clear imput buffer 
-    getchar(); 
+    clearbuffer();
+    getchar();  // blocking behaviour 
     return 0;
 }
 
@@ -235,7 +234,6 @@ pkg_conf_name detect_config_name(char *input)
     if (strcmp(input, "zsh") == 0) return CONF_ZSHH;
     return CONF_UNKNOWN;
 }
-
 
 void config_description(char *package_t)
 {
@@ -325,4 +323,59 @@ int get_os_name()
     // close file since it won't be used anymore
     fclose(fp);
     return 0;
+}
+
+void check_for_yay()
+{
+    if (system("test -f /sbin/yay") == 0)
+    {
+	printf("Yay already installed.\n");
+    }
+    else
+    {
+        printf("Yay is not installed, do you want to install it? (Y/n): ");
+    
+        char YAY;
+        clearbuffer();
+        scanf(" %c", &YAY); // asks the user if they wanna install yay (needed)
+        if (YAY == 'Y' || YAY == 'y')
+        {
+            // Check if makepkg is installed ( it is needed in order to compile yay )
+            if (system("command -v makepkg > /dev/null") != 0)
+            {
+		printf("\nMakepkg is not installed. Installing 'base-devel' package group to proceed...\n");
+		char cmd[128];
+		snprintf(cmd, sizeof(cmd),
+			"sudo pacman -S --noconfirm base-devel");
+		system(cmd);
+                 
+                // Check if makepkg is available after installing the base-devel package
+                if (system("command -v makepkg > /dev/null") != 0)
+                {
+		    error_message(51);
+                }
+                else
+                {
+		    printf("Makepkg has been successfully installed!\n");
+                }
+            }
+            else
+            {
+		printf("Makepkg is already installed.\n");
+            }
+		char cmd[256];
+		snprintf(cmd, sizeof(cmd),
+			"sudo pacman -S --noconfirm base-devel ; "
+			"git clone https://aur.archlinux.org/yay.git ; "	// download yay from aur
+			"cd yay ; "						//
+			"makepkg -si ; "					// build package from source
+			"cd ..");						//
+		system(cmd);
+		printf("\nYay is installed, congrats!\n");
+        }
+        else
+        {
+            error_message(5);
+        }
+    }
 }
