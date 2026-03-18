@@ -47,7 +47,6 @@ void ZSHH(char ARCHIVE, float pver, char PKGINSTALL);
 void clear();
 void clearbuffer();
 void pre_startup();
-int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[]);
 
 // Mandatory global variables
 extern char distro[128];
@@ -60,7 +59,6 @@ int full_update(char ARCHIVE, float pver);
 void install_configs(int custom_package_install); // the partial install script (configure which package or configuration to install)
 void copyfiles (int fastfetch_conf_export);
 void check_for_yay();
-void wait_for_timeout(int timer_quarters, int timer_seconds);
 void exec_cmd(int buffer_size, char *command_to_execute);
 void link_fastfetch_configs();
 
@@ -86,11 +84,19 @@ typedef enum
 
 pkg_conf_name detect_config_name(char *input);
 
-extern int n_to_arg;
+// time related
+void countdown(int counter);
+void wait_for_timeout(int timer_quarters, int timer_seconds);
+extern struct timespec install_timer;
+extern int timer_quarters; // max is 4
+extern int timer_seconds;
+
 
 int install_package(char *pkg_type_distro, char *pkginstallname);
 void config_description(char *package_t);
 void cli_arg_missing(char *first_command, char *type_of_missing_arg, char *user_flag_t);
+int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[]);
+extern int n_to_arg;
 
 // data 
 extern char* TEXT_C_BASH;
@@ -108,10 +114,6 @@ extern char* TEXT_C_SWAY;
 extern char* TEXT_C_WAYB;
 extern char* TEXT_C_ZSHH;
 
-extern char fuzzel_view_config_text[32];
-extern char fuzzel_edit_config_text[32];
-extern char fuzzel_catppuccin_text[32];
-
 extern char fastfetch_config_menu_text[32];
 extern char kitty_config_menu_text[32];
 extern char fuzzel_config_menu_text[32];
@@ -128,25 +130,27 @@ extern char kitty_color_text[32];
 extern char kitty_fonts_text[32];
 
 // needs to be global
+extern char* theme_colour_text;
+extern float pver;
 char *get_initial_path();
 int get_os_name();
-extern const int max_menu_opt_n;
 extern int fastfetch_conf_export;
 extern const char *home;
-extern struct timespec install_timer;
 extern char full_install_opt; // if the user wants to install everything set to Y
 extern char full_update_opt; 
 extern int menu_one_i;
-extern int timer_quarters; // max is 4
-extern int timer_seconds;
-extern int fuzzel_config_menu_choice;
-extern char* theme_colour_text;
-extern float pver;
+extern const int max_menu_opt_n;
+
 
 float* update();
 
+// fuzzel 
 void fuzzel_config_importing();
+extern int fuzzel_config_menu_choice;
 void apply_fuzzel_config(int config_choice_t);
+extern char fuzzel_view_config_text[32];
+extern char fuzzel_edit_config_text[32];
+extern char fuzzel_catppuccin_text[32];
 
 // errors
 extern char errcode;
