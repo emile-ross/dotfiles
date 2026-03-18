@@ -382,3 +382,27 @@ void exec_cmd(int buffer_size, char *command_to_execute)
     snprintf(command_exec, sizeof(command_exec), "%s", command_to_execute);
     system(command_exec);
 }
+
+void countdown(int counter)
+{
+    int total_time = counter;
+
+    for (int i = 0; i < total_time; i++)
+    {
+        printf("%d ", counter);
+    
+        for (int j = 0; j < 3; j++)
+        {
+            printf(".");
+            fflush(stdout);
+    
+    	wait_for_timeout(1, 0);
+        }
+        for (int k = 0; k < 1; k++)
+        {
+	    printf("\n");
+	    wait_for_timeout(1, 0);
+        }
+        counter--;
+    }
+}
