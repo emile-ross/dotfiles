@@ -43,7 +43,6 @@ void NVIM(char ARCHIVE, float pver, char PKGINSTALL);
 void WAYB(char ARCHIVE, float pver, char PKGINSTALL);
 void ZSHH(char ARCHIVE, float pver, char PKGINSTALL);
 
-
 void clear();
 void clearbuffer();
 void pre_startup();
@@ -54,8 +53,8 @@ extern char parent[128];
 extern char initial_path[64];
 extern char inpath[64];
 
+int install_package(char *pkg_type_distro, char *pkginstallname);
 void full_install(char ARCHIVE, char full_install_opt);
-int full_update(char ARCHIVE, float pver);
 void install_configs(int custom_package_install); // the partial install script (configure which package or configuration to install)
 void copyfiles (int fastfetch_conf_export);
 void check_for_yay();
@@ -91,8 +90,6 @@ extern struct timespec install_timer;
 extern int timer_quarters; // max is 4
 extern int timer_seconds;
 
-
-int install_package(char *pkg_type_distro, char *pkginstallname);
 void config_description(char *package_t);
 void cli_arg_missing(char *first_command, char *type_of_missing_arg, char *user_flag_t);
 int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[]);
@@ -132,17 +129,18 @@ extern char kitty_fonts_text[32];
 // needs to be global
 extern char* theme_colour_text;
 extern float pver;
-char *get_initial_path();
-int get_os_name();
 extern int fastfetch_conf_export;
 extern const char *home;
 extern char full_install_opt; // if the user wants to install everything set to Y
-extern char full_update_opt; 
 extern int menu_one_i;
 extern const int max_menu_opt_n;
+char *get_initial_path();
+int get_os_name();
 
-
+extern char full_update_opt; 
 float* update();
+int full_update(char ARCHIVE, float pver);
+
 
 // fuzzel 
 void fuzzel_config_importing();
