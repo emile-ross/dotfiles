@@ -77,7 +77,7 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 	else if (strcmp(cmd_arg_v[1], "--help") == 0)
 	{
 	    printf("Help menu\n");
-	    exit(0);
+	    return 0;
 	}
 	else
 	{
@@ -155,42 +155,59 @@ void argument_config_install(char *package_t)
     switch (detect_config_name(package_t)) 
     {
         case CONF_BASH:
+	    BASH();
             break;
 
         case CONF_BPYT:
+	    BPYT('y', 0.0, 'Y');
             break;
 
         case CONF_BTOP:
+	    BTOP('y', 0.0, 'Y');
             break;
 
         case CONF_CAVA:
+	    CAVA('y', 0.0, 'Y');
             break;
 
         case CONF_FAST:
+	    FAST('y', 0.0, 'Y');
             break;
 
         case CONF_FUZZ:
+	    FUZZ('y', 0.0, 'Y');
             break;
 
         case CONF_GTKL:
+	    GTKL('y', 0.0, 'Y');
             break;
 
         case CONF_HYPR:
+	    HYPR('y', 0.0, 'Y');
             break;
 
 	case CONF_KITT:
+	    KITT('y', 0.0, 'Y');
             break;
 
         case CONF_MPVF:
+	    MPVF('y', 0.0, 'Y');
             break;
 
         case CONF_NVIM:
+	    NVIM('y', 0.0, 'Y');
             break;
  
+        case CONF_SWAY:
+	    SWAY('y', 0.0, 'Y');
+            break;
+
         case CONF_WAYB:
+	    WAYB('y', 0.0, 'Y');
             break;
 
 	case CONF_ZSHH:
+	    ZSHH('y', 0.0, 'Y');
 	    break;
 
         default:
