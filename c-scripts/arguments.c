@@ -88,3 +88,112 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
     }
     return 0;
 }
+
+void config_description(char *package_t)
+{
+    switch (detect_config_name(package_t)) 
+    {
+        case CONF_BASH:
+            printf("Bash, (Bourne Again SHell) is the default shell on most Linux distributions.\n");
+            break;
+
+        case CONF_BPYT:
+            printf("bpytop is a system resource monitor.\n");
+            break;
+
+        case CONF_BTOP:
+            printf("btop is a system resource monitor.\n");
+            break;
+
+        case CONF_CAVA:
+            printf("Cava is a Cross-platform Audio Visualizer.\n");
+            break;
+
+        case CONF_FAST:
+            printf("Fastfetch is a fast system information tool made in C.\n");
+            break;
+
+        case CONF_FUZZ:
+            printf("Fuzzel is an App launcher and fuzzy finder based on rofi & dmenu.\n");
+            break;
+
+        case CONF_GTKL:
+            printf("Gtklock is a GTK lockscreen for Wayland.\n");
+            break;
+
+        case CONF_HYPR:
+            printf("Hyprland is a dynamic tiling window manager made for Wayland.\n");
+            break;
+
+	case CONF_KITT:
+            printf("Kitty is a fast, GPU based terminal emulator.\n");
+            break;
+
+        case CONF_MPVF:
+            printf("MPV is a cross-platform media player made for the command line.\n");
+            break;
+
+        case CONF_NVIM:
+            printf("Neovim is a modern Vi-based text editor.\n");
+            break;
+ 
+
+        case CONF_WAYB:
+            printf("Waybar is an highly customizable\n");
+            break;
+
+	case CONF_ZSHH:
+            printf("Zsh (Z shell) is a command line interpreter focused on speed and efficiency.\n");
+	    break;
+        default:
+            printf("Unknown program.\n");
+    }
+}
+
+void argument_config_install(char *package_t)
+{
+    switch (detect_config_name(package_t)) 
+    {
+        case CONF_BASH:
+            break;
+
+        case CONF_BPYT:
+            break;
+
+        case CONF_BTOP:
+            break;
+
+        case CONF_CAVA:
+            break;
+
+        case CONF_FAST:
+            break;
+
+        case CONF_FUZZ:
+            break;
+
+        case CONF_GTKL:
+            break;
+
+        case CONF_HYPR:
+            break;
+
+	case CONF_KITT:
+            break;
+
+        case CONF_MPVF:
+            break;
+
+        case CONF_NVIM:
+            break;
+ 
+        case CONF_WAYB:
+            break;
+
+	case CONF_ZSHH:
+	    break;
+
+        default:
+	    break;
+    }
+}
