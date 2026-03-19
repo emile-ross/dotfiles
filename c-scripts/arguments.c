@@ -10,8 +10,6 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 {
     if (num_cmd_arguments > 1) // checks how many arguments were used
     {
-
-
 	// checks if the command was ran with the --noconfirm flag
 	if (strcmp(cmd_arg_v[1], "--noconfirm") == 0) 
 	{
@@ -46,7 +44,7 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 		{
 		    // support for different operating systems might come in the future...
 		    // will print the arguments instead of executing the command (useless)
-		    config_description(cmd_arg_v[i]);
+		    argument_config_install(cmd_arg_v[i]);
 		}
 		exit(0);
 	    }
@@ -75,6 +73,11 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 		cli_arg_missing(cmd_arg_v[0], "package", cmd_arg_v[1]);
 		exit(-1);
 	    }
+	}
+	else if (strcmp(cmd_arg_v[1], "--help") == 0)
+	{
+	    printf("Help menu\n");
+	    exit(0);
 	}
 	else
 	{
