@@ -5,67 +5,68 @@ int full_update(char ARCHIVE, float pver)
     int VAWSM = (int)(pver * 100);
     switch (VAWSM)
     {
-    case 100:
-	printf("\nUpdating from %d\n", VAWSM);
+	case 100:
+    	    printf("\nUpdating from %d\n", VAWSM);
 
-	install_package(parent, "cava fuzzel kitty fastfetch waybar");
-	// do not break because we are also installing everything below
-	__attribute__ ((fallthrough));
-    case 120:
-    case 130:
-	install_package(parent, "hyprpaper btop");
-	CAVA(ARCHIVE, VAWSM, 'N');
-	__attribute__ ((fallthrough));
-	// do not break because we are also installing everything below
-    case 140:
-	BTOP(ARCHIVE, VAWSM, 'N');
-	__attribute__ ((fallthrough));
-	// do not break because we are also installing everything below
-    case 200:
-	install_package(parent, "gtklock");
-	KITT(ARCHIVE, VAWSM, 'N');
-	__attribute__ ((fallthrough));
-	// do not break because we are also installing everything below
-    case 210:
-	install_package(parent, "sway");
-	BASH();
-	WAYB(ARCHIVE, VAWSM, 'N');
-	NVIM(ARCHIVE, VAWSM, 'N');
-	__attribute__ ((fallthrough));
-	// do not break because we are also installing everything below
-    case 220:
-	SWAY('Y', VAWSM, 'N');
-	GTKL('Y', VAWSM, 'N');
-	install_package(parent, "mpv swaylock");
-	__attribute__ ((fallthrough));
-	// do not break because we are also installing everything below
-    case 230:
-	install_package(parent, "nvim");
-	NVIM('Y', VAWSM, 'N');
-	FUZZ('Y', VAWSM, 'N');
-	MPVF('Y', VAWSM, 'N');
-	FAST('Y', VAWSM, 'N');
-	__attribute__ ((fallthrough));
-	// do not break because we are also installing everything below
-    case 240:
-	install_package(parent, "hyprland bpytop hyprlock");
-	BPYT('Y', VAWSM, 'N');
-	ZSHH('Y', VAWSM, 'N');
-	HYPR('Y', VAWSM, 'N');
+    	    install_package(parent, "cava fuzzel kitty fastfetch waybar");
+    	    // do not break because we are also installing everything below
+    	    __attribute__ ((fallthrough));
+    	case 120:
+    	case 130:
+    	    install_package(parent, "hyprpaper btop");
+    	    CAVA(ARCHIVE, VAWSM, 'N');
+    	    __attribute__ ((fallthrough));
+    	    // do not break because we are also installing everything below
+    	case 140:
+    	    BTOP(ARCHIVE, VAWSM, 'N');
+    	    __attribute__ ((fallthrough));
+    	    // do not break because we are also installing everything below
+    	case 200:
+    	    install_package(parent, "gtklock");
+    	    KITT(ARCHIVE, VAWSM, 'N');
+    	    __attribute__ ((fallthrough));
+    	    // do not break because we are also installing everything below
+    	case 210:
+    	    install_package(parent, "sway");
+    	    BASH();
+    	    WAYB(ARCHIVE, VAWSM, 'N');
+    	    NVIM(ARCHIVE, VAWSM, 'N');
+    	    __attribute__ ((fallthrough));
+    	    // do not break because we are also installing everything below
+    	case 220:
+    	    SWAY('Y', VAWSM, 'N');
+    	    GTKL('Y', VAWSM, 'N');
+    	    install_package(parent, "mpv swaylock");
+    	    __attribute__ ((fallthrough));
+    	    // do not break because we are also installing everything below
+    	case 230:
+    	    install_package(parent, "nvim");
+    	    NVIM('Y', VAWSM, 'N');
+    	    FUZZ('Y', VAWSM, 'N');
+    	    MPVF('Y', VAWSM, 'N');
+    	    FAST('Y', VAWSM, 'N');
+    	    __attribute__ ((fallthrough));
+    	    // do not break because we are also installing everything below
+    	case 240:
+    	    install_package(parent, "hyprland bpytop hyprlock");
+    	    BPYT('Y', VAWSM, 'N');
+    	    ZSHH('Y', VAWSM, 'N');
+    	    HYPR('Y', VAWSM, 'N');
 
-	printf("Update completed!\n");
-	break;
+    	    printf("Update completed!\n");
+    	    break;
 
-    case 250:
-    case 300:
-	printf("\nYou are running the latest version.\n");
-	wait_for_timeout(2, 0);
-	break;
+    	case 250:
+    	case 300:
+    	    printf("\nYou are running the latest version.\n");
+    	    wait_for_timeout(2, 0);
+    	    break;
 
-    default:
-	error_message(207);
-	return 1;
-    }
+    	default:
+    	    error_message(207);
+    	    return 1;
+    	}
+
     return 0;
 }
 
