@@ -125,8 +125,7 @@ char *get_initial_path()
 
 int error_message(int err_code)
 {
-    printf(ANSI_RED UDRL_S BOLD_S"Error\n"STYLE_END);
-    printf(ANSI_RED BOLD_S"Error code: %d \n"STYLE_END, err_code);
+    int skip_warning = 0;
 
     char err_text_temp[128];
     char err_solution_temp[128];
@@ -178,6 +177,13 @@ int error_message(int err_code)
 		snprintf(err_text_temp, sizeof(err_text_temp), "Unknown version");
 		snprintf(err_solution_temp, sizeof(err_solution_temp), "Try installing the dotfiles in order to fix the unknown version");
 		break;
+
+	case 301:
+		snprintf(err_text_temp, sizeof(err_text_temp), "Unknown package");
+		snprintf(err_solution_temp, sizeof(err_solution_temp), "Type the config name in lowercase");
+		goto skip_warn;
+		break;
+
 	case 909:
 	    printf("This error should never display (in theory) \n");
 	    break;
@@ -185,14 +191,30 @@ int error_message(int err_code)
 	default:
 		snprintf(err_text_temp, sizeof(err_text_temp), "This error code isn't known");
 		break;
-    }
-    printf(ANSI_RED BOLD_S"%s \n"STYLE_END, err_text_temp);
-    printf(ANSI_RED BOLD_S"%s \n"STYLE_END, err_solution_temp);
-    printf("Press "UDRL_S"CTRL + C"STYLE_END BOLD_S" to exit\n"STYLE_END);
-    printf("Press any key to continue\n");
 
-    clearbuffer();
-    getchar();  // blocking behaviour 
+	skip_warn:
+		skip_warning = 1; // skips the warnings at the end
+		break;
+    }
+
+    if (skip_warning != 1)
+    {
+	printf(ANSI_RED UDRL_S BOLD_S"Error\n"STYLE_END);
+	printf(ANSI_RED BOLD_S"Error code: %d \n"STYLE_END, err_code);
+
+	printf(ANSI_RED BOLD_S"%s \n"STYLE_END, err_text_temp);
+    	printf(ANSI_RED BOLD_S"%s \n"STYLE_END, err_solution_temp);
+    	printf("Press "UDRL_S"CTRL + C"STYLE_END BOLD_S" to exit\n"STYLE_END);
+    	printf("Press any key to continue\n");
+
+    	clearbuffer();
+    	getchar();  // blocking behaviour 
+    }
+    else
+    {
+	printf(ANSI_RED BOLD_S"%s"STYLE_END"\n", err_text_temp);
+    	printf(ANSI_RED BOLD_S"%s"STYLE_END"\n", err_solution_temp);
+    }
     return 0;
 }
 
