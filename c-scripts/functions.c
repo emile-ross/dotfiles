@@ -406,3 +406,50 @@ void countdown(int counter)
         counter--;
     }
 }
+void argument_config_install(char *package_t)
+{
+    switch (detect_config_name(package_t)) 
+    {
+        case CONF_BASH:
+            break;
+
+        case CONF_BPYT:
+            break;
+
+        case CONF_BTOP:
+            break;
+
+        case CONF_CAVA:
+            break;
+
+        case CONF_FAST:
+            break;
+
+        case CONF_FUZZ:
+            break;
+
+        case CONF_GTKL:
+            break;
+
+        case CONF_HYPR:
+            break;
+
+	case CONF_KITT:
+            break;
+
+        case CONF_MPVF:
+            break;
+
+        case CONF_NVIM:
+            break;
+ 
+        case CONF_WAYB:
+            break;
+
+	case CONF_ZSHH:
+	    break;
+
+        default:
+	    break;
+    }
+}
