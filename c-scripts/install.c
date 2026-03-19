@@ -145,28 +145,10 @@ void full_install(char install_ARCHIVE, char full_install_opt)
 {
     if (full_install_opt == 'Y' || full_install_opt == 'y')
     {
-	int timerinstall = 3;
 	printf(BOLD_S"\nInstalling every configuration\n"STYLE_END);
 	printf(BOLD_S"\nStarting in:\n"STYLE_END);
 	
-	for (int i = 0; i < 3; i++)
-	{
-	    printf("%d ", timerinstall);
-	
-	    for (int j = 0; j < 3; j++)
-	    {
-	        printf(".");
-	        fflush(stdout);
-	
-		wait_for_timeout(1, 0);
-	    }
-	    for (int k = 0; k < 1; k++)
-	    {
-		printf("\n");
-		wait_for_timeout(1, 0);
-	    }
-	    timerinstall--;
-	}
+	countdown(3);
 	
 	if (strcmp(parent, "arch") == 0)
 	{
