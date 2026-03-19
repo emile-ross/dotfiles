@@ -14,11 +14,11 @@ int full_update(char ARCHIVE, float pver)
     case 120:
     case 130:
 	install_package(parent, "hyprpaper btop");
-	CAVA(ARCHIVE, 1.3, 'N');
+	CAVA(ARCHIVE, VAWSM, 'N');
 	__attribute__ ((fallthrough));
 	// do not break because we are also installing everything below
     case 140:
-	BTOP(ARCHIVE, 1.4, 'N');
+	BTOP(ARCHIVE, VAWSM, 'N');
 	__attribute__ ((fallthrough));
 	// do not break because we are also installing everything below
     case 200:
@@ -52,7 +52,9 @@ int full_update(char ARCHIVE, float pver)
 	BPYT('Y', VAWSM, 'N');
 	ZSHH('Y', VAWSM, 'N');
 	HYPR('Y', VAWSM, 'N');
-	goto end;
+
+	printf("Update completed!\n");
+	break;
 
     case 250:
     case 300:
@@ -63,11 +65,6 @@ int full_update(char ARCHIVE, float pver)
     default:
 	error_message(207);
 	return 1;
-    end:
-	printf("Update completed!\n");
-	goto exit;
-    exit:
-    ;
     }
     return 0;
 }
