@@ -268,7 +268,9 @@ int main(int argc, char *argv[])
 		
     		char act_linux_water_text[128] = "Do you want to add the \"Activate Linux\" watermark?";
 
-		printf(BOLD_S "\n [1] Yes (%s)\n"STYLE_END, act_linux_water_text);
+		printf("\n%s\n", act_linux_water_text);
+
+		printf(BOLD_S "\n [1] Yes \n"STYLE_END);
 		printf(BOLD_S "\n [0] No \n"STYLE_END);
 
 		clearbuffer();
