@@ -26,7 +26,7 @@
 #define ANSI_CYAN    	"\x1b[36m"
 #define ANSI_LCYAN    	"\x1b[96m"
 
-#define STYLE_END   	"\e[m" // resets the styling
+#define STYLE_END	"\033[0m" // reset styling
 
 void BASH();
 void SWAY(char ARCHIVE, float pver, char PKGINSTALL);
@@ -90,7 +90,10 @@ extern struct timespec install_timer;
 extern int timer_quarters; // max is 4
 extern int timer_seconds;
 
+//  command line arguments
 void config_description(char *package_t);
+void argument_config_install(char *package_t);
+void cmd_arg_install(int num_cmd_arguments_t, char *cmd_arg_v_t[]);
 void cli_arg_missing(char *first_command, char *type_of_missing_arg, char *user_flag_t);
 int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[]);
 extern int n_to_arg;
