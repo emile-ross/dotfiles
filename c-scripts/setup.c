@@ -20,12 +20,10 @@ int main(int argc, char *argv[])
     	scanf(" %d", &menu_one_i);
     	if (menu_one_i == 1)
     	{
-	    char full_install_opt;
 	    clear();
     	    printf(BOLD_S "%s\n"STYLE_END, opt_one_text );
     	    printf("\nDo you want to backup your old dotfiles before proceeding? (Y/n)\n");
 
-	    char archive_before_install;
     	    scanf(" %c", &archive_before_install);
 	    printf(ANSI_RED BOLD_S"\nWARNING\n"STYLE_END BOLD_S"This will install every config.\n"STYLE_END);
 	    printf(ITALICS_S"\nIn order to pick the configs you want, you need to use the custom configuration option\n"STYLE_END);
@@ -93,14 +91,15 @@ int main(int argc, char *argv[])
 			    do
 	    	            {
 				clear();
+
+	    	            	int link_fastfetch_configs_opt = -1;
+    	    	            	char cmd[128];
+
 	    	            	printf(BOLD_S"What file would you like to use as your fastfetch config?\n\n"STYLE_END);
 	    	            	printf(BOLD_S " [1] "STYLE_END"config-default.jsonc\n");
 	    	            	printf(BOLD_S " [2] "STYLE_END"config-other.jsonc\n");
 	    	            	printf(BOLD_S " [3] "STYLE_END"config-duplicated.jsonc\n");
 	    	            	printf(BOLD_S " [0] "STYLE_END "%s\n", opt_exit_text);
-
-	    	            	int link_fastfetch_configs_opt = -1;
-    	    	            	char cmd[128];
 
 				clearbuffer();
     	    	            	scanf("%d", &link_fastfetch_configs_opt);
@@ -153,9 +152,9 @@ int main(int argc, char *argv[])
 
     	                if (kitty_config_choice == 1)
     	                {
-			    exec_cmd(24, "kitten themes");
+			    exec_cmd(16, "kitten themes");
     	                }
-    	                if (kitty_config_choice == 2)
+			else if (kitty_config_choice == 2)
     	                {
 			    exec_cmd(24, "kitty +list-fonts");
     
@@ -215,7 +214,7 @@ int main(int argc, char *argv[])
 				
 				apply_fuzzel_config(fuzzel_edit_menu_choice);
 			    }
-			    while (fuzzel_edit_menu_choice > 0);
+			    while (fuzzel_edit_menu_choice > 0.0);
 			}
 			else if (fuzzel_config_menu_choice == 3)
 			{
@@ -223,7 +222,7 @@ int main(int argc, char *argv[])
 			    wait_for_timeout(1, 0);
 			}
 		    }
-		    while (fuzzel_config_menu_choice > 0);
+		    while (fuzzel_config_menu_choice > 0.0);
 		}
 		else if (dotfiles_config_menu == 4)
 		{
