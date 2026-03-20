@@ -38,22 +38,7 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 	}
 	else if (strcmp(cmd_arg_v[1], "-c") == 0 || strcmp(cmd_arg_v[1], "-C") == 0)
 	{
-	    if (num_cmd_arguments >= n_to_arg)
-	    {
-		for (int i = n_to_arg - 1; i < num_cmd_arguments; i++)
-		{
-		    // support for different operating systems might come in the future...
-		    // will print the arguments instead of executing the command (useless)
-		    argument_config_install(cmd_arg_v[i]);
-		}
-		exit(0);
-	    }
-	    else
-	    {
-		// prints an error message if there isn't any config name specified in the command
-		cli_arg_missing(cmd_arg_v[0], "config name", cmd_arg_v[1]);
-		exit(-1);
-	    }
+	    cmd_arg_install(num_cmd_arguments, cmd_arg_v);
 	}
 	else if (strcmp(cmd_arg_v[1], "-i") == 0 || strcmp(cmd_arg_v[1], "-I") == 0)
 	{
@@ -211,6 +196,27 @@ void argument_config_install(char *package_t)
 	    break;
 
         default:
+	    error_message(301);
 	    break;
+    }
+}
+
+void cmd_arg_install(int num_cmd_arguments_t, char *cmd_arg_v_t[])
+{
+    if (num_cmd_arguments_t >= n_to_arg)
+    {
+	for (int i = n_to_arg - 1; i < num_cmd_arguments_t; i++)
+	{
+	    // support for different operating systems might come in the future...
+	    // will print the arguments instead of executing the command (useless)
+	    argument_config_install(cmd_arg_v_t[i]);
+	}
+	exit(0);
+    }
+    else
+    {
+	// prints an error message if there isn't any config name specified in the command
+	cli_arg_missing(cmd_arg_v_t[0], "config name", cmd_arg_v_t[1]);
+	exit(-1);
     }
 }
