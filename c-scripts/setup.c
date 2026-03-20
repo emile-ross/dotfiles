@@ -23,10 +23,12 @@ int main(int argc, char *argv[])
 	    clear();
     	    printf(BOLD_S "%s\n"STYLE_END, opt_one_text );
     	    printf("\nDo you want to backup your old dotfiles before proceeding? (Y/n)\n");
+	    clearbuffer();
 
     	    scanf(" %c", &archive_before_install);
 	    printf(ANSI_RED BOLD_S"\nWARNING\n"STYLE_END BOLD_S"This will install every config.\n"STYLE_END);
 	    printf(ITALICS_S"\nIn order to pick the configs you want, you need to use the custom configuration option\n"STYLE_END);
+	    clearbuffer();
 	    
     	    printf(BOLD_S"\nProceed with installation (Y/n)\n"STYLE_END);	// prompt user for imput
     	    scanf(" %c", &full_install_opt);
@@ -240,15 +242,8 @@ int main(int argc, char *argv[])
 			if (zshforhumans_choice == 1)
 			{
 			    clear();
-			    // using curl to download a program is not a good practice 
-			    // but it's the recommended installation method
-			    system("if command -v curl >/dev/null 2>&1; then "
-				    "  sh -c \"$(curl -fsSL https://raw.githubusercontent.com/romkatv/zsh4humans/v5/install)\"; "
-				    "else "
-				    "  sh -c \"$(wget -O- https://raw.githubusercontent.com/romkatv/zsh4humans/v5/install)\"; " 
-				    "fi");
-			    clearbuffer();
-			    getchar(); // intended blocking behaviour
+
+			    configure_oh_my_zsh();
 			}
 		    }
 		    while (zshforhumans_choice > 0);
