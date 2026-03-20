@@ -95,6 +95,10 @@ void pre_startup()
 	snprintf(parent, sizeof(parent),
 		"%s", distro);
     }
+    else
+    {
+	error_message(101);
+    }
 }
 
 char *get_initial_path()
@@ -149,6 +153,11 @@ int error_message(int err_code)
 	case 51:
 	    snprintf(err_text_temp, sizeof(err_text_temp), "Makepkg installation failed. Please check your system configuration.");
 	    snprintf(err_solution_temp, sizeof(err_solution_temp), "Helpful link: \"https://wiki.archlinux.org/title/Makepkg\"");
+	    break;
+
+	case 101:
+	    snprintf(err_text_temp, sizeof(err_text_temp), "Unsupported distribution");
+	    snprintf(err_solution_temp, sizeof(err_solution_temp), "Supported distros: \nArch Based \nDebian Based");
 	    break;
 
 	case 103:
