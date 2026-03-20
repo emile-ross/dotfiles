@@ -60,6 +60,7 @@ void copyfiles (int fastfetch_conf_export);
 void check_for_yay();
 void exec_cmd(int buffer_size, char *command_to_execute);
 void link_fastfetch_configs();
+void configure_oh_my_zsh();
 
 
 typedef enum 
@@ -135,6 +136,7 @@ extern float pver;
 extern int fastfetch_conf_export;
 extern const char *home;
 extern char full_install_opt; // if the user wants to install everything set to Y
+extern char archive_before_install;
 extern int menu_one_i;
 extern const int max_menu_opt_n;
 char *get_initial_path();
