@@ -309,7 +309,6 @@ void SWAY(char ARCHIVE, float pver, char PKGINSTALL)
 
 void WAYB(char ARCHIVE, float pver, char PKGINSTALL)
 {
-    
     char cmd[256];
     if (ARCHIVE == 'Y' || ARCHIVE == 'y')
     {
@@ -374,4 +373,17 @@ int install_package(char *pkg_type_distro, char *pkginstallname)
     }
 
     return 0;
+}
+
+void configure_oh_my_zsh()
+{
+    // using curl to download a program is not a good practice 
+    // but it's the recommended installation method
+    system("if command -v curl >/dev/null 2>&1; then "
+            "  sh -c \"$(curl -fsSL https://raw.githubusercontent.com/romkatv/zsh4humans/v5/install)\"; "
+            "else "
+            "  sh -c \"$(wget -O- https://raw.githubusercontent.com/romkatv/zsh4humans/v5/install)\"; " 
+            "fi");
+    clearbuffer();
+    getchar(); // intended blocking behaviour
 }
