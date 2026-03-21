@@ -30,7 +30,7 @@ int main(int argc, char *argv[])
 	    printf(ITALICS_S"\nIn order to pick the configs you want, you need to use the custom configuration option\n"STYLE_END);
 	    clearbuffer();
 	    
-    	    printf(BOLD_S"\nProceed with installation (Y/n)\n"STYLE_END);	// prompt user for imput
+    	    printf(BOLD_S"\nProceed with installation (Y/n)\n"STYLE_END); // prompt user for input
     	    scanf(" %c", &full_install_opt);
     	    if (full_install_opt == 'Y' || full_install_opt == 'y')
 	    {
@@ -90,11 +90,13 @@ int main(int argc, char *argv[])
     	                }
 			else if (fastfetch_config_choice == 2)
     	                {
+	    	            int link_fastfetch_configs_opt;
 			    do
 	    	            {
 				clear();
 
-	    	            	int link_fastfetch_configs_opt = -1;
+				link_fastfetch_configs_opt = -1;
+
     	    	            	char cmd[128];
 
 	    	            	printf(BOLD_S"What file would you like to use as your fastfetch config?\n\n"STYLE_END);
@@ -291,7 +293,7 @@ int main(int argc, char *argv[])
     	}
     	else
     	{
-	    // idk what causes this..
+	    // this is caused by invalid input
 	    error_message(2);
     	    return 2;
     	}
