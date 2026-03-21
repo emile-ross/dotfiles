@@ -14,7 +14,7 @@ or ``make setup`` if you don't want any warning
 ## Compile using GCC 
 
 ```bash
-gcc setup.c functions.c install.c update.c programs.c -o setup -Wall -Wextra
+gcc setup.c functions.c install.c update.c programs.c arguments.c -o setup -Wall -Wextra
 ./setup
 ```
 ## Compile using zig 
