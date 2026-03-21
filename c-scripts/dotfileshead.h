@@ -61,6 +61,7 @@ void check_for_yay();
 void exec_cmd(int buffer_size, char *command_to_execute);
 void link_fastfetch_configs();
 void configure_oh_my_zsh();
+void configure_fastfetch();
 
 
 typedef enum 
