@@ -27,4 +27,9 @@ Provides a short description for the specified package
 Will install the specified config along with the package
 
 
+``--help``
+
+Display help menu
+
+
 ## features
