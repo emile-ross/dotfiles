@@ -1,6 +1,6 @@
 #include "dotfileshead.h"
 
-const int max_menu_opt_n = 12;
+const int max_menu_opt_n = 14;
 
 void clear()
 {
@@ -356,19 +356,25 @@ void exec_cmd(int buffer_size, char *command_to_execute)
 
 void countdown(int counter)
 {
+    // total_time is the total time the execution should last 
+    // counter will be the variable used in the countdown 
+
     int total_time = counter;
 
     for (int i = 0; i < total_time; i++)
     {
         printf("%d ", counter);
     
+	// prints a "." to the screen each quarter of a second
         for (int j = 0; j < 3; j++)
         {
             printf(".");
             fflush(stdout);
-    
-    	wait_for_timeout(1, 0);
+	    
+	    wait_for_timeout(1, 0);
         }
+
+	// prints one newline everytime this is executed
         for (int k = 0; k < 1; k++)
         {
 	    printf("\n");
