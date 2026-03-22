@@ -90,51 +90,7 @@ int main(int argc, char *argv[])
     	                }
 			else if (fastfetch_config_choice == 2)
     	                {
-	    	            int link_fastfetch_configs_opt;
-			    do
-	    	            {
-				clear();
-
-				link_fastfetch_configs_opt = -1;
-
-    	    	            	char cmd[128];
-
-	    	            	printf(BOLD_S"What file would you like to use as your fastfetch config?\n\n"STYLE_END);
-	    	            	printf(BOLD_S " [1] "STYLE_END"config-default.jsonc\n");
-	    	            	printf(BOLD_S " [2] "STYLE_END"config-other.jsonc\n");
-	    	            	printf(BOLD_S " [3] "STYLE_END"config-duplicated.jsonc\n");
-	    	            	printf(BOLD_S " [0] "STYLE_END "%s\n", opt_exit_text);
-
-				clearbuffer();
-    	    	            	scanf("%d", &link_fastfetch_configs_opt);
-
-    	    	            	if (link_fastfetch_configs_opt == 1)
-    	    	            	{
-    	    	            	    snprintf(cmd, sizeof(cmd),
-					    "ln -fs ~/.config/fastfetch/config-default.jsonc ~/.config/fastfetch/config.jsonc");
-    	    	            	    system(cmd);
-    	    	            	    printf("\nThe fastfetch config was applied successfully\n");
-	    	            	    wait_for_timeout(1, 0);
-    	    	            	}
-    	    	            	else if (link_fastfetch_configs_opt == 2)
-    	    	            	{
-    	    	            	    snprintf(cmd, sizeof(cmd),
-					    "ln -fs ~/.config/fastfetch/config-other.jsonc ~/.config/fastfetch/config.jsonc");
-    	    	            	    system(cmd);
-    	    	            	    printf("\nThe fastfetch config was applied successfully\n");
-	    	            	    wait_for_timeout(1, 0);
-    	    	            	}
-    	    	            	else if (link_fastfetch_configs_opt == 3)
-    	    	            	{
-    	    	            	    snprintf(cmd, sizeof(cmd),
-					    "ln -fs ~/.config/fastfetch/config-duplicated.jsonc ~/.config/fastfetch/config.jsonc");
-    	    	            	    system(cmd);
-
-    	    	            	    printf("\nThe fastfetch config was applied successfully\n");
-	    	            	    wait_for_timeout(1, 0);
-    	    	            	}
-	    	            }
-	    	            while (fastfetch_conf_export > 0.0);
+			    configure_fastfetch();
     	                }
     	            }
     	            while (fastfetch_config_choice > 0.0);
