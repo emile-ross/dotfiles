@@ -212,75 +212,50 @@ void apply_fuzzel_config(int config_choice_t)
 
 void configure_fastfetch()
 {
-    int fastfetch_config_choice;
+    int link_fastfetch_configs_opt;
     do
     {
         clear();
-
-        char fastfetch_edit_config_text[48] = "Change the config fastfetch uses by default";
-        char fastfetch_preview_text[32] = "Preview fastfetch output";
-        
-        printf(BOLD_S ANSI_WHITE "%s\n\n"STYLE_END, fastfetch_config_menu_text );
-        printf(BOLD_S " [1] " STYLE_END "%s\n", fastfetch_preview_text);
-        printf(BOLD_S " [2] " STYLE_END "%s\n", fastfetch_edit_config_text);
-        printf(BOLD_S " [0] " STYLE_END "%s\n", opt_exit_text);
-
-	clearbuffer();
-        scanf("\n%d", &fastfetch_config_choice);
-
-        if (fastfetch_config_choice == 1)
-        {
-	    exec_cmd(16, "fastfetch");
-	    wait_for_timeout(0, 2);
-        }
-	else if (fastfetch_config_choice == 2)
-        {
-            int link_fastfetch_configs_opt;
-	    do
-            {
-		clear();
-
-		link_fastfetch_configs_opt = -1;
-
-            	char cmd[128];
-
-            	printf(BOLD_S"What file would you like to use as your fastfetch config?\n\n"STYLE_END);
-            	printf(BOLD_S " [1] "STYLE_END"config-default.jsonc\n");
-            	printf(BOLD_S " [2] "STYLE_END"config-other.jsonc\n");
-            	printf(BOLD_S " [3] "STYLE_END"config-duplicated.jsonc\n");
-            	printf(BOLD_S " [0] "STYLE_END "%s\n", opt_exit_text);
-
-		clearbuffer();
-            	scanf("%d", &link_fastfetch_configs_opt);
-
-            	if (link_fastfetch_configs_opt == 1)
-            	{
-            	    snprintf(cmd, sizeof(cmd),
-			    "ln -fs ~/.config/fastfetch/config-default.jsonc ~/.config/fastfetch/config.jsonc");
-            	    system(cmd);
-            	    printf("\nThe fastfetch config was applied successfully\n");
-            	    wait_for_timeout(1, 0);
-            	}
-            	else if (link_fastfetch_configs_opt == 2)
-            	{
-            	    snprintf(cmd, sizeof(cmd),
-			    "ln -fs ~/.config/fastfetch/config-other.jsonc ~/.config/fastfetch/config.jsonc");
-            	    system(cmd);
-            	    printf("\nThe fastfetch config was applied successfully\n");
-            	    wait_for_timeout(1, 0);
-            	}
-            	else if (link_fastfetch_configs_opt == 3)
-            	{
-            	    snprintf(cmd, sizeof(cmd),
-			    "ln -fs ~/.config/fastfetch/config-duplicated.jsonc ~/.config/fastfetch/config.jsonc");
-            	    system(cmd);
-
-            	    printf("\nThe fastfetch config was applied successfully\n");
-            	    wait_for_timeout(1, 0);
-            	}
-            }
-            while (fastfetch_conf_export > 0.0);
-        }
+    
+        link_fastfetch_configs_opt = -1;
+    
+	// create command buffer
+    	char cmd[128];
+    
+    	printf(BOLD_S"What file would you like to use as your fastfetch config?\n\n"STYLE_END);
+    	printf(BOLD_S " [1] "STYLE_END"config-default.jsonc\n");
+    	printf(BOLD_S " [2] "STYLE_END"config-other.jsonc\n");
+    	printf(BOLD_S " [3] "STYLE_END"config-duplicated.jsonc\n");
+    	printf(BOLD_S " [0] "STYLE_END "%s\n", opt_exit_text);
+    
+        clearbuffer();
+    	scanf("%d", &link_fastfetch_configs_opt);
+    
+    	if (link_fastfetch_configs_opt == 1)
+    	{
+    	    snprintf(cmd, sizeof(cmd),
+        	    "ln -fs ~/.config/fastfetch/config-default.jsonc ~/.config/fastfetch/config.jsonc");
+    	    system(cmd);
+    	    printf("\nThe fastfetch config was applied successfully\n");
+    	    wait_for_timeout(1, 0);
+    	}
+    	else if (link_fastfetch_configs_opt == 2)
+    	{
+    	    snprintf(cmd, sizeof(cmd),
+        	    "ln -fs ~/.config/fastfetch/config-other.jsonc ~/.config/fastfetch/config.jsonc");
+    	    system(cmd);
+    	    printf("\nThe fastfetch config was applied successfully\n");
+    	    wait_for_timeout(1, 0);
+    	}
+    	else if (link_fastfetch_configs_opt == 3)
+    	{
+    	    snprintf(cmd, sizeof(cmd),
+        	    "ln -fs ~/.config/fastfetch/config-duplicated.jsonc ~/.config/fastfetch/config.jsonc");
+    	    system(cmd);
+    
+    	    printf("\nThe fastfetch config was applied successfully\n");
+    	    wait_for_timeout(1, 0);
+    	}
     }
     while (fastfetch_config_choice > 0.0);
     // exits the while loop when the user types 0
