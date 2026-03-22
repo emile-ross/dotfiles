@@ -378,8 +378,8 @@ void countdown(int counter)
         for (int k = 0; k < 1; k++)
         {
 	    printf("\n");
-	    wait_for_timeout(1, 0);
         }
+	wait_for_timeout(1, 0);
         counter--;
     }
 }
