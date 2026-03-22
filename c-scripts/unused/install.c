@@ -101,13 +101,6 @@ int main()
 	    printf("\nExiting install script.\n");
 	    return 1;
 	}
-    //
-    // (I have no clue what this is supposed to be)
-    // else
-    // {
-    //     printf("\n The installation is now starting. \n");
-    // }
-
     // Check if yay is installed
     if (system("test -f /sbin/yay") == 0)
     {
