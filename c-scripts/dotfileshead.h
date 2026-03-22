@@ -86,7 +86,7 @@ typedef enum
 pkg_conf_name detect_config_name(char *input);
 
 // time related
-void countdown(int counter);
+void countdown(int counter, int lines_to_skip);
 void wait_for_timeout(int timer_quarters, int timer_seconds);
 extern struct timespec install_timer;
 extern int timer_quarters; // max is 4
