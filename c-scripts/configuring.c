@@ -257,6 +257,6 @@ void configure_fastfetch()
     	    wait_for_timeout(1, 0);
     	}
     }
-    while (fastfetch_config_choice > 0.0);
+    while (link_fastfetch_configs_opt > 0.0);
     // exits the while loop when the user types 0
 }
