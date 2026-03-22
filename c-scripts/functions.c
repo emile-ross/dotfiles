@@ -354,7 +354,7 @@ void exec_cmd(int buffer_size, char *command_to_execute)
     system(command_exec);
 }
 
-void countdown(int counter)
+void countdown(int counter, int lines_to_skip)
 {
     // total_time is the total time the execution should last 
     // counter will be the variable used in the countdown 
@@ -375,7 +375,7 @@ void countdown(int counter)
         }
 
 	// prints one newline everytime this is executed
-        for (int k = 0; k < 1; k++)
+        for (int k = 0; k < lines_to_skip; k++)
         {
 	    printf("\n");
         }
