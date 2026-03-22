@@ -148,7 +148,7 @@ void full_install(char install_ARCHIVE, char full_install_opt)
 	printf(BOLD_S"\nInstalling every configuration\n"STYLE_END);
 	printf(BOLD_S"\nStarting in:\n"STYLE_END);
 	
-	countdown(3);
+	countdown(3, 1);
 	
 	if (strcmp(parent, "arch") == 0)
 	{
