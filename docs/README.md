@@ -12,17 +12,17 @@ Proceed with the full installation of the dotfiles without any warnings.
 ```
 
 ### install a package
-``-p`` or ``-P``
+``-p``
 
 Install a package using the method appropriate for the distro
 
 ### description for a package
-``-d`` or ``-D``
+``-d``
 
 Provides a short description for the specified package
 
 ### Installs a config
-``-c`` or ``-C``
+``-c``
 
 Will install the specified config along with the package
 
