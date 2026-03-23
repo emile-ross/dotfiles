@@ -157,47 +157,47 @@ void argument_config_install(char *package_t, char archiving_t, char pkginstall_
             break;
 
         case CONF_CAVA:
-	    CAVA('y', 0.0, 'Y');
+	    CAVA(archiving_t, 0.0, pkginstall_t);
             break;
 
         case CONF_FAST:
-	    FAST('y', 0.0, 'Y');
+	    FAST(archiving_t, 0.0, pkginstall_t);
             break;
 
         case CONF_FUZZ:
-	    FUZZ('y', 0.0, 'Y');
+	    FUZZ(archiving_t, 0.0, pkginstall_t);
             break;
 
         case CONF_GTKL:
-	    GTKL('y', 0.0, 'Y');
+	    GTKL(archiving_t, 0.0, pkginstall_t);
             break;
 
         case CONF_HYPR:
-	    HYPR('y', 0.0, 'Y');
+	    HYPR(archiving_t, 0.0, pkginstall_t);
             break;
 
 	case CONF_KITT:
-	    KITT('y', 0.0, 'Y');
+	    KITT(archiving_t, 0.0, pkginstall_t);
             break;
 
         case CONF_MPVF:
-	    MPVF('y', 0.0, 'Y');
+	    MPVF(archiving_t, 0.0, pkginstall_t);
             break;
 
         case CONF_NVIM:
-	    NVIM('y', 0.0, 'Y');
+	    NVIM(archiving_t, 0.0, pkginstall_t);
             break;
  
         case CONF_SWAY:
-	    SWAY('y', 0.0, 'Y');
+	    SWAY(archiving_t, 0.0, pkginstall_t);
             break;
 
         case CONF_WAYB:
-	    WAYB('y', 0.0, 'Y');
+	    WAYB(archiving_t, 0.0, pkginstall_t);
             break;
 
 	case CONF_ZSHH:
-	    ZSHH('y', 0.0, 'Y');
+	    ZSHH(archiving_t, 0.0, pkginstall_t);
 	    break;
 
         default:
