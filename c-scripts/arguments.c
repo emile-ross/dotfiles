@@ -36,7 +36,7 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 	}
 	else if (strcmp(cmd_arg_v[1], "-c") == 0 || strcmp(cmd_arg_v[1], "-C") == 0)
 	{
-	    cmd_arg_install(num_cmd_arguments, cmd_arg_v);
+	    cmd_arg_install(num_cmd_arguments, cmd_arg_v, 'Y', 'N');
 	}
 	else if (strcmp(cmd_arg_v[1], "-i") == 0 || strcmp(cmd_arg_v[1], "-I") == 0)
 	{
@@ -140,7 +140,7 @@ void config_description(char *package_t)
     }
 }
 
-void argument_config_install(char *package_t)
+void argument_config_install(char *package_t, char archiving_t, char pkginstall_t)
 {
     switch (detect_config_name(package_t)) 
     {
@@ -149,11 +149,11 @@ void argument_config_install(char *package_t)
             break;
 
         case CONF_BPYT:
-	    BPYT('y', 0.0, 'Y');
+	    BPYT(archiving_t, 0.0, pkginstall_t);
             break;
 
         case CONF_BTOP:
-	    BTOP('y', 0.0, 'Y');
+	    BTOP(archiving_t, 0.0, pkginstall_t);
             break;
 
         case CONF_CAVA:
@@ -206,7 +206,7 @@ void argument_config_install(char *package_t)
     }
 }
 
-void cmd_arg_install(int num_cmd_arguments_t, char *cmd_arg_v_t[])
+void cmd_arg_install(int num_cmd_arguments_t, char *cmd_arg_v_t[], char config_archive_t, char pkg_install_t)
 {
     if (num_cmd_arguments_t >= n_to_arg)
     {
@@ -214,7 +214,7 @@ void cmd_arg_install(int num_cmd_arguments_t, char *cmd_arg_v_t[])
 	{
 	    // support for different operating systems might come in the future...
 	    // will print the arguments instead of executing the command (useless)
-	    argument_config_install(cmd_arg_v_t[i]);
+	    argument_config_install(cmd_arg_v_t[i], config_archive_t, pkg_install_t);
 	}
 	exit(0);
     }
