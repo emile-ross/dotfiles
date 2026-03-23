@@ -54,6 +54,8 @@ extern char initial_path[64];
 extern char inpath[64];
 
 int install_package(char *pkg_type_distro, char *pkginstallname);
+
+void install_menu();
 void full_install(char ARCHIVE, char full_install_opt);
 void install_configs(int custom_package_install); // the partial install script (configure which package or configuration to install)
 void copyfiles (int fastfetch_conf_export);
