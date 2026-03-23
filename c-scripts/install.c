@@ -152,10 +152,10 @@ void install_configs(int custom_package_install)  // the partial install script 
     	        printf(UDRL_S"\nInstalled %s successfully.\n"STYLE_END, temp_conf_installed);
 		break;
     	    default:
-    		    printf(ANSI_RED"\nInvalid character\n"STYLE_END);
-		    wait_for_timeout(2, 0);
+    		printf(ANSI_RED"\nInvalid character\n"STYLE_END);
+		wait_for_timeout(2, 0);
+		break;
     	}
-	printf(ANSI_GREEN"Installed %s\n"STYLE_END, temp_conf_installed);
 	wait_for_timeout(0, 1);
     }
     while(custom_package_install > 0 && custom_package_install < max_menu_opt_n);
