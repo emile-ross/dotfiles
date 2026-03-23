@@ -2,6 +2,12 @@
 
 ## flags
 
+### description for a package
+``-d``
+
+Provides a short description for the specified package
+
+
 ## full install
 ``--noconfirm``
 
@@ -11,15 +17,12 @@ Proceed with the full installation of the dotfiles without any warnings.
 ./setup --noconfirm
 ```
 
+
 ### install a package
 ``-p``
 
 Install a package using the method appropriate for the distro
 
-### description for a package
-``-d``
-
-Provides a short description for the specified package
 
 ### Installs a config
 ``-c``
@@ -32,4 +35,7 @@ Will install the specified config along with the package
 Display help menu
 
 
+
 ## features
+
+Display a short description of the specified package using the ``-i``
