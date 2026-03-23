@@ -175,20 +175,7 @@ void full_install(char install_ARCHIVE, char full_install_opt)
 	    check_for_yay();
 	}
 	// actually install the dotfiles
-	BASH();
-	BPYT(install_ARCHIVE, 0.0, 'Y');
-	BTOP(install_ARCHIVE, 0.0, 'Y');
-	CAVA(install_ARCHIVE, 0.0, 'Y');
-	FAST(install_ARCHIVE, 0.0, 'Y');
-	FUZZ(install_ARCHIVE, 0.0, 'Y');
-	GTKL(install_ARCHIVE, 0.0, 'Y');
-	HYPR(install_ARCHIVE, 0.0, 'Y');
-	KITT(install_ARCHIVE, 0.0, 'Y');
-	MPVF(install_ARCHIVE, 0.0, 'Y');
-	NVIM(install_ARCHIVE, 0.0, 'Y');
-	SWAY(install_ARCHIVE, 0.0, 'Y');
-	WAYB(install_ARCHIVE, 0.0, 'Y');
-	ZSHH(install_ARCHIVE, 0.0, 'Y');
+	full_config_install(install_ARCHIVE, 0.0, 'Y');
     }
     else
     {
@@ -217,4 +204,23 @@ void full_install(char install_ARCHIVE, char full_install_opt)
 	while (install_pkg_opt > 0);
     }
     printf(BOLD_S"\nInstallation completed!\n"STYLE_END);
+}
+
+
+void full_config_install(char choice_ARCHIVE_opt, float previous_version_t, char install_packages_t)
+{
+    BASH();
+    BPYT(choice_ARCHIVE_opt, previous_version_t, install_packages_t);
+    BTOP(choice_ARCHIVE_opt, previous_version_t, install_packages_t);
+    CAVA(choice_ARCHIVE_opt, previous_version_t, install_packages_t);
+    FAST(choice_ARCHIVE_opt, previous_version_t, install_packages_t);
+    FUZZ(choice_ARCHIVE_opt, previous_version_t, install_packages_t);
+    GTKL(choice_ARCHIVE_opt, previous_version_t, install_packages_t);
+    HYPR(choice_ARCHIVE_opt, previous_version_t, install_packages_t);
+    KITT(choice_ARCHIVE_opt, previous_version_t, install_packages_t);
+    MPVF(choice_ARCHIVE_opt, previous_version_t, install_packages_t);
+    NVIM(choice_ARCHIVE_opt, previous_version_t, install_packages_t);
+    SWAY(choice_ARCHIVE_opt, previous_version_t, install_packages_t);
+    WAYB(choice_ARCHIVE_opt, previous_version_t, install_packages_t);
+    ZSHH(choice_ARCHIVE_opt, previous_version_t, install_packages_t);
 }
