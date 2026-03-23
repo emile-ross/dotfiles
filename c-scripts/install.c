@@ -1,5 +1,25 @@
 #include "dotfileshead.h"
 
+void install_menu()
+{
+    clear();
+    printf(BOLD_S "%s\n"STYLE_END, opt_one_text );
+    printf("\nDo you want to backup your old dotfiles before proceeding? (Y/n)\n");
+    clearbuffer();
+    
+    scanf(" %c", &archive_before_install);
+    printf(ANSI_RED BOLD_S"\nWARNING\n"STYLE_END BOLD_S"This will install every config.\n"STYLE_END);
+    printf(ITALICS_S"\nIn order to pick the configs you want, you need to use the custom configuration option\n"STYLE_END);
+    clearbuffer();
+    
+    printf(BOLD_S"\nProceed with installation (Y/n)\n"STYLE_END); // prompt user for input
+    scanf(" %c", &full_install_opt);
+    if (full_install_opt == 'Y' || full_install_opt == 'y')
+    {
+        full_install(archive_before_install, 'y');
+    }
+}
+
 void install_configs(int custom_package_install)  // the partial install script (configure which package or configuration to install)
 {
     do
