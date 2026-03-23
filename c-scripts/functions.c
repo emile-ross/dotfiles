@@ -249,6 +249,7 @@ void wait_for_timeout(int timer_quarters, int timer_seconds)
 
 pkg_conf_name detect_config_name(char *input) 
 {
+    // match the name to the correct config
     if (strcmp(input, "bash") == 0) return CONF_BASH;
     if (strcmp(input, "btop") == 0) return CONF_BTOP;
     if (strcmp(input, "bpytop") == 0) return CONF_BPYT;
@@ -263,6 +264,9 @@ pkg_conf_name detect_config_name(char *input)
     if (strcmp(input, "sway") == 0) return CONF_SWAY;
     if (strcmp(input, "waybar") == 0) return CONF_WAYB;
     if (strcmp(input, "zsh") == 0) return CONF_ZSHH;
+    if (strcmp(input, "hypr") == 0) return CONF_HYPR;
+    if (strcmp(input, "Hyprland") == 0) return CONF_HYPR;
+    if (strcmp(input, "neovim") == 0) return CONF_NVIM;
     return CONF_UNKNOWN;
 }
 
