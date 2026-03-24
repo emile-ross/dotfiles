@@ -6,7 +6,7 @@
 Provides a short description for the specified package
 
 
-## full install
+## full everything
 ### ``--noconfirm``
 
 Proceed with the full installation of the dotfiles without any confirmations or warnings.  
@@ -28,10 +28,11 @@ Note: the ``-c`` flag does not install the packages needed for the config.  If y
 
 Install a package using the method appropriate for the distro
 
+## help 
+
+### ``--help``
 
 Display help menu
-``--help``
-
 
 ## display information about a package
 ### ``-i``
@@ -40,4 +41,6 @@ This will display a basic description for the specified package
 
 ## features
 
-Display a short description of the specified package using the ``-i``
+Display a short description of the specified package using the ``-i`` flag
+
+Install the specified config along with the package ``-c``
