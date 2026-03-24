@@ -2,6 +2,7 @@
 
 int full_update(char ARCHIVE, float pver)
 {
+    check_for_yay();
     int VAWSM = (int)(pver * 100);
     switch (VAWSM)
     {
