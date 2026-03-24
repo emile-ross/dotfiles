@@ -1,40 +1,42 @@
 # Documentation for command line arguments
 
-## flags
-
-### description for a package
-``-d``
+## description for a package
+### ``-d``
 
 Provides a short description for the specified package
 
 
 ## full install
-``--noconfirm``
+### ``--noconfirm``
 
-Proceed with the full installation of the dotfiles without any warnings.
+Proceed with the full installation of the dotfiles without any confirmations or warnings.  
 
 ```bash
 ./setup --noconfirm
 ```
 
+## apply a config
+### ``-c``
 
-### install a package
-``-p``
+Will install the specified config along with the package
+
+Note: the ``-c`` flag does not install the packages needed for the config.  If you want to install the package use ``-p``. 
+
+
+## install a package
+### ``-p``
 
 Install a package using the method appropriate for the distro
 
 
-### Installs a config
-``-c``
-
-Will install the specified config along with the package
-
-
+Display help menu
 ``--help``
 
-Display help menu
 
+## display information about a package
+### ``-i``
 
+This will display a basic description for the specified package
 
 ## features
 
