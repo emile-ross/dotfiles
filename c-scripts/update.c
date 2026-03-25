@@ -65,7 +65,6 @@ int full_update(char ARCHIVE, float pver)
 
     	default:
     	    error_message(207);
-    	    return 1;
     	}
 
     return 0;
