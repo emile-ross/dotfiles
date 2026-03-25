@@ -5,16 +5,19 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <stdbool.h>
 
 #include <fcntl.h>
 #include <unistd.h>
 #include <sys/stat.h>
 
+// text styles
 #define BOLD_S  	"\e[1m" // defines BOLD_S as a keyword to make text bold
 #define UDRL_S  	"\e[4m" // UDRL_S starts an underline style (does not work in kitty by default)
 #define ITALICS_S 	"\e[3m"
 #define STRIKE_S 	"\e[9m"
 
+// colors
 #define ANSI_RED 	"\x1b[31m"
 #define ANSI_GREEN 	"\x1b[32m"
 #define ANSI_LGREEN 	"\x1b[92m"
@@ -26,7 +29,9 @@
 #define ANSI_CYAN    	"\x1b[36m"
 #define ANSI_LCYAN    	"\x1b[96m"
 
-#define STYLE_END	"\033[0m" // reset styling
+// reset styling
+#define STYLE_END	"\033[0m" 
+
 
 void BASH();
 void SWAY(char ARCHIVE, float pver, char PKGINSTALL);
