@@ -130,12 +130,12 @@ char *get_initial_path()
 
 int error_message(int err_code)
 {
-    int skip_warning = 0;
-
-    bool critical = false;
     char err_text_temp[128];
     char err_solution_temp[128];
     
+    bool critical = false;	// default is false
+    bool skip_warning = false;	// default is false
+
     switch (err_code)
     {
 	case 2:
@@ -192,57 +192,42 @@ int error_message(int err_code)
 		break;
 
 	case 301:
-		snprintf(err_text_temp, sizeof(err_text_temp), "Unknown package");
-		snprintf(err_solution_temp, sizeof(err_solution_temp), "Type the config name in lowercase");
-		goto skip_warn;
-		break;
+	    snprintf(err_text_temp, sizeof(err_text_temp), "Unknown package");
+	    snprintf(err_solution_temp, sizeof(err_solution_temp), "Type the config name in lowercase");
+	    skip_warning = true;
+	    break;
 
 	case 909:
 	    printf("This error should never display (in theory) \n");
 	    break;
 		
 	default:
-		snprintf(err_text_temp, sizeof(err_text_temp), "This error code isn't known");
-		break;
-
-	skip_warn:
-		skip_warning = 1; // skips the warnings at the end
-		break;
+	    snprintf(err_text_temp, sizeof(err_text_temp), "This error code isn't known");
+	    break;
     }
 
-    if (critical == 1)
+    if (!skip_warning)
     {
-	// print error code
+        // print error code
         printf(ANSI_RED UDRL_S BOLD_S"Error\n"STYLE_END);
         printf(ANSI_RED BOLD_S"Error code: %d \n"STYLE_END, err_code);
+    }
 
-	if (skip_warning != 1)
-	{
-	    printf(ANSI_RED BOLD_S"%s \n"STYLE_END, err_text_temp);
-    	    printf(ANSI_RED BOLD_S"%s \n"STYLE_END, err_solution_temp);
-	}
+    printf(ANSI_RED BOLD_S"%s \n"STYLE_END, err_text_temp);
+    printf(ANSI_RED BOLD_S"%s \n"STYLE_END, err_solution_temp);
 
+    if (critical)
+    {
         exit(err_code);
     }
 
-    if (skip_warning != 1)
+    if (!skip_warning)	// cannot be removed — even though this is the second check
     {
-	// print error code
-	printf(ANSI_RED UDRL_S BOLD_S"Error\n"STYLE_END);
-	printf(ANSI_RED BOLD_S"Error code: %d \n"STYLE_END, err_code);
-
-	printf(ANSI_RED BOLD_S"%s \n"STYLE_END, err_text_temp);
-    	printf(ANSI_RED BOLD_S"%s \n"STYLE_END, err_solution_temp);
     	printf("Press "UDRL_S"CTRL + C"STYLE_END BOLD_S" to exit\n"STYLE_END);
     	printf("Press any key to continue\n");
 
     	clearbuffer();
-    	getchar();  // blocking behaviour 
-    }
-    else
-    {
-	printf(ANSI_RED BOLD_S"%s"STYLE_END"\n", err_text_temp);
-    	printf(ANSI_RED BOLD_S"%s"STYLE_END"\n", err_solution_temp);
+    	getchar();	// blocking behaviour 
     }
     return 0;
 }
