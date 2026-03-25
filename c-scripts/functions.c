@@ -200,6 +200,7 @@ int error_message(int err_code)
 	case 302:
 	    snprintf(err_text_temp, sizeof(err_text_temp), "Invalid command syntax");
 	    skip_warning = true;
+	    critical = true;
 	    break;
 
 	case 909:
@@ -241,13 +242,13 @@ void wait_for_timeout(int timer_quarters, int timer_seconds)
 {
     if (timer_quarters < 4)
     {
-	time_timer_quarters = timer_quarters * 250000000;
-	time_timer_seconds = timer_seconds;
+	time_timer_quarters = timer_quarters * 250000000;   // convert quarters to nanoseconds
+	time_timer_seconds = timer_seconds;		    // set seconds
     }
     else
     {
 	time_timer_quarters = 0;
-	time_timer_seconds = timer_seconds + 1;
+	time_timer_seconds = timer_seconds + 1;	// adds 1 second if 4 >= quarters
     }
 
     install_timer.tv_nsec = time_timer_quarters;
@@ -258,7 +259,7 @@ void wait_for_timeout(int timer_quarters, int timer_seconds)
 
 pkg_conf_name detect_config_name(char *input) 
 {
-    // match the name to the correct config
+    // match the name to the correct config name
     if (strcmp(input, "bash") == 0) return CONF_BASH;
     if (strcmp(input, "btop") == 0) return CONF_BTOP;
     if (strcmp(input, "bpytop") == 0) return CONF_BPYT;
@@ -284,7 +285,7 @@ int get_os_name()
     // open /etc/os-release
     FILE *fp = fopen("/etc/os-release", "r");
 
-    // fallback to /usr/lib if /etc/ fails
+    // fallback to /usr/lib if /etc/os-release fails
     if (!fp) fp = fopen("/usr/lib/os-release", "r"); 
     // error checking
     if (!fp) error_message(52);
@@ -303,13 +304,14 @@ int get_os_name()
         else if (strncmp(t_line, "ID_LIKE=", 8) == 0) strcpy(parent, val);  // store the value in char parent
     }
 
-    // close file since it won't be used anymore
+    // close file
     fclose(fp);
     return 0;
 }
 
 void check_for_yay()
 {
+    // check if yay is present
     if (system("test -f /sbin/yay") == 0)
     {
 	printf("Yay already installed.\n");
@@ -362,9 +364,11 @@ void check_for_yay()
 
 void exec_cmd(int buffer_size, char *command_to_execute)
 {
+    // execute the command stored in command_to_execute
+    // using system() while ensuring output doesn't exceed buffer_size
     char command_exec[buffer_size];
     snprintf(command_exec, sizeof(command_exec), "%s", command_to_execute);
-    system(command_exec);
+    system(command_exec);   // execute command
 }
 
 void countdown(int counter, int lines_to_skip)
