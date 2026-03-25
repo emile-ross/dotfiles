@@ -12,6 +12,16 @@ Note: the ``-c`` flag does not install the packages needed for the config.  If y
 
 Provides a short description for the specified package
 
+## help 
+### ``--help``
+
+Display help menu
+
+## display information about a package
+### ``-i``
+
+This will display a basic description for the specified package
+
 
 ## install everything
 ### ``--noconfirm``
@@ -28,16 +38,6 @@ This will not give any choices to the user.  It should only be used if the opera
 ### ``-p``
 
 Install a package using the method appropriate for the distro
-
-## help 
-### ``--help``
-
-Display help menu
-
-## display information about a package
-### ``-i``
-
-This will display a basic description for the specified package
 
 ## features
 
