@@ -1,12 +1,19 @@
 # Documentation for command line arguments
 
+## apply a config
+### ``-c``
+
+Will install the specified config along with the package
+
+Note: the ``-c`` flag does not install the packages needed for the config.  If you want to install the package use ``-p``.  
+
 ## description for a package
 ### ``-d``
 
 Provides a short description for the specified package
 
 
-## full everything
+## install everything
 ### ``--noconfirm``
 
 Proceed with the full installation of the dotfiles without any confirmations or warnings.  
@@ -14,13 +21,7 @@ Proceed with the full installation of the dotfiles without any confirmations or 
 ```bash
 ./setup --noconfirm
 ```
-
-## apply a config
-### ``-c``
-
-Will install the specified config along with the package
-
-Note: the ``-c`` flag does not install the packages needed for the config.  If you want to install the package use ``-p``. 
+This will not give any choices to the user.  It should only be used if the operating system was recently installed or if the user doesn't care about their existing configurations.  
 
 
 ## install a package
@@ -29,7 +30,6 @@ Note: the ``-c`` flag does not install the packages needed for the config.  If y
 Install a package using the method appropriate for the distro
 
 ## help 
-
 ### ``--help``
 
 Display help menu
