@@ -236,7 +236,6 @@ int main(int argc, char *argv[])
     	{
 	    // this is caused by invalid input
 	    error_message(2);
-    	    return 2;
     	}
     }
     while(menu_one_i != 0);	// exits the while loop when the user types 0
