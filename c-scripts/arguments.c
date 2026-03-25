@@ -32,7 +32,6 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 	    {
 		// prints an error message if there isn't a package specified in the command
 		cli_arg_missing(cmd_arg_v[0], "package", cmd_arg_v[1]);
-		exit(-1);
 	    }
 	}
 	else if (strcmp(cmd_arg_v[1], "-c") == 0 || strcmp(cmd_arg_v[1], "-C") == 0)
@@ -55,7 +54,6 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 	    {
 		// prints an error message if there isn't a package specified in the command
 		cli_arg_missing(cmd_arg_v[0], "package", cmd_arg_v[1]);
-		exit(-1);
 	    }
 	}
 	else if (strcmp(cmd_arg_v[1], "--help") == 0)
@@ -223,6 +221,5 @@ void cmd_arg_install(int num_cmd_arguments_t, char *cmd_arg_v_t[], char config_a
     {
 	// prints an error message if there isn't any config name specified in the command
 	cli_arg_missing(cmd_arg_v_t[0], "config name", cmd_arg_v_t[1]);
-	exit(-1);
     }
 }
