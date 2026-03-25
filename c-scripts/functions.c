@@ -132,6 +132,7 @@ int error_message(int err_code)
 {
     int skip_warning = 0;
 
+    int critical = 0;
     char err_text_temp[128];
     char err_solution_temp[128];
     
@@ -205,6 +206,11 @@ int error_message(int err_code)
 	skip_warn:
 		skip_warning = 1; // skips the warnings at the end
 		break;
+    }
+
+    if (critical == 1)
+    {
+	exit(err_code);
     }
 
     if (skip_warning != 1)
