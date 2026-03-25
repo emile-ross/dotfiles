@@ -132,7 +132,7 @@ int error_message(int err_code)
 {
     int skip_warning = 0;
 
-    int critical = 0;
+    bool critical = false;
     char err_text_temp[128];
     char err_solution_temp[128];
     
@@ -140,6 +140,7 @@ int error_message(int err_code)
     {
 	case 2:
 	    snprintf(err_text_temp, sizeof(err_text_temp), "Exiting.. (invalid character)");
+	    critical = true;
 	    break;
 
 	case 5:
@@ -173,6 +174,7 @@ int error_message(int err_code)
 	case 204:
 	    snprintf(err_text_temp, sizeof(err_text_temp), "Can't find home directory");
 	    snprintf(err_solution_temp, sizeof(err_solution_temp), "Try running \"ls /home/\"\nif that doesn't do it \"useradd -m -d /home/[YOUR_USERNAME]/ -s /bin/bash -G sudo [YOUR_USERNAME]\"");
+	    critical = true;
 	    break;
 
 	case 205:
@@ -210,11 +212,22 @@ int error_message(int err_code)
 
     if (critical == 1)
     {
-	exit(err_code);
+	// print error code
+        printf(ANSI_RED UDRL_S BOLD_S"Error\n"STYLE_END);
+        printf(ANSI_RED BOLD_S"Error code: %d \n"STYLE_END, err_code);
+
+	if (skip_warning != 1)
+	{
+	    printf(ANSI_RED BOLD_S"%s \n"STYLE_END, err_text_temp);
+    	    printf(ANSI_RED BOLD_S"%s \n"STYLE_END, err_solution_temp);
+	}
+
+        exit(err_code);
     }
 
     if (skip_warning != 1)
     {
+	// print error code
 	printf(ANSI_RED UDRL_S BOLD_S"Error\n"STYLE_END);
 	printf(ANSI_RED BOLD_S"Error code: %d \n"STYLE_END, err_code);
 
