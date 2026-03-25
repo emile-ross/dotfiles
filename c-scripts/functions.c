@@ -197,6 +197,11 @@ int error_message(int err_code)
 	    skip_warning = true;
 	    break;
 
+	case 302:
+	    snprintf(err_text_temp, sizeof(err_text_temp), "Invalid command syntax");
+	    skip_warning = true;
+	    break;
+
 	case 909:
 	    printf("This error should never display (in theory) \n");
 	    break;
