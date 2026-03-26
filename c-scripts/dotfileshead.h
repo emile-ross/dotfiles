@@ -48,6 +48,7 @@ void NVIM(char ARCHIVE, float pver, char PKGINSTALL);
 void WAYB(char ARCHIVE, float pver, char PKGINSTALL);
 void ZSHH(char ARCHIVE, float pver, char PKGINSTALL);
 
+
 void clear();
 void clearbuffer();
 void pre_startup();
@@ -123,6 +124,10 @@ extern char* TEXT_C_NVIM;
 extern char* TEXT_C_SWAY;
 extern char* TEXT_C_WAYB;
 extern char* TEXT_C_ZSHH;
+
+// command line related
+extern char* help_flag_arg_text;	// flag for the help menu
+extern char* pkgi_flag_arg_text;	// flag to install a package
 
 extern char fastfetch_config_menu_text[32];
 extern char kitty_config_menu_text[32];
