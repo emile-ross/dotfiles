@@ -29,6 +29,9 @@ char* TEXT_C_NVIM = "neovim config with lazy";
 char* TEXT_C_WAYB = "waybar config and style (appearance)";
 char* TEXT_C_ZSHH = "zsh config (.zshrc)";
 
+char* help_flag_arg_text = "--help";	// flag for the help menu
+char* pkgi_flag_arg_text = "-p";	// flag to install a package
+
 char fuzzel_view_config_text[32] = "Preview Fuzzel appearance";
 char fuzzel_edit_config_text[32] = "Edit Fuzzel config";
 char fuzzel_catppuccin_text[32] = "Configure Catppuccin themes";
@@ -135,6 +138,12 @@ int error_message(int err_code)
     
     bool critical = false;	// default is false
     bool skip_warning = false;	// default is false
+    
+    if (err_code >= 300 && err_code <= 400)
+    {
+	critical = true;
+	skip_warning = true;
+    }
 
     switch (err_code)
     {
@@ -187,26 +196,34 @@ int error_message(int err_code)
 	    break;
 	    
 	case 207:
-		snprintf(err_text_temp, sizeof(err_text_temp), "Unknown version");
-		snprintf(err_solution_temp, sizeof(err_solution_temp), "Try installing the dotfiles in order to fix the unknown version");
-		break;
+	    snprintf(err_text_temp, sizeof(err_text_temp), "Unknown version");
+	    snprintf(err_solution_temp, sizeof(err_solution_temp), "Try installing the dotfiles in order to fix the unknown version");
+	    break;
 
 	case 301:
 	    snprintf(err_text_temp, sizeof(err_text_temp), "Unknown package");
 	    snprintf(err_solution_temp, sizeof(err_solution_temp), "Type the config name in lowercase");
-	    skip_warning = true;
 	    break;
 
 	case 302:
 	    snprintf(err_text_temp, sizeof(err_text_temp), "Invalid command syntax");
-	    skip_warning = true;
-	    critical = true;
 	    break;
 
-	case 909:
-	    printf("This error should never display (in theory) \n");
+	case 303:
+	    snprintf(err_text_temp, sizeof(err_text_temp), "Invalid flag");
+	    snprintf(err_solution_temp, sizeof(err_solution_temp), "Use the %s flag to display the valid flags", help_flag_arg_text);
 	    break;
 		
+	case 304:
+	    snprintf(err_text_temp, sizeof(err_text_temp), "Missing arguments in the command");
+	    snprintf(err_solution_temp, sizeof(err_solution_temp), " ");
+	    break;
+		
+	case 909:
+	    printf("This error should never display (in theory) \n");
+	    printf("Meaning.. this is a bug inside of another bug...\n");
+	    break;
+
 	default:
 	    snprintf(err_text_temp, sizeof(err_text_temp), "This error code isn't known");
 	    break;
