@@ -24,7 +24,6 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 	    {
 		for (int i = n_to_arg - 1; i < num_cmd_arguments; i++)
 		{
-		    // arch is currently hardcoded since the distro parser isn't complete
 		    install_package(parent, cmd_arg_v[i]); 
 		}
 	    }
@@ -71,6 +70,10 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 	    printf(BOLD_S ANSI_RED"%s: invalid option -- '%s'\n"STYLE_END, cmd_arg_v[0], cmd_arg_v[1]);
 	    exit(-2);
 	}
+    }
+    else
+    {
+	return 0;
     }
     exit(0);
 }
