@@ -5,6 +5,7 @@ void cli_arg_missing(char *first_command, char *type_of_missing_arg, char *user_
     // prints an error message if there isn't a package specified in the command
     printf(BOLD_S ANSI_RED"%s: missing %s after -- '%s'\n"STYLE_END, first_command, type_of_missing_arg, user_flag_t);
     error_message(302);
+    exit(0);
 }
 
 int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
@@ -59,8 +60,8 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 	else if (strcmp(cmd_arg_v[1], "--help") == 0)
 	{
 	    printf(BOLD_S"Help menu\n"STYLE_END);
-		printf("-c	    	[CONFIG NAME] \n");
-		printf("	apply specified config \n");
+	    printf("-c	    	[CONFIG NAME] \n");
+	    printf("	apply specified config \n");
 	    printf("-p	    	[PACKAGE] \n");
 	    printf("	install specified package \n");
 	    printf("-i	    	[CONFIG NAME] \n");
@@ -215,7 +216,6 @@ void cmd_arg_install(int num_cmd_arguments_t, char *cmd_arg_v_t[], char config_a
 	    // will print the arguments instead of executing the command (useless)
 	    argument_config_install(cmd_arg_v_t[i], config_archive_t, pkg_install_t);
 	}
-	exit(0);
     }
     else
     {
