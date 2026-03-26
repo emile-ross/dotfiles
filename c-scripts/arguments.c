@@ -27,7 +27,6 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 		    // arch is currently hardcoded since the distro parser isn't complete
 		    install_package(parent, cmd_arg_v[i]); 
 		}
-		exit(0);
 	    }
 	    else
 	    {
@@ -49,7 +48,6 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 		    // will print a short description for the package
 		    config_description(cmd_arg_v[i]);
 		}
-		exit(0);
 	    }
 	    else
 	    {
@@ -66,8 +64,6 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 	    printf("	install specified package \n");
 	    printf("-i	    	[CONFIG NAME] \n");
 	    printf("	print a short description of the package\n");
-
-	    exit(0);
 	}
 	else
 	{
@@ -76,7 +72,7 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 	    exit(-2);
 	}
     }
-    return 0;
+    exit(0);
 }
 
 void config_description(char *package_t)
