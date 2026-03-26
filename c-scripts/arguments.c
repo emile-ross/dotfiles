@@ -66,7 +66,7 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 	}
 	else if (strcmp(cmd_arg_v[1], "-d") == 0 || strcmp(cmd_arg_v[1], "-D") == 0)
 	{
-	    printf("This will be deprecated\n");
+	    error_message(7);
 	}
 	else
 	{
