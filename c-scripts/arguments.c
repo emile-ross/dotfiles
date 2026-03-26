@@ -4,8 +4,6 @@ void cli_arg_missing(char *first_command, char *type_of_missing_arg, char *user_
 {
     // prints an error message if there isn't a package specified in the command
     printf(BOLD_S ANSI_RED"%s: missing %s after -- '%s'\n"STYLE_END, first_command, type_of_missing_arg, user_flag_t);
-    error_message(302);
-    exit(0);
 }
 
 int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
@@ -31,6 +29,7 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 	    {
 		// prints an error message if there isn't a package specified in the command
 		cli_arg_missing(cmd_arg_v[0], "package", cmd_arg_v[1]);
+		error_message(304);
 	    }
 	}
 	else if (strcmp(cmd_arg_v[1], "-c") == 0 || strcmp(cmd_arg_v[1], "-C") == 0)
@@ -52,6 +51,7 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 	    {
 		// prints an error message if there isn't a package specified in the command
 		cli_arg_missing(cmd_arg_v[0], "package", cmd_arg_v[1]);
+		error_message(304);
 	    }
 	}
 	else if (strcmp(cmd_arg_v[1], "--help") == 0)
@@ -64,15 +64,20 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 	    printf("-i	    	[CONFIG NAME] \n");
 	    printf("	print a short description of the package\n");
 	}
+	else if (strcmp(cmd_arg_v[1], "-d") == 0 || strcmp(cmd_arg_v[1], "-D") == 0)
+	{
+	    printf("This will be deprecated\n");
+	}
 	else
 	{
 	    // prints an error message if the argument is invalid
 	    printf(BOLD_S ANSI_RED"%s: invalid option -- '%s'\n"STYLE_END, cmd_arg_v[0], cmd_arg_v[1]);
-	    exit(-2);
+	    error_message(303);
 	}
     }
     else
     {
+	// if no argument is found (most cases)
 	return 0;
     }
     exit(0);
@@ -220,5 +225,6 @@ void cmd_arg_install(int num_cmd_arguments_t, char *cmd_arg_v_t[], char config_a
     {
 	// prints an error message if there isn't any config name specified in the command
 	cli_arg_missing(cmd_arg_v_t[0], "config name", cmd_arg_v_t[1]);
+	error_message(304);
     }
 }
