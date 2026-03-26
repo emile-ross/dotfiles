@@ -162,6 +162,11 @@ int error_message(int err_code)
 	    snprintf(err_solution_temp, sizeof(err_solution_temp), "Try updating the dotfiles");
 	    break;
 
+	case 7:
+	    snprintf(err_text_temp, sizeof(err_text_temp), "This feature will be removed/deprecated");
+	    snprintf(err_solution_temp, sizeof(err_solution_temp), "Read the documentation to learn about the existing features");
+	    break;
+
 	case 51:
 	    snprintf(err_text_temp, sizeof(err_text_temp), "Makepkg installation failed. Please check your system configuration.");
 	    snprintf(err_solution_temp, sizeof(err_solution_temp), "Helpful link: \"https://wiki.archlinux.org/title/Makepkg\"");
@@ -249,7 +254,7 @@ int error_message(int err_code)
     	printf("Press "UDRL_S"CTRL + C"STYLE_END BOLD_S" to exit\n"STYLE_END);
     	printf("Press any key to continue\n");
 
-    	clearbuffer();
+	clearbuffer();
     	getchar();	// blocking behaviour 
     }
     return 0;
