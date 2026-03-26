@@ -7,11 +7,6 @@ Will install the specified config along with the package
 
 Note: the ``-c`` flag does not install the packages needed for the config.  If you want to install the package use ``-p``.  
 
-## description for a package
-### ``-d``
-
-Provides a short description for the specified package
-
 ## help 
 ### ``--help``
 
