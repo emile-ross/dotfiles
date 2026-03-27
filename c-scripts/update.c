@@ -70,7 +70,7 @@ int full_update(char ARCHIVE, float pver)
     return 0;
 }
 
-float* update() 
+float* update(void) 
 {
     char *USERNAME = getenv("HOME");
 
