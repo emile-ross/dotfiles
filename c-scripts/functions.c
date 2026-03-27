@@ -2,13 +2,13 @@
 
 const int max_menu_opt_n = 14;
 
-void clear()
+void clear(void)
 {
     // clears the screen
     printf("\033[2J\033[H");
 }
 
-void clearbuffer()
+void clearbuffer(void)
 {
     // clears the imput buffer 
     while (getchar() != '\n');
@@ -81,7 +81,7 @@ char parent[128] = "";
 char initial_path[64];
 char inpath[64];
 
-void pre_startup()
+void pre_startup(void)
 {
     // gets the current working directory
     snprintf(inpath, sizeof(inpath), "%s", get_initial_path());
@@ -105,7 +105,7 @@ void pre_startup()
     }
 }
 
-char *get_initial_path()
+char *get_initial_path(void)
 {
     chdir("dotfiles/");
 
@@ -173,7 +173,7 @@ pkg_conf_name detect_config_name(char *input)
     return CONF_UNKNOWN;
 }
 
-int get_os_name()
+int get_os_name(void)
 {
     // open /etc/os-release
     FILE *fp = fopen("/etc/os-release", "r");
@@ -202,7 +202,7 @@ int get_os_name()
     return 0;
 }
 
-void check_for_yay()
+void check_for_yay(void)
 {
     // check if yay is present
     if (system("test -f /sbin/yay") == 0)
