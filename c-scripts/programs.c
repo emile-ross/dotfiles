@@ -148,7 +148,7 @@ void FUZZ(char ARCHIVE, float pver, char PKGINSTALL)
 }
 void GTKL(char ARCHIVE, float pver, char PKGINSTALL)
 {
-    char cmd[256];
+    char cmd[512];
     if (ARCHIVE == 'Y' || ARCHIVE == 'y')
     {
     	// backup gtklock config
