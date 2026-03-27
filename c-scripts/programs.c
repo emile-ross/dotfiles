@@ -1,6 +1,6 @@
 #include "dotfileshead.h"
 
-void BASH()
+void BASH(void)
 {
     char BRCNAME[12] = ".bashrc-new";
     // prompt to let the user know the bashrc isn't exported/replaced
@@ -375,7 +375,7 @@ int install_package(char *pkg_type_distro, char *pkginstallname)
     return 0;
 }
 
-void configure_oh_my_zsh()
+void configure_oh_my_zsh(void)
 {
     // using curl to download a program is not a good practice 
     // but it's the recommended installation method
