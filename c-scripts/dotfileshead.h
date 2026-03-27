@@ -32,7 +32,7 @@
 // reset styling
 #define STYLE_END	"\x1B[0m"
 
-void BASH();
+void BASH(void);
 void SWAY(char ARCHIVE, float pver, char PKGINSTALL);
 void BTOP(char ARCHIVE, float pver, char PKGINSTALL);
 void BPYT(char ARCHIVE, float pver, char PKGINSTALL);
@@ -48,9 +48,9 @@ void WAYB(char ARCHIVE, float pver, char PKGINSTALL);
 void ZSHH(char ARCHIVE, float pver, char PKGINSTALL);
 
 
-void clear();
-void clearbuffer();
-void pre_startup();
+void clear(void);
+void clearbuffer(void);
+void pre_startup(void);
 
 // Mandatory global variables
 extern char distro[128];
@@ -60,16 +60,16 @@ extern char inpath[64];
 
 int install_package(char *pkg_type_distro, char *pkginstallname);
 
-void install_menu();
+void install_menu(void);
 void full_install(char ARCHIVE, char full_install_opt);
 void full_config_install(char choice_ARCHIVE_opt, float previous_version_t, char install_packages_t);
 void install_configs(int custom_package_install); // the partial install script (configure which package or configuration to install)
 void copyfiles (int fastfetch_conf_export);
-void check_for_yay();
+void check_for_yay(void);
 void exec_cmd(int buffer_size, char *command_to_execute);
-void link_fastfetch_configs();
-void configure_oh_my_zsh();
-void configure_fastfetch();
+void link_fastfetch_configs(void);
+void configure_oh_my_zsh(void);
+void configure_fastfetch(void);
 
 
 typedef enum 
@@ -152,16 +152,16 @@ extern char full_install_opt; // if the user wants to install everything set to 
 extern char archive_before_install;
 extern int menu_one_i;
 extern const int max_menu_opt_n;
-char *get_initial_path();
-int get_os_name();
+char *get_initial_path(void);
+int get_os_name(void);
 
 extern char full_update_opt; 
-float* update();
+float* update(void);
 int full_update(char ARCHIVE, float pver);
 
 
 // fuzzel 
-void fuzzel_config_importing();
+void fuzzel_config_importing(void);
 extern int fuzzel_config_menu_choice;
 void apply_fuzzel_config(int config_choice_t);
 extern char fuzzel_view_config_text[32];
