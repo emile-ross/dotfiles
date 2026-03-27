@@ -1,6 +1,6 @@
 #include "dotfileshead.h"
 
-void fuzzel_config_importing()
+void fuzzel_config_importing(void)
 {
     char path[512];
     char *home = getenv("HOME");
@@ -51,6 +51,7 @@ void fuzzel_config_importing()
     	    theme_type_text = "catppuccin-mocha";
     	    goto endone;
     	default:
+    	    theme_type_text = NULL;
     	    printf("Try again.\n");
     	    goto endone;
     	endone:
@@ -125,6 +126,7 @@ void fuzzel_config_importing()
 	    break;
 	default:
 	    printf("Try again.\n");
+	    break;
     }
 
     char fuz_theme_path[256];
@@ -210,7 +212,7 @@ void apply_fuzzel_config(int config_choice_t)
     }
 }
 
-void configure_fastfetch()
+void configure_fastfetch(void)
 {
     int link_fastfetch_configs_opt;
     do
