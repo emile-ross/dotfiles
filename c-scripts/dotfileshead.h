@@ -12,10 +12,10 @@
 #include <sys/stat.h>
 
 // text styles
-#define BOLD_S  	"\e[1m" // defines BOLD_S as a keyword to make text bold
-#define UDRL_S  	"\e[4m" // UDRL_S starts an underline style (does not work in kitty by default)
-#define ITALICS_S 	"\e[3m"
-#define STRIKE_S 	"\e[9m"
+#define BOLD_S  	"\x1B[1m" // defines BOLD_S as a keyword to make text bold
+#define UDRL_S  	"\x1B[4m" // UDRL_S starts an underline style (does not work in kitty by default)
+#define ITALICS_S 	"\x1B[3m"
+#define STRIKE_S 	"\x1B[9m"
 
 // colors
 #define ANSI_RED 	"\x1b[31m"
@@ -30,8 +30,7 @@
 #define ANSI_LCYAN    	"\x1b[96m"
 
 // reset styling
-#define STYLE_END	"\033[0m" 
-
+#define STYLE_END	"\x1B[0m"
 
 void BASH();
 void SWAY(char ARCHIVE, float pver, char PKGINSTALL);
