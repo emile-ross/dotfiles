@@ -9,6 +9,7 @@ full_recompilation:
 	gcc $(FLAGS) -c c-scripts/update.c -o c-scripts/update.o
 	gcc $(FLAGS) -c c-scripts/arguments.c -o c-scripts/arguments.o
 	gcc $(FLAGS) -c c-scripts/configuring.c -o c-scripts/configuring.o
+	gcc $(FLAGS) -c c-scripts/configuring.c -o c-scripts/error-handling.o
 	@echo "Compiling full application"
 
 user_compilation:
@@ -19,6 +20,7 @@ user_compilation:
 	@gcc $(U_FLAGS) -c c-scripts/update.c -o c-scripts/update.o
 	@gcc $(U_FLAGS) -c c-scripts/arguments.c -o c-scripts/arguments.o
 	@gcc $(U_FLAGS) -c c-scripts/configuring.c -o c-scripts/configuring.o
+	@gcc $(U_FLAGS) -c c-scripts/configuring.c -o c-scripts/error-handling.o
 	@echo "Compiled full package"
 	@echo "execute it with: ./setup"
 clean: 
@@ -28,7 +30,8 @@ clean:
 		c-scripts/install.o \
 		c-scripts/update.o \
 		c-scripts/arguments.o \
-		c-scripts/configuring.o
+		c-scripts/configuring.o \
+		c-scripts/error-handling.o
 
 setup: user_compilation
 	@gcc $(U_FLAGS) c-scripts/setup.o c-scripts/functions.o c-scripts/install.o c-scripts/update.o c-scripts/programs.o c-scripts/arguments.c c-scripts/configuring.o -o setup
