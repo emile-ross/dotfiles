@@ -1,6 +1,6 @@
 #include "dotfileshead.h"
 
-void install_menu()
+void install_menu(void)
 {
     clear();
     printf(BOLD_S "%s\n"STYLE_END, opt_one_text );
