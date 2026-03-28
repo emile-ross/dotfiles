@@ -85,7 +85,7 @@ make setup
 ```sh
 git clone https://github.com/imawsumm/dotfiles
 cd dotfiles/
-gcc dotfiles/c-scripts/setup.c dotfiles/c-scripts/functions.c dotfiles/c-scripts/install.c dotfiles/c-scripts/update.c dotfiles/c-scripts/programs.c -o setup -Wall
+gcc dotfiles/c-scripts/setup.c dotfiles/c-scripts/functions.c dotfiles/c-scripts/install.c dotfiles/c-scripts/update.c dotfiles/c-scripts/programs.c c-scripts/error-handling.c -o setup -Wall
 ./setup
 ```
 
