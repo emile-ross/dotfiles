@@ -23,7 +23,7 @@ gcc arguments.c \
     setup.c \
     update.c \
     -o setup \
-    -Wall -Wextra
+    -Wall -Wextra -pedantic -fsanitize=undefined 
 ./setup
 ```
 
@@ -39,7 +39,7 @@ zig cc arguments.c \
     setup.c \
     update.c \
     -o setup \
-    -Wall -Wextra
+    -Wall -Wextra -pedantic -fsanitize=undefined
 ./setup
 ```
 
