@@ -85,7 +85,16 @@ make setup
 ```sh
 git clone https://github.com/imawsumm/dotfiles
 cd dotfiles/
-gcc dotfiles/c-scripts/setup.c dotfiles/c-scripts/functions.c dotfiles/c-scripts/install.c dotfiles/c-scripts/update.c dotfiles/c-scripts/programs.c c-scripts/error-handling.c -o setup -Wall
+gcc c-scripts/arguments.c \
+    c-scripts/configuring.c \
+    c-scripts/functions.c \
+    c-scripts/install.c \
+    c-scripts/error-handling.c \
+    c-scripts/programs.c \
+    c-scripts/setup.c \
+    c-scripts/update.c \
+    -o setup \
+    -Wall -Wextra
 ./setup
 ```
 
