@@ -16,9 +16,9 @@ or ``make setup`` if you don't want any warning
 ```bash
 gcc arguments.c \
     configuring.c \
-    dotfileshead.h \
     functions.c \
     install.c \
+    error-handling.c \
     programs.c \
     setup.c \
     update.c \
@@ -32,7 +32,7 @@ gcc arguments.c \
 ```bash
 zig cc arguments.c \
     configuring.c \
-    dotfileshead.h \
+    error-handling.c \
     functions.c \
     install.c \
     programs.c \
