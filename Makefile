@@ -54,3 +54,6 @@ base: zig_recompilation
 full: full_recompilation
 	gcc $(FLAGS) c-scripts/setup.o c-scripts/functions.o c-scripts/install.o c-scripts/update.o c-scripts/programs.o c-scripts/arguments.c c-scripts/configuring.o c-scripts/error-handling.o -o setup
 	@echo "Compiled successfully"
+
+
+force
