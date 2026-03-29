@@ -1,4 +1,4 @@
-FLAGS = -Werror -Wall -Wextra -pedantic
+FLAGS = -Werror -Wall -Wextra -pedantic -Werror
 ZIG_FLAGS = -Wall -Wextra -pedantic -fsanitize=undefined 
 U_FLAGS = -Wno-implicit-function-declaration
 
