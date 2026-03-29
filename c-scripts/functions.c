@@ -167,9 +167,14 @@ pkg_conf_name detect_config_name(char *input)
     if (strcmp(input, "sway") == 0) return CONF_SWAY;
     if (strcmp(input, "waybar") == 0) return CONF_WAYB;
     if (strcmp(input, "zsh") == 0) return CONF_ZSHH;
+
+    // alternative names
     if (strcmp(input, "hypr") == 0) return CONF_HYPR;
     if (strcmp(input, "Hyprland") == 0) return CONF_HYPR;
     if (strcmp(input, "neovim") == 0) return CONF_NVIM;
+    if (strcmp(input, "swaywm") == 0) return CONF_SWAY;
+    if (strcmp(input, "fast") == 0) return CONF_FAST;
+    if (strcmp(input, "fuzz") == 0) return CONF_FUZZ;
     return CONF_UNKNOWN;
 }
 
