@@ -209,6 +209,8 @@ void full_install(char install_ARCHIVE, char full_install_opt)
 
 void full_config_install(char choice_ARCHIVE_opt, float previous_version_t, char install_packages_t)
 {
+	// a list of all configs
+	// this will execute each and every entry
     BASH();
     BPYT(choice_ARCHIVE_opt, previous_version_t, install_packages_t);
     BTOP(choice_ARCHIVE_opt, previous_version_t, install_packages_t);
