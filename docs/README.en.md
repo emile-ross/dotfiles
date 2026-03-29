@@ -26,8 +26,8 @@ Proceed with the full installation of the dotfiles without any confirmations or 
 ```bash
 ./setup --noconfirm
 ```
-This will not give any choices to the user.  It should only be used if the operating system was recently installed or if the user doesn't care about their existing configurations.  
 
+This will not give any choices to the user.  It should only be used if the operating system was recently installed or if the user doesn't care about their existing configurations.  
 
 ## install a package
 ### ``-p``
