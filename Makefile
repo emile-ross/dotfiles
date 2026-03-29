@@ -1,6 +1,7 @@
 FLAGS = -Werror -Wall -Wextra -pedantic -Werror
 ZIG_FLAGS = -Wall -Wextra -pedantic -fsanitize=undefined 
 U_FLAGS = -Wno-implicit-function-declaration
+FLAGS = -Wall -Wextra -pedantic 
 
 full_recompilation:
 	gcc $(FLAGS) -c c-scripts/programs.c -o c-scripts/programs.o
