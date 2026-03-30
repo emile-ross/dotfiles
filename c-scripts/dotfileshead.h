@@ -147,6 +147,7 @@ extern char kitty_fonts_text[32];
 extern char* theme_colour_text;
 extern float pver;
 extern int fastfetch_conf_export;
+extern bool apply_fastfetch_config;
 extern const char *home;
 extern char full_install_opt; // if the user wants to install everything set to Y
 extern char archive_before_install;
