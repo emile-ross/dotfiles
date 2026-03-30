@@ -4,7 +4,7 @@
   "logo": {
     "type": "auto",
     /* adds the arch linux logo to fastfetch */
-    "source": "~/.config/fastfetch/assets/archlinux.png",
+    /*"source": "~/.config/fastfetch/assets/archlinux.png",*/
     /*"source": "~/.config/fastfetch/assets/image.webp",*/
     /*the directory above can be changed to anything you want*/
     "width": 32,
