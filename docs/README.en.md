@@ -1,5 +1,7 @@
 # Documentation for command line arguments
 
+[Voir cette page en francais][fr]
+
 ## apply a config
 ### ``-c``
 
@@ -39,3 +41,6 @@ Install a package using the method appropriate for the distro
 Display a short description of the specified package using the ``-i`` flag
 
 Install the specified config along with the package ``-c``
+
+
+[fr]: README.fr.md
