@@ -73,6 +73,24 @@ Vous pouvez utiliser cette routine afin d'installer vos dotfiles, afin de les me
 
 Plus de fonctionnalités sont à venir.
 
+### Compiler avec GCC
+
+```sh
+git clone https://github.com/imawsumm/dotfiles
+cd dotfiles/
+gcc c-scripts/arguments.c \
+    c-scripts/configuring.c \
+    c-scripts/functions.c \
+    c-scripts/install.c \
+    c-scripts/error-handling.c \
+    c-scripts/programs.c \
+    c-scripts/setup.c \
+    c-scripts/update.c \
+    -o setup \
+    -Wall -Wextra
+./setup
+```
+
 ### Compiler avec make
 ```sh
 git clone https://github.com/imawsumm/dotfiles
