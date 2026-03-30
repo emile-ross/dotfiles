@@ -19,8 +19,8 @@
 
 // colors
 #define ANSI_RED 	"\x1b[31m"
-#define ANSI_GREEN 	"\x1b[32m"
-#define ANSI_LGREEN 	"\x1b[92m"
+#define ANSI_GREEN 	"\x1b[32m"  // same as LGREEN on many terminals
+#define ANSI_LGREEN 	"\x1b[92m"  // same as GREEN on many terminals
 #define ANSI_YELLOW 	"\x1b[33m"
 #define ANSI_LYELLOW 	"\x1b[93m"
 #define ANSI_BLUE    	"\x1b[34m"
@@ -52,14 +52,9 @@ void clear(void);
 void clearbuffer(void);
 void pre_startup(void);
 
-// Mandatory global variables
-extern char distro[128];
-extern char parent[128];
-extern char initial_path[64];
-extern char inpath[64];
+
 
 int install_package(char *pkg_type_distro, char *pkginstallname);
-
 void install_menu(void);
 void full_install(char ARCHIVE, char full_install_opt);
 void full_config_install(char choice_ARCHIVE_opt, float previous_version_t, char install_packages_t);
@@ -70,7 +65,6 @@ void exec_cmd(int buffer_size, char *command_to_execute);
 void link_fastfetch_configs(void);
 void configure_oh_my_zsh(void);
 void configure_fastfetch(void);
-
 
 typedef enum 
 {
@@ -147,12 +141,16 @@ extern char kitty_fonts_text[32];
 extern char* theme_colour_text;
 extern float pver;
 extern int fastfetch_conf_export;
-extern bool apply_fastfetch_config;
 extern const char *home;
 extern char full_install_opt; // if the user wants to install everything set to Y
 extern char archive_before_install;
 extern int menu_one_i;
 extern const int max_menu_opt_n;
+extern bool fastfetch_config_apply;
+extern char distro[128];
+extern char parent[128];
+extern char initial_path[64];
+extern char inpath[64];
 char *get_initial_path(void);
 int get_os_name(void);
 
