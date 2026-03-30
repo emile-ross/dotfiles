@@ -9,6 +9,7 @@ full_recompilation:
 	gcc $(FLAGS) -c c-scripts/setup.c -o c-scripts/setup.o
 	gcc $(FLAGS) -c c-scripts/install.c -o c-scripts/install.o
 	gcc $(FLAGS) -c c-scripts/update.c -o c-scripts/update.o
+	gcc $(FLAGS) -c c-scripts/globals.c -o c-scripts/globals.o
 	gcc $(FLAGS) -c c-scripts/arguments.c -o c-scripts/arguments.o
 	gcc $(FLAGS) -c c-scripts/configuring.c -o c-scripts/configuring.o
 	gcc $(FLAGS) -c c-scripts/error-handling.c -o c-scripts/error-handling.o
@@ -20,6 +21,7 @@ zig_recompilation:
 	@zig cc $(ZIG_FLAGS) -c c-scripts/setup.c -o c-scripts/setup.o
 	@zig cc $(ZIG_FLAGS) -c c-scripts/install.c -o c-scripts/install.o
 	@zig cc $(ZIG_FLAGS) -c c-scripts/update.c -o c-scripts/update.o
+	@zig cc $(ZIG_FLAGS) -c c-scripts/globals.c -o c-scripts/globals.o
 	@zig cc $(ZIG_FLAGS) -c c-scripts/arguments.c -o c-scripts/arguments.o
 	@zig cc $(ZIG_FLAGS) -c c-scripts/configuring.c -o c-scripts/configuring.o
 	@zig cc $(ZIG_FLAGS) -c c-scripts/error-handling.c -o c-scripts/error-handling.o
@@ -30,6 +32,7 @@ user_compilation:
 	@gcc $(U_FLAGS) -c c-scripts/setup.c -o c-scripts/setup.o
 	@gcc $(U_FLAGS) -c c-scripts/install.c -o c-scripts/install.o
 	@gcc $(U_FLAGS) -c c-scripts/update.c -o c-scripts/update.o
+	@gcc $(U_FLAGS) -c c-scripts/globals.c -o c-scripts/globals.o
 	@gcc $(U_FLAGS) -c c-scripts/arguments.c -o c-scripts/arguments.o
 	@gcc $(U_FLAGS) -c c-scripts/configuring.c -o c-scripts/configuring.o
 	@gcc $(U_FLAGS) -c c-scripts/error-handling.c -o c-scripts/error-handling.o
@@ -41,20 +44,21 @@ clean:
 		c-scripts/setup.o \
 		c-scripts/install.o \
 		c-scripts/update.o \
+		c-scripts/globals.o \
 		c-scripts/arguments.o \
 		c-scripts/configuring.o \
 		c-scripts/error-handling.o
 
 setup: user_compilation
-	@gcc $(U_FLAGS) c-scripts/setup.o c-scripts/functions.o c-scripts/install.o c-scripts/update.o c-scripts/programs.o c-scripts/arguments.c c-scripts/configuring.o c-scripts/error-handling.o -o setup
+	@gcc $(U_FLAGS) c-scripts/setup.o c-scripts/functions.o c-scripts/install.o c-scripts/update.o c-scripts/globals.o c-scripts/programs.o c-scripts/arguments.c c-scripts/configuring.o c-scripts/error-handling.o -o setup
 
 base: zig_recompilation
-	gcc $(ZIG_FLAGS) c-scripts/setup.o c-scripts/functions.o c-scripts/install.o c-scripts/update.o c-scripts/programs.o c-scripts/arguments.c c-scripts/configuring.o c-scripts/error-handling.o -o setup
+	gcc $(ZIG_FLAGS) c-scripts/setup.o c-scripts/functions.o c-scripts/install.o c-scripts/update.o c-scripts/globals.o c-scripts/programs.o c-scripts/arguments.c c-scripts/configuring.o c-scripts/error-handling.o -o setup
 
 full: full_recompilation
-	gcc $(FLAGS) c-scripts/setup.o c-scripts/functions.o c-scripts/install.o c-scripts/update.o c-scripts/programs.o c-scripts/arguments.c c-scripts/configuring.o c-scripts/error-handling.o -o setup
+	gcc $(FLAGS) c-scripts/setup.o c-scripts/functions.o c-scripts/install.o c-scripts/update.o c-scripts/globals.o c-scripts/programs.o c-scripts/arguments.c c-scripts/configuring.o c-scripts/error-handling.o -o setup
 	@echo "Compiled successfully"
 
 force: zig_recompilation
-	gcc $(no_err_flags) c-scripts/setup.o c-scripts/functions.o c-scripts/install.o c-scripts/update.o c-scripts/programs.o c-scripts/arguments.c c-scripts/configuring.o c-scripts/error-handling.o -o setup
+	gcc $(no_err_flags) c-scripts/setup.o c-scripts/functions.o c-scripts/install.o c-scripts/update.o c-scripts/globals.o c-scripts/programs.o c-scripts/arguments.c c-scripts/configuring.o c-scripts/error-handling.o -o setup
 
