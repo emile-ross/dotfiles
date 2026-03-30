@@ -53,6 +53,7 @@ char opt_exit_text[16] = "Exit";
 
 int timer_quarters;
 int timer_seconds;
+bool fastfetch_config_apply;
 
 char* theme_colour_text;
 long int time_timer_quarters;
