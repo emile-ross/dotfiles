@@ -230,6 +230,11 @@ void configure_fastfetch(void)
     	printf(BOLD_S " [3] "STYLE_END"config-duplicated.jsonc\n");
     	printf(BOLD_S " [0] "STYLE_END "%s\n", opt_exit_text);
     
+	if (apply_fastfetch_config == true)
+	{
+    	    printf("\nThe fastfetch config was applied successfully\n");
+	}
+
         clearbuffer();
     	scanf("%d", &link_fastfetch_configs_opt);
     
@@ -238,7 +243,7 @@ void configure_fastfetch(void)
     	    snprintf(cmd, sizeof(cmd),
         	    "ln -fs ~/.config/fastfetch/config-default.jsonc ~/.config/fastfetch/config.jsonc");
     	    system(cmd);
-    	    printf("\nThe fastfetch config was applied successfully\n");
+	    apply_fastfetch_config = true;
     	    wait_for_timeout(1, 0);
     	}
     	else if (link_fastfetch_configs_opt == 2)
@@ -247,6 +252,7 @@ void configure_fastfetch(void)
         	    "ln -fs ~/.config/fastfetch/config-other.jsonc ~/.config/fastfetch/config.jsonc");
     	    system(cmd);
     	    printf("\nThe fastfetch config was applied successfully\n");
+	    apply_fastfetch_config = true;
     	    wait_for_timeout(1, 0);
     	}
     	else if (link_fastfetch_configs_opt == 3)
@@ -256,8 +262,13 @@ void configure_fastfetch(void)
     	    system(cmd);
     
     	    printf("\nThe fastfetch config was applied successfully\n");
+	    apply_fastfetch_config = true;
     	    wait_for_timeout(1, 0);
     	}
+	else 
+	{
+	    apply_fastfetch_config = false;
+	}
     }
     while (link_fastfetch_configs_opt > 0.0);
     // exits the while loop when the user types 0
