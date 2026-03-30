@@ -1,7 +1,7 @@
 # Configuration du système
 Les (dotfiles) sont des fichiers utilisés pour modifier votre système.  Vous pouvez les modifier en utilisant un éditeur de texte comme ([Neovim](https://github.com/neovim/neovim)).
 
-[View this page in english](https://github.com/imawsumm/dotfiles)
+[View this page in english](https://github.com/imawsumm/dotfiles#imawsums-dotfiles)
 
 Si vous voulez **Installer** vos configurations, cliquez [ici](#Installer)
 
