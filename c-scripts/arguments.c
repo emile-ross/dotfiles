@@ -228,3 +228,31 @@ void cmd_arg_install(int num_cmd_arguments_t, char *cmd_arg_v_t[], char config_a
 	error_message(304);
     }
 }
+
+pkg_conf_name detect_config_name(char *input) 
+{
+    // match the name to the correct config name
+    if (strcmp(input, "bash") == 0) return CONF_BASH;
+    if (strcmp(input, "btop") == 0) return CONF_BTOP;
+    if (strcmp(input, "bpytop") == 0) return CONF_BPYT;
+    if (strcmp(input, "cava") == 0) return CONF_CAVA;
+    if (strcmp(input, "fastfetch") == 0) return CONF_FAST;
+    if (strcmp(input, "fuzzel") == 0) return CONF_FUZZ;
+    if (strcmp(input, "gtklock") == 0) return CONF_GTKL;
+    if (strcmp(input, "hyprland") == 0) return CONF_HYPR;
+    if (strcmp(input, "kitty") == 0) return CONF_KITT;
+    if (strcmp(input, "mpv") == 0) return CONF_MPVF;
+    if (strcmp(input, "nvim") == 0) return CONF_NVIM;
+    if (strcmp(input, "sway") == 0) return CONF_SWAY;
+    if (strcmp(input, "waybar") == 0) return CONF_WAYB;
+    if (strcmp(input, "zsh") == 0) return CONF_ZSHH;
+
+    // alternative names
+    if (strcmp(input, "hypr") == 0) return CONF_HYPR;
+    if (strcmp(input, "Hyprland") == 0) return CONF_HYPR;
+    if (strcmp(input, "neovim") == 0) return CONF_NVIM;
+    if (strcmp(input, "swaywm") == 0) return CONF_SWAY;
+    if (strcmp(input, "fast") == 0) return CONF_FAST;
+    if (strcmp(input, "fuzz") == 0) return CONF_FUZZ;
+    return CONF_UNKNOWN;
+}
