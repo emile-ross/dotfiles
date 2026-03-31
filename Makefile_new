@@ -1,0 +1,12 @@
+ZIG_BINARY := $(wildcard build-file)
+GCC_BINARY := $(wildcard build-file)
+
+base:
+
+ifeq ($(ZIG_BINARY),)
+	@gcc build.c -o build_zig
+else
+	@echo build-file found
+endif
+
+	@./build_zig
