@@ -6,7 +6,6 @@
 #include <string.h>
 #include <time.h>
 #include <stdbool.h>
-
 #include <fcntl.h>
 #include <unistd.h>
 #include <sys/stat.h>
@@ -47,12 +46,9 @@ void NVIM(char ARCHIVE, float pver, char PKGINSTALL);
 void WAYB(char ARCHIVE, float pver, char PKGINSTALL);
 void ZSHH(char ARCHIVE, float pver, char PKGINSTALL);
 
-
 void clear(void);
 void clearbuffer(void);
 void pre_startup(void);
-
-
 
 int install_package(char *pkg_type_distro, char *pkginstallname);
 void install_menu(void);
@@ -127,6 +123,7 @@ extern char kitty_config_menu_text[32];
 extern char fuzzel_config_menu_text[32];
 extern char zshforhumans_config_menu_text[32];
 
+// main menu
 extern char main_menu_text[128];
 extern char opt_one_text[128];
 extern char opt_the_text[128];
@@ -144,7 +141,7 @@ extern int fastfetch_conf_export;
 extern const char *home;
 extern char full_install_opt; // if the user wants to install everything set to Y
 extern char archive_before_install;
-extern int menu_one_i;
+extern int menu_one_i;    // main menu
 extern const int max_menu_opt_n;
 extern bool fastfetch_config_apply;
 extern char distro[128];
@@ -157,7 +154,6 @@ int get_os_name(void);
 extern char full_update_opt; 
 float* update(void);
 int full_update(char ARCHIVE, float pver);
-
 
 // fuzzel 
 void fuzzel_config_importing(void);
