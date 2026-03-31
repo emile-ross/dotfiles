@@ -2,6 +2,7 @@ FLAGS = -Werror -Wall -Wextra -pedantic -Werror
 ZIG_FLAGS = -Wall -Wextra -pedantic -fsanitize=undefined 
 U_FLAGS = -Wno-implicit-function-declaration
 NO_ERR_FLAGS = -Wall -Wextra -pedantic 
+ALL_OBJECT_FILES = c-scripts/setup.o c-scripts/functions.o c-scripts/install.o c-scripts/update.o c-scripts/globals.o c-scripts/programs.o c-scripts/arguments.c c-scripts/configuring.o c-scripts/error-handling.o
 
 full_recompilation:
 	gcc $(FLAGS) -c c-scripts/programs.c -o c-scripts/programs.o
@@ -38,6 +39,7 @@ user_compilation:
 	@gcc $(U_FLAGS) -c c-scripts/error-handling.c -o c-scripts/error-handling.o
 	@echo "Compiled full package"
 	@echo "execute it with: ./setup"
+
 clean: 
 	@rm c-scripts/programs.o \
 		c-scripts/functions.o \
@@ -50,15 +52,14 @@ clean:
 		c-scripts/error-handling.o
 
 setup: user_compilation
-	@gcc $(U_FLAGS) c-scripts/setup.o c-scripts/functions.o c-scripts/install.o c-scripts/update.o c-scripts/globals.o c-scripts/programs.o c-scripts/arguments.c c-scripts/configuring.o c-scripts/error-handling.o -o setup
+	@gcc $(U_FLAGS) $(ALL_OBJECT_FILES) -o setup
 
 base: zig_recompilation
-	zig cc $(ZIG_FLAGS) c-scripts/setup.o c-scripts/functions.o c-scripts/install.o c-scripts/update.o c-scripts/globals.o c-scripts/programs.o c-scripts/arguments.c c-scripts/configuring.o c-scripts/error-handling.o -o setup
+	zig cc $(ZIG_FLAGS) $(ALL_OBJECT_FILES) -o setup
 
 full: full_recompilation
-	gcc $(FLAGS) c-scripts/setup.o c-scripts/functions.o c-scripts/install.o c-scripts/update.o c-scripts/globals.o c-scripts/programs.o c-scripts/arguments.c c-scripts/configuring.o c-scripts/error-handling.o -o setup
-	@echo "Compiled successfully"
+	gcc $(FLAGS) $(ALL_OBJECT_FILES) -o setup
 
 force: zig_recompilation
-	zig cc $(no_err_flags) c-scripts/setup.o c-scripts/functions.o c-scripts/install.o c-scripts/update.o c-scripts/globals.o c-scripts/programs.o c-scripts/arguments.c c-scripts/configuring.o c-scripts/error-handling.o -o setup
+	zig cc $(no_err_flags) $(ALL_OBJECT_FILES) -o setup
 
