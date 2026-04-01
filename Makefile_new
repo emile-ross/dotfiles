@@ -16,6 +16,8 @@ setup: existing_binaries
 
 base:
 	@gcc $(DEBUG_BUILD_COMMAND)
+	@./build gcc verbose
 
 zig:
 	@zig cc $(DEBUG_BUILD_COMMAND)
+	@./build zig verbose
