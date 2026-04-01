@@ -5,6 +5,8 @@
 
 #define CMD_MAX 24
 
+void compile_all_files(char compiler, char flags);
+
 typedef enum 
 {
     CLANG,
@@ -14,13 +16,14 @@ typedef enum
 
 int main(int argc, char *argv[])
 {
+    char compiler_name_cmd[CMD_MAX];
+    compiler_name_cmd[0] = '\0';
+
     // declare compiler_name enum
     compiler_enum compiler_name;
 
     bool verbose_log_output;
 
-    char compiler_name_cmd[CMD_MAX];
-    compiler_name_cmd[0] = '\0';
 
     for (int i = 1; i < argc; i++)
     {
@@ -63,13 +66,25 @@ int main(int argc, char *argv[])
 	    break;
         default: 
 	    printf("Unknown compiler\n");
-	    break;
+	    return 1;
     }
+
 
     char cmd[128];
     snprintf(cmd, sizeof(cmd),
-	    "%s build.c -o a.out", compiler_name_cmd);
+	    "%s build.c -o a.out\n", compiler_name_cmd);
     printf(cmd);
 
     return 0;
 }
+
+void compile_all_files(char compiler, char flags)
+{
+    for (int i = 0; i < 9; i++)
+    {
+	// snprintf(cmd, sizeof(cmd),
+	// 	"%s %s.c -o a.out\n", compiler, source_files[i]);
+	// printf(cmd);
+    }
+}
+
