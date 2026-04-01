@@ -3,20 +3,24 @@
 #include <stdlib.h>
 #include <string.h>
 
-bool verbose_log_output;
+#define CMD_MAX 24
 
 typedef enum 
 {
     CLANG,
     ZIG,
     GCC
-
 } compiler_enum;
 
 int main(int argc, char *argv[])
 {
     // declare compiler_name enum
     compiler_enum compiler_name;
+
+    bool verbose_log_output;
+
+    char compiler_name_cmd[CMD_MAX];
+    compiler_name_cmd[0] = '\0';
 
     for (int i = 1; i < argc; i++)
     {
@@ -36,6 +40,10 @@ int main(int argc, char *argv[])
     	{
     	    verbose_log_output = true;
     	}
+	else if (strcmp(argv[i], "-v") == 0)
+	{
+    	    verbose_log_output = true;
+	}
     	else
     	{
     	    printf("Unknown argument: %s\n", argv[i]);
@@ -45,18 +53,23 @@ int main(int argc, char *argv[])
     switch(compiler_name)
     {
 	case CLANG:
-	    printf("Clang compiler\n");
+	    strncpy(compiler_name_cmd, "clang", CMD_MAX - 1);
 	    break;
 	case GCC:
-	    printf("GCC compiler\n");
+	    strncpy(compiler_name_cmd, "gcc", CMD_MAX - 1);
 	    break;
 	case ZIG:
-	    printf("zig compiler\n");
+	    strncpy(compiler_name_cmd, "zig cc", CMD_MAX - 1);
 	    break;
         default: 
 	    printf("Unknown compiler\n");
-	    return 1;
+	    break;
     }
+
+    char cmd[128];
+    snprintf(cmd, sizeof(cmd),
+	    "%s build.c -o a.out", compiler_name_cmd);
+    printf(cmd);
 
     return 0;
 }
