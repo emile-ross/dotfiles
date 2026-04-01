@@ -21,6 +21,7 @@ gcc arguments.c \
     error-handling.c \
     programs.c \
     setup.c \
+    globals.c \
     update.c \
     -o setup \
     -Wall -Wextra -pedantic -fsanitize=undefined 
@@ -37,6 +38,7 @@ zig cc arguments.c \
     install.c \
     programs.c \
     setup.c \
+    globals.c \
     update.c \
     -o setup \
     -Wall -Wextra -pedantic -fsanitize=undefined
