@@ -4,6 +4,7 @@
 #include <string.h>
 
 #define CMD_MAX 24
+#define NUM_SRC_FILES 9
 
 void compile_all_files(char compiler, char flags);
 
@@ -68,19 +69,14 @@ int main(int argc, char *argv[])
 	    printf("Unknown compiler\n");
 	    return 1;
     }
-
-
-    char cmd[128];
-    snprintf(cmd, sizeof(cmd),
-	    "%s build.c -o a.out\n", compiler_name_cmd);
-    printf(cmd);
-
+	// compile_all_files()
+	// link all files together
     return 0;
 }
 
 void compile_all_files(char compiler, char flags)
 {
-    for (int i = 0; i < 9; i++)
+    for (int i = 0; i < NUM_SRC_FILES; i++)
     {
 	// snprintf(cmd, sizeof(cmd),
 	// 	"%s %s.c -o a.out\n", compiler, source_files[i]);
