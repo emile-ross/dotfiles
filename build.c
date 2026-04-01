@@ -18,19 +18,28 @@ int main(int argc, char *argv[])
     // declare compiler_name enum
     compiler_enum compiler_name;
 
-    if (strcmp(argv[1], "gcc") == 0)
+    for (int i = 1; i < argc; i++)
     {
-	compiler_name = GCC;
-    }
-    else if (strcmp(argv[1], "zig") == 0)
-    {
-	compiler_name = ZIG;
-    }
-
-    if (strcmp(argv[2], "verbose") == 0)
-    {
-
-	verbose_log_output = true;
+	if (strcmp(argv[i], "gcc") == 0)
+    	{
+    	    compiler_name = GCC;
+    	}
+    	else if (strcmp(argv[i], "zig") == 0)
+    	{
+    	    compiler_name = ZIG;
+    	}
+    	else if (strcmp(argv[i], "clang") == 0)
+    	{
+    	    compiler_name = CLANG;
+    	}
+	else if (strcmp(argv[i], "verbose") == 0)
+    	{
+    	    verbose_log_output = true;
+    	}
+    	else
+    	{
+    	    printf("Unknown argument: %s\n", argv[i]);
+    	}
     }
 
     switch(compiler_name)
@@ -50,5 +59,4 @@ int main(int argc, char *argv[])
     }
 
     return 0;
-
 }
