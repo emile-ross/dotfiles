@@ -1,12 +1,16 @@
-ZIG_BINARY := $(wildcard build-file)
-GCC_BINARY := $(wildcard build-file)
+BUILD_BINARY := $(wildcard build)
 
-base:
+existing_binaries:
 
-ifeq ($(ZIG_BINARY),)
-	@gcc build.c -o build_zig
-else
-	@echo build-file found
+ifeq ($(BUILD_BINARY),)
+	@gcc build.c -o build
 endif
 
-	@./build_zig
+full: existing_binaries
+	@./build gcc verbose
+
+setup: existing_binaries
+	@./build gcc
+
+base:
+	@gcc build.c -o build -Wall -Wextra -pedantic -Werror
