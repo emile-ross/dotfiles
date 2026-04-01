@@ -2,6 +2,8 @@
 #include <stdbool.h>
 #include <string.h>
 
+bool verbose_log_output;
+
 typedef enum 
 {
     CLANG,
@@ -28,6 +30,16 @@ int main(int argc, char *argv[])
     if (strcmp(argv[1], "gcc") == 0)
     {
 	compiler_name = GCC;
+    }
+    else if (strcmp(argv[1], "zig") == 0)
+    {
+	compiler_name = ZIG;
+    }
+
+    if (strcmp(argv[2], "verbose") == 0)
+    {
+
+	verbose_log_output = true;
     }
 
     return 0;
