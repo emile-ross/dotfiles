@@ -91,6 +91,7 @@ gcc c-scripts/arguments.c \
     c-scripts/install.c \
     c-scripts/error-handling.c \
     c-scripts/programs.c \
+    c-scripts/globals.c \
     c-scripts/setup.c \
     c-scripts/update.c \
     -o setup \
