@@ -6,7 +6,7 @@
 #define CMD_MAX 24
 #define NUM_SRC_FILES 9
 
-void compile_all_files(char *compiler, char flags);
+void compile_all_files(char *compiler, char *flags);
 
 const char *source_files[] = { "setup", "update", "install", NULL };
 
@@ -71,13 +71,15 @@ int main(int argc, char *argv[])
 	    return 1;
     }
 
+    compile_all_files(compiler_name_cmd, "-Wall -Wextra -Wpedantic");
+
     // compile_all_files()
     // link all files together
 
     return 0;
 }
 
-void compile_all_files(char *compiler, char flags)
+void compile_all_files(char *compiler, char *flags)
 {
     for (int i = 0; source_files[i] != NULL; i++) 
     {
