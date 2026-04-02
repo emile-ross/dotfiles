@@ -106,15 +106,31 @@ void compile_all_files(bool treat_as_errors, char *compiler, char *base_flags)
 
     for (int i = 0; source_files[i] != NULL; i++) 
     {
-	char cmd[256];
-	snprintf(cmd, sizeof(cmd),
-		"%s %s/%s.c -o %s/%s.o %s \n"
-		, compiler, source_fpath, source_files[i], object_fpath, source_files[i], all_flags);
+        char cmd[256];
+        snprintf(cmd, sizeof(cmd),
+        	"%s %s/%s.c -o %s/%s.o %s \n"
+        	, compiler, source_fpath, source_files[i], object_fpath, source_files[i], all_flags);
+	printf("%s", cmd);
+    }
+}
+
+void link_object_files(bool treat_as_errors, char *compiler, char *base_flags)
+{
+    char all_flags[128];
+    if (treat_as_errors == true )
+    {
+	snprintf(all_flags, sizeof(all_flags),
+		"%s -Werror", base_flags);
+    }
+    else
+    {
+	snprintf(all_flags, sizeof(all_flags),
+		"%s ", base_flags);
+    }
 
     char *source_files_obj_cmd = NULL;
     char *link_cmd = compiler;
 
     strcat(link_cmd, source_files_obj_cmd);
-	  printf("%s", link_cmd);
-    }
+          printf("%s", link_cmd);
 }
