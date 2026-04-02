@@ -10,7 +10,17 @@ void compile_all_files(bool treat_as_errors, char *compiler, char *base_flags);
 char *object_fpath = "c-scripts";
 char *source_fpath = "c-scripts";
 
-const char *source_files[] = { "setup", "update", "install", NULL };
+const char *source_files[] = { 
+    "arguments",
+    "configuring",
+    "error-handling",
+    "functions",
+    "programs",
+    "globals",
+    "install",
+    "setup",
+    "update",
+    NULL };
 
 typedef enum 
 {
