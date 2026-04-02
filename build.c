@@ -4,7 +4,6 @@
 #include <string.h>
 
 #define CMD_MAX 24
-#define NUM_SRC_FILES 9
 
 void compile_all_files(bool treat_as_errors, char *compiler, char *base_flags);
 
@@ -28,7 +27,7 @@ int main(int argc, char *argv[])
     // declare compiler_name enum
     compiler_enum compiler_name;
 
-    bool verbose_log_output;
+    bool verbose_log_output = false;
 
     for (int i = 1; i < argc; i++)
     {
@@ -44,11 +43,11 @@ int main(int argc, char *argv[])
     	{
     	    compiler_name = CLANG;
     	}
-	else if (strcmp(argv[i], "verbose") == 0)
+	else if (strcmp(argv[i], "error") == 0)
     	{
     	    verbose_log_output = true;
-    	}
-	else if (strcmp(argv[i], "-v") == 0)
+	}
+	else if (strcmp(argv[i], "-d") == 0 || strcmp(argv[i], "-e") == 0)
 	{
     	    verbose_log_output = true;
 	}
@@ -76,7 +75,6 @@ int main(int argc, char *argv[])
 
     compile_all_files(verbose_log_output, compiler_name_cmd, "-Wall -Wextra -Wpedantic");
 
-    // compile_all_files()
     // link all files together
 
     return 0;
@@ -84,7 +82,7 @@ int main(int argc, char *argv[])
 
 void compile_all_files(bool treat_as_errors, char *compiler, char *base_flags)
 {
-    char *all_flags[128];
+    char all_flags[128];
     if (treat_as_errors == true )
     {
 	snprintf(all_flags, sizeof(all_flags),
