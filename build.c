@@ -8,6 +8,8 @@
 
 void compile_all_files(char *compiler, char *flags);
 
+char *object_fpath = "c-scripts";
+
 const char *source_files[] = { "setup", "update", "install", NULL };
 
 typedef enum 
@@ -85,8 +87,8 @@ void compile_all_files(char *compiler, char *flags)
     {
 	char cmd[256];
 	snprintf(cmd, sizeof(cmd),
-		"%s %s.c -o a.out\n", compiler, source_files[i]);
+		"%s %s/%s.c -o %s/%s.o %s \n"
+		, compiler, object_fpath, source_files[i], object_fpath, source_files[i], flags);
 	printf(cmd);
     }
 }
-
