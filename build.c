@@ -6,6 +6,7 @@
 #define CMD_MAX 24
 
 void compile_all_files(bool treat_as_errors, char *compiler, char *base_flags);
+void link_object_files(bool treat_as_errors, char *compiler, char *base_flags);
 
 char *object_fpath = "c-scripts";
 char *source_fpath = "c-scripts";
@@ -84,6 +85,7 @@ int main(int argc, char *argv[])
     }
 
     compile_all_files(verbose_log_output, compiler_name_cmd, "-Wall -Wextra -Wpedantic");
+    link_object_files(verbose_log_output, compiler_name_cmd, "-Wall -Wextra -Wpedantic");
 
     // link all files together
 
@@ -128,9 +130,12 @@ void link_object_files(bool treat_as_errors, char *compiler, char *base_flags)
 		"%s ", base_flags);
     }
 
-    char *source_files_obj_cmd = NULL;
-    char *link_cmd = compiler;
+    char *source_files_obj_cmd = " ";
+    char link_cmd[128];
 
-    strcat(link_cmd, source_files_obj_cmd);
+    snprintf(link_cmd, sizeof(link_cmd),
+	    "%s %s %s", compiler, source_files_obj_cmd, all_flags);
+
+    //strcat(link_cmd, source_files_obj_cmd);
           printf("%s", link_cmd);
 }
