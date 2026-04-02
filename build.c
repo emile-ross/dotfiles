@@ -6,7 +6,7 @@
 #define CMD_MAX 24
 #define NUM_SRC_FILES 9
 
-void compile_all_files(char *compiler, char *flags);
+void compile_all_files(bool treat_as_errors, char *compiler, char *base_flags);
 
 char *object_fpath = "c-scripts";
 char *source_fpath = "c-scripts";
@@ -74,7 +74,7 @@ int main(int argc, char *argv[])
 	    return 1;
     }
 
-    compile_all_files(compiler_name_cmd, "-Wall -Wextra -Wpedantic");
+    compile_all_files(verbose_log_output, compiler_name_cmd, "-Wall -Wextra -Wpedantic");
 
     // compile_all_files()
     // link all files together
@@ -82,14 +82,26 @@ int main(int argc, char *argv[])
     return 0;
 }
 
-void compile_all_files(char *compiler, char *flags)
+void compile_all_files(bool treat_as_errors, char *compiler, char *base_flags)
 {
+    char *all_flags[128];
+    if (treat_as_errors == true )
+    {
+	snprintf(all_flags, sizeof(all_flags),
+		"%s -Werror", base_flags);
+    }
+    else
+    {
+	snprintf(all_flags, sizeof(all_flags),
+		"%s ", base_flags);
+    }
+
     for (int i = 0; source_files[i] != NULL; i++) 
     {
 	char cmd[256];
 	snprintf(cmd, sizeof(cmd),
 		"%s %s/%s.c -o %s/%s.o %s \n"
-		, compiler, source_fpath, source_files[i], object_fpath, source_files[i], flags);
+		, compiler, source_fpath, source_files[i], object_fpath, source_files[i], all_flags);
 	printf(cmd);
     }
 }
