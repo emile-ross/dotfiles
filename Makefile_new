@@ -11,6 +11,9 @@ endif
 full: existing_binaries
 	@./build gcc -e
 
+gcc: existing_binaries
+	@./build gcc
+
 setup: existing_binaries
 	@./build gcc
 
