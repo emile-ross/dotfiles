@@ -8,7 +8,7 @@
 
 void compile_all_files(char *compiler, char flags);
 
-const char *source_files[] = { "setup", "update", "install" };
+const char *source_files[] = { "setup", "update", "install", NULL };
 
 typedef enum 
 {
@@ -26,7 +26,6 @@ int main(int argc, char *argv[])
     compiler_enum compiler_name;
 
     bool verbose_log_output;
-
 
     for (int i = 1; i < argc; i++)
     {
@@ -73,7 +72,6 @@ int main(int argc, char *argv[])
     }
 
     // compile_all_files()
-    
     // link all files together
 
     return 0;
@@ -81,7 +79,7 @@ int main(int argc, char *argv[])
 
 void compile_all_files(char *compiler, char flags)
 {
-    for (int i = 0; i < NUM_SRC_FILES; i++)
+    for (int i = 0; source_files[i] != NULL; i++) 
     {
 	char cmd[256];
 	snprintf(cmd, sizeof(cmd),
