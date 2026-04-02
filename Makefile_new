@@ -9,15 +9,15 @@ ifeq ($(BUILD_BINARY),)
 endif
 
 full: existing_binaries
-	@./build gcc verbose
+	@./build gcc -e
 
 setup: existing_binaries
 	@./build gcc
 
 base:
 	@gcc $(DEBUG_BUILD_COMMAND)
-	@./build gcc verbose
+	@./build zig -e
 
 zig:
 	@zig cc $(DEBUG_BUILD_COMMAND)
-	@./build zig verbose
+	@./build zig
