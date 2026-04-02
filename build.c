@@ -110,6 +110,11 @@ void compile_all_files(bool treat_as_errors, char *compiler, char *base_flags)
 	snprintf(cmd, sizeof(cmd),
 		"%s %s/%s.c -o %s/%s.o %s \n"
 		, compiler, source_fpath, source_files[i], object_fpath, source_files[i], all_flags);
-	printf(cmd);
+
+    char *source_files_obj_cmd = NULL;
+    char *link_cmd = compiler;
+
+    strcat(link_cmd, source_files_obj_cmd);
+	  printf("%s", link_cmd);
     }
 }
