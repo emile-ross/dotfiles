@@ -9,6 +9,7 @@
 void compile_all_files(char *compiler, char *flags);
 
 char *object_fpath = "c-scripts";
+char *source_fpath = "c-scripts";
 
 const char *source_files[] = { "setup", "update", "install", NULL };
 
@@ -88,7 +89,7 @@ void compile_all_files(char *compiler, char *flags)
 	char cmd[256];
 	snprintf(cmd, sizeof(cmd),
 		"%s %s/%s.c -o %s/%s.o %s \n"
-		, compiler, object_fpath, source_files[i], object_fpath, source_files[i], flags);
+		, compiler, source_fpath, source_files[i], object_fpath, source_files[i], flags);
 	printf(cmd);
     }
 }
