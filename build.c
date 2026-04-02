@@ -6,7 +6,9 @@
 #define CMD_MAX 24
 #define NUM_SRC_FILES 9
 
-void compile_all_files(char compiler, char flags);
+void compile_all_files(char *compiler, char flags);
+
+const char *source_files[] = { "setup", "update", "install" };
 
 typedef enum 
 {
@@ -69,18 +71,22 @@ int main(int argc, char *argv[])
 	    printf("Unknown compiler\n");
 	    return 1;
     }
-	// compile_all_files()
-	// link all files together
+
+    // compile_all_files()
+    
+    // link all files together
+
     return 0;
 }
 
-void compile_all_files(char compiler, char flags)
+void compile_all_files(char *compiler, char flags)
 {
     for (int i = 0; i < NUM_SRC_FILES; i++)
     {
-	// snprintf(cmd, sizeof(cmd),
-	// 	"%s %s.c -o a.out\n", compiler, source_files[i]);
-	// printf(cmd);
+	char cmd[256];
+	snprintf(cmd, sizeof(cmd),
+		"%s %s.c -o a.out\n", compiler, source_files[i]);
+	printf(cmd);
     }
 }
 
