@@ -42,5 +42,15 @@ Display a short description of the specified package using the ``-i`` flag
 
 Install the specified config along with the package ``-c``
 
+# Makefile options
+
+The new makefile can take in a wide variety of options for compilation,
+
+``make full``
+``make gcc``
+
+``make base``
+``make zig``
+
 
 [fr]: README.fr.md
