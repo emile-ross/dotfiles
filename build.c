@@ -118,17 +118,19 @@ void compile_all_files(char *compiler, char *flags)
 void link_object_files(char *compiler, char *flags)
 {
 
-    char *source_files_obj_cmd = " ";
+    char source_files_obj_cmd[512];
+    source_files_obj_cmd[0] = '\0';
     char link_cmd[128];
 
     ssize_t num_src_files = (sizeof(source_files) / sizeof(source_files[0]) -1 );
 
+    char temp_obj_path[64];
+
     for (int i = 0; num_src_files > i; i++)
     {
-	char temp_obj_path[32];
 	snprintf(temp_obj_path, sizeof(temp_obj_path),
-		" %s/%s.o", object_fpath, source_files[i]);
-	printf("%s", temp_obj_path);
+		"%s/%s.o ", object_fpath, source_files[i]);
+	strcat(source_files_obj_cmd, temp_obj_path);
     }
 
     //strcat(link_cmd, source_files_obj_cmd);
