@@ -6,3 +6,14 @@ La version en anglais est plus claire, complète et précise.
 ### ``--help``
 
 Aficher le menu d'aide. 
+
+
+**Ceci compile en utilisant GCC**
+
+``make full``
+``make gcc``
+
+**Ceci compile en utilisant ZIG CC**
+
+``make base``
+``make zig``
