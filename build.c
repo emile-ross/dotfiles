@@ -1,12 +1,12 @@
-#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include <string.h>
 
 #define CMD_MAX 24
 
-void compile_all_files(bool treat_as_errors, char *compiler, char *flags);
-void link_object_files(bool treat_as_errors, char *compiler, char *flags);
+void compile_all_files(char *compiler, char *flags);
+void link_object_files(char *compiler, char *flags);
 
 char *object_fpath = "c-scripts";
 char *source_fpath = "c-scripts";
@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
     // declare compiler_name enum
     compiler_enum compiler_name;
 
-    bool verbose_log_output = false;
+    bool treat_as_errors = false;
 
     for (int i = 1; i < argc; i++)
     {
@@ -56,11 +56,11 @@ int main(int argc, char *argv[])
     	}
 	else if (strcmp(argv[i], "error") == 0)
     	{
-    	    verbose_log_output = true;
+    	    treat_as_errors = true;
 	}
 	else if (strcmp(argv[i], "-d") == 0 || strcmp(argv[i], "-e") == 0)
 	{
-    	    verbose_log_output = true;
+    	    treat_as_errors = true;
 	}
     	else
     	{
@@ -97,15 +97,13 @@ int main(int argc, char *argv[])
 		"%s ", base_flags);
     }
 
-    compile_all_files(verbose_log_output, compiler_name_cmd, all_flags);
-    link_object_files(verbose_log_output, compiler_name_cmd, all_flags);
-
-    // link all files together
+    compile_all_files(compiler_name_cmd, all_flags);
+    link_object_files(compiler_name_cmd, all_flags);
 
     return 0;
 }
 
-void compile_all_files(bool treat_as_errors, char *compiler, char *flags)
+void compile_all_files(char *compiler, char *flags)
 {
     for (int i = 0; source_files[i] != NULL; i++) 
     {
@@ -117,14 +115,14 @@ void compile_all_files(bool treat_as_errors, char *compiler, char *flags)
     }
 }
 
-void link_object_files(bool treat_as_errors, char *compiler, char *flags)
+void link_object_files(char *compiler, char *flags)
 {
 
     char *source_files_obj_cmd = " ";
     char link_cmd[128];
 
-    size_t num_src_files = (sizeof(source_files) / sizeof(source_files[0]) -1 );
-    
+    ssize_t num_src_files = (sizeof(source_files) / sizeof(source_files[0]) -1 );
+
     printf("%d\n", num_src_files);
 
     for (int i = 0; num_src_files > i; i++)
