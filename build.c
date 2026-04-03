@@ -3,10 +3,7 @@
 #include <stdbool.h>
 #include <string.h>
 
-#define COMPILER_NAME_SIZE 8
-
-void compile_all_files(char *compiler, char *flags);
-void link_object_files(char *compiler, char *flags);
+#define COMPILER_NAME_SIZE 16
 
 char object_fpath[12] = "c-scripts";
 char source_fpath[12] = "c-scripts";
@@ -31,6 +28,11 @@ typedef enum
     ZIG,
     GCC
 } compiler_enum;
+
+void compile_all_files(char *compiler, char *flags);
+void link_object_files(compiler_enum compiler_name_def, char *flags);
+
+//extern compiler_enum compiler_name_def;
 
 int main(int argc, char *argv[])
 {
@@ -73,18 +75,19 @@ int main(int argc, char *argv[])
     switch(compiler_name)
     {
 	case CLANG:
-	    strncpy(compiler_name_cmd, "clang", COMPILER_NAME_SIZE - 1);
+	    strncpy(compiler_name_cmd, "clang -c", COMPILER_NAME_SIZE - 1);
 	    break;
 	case GCC:
-	    strncpy(compiler_name_cmd, "gcc", COMPILER_NAME_SIZE - 1);
+	    strncpy(compiler_name_cmd, "gcc -c", COMPILER_NAME_SIZE - 1);
 	    break;
 	case ZIG:
-	    strncpy(compiler_name_cmd, "zig cc", COMPILER_NAME_SIZE - 1);
+	    strncpy(compiler_name_cmd, "zig cc -c", COMPILER_NAME_SIZE - 1);
 	    break;
         default: 
 	    printf("Unknown compiler\n");
 	    return 1;
     }
+    //compiler_enum compiler_name_def = compiler_name;
 
     char *base_flags = "-Wall -Wextra -Wpedantic";
     char all_flags[128];
@@ -100,7 +103,7 @@ int main(int argc, char *argv[])
     }
 
     compile_all_files(compiler_name_cmd, all_flags);
-    link_object_files(compiler_name_cmd, all_flags);
+    link_object_files(compiler_name, all_flags);
 
     return 0;
 }
@@ -113,11 +116,11 @@ void compile_all_files(char *compiler, char *flags)
         snprintf(cmd, sizeof(cmd),
         	"%s %s/%s.c -o %s/%s.o %s \n"
         	, compiler, source_fpath, source_files[i], object_fpath, source_files[i], flags);
-	printf("%s", cmd);
+	system(cmd);
     }
 }
 
-void link_object_files(char *compiler, char *flags)
+void link_object_files(compiler_enum compiler_name_def, char *flags)
 {
     // define the memory needed for the command buffer
     int buffer_size_flags = snprintf(NULL, 0,
@@ -139,6 +142,7 @@ void link_object_files(char *compiler, char *flags)
     int link_cmd_size = COMPILER_NAME_SIZE + obj_buffer_size + buffer_size_flags;
     char link_cmd[link_cmd_size];
 
+
     for (int i = 0; num_src_files > i; i++)
     {
 	snprintf(temp_obj_path, size_obj_fpath,
@@ -146,8 +150,28 @@ void link_object_files(char *compiler, char *flags)
 	strcat(source_files_obj_cmd, temp_obj_path);
     }
 
-    snprintf(link_cmd, sizeof(link_cmd),
-	    "%s %s %s", compiler, source_files_obj_cmd, flags);
+    char compiler_linking_string[COMPILER_NAME_SIZE];
+    switch(compiler_name_def)
+    {
+	case CLANG:
+	    snprintf(compiler_linking_string, COMPILER_NAME_SIZE - 1,
+		    "clang");
+	    break;
+	case GCC:
+	    snprintf(compiler_linking_string, COMPILER_NAME_SIZE - 1,
+		    "gcc");
+	    break;
+	case ZIG:
+	    snprintf(compiler_linking_string, COMPILER_NAME_SIZE - 1,
+		    "zig cc");
+	    break;
+        default: 
+	    printf("Unknown compiler\n");
+	    exit(1);
+    }
 
-    printf("%s", link_cmd);
+    snprintf(link_cmd, sizeof(link_cmd),
+	    "%s %s %s", compiler_linking_string, source_files_obj_cmd, flags);
+
+    system(link_cmd);
 }
