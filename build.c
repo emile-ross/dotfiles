@@ -133,9 +133,19 @@ void link_object_files(bool treat_as_errors, char *compiler, char *base_flags)
     char *source_files_obj_cmd = " ";
     char link_cmd[128];
 
+    size_t num_src_files = (sizeof(source_files) / sizeof(source_files[0]) -1 );
+    
+    printf("%d\n", num_src_files);
+
+    for (int i = 0; num_src_files > i; i++)
+    {
+	printf("%s", source_files[i]);
+    }
+
+    //strcat(link_cmd, source_files_obj_cmd);
+
     snprintf(link_cmd, sizeof(link_cmd),
 	    "%s %s %s", compiler, source_files_obj_cmd, all_flags);
 
-    //strcat(link_cmd, source_files_obj_cmd);
-          printf("%s", link_cmd);
+    printf("%s", link_cmd);
 }
