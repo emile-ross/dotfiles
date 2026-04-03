@@ -46,9 +46,12 @@ Install the specified config along with the package ``-c``
 
 The new makefile can take in a wide variety of options for compilation,
 
+**This compiles using the GCC compiler**
+
 ``make full``
 ``make gcc``
 
+**This compiles using the ZIG CC frontend compiler**
 ``make base``
 ``make zig``
 
