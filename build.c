@@ -123,11 +123,12 @@ void link_object_files(char *compiler, char *flags)
 
     ssize_t num_src_files = (sizeof(source_files) / sizeof(source_files[0]) -1 );
 
-    printf("%d\n", num_src_files);
-
     for (int i = 0; num_src_files > i; i++)
     {
-	printf("%s\n", source_files[i]);
+	char temp_obj_path[32];
+	snprintf(temp_obj_path, sizeof(temp_obj_path),
+		" %s/%s.o", object_fpath, source_files[i]);
+	printf("%s", temp_obj_path);
     }
 
     //strcat(link_cmd, source_files_obj_cmd);
