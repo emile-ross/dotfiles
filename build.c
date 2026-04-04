@@ -187,7 +187,8 @@ void clean_objects()
         char cmd[256];
         snprintf(cmd, sizeof(cmd),
         	"rm %s/%s.o"
-        	, source_fpath, source_files[i]);
+        	, object_fpath, source_files[i]);
 	system(cmd);
     }
+    exit(0);
 }
