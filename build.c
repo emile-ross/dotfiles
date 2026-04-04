@@ -66,6 +66,11 @@ int main(int argc, char *argv[])
 	{
     	    treat_as_errors = true;
 	}
+
+    	else if (strcmp(argv[i], "clean") == 0)
+    	{
+	    clean_objects();
+    	}
     	else
     	{
     	    printf("Unknown argument: %s\n", argv[i]);
@@ -172,6 +177,5 @@ void link_object_files(compiler_enum compiler_name_def, char *flags)
 
     snprintf(link_cmd, sizeof(link_cmd),
 	    "%s %s %s", compiler_linking_string, source_files_obj_cmd, flags);
-
     system(link_cmd);
 }
