@@ -29,6 +29,7 @@ typedef enum
     GCC
 } compiler_enum;
 
+void clean_objects();
 void compile_all_files(char *compiler, char *flags);
 void link_object_files(compiler_enum compiler_name_def, char *flags);
 
@@ -66,7 +67,6 @@ int main(int argc, char *argv[])
 	{
     	    treat_as_errors = true;
 	}
-
     	else if (strcmp(argv[i], "clean") == 0)
     	{
 	    clean_objects();
@@ -178,4 +178,16 @@ void link_object_files(compiler_enum compiler_name_def, char *flags)
     snprintf(link_cmd, sizeof(link_cmd),
 	    "%s %s %s", compiler_linking_string, source_files_obj_cmd, flags);
     system(link_cmd);
+}
+
+void clean_objects()
+{
+    for (int i = 0; source_files[i] != NULL; i++) 
+    {
+        char cmd[256];
+        snprintf(cmd, sizeof(cmd),
+        	"%s %s/%s.c -o %s/%s.o %s \n"
+        	, compiler, source_fpath, source_files[i], object_fpath, source_files[i], flags);
+	system(cmd);
+    }
 }
