@@ -8,6 +8,8 @@
 char object_fpath[12] = "c-scripts";
 char source_fpath[12] = "c-scripts";
 
+char output_binary_name[16] = "setup";
+
 int size_source_filename = 24;
 
 const char *source_files[] = { 
@@ -29,7 +31,7 @@ typedef enum
     GCC
 } compiler_enum;
 
-void clean_objects();
+void clean_objects(void);
 void compile_all_files(char *compiler, char *flags);
 void link_object_files(compiler_enum compiler_name_def, char *flags);
 
@@ -92,7 +94,6 @@ int main(int argc, char *argv[])
 	    printf("Unknown compiler\n");
 	    return 1;
     }
-    //compiler_enum compiler_name_def = compiler_name;
 
     char *base_flags = "-Wall -Wextra -Wpedantic";
     char all_flags[128];
@@ -175,12 +176,13 @@ void link_object_files(compiler_enum compiler_name_def, char *flags)
 	    exit(1);
     }
 
+
     snprintf(link_cmd, sizeof(link_cmd),
-	    "%s %s %s", compiler_linking_string, source_files_obj_cmd, flags);
+	    "%s %s -o %s %s", compiler_linking_string, source_files_obj_cmd, output_binary_name, flags);
     system(link_cmd);
 }
 
-void clean_objects()
+void clean_objects(void)
 {
     for (int i = 0; source_files[i] != NULL; i++) 
     {
