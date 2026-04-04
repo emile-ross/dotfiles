@@ -17,10 +17,11 @@ gcc: existing_binaries
 setup: existing_binaries
 	@./build gcc
 
-base:
-	@gcc $(DEBUG_BUILD_COMMAND)
+base: existing_binaries
 	@./build zig -e
 
-zig:
-	@zig cc $(DEBUG_BUILD_COMMAND)
+zig: existing_binaries
 	@./build zig
+
+debug:
+	@gcc $(DEBUG_BUILD_COMMAND)
