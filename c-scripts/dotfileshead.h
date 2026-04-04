@@ -7,7 +7,6 @@
 #include <time.h>
 #include <stdbool.h>
 
-#include <fcntl.h>
 #include <unistd.h>
 #include <sys/stat.h>
 
