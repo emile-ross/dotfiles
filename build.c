@@ -46,6 +46,7 @@ int main(int argc, char *argv[])
     compiler_enum compiler_name;
 
     bool treat_as_errors = false;
+    bool compile_op = true;
 
     for (int i = 1; i < argc; i++)
     {
@@ -61,10 +62,6 @@ int main(int argc, char *argv[])
     	{
     	    compiler_name = CLANG;
     	}
-	else if (strcmp(argv[i], "error") == 0)
-    	{
-    	    treat_as_errors = true;
-	}
 	else if (strcmp(argv[i], "-d") == 0 || strcmp(argv[i], "-e") == 0)
 	{
     	    treat_as_errors = true;
@@ -72,6 +69,7 @@ int main(int argc, char *argv[])
     	else if (strcmp(argv[i], "clean") == 0)
     	{
 	    clean_objects();
+	    compile_op = false;	// ignore the compilation step
     	}
     	else
     	{
@@ -79,38 +77,41 @@ int main(int argc, char *argv[])
     	}
     }
 
-    switch(compiler_name)
+    
+    if (compile_op)
     {
-	case CLANG:
-	    strncpy(compiler_name_cmd, "clang -c", COMPILER_NAME_SIZE - 1);
-	    break;
-	case GCC:
-	    strncpy(compiler_name_cmd, "gcc -c", COMPILER_NAME_SIZE - 1);
-	    break;
-	case ZIG:
-	    strncpy(compiler_name_cmd, "zig cc -c", COMPILER_NAME_SIZE - 1);
-	    break;
-        default: 
-	    printf("Unknown compiler\n");
-	    return 1;
-    }
+	switch(compiler_name)
+    	{
+    	    case CLANG:
+    	        strncpy(compiler_name_cmd, "clang -c", COMPILER_NAME_SIZE - 1);
+    	        break;
+    	    case GCC:
+    	        strncpy(compiler_name_cmd, "gcc -c", COMPILER_NAME_SIZE - 1);
+    	        break;
+    	    case ZIG:
+    	        strncpy(compiler_name_cmd, "zig cc -c", COMPILER_NAME_SIZE - 1);
+    	        break;
+    	    default: 
+    	        printf("Unknown compiler\n");
+    	        return 1;
+    	}
 
-    char *base_flags = "-Wall -Wextra -Wpedantic";
-    char all_flags[128];
-    if (treat_as_errors == true )
-    {
-	snprintf(all_flags, sizeof(all_flags),
-		"%s -Werror", base_flags);
-    }
-    else
-    {
-	snprintf(all_flags, sizeof(all_flags),
-		"%s ", base_flags);
-    }
+    	char *base_flags = "-Wall -Wextra -Wpedantic";
+    	char all_flags[128];
+    	if (treat_as_errors == true )
+    	{
+    	    snprintf(all_flags, sizeof(all_flags),
+    	    	"%s -Werror", base_flags);
+    	}
+    	else
+    	{
+    	    snprintf(all_flags, sizeof(all_flags),
+    	    	"%s ", base_flags);
+    	}
 
-    compile_all_files(compiler_name_cmd, all_flags);
-    link_object_files(compiler_name, all_flags);
-
+    	compile_all_files(compiler_name_cmd, all_flags);
+    	link_object_files(compiler_name, all_flags);
+    }
     return 0;
 }
 
@@ -192,5 +193,4 @@ void clean_objects(void)
         	, object_fpath, source_files[i]);
 	system(cmd);
     }
-    exit(0);
 }
