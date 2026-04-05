@@ -194,3 +194,39 @@ void clean_objects(void)
 	system(cmd);
     }
 }
+
+
+void compilation()
+{
+    switch(compiler_name)
+    {
+        case CLANG:
+            strncpy(compiler_name_cmd, "clang -c", COMPILER_NAME_SIZE - 1);
+            break;
+        case GCC:
+            strncpy(compiler_name_cmd, "gcc -c", COMPILER_NAME_SIZE - 1);
+            break;
+        case ZIG:
+            strncpy(compiler_name_cmd, "zig cc -c", COMPILER_NAME_SIZE - 1);
+            break;
+        default: 
+            printf("Unknown compiler\n");
+            return 1;
+    }
+    
+    char *base_flags = "-Wall -Wextra -Wpedantic";
+    char all_flags[128];
+    if (treat_as_errors == true )
+    {
+        snprintf(all_flags, sizeof(all_flags),
+        	"%s -Werror", base_flags);
+    }
+    else
+    {
+        snprintf(all_flags, sizeof(all_flags),
+        	"%s ", base_flags);
+    }
+    
+    compile_all_files(compiler_name_cmd, all_flags);
+    link_object_files(compiler_name, all_flags);
+}
