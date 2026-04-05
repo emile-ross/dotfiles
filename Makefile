@@ -16,6 +16,8 @@ gcc: existing_binaries
 
 setup: existing_binaries
 	@./build gcc
+build: existing_binaries
+	@./build gcc
 
 base: existing_binaries
 	@./build zig -e
