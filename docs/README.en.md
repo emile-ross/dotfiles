@@ -60,6 +60,7 @@ The new makefile can take in a wide variety of options for compilation,
 
 This will compile using the following command:
 ```sh
+gcc build.c -o build -Wall -Wextra -pedantic -Werror
 ```
 
 
