@@ -89,8 +89,7 @@ int main(int argc, char *argv[])
     	        strncpy(compiler_name_cmd, "gcc -c", COMPILER_NAME_SIZE - 1);
     	        break;
     	    case ZIG:
-    	        strncpy(compiler_name_cmd, "zig cc -c", COMPILER_NAME_SIZE - 1);
-    	        break;
+    	        strncpy(compiler_name_cmd, "zig cc -c", COMPILER_NAME_SIZE - 1); break;
     	    default: 
     	        printf("Unknown compiler\n");
     	        return 1;
@@ -196,9 +195,11 @@ void clean_objects(void)
 }
 
 
-void compilation()
+void compilation(compiler_enum compiler_name_temp, bool error_flag_temp)
 {
-    switch(compiler_name)
+    char compiler_name_cmd[COMPILER_NAME_SIZE];
+    compiler_name_cmd[0] = '\0';
+    switch(compiler_name_temp)
     {
         case CLANG:
             strncpy(compiler_name_cmd, "clang -c", COMPILER_NAME_SIZE - 1);
@@ -211,12 +212,12 @@ void compilation()
             break;
         default: 
             printf("Unknown compiler\n");
-            return 1;
+	    exit(1);
     }
     
     char *base_flags = "-Wall -Wextra -Wpedantic";
     char all_flags[128];
-    if (treat_as_errors == true )
+    if (error_flag_temp == true )
     {
         snprintf(all_flags, sizeof(all_flags),
         	"%s -Werror", base_flags);
@@ -228,5 +229,5 @@ void compilation()
     }
     
     compile_all_files(compiler_name_cmd, all_flags);
-    link_object_files(compiler_name, all_flags);
+    link_object_files(compiler_name_temp, all_flags);
 }
