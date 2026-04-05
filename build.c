@@ -34,6 +34,7 @@ typedef enum
 void clean_objects(void);
 void compile_all_files(char *compiler, char *flags);
 void link_object_files(compiler_enum compiler_name_def, char *flags);
+void compilation(compiler_enum compiler_name_temp, bool error_flag_temp);
 
 //extern compiler_enum compiler_name_def;
 
@@ -80,7 +81,7 @@ int main(int argc, char *argv[])
     
     if (compile_op)
     {
-
+	compilation(compiler_name, treat_as_errors);
     }
     return 0;
 }
