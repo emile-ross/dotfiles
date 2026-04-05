@@ -44,7 +44,7 @@ Install the specified config along with the package ``-c``
 
 # Makefile options
 
-The new makefile can take in a wide variety of options for compilation,
+The new makefile can take in a wide variety of options for compilation (whether it should treat warnings as errors, flags, compiler..)
 
 **This compiles using the GCC compiler**
 
@@ -52,15 +52,17 @@ The new makefile can take in a wide variety of options for compilation,
 ``make gcc``
 
 **This compiles using the ZIG CC frontend compiler**
+
 ``make base``
 ``make zig``
+
 
 **This compiles the ``build.c`` file**
 ``make debug``
 
 This will compile using the following command:
 ```sh
-zig cc build.c -o build -Wall -Wextra -pedantic -Werror
+zig cc build.c -o build -Wall -Wextra -pedantic
 ```
 
 
