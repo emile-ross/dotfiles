@@ -55,5 +55,12 @@ The new makefile can take in a wide variety of options for compilation,
 ``make base``
 ``make zig``
 
+**This compiles the ``build.c`` file**
+``make debug``
+
+This will compile using the following command:
+```sh
+```
+
 
 [fr]: README.fr.md
