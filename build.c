@@ -80,36 +80,7 @@ int main(int argc, char *argv[])
     
     if (compile_op)
     {
-	switch(compiler_name)
-    	{
-    	    case CLANG:
-    	        strncpy(compiler_name_cmd, "clang -c", COMPILER_NAME_SIZE - 1);
-    	        break;
-    	    case GCC:
-    	        strncpy(compiler_name_cmd, "gcc -c", COMPILER_NAME_SIZE - 1);
-    	        break;
-    	    case ZIG:
-    	        strncpy(compiler_name_cmd, "zig cc -c", COMPILER_NAME_SIZE - 1); break;
-    	    default: 
-    	        printf("Unknown compiler\n");
-    	        return 1;
-    	}
 
-    	char *base_flags = "-Wall -Wextra -Wpedantic";
-    	char all_flags[128];
-    	if (treat_as_errors == true )
-    	{
-    	    snprintf(all_flags, sizeof(all_flags),
-    	    	"%s -Werror", base_flags);
-    	}
-    	else
-    	{
-    	    snprintf(all_flags, sizeof(all_flags),
-    	    	"%s ", base_flags);
-    	}
-
-    	compile_all_files(compiler_name_cmd, all_flags);
-    	link_object_files(compiler_name, all_flags);
     }
     return 0;
 }
@@ -197,18 +168,18 @@ void clean_objects(void)
 
 void compilation(compiler_enum compiler_name_temp, bool error_flag_temp)
 {
-    char compiler_name_cmd[COMPILER_NAME_SIZE];
-    compiler_name_cmd[0] = '\0';
+    char compiler_name_cmd_temp[COMPILER_NAME_SIZE];
+    compiler_name_cmd_temp[0] = '\0';
     switch(compiler_name_temp)
     {
         case CLANG:
-            strncpy(compiler_name_cmd, "clang -c", COMPILER_NAME_SIZE - 1);
+            strncpy(compiler_name_cmd_temp, "clang -c", COMPILER_NAME_SIZE - 1);
             break;
         case GCC:
-            strncpy(compiler_name_cmd, "gcc -c", COMPILER_NAME_SIZE - 1);
+            strncpy(compiler_name_cmd_temp, "gcc -c", COMPILER_NAME_SIZE - 1);
             break;
         case ZIG:
-            strncpy(compiler_name_cmd, "zig cc -c", COMPILER_NAME_SIZE - 1);
+            strncpy(compiler_name_cmd_temp, "zig cc -c", COMPILER_NAME_SIZE - 1);
             break;
         default: 
             printf("Unknown compiler\n");
@@ -228,6 +199,6 @@ void compilation(compiler_enum compiler_name_temp, bool error_flag_temp)
         	"%s ", base_flags);
     }
     
-    compile_all_files(compiler_name_cmd, all_flags);
+    compile_all_files(compiler_name_cmd_temp, all_flags);
     link_object_files(compiler_name_temp, all_flags);
 }
