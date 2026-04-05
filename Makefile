@@ -24,7 +24,7 @@ zig: existing_binaries
 	@./build zig
 
 debug:
-	@gcc $(DEBUG_BUILD_COMMAND)
+	zig cc $(DEBUG_BUILD_COMMAND)
 
 clean:
 	@./build clean
