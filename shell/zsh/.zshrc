@@ -4,7 +4,7 @@
 #
 # Documentation: https://github.com/romkatv/zsh4humans/blob/v5/README.md.
 
-# AWSMVERSION: 3.1
+# AWSMVERSION: 3.2
 
 # Periodic auto-update on Zsh startup: 'ask' or 'no'.
 # You can manually run `z4h update` to update everything.
