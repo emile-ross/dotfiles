@@ -40,10 +40,7 @@ void compilation(compiler_enum compiler_name_temp, bool error_flag_temp);
 
 int main(int argc, char *argv[])
 {
-    char compiler_name_cmd[COMPILER_NAME_SIZE];
-    compiler_name_cmd[0] = '\0';
-
-    // declare compiler_name enum
+    /* declare compiler_name enum */
     compiler_enum compiler_name;
 
     bool treat_as_errors = false;
@@ -70,7 +67,7 @@ int main(int argc, char *argv[])
     	else if (strcmp(argv[i], "clean") == 0)
     	{
 	    clean_objects();
-	    compile_op = false;	// ignore the compilation step
+	    compile_op = false;	/* ignore the compilation step */
     	}
     	else
     	{
@@ -100,23 +97,23 @@ void compile_all_files(char *compiler, char *flags)
 
 void link_object_files(compiler_enum compiler_name_def, char *flags)
 {
-    // define the memory needed for the command buffer
+    /* define the memory needed for the command buffer */
     int buffer_size_flags = snprintf(NULL, 0,
 	    "%s -o -c", flags);
-    ssize_t num_src_files = (sizeof(source_files) / sizeof(source_files[0]) -1 );
+    long num_src_files = (sizeof(source_files) / sizeof(source_files[0]) - 1);
 
     int size_obj_fpath = sizeof(object_fpath) + size_source_filename + 8;
     char temp_obj_path[size_obj_fpath];
 
-    // set object buffer size based on the size of path+filename
+    /* set object buffer size based on the size of path+filename */
     int obj_buffer_size = sizeof(temp_obj_path) * num_src_files;
 
     char source_files_obj_cmd[obj_buffer_size];
     source_files_obj_cmd[0] = '\0';
 
-    // calculate total command buffer size
-    // this avoids all buffer overflows since it is based on the size of 
-    // all the strings composing this command
+    /* calculate total command buffer size
+    this avoids all buffer overflows since it is based on the size of 
+    all the strings composing this command */
     int link_cmd_size = COMPILER_NAME_SIZE + obj_buffer_size + buffer_size_flags;
     char link_cmd[link_cmd_size];
 
@@ -156,7 +153,7 @@ void clean_objects(void)
 {
     for (int i = 0; source_files[i] != NULL; i++) 
     {
-        char cmd[128];	// initialize cmd buffer
+        char cmd[128];	/* initialize cmd buffer */
         snprintf(cmd, sizeof(cmd),
         	"rm %s/%s.o"
         	, object_fpath, source_files[i]);
@@ -184,12 +181,12 @@ void compilation(compiler_enum compiler_name_temp, bool error_flag_temp)
 	    exit(1);
     }
     
-    char all_flags[128];    // initialize the all_flags buffer
-    snprintf(all_flags, sizeof(all_flags), "%s", base_flags);	// move base flags to all_flags
+    char all_flags[128];    /* initialize the all_flags buffer */
+    snprintf(all_flags, sizeof(all_flags), "%s", base_flags);	/* move base flags to all_flags */
 
     if (error_flag_temp == true )
     {
-        strcat(all_flags, error_flag);	// append the error flags to the end of the all_flags buffer
+        strcat(all_flags, error_flag);	/* append the error flags to the end of the all_flags buffer */
     }
     
     compile_all_files(compiler_name_cmd_temp, all_flags);
