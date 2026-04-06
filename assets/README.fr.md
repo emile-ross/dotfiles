@@ -98,6 +98,11 @@ cd dotfiles/
 make setup
 ./setup
 ```
+Vous pouvez ajouter l'étiquette ``--noconfirm`` afin d'éviter les avertissements lorsque vous installez les fichiers.
+
+```bash
+./setup --noconfirm
+```
 
 Veuillez noter que ceci ne compile que le code nécessaire pour le script d'installation.
 
