@@ -72,6 +72,9 @@ This is a script to help new users configure their system to tbeir liking.
 You can use this script to install your dotfiles, update your dotfiles and configure your environment! 
 
 ### Compile with make
+
+The makefile compiles the entire source-code by executing the code in the ``build.c`` file.  
+
 ```sh
 git clone https://github.com/imawsumm/dotfiles
 cd dotfiles/
