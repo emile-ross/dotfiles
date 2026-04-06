@@ -10,6 +10,8 @@ char source_fpath[12] = "c-scripts";
 
 char output_binary_name[16] = "setup";
 
+char *base_flags = "-Wall -Wextra -Wpedantic";
+
 int size_source_filename = 24;
 
 const char *source_files[] = { 
@@ -187,7 +189,6 @@ void compilation(compiler_enum compiler_name_temp, bool error_flag_temp)
 	    exit(1);
     }
     
-    char *base_flags = "-Wall -Wextra -Wpedantic";
     char all_flags[128];
     if (error_flag_temp == true )
     {
