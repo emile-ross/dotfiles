@@ -73,6 +73,14 @@ Vous pouvez utiliser cette routine afin d'installer vos dotfiles, afin de les me
 
 Plus de fonctionnalités sont à venir.
 
+### Compiler avec make
+```sh
+git clone https://github.com/imawsumm/dotfiles
+cd dotfiles/
+make setup
+./setup
+```
+
 ### Compiler avec GCC
 
 ```sh
@@ -91,13 +99,6 @@ gcc c-scripts/arguments.c \
 ./setup
 ```
 
-### Compiler avec make
-```sh
-git clone https://github.com/imawsumm/dotfiles
-cd dotfiles/
-make setup
-./setup
-```
 Vous pouvez ajouter l'étiquette ``--noconfirm`` afin d'éviter les avertissements lorsque vous installez les fichiers.
 
 ```bash
