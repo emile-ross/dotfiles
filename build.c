@@ -8,6 +8,8 @@
 char object_fpath[12] = "c-scripts";
 char source_fpath[12] = "c-scripts";
 
+char error_flag[16] = " -Werror";
+
 char output_binary_name[16] = "setup";
 
 char *base_flags = "-Wall -Wextra -Wpedantic";
@@ -193,7 +195,7 @@ void compilation(compiler_enum compiler_name_temp, bool error_flag_temp)
     if (error_flag_temp == true )
     {
         snprintf(all_flags, sizeof(all_flags),
-        	"%s -Werror", base_flags);
+        	"%s %s", base_flags, error_flag);
     }
     else
     {
