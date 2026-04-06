@@ -8,11 +8,9 @@
 char object_fpath[12] = "c-scripts";
 char source_fpath[12] = "c-scripts";
 
-char error_flag[16] = " -Werror";
-
 char output_binary_name[16] = "setup";
-
-char *base_flags = "-Wall -Wextra -Wpedantic";
+char *base_flags = " -Wall -Wextra -Wpedantic";
+char error_flag[16] = " -Werror";
 
 int size_source_filename = 24;
 
@@ -39,8 +37,6 @@ void clean_objects(void);
 void compile_all_files(char *compiler, char *flags);
 void link_object_files(compiler_enum compiler_name_def, char *flags);
 void compilation(compiler_enum compiler_name_temp, bool error_flag_temp);
-
-//extern compiler_enum compiler_name_def;
 
 int main(int argc, char *argv[])
 {
@@ -96,7 +92,7 @@ void compile_all_files(char *compiler, char *flags)
     {
         char cmd[256];
         snprintf(cmd, sizeof(cmd),
-        	"%s %s/%s.c -o %s/%s.o %s \n"
+        	"%s %s/%s.c -o %s/%s.o%s \n"
         	, compiler, source_fpath, source_files[i], object_fpath, source_files[i], flags);
 	system(cmd);
     }
@@ -123,7 +119,6 @@ void link_object_files(compiler_enum compiler_name_def, char *flags)
     // all the strings composing this command
     int link_cmd_size = COMPILER_NAME_SIZE + obj_buffer_size + buffer_size_flags;
     char link_cmd[link_cmd_size];
-
 
     for (int i = 0; num_src_files > i; i++)
     {
@@ -152,7 +147,6 @@ void link_object_files(compiler_enum compiler_name_def, char *flags)
 	    exit(1);
     }
 
-
     snprintf(link_cmd, sizeof(link_cmd),
 	    "%s %s -o %s %s", compiler_linking_string, source_files_obj_cmd, output_binary_name, flags);
     system(link_cmd);
@@ -162,14 +156,13 @@ void clean_objects(void)
 {
     for (int i = 0; source_files[i] != NULL; i++) 
     {
-        char cmd[256];
+        char cmd[128];	// initialize cmd buffer
         snprintf(cmd, sizeof(cmd),
         	"rm %s/%s.o"
         	, object_fpath, source_files[i]);
 	system(cmd);
     }
 }
-
 
 void compilation(compiler_enum compiler_name_temp, bool error_flag_temp)
 {
@@ -191,16 +184,12 @@ void compilation(compiler_enum compiler_name_temp, bool error_flag_temp)
 	    exit(1);
     }
     
-    char all_flags[128];
+    char all_flags[128];    // initialize the all_flags buffer
+    snprintf(all_flags, sizeof(all_flags), "%s", base_flags);	// move base flags to all_flags
+
     if (error_flag_temp == true )
     {
-        snprintf(all_flags, sizeof(all_flags),
-        	"%s %s", base_flags, error_flag);
-    }
-    else
-    {
-        snprintf(all_flags, sizeof(all_flags),
-        	"%s ", base_flags);
+        strcat(all_flags, error_flag);	// append the error flags to the end of the all_flags buffer
     }
     
     compile_all_files(compiler_name_cmd_temp, all_flags);
