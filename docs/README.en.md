@@ -60,6 +60,9 @@ The new makefile can take in a wide variety of options for compilation (whether 
 **This compiles the ``build.c`` file**
 ``make debug``
 
+``./build`` has it's own command line flags including the following:
+
+
 This will compile using the following command:
 ```sh
 zig cc build.c -o build -Wall -Wextra -pedantic
