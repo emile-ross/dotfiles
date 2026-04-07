@@ -71,8 +71,10 @@ The new makefile can take in a wide variety of options for compilation (whether 
 [source](https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-W)
 
 ``-p`` -> append -Wpedantic "Issue all the warnings demanded by strict ISO C and ISO C++;"
+[source](https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-pedantic-1)
 
-``-c99`` -> append -std=c99
+``-c99`` -> append -std=c99 Display all warnings from the C99 C dialect.
+[source-1](https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-pedantic-1) [source-2](https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-pedantic-1)
 
 see [the GCC documentation](https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html) for a detailed breakdown
 
