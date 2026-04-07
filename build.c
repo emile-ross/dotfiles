@@ -5,12 +5,16 @@
 
 #define COMPILER_NAME_SIZE 16
 
-char object_fpath[12] = "c-scripts";
-char source_fpath[12] = "c-scripts";
+char object_fpath[16] = "c-scripts/";
+char source_fpath[16] = "c-scripts/";
 
 char output_binary_name[16] = "setup";
-char *base_flags = " -Wall -Wextra -Wpedantic";
+
+// Warnings flags
+char *base_flags = " -Wextra";
 char error_flag[16] = " -Werror";
+char pedantic_flag[16] = " -Wpedantic";
+char Wall_flag[16] = " -Wall";
 
 int size_source_filename = 24;
 
@@ -36,15 +40,18 @@ typedef enum
 void clean_objects(void);
 void compile_all_files(char *compiler, char *flags);
 void link_object_files(compiler_enum compiler_name_def, char *flags);
-void compilation(compiler_enum compiler_name_temp, bool error_flag_temp);
+void compilation(compiler_enum compiler_name_temp, bool error_flag_temp, bool pedantic_flag_bl, bool Wall_bl);
 
 int main(int argc, char *argv[])
 {
     /* declare compiler_name enum */
     compiler_enum compiler_name;
 
-    bool treat_as_errors = false;
-    bool compile_op = true;
+    bool treat_as_errors = false;   // default is false
+    bool Wpedantic_bl = false;	    // default is false
+    bool Wall_flag_bl = false;	    // default is false
+
+    bool compile_bl = true;
 
     for (int i = 1; i < argc; i++)
     {
@@ -60,25 +67,37 @@ int main(int argc, char *argv[])
     	{
     	    compiler_name = CLANG;
     	}
-	else if (strcmp(argv[i], "-d") == 0 || strcmp(argv[i], "-e") == 0)
+    	else if (strcmp(argv[i], "--base") == 0)
+    	{
+	    Wall_flag_bl = true;
+	    Wpedantic_bl = true;
+    	}
+	else if (strcmp(argv[i], "-a") == 0)
+	{
+	    Wall_flag_bl = true;
+	}
+	else if (strcmp(argv[i], "-e") == 0)
 	{
     	    treat_as_errors = true;
 	}
     	else if (strcmp(argv[i], "clean") == 0)
     	{
 	    clean_objects();
-	    compile_op = false;	/* ignore the compilation step */
+	    compile_bl = false;	/* ignore the compilation step */
+    	}
+    	else if (strcmp(argv[i], "-p") == 0 || strcmp(argv[i], "pedantic") == 0)
+    	{
+	    Wpedantic_bl = true;
     	}
     	else
     	{
     	    printf("Unknown argument: %s\n", argv[i]);
     	}
     }
-
     
-    if (compile_op)
+    if (compile_bl)
     {
-	compilation(compiler_name, treat_as_errors);
+	compilation(compiler_name, treat_as_errors, Wpedantic_bl, Wall_flag_bl);
     }
     return 0;
 }
@@ -89,9 +108,10 @@ void compile_all_files(char *compiler, char *flags)
     {
         char cmd[256];
         snprintf(cmd, sizeof(cmd),
-        	"%s %s/%s.c -o %s/%s.o%s \n"
+        	"%s %s%s.c -o %s%s.o%s \n"
         	, compiler, source_fpath, source_files[i], object_fpath, source_files[i], flags);
-	system(cmd);
+	//system(cmd);
+	printf(cmd);
     }
 }
 
@@ -120,7 +140,7 @@ void link_object_files(compiler_enum compiler_name_def, char *flags)
     for (int i = 0; num_src_files > i; i++)
     {
 	snprintf(temp_obj_path, size_obj_fpath,
-		"%s/%s.o ", object_fpath, source_files[i]);
+		"%s%s.o ", object_fpath, source_files[i]);
 	strcat(source_files_obj_cmd, temp_obj_path);
     }
 
@@ -146,7 +166,8 @@ void link_object_files(compiler_enum compiler_name_def, char *flags)
 
     snprintf(link_cmd, sizeof(link_cmd),
 	    "%s %s -o %s %s", compiler_linking_string, source_files_obj_cmd, output_binary_name, flags);
-    system(link_cmd);
+    //system(link_cmd);
+    printf(link_cmd);
 }
 
 void clean_objects(void)
@@ -155,13 +176,13 @@ void clean_objects(void)
     {
         char cmd[128];	/* initialize cmd buffer */
         snprintf(cmd, sizeof(cmd),
-        	"rm %s/%s.o"
+        	"rm %s%s.o"
         	, object_fpath, source_files[i]);
 	system(cmd);
     }
 }
 
-void compilation(compiler_enum compiler_name_temp, bool error_flag_temp)
+void compilation(compiler_enum compiler_name_temp, bool error_flag_temp, bool pedantic_flag_bl, bool Wall_bl)
 {
     char compiler_name_cmd_temp[COMPILER_NAME_SIZE];
     compiler_name_cmd_temp[0] = '\0';
@@ -184,11 +205,23 @@ void compilation(compiler_enum compiler_name_temp, bool error_flag_temp)
     char all_flags[128];    /* initialize the all_flags buffer */
     snprintf(all_flags, sizeof(all_flags), "%s", base_flags);	/* move base flags to all_flags */
 
-    if (error_flag_temp == true )
+    if (error_flag_temp == true)
     {
-        strcat(all_flags, error_flag);	/* append the error flags to the end of the all_flags buffer */
+	/* append error flags to the end of the all_flags buffer */
+        strcat(all_flags, error_flag);	
     }
-    
+
+    if (pedantic_flag_bl == true)
+    {
+	/* append pedantic flags to the end of the all_flags buffer */
+	strcat(all_flags, pedantic_flag);   
+    }
+
+    if (Wall_bl == true)
+    {
+	strcat(all_flags, Wall_flag);   
+    }
+
     compile_all_files(compiler_name_cmd_temp, all_flags);
     link_object_files(compiler_name_temp, all_flags);
 }
