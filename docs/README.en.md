@@ -61,20 +61,24 @@ The new makefile can take in a wide variety of options for compilation (whether 
 
 ``./build`` has it's own command line flags including the following:
 
-``-e`` -> append -Werror
+``-e`` -> append -Werror "Turn all warnings into errors" 
+[source](https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Werror)
 
-``-a`` -> append -Wall
+``-a`` -> append -Wall "This enables all the warnings about constructions that some users consider questionable" 
+[source](https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wall)
 
-``-x`` -> append -Wextra
+``-x`` -> append -Wextra "This enables some extra warning flags that are not enabled by -Wall" 
+[source](https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-W)
 
-``-p`` -> append -Wpedantic
+``-p`` -> append -Wpedantic "Issue all the warnings demanded by strict ISO C and ISO C++;"
 
 ``-c99`` -> append -std=c99
+
+see [the GCC documentation](https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html) for a detailed breakdown
 
 This will compile using the following command:
 ```sh
 zig cc build.c -o build -Wall -Wextra -pedantic
 ```
-
 
 [fr]: README.fr.md
