@@ -111,6 +111,15 @@ int main(int argc, char *argv[])
 	    clean_objects();
 	    compile_bl = false;	/* ignore the compilation step */
     	}
+    	else if (strcmp(argv[i], "std") == 0)
+	{
+    	    compiler_name = ZIG;
+	    c99_flag_bl = true;
+	    Wall_flag_bl = true;
+	    Wpedantic_bl = true;
+	    Wextra_flag_bl = true;
+	    num_flags += 4;
+	}
     	else
     	{
     	    printf("Unknown argument: %s\n", argv[i]);
