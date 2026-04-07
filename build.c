@@ -17,6 +17,7 @@ const char Wextra_flag[FLAG_BUFFER_SIZE] = " -Wextra";
 const char Werror_flag[FLAG_BUFFER_SIZE] = " -Werror";
 const char Wpedantic_flag[FLAG_BUFFER_SIZE] = " -Wpedantic";
 const char Wall_flag[FLAG_BUFFER_SIZE] = " -Wall";
+const char c99_flag[FLAG_BUFFER_SIZE] = " -std=c99";
 
 int num_flags = 0;
 
@@ -44,7 +45,7 @@ typedef enum
 void clean_objects(void);
 void compile_all_files(char *compiler, char *flags);
 void link_object_files(compiler_enum compiler_name_def, char *flags);
-void compilation(compiler_enum compiler_name_temp, bool error_flag_temp_bl, bool pedantic_flag_temp_bl, bool all_flag_temp_bl, bool extra_flag_temp_bl);
+void compilation(compiler_enum compiler_name_temp, bool error_flag_temp_bl, bool pedantic_flag_temp_bl, bool all_flag_temp_bl, bool extra_flag_temp_bl, bool c99_flag_temp_bl);
 
 int main(int argc, char *argv[])
 {
@@ -55,6 +56,7 @@ int main(int argc, char *argv[])
     bool Wpedantic_bl = false;	    // default is false
     bool Wall_flag_bl = false;	    // default is false
     bool Wextra_flag_bl = false;    // default is false
+    bool c99_flag_bl = false;    // default is false
 
     bool compile_bl = true;
 
@@ -94,6 +96,11 @@ int main(int argc, char *argv[])
     	    Werror_flag_bl = true;
 	    num_flags++;
 	}
+	else if (strcmp(argv[i], "-c99") == 0)
+	{
+	    c99_flag_bl = true;
+	    num_flags++;
+	}
     	else if (strcmp(argv[i], "-p") == 0 || strcmp(argv[i], "pedantic") == 0)
     	{
 	    Wpedantic_bl = true;
@@ -112,7 +119,7 @@ int main(int argc, char *argv[])
     
     if (compile_bl)
     {
-	compilation(compiler_name, Werror_flag_bl, Wpedantic_bl, Wall_flag_bl, Wextra_flag_bl);
+	compilation(compiler_name, Werror_flag_bl, Wpedantic_bl, Wall_flag_bl, Wextra_flag_bl, c99_flag_bl);
     }
     return 0;
 }
@@ -195,7 +202,7 @@ void clean_objects(void)
     }
 }
 
-void compilation(compiler_enum compiler_name_temp, bool error_flag_temp_bl, bool pedantic_flag_temp_bl, bool all_flag_temp_bl, bool extra_flag_temp_bl)
+void compilation(compiler_enum compiler_name_temp, bool error_flag_temp_bl, bool pedantic_flag_temp_bl, bool all_flag_temp_bl, bool extra_flag_temp_bl, bool c99_flag_temp_bl)
 {
     char compiler_name_cmd_temp[COMPILER_NAME_SIZE];
     compiler_name_cmd_temp[0] = '\0';
@@ -241,6 +248,11 @@ void compilation(compiler_enum compiler_name_temp, bool error_flag_temp_bl, bool
     if (all_flag_temp_bl == true)
     {
 	strcat(all_flags, Wall_flag);   
+    }
+
+    if (c99_flag_temp_bl == true)
+    {
+	strcat(all_flags, c99_flag);   
     }
 
     compile_all_files(compiler_name_cmd_temp, all_flags);
