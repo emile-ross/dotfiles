@@ -24,7 +24,7 @@ gcc arguments.c \
     globals.c \
     update.c \
     -o setup \
-    -Wall -Wextra -pedantic -fsanitize=undefined 
+    -Wall -Wextra -pedantic -std=c99
 ./setup
 ```
 
@@ -41,10 +41,9 @@ zig cc arguments.c \
     globals.c \
     update.c \
     -o setup \
-    -Wall -Wextra -pedantic -fsanitize=undefined
+    -Wall -Wextra -pedantic -std=c99
 ./setup
 ```
 
-
-this will compile both c source code files into a single binary
-if it produces any errors, make sure to report it as an issue in github
+This will compile both c source code files into a single binary.  
+If it produces any errors, make sure to report it as an issue in the parent github repo.  
