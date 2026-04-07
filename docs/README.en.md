@@ -56,12 +56,20 @@ The new makefile can take in a wide variety of options for compilation (whether 
 ``make base``
 ``make zig``
 
-
 **This compiles the ``build.c`` file**
 ``make debug``
 
 ``./build`` has it's own command line flags including the following:
 
+``-e`` -> append -Werror
+
+``-a`` -> append -Wall
+
+``-x`` -> append -Wextra
+
+``-p`` -> append -Wpedantic
+
+``-c99`` -> append -std=c99
 
 This will compile using the following command:
 ```sh
