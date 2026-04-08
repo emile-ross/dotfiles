@@ -48,98 +48,98 @@ void install_configs(int custom_package_install)  // the partial install script 
     	    case 1:
     	        temp_conf_installed = (char*)(TEXT_C_BASH);
 
-    	        printf("\nInstalling %s \n", temp_conf_installed);
+		install_config_message(temp_conf_installed);
 		BASH();
 		clear();
 		break;
     	    case 2:
     	        temp_conf_installed = (char*)(TEXT_C_BPYT);
 
-    	        printf("\nInstalling %s \n", temp_conf_installed);
+		install_config_message(temp_conf_installed);
 		BPYT(ARCHIVE_T, pver, PKGINSTALL_T);
 		clear();
 		break;
     	    case 3:
     	        temp_conf_installed = (char*)(TEXT_C_BTOP);
 
-    	        printf("\nInstalling %s \n", temp_conf_installed);
+		install_config_message(temp_conf_installed);
 		BTOP(ARCHIVE_T, pver, PKGINSTALL_T);
 		clear();
 		break;
 	    case 4:
     	        temp_conf_installed = (char*)(TEXT_C_CAVA);
 
-    	        printf("\nInstalling %s \n", temp_conf_installed);
+		install_config_message(temp_conf_installed);
 		CAVA(ARCHIVE_T, pver, PKGINSTALL_T);
 		clear();
 		break;
     	    case 5:
     	        temp_conf_installed = (char*)(TEXT_C_FAST);
 
-    	        printf("\nInstalling %s \n", temp_conf_installed);
+		install_config_message(temp_conf_installed);
 		FAST(ARCHIVE_T, pver, PKGINSTALL_T);
 		clear();
 		break;
     	    case 6:
     	        temp_conf_installed = (char*)(TEXT_C_FUZZ);
 
-    	        printf("\nInstalling %s \n", temp_conf_installed);
+		install_config_message(temp_conf_installed);
 		FUZZ(ARCHIVE_T, pver, PKGINSTALL_T);
 		clear();
 		break;
     	    case 7:
     	        temp_conf_installed = (char*)(TEXT_C_GTKL);
 
-    	        printf("\nInstalling %s \n", temp_conf_installed);
+		install_config_message(temp_conf_installed);
 		GTKL(ARCHIVE_T, pver, PKGINSTALL_T);
 		clear();
 		break;
     	    case 8:
     	        temp_conf_installed = (char*)(TEXT_C_HYPR);
 
-    	        printf("\nInstalling %s \n", temp_conf_installed);
+		install_config_message(temp_conf_installed);
 		HYPR(ARCHIVE_T, pver, PKGINSTALL_T);
 		clear();
 		break;
     	    case 9:
     	        temp_conf_installed = (char*)(TEXT_C_KITT);
 
-    	        printf("\nInstalling %s \n", temp_conf_installed);
+		install_config_message(temp_conf_installed);
 		KITT(ARCHIVE_T, pver, PKGINSTALL_T);
 		clear();
 		break;
     	    case 10:
     	        temp_conf_installed = (char*)(TEXT_C_MPVF);
 
-    	        printf("\nInstalling %s \n", temp_conf_installed);
+		install_config_message(temp_conf_installed);
 		MPVF(ARCHIVE_T, pver, PKGINSTALL_T);
 		clear();
 		break;
     	    case 11:
     	        temp_conf_installed = (char*)(TEXT_C_NVIM);
 
-    	        printf("\nInstalling %s \n", temp_conf_installed);
+		install_config_message(temp_conf_installed);
 		NVIM(ARCHIVE_T, pver, PKGINSTALL_T);
 		clear();
 		break;
     	    case 12:
     	        temp_conf_installed = (char*)(TEXT_C_SWAY);
 
-    	        printf("\nInstalling %s \n", temp_conf_installed);
+		install_config_message(temp_conf_installed);
 		SWAY(ARCHIVE_T, pver, PKGINSTALL_T);
 		clear();
 		break;
     	    case 13:
     	        temp_conf_installed = (char*)(TEXT_C_WAYB);
 
-    	        printf("\nInstalling %s \n", temp_conf_installed);
+		install_config_message(temp_conf_installed);
 		WAYB(ARCHIVE_T, pver, PKGINSTALL_T);
 		clear();
 		break;
     	    case 14:
     	        temp_conf_installed = (char*)(TEXT_C_ZSHH);
 
-    	        printf("\nInstalling %s \n", temp_conf_installed);
+		install_config_message(temp_conf_installed);
 		ZSHH(ARCHIVE_T, pver, PKGINSTALL_T);
 		clear();
 		break;
