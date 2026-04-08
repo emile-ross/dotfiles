@@ -12,7 +12,6 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
     {
 	// checks if the command was ran with the --noconfirm flag
 
-	before_if_statement:
 	if (strcmp(cmd_arg_v[1], "--noconfirm") == 0) 
 	{
 	    printf(BOLD_S"Proceeding with full install\n"STYLE_END);
@@ -38,9 +37,14 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 	{
 	    cmd_arg_install(num_cmd_arguments, cmd_arg_v, 'Y', 'N');
 	}
-	else if (strcmp(cmd_arg_v[1], "-i") == 0)
+	else if (strcmp(cmd_arg_v[1], "-i") == 0 || strcmp(cmd_arg_v[1], "-I") == 0)
 	{
 	    // loops through the arguments in order to pass them one at a time
+	    if (strcmp(cmd_arg_v[1], "-I") == 0)
+	    {
+		error_message(7);
+	    }
+
 	    if (num_cmd_arguments >= n_to_arg)
 	    {
 		for (int i = n_to_arg - 1; i < num_cmd_arguments; i++)
@@ -55,11 +59,6 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 		cli_arg_missing(cmd_arg_v[0], "package", cmd_arg_v[1]);
 		error_message(304);
 	    }
-	}
-	else if (strcmp(cmd_arg_v[1], "-I") == 0)
-	{
-	    cmd_arg_v[1] = "-i";
-	    goto before_if_statement;
 	}
 	else if (strcmp(cmd_arg_v[1], "--help") == 0)
 	{
