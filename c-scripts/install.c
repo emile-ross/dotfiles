@@ -20,6 +20,11 @@ void install_menu(void)
     }
 }
 
+void install_config_message(char *text)
+{
+    printf("\nInstalling %s \n", text);
+}
+
 void install_configs(int custom_package_install)  // the partial install script (configure which package or configuration to install)
 {
     do
@@ -202,7 +207,7 @@ void full_install(char install_ARCHIVE, char full_install_opt)
 void full_config_install(char choice_ARCHIVE_opt, float previous_version_t, char install_packages_t)
 {
 	// a list of all configs
-	// this will execute each and every entry
+	// this will execute all configuration entries
     BASH();
     BPYT(choice_ARCHIVE_opt, previous_version_t, install_packages_t);
     BTOP(choice_ARCHIVE_opt, previous_version_t, install_packages_t);
