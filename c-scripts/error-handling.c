@@ -23,7 +23,7 @@ int error_message(int err_code)
 
 	case 5:
 	    snprintf(err_text_temp, sizeof(err_text_temp), "Yay is needed for the installation");
-	    snprintf(err_solution_temp, sizeof(err_solution_temp), "Give the script permission to install Yay");
+	    snprintf(err_solution_temp, sizeof(err_solution_temp), "Give the program permission to install Yay");
 	    break;
 
 	case 6:
@@ -48,6 +48,7 @@ int error_message(int err_code)
 
 	case 103:
 	    snprintf(err_text_temp, sizeof(err_text_temp), "Could not apply fuzzel theme");
+	    snprintf(err_solution_temp, sizeof(err_solution_temp), "Try again.  Report the issue if this keeps happening.");
 	    break;
 
 	case 104:
@@ -62,11 +63,12 @@ int error_message(int err_code)
 
 	case 205:
 	    snprintf(err_text_temp, sizeof(err_text_temp), "No such file or directory"); // for hyprland.conf (when looking for version # )
-	    snprintf(err_solution_temp, sizeof(err_solution_temp), "Make sure you have installed the dotfiles");
+	    snprintf(err_solution_temp, sizeof(err_solution_temp), "This could display if you haven't installed the hyprland config");	// also sway and .zshrc
 	    break;
 
 	case 206:
 	    snprintf(err_text_temp, sizeof(err_text_temp), "popen failed");
+	    snprintf(err_text_temp, sizeof(err_text_temp), "This could happen if your system only supports c99");
 	    break;
 	    
 	case 207:
