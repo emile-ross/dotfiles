@@ -11,6 +11,8 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
     if (num_cmd_arguments > 1) // checks how many arguments were used
     {
 	// checks if the command was ran with the --noconfirm flag
+
+	before_if_statement:
 	if (strcmp(cmd_arg_v[1], "--noconfirm") == 0) 
 	{
 	    printf(BOLD_S"Proceeding with full install\n"STYLE_END);
@@ -36,7 +38,7 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 	{
 	    cmd_arg_install(num_cmd_arguments, cmd_arg_v, 'Y', 'N');
 	}
-	else if (strcmp(cmd_arg_v[1], "-i") == 0 || strcmp(cmd_arg_v[1], "-I") == 0)
+	else if (strcmp(cmd_arg_v[1], "-i") == 0)
 	{
 	    // loops through the arguments in order to pass them one at a time
 	    if (num_cmd_arguments >= n_to_arg)
@@ -54,6 +56,11 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 		error_message(304);
 	    }
 	}
+	else if (strcmp(cmd_arg_v[1], "-I") == 0)
+	{
+	    cmd_arg_v[1] = "-i";
+	    goto before_if_statement;
+	}
 	else if (strcmp(cmd_arg_v[1], "--help") == 0)
 	{
 	    printf(BOLD_S"Help menu\n"STYLE_END);
@@ -63,10 +70,6 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 	    printf("	install specified package \n");
 	    printf("-i	    	[CONFIG NAME] \n");
 	    printf("	print a short description of the package\n");
-	}
-	else if (strcmp(cmd_arg_v[1], "-d") == 0 || strcmp(cmd_arg_v[1], "-D") == 0)
-	{
-	    error_message(7);
 	}
 	else
 	{
