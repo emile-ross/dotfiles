@@ -35,6 +35,10 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 	}
 	else if (strcmp(cmd_arg_v[1], "-c") == 0 || strcmp(cmd_arg_v[1], "-C") == 0)
 	{
+	    if (strcmp(cmd_arg_v[1], "-C") == 0)
+	    {
+		error_message(7);
+	    }
 	    cmd_arg_install(num_cmd_arguments, cmd_arg_v, 'Y', 'N');
 	}
 	else if (strcmp(cmd_arg_v[1], "-i") == 0 || strcmp(cmd_arg_v[1], "-I") == 0)
@@ -133,7 +137,6 @@ void config_description(char *package_t)
             printf("Neovim is a modern Vi-based text editor.\n");
             break;
  
-
         case CONF_WAYB:
             printf("Waybar is an highly customizable\n");
             break;
