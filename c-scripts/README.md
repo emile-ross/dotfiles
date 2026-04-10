@@ -47,3 +47,5 @@ zig cc arguments.c \
 
 This will compile both c source code files into a single binary.  
 If it produces any errors, make sure to report it as an issue in the parent github repo.  
+
+-std=c99 will display errors one could encounter while compiling this with a compiler using the C99 standard
