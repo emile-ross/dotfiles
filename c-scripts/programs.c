@@ -7,14 +7,14 @@ void BASH(void)
     printf(UDRL_S"\nThe .bashrc file plays a very important role therefore, it was not replaced."STYLE_END);
     printf(UDRL_S"\nYou can find the new .bashrc file under the name %s\n"STYLE_END, BRCNAME);
 
-    // export .bashrc
-    
+	// calculate the sufficient amount of memory to the buffer
     int mem_needed = snprintf(NULL, 0,
 	    "cp -f %s/shell/bash/.bashrc ~/%s", 
 	    inpath, BRCNAME);
 
     char *cmd = malloc(mem_needed + 1);
 
+	// execute the command with the according buffer size previously calculated (above)
     snprintf(cmd, mem_needed + 1,
              "cp -f %s/shell/bash/.bashrc ~/%s",
              inpath, BRCNAME);
