@@ -2,6 +2,7 @@
 Les (dotfiles) sont des fichiers utilisés pour modifier votre système.  Vous pouvez les modifier en utilisant un éditeur de texte comme ([Neovim](https://github.com/neovim/neovim)).
 
 [View this page in english](https://github.com/imawsumm/dotfiles#imawsums-dotfiles)
+*(la version en francais n'est pas à jour et elle peut contenir des erreurs)*
 
 Si vous voulez **Installer** vos configurations, cliquez [ici](#Installer)
 
@@ -74,10 +75,18 @@ Vous pouvez utiliser cette routine afin d'installer vos dotfiles, afin de les me
 Plus de fonctionnalités sont à venir.
 
 ### Compiler avec make
+
+
+Le makefile compile tout le code source en en exécutant le code dans le fichier « [build.c](https://github.com/ImAwsumm/dotfiles/blob/main/build.c). ».  
+
 ```sh
 git clone https://github.com/imawsumm/dotfiles
 cd dotfiles/
 make setup
+```
+
+Maintenant, exécutez le fichier en binaire avec:
+```c
 ./setup
 ```
 
@@ -99,7 +108,13 @@ gcc c-scripts/arguments.c \
 ./setup
 ```
 
-Vous pouvez ajouter l'étiquette ``--noconfirm`` afin d'éviter les avertissements lorsque vous installez les fichiers.
+Maintenant, exécutez le fichier en binaire avec:
+```c
+./setup
+```
+
+
+Vous pouvez aussi ajouter l'étiquette ``--noconfirm`` afin d'éviter les avertissements lorsque vous installez les fichiers et afin de tout installer directement sur votre systeme.  
 
 ```bash
 ./setup --noconfirm
