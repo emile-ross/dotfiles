@@ -79,6 +79,9 @@ The makefile compiles the entire source-code by executing the code in the ``buil
 git clone https://github.com/imawsumm/dotfiles
 cd dotfiles/
 make setup
+```
+Now, execute the binary with:
+```sh
 ./setup
 ```
 
@@ -99,8 +102,13 @@ gcc c-scripts/arguments.c \
     c-scripts/update.c \
     -o setup \
     -Wall -Wextra
+```
+
+Now, execute the binary with:
+```sh
 ./setup
 ```
+
 
 note: This only compiles the code necessary for the install script. 
 
