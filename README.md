@@ -125,6 +125,11 @@ You can also append the ``--noconfirm`` flag in order to install without any pro
 
 You can use the ``-c`` flag in order to install a single config
 
+example: ``./setup -c hyprland`` installs the hyprland config *(only the configs, use -p for the package)*
+
+You can also use the ``-p`` flag in order to install a package
+
+example: ``./setup -p cava`` This would install cava *(only the package, use -c for configs)*
 
 ## Keybinds for Hyprland
 Useful keybinds to know:
@@ -178,7 +183,6 @@ ALT + 1 -> **focus floorp**
 ALT + 2 -> **focus firefox**
 
 ALT + 0 -> **focus obs**
-
 
 If you ever encounter an issue please report it by providing the issue you are experiencing with a log, it helps me improve this script. 
 
