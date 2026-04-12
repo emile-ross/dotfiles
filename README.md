@@ -39,7 +39,10 @@ If you want to **Install** your dotfiles, click [here](#Install)
 - Hyprland isn't required but still recomended in order to benefit from all configurations
   
 
-## programs modified
+## programs modified 
+
+When doing a full installation, you are installing all of the following programs:
+
 - **neovim**
   - lazy, telescope and lualine
 - **hyprland**
@@ -118,7 +121,12 @@ You can also append the ``--noconfirm`` flag in order to install without any pro
 ./setup --noconfirm
 ```
 
-## after install 
+**Partial Install**
+
+You can use the ``-c`` flag in order to install a single config
+
+
+## Keybinds for Hyprland
 Useful keybinds to know:
 (super = "Windows key")
  
@@ -133,8 +141,7 @@ super + V -> **Toggle Floating Mode**
 super + C -> **Close Window**
 
 
-### execute programs
-
+### execute programs (in Hyprland)
 
 super + R -> **execute [Fuzzel](https://codeberg.org/dnkl/fuzzel)**
 > (fuzzel is an App launcher and fuzzy finder for Wayland)
@@ -188,7 +195,6 @@ You can find the original content at: [github.com/kzndotsh/dotfiles](https://git
 other credits:
 
 fastfetch config: [github.com/harilvfs/fastfetch](https://github.com/harilvfs/fastfetch)
-
 
 linux kernel source code: [github.com/torvalds/linux](https://github.com/torvalds/linux)
 
