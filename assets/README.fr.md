@@ -105,7 +105,6 @@ gcc c-scripts/arguments.c \
     c-scripts/update.c \
     -o setup \
     -Wall -Wextra
-./setup
 ```
 
 Maintenant, exécutez le fichier en binaire avec:
@@ -122,7 +121,7 @@ Vous pouvez aussi ajouter l'étiquette ``--noconfirm`` afin d'éviter les averti
 
 Veuillez noter que ceci ne compile que le code nécessaire pour le script d'installation.
 
-## Après avoir installé
+## Touches utiles pour Hyprland
 des touches utiles a connaitre:
 (super = "la touche Windows")
  
