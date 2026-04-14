@@ -56,8 +56,14 @@ The new makefile can take in a wide variety of options for compilation (whether 
 ``make base``
 ``make zig``
 
-**This compiles the ``build.c`` file**
+### compile build.c manually
+
 ``make debug``
+
+This will compile the ``build.c`` source-code using the following command:
+```sh
+zig cc build.c -o build -Wall -Wextra -Wpedantic
+```
 
 # Building flags
 
@@ -83,10 +89,5 @@ These are all of the possible command line flags you can append to the ``./build
 [source-1](https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-pedantic-1) [source-2](https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-pedantic-1)
 
 see [the GCC documentation](https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html) for a detailed breakdown
-
-This will compile using the following command:
-```sh
-zig cc build.c -o build -Wall -Wextra -pedantic
-```
 
 [fr]: README.fr.md
