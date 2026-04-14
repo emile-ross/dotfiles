@@ -52,14 +52,16 @@ int full_update(char ARCHIVE, float pver)
     	    install_package(parent, "hyprland bpytop hyprlock");
     	    BPYT('Y', VAWSM, 'N');
     	    ZSHH('Y', VAWSM, 'N');
-    	    HYPR('Y', VAWSM, 'N');
-
-    	    printf("Update completed!\n");
-    	    break;
+	        __attribute__ ((fallthrough));
 
     	case 250:
     	case 300:
-    	    printf("\nYou are running the latest version.\n");
+			HYPR('Y', VAWSM, 'N');
+		    printf("Update completed!\n");
+
+		    break;
+		case 310:
+			printf("\nYou are running the latest version.\n");
     	    wait_for_timeout(2, 0);
     	    break;
 
