@@ -59,7 +59,13 @@ The new makefile can take in a wide variety of options for compilation (whether 
 **This compiles the ``build.c`` file**
 ``make debug``
 
-``./build`` has it's own command line flags including the following:
+# Building flags
+
+``./build`` has it's own command line flags
+
+You can choose which flag to use for the compilation considering the warnings you want to use
+
+These are all of the possible command line flags you can append to the ``./build`` command:
 
 ``-e`` -> append -Werror "Turn all warnings into errors" 
 [source](https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Werror)
