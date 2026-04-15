@@ -14,6 +14,10 @@ int error_message(int err_code)
 	skip_warning = true;
     }
 
+
+	// error code assignment from the err_code variable
+	// enum error_code_e error_message_code = err_code;
+
     switch (err_code)
     {
 	case 2:
