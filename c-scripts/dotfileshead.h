@@ -55,7 +55,6 @@ void clearbuffer(void);
 void pre_startup(void);
 
 
-
 int install_package(char *pkg_type_distro, char *pkginstallname);
 void install_menu(void);
 void full_install(char ARCHIVE, char full_install_opt);
@@ -67,25 +66,6 @@ void exec_cmd(int buffer_size, char *command_to_execute);
 void link_fastfetch_configs(void);
 void configure_oh_my_zsh(void);
 void configure_fastfetch(void);
-
-typedef enum 
-{
-    CONF_UNKNOWN,
-    CONF_BASH,
-    CONF_BTOP,
-    CONF_BPYT,
-    CONF_CAVA,
-    CONF_FAST,
-    CONF_FUZZ,
-    CONF_GTKL,
-    CONF_HYPR,
-    CONF_KITT,
-    CONF_MPVF,
-    CONF_NVIM,
-    CONF_SWAY,
-    CONF_WAYB,
-    CONF_ZSHH
-} pkg_conf_name;
 
 pkg_conf_name detect_config_name(char *input);
 
@@ -123,8 +103,10 @@ extern char* TEXT_C_WAYB;
 extern char* TEXT_C_ZSHH;
 
 // command line related
-extern char* help_flag_arg_text;	// flag for the help menu
-extern char* pkgi_flag_arg_text;	// flag to install a package
+// Initialized in globals.c
+extern char* help_flag_arg_text;
+extern char* pkgi_flag_arg_text;
+extern char* conf_inst_flag_arg_text;
 
 extern char fastfetch_config_menu_text[32];
 extern char kitty_config_menu_text[32];
@@ -172,6 +154,7 @@ void apply_fuzzel_config(int config_choice_t);
 extern char fuzzel_view_config_text[32];
 extern char fuzzel_edit_config_text[32];
 extern char fuzzel_catppuccin_text[32];
+
 
 // errors
 extern char errcode;
