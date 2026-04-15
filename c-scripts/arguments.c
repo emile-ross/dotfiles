@@ -151,6 +151,8 @@ void config_description(char *package_t)
 
 void argument_config_install(char *package_t, char archiving_t, char pkginstall_t)
 {
+    float version = 0.0;
+
     switch (detect_config_name(package_t)) 
     {
         case CONF_BASH:
@@ -158,55 +160,55 @@ void argument_config_install(char *package_t, char archiving_t, char pkginstall_
             break;
 
         case CONF_BPYT:
-	    BPYT(archiving_t, 0.0, pkginstall_t);
+	    BPYT(archiving_t, version, pkginstall_t);
             break;
 
         case CONF_BTOP:
-	    BTOP(archiving_t, 0.0, pkginstall_t);
+	    BTOP(archiving_t, version, pkginstall_t);
             break;
 
         case CONF_CAVA:
-	    CAVA(archiving_t, 0.0, pkginstall_t);
+	    CAVA(archiving_t, version, pkginstall_t);
             break;
 
         case CONF_FAST:
-	    FAST(archiving_t, 0.0, pkginstall_t);
+	    FAST(archiving_t, version, pkginstall_t);
             break;
 
         case CONF_FUZZ:
-	    FUZZ(archiving_t, 0.0, pkginstall_t);
+	    FUZZ(archiving_t, version, pkginstall_t);
             break;
 
         case CONF_GTKL:
-	    GTKL(archiving_t, 0.0, pkginstall_t);
+	    GTKL(archiving_t, version, pkginstall_t);
             break;
 
         case CONF_HYPR:
-	    HYPR(archiving_t, 0.0, pkginstall_t);
+	    HYPR(archiving_t, version, pkginstall_t);
             break;
 
 	case CONF_KITT:
-	    KITT(archiving_t, 0.0, pkginstall_t);
+	    KITT(archiving_t, version, pkginstall_t);
             break;
 
         case CONF_MPVF:
-	    MPVF(archiving_t, 0.0, pkginstall_t);
+	    MPVF(archiving_t, version, pkginstall_t);
             break;
 
         case CONF_NVIM:
-	    NVIM(archiving_t, 0.0, pkginstall_t);
+	    NVIM(archiving_t, version, pkginstall_t);
             break;
  
         case CONF_SWAY:
-	    SWAY(archiving_t, 0.0, pkginstall_t);
+	    SWAY(archiving_t, version, pkginstall_t);
             break;
 
         case CONF_WAYB:
-	    WAYB(archiving_t, 0.0, pkginstall_t);
+	    WAYB(archiving_t, version, pkginstall_t);
             break;
 
 	case CONF_ZSHH:
-	    ZSHH(archiving_t, 0.0, pkginstall_t);
+	    ZSHH(archiving_t, version, pkginstall_t);
 	    break;
 
         default:
