@@ -14,28 +14,31 @@ int error_message(int err_code)
 	skip_warning = true;
     }
 
+    enum error_code_e;
+    
+    error_code_e error_msg_code = err_code;
+    
+    // error code assignment from the err_code variable
+    // enum error_code_e error_message_code = err_code;
 
-	// error code assignment from the err_code variable
-	// enum error_code_e error_message_code = err_code;
-
-    switch (err_code)
+    switch (error_msg_code)
     {
-	case 2:
+	case INVALID_INPUT:
 	    snprintf(err_text_temp, sizeof(err_text_temp), "Exiting.. (invalid character)");
 	    critical = true;
 	    break;
 
-	case 5:
-	    snprintf(err_text_temp, sizeof(err_text_temp), "Yay is needed for the installation");
+	case YAY_INST_U:
+	    snprintf(err_text_temp, sizeof(err_text_temp), "Yay is needed for the k4dd..installation");
 	    snprintf(err_solution_temp, sizeof(err_solution_temp), "Give the program permission to install Yay");
 	    break;
 
-	case 6:
+	case FEATURE_IN_DEV:
 	    snprintf(err_text_temp, sizeof(err_text_temp), "This feature hasn't been implemented");
 	    snprintf(err_solution_temp, sizeof(err_solution_temp), "Try updating the dotfiles");
 	    break;
 
-	case 7:
+	case FEAT_DEPRECATED:
 	    snprintf(err_text_temp, sizeof(err_text_temp), "This feature will be removed/deprecated");
 	    snprintf(err_solution_temp, sizeof(err_solution_temp), "Read the documentation to learn about the existing features");
 	    break;
@@ -89,23 +92,29 @@ int error_message(int err_code)
 	    snprintf(err_text_temp, sizeof(err_text_temp), "Invalid command syntax");
 	    break;
 
-	case 303:
+	case CLI_INVALID_FLAG:
 	    snprintf(err_text_temp, sizeof(err_text_temp), "Invalid flag");
 	    snprintf(err_solution_temp, sizeof(err_solution_temp), "Use the %s flag to display the valid flags", help_flag_arg_text);
 	    break;
 		
-	case 304:
+	case CLI_ARGS_MISSING:
 	    snprintf(err_text_temp, sizeof(err_text_temp), "Missing arguments in the command");
 	    snprintf(err_solution_temp, sizeof(err_solution_temp), " ");
 	    break;
 		
+	default:
+	    snprintf(err_text_temp, sizeof(err_text_temp), "This error code isn't known");
+	    break;
+    }
+
+    switch (err_code)
+    {
 	case 909:
 	    printf("This error should never display (in theory) \n");
 	    printf("Meaning.. this is a bug inside of another bug...\n");
 	    break;
 
 	default:
-	    snprintf(err_text_temp, sizeof(err_text_temp), "This error code isn't known");
 	    break;
     }
 
