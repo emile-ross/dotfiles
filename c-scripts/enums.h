@@ -43,11 +43,18 @@ typedef enum
 {
     INVALID_INPUT = 2,
     YAY_INST_U = 5,
-}
-   
-    
-
-extern enum error_code_e;
-
-// error_code_e error_message_code = err_code;
-
+    FEATURE_IN_DEV = 6,
+    FEAT_DEPRECATED = 7,
+    MAKEPKG_FAIL = 51,
+    UNSUPPORTED_DISTRO = 101,
+    FUZZ_THEME_FAIL = 103,
+    KITTY_PKG_NOT_FOUND = 104,
+    FAIL_FIND_HOME_DIR = 204,
+    NO_SUCH_FILE_OR_DIR = 205,
+    POPEN_FAILED = 206,
+    UNKNOWN_AWSM_VERSION = 207,
+    CLI_UNKNOWN_PKG = 301,
+    CLI_INVALID_CMD_SYNTAX = 302,
+    CLI_INVALID_FLAG = 303,
+    CLI_ARGS_MISSING = 304,
+} error_code_e;
