@@ -2,6 +2,7 @@
 #define _POSIX_C_SOURCE 200809L
 
 #include "enums.h"
+#include "macros.h"
 
 #include <ctype.h>
 #include <stdio.h>
@@ -13,26 +14,6 @@
 #include <unistd.h>
 #include <sys/stat.h>
 
-// text styles
-#define BOLD_S  	"\x1B[1m" // defines BOLD_S as a keyword to make text bold
-#define UDRL_S  	"\x1B[4m" // UDRL_S starts an underline style (does not work in kitty by default)
-#define ITALICS_S 	"\x1B[3m"
-#define STRIKE_S 	"\x1B[9m"
-
-// colors
-#define ANSI_RED 	"\x1b[31m"
-#define ANSI_GREEN 	"\x1b[32m"  // same as LGREEN on many terminals
-#define ANSI_LGREEN 	"\x1b[92m"  // same as GREEN on many terminals
-#define ANSI_YELLOW 	"\x1b[33m"
-#define ANSI_LYELLOW 	"\x1b[93m"
-#define ANSI_BLUE    	"\x1b[34m"
-#define ANSI_WHITE    	"\x1b[97m"
-#define ANSI_GREY    	"\x1b[90m"
-#define ANSI_CYAN    	"\x1b[36m"
-#define ANSI_LCYAN    	"\x1b[96m"
-
-// reset styling
-#define STYLE_END	"\x1B[0m"
 
 void BASH(void);
 void SWAY(char ARCHIVE, float pver, char PKGINSTALL);
@@ -60,7 +41,7 @@ void install_menu(void);
 void full_install(char ARCHIVE, char full_install_opt);
 void full_config_install(char choice_ARCHIVE_opt, float previous_version_t, char install_packages_t);
 void install_configs(int custom_package_install); // the partial install script (configure which package or configuration to install)
-void copyfiles (int fastfetch_conf_export);
+void copyfiles(int fastfetch_conf_export);
 void check_for_yay(void);
 void exec_cmd(int buffer_size, char *command_to_execute);
 void link_fastfetch_configs(void);

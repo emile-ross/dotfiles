@@ -78,7 +78,7 @@ int main(int argc, char *argv[])
 			    configure_fastfetch();
     	                }
     	            }
-    	            while (fastfetch_config_choice > 0.0);
+    	            while (fastfetch_config_choice > INPUT_BACK_VALUE);
     	            // exits the while loop when the user types 0
 	        }
 		else if (dotfiles_config_menu == 2)
@@ -106,7 +106,7 @@ int main(int argc, char *argv[])
     	                    printf("\nThe install script can be used to install more fonts.");
     	                }
     	            }
-    	            while(kitty_config_choice > 0.0); // exits the while loop when the user types 0
+    	            while (kitty_config_choice > INPUT_BACK_VALUE); // exits the while loop when the user types 0
     	        }
 		else if (dotfiles_config_menu == 3)
 		{
@@ -225,7 +225,7 @@ int main(int argc, char *argv[])
 	    	    printf("These flags allow you to add a custom message or title\n");
 		}
 	    }
-	    while(menu_activate_linux > 0.0);
+	    while (menu_activate_linux > 0.0);
     	}
     	else if (menu_one_i == 0 || menu_one_i > 4)
     	{
@@ -238,6 +238,6 @@ int main(int argc, char *argv[])
 	    error_message(2);
     	}
     }
-    while(menu_one_i != 0);	// exits the while loop when the user types 0
+    while (menu_one_i != 0);	// exits the while loop when the user types 0
     return 0;
 }
