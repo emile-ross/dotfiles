@@ -20,6 +20,7 @@
     
     char* help_flag_arg_text = "--help";	// flag for the help menu
     char* pkgi_flag_arg_text = "-p";	// flag to install a package
+    char* pkgi_flag_arg_text = "-c";	// flag to install a config
     
     char fuzzel_view_config_text[32] = "Preview Fuzzel appearance";
     char fuzzel_edit_config_text[32] = "Edit Fuzzel config";
@@ -67,6 +68,8 @@
     int fastfetch_conf_export;
     bool fastfetch_config_apply;
     
+    // Distribution global variable
+    // it is used when installing packages with the right package manager
     char distro[128] = "";
     char parent[128] = "";
     

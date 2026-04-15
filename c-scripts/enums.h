@@ -12,5 +12,10 @@ typedef enum
     V_2_5 = 250,
     V_3 = 300,
     V_3_1 = 310,
-    LATEST = 320,
+    V_3_2 = 320,
+    V_3_3 = 330,
+
+    STABLE = V_3_1,
+    LATEST = V_3_2,
+    NEXT = V_3_3,
 } df_version;

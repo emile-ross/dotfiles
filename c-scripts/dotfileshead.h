@@ -1,6 +1,8 @@
 #define HSETUP_DOT_H
 #define _POSIX_C_SOURCE 200809L
 
+#include "enums.h"
+
 #include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
