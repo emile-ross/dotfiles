@@ -159,7 +159,7 @@ int main(int argc, char *argv[])
 				
 				apply_fuzzel_config(fuzzel_edit_menu_choice);
 			    }
-			    while (fuzzel_edit_menu_choice > 0.0);
+			    while (fuzzel_edit_menu_choice > INPUT_BACK_VALUE);
 			}
 			else if (fuzzel_config_menu_choice == 3)
 			{
@@ -167,7 +167,7 @@ int main(int argc, char *argv[])
 			    wait_for_timeout(1, 0);
 			}
 		    }
-		    while (fuzzel_config_menu_choice > 0.0);
+		    while (fuzzel_config_menu_choice > INPUT_BACK_VALUE);
 		}
 		else if (dotfiles_config_menu == 4)
 		{
@@ -189,10 +189,10 @@ int main(int argc, char *argv[])
 			    configure_oh_my_zsh();
 			}
 		    }
-		    while (zshforhumans_choice > 0);
+		    while (zshforhumans_choice > INPUT_BACK_VALUE);
 		}
     	    } 
-    	    while (dotfiles_config_menu > 0.0);
+    	    while (dotfiles_config_menu > INPUT_BACK_VALUE);
     	    // exits the while loop when the user types 0
     	}
     	else if (menu_one_i == 4)
@@ -225,7 +225,7 @@ int main(int argc, char *argv[])
 	    	    printf("These flags allow you to add a custom message or title\n");
 		}
 	    }
-	    while (menu_activate_linux > 0.0);
+	    while (menu_activate_linux > INPUT_BACK_VALUE);
     	}
     	else if (menu_one_i == 0 || menu_one_i > 4)
     	{

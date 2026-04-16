@@ -2,9 +2,8 @@
 
 
 // Text available globally
-
     char* TEXT_C_BASH = ".bashrc";
-    char* TEXT_C_SWAY = "Sway-WM configs";
+    char* TEXT_C_SWAY = "Sway-WM config";
     char* TEXT_C_BPYT = "bpytop config";
     char* TEXT_C_BTOP = "btop config";
     char* TEXT_C_CAVA = "cava config";
@@ -12,7 +11,7 @@
     char* TEXT_C_FUZZ = "fuzzel configs";
     char* TEXT_C_GTKL = "gtklock config and style (appearance) ";
     char* TEXT_C_HYPR = "Hyprland-WM config + Hypridle config";
-    char* TEXT_C_KITT = "kitty terminal";
+    char* TEXT_C_KITT = "kitty terminal configs";
     char* TEXT_C_MPVF = "mpv config";
     char* TEXT_C_NVIM = "neovim config with lazy";
     char* TEXT_C_WAYB = "waybar config and style (appearance)";
@@ -20,7 +19,7 @@
     
     char* help_flag_arg_text = "--help";	// flag for the help menu
     char* pkgi_flag_arg_text = "-p";	// flag to install a package
-    char* pkgi_flag_arg_text = "-c";	// flag to install a config
+    char* conf_inst_flag_arg_text = "-c";	// flag to install a config
     
     char fuzzel_view_config_text[32] = "Preview Fuzzel appearance";
     char fuzzel_edit_config_text[32] = "Edit Fuzzel config";
@@ -39,6 +38,7 @@
     char opt_for_text[128] = "Custom configuration menu";
     char opt_fiv_text[128] = "Something else";
     char opt_exit_text[16] = "Exit";
+    char opt_back_text[16] = "Back";
     
 // Global variables
 

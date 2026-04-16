@@ -64,7 +64,7 @@ char *get_initial_path(void)
 
 void wait_for_timeout(int timer_quarters, int timer_seconds)
 {
-    if (timer_quarters < 4)
+    if (timer_quarters < 4) // 4 quarters per second
     {
 	time_timer_quarters = timer_quarters * 250000000;   // convert quarters to nanoseconds
 	time_timer_seconds = timer_seconds;		    // set seconds
@@ -124,6 +124,7 @@ void check_for_yay(void)
         char YAY;
         clearbuffer();
         scanf(" %c", &YAY); // asks the user if they wanna install yay (needed)
+
         if (YAY == 'Y' || YAY == 'y')
         {
             // Check if makepkg is installed ( it is needed in order to compile yay )

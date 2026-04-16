@@ -3,11 +3,11 @@
 int full_update(char ARCHIVE, float pver)
 {
     check_for_yay();
+
     int VAWSM = (int)(pver * 100);
     char install_pkg_yn = 'N';
 
     enum df_version;
-
     df_version prev_update_version = VAWSM;
 
     switch (prev_update_version)
@@ -88,7 +88,7 @@ float* update(void)
     // error message if username can't be fetched 
     if (USERNAME == NULL) 
     {
-	 	 error_message(204);
+	error_message(204);
         return NULL;
     }
 
