@@ -9,7 +9,7 @@ void install_menu(void)
     
     scanf(" %c", &archive_before_install);
     printf(ANSI_RED BOLD_S"\nWARNING\n"STYLE_END BOLD_S"This will install every config.\n"STYLE_END);
-    printf(ITALICS_S"\nIn order to pick the configs you want, you need to use the custom configuration option\n"STYLE_END);
+    printf(ITALICS_S"\nIn order to pick the configs you want, you need to use the custom configuration option\n"STYLE_END); // italics might not work on all terminals
     clearbuffer();
     
     printf(BOLD_S"\nProceed with installation (Y/n)\n"STYLE_END); // prompt user for input
@@ -206,8 +206,8 @@ void full_install(char install_ARCHIVE, char full_install_opt)
 
 void full_config_install(char choice_ARCHIVE_opt, float previous_version_t, char install_packages_t)
 {
-	// a list of all configs
-	// this will execute all configuration entries
+    // a list of all configs
+    // this will execute all configuration entries
     BASH();
     BPYT(choice_ARCHIVE_opt, previous_version_t, install_packages_t);
     BTOP(choice_ARCHIVE_opt, previous_version_t, install_packages_t);

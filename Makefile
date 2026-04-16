@@ -16,6 +16,7 @@ gcc: existing_binaries
 
 setup: existing_binaries
 	@./build gcc
+
 build: existing_binaries
 	@./build gcc
 
@@ -27,6 +28,7 @@ zig: existing_binaries
 
 debug:
 	zig cc $(DEBUG_BUILD_COMMAND)
+	@./build std
 
 clean:
 	@./build clean
