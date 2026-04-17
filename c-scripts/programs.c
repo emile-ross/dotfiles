@@ -158,7 +158,7 @@ void GTKL(char ARCHIVE, float pver, char PKGINSTALL)
     		pver);
     	system(cmd);
     }
-    if ( PKGINSTALL == 'Y'|| PKGINSTALL == 'y')
+    if (PKGINSTALL == 'Y'|| PKGINSTALL == 'y')
     {
 	// install gtklock package
 	install_package(parent, "gtklock");
@@ -226,7 +226,7 @@ void KITT(char ARCHIVE, float pver, char PKGINSTALL)
     {
 	// install kitty package
 	//  the kitty terminal is most likely already installed on your system
-	install_package(parent, "mpv");
+	install_package(parent, "kitty");
     }
     // export kitty config
     snprintf(cmd, sizeof(cmd),
@@ -270,7 +270,7 @@ void NVIM(char ARCHIVE, float pver, char PKGINSTALL)
     	    	pver, pver, pver);
         system(cmd);
     }
-    if ( PKGINSTALL == 'Y'|| PKGINSTALL == 'y')
+    if (PKGINSTALL == 'Y'|| PKGINSTALL == 'y')
     {
 	// install neovim (nvim) package
 	// nvim is most likely already installed 
@@ -294,7 +294,7 @@ void SWAY(char ARCHIVE, float pver, char PKGINSTALL)
     	    	"mv ~/.config/sway/config ~/.config/sway/config-oldv%.2f ", pver);
         system(cmd);
     }
-    if ( PKGINSTALL == 'Y'|| PKGINSTALL == 'y')
+    if (PKGINSTALL == 'Y'|| PKGINSTALL == 'y')
     {
 	// install sway package -- a system update is strongly recommended 
 	install_package(parent, "wlroots swaylock sway");

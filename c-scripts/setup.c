@@ -108,7 +108,7 @@ int main(int argc, char *argv[])
     	            }
     	            while (kitty_config_choice > INPUT_BACK_VALUE); // exits the while loop when the user types 0
     	        }
-		else if (dotfiles_config_menu == 3)
+		else if (dotfiles_config_menu == KEY_MAIN_MENU_CONFIGURE)
 		{
 		    do
 		    {
@@ -136,27 +136,27 @@ int main(int argc, char *argv[])
 				clear();
 
 				char fuzzel_config_one[32] = "Use fuzzel-duplicated.ini";
-    	                	char fuzzel_config_old[32] = "Use old-fuzzel.ini";
-    	                	char fuzzel_config_vzero[32] = "Use fuzzel-v0.0.ini";
-    	                	char fuzzel_config_default[32] = "Use default config";
-    	                	char fuzzel_config_catp[48] = "Use the customized Catppuccin theme";
-    	                	char fuzzel_config_custom[32] = "Use custom config";
+				char fuzzel_config_old[32] = "Use old-fuzzel.ini";
+				char fuzzel_config_vzero[32] = "Use fuzzel-v0.0.ini";
+				char fuzzel_config_default[32] = "Use default config";
+				char fuzzel_config_catp[48] = "Use the customized Catppuccin theme";
+				char fuzzel_config_custom[32] = "Use custom config";
 				char fuzzel_config_edit_custom[32] = "Edit custom config";
-
+				
 				printf(BOLD_S ANSI_WHITE "%s\n\n"STYLE_END, fuzzel_edit_config_text);
-    	            		printf(BOLD_S " [1] " STYLE_END "%s\n", fuzzel_config_one);
-    	            		printf(BOLD_S " [2] " STYLE_END "%s\n",	fuzzel_config_old);
-    	            		printf(BOLD_S " [3] " STYLE_END "%s\n",	fuzzel_config_vzero);
-    	            		printf(BOLD_S " [4] " STYLE_END "%s\n\n", fuzzel_config_default);
-    	            		printf(BOLD_S " [5] " STYLE_END "%s\n\n", fuzzel_config_catp);
-
-    	            		printf(BOLD_S " [6] " STYLE_END "%s\n",	fuzzel_config_custom);
-    	            		printf(BOLD_S " [7] " STYLE_END "%s\n\n", fuzzel_config_edit_custom);
-    	            		printf(BOLD_S " [0] " STYLE_END "%s\n", opt_exit_text);
+				printf(BOLD_S " [1] " STYLE_END "%s\n", fuzzel_config_one);
+				printf(BOLD_S " [2] " STYLE_END "%s\n",	fuzzel_config_old);
+				printf(BOLD_S " [3] " STYLE_END "%s\n",	fuzzel_config_vzero);
+				printf(BOLD_S " [4] " STYLE_END "%s\n\n", fuzzel_config_default);
+				printf(BOLD_S " [5] " STYLE_END "%s\n\n", fuzzel_config_catp);
+				
+				printf(BOLD_S " [6] " STYLE_END "%s\n",	fuzzel_config_custom);
+				printf(BOLD_S " [7] " STYLE_END "%s\n\n", fuzzel_config_edit_custom);
+				printf(BOLD_S " [0] " STYLE_END "%s\n", opt_exit_text);
 
 				clearbuffer();
 				scanf(" %d", &fuzzel_edit_menu_choice);
-				
+
 				apply_fuzzel_config(fuzzel_edit_menu_choice);
 			    }
 			    while (fuzzel_edit_menu_choice > INPUT_BACK_VALUE);
@@ -185,7 +185,6 @@ int main(int argc, char *argv[])
 			if (zshforhumans_choice == 1)
 			{
 			    clear();
-
 			    configure_oh_my_zsh();
 			}
 		    }
