@@ -12,7 +12,6 @@ char output_binary_name[16] = "setup";
 
 // Warnings flags
 #define FLAG_BUFFER_SIZE (16)
-#define NUM_POSSIBLE_FLAGS (6)
 
 const char *base_flags = " -W";
 const char Wextra_flag[FLAG_BUFFER_SIZE] = " -Wextra";
@@ -37,28 +36,6 @@ const char *source_files[] =
     "setup",
     "update",
     NULL };
-
-
-
-typedef enum
-{
-    error,
-    extra,
-    pedantic,
-    all,
-    c99,
-} e_flag_names;
-
-char *compiler_flag_text[NUM_POSSIBLE_FLAGS] = 
-{
-    "-Werror",
-    "-Wextra",
-    "-Wpedantic",
-    "-Wall",
-    "-std=c99",
-};
-
-bool flags_bl[NUM_POSSIBLE_FLAGS];
 
 typedef enum 
 {
@@ -258,6 +235,7 @@ void compilation(compiler_enum compiler_name_temp, bool error_flag_temp_bl, bool
     }
     
     int size_all_flags_temp = num_flags * FLAG_BUFFER_SIZE ;
+    size_all_flags_temp++;
 
     char all_flags[size_all_flags_temp];    /* initialize the all_flags buffer */
     snprintf(all_flags, sizeof(all_flags), "%s", base_flags);	/* move base flags to all_flags */
@@ -268,26 +246,29 @@ void compilation(compiler_enum compiler_name_temp, bool error_flag_temp_bl, bool
         strcat(all_flags, Werror_flag);	
     }
 
-    if (pedantic_flag_temp_bl == true)
+    if (num_flags > 0)
     {
-	/* append Wpedantic flag to the end of the all_flags buffer */
-	strcat(all_flags, Wpedantic_flag);   
-    }
+	if (pedantic_flag_temp_bl == true)
+    	{
+    	    /* append Wpedantic flag to the end of the all_flags buffer */
+    	    strcat(all_flags, Wpedantic_flag);   
+    	}
 
-    if (extra_flag_temp_bl == true)
-    {
-	/* append extra flag to the end of the all_flags buffer */
-	strcat(all_flags, Wextra_flag);   
-    }
+    	if (extra_flag_temp_bl == true)
+    	{
+    	    /* append extra flag to the end of the all_flags buffer */
+    	    strcat(all_flags, Wextra_flag);   
+    	}
 
-    if (all_flag_temp_bl == true)
-    {
-	strcat(all_flags, Wall_flag);   
-    }
+    	if (all_flag_temp_bl == true)
+    	{
+    	    strcat(all_flags, Wall_flag);   
+    	}
 
-    if (c99_flag_temp_bl == true)
-    {
-	strcat(all_flags, c99_flag);   
+    	if (c99_flag_temp_bl == true)
+    	{
+    	    strcat(all_flags, c99_flag);   
+    	}
     }
 
     compile_all_files(compiler_name_cmd_temp, all_flags);
