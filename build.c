@@ -11,7 +11,7 @@ char source_fpath[16] = "c-scripts/";
 char output_binary_name[16] = "setup";
 
 // Warnings flags
-#define FLAG_BUFFER_SIZE (16)
+#define FLAG_BUFFER_SIZE 16
 const char *base_flags = " -W";
 const char Wextra_flag[FLAG_BUFFER_SIZE] = " -Wextra";
 const char Werror_flag[FLAG_BUFFER_SIZE] = " -Werror";
@@ -23,7 +23,8 @@ int num_flags = 0;
 
 int size_source_filename = 24;
 
-const char *source_files[] = { 
+const char *source_files[] = 
+{ 
     "arguments",
     "configuring",
     "error-handling",
@@ -33,7 +34,8 @@ const char *source_files[] = {
     "install",
     "setup",
     "update",
-    NULL };
+    NULL 
+};
 
 typedef enum 
 {
@@ -167,6 +169,11 @@ void link_object_files(compiler_enum compiler_name_def, char *flags)
     int link_cmd_size = COMPILER_NAME_SIZE + obj_buffer_size + buffer_size_flags;
     char link_cmd[link_cmd_size];
 
+    if (!(num_src_files >= 1))
+    {
+	exit(1);
+    }
+
     for (int i = 0; num_src_files > i; i++)
     {
 	snprintf(temp_obj_path, size_obj_fpath,
@@ -231,10 +238,18 @@ void compilation(compiler_enum compiler_name_temp, bool error_flag_temp_bl, bool
 	    exit(1);
     }
     
-    int size_all_flags_temp = num_flags * FLAG_BUFFER_SIZE ;
+    unsigned int flag_size;
+    flag_size = FLAG_BUFFER_SIZE;
 
-    char all_flags[size_all_flags_temp];    /* initialize the all_flags buffer */
+    unsigned int base_buffer = 16;
+    unsigned int size_all_flags_temp;
+    size_all_flags_temp = num_flags * flag_size;
+    unsigned int buffer_size_all_flags = base_buffer + size_all_flags_temp;
+
+    int buffer_size_total = 128;
+    char all_flags[buffer_size_total];    /* initialize the all_flags buffer */
     snprintf(all_flags, sizeof(all_flags), "%s", base_flags);	/* move base flags to all_flags */
+
 
     if (error_flag_temp_bl == true)
     {
