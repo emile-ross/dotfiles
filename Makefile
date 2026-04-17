@@ -1,6 +1,6 @@
 BUILD_BINARY := $(wildcard build)
 
-DEBUG_BUILD_COMMAND = build.c -o build -Wall -Wextra -pedantic
+DEBUG_BUILD_COMMAND = build.c -o build -Wall -Wextra -pedantic -Werror -std=c99
 
 existing_binaries:
 
