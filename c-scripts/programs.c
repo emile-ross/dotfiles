@@ -297,7 +297,7 @@ void SWAY(char ARCHIVE, float pver, char PKGINSTALL)
     if (PKGINSTALL == 'Y'|| PKGINSTALL == 'y')
     {
 	// install sway package -- a system update is strongly recommended 
-	install_package(parent, "wlroots swaylock sway");
+	install_package(parent, "wlroots swaylock sway swayidle");
     }
     // export sway config
     snprintf(cmd, sizeof(cmd),
@@ -309,6 +309,7 @@ void SWAY(char ARCHIVE, float pver, char PKGINSTALL)
 
 void WAYB(char ARCHIVE, float pver, char PKGINSTALL)
 {
+    const char *path = "~/.config/waybar";
     char cmd[256];
     if (ARCHIVE == 'Y' || ARCHIVE == 'y')
     {
@@ -324,9 +325,9 @@ void WAYB(char ARCHIVE, float pver, char PKGINSTALL)
     }
     // export waybar config and appearance
     snprintf(cmd, sizeof(cmd),
-	    "mkdir -p ~/.config/waybar ; "
-	    "cp -f %s/waybar/style.css ~/.config/waybar ; "
-            "cp -f %s/waybar/config.jsonc ~/.config/waybar", inpath, inpath);
+	    "mkdir -p %s ; "
+	    "cp -f %s/waybar/style.css %s ; "
+            "cp -f %s/waybar/config.jsonc %s", path, inpath, path, inpath, path);
     system(cmd);
 }
 

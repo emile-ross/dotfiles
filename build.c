@@ -35,7 +35,8 @@ const char *source_files[] =
     "install",
     "setup",
     "update",
-    NULL };
+    NULL 
+};
 
 typedef enum 
 {
@@ -218,7 +219,7 @@ void compilation(compiler_enum compiler_name_temp, bool error_flag_temp_bl, bool
 {
     char compiler_name_cmd_temp[COMPILER_NAME_SIZE];
     compiler_name_cmd_temp[0] = '\0';
-    switch(compiler_name_temp)
+    switch (compiler_name_temp)
     {
         case CLANG:
             strncpy(compiler_name_cmd_temp, "clang -c", COMPILER_NAME_SIZE - 1);
