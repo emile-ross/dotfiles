@@ -8,9 +8,9 @@
 char object_fpath[16] = "c-scripts/";
 char source_fpath[16] = "c-scripts/";
 
-const char output_binary_name[16] = "setup";	// set the name of the binary file
+const char output_binary_name[16] = "setup";	/* set the name of the binary file */
 
-// Warnings flags
+/* Warnings flags */
 #define FLAG_BUFFER_SIZE (16)
 
 const char *base_flags = " -W";
@@ -55,11 +55,11 @@ int main(int argc, char *argv[])
     /* declare compiler_name enum */
     compiler_enum compiler_name;
 
-    bool Werror_flag_bl = false;   // default is false
-    bool Wpedantic_bl = false;	    // default is false
-    bool Wall_flag_bl = false;	    // default is false
-    bool Wextra_flag_bl = false;    // default is false
-    bool c99_flag_bl = false;    // default is false
+    bool Werror_flag_bl = false;   /* default is false  */
+    bool Wpedantic_bl = false;	    /* default is false */
+    bool Wall_flag_bl = false;	    /* default is false */
+    bool Wextra_flag_bl = false;    /* default is false */
+    bool c99_flag_bl = false;    /* default is false */
 
     bool compile_bl = true;
 
@@ -154,6 +154,7 @@ void link_object_files(compiler_enum compiler_name_def, char *flags)
     /* define the memory needed for the command buffer */
     int buffer_size_flags = snprintf(NULL, 0,
 	    "%s -o -c", flags);
+
     long num_src_files = (sizeof(source_files) / sizeof(source_files[0]) - 1);
 
     int size_obj_fpath = sizeof(object_fpath) + size_source_filename + 8;

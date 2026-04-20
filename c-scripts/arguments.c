@@ -238,6 +238,25 @@ void cmd_arg_install(int num_cmd_arguments_t, char *cmd_arg_v_t[], char config_a
 
 pkg_conf_name detect_config_name(char *input) 
 {
+    char *HYPR_ARG_NAME[5] = 
+    {
+        "hyprland",
+        "Hyprland",
+        "hypr",
+        "Hypr",
+        NULL,
+    };
+
+    char *NVIM_ARG_NAME[6] = 
+    {
+        "nvim",
+        "neovim",
+        "Neovim",
+        "NeoVim",
+        "Nvim",
+        NULL,
+    };
+
     // match the name to the correct config name
     if (strcmp(input, "bash") == 0) return CONF_BASH;
     if (strcmp(input, "btop") == 0) return CONF_BTOP;
@@ -246,7 +265,7 @@ pkg_conf_name detect_config_name(char *input)
     if (strcmp(input, "fastfetch") == 0) return CONF_FAST;
     if (strcmp(input, "fuzzel") == 0) return CONF_FUZZ;
     if (strcmp(input, "gtklock") == 0) return CONF_GTKL;
-    if (strcmp(input, "hyprland") == 0) return CONF_HYPR;
+    if (strcmp(input, HYPR_ARG_NAME[0]) == 0) return CONF_HYPR;
     if (strcmp(input, "kitty") == 0) return CONF_KITT;
     if (strcmp(input, "mpv") == 0) return CONF_MPVF;
     if (strcmp(input, "nvim") == 0) return CONF_NVIM;
@@ -255,9 +274,21 @@ pkg_conf_name detect_config_name(char *input)
     if (strcmp(input, "zsh") == 0) return CONF_ZSHH;
 
     // alternative names
-    if (strcmp(input, "hypr") == 0) return CONF_HYPR;
-    if (strcmp(input, "Hyprland") == 0) return CONF_HYPR;
-    if (strcmp(input, "neovim") == 0) return CONF_NVIM;
+    // check for hyprland
+    int i = 1;
+    while (HYPR_ARG_NAME[i] != NULL)
+    {
+	if (strcmp(input, HYPR_ARG_NAME[i]) == 0) return CONF_HYPR;
+	i++;
+    }
+    // check for nvim
+    i = 1;
+    while (NVIM_ARG_NAME[i] != NULL)
+    {
+	if (strcmp(input, NVIM_ARG_NAME[i]) == 0) return CONF_NVIM;
+	i++;
+    }
+
     if (strcmp(input, "swaywm") == 0) return CONF_SWAY;
     if (strcmp(input, "fast") == 0) return CONF_FAST;
     if (strcmp(input, "fuzz") == 0) return CONF_FUZZ;
