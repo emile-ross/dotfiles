@@ -13,7 +13,7 @@ int main(int argc, char *argv[])
     	printf(BOLD_S ANSI_CYAN "%s\n\n" STYLE_END, main_menu_text );
     	printf(BOLD_S " [1] " STYLE_END "%s\n", opt_one_text);
     	printf(BOLD_S " [2] " STYLE_END "%s\n", opt_the_text);
-    	printf(BOLD_S " [3] " STYLE_END "%s\n", opt_for_text);
+    	printf(BOLD_S " [%d] " STYLE_END "%s\n", KEY_MAIN_MENU_CONFIGURE, opt_for_text);
     	printf(BOLD_S " [4] " STYLE_END "%s\n\n", opt_fiv_text);
     	printf(BOLD_S " [0] " STYLE_END "%s\n", opt_exit_text);
 
@@ -35,7 +35,7 @@ int main(int argc, char *argv[])
 	    scanf("%c", &backuptemp);
 	    full_update(backuptemp, *version);
     	}
-    	else if (menu_one_i == 3)
+    	else if (menu_one_i == KEY_MAIN_MENU_CONFIGURE)
     	{
 	    int dotfiles_config_menu;
     	    do
@@ -108,7 +108,7 @@ int main(int argc, char *argv[])
     	            }
     	            while (kitty_config_choice > INPUT_BACK_VALUE); // exits the while loop when the user types 0
     	        }
-		else if (dotfiles_config_menu == KEY_MAIN_MENU_CONFIGURE)
+		else if (dotfiles_config_menu == 3)
 		{
 		    do
 		    {

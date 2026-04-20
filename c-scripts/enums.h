@@ -58,3 +58,21 @@ typedef enum
     CLI_INVALID_FLAG = 303,
     CLI_ARGS_MISSING = 304,
 } error_code_e;
+
+typedef enum
+{
+    blue = 1,
+    flamingo,
+    green,
+    lavender,
+    maroon,
+    mauve,
+    peach,
+    pink,
+    red,
+    rosewater,
+    sapphire,
+    sky,
+    teal,
+    yellow,
+} fuzzel_colour_e;

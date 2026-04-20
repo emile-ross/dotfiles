@@ -63,65 +63,72 @@ void fuzzel_config_importing(void)
     int theme_colour_user_opt;
     char colour_message_text[16] = "Use the colour";
 
-    printf(BOLD_S"[1] "STYLE_END" %s "BOLD_S"blue"STYLE_END"\n", colour_message_text);
-    printf(BOLD_S"[2] "STYLE_END" %s "BOLD_S"flamingo"STYLE_END"\n", colour_message_text);
-    printf(BOLD_S"[3] "STYLE_END" %s "BOLD_S"green"STYLE_END"\n", colour_message_text);
-    printf(BOLD_S"[4] "STYLE_END" %s "BOLD_S"lavender"STYLE_END"\n", colour_message_text);
-    printf(BOLD_S"[5] "STYLE_END" %s "BOLD_S"maroon"STYLE_END"\n", colour_message_text);
-    printf(BOLD_S"[6] "STYLE_END" %s "BOLD_S"mauve"STYLE_END"\n", colour_message_text);
-    printf(BOLD_S"[7] "STYLE_END" %s "BOLD_S"peach"STYLE_END"\n", colour_message_text);
-    printf(BOLD_S"[8] "STYLE_END" %s "BOLD_S"pink"STYLE_END"\n", colour_message_text);
-    printf(BOLD_S"[9] "STYLE_END" %s "BOLD_S"red"STYLE_END"\n", colour_message_text);
-    printf(BOLD_S"[10]"STYLE_END" %s "BOLD_S"rosewater"STYLE_END"\n", colour_message_text);
-    printf(BOLD_S"[11]"STYLE_END" %s "BOLD_S"sapphire"STYLE_END"\n", colour_message_text);
-    printf(BOLD_S"[12]"STYLE_END" %s "BOLD_S"sky"STYLE_END"\n", colour_message_text);
-    printf(BOLD_S"[13]"STYLE_END" %s "BOLD_S"teal"STYLE_END"\n", colour_message_text);
-    printf(BOLD_S"[14]"STYLE_END" %s "BOLD_S"yellow"STYLE_END"\n", colour_message_text);
+    enum fuzzel_colour_e;
+    fuzzel_colour_e fuzz_colour;
+
+    printf(BOLD_S"[%d] "STYLE_END" %s "BOLD_S"blue"STYLE_END"\n", fuzz_colour = blue, colour_message_text);
+    //printf(BOLD_S"[1] "STYLE_END" %s "BOLD_S"blue"STYLE_END"\n", fuzz_colour = blue, colour_message_text);
+    printf(BOLD_S"[%d] "STYLE_END" %s "BOLD_S"flamingo"STYLE_END"\n", fuzz_colour = flamingo, colour_message_text);
+    printf(BOLD_S"[%d] "STYLE_END" %s "BOLD_S"green"STYLE_END"\n", fuzz_colour = green, colour_message_text);
+    printf(BOLD_S"[%d] "STYLE_END" %s "BOLD_S"lavender"STYLE_END"\n", fuzz_colour = lavender, colour_message_text);
+    printf(BOLD_S"[%d] "STYLE_END" %s "BOLD_S"maroon"STYLE_END"\n", fuzz_colour = maroon, colour_message_text);
+    printf(BOLD_S"[%d] "STYLE_END" %s "BOLD_S"mauve"STYLE_END"\n", fuzz_colour = mauve, colour_message_text);
+    printf(BOLD_S"[%d] "STYLE_END" %s "BOLD_S"peach"STYLE_END"\n", fuzz_colour = peach, colour_message_text);
+    printf(BOLD_S"[%d] "STYLE_END" %s "BOLD_S"pink"STYLE_END"\n", fuzz_colour = pink, colour_message_text);
+    printf(BOLD_S"[%d] "STYLE_END" %s "BOLD_S"red"STYLE_END"\n", fuzz_colour = red, colour_message_text);
+    printf(BOLD_S"[%d]"STYLE_END" %s "BOLD_S"rosewater"STYLE_END"\n", fuzz_colour = rosewater, colour_message_text);
+    printf(BOLD_S"[%d]"STYLE_END" %s "BOLD_S"sapphire"STYLE_END"\n", fuzz_colour = sapphire, colour_message_text);
+    printf(BOLD_S"[%d]"STYLE_END" %s "BOLD_S"sky"STYLE_END"\n", fuzz_colour = sky, colour_message_text);
+    printf(BOLD_S"[%d]"STYLE_END" %s "BOLD_S"teal"STYLE_END"\n", fuzz_colour = teal, colour_message_text);
+    printf(BOLD_S"[%d]"STYLE_END" %s "BOLD_S"yellow"STYLE_END"\n", fuzz_colour = yellow, colour_message_text);
     
     clearbuffer();
     scanf(" %d", &theme_colour_user_opt);
-    switch(theme_colour_user_opt)
+
+    fuzzel_colour_e theme_colour_name = theme_colour_user_opt;
+
+    switch(theme_colour_name)
     {
-	case 1:
+	case blue:
 	    theme_colour_text = "blue";
 	    break;
-	case 2:
+	case flamingo:
 	    theme_colour_text = "flamingo";
 	    break;
-	case 3:
+	case green:
 	    theme_colour_text = "green";
 	    break;
-	case 4:
+	case lavender:
 	    theme_colour_text = "lavender";
 	    break;
-	case 5:
+	case maroon:
 	    theme_colour_text = "maroon";
 	    break;
-	case 6:
+	case mauve:
 	    theme_colour_text = "mauve";
 	    break;
-	case 7:
+	case peach:
 	    theme_colour_text = "peach";
 	    break;
-	case 8:
+	case pink:
 	    theme_colour_text = "pink";
 	    break;
-	case 9:
+	case red:
 	    theme_colour_text = "red";
 	    break;
-	case 10:
+	case rosewater:
 	    theme_colour_text = "rosewater";
 	    break;
-	case 11:
+	case sapphire:
 	    theme_colour_text = "sapphire";
 	    break;
-	case 12:
+	case sky:
 	    theme_colour_text = "sky";
 	    break;
-	case 13:
+	case teal:
 	    theme_colour_text = "teal";
 	    break;
-	case 14:
+	case yellow:
 	    theme_colour_text = "yellow";
 	    break;
 	default:

@@ -48,7 +48,7 @@
     // the position of the first argument in a command
     // example: ``./setup -i nvim``
     // nvim is the 3rd argument
-    int n_to_arg = 3;
+    const int n_to_arg = 3;
 
     struct timespec install_timer;
     int timer_quarters;
