@@ -50,98 +50,84 @@ void install_configs(int custom_package_install)  // the partial install script 
 
 		install_config_message(temp_conf_installed);
 		BASH();
-		clear();
 		break;
     	    case 2:
     	        temp_conf_installed = (char*)(TEXT_C_BPYT);
 
 		install_config_message(temp_conf_installed);
 		BPYT(ARCHIVE_T, pver, PKGINSTALL_T);
-		clear();
 		break;
     	    case 3:
     	        temp_conf_installed = (char*)(TEXT_C_BTOP);
 
 		install_config_message(temp_conf_installed);
 		BTOP(ARCHIVE_T, pver, PKGINSTALL_T);
-		clear();
 		break;
 	    case 4:
     	        temp_conf_installed = (char*)(TEXT_C_CAVA);
 
 		install_config_message(temp_conf_installed);
 		CAVA(ARCHIVE_T, pver, PKGINSTALL_T);
-		clear();
 		break;
     	    case 5:
     	        temp_conf_installed = (char*)(TEXT_C_FAST);
 
 		install_config_message(temp_conf_installed);
 		FAST(ARCHIVE_T, pver, PKGINSTALL_T);
-		clear();
 		break;
     	    case 6:
     	        temp_conf_installed = (char*)(TEXT_C_FUZZ);
 
 		install_config_message(temp_conf_installed);
 		FUZZ(ARCHIVE_T, pver, PKGINSTALL_T);
-		clear();
 		break;
     	    case 7:
     	        temp_conf_installed = (char*)(TEXT_C_GTKL);
 
 		install_config_message(temp_conf_installed);
 		GTKL(ARCHIVE_T, pver, PKGINSTALL_T);
-		clear();
 		break;
     	    case 8:
     	        temp_conf_installed = (char*)(TEXT_C_HYPR);
 
 		install_config_message(temp_conf_installed);
 		HYPR(ARCHIVE_T, pver, PKGINSTALL_T);
-		clear();
 		break;
     	    case 9:
     	        temp_conf_installed = (char*)(TEXT_C_KITT);
 
 		install_config_message(temp_conf_installed);
 		KITT(ARCHIVE_T, pver, PKGINSTALL_T);
-		clear();
 		break;
     	    case 10:
     	        temp_conf_installed = (char*)(TEXT_C_MPVF);
 
 		install_config_message(temp_conf_installed);
 		MPVF(ARCHIVE_T, pver, PKGINSTALL_T);
-		clear();
 		break;
     	    case 11:
     	        temp_conf_installed = (char*)(TEXT_C_NVIM);
 
 		install_config_message(temp_conf_installed);
 		NVIM(ARCHIVE_T, pver, PKGINSTALL_T);
-		clear();
 		break;
     	    case 12:
     	        temp_conf_installed = (char*)(TEXT_C_SWAY);
 
 		install_config_message(temp_conf_installed);
 		SWAY(ARCHIVE_T, pver, PKGINSTALL_T);
-		clear();
 		break;
     	    case 13:
     	        temp_conf_installed = (char*)(TEXT_C_WAYB);
 
 		install_config_message(temp_conf_installed);
 		WAYB(ARCHIVE_T, pver, PKGINSTALL_T);
-		clear();
 		break;
     	    case 14:
     	        temp_conf_installed = (char*)(TEXT_C_ZSHH);
 
 		install_config_message(temp_conf_installed);
 		ZSHH(ARCHIVE_T, pver, PKGINSTALL_T);
-		clear();
 		break;
     	    default:
     		printf(ANSI_RED"\nInvalid character\n"STYLE_END);
@@ -149,6 +135,7 @@ void install_configs(int custom_package_install)  // the partial install script 
 		wait_for_timeout(2, 0);
 		break;
     	}
+	clear();
 	if (install_success)
 	{
 	    printf(UDRL_S"\nInstalled %s successfully.\n"STYLE_END, temp_conf_installed);

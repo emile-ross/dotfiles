@@ -91,13 +91,16 @@ void CAVA(char ARCHIVE, float pver, char PKGINSTALL)
 
 void FAST(char ARCHIVE, float pver, char PKGINSTALL)
 {
+    const char *path = malloc(22);
+    path = "~/.config/fastfetch/";
+
     char cmd[768];
     if (ARCHIVE == 'Y' || ARCHIVE == 'y')
     {
     	// backup fastfetch config
     	snprintf(cmd, 96,
-		"mv ~/.config/fastfetch/config.jsonc "
-		"~/.config/fastfetch/config-oldv%.2f.jsonc", pver);
+		"mv %sconfig.jsonc "
+		"%sconfig-oldv%.2f.jsonc", path, path, pver);
     	system(cmd);
     }
     if ( PKGINSTALL == 'Y'|| PKGINSTALL == 'y')
@@ -106,13 +109,13 @@ void FAST(char ARCHIVE, float pver, char PKGINSTALL)
     }
     // export fastfetch config
     snprintf(cmd, sizeof(cmd),
-	    "rm ~/.config/fastfetch ; "
-	    "mkdir -p ~/.config/fastfetch/assets ; "
-	    "cp -f %s/fastfetch/assets/*.png ~/.config/fastfetch/assets ; "
-	    "cp -f %s/fastfetch/config.jsonc ~/.config/fastfetch ; "
+	    "rm %s ; "
+	    "mkdir -p %sassets ; "
+	    "cp -f %s/fastfetch/assets/*.png %sassets ; "
+	    "cp -f %s/fastfetch/config.jsonc %s ; "
 	    "cp -f ~/.config/fastfetch/config.jsonc ~/.config/fastfetch/config-duplicated.jsonc ; "
 	    "cp -f %s/fastfetch/config-other.jsonc ~/.config/fastfetch ; "
-	    "cp -f %s/fastfetch/config-default.jsonc ~/.config/fastfetch", inpath, inpath, inpath, inpath);
+	    "cp -f %s/fastfetch/config-default.jsonc ~/.config/fastfetch", path, path, inpath, path, inpath, path, inpath, inpath);
     system(cmd);
 }
 void FUZZ(char ARCHIVE, float pver, char PKGINSTALL)
