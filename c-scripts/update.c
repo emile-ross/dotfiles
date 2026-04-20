@@ -66,7 +66,7 @@ int full_update(char ARCHIVE, float pver)
 
 	case STABLE:
 	    printf("\nYou are running the latest stableversion.\n");
-    	    wait_for_timeout(2, 0); // let the user read the message
+    	    wait_for_timeout(SHORT_TIMER, 0); // let the user read the message
     	    break;
 
 	case LATEST:

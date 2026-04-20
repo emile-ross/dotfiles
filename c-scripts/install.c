@@ -132,7 +132,7 @@ void install_configs(int custom_package_install)  // the partial install script 
     	    default:
     		printf(ANSI_RED"\nInvalid character\n"STYLE_END);
 		install_success = false;
-		wait_for_timeout(2, 0);
+		wait_for_timeout(SHORT_TIMER, 0);
 		break;
     	}
 	clear();

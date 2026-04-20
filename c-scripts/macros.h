@@ -25,3 +25,6 @@
 #define INPUT_EXIT_VALUE 0
 
 #define KEY_MAIN_MENU_CONFIGURE 3
+
+
+#define SHORT_TIMER 2
