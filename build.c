@@ -8,7 +8,7 @@
 char object_fpath[16] = "c-scripts/";
 char source_fpath[16] = "c-scripts/";
 
-char output_binary_name[16] = "setup";
+const char output_binary_name[16] = "setup";	// set the name of the binary file
 
 // Warnings flags
 #define FLAG_BUFFER_SIZE (16)

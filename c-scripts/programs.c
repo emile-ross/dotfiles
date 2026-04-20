@@ -309,14 +309,14 @@ void SWAY(char ARCHIVE, float pver, char PKGINSTALL)
 
 void WAYB(char ARCHIVE, float pver, char PKGINSTALL)
 {
-    const char *path = "~/.config/waybar";
+    const char *path = "~/.config/waybar/";
     char cmd[256];
     if (ARCHIVE == 'Y' || ARCHIVE == 'y')
     {
     	// archive waybar
         snprintf(cmd, sizeof(cmd),
-		"mv ~/.config/waybar/config.jsonc ~/.config/waybar/config-oldv%.2f.jsonc ; "
-		"mv ~/.config/waybar/style.css ~/.config/waybar/style-oldv%.2f.css", pver, pver);
+		"mv %sconfig.jsonc ~/.config/waybar/config-oldv%.2f.jsonc ; "
+		"mv %sstyle.css ~/.config/waybar/style-oldv%.2f.css", path, pver, path, pver);
 	system(cmd);
     }
     if ( PKGINSTALL == 'Y'|| PKGINSTALL == 'y')
