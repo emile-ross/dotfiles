@@ -20,6 +20,7 @@
     char* help_flag_arg_text = "--help";	// flag for the help menu
     char* pkgi_flag_arg_text = "-p";	// flag to install a package
     char* conf_inst_flag_arg_text = "-c";	// flag to install a config
+    char* conf_info_flag_arg_text = "-i";	// flag to install a package
     
     char fuzzel_view_config_text[32] = "Preview Fuzzel appearance";
     char fuzzel_edit_config_text[32] = "Edit Fuzzel config";
