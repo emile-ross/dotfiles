@@ -26,5 +26,5 @@
 
 #define KEY_MAIN_MENU_CONFIGURE 3
 
-
+#define MENU_TEXT_SIZE (128)
 #define SHORT_TIMER 2
