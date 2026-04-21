@@ -122,6 +122,16 @@ Vous pouvez aussi ajouter l'étiquette ``--noconfirm`` afin d'éviter les averti
 
 Veuillez noter que ceci ne compile que le code nécessaire pour le script d'installation.
 
+**Installation Partielle**
+
+Vous pouvez utiliser le drapeau ``-c`` afin d'installer une seule configuration
+
+par exemple: ``./setup -c hyprland`` installe la configuration hyprland *(uniquement la configuration, utilisez ``-p`` pour installer le paquet)*
+
+Vous pouvez utiliser le drapeau ``-p`` afin d'installer un paquet avec le bon "Package Manager"
+
+par exemple: ``./setup -p cava`` Cette commande installe cava *(uniquement le paquet, utilisez ``-c`` pour la configuration)*
+
 ## Touches utiles pour Hyprland
 des touches utiles a connaitre:
 (super = "la touche Windows")
