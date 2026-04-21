@@ -93,55 +93,55 @@ void config_description(char *package_t)
 {
     switch (detect_config_name(package_t)) 
     {
-        case CONF_BASH:
+        case bash:
             printf("Bash, (Bourne Again SHell) is the default shell on most Linux distributions.\n");
             break;
 
-        case CONF_BPYT:
+        case bpyt:
             printf("bpytop is a system resource monitor.\n");
             break;
 
-        case CONF_BTOP:
+        case btop:
             printf("btop is a system resource monitor.\n");
             break;
 
-        case CONF_CAVA:
+        case cava:
             printf("Cava is a Cross-platform Audio Visualizer.\n");
             break;
 
-        case CONF_FAST:
+        case fast:
             printf("Fastfetch is a fast system information tool made in C.\n");
             break;
 
-        case CONF_FUZZ:
+        case fuzz:
             printf("Fuzzel is an App launcher and fuzzy finder based on rofi & dmenu.\n");
             break;
 
-        case CONF_GTKL:
+        case gtkl:
             printf("Gtklock is a GTK lockscreen for Wayland.\n");
             break;
 
-        case CONF_HYPR:
+        case hypr:
             printf("Hyprland is a dynamic tiling window manager made for Wayland.\n");
             break;
 
-	case CONF_KITT:
+	case kitt:
             printf("Kitty is a fast, GPU based terminal emulator.\n");
             break;
 
-        case CONF_MPVF:
+        case mpvf:
             printf("MPV is a cross-platform media player made for the command line.\n");
             break;
 
-        case CONF_NVIM:
+        case nvim:
             printf("Neovim is a modern Vi-based text editor.\n");
             break;
  
-        case CONF_WAYB:
+        case wayb:
             printf("Waybar is an highly customizable\n");
             break;
 
-	case CONF_ZSHH:
+	case zshh:
             printf("Zsh (Z shell) is a command line interpreter focused on speed and efficiency.\n");
 	    break;
         default:
@@ -155,59 +155,59 @@ void argument_config_install(char *package_t, char archiving_t, char pkginstall_
 
     switch (detect_config_name(package_t)) 
     {
-        case CONF_BASH:
+        case bash:
 	    BASH();
             break;
 
-        case CONF_BPYT:
+        case bpyt:
 	    BPYT(archiving_t, version, pkginstall_t);
             break;
 
-        case CONF_BTOP:
+        case btop:
 	    BTOP(archiving_t, version, pkginstall_t);
             break;
 
-        case CONF_CAVA:
+        case cava:
 	    CAVA(archiving_t, version, pkginstall_t);
             break;
 
-        case CONF_FAST:
+        case fast:
 	    FAST(archiving_t, version, pkginstall_t);
             break;
 
-        case CONF_FUZZ:
+        case fuzz:
 	    FUZZ(archiving_t, version, pkginstall_t);
             break;
 
-        case CONF_GTKL:
+        case gtkl:
 	    GTKL(archiving_t, version, pkginstall_t);
             break;
 
-        case CONF_HYPR:
+        case hypr:
 	    HYPR(archiving_t, version, pkginstall_t);
             break;
 
-	case CONF_KITT:
+	case kitt:
 	    KITT(archiving_t, version, pkginstall_t);
             break;
 
-        case CONF_MPVF:
+        case mpvf:
 	    MPVF(archiving_t, version, pkginstall_t);
             break;
 
-        case CONF_NVIM:
+        case nvim:
 	    NVIM(archiving_t, version, pkginstall_t);
             break;
  
-        case CONF_SWAY:
+        case sway:
 	    SWAY(archiving_t, version, pkginstall_t);
             break;
 
-        case CONF_WAYB:
+        case wayb:
 	    WAYB(archiving_t, version, pkginstall_t);
             break;
 
-	case CONF_ZSHH:
+	case zshh:
 	    ZSHH(archiving_t, version, pkginstall_t);
 	    break;
 
@@ -258,39 +258,39 @@ config_name detect_config_name(char *input)
     };
 
     // match the name to the correct config name
-    if (strcmp(input, "bash") == 0) return CONF_BASH;
-    if (strcmp(input, "btop") == 0) return CONF_BTOP;
-    if (strcmp(input, "bpytop") == 0) return CONF_BPYT;
-    if (strcmp(input, "cava") == 0) return CONF_CAVA;
-    if (strcmp(input, "fastfetch") == 0) return CONF_FAST;
-    if (strcmp(input, "fuzzel") == 0) return CONF_FUZZ;
-    if (strcmp(input, "gtklock") == 0) return CONF_GTKL;
-    if (strcmp(input, HYPR_ARG_NAME[0]) == 0) return CONF_HYPR;
-    if (strcmp(input, "kitty") == 0) return CONF_KITT;
-    if (strcmp(input, "mpv") == 0) return CONF_MPVF;
-    if (strcmp(input, "nvim") == 0) return CONF_NVIM;
-    if (strcmp(input, "sway") == 0) return CONF_SWAY;
-    if (strcmp(input, "waybar") == 0) return CONF_WAYB;
-    if (strcmp(input, "zsh") == 0) return CONF_ZSHH;
+    if (strcmp(input, "bash") == 0) return bash;
+    if (strcmp(input, "bpytop") == 0) return bpyt;
+    if (strcmp(input, "btop") == 0) return btop;
+    if (strcmp(input, "cava") == 0) return cava;
+    if (strcmp(input, "fastfetch") == 0) return fast;
+    if (strcmp(input, "fuzzel") == 0) return fuzz;
+    if (strcmp(input, "gtklock") == 0) return gtkl;
+    if (strcmp(input, HYPR_ARG_NAME[0]) == 0) return hypr;
+    if (strcmp(input, "kitty") == 0) return kitt;
+    if (strcmp(input, "mpv") == 0) return mpvf;
+    if (strcmp(input, "nvim") == 0) return nvim;
+    if (strcmp(input, "sway") == 0) return sway;
+    if (strcmp(input, "waybar") == 0) return wayb;
+    if (strcmp(input, "zsh") == 0) return zshh;
 
     // alternative names
     // check for hyprland
     int i = 1;
     while (HYPR_ARG_NAME[i] != NULL)
     {
-	if (strcmp(input, HYPR_ARG_NAME[i]) == 0) return CONF_HYPR;
+	if (strcmp(input, HYPR_ARG_NAME[i]) == 0) return hypr;
 	i++;
     }
     // check for nvim
     i = 1;
     while (NVIM_ARG_NAME[i] != NULL)
     {
-	if (strcmp(input, NVIM_ARG_NAME[i]) == 0) return CONF_NVIM;
+	if (strcmp(input, NVIM_ARG_NAME[i]) == 0) return nvim;
 	i++;
     }
 
-    if (strcmp(input, "swaywm") == 0) return CONF_SWAY;
-    if (strcmp(input, "fast") == 0) return CONF_FAST;
-    if (strcmp(input, "fuzz") == 0) return CONF_FUZZ;
-    return CONF_UNKNOWN;
+    if (strcmp(input, "swaywm") == 0) return sway;
+    if (strcmp(input, "fast") == 0) return fast;
+    if (strcmp(input, "fuzz") == 0) return fuzz;
+    return unknown;
 }

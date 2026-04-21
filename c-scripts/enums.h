@@ -22,21 +22,21 @@ typedef enum
 
 typedef enum 
 {
-    CONF_UNKNOWN = 0,
-    CONF_BASH,
-    CONF_BTOP,
-    CONF_BPYT,
-    CONF_CAVA,
-    CONF_FAST,
-    CONF_FUZZ,
-    CONF_GTKL,
-    CONF_HYPR,
-    CONF_KITT,
-    CONF_MPVF,
-    CONF_NVIM,
-    CONF_SWAY,
-    CONF_WAYB,
-    CONF_ZSHH
+    unknown = 0,
+    bash,
+    btop,
+    bpyt,
+    cava,
+    fast,
+    fuzz,
+    gtkl,
+    hypr,
+    kitt,
+    mpvf,
+    nvim,
+    sway,
+    wayb,
+    zshh
 } config_name;
 
 typedef enum

@@ -50,90 +50,89 @@ void install_configs(int custom_package_install)  // the partial install script 
 	char PKGINSTALL_T;
 	scanf(" %c", &PKGINSTALL_T);
 
-
 	enum config_name;
 	config_name config_install_enum;
     	switch (config_install_enum)
     	{
-    	    case 1:
+    	    case bash:
     	        temp_conf_installed = (char*)(TEXT_C_BASH);
 
 		install_config_message(temp_conf_installed);
 		BASH();
 		break;
-    	    case 2:
+    	    case bpyt:
     	        temp_conf_installed = (char*)(TEXT_C_BPYT);
 
 		install_config_message(temp_conf_installed);
 		BPYT(ARCHIVE_T, pver, PKGINSTALL_T);
 		break;
-    	    case 3:
+    	    case btop:
     	        temp_conf_installed = (char*)(TEXT_C_BTOP);
 
 		install_config_message(temp_conf_installed);
 		BTOP(ARCHIVE_T, pver, PKGINSTALL_T);
 		break;
-	    case 4:
+	    case cava:
     	        temp_conf_installed = (char*)(TEXT_C_CAVA);
 
 		install_config_message(temp_conf_installed);
 		CAVA(ARCHIVE_T, pver, PKGINSTALL_T);
 		break;
-    	    case 5:
+    	    case fast:
     	        temp_conf_installed = (char*)(TEXT_C_FAST);
 
 		install_config_message(temp_conf_installed);
 		FAST(ARCHIVE_T, pver, PKGINSTALL_T);
 		break;
-    	    case 6:
+    	    case fuzz:
     	        temp_conf_installed = (char*)(TEXT_C_FUZZ);
 
 		install_config_message(temp_conf_installed);
 		FUZZ(ARCHIVE_T, pver, PKGINSTALL_T);
 		break;
-    	    case 7:
+    	    case gtkl:
     	        temp_conf_installed = (char*)(TEXT_C_GTKL);
 
 		install_config_message(temp_conf_installed);
 		GTKL(ARCHIVE_T, pver, PKGINSTALL_T);
 		break;
-    	    case 8:
+    	    case hypr:
     	        temp_conf_installed = (char*)(TEXT_C_HYPR);
 
 		install_config_message(temp_conf_installed);
 		HYPR(ARCHIVE_T, pver, PKGINSTALL_T);
 		break;
-    	    case 9:
+    	    case kitt:
     	        temp_conf_installed = (char*)(TEXT_C_KITT);
 
 		install_config_message(temp_conf_installed);
 		KITT(ARCHIVE_T, pver, PKGINSTALL_T);
 		break;
-    	    case 10:
+    	    case mpvf:
     	        temp_conf_installed = (char*)(TEXT_C_MPVF);
 
 		install_config_message(temp_conf_installed);
 		MPVF(ARCHIVE_T, pver, PKGINSTALL_T);
 		break;
-    	    case 11:
+    	    case nvim:
     	        temp_conf_installed = (char*)(TEXT_C_NVIM);
 
 		install_config_message(temp_conf_installed);
 		NVIM(ARCHIVE_T, pver, PKGINSTALL_T);
 		break;
-    	    case 12:
+    	    case sway:
     	        temp_conf_installed = (char*)(TEXT_C_SWAY);
 
 		install_config_message(temp_conf_installed);
 		SWAY(ARCHIVE_T, pver, PKGINSTALL_T);
 		break;
-    	    case 13:
+    	    case wayb:
     	        temp_conf_installed = (char*)(TEXT_C_WAYB);
 
 		install_config_message(temp_conf_installed);
 		WAYB(ARCHIVE_T, pver, PKGINSTALL_T);
 		break;
-    	    case 14:
+    	    case zshh:
     	        temp_conf_installed = (char*)(TEXT_C_ZSHH);
 
 		install_config_message(temp_conf_installed);
@@ -176,6 +175,9 @@ void full_install(bool ARCHIVE_BL, bool full_install_bl)
 	int install_pkg_opt;
 	do
 	{
+	    // this is awful
+	    // it could all be replaced by a single array with all of the text 
+	    // (would be significantly faster, better, more maintainable...)
 	    printf("\n[1] Install %s ", TEXT_C_BASH);
 	    printf("\n[2] Install %s ", TEXT_C_BPYT);
 	    printf("\n[3] Install %s ", TEXT_C_BTOP);
