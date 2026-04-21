@@ -22,7 +22,7 @@ typedef enum
 
 typedef enum 
 {
-    CONF_UNKNOWN,
+    CONF_UNKNOWN = 0,
     CONF_BASH,
     CONF_BTOP,
     CONF_BPYT,
@@ -37,7 +37,7 @@ typedef enum
     CONF_SWAY,
     CONF_WAYB,
     CONF_ZSHH
-} pkg_conf_name;
+} config_name;
 
 typedef enum
 {

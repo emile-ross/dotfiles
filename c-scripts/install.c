@@ -19,7 +19,7 @@ void install_menu(void)
     bool full_install_bl = yn(full_install_opt);
     if (full_install_bl)
     {
-        full_install(archive_bl, 'y');
+        full_install(archive_bl, true);
     }
     else
     {
@@ -50,7 +50,10 @@ void install_configs(int custom_package_install)  // the partial install script 
 	char PKGINSTALL_T;
 	scanf(" %c", &PKGINSTALL_T);
 
-    	switch (custom_package_install)
+
+	enum config_name;
+	config_name config_install_enum;
+    	switch (config_install_enum)
     	{
     	    case 1:
     	        temp_conf_installed = (char*)(TEXT_C_BASH);
@@ -152,9 +155,9 @@ void install_configs(int custom_package_install)  // the partial install script 
     while(custom_package_install > 0 && custom_package_install < max_menu_opt_n);
 }
 
-void full_install(bool ARCHIVE_BL, char full_install_opt)
+void full_install(bool ARCHIVE_BL, bool full_install_bl)
 {
-    if (full_install_opt == 'Y' || full_install_opt == 'y')
+    if (full_install_bl)
     {
 	printf(BOLD_S"\nInstalling every configuration\n"STYLE_END);
 	printf(BOLD_S"\nStarting in:\n"STYLE_END);
@@ -166,7 +169,7 @@ void full_install(bool ARCHIVE_BL, char full_install_opt)
 	    check_for_yay();
 	}
 	// actually install the dotfiles
-	full_config_install(ARCHIVE_BL, 0.0, 'Y');
+	full_config_install(ARCHIVE_BL, 0.0, true);
     }
     else
     {
@@ -198,7 +201,7 @@ void full_install(bool ARCHIVE_BL, char full_install_opt)
 }
 
 
-void full_config_install(bool ARCHIVE_BL, float previous_version_t, char install_packages_t)
+void full_config_install(bool ARCHIVE_BL, float previous_version_t, bool install_packages_t)
 {
     // a list of all configs
     // this will execute all configuration entries

@@ -39,8 +39,8 @@ bool yn(char yn);
 
 int install_package(char *pkg_type_distro, char *pkginstallname);
 void install_menu(void);
-void full_install(bool ARCHIVE_BL, char full_install_opt);
-void full_config_install(bool ARCHIVE_BL, float previous_version_t, char install_packages_t);
+void full_install(bool ARCHIVE_BL, bool full_install_bl);
+void full_config_install(bool ARCHIVE_BL, float previous_version_t, bool install_packages_t);
 void install_configs(int custom_package_install); // the partial install script (configure which package or configuration to install)
 void copyfiles(int fastfetch_conf_export);
 void check_for_yay(void);
@@ -49,7 +49,7 @@ void link_fastfetch_configs(void);
 void configure_oh_my_zsh(void);
 void configure_fastfetch(void);
 
-pkg_conf_name detect_config_name(char *input);
+config_name detect_config_name(char *input);
 
 // time related
 void countdown(int counter, int lines_to_skip);

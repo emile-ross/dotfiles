@@ -236,7 +236,7 @@ void cmd_arg_install(int num_cmd_arguments_t, char *cmd_arg_v_t[], char config_a
     }
 }
 
-pkg_conf_name detect_config_name(char *input) 
+config_name detect_config_name(char *input) 
 {
     char *HYPR_ARG_NAME[5] = 
     {
