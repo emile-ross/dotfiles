@@ -337,13 +337,16 @@ void WAYB(char ARCHIVE, float pver, char PKGINSTALL)
 void ZSHH(char ARCHIVE, float pver, char PKGINSTALL)
 {
     char cmd[128];
-    if (ARCHIVE == 'Y' || ARCHIVE == 'y')
+
+    bool archive_bl = yn(ARCHIVE);
+    if (archive_bl)
     {
     	// archive old zsh config
         snprintf(cmd, sizeof(cmd),
 		"mv ~/.zshrc ~/.zshrc-old-v%.2f", pver);
 	system(cmd);
     }
+
     if ( PKGINSTALL == 'Y'|| PKGINSTALL == 'y')
     {
 	install_package(parent, "zsh");
@@ -373,7 +376,7 @@ int install_package(char *pkg_type_distro, char *pkginstallname)
     else 
     {
     	printf("Your distribution is not supported.\n");
-    	wait_for_timeout(0, 1);
+    	wait_for_timeout(SHORT_TIMER, 1);
     }
 
     return 0;

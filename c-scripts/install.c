@@ -14,9 +14,15 @@ void install_menu(void)
     
     printf(BOLD_S"\nProceed with installation (Y/n)\n"STYLE_END); // prompt user for input
     scanf(" %c", &full_install_opt);
-    if (full_install_opt == 'Y' || full_install_opt == 'y')
+
+    bool full_install_bl = yn(full_install_opt);
+    if (full_install_bl)
     {
         full_install(archive_before_install, 'y');
+    }
+    else
+    {
+	printf("Skipping full install\n");
     }
 }
 

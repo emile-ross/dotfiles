@@ -34,6 +34,7 @@ void ZSHH(char ARCHIVE, float pver, char PKGINSTALL);
 void clear(void);
 void clearbuffer(void);
 void pre_startup(void);
+bool yn(char yn);
 
 
 int install_package(char *pkg_type_distro, char *pkginstallname);
