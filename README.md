@@ -33,6 +33,7 @@ If you want to **Install** your dotfiles, click [here](#Install)
   </tr>
 </table>
 
+<img src="assets/main-menu.png" alt="installer" width=340>
 
 ## prerequisites
 - an Arch based distribution of linux (Windows will **never** get support)
