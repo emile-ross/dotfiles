@@ -226,7 +226,7 @@ int main(int argc, char *argv[])
 	    }
 	    while (menu_activate_linux > INPUT_BACK_VALUE);
     	}
-    	else if (menu_one_i == 0 || menu_one_i > 4)
+    	else if (menu_one_i == INPUT_EXIT_VALUE || menu_one_i > 4)
     	{
     		printf("\nExiting..\n");
     		return 0;
