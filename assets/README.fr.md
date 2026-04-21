@@ -34,7 +34,7 @@ Si vous voulez **Installer** vos configurations, cliquez [ici](#Installer)
   </tr>
 </table>
 
-<img src="main-menu.png" alt="installer" width=360>
+<img src="menu.png" alt="un apercu du programme" width=320>
 
 ## prérequis
 - une distribution basée sur Arch Linux (Windows ne sera **jamais** supporté)
