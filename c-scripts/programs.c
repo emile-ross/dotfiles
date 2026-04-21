@@ -23,10 +23,10 @@ void BASH(void)
     free(cmd);
 }
 
-void BPYT(char ARCHIVE, float pver, char PKGINSTALL)
+void BPYT(bool archive_bl, float pver, bool pkginstall_bl)
 {
     char cmd[192];
-    if (ARCHIVE == 'Y' || ARCHIVE == 'y')
+    if (archive_bl)
     {
     	// archive bpytop config
     	snprintf(cmd, sizeof(cmd),
@@ -34,7 +34,7 @@ void BPYT(char ARCHIVE, float pver, char PKGINSTALL)
     		"~/.config/bpytop/bpytop-oldv%.2f.conf", pver);
     	system(cmd);
     }
-    if ( PKGINSTALL == 'Y'|| PKGINSTALL == 'y')
+    if (pkginstall_bl)
     {
 	install_package(parent, "bpytop"); // install bpytop package
     }
@@ -45,10 +45,10 @@ void BPYT(char ARCHIVE, float pver, char PKGINSTALL)
     system(cmd);
 }
 
-void BTOP(char ARCHIVE, float pver, char PKGINSTALL)
+void BTOP(bool archive_bl, float pver, bool pkginstall_bl)
 {
     char cmd[128];
-    if (ARCHIVE == 'Y' || ARCHIVE == 'y')
+    if (archive_bl)
     {
     	// archive btop config
     	snprintf(cmd, sizeof(cmd),
@@ -56,7 +56,7 @@ void BTOP(char ARCHIVE, float pver, char PKGINSTALL)
     		"~/.config/btop/btop-oldv%.2f.conf", pver);
     	system(cmd);
     }
-    if ( PKGINSTALL == 'Y'|| PKGINSTALL == 'y')
+    if (pkginstall_bl)
     {
 	install_package(parent, "btop"); // install btop package
     }
@@ -67,10 +67,10 @@ void BTOP(char ARCHIVE, float pver, char PKGINSTALL)
     system(cmd);
 }
 
-void CAVA(char ARCHIVE, float pver, char PKGINSTALL)
+void CAVA(bool archive_bl, float pver, bool pkginstall_bl)
 {
     char cmd[128];
-    if (ARCHIVE == 'Y' || ARCHIVE == 'y')
+    if (archive_bl)
     {
         // backup cava config
         snprintf(cmd, sizeof(cmd),
@@ -78,7 +78,7 @@ void CAVA(char ARCHIVE, float pver, char PKGINSTALL)
 		"~/.config/cava/config-oldv%.2f", pver);
         system(cmd);
     }
-    if ( PKGINSTALL == 'Y'|| PKGINSTALL == 'y')
+    if (pkginstall_bl)
     {
 	install_package(parent, "cava"); // install cava package
     }
@@ -89,13 +89,13 @@ void CAVA(char ARCHIVE, float pver, char PKGINSTALL)
     system(cmd);
 }
 
-void FAST(char ARCHIVE, float pver, char PKGINSTALL)
+void FAST(bool archive_bl, float pver, bool pkginstall_bl)
 {
     const char *path = malloc(22);
     path = "~/.config/fastfetch/";
 
     char cmd[768];
-    if (ARCHIVE == 'Y' || ARCHIVE == 'y')
+    if (archive_bl)
     {
     	// backup fastfetch config
     	snprintf(cmd, 96,
@@ -103,7 +103,7 @@ void FAST(char ARCHIVE, float pver, char PKGINSTALL)
 		"%sconfig-oldv%.2f.jsonc", path, path, pver);
     	system(cmd);
     }
-    if ( PKGINSTALL == 'Y'|| PKGINSTALL == 'y')
+    if (pkginstall_bl)
     {
 	install_package(parent, "fastfetch"); // install fastfetch
     }
@@ -118,10 +118,10 @@ void FAST(char ARCHIVE, float pver, char PKGINSTALL)
 	    "cp -f %s/fastfetch/config-default.jsonc ~/.config/fastfetch", path, path, inpath, path, inpath, path, inpath, inpath);
     system(cmd);
 }
-void FUZZ(char ARCHIVE, float pver, char PKGINSTALL)
+void FUZZ(bool archive_bl, float pver, bool pkginstall_bl)
 {
     char cmd[1024];
-    if (ARCHIVE == 'Y' || ARCHIVE == 'y')
+    if (archive_bl)
     {
     	// backup fuzzel config
         snprintf(cmd, sizeof(cmd),
@@ -133,7 +133,7 @@ void FUZZ(char ARCHIVE, float pver, char PKGINSTALL)
     		"~/.config/fuzzel/fuzzel-oldv%.2f.ini", pver, pver, pver);
     	system(cmd);
     }
-    if ( PKGINSTALL == 'Y'|| PKGINSTALL == 'y')
+    if (pkginstall_bl)
     {
 	// install fuzzel package
 	install_package(parent, "fuzzel");
@@ -149,10 +149,10 @@ void FUZZ(char ARCHIVE, float pver, char PKGINSTALL)
 	    "ln -sf ~/.config/fuzzel/fuzzel-duplicated.ini ~/.config/fuzzel/fuzzel.ini ", inpath, inpath, inpath);
     system(cmd);  		
 }
-void GTKL(char ARCHIVE, float pver, char PKGINSTALL)
+void GTKL(bool archive_bl, float pver, bool pkginstall_bl)
 {
     char cmd[512];
-    if (ARCHIVE == 'Y' || ARCHIVE == 'y')
+    if (archive_bl)
     {
     	// backup gtklock config
         snprintf(cmd, sizeof(cmd),
@@ -161,7 +161,7 @@ void GTKL(char ARCHIVE, float pver, char PKGINSTALL)
     		pver);
     	system(cmd);
     }
-    if (PKGINSTALL == 'Y'|| PKGINSTALL == 'y')
+    if (pkginstall_bl)
     {
 	// install gtklock package
 	install_package(parent, "gtklock");
@@ -174,9 +174,9 @@ void GTKL(char ARCHIVE, float pver, char PKGINSTALL)
     system(cmd);
 }
 
-void HYPR(char ARCHIVE, float pver, char PKGINSTALL)
+void HYPR(bool archive_bl, float pver, bool pkginstall_bl)
 {
-    if (ARCHIVE == 'Y' || ARCHIVE == 'y')
+    if (archive_bl)
     {
     	// archive hyprland configs
 	char cmd[1536];
@@ -187,7 +187,7 @@ void HYPR(char ARCHIVE, float pver, char PKGINSTALL)
         	"mv ~/.config/hypr/hypridle.conf ~/.config/hypr/hypridle-oldv%.2f.conf", pver, pver, pver, pver);
         system(cmd);
     }
-    if ( PKGINSTALL == 'Y'|| PKGINSTALL == 'y')
+    if (pkginstall_bl)
     {
 	// install Hyprland packages
 	install_package(parent, "hyprlock hypridle hyprpaper hyprland");
@@ -214,10 +214,10 @@ void HYPR(char ARCHIVE, float pver, char PKGINSTALL)
 	    inpath, inpath, inpath, inpath, inpath);
     system(cmd);
 }
-void KITT(char ARCHIVE, float pver, char PKGINSTALL)
+void KITT(bool archive_bl, float pver, bool pkginstall_bl)
 {
     char cmd[256];
-    if (ARCHIVE == 'Y' || ARCHIVE == 'y')
+    if (archive_bl)
     {
     	// backup kitty config
         snprintf(cmd, sizeof(cmd),
@@ -225,7 +225,7 @@ void KITT(char ARCHIVE, float pver, char PKGINSTALL)
     		"~/.config/kitty/kitty-oldv%.2f.conf", pver);
     	system(cmd);
     }
-    if ( PKGINSTALL == 'Y'|| PKGINSTALL == 'y')
+    if (pkginstall_bl)
     {
 	// install kitty package
 	//  the kitty terminal is most likely already installed on your system
@@ -239,10 +239,10 @@ void KITT(char ARCHIVE, float pver, char PKGINSTALL)
     system(cmd);
 }
 
-void MPVF(char ARCHIVE, float pver, char PKGINSTALL)
+void MPVF(bool archive_bl, float pver, bool pkginstall_bl)
 {
     char cmd[256];
-    if (ARCHIVE == 'Y' || ARCHIVE == 'y')
+    if (archive_bl)
     {
     	// archive mpv config
         snprintf(cmd, sizeof(cmd),
@@ -250,7 +250,7 @@ void MPVF(char ARCHIVE, float pver, char PKGINSTALL)
 	system(cmd);
 	printf(BOLD_S"\nThe old "UDRL_S"mpv"STYLE_END BOLD_S" config was archived\n"STYLE_END);
     }
-    if ( PKGINSTALL == 'Y'|| PKGINSTALL == 'y')
+    if (pkginstall_bl)
     {
 	install_package(parent, "mpv");
     }
@@ -261,10 +261,10 @@ void MPVF(char ARCHIVE, float pver, char PKGINSTALL)
     system(cmd);
 }
 
-void NVIM(char ARCHIVE, float pver, char PKGINSTALL)
+void NVIM(bool archive_bl, float pver, bool pkginstall_bl)
 {
     char cmd[256];
-    if (ARCHIVE == 'Y' || ARCHIVE == 'y')
+    if (archive_bl)
     {
         snprintf(cmd, sizeof(cmd),
     	    	"mv ~/.config/nvim/init.lua ~/.config/nvim/init-oldv%.2f.lua ; "
@@ -273,7 +273,7 @@ void NVIM(char ARCHIVE, float pver, char PKGINSTALL)
     	    	pver, pver, pver);
         system(cmd);
     }
-    if (PKGINSTALL == 'Y'|| PKGINSTALL == 'y')
+    if (pkginstall_bl)
     {
 	// install neovim (nvim) package
 	// nvim is most likely already installed 
@@ -287,17 +287,17 @@ void NVIM(char ARCHIVE, float pver, char PKGINSTALL)
     system(cmd);
 }
 
-void SWAY(char ARCHIVE, float pver, char PKGINSTALL)
+void SWAY(bool archive_bl, float pver, bool pkginstall_bl)
 {
     // sway window manager doesn't work without wlroots
     char cmd[256];
-    if (ARCHIVE == 'Y' || ARCHIVE == 'y')
+    if (archive_bl)
     {
         snprintf(cmd, 64,
     	    	"mv ~/.config/sway/config ~/.config/sway/config-oldv%.2f ", pver);
         system(cmd);
     }
-    if (PKGINSTALL == 'Y'|| PKGINSTALL == 'y')
+    if (pkginstall_bl)
     {
 	// install sway package -- a system update is strongly recommended 
 	install_package(parent, "wlroots swaylock sway swayidle");
@@ -310,11 +310,11 @@ void SWAY(char ARCHIVE, float pver, char PKGINSTALL)
     system(cmd);
 }
 
-void WAYB(char ARCHIVE, float pver, char PKGINSTALL)
+void WAYB(bool archive_bl, float pver, bool pkginstall_bl)
 {
     const char *path = "~/.config/waybar/";
     char cmd[256];
-    if (ARCHIVE == 'Y' || ARCHIVE == 'y')
+    if (archive_bl)
     {
     	// archive waybar
         snprintf(cmd, sizeof(cmd),
@@ -322,7 +322,7 @@ void WAYB(char ARCHIVE, float pver, char PKGINSTALL)
 		"mv %sstyle.css ~/.config/waybar/style-oldv%.2f.css", path, pver, path, pver);
 	system(cmd);
     }
-    if ( PKGINSTALL == 'Y'|| PKGINSTALL == 'y')
+    if (pkginstall_bl)
     {
 	install_package(parent, "waybar");
     }
@@ -334,11 +334,9 @@ void WAYB(char ARCHIVE, float pver, char PKGINSTALL)
     system(cmd);
 }
 
-void ZSHH(char ARCHIVE, float pver, char PKGINSTALL)
+void ZSHH(bool archive_bl, float pver, bool pkginstall_bl)
 {
     char cmd[128];
-
-    bool archive_bl = yn(ARCHIVE);
     if (archive_bl)
     {
     	// archive old zsh config
@@ -347,7 +345,7 @@ void ZSHH(char ARCHIVE, float pver, char PKGINSTALL)
 	system(cmd);
     }
 
-    if ( PKGINSTALL == 'Y'|| PKGINSTALL == 'y')
+    if (pkginstall_bl)
     {
 	install_package(parent, "zsh");
     }

@@ -16,19 +16,19 @@
 
 
 void BASH(void);
-void SWAY(char ARCHIVE, float pver, char PKGINSTALL);
-void BTOP(char ARCHIVE, float pver, char PKGINSTALL);
-void BPYT(char ARCHIVE, float pver, char PKGINSTALL);
-void CAVA(char ARCHIVE, float pver, char PKGINSTALL);
-void FAST(char ARCHIVE, float pver, char PKGINSTALL);
-void FUZZ(char ARCHIVE, float pver, char PKGINSTALL);
-void GTKL(char ARCHIVE, float pver, char PKGINSTALL);
-void HYPR(char ARCHIVE, float pver, char PKGINSTALL);
-void KITT(char ARCHIVE, float pver, char PKGINSTALL);
-void MPVF(char ARCHIVE, float pver, char PKGINSTALL);
-void NVIM(char ARCHIVE, float pver, char PKGINSTALL);
-void WAYB(char ARCHIVE, float pver, char PKGINSTALL);
-void ZSHH(char ARCHIVE, float pver, char PKGINSTALL);
+void SWAY(bool archive_bl, float pver, bool pkginstall_bl);
+void BTOP(bool archive_bl, float pver, bool pkginstall_bl);
+void BPYT(bool archive_bl, float pver, bool pkginstall_bl);
+void CAVA(bool archive_bl, float pver, bool pkginstall_bl);
+void FAST(bool archive_bl, float pver, bool pkginstall_bl);
+void FUZZ(bool archive_bl, float pver, bool pkginstall_bl);
+void GTKL(bool archive_bl, float pver, bool pkginstall_bl);
+void HYPR(bool archive_bl, float pver, bool pkginstall_bl);
+void KITT(bool archive_bl, float pver, bool pkginstall_bl);
+void MPVF(bool archive_bl, float pver, bool pkginstall_bl);
+void NVIM(bool archive_bl, float pver, bool pkginstall_bl);
+void WAYB(bool archive_bl, float pver, bool pkginstall_bl);
+void ZSHH(bool archive_bl, float pver, bool pkginstall_bl);
 
 
 void clear(void);
@@ -39,8 +39,8 @@ bool yn(char yn);
 
 int install_package(char *pkg_type_distro, char *pkginstallname);
 void install_menu(void);
-void full_install(char ARCHIVE, char full_install_opt);
-void full_config_install(char choice_ARCHIVE_opt, float previous_version_t, char install_packages_t);
+void full_install(bool ARCHIVE_BL, char full_install_opt);
+void full_config_install(bool ARCHIVE_BL, float previous_version_t, char install_packages_t);
 void install_configs(int custom_package_install); // the partial install script (configure which package or configuration to install)
 void copyfiles(int fastfetch_conf_export);
 void check_for_yay(void);

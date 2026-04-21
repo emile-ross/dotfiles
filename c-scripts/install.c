@@ -15,10 +15,11 @@ void install_menu(void)
     printf(BOLD_S"\nProceed with installation (Y/n)\n"STYLE_END); // prompt user for input
     scanf(" %c", &full_install_opt);
 
+    bool archive_bl = yn(archive_before_install);
     bool full_install_bl = yn(full_install_opt);
     if (full_install_bl)
     {
-        full_install(archive_before_install, 'y');
+        full_install(archive_bl, 'y');
     }
     else
     {
@@ -151,7 +152,7 @@ void install_configs(int custom_package_install)  // the partial install script 
     while(custom_package_install > 0 && custom_package_install < max_menu_opt_n);
 }
 
-void full_install(char install_ARCHIVE, char full_install_opt)
+void full_install(bool ARCHIVE_BL, char full_install_opt)
 {
     if (full_install_opt == 'Y' || full_install_opt == 'y')
     {
@@ -165,7 +166,7 @@ void full_install(char install_ARCHIVE, char full_install_opt)
 	    check_for_yay();
 	}
 	// actually install the dotfiles
-	full_config_install(install_ARCHIVE, 0.0, 'Y');
+	full_config_install(ARCHIVE_BL, 0.0, 'Y');
     }
     else
     {
@@ -197,22 +198,22 @@ void full_install(char install_ARCHIVE, char full_install_opt)
 }
 
 
-void full_config_install(char choice_ARCHIVE_opt, float previous_version_t, char install_packages_t)
+void full_config_install(bool ARCHIVE_BL, float previous_version_t, char install_packages_t)
 {
     // a list of all configs
     // this will execute all configuration entries
     BASH();
-    BPYT(choice_ARCHIVE_opt, previous_version_t, install_packages_t);
-    BTOP(choice_ARCHIVE_opt, previous_version_t, install_packages_t);
-    CAVA(choice_ARCHIVE_opt, previous_version_t, install_packages_t);
-    FAST(choice_ARCHIVE_opt, previous_version_t, install_packages_t);
-    FUZZ(choice_ARCHIVE_opt, previous_version_t, install_packages_t);
-    GTKL(choice_ARCHIVE_opt, previous_version_t, install_packages_t);
-    HYPR(choice_ARCHIVE_opt, previous_version_t, install_packages_t);
-    KITT(choice_ARCHIVE_opt, previous_version_t, install_packages_t);
-    MPVF(choice_ARCHIVE_opt, previous_version_t, install_packages_t);
-    NVIM(choice_ARCHIVE_opt, previous_version_t, install_packages_t);
-    SWAY(choice_ARCHIVE_opt, previous_version_t, install_packages_t);
-    WAYB(choice_ARCHIVE_opt, previous_version_t, install_packages_t);
-    ZSHH(choice_ARCHIVE_opt, previous_version_t, install_packages_t);
+    BPYT(ARCHIVE_BL, previous_version_t, install_packages_t);
+    BTOP(ARCHIVE_BL, previous_version_t, install_packages_t);
+    CAVA(ARCHIVE_BL, previous_version_t, install_packages_t);
+    FAST(ARCHIVE_BL, previous_version_t, install_packages_t);
+    FUZZ(ARCHIVE_BL, previous_version_t, install_packages_t);
+    GTKL(ARCHIVE_BL, previous_version_t, install_packages_t);
+    HYPR(ARCHIVE_BL, previous_version_t, install_packages_t);
+    KITT(ARCHIVE_BL, previous_version_t, install_packages_t);
+    MPVF(ARCHIVE_BL, previous_version_t, install_packages_t);
+    NVIM(ARCHIVE_BL, previous_version_t, install_packages_t);
+    SWAY(ARCHIVE_BL, previous_version_t, install_packages_t);
+    WAYB(ARCHIVE_BL, previous_version_t, install_packages_t);
+    ZSHH(ARCHIVE_BL, previous_version_t, install_packages_t);
 }

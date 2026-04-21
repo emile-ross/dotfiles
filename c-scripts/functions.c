@@ -204,9 +204,13 @@ void countdown(int counter, int lines_to_skip)
     }
 }
 
-bool yn(char yn)
+bool yn(char yes_no)
 {
-    if (yn == 'Y' || yn == 'y')
+    if (yes_no == 'Y' || yes_no == 'y')
+    {
+	return true;
+    }
+    else if (yes_no == 'T' || yes_no == 't')
     {
 	return true;
     }
