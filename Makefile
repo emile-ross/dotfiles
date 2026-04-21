@@ -18,14 +18,14 @@ setup: existing_binaries
 	@./build gcc
 
 base: existing_binaries
-	@./build zig -e
+	@./build std -e
 
 zig: existing_binaries
-	@./build zig
+	@./build std
 
 debug:
 	zig cc $(DEBUG_BUILD_COMMAND)
-	@./build std
+	@#./build std
 
 clean:
 	@./build clean

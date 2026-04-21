@@ -50,7 +50,6 @@ void install_configs(int custom_package_install)  // the partial install script 
 	char PKGINSTALL_T;
 	scanf(" %c", &PKGINSTALL_T);
 
-	enum config_name;
 	config_name config_install_enum;
     	switch (config_install_enum)
     	{

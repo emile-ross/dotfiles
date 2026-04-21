@@ -7,7 +7,6 @@ int full_update(char ARCHIVE, float pver)
     int VAWSM = (int)(pver * 100);
     bool install_pkg_yn = false;
 
-    enum df_version;
     df_version prev_update_version = VAWSM;
 
     switch (prev_update_version)

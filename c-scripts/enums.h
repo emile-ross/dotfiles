@@ -24,8 +24,8 @@ typedef enum
 {
     unknown = 0,
     bash,
-    btop,
     bpyt,
+    btop,
     cava,
     fast,
     fuzz,

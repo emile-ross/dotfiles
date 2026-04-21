@@ -19,6 +19,7 @@ const char Werror_flag[FLAG_BUFFER_SIZE] = " -Werror";
 const char Wpedantic_flag[FLAG_BUFFER_SIZE] = " -Wpedantic";
 const char Wall_flag[FLAG_BUFFER_SIZE] = " -Wall";
 const char c99_flag[FLAG_BUFFER_SIZE] = " -std=c99";
+const char Wconversion_flag[FLAG_BUFFER_SIZE] = " -Wconversion";
 
 int num_flags = 0;
 
@@ -48,20 +49,21 @@ typedef enum
 void clean_objects(void);
 void compile_all_files(char *compiler, char *flags);
 void link_object_files(compiler_enum compiler_name_def, char *flags);
-void compilation(compiler_enum compiler_name_temp, bool error_flag_temp_bl, bool pedantic_flag_temp_bl, bool all_flag_temp_bl, bool extra_flag_temp_bl, bool c99_flag_temp_bl);
+void compilation(compiler_enum compiler_name_temp, bool error_flag_temp_bl, bool pedantic_flag_temp_bl, bool all_flag_temp_bl, bool extra_flag_temp_bl, bool c99_flag_temp_bl, bool conversion_bl);
 
 int main(int argc, char *argv[])
 {
     /* declare compiler_name enum */
     compiler_enum compiler_name;
 
-    bool Werror_flag_bl = false;   /* default is false  */
+    bool Werror_flag_bl = false;    /* default is false */
     bool Wpedantic_bl = false;	    /* default is false */
     bool Wall_flag_bl = false;	    /* default is false */
     bool Wextra_flag_bl = false;    /* default is false */
-    bool c99_flag_bl = false;    /* default is false */
+    bool c99_flag_bl = false;	    /* default is false */
+    bool Wconversion_bl = false;    /* default is false */ 
 
-    bool compile_bl = true;
+    bool compile_bl = true;	    /* default is true */
 
     for (int i = 1; i < argc; i++)
     {
@@ -82,8 +84,14 @@ int main(int argc, char *argv[])
 	    Wall_flag_bl = true;
 	    Wpedantic_bl = true;
 	    Wextra_flag_bl = true;
-	    num_flags += 3;
+	    Wconversion_bl = true;
+	    num_flags += 4;
     	}
+	else if (strcmp(argv[i], "-c") == 0)
+	{
+	    Wconversion_bl = true;
+	    num_flags++;
+	}
 	else if (strcmp(argv[i], "-a") == 0)
 	{
 	    Wall_flag_bl = true;
@@ -122,7 +130,8 @@ int main(int argc, char *argv[])
 	    Wall_flag_bl = true;
 	    Wpedantic_bl = true;
 	    Wextra_flag_bl = true;
-	    num_flags += 4;
+	    Wconversion_bl = true;
+	    num_flags += 5;
 	}
     	else
     	{
@@ -132,7 +141,7 @@ int main(int argc, char *argv[])
     
     if (compile_bl)
     {
-	compilation(compiler_name, Werror_flag_bl, Wpedantic_bl, Wall_flag_bl, Wextra_flag_bl, c99_flag_bl);
+	compilation(compiler_name, Werror_flag_bl, Wpedantic_bl, Wall_flag_bl, Wextra_flag_bl, c99_flag_bl, Wconversion_bl);
     }
     return 0;
 }
@@ -216,7 +225,7 @@ void clean_objects(void)
     }
 }
 
-void compilation(compiler_enum compiler_name_temp, bool error_flag_temp_bl, bool pedantic_flag_temp_bl, bool all_flag_temp_bl, bool extra_flag_temp_bl, bool c99_flag_temp_bl)
+void compilation(compiler_enum compiler_name_temp, bool error_flag_temp_bl, bool pedantic_flag_temp_bl, bool all_flag_temp_bl, bool extra_flag_temp_bl, bool c99_flag_temp_bl, bool conversion_bl)
 {
     char compiler_name_cmd_temp[COMPILER_NAME_SIZE];
     compiler_name_cmd_temp[0] = '\0';
@@ -267,10 +276,15 @@ void compilation(compiler_enum compiler_name_temp, bool error_flag_temp_bl, bool
     	    strcat(all_flags, Wall_flag);   
     	}
 
-    	if (c99_flag_temp_bl == true)
+    	if (c99_flag_temp_bl)
     	{
     	    strcat(all_flags, c99_flag);   
     	}
+
+	if (conversion_bl)
+	{
+	    strcat(all_flags, Wconversion_flag);
+	}
     }
 
     compile_all_files(compiler_name_cmd_temp, all_flags);

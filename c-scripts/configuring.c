@@ -85,7 +85,7 @@ void fuzzel_config_importing(void)
     clearbuffer();
     scanf(" %d", &theme_colour_user_opt);
 
-    fuzzel_colour_e theme_colour_name = theme_colour_user_opt;
+    fuzzel_colour_e theme_colour_name = (fuzzel_colour_e)theme_colour_user_opt;
 
     switch(theme_colour_name)
     {
