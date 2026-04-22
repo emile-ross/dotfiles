@@ -41,7 +41,7 @@ int install_package(char *pkg_type_distro, char *pkginstallname);
 void install_menu(void);
 void full_install(bool ARCHIVE_BL, bool full_install_bl);
 void full_config_install(bool ARCHIVE_BL, float previous_version_t, bool install_packages_t);
-void install_configs(int custom_package_install); // the partial install script (configure which package or configuration to install)
+void install_configs(unsigned int custom_package_install);
 void copyfiles(int fastfetch_conf_export);
 void check_for_yay(void);
 void exec_cmd(int buffer_size, char *command_to_execute);

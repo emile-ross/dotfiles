@@ -20,46 +20,46 @@ int full_update(char ARCHIVE, float pver)
     	case V_1_2:
     	case V_1_3:
     	    install_package(parent, "hyprpaper btop");
-    	    CAVA(ARCHIVE, VAWSM, install_pkg_yn);
+    	    CAVA(ARCHIVE, pver, install_pkg_yn);
     	    __attribute__ ((fallthrough));
     	    // do not break because we are also installing everything below
     	case V_1_4:
-    	    BTOP(ARCHIVE, VAWSM, install_pkg_yn);
+    	    BTOP(ARCHIVE, pver, install_pkg_yn);
     	    __attribute__ ((fallthrough));
     	    // do not break because we are also installing everything below
     	case V_2:
     	    install_package(parent, "gtklock");
-    	    KITT(ARCHIVE, VAWSM, install_pkg_yn);
+    	    KITT(ARCHIVE, pver, install_pkg_yn);
     	    __attribute__ ((fallthrough));
     	    // do not break because we are also installing everything below
     	case V_2_1:
     	    install_package(parent, "sway");
-    	    WAYB(ARCHIVE, VAWSM, install_pkg_yn);
+    	    WAYB(ARCHIVE, pver, install_pkg_yn);
     	    __attribute__ ((fallthrough));
     	    // do not break because we are also installing everything below
     	case V_2_2:
-    	    SWAY(ARCHIVE, VAWSM, install_pkg_yn);
-    	    GTKL(ARCHIVE, VAWSM, install_pkg_yn);
+    	    SWAY(ARCHIVE, pver, install_pkg_yn);
+    	    GTKL(ARCHIVE, pver, install_pkg_yn);
     	    install_package(parent, "mpv swaylock");
     	    __attribute__ ((fallthrough));
     	    // do not break because we are also installing everything below
     	case V_2_3:
     	    install_package(parent, "nvim");
-    	    NVIM(ARCHIVE, VAWSM, install_pkg_yn);
-    	    FUZZ(ARCHIVE, VAWSM, install_pkg_yn);
-    	    MPVF(ARCHIVE, VAWSM, install_pkg_yn);
+    	    NVIM(ARCHIVE, pver, install_pkg_yn);
+    	    FUZZ(ARCHIVE, pver, install_pkg_yn);
+    	    MPVF(ARCHIVE, pver, install_pkg_yn);
     	    __attribute__ ((fallthrough));
     	    // do not break because we are also installing everything below
     	case V_2_4:
     	    install_package(parent, "hyprland bpytop hyprlock");
-    	    BPYT(ARCHIVE, VAWSM, install_pkg_yn);
+    	    BPYT(ARCHIVE, pver, install_pkg_yn);
 	    __attribute__ ((fallthrough));
 	    // do not break because we are also installing everything below
     	case V_2_5:
     	case V_3:
 	    BASH();
-	    HYPR(ARCHIVE, VAWSM, install_pkg_yn);
-	    ZSHH(ARCHIVE, VAWSM, install_pkg_yn);
+	    HYPR(ARCHIVE, pver, install_pkg_yn);
+	    ZSHH(ARCHIVE, pver, install_pkg_yn);
 	    printf("Update completed!\n");
 	    break;
 

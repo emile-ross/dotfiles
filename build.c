@@ -21,7 +21,8 @@ const char Wall_flag[FLAG_BUFFER_SIZE] = " -Wall";
 const char c99_flag[FLAG_BUFFER_SIZE] = " -std=c99";
 const char Wconversion_flag[FLAG_BUFFER_SIZE] = " -Wconversion";
 
-const char logging_cmd[LOGGING_CMD_SIZE] = " 2>&1 | tee -a compile_log.txt";
+const char logging_cmd[LOGGING_CMD_SIZE] = " 2>&1 | tee compile_log.txt"; /* this will overwrite the compile_log.txt */
+/* const char logging_cmd[LOGGING_CMD_SIZE] = " 2>&1 | tee -a compile_log.txt"; */
 
 int size_all_flags;
 
@@ -132,7 +133,6 @@ int main(int argc, char *argv[])
     	else if (strcmp(argv[i], "std") == 0)
 	{
     	    compiler_name = ZIG;
-	    log_bl = true;
 
 	    c99_flag_bl = true;
 	    Wall_flag_bl = true;

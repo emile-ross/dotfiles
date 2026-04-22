@@ -63,7 +63,6 @@ void fuzzel_config_importing(void)
     int theme_colour_user_opt;
     char colour_message_text[16] = "Use the colour";
 
-    enum fuzzel_colour_e;
     fuzzel_colour_e fuzz_colour;
 
     printf(BOLD_S"[%d] "STYLE_END" %s "BOLD_S"blue"STYLE_END"\n", fuzz_colour = blue, colour_message_text);

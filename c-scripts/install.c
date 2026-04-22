@@ -32,7 +32,7 @@ void install_config_message(char *text)
     printf("\nInstalling %s \n", text);
 }
 
-void install_configs(int custom_package_install)  // the partial install script (configure which package or configuration to install)
+void install_configs(unsigned int custom_package_install)  // the partial install script (configure which package or configuration to install)
 {
     do
     {
@@ -50,7 +50,7 @@ void install_configs(int custom_package_install)  // the partial install script 
 	char PKGINSTALL_T;
 	scanf(" %c", &PKGINSTALL_T);
 
-	config_name config_install_enum;
+	config_name config_install_enum = custom_package_install;
     	switch (config_install_enum)
     	{
     	    case bash:
@@ -150,7 +150,7 @@ void install_configs(int custom_package_install)  // the partial install script 
 	}
 	wait_for_timeout(0, 1);
     }
-    while(custom_package_install > 0 && custom_package_install < max_menu_opt_n);
+    while (custom_package_install > 0 && (int)custom_package_install < max_menu_opt_n);
 }
 
 void full_install(bool ARCHIVE_BL, bool full_install_bl)
@@ -171,7 +171,7 @@ void full_install(bool ARCHIVE_BL, bool full_install_bl)
     }
     else
     {
-	int install_pkg_opt;
+	unsigned int install_pkg_opt;
 	do
 	{
 	    // this is awful

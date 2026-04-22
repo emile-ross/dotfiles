@@ -213,6 +213,7 @@ void HYPR(bool archive_bl, float pver, bool pkginstall_bl)
     	    "cp -f %s/hypr/hyprpaper.conf ~/.config/hypr",
 	    inpath, inpath, inpath, inpath, inpath);
     system(cmd);
+    free(cmd);
 }
 void KITT(bool archive_bl, float pver, bool pkginstall_bl)
 {

@@ -17,6 +17,9 @@ gcc: existing_binaries
 setup: existing_binaries
 	@./build gcc
 
+log: existing_binaries
+	@./build std -e log
+
 base: existing_binaries
 	@./build std -e
 
