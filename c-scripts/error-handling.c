@@ -14,7 +14,7 @@ int error_message(int err_code)
 	skip_warning = true;
     }
 
-    error_code_e error_msg_code = err_code;
+    error_code_e error_msg_code = (error_code_e)err_code;
     
     /* error code assignment from the err_code variable
      * enum error_code_e error_message_code = err_code;	*/

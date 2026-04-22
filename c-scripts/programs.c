@@ -15,7 +15,7 @@ void BASH(void)
     char *cmd = malloc((size_t)mem_needed + 1);
 
 	// execute the command with the according buffer size previously calculated (above)
-    snprintf(cmd, mem_needed + 1,
+    snprintf(cmd, (size_t)mem_needed + 1,
              "cp -f %s/shell/bash/.bashrc ~/%s",
              inpath, BRCNAME);
     system(cmd);
@@ -202,9 +202,9 @@ void HYPR(bool archive_bl, float pver, bool pkginstall_bl)
     	    "cp -f %s/hypr/hyprpaper.conf ~/.config/hypr",
 	    inpath, inpath, inpath, inpath, inpath);
 
-    char *cmd = malloc(mem_needed + 1); // allocate just enough memory for the buffer size
+    char *cmd = malloc((size_t)mem_needed + 1); // allocate just enough memory for the buffer size
 
-    snprintf(cmd, mem_needed + 1,
+    snprintf(cmd, (size_t)mem_needed + 1,
 	    "mkdir -p ~/.config/hypr/assets ; "
     	    "cp -f %s/hypr/assets/lockscreen.png ~/.config/hypr/assets/ ; "
 	    "cp -f %s/hypr/hyprland.conf ~/.config/hypr ; "
