@@ -45,7 +45,6 @@ zig cc arguments.c \
 ./setup
 ```
 
-This will compile both c source code files into a single binary.  
-If it produces any errors, make sure to report it as an issue in the parent github repo.  
+This will compile the source code into a single binary.  
 
 The -std=c99 will display errors in accordance with the C99 standard
