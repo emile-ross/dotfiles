@@ -24,7 +24,7 @@ gcc arguments.c \
     globals.c \
     update.c \
     -o setup \
-    -Wall -Wextra -pedantic -std=c99
+    -Wall -Wextra -Wpedantic -std=c99
 ./setup
 ```
 
@@ -41,10 +41,12 @@ zig cc arguments.c \
     globals.c \
     update.c \
     -o setup \
-    -Wall -Wextra -pedantic -std=c99
+    -Wall -Wextra -Wpedantic -std=c99
 ./setup
 ```
 
 This will compile the source code into a single binary.  
 
-The -std=c99 will display errors in accordance with the C99 standard
+This source code follows ISO C and ISO C++ standards — you can verify this by using the ``-Wpedantic`` flag when compiling.  
+
+This source code follows C99 standards — you can verify this by using the ``-std=c99`` flag. 
