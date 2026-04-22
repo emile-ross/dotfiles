@@ -12,7 +12,7 @@ void BASH(void)
 	    "cp -f %s/shell/bash/.bashrc ~/%s", 
 	    inpath, BRCNAME);
 
-    char *cmd = malloc(mem_needed + 1);
+    char *cmd = malloc((size_t)mem_needed + 1);
 
 	// execute the command with the according buffer size previously calculated (above)
     snprintf(cmd, mem_needed + 1,

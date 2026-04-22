@@ -5,8 +5,8 @@ int error_message(int err_code)
     char err_text_temp[128];
     char err_solution_temp[128];
     
-    bool critical = false;	// default is false
-    bool skip_warning = false;	// default is false
+    bool critical = false;	/* default is false */
+    bool skip_warning = false;	/* default is false */
     
     if (err_code >= 300 && err_code <= 400)
     {
@@ -14,12 +14,10 @@ int error_message(int err_code)
 	skip_warning = true;
     }
 
-    enum error_code_e;
-    
     error_code_e error_msg_code = err_code;
     
-    // error code assignment from the err_code variable
-    // enum error_code_e error_message_code = err_code;
+    /* error code assignment from the err_code variable
+     * enum error_code_e error_message_code = err_code;	*/
 
     switch (error_msg_code)
     {
@@ -133,7 +131,7 @@ int error_message(int err_code)
         exit(err_code);
     }
 
-    if (!skip_warning)	// cannot be removed — even though this is the second check
+    if (!skip_warning)	/* cannot be removed — even though this is the second check */
     {
     	printf("Press "UDRL_S"CTRL + C"STYLE_END BOLD_S" to exit\n"STYLE_END);
     	printf("Press any key to continue\n");
