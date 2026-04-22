@@ -11,7 +11,7 @@ char source_fpath[16] = "c-scripts/";
 const char output_binary_name[16] = "setup";	/* set the name of the binary file */
 /* Warnings flags */
 #define FLAG_BUFFER_SIZE (18)
-#define LOGGING_CMD_SIZE (64)
+#define LOGGING_CMD_SIZE (48)
 
 const char *base_flags = " -W";
 const char Wextra_flag[FLAG_BUFFER_SIZE] = " -Wextra";
@@ -26,6 +26,8 @@ const char logging_cmd[LOGGING_CMD_SIZE] = " 2>&1 | tee -a compile_log.txt";
 int size_all_flags;
 
 int size_source_filename = 24;
+
+#define num_src_files (9)
 
 const char *source_files[] = 
 { 
@@ -158,20 +160,21 @@ int main(int argc, char *argv[])
 
 void compile_all_files(bool log, char *compiler, char *flags)
 {
-    int command_size;
+    int base_size = 1;
     if (log)
     {
-	command_size = (int)size_all_flags + LOGGING_CMD_SIZE + 1;
+	base_size += LOGGING_CMD_SIZE;
     }
-    else
-    {
-	command_size = (int)size_all_flags;
-    }
+
     for (int i = 0; source_files[i] != NULL; i++) 
     {
+	int command_size = base_size + snprintf(NULL, 0,
+        	"%s %s%s.c -o %s%s.o%s "
+        	, compiler, source_fpath, source_files[i], object_fpath, source_files[i], flags);
+		
         char cmd[command_size];
         snprintf(cmd, sizeof(cmd),
-        	"%s %s%s.c -o %s%s.o%s \n"
+        	"%s %s%s.c -o %s%s.o%s "
         	, compiler, source_fpath, source_files[i], object_fpath, source_files[i], flags);
 	if (log)
 	{
@@ -187,35 +190,31 @@ void link_object_files(bool log, compiler_enum compiler_name_def, char *flags)
     int buffer_size_flags = snprintf(NULL, 0,
 	    "%s -o -c", flags);
 
-    long num_src_files = (sizeof(source_files) / sizeof(source_files[0]) - 1);
+    int buf_size[num_src_files];
 
-    int size_obj_fpath = sizeof(object_fpath) + size_source_filename + 8;
-    char temp_obj_path[size_obj_fpath];
-
-    /* set object buffer size based on the size of path+filename */
-    int obj_buffer_size = sizeof(temp_obj_path) * num_src_files;
-
-    char source_files_obj_cmd[obj_buffer_size];
+    int total_obj_path_size = 1;
+    /* first loop to get the size of each object path
+     * and then store it in an array of sizes */
+    for (int i = 0; source_files[i] != NULL; i++)
+    {
+	int temp_obj_path_size = snprintf(NULL, 0,
+		" %s%s.o ", object_fpath, source_files[i]);
+	temp_obj_path_size++;
+	buf_size[i] = temp_obj_path_size;
+	total_obj_path_size += temp_obj_path_size;
+    }
+    total_obj_path_size++;
+    char source_files_obj_cmd[total_obj_path_size];
     source_files_obj_cmd[0] = '\0';
 
-    /* calculate total command buffer size
-    this avoids all buffer overflows since it is based on the size of 
-    all the strings composing this command */
-    int link_cmd_size;
-    if (log)
-    {
-	link_cmd_size = COMPILER_NAME_SIZE + obj_buffer_size + buffer_size_flags + LOGGING_CMD_SIZE + 1;
-    }
-    else
-    {
-	link_cmd_size = COMPILER_NAME_SIZE + obj_buffer_size + buffer_size_flags + 1;
-    }
-    char link_cmd[link_cmd_size];
+    int total_size = total_obj_path_size + buffer_size_flags + 1;
 
     for (int i = 0; num_src_files > i; i++)
     {
-	snprintf(temp_obj_path, size_obj_fpath,
+	char temp_obj_path[buf_size[i] + 1];
+	snprintf(temp_obj_path, sizeof(temp_obj_path),
 		"%s%s.o ", object_fpath, source_files[i]);
+
 	strcat(source_files_obj_cmd, temp_obj_path);
     }
 
@@ -238,22 +237,35 @@ void link_object_files(bool log, compiler_enum compiler_name_def, char *flags)
 	    printf("Unknown compiler\n");
 	    exit(1);
     }
+    total_size += snprintf(NULL, 0,
+	    "%s %s %s", compiler_linking_string, output_binary_name, flags);
+    total_size++;
 
+    /* add the logging command buffer size if logging is enabled */
+    if (log)
+    {
+	total_size += LOGGING_CMD_SIZE;
+    }
+
+    char link_cmd[total_size];
     snprintf(link_cmd, sizeof(link_cmd),
 	    "%s %s -o %s %s", compiler_linking_string, source_files_obj_cmd, output_binary_name, flags);
 
+    /* append the logging command if it's enabled */
     if (log)
     {
 	strcat(link_cmd, logging_cmd);
     }
-    system(link_cmd);
+    system(link_cmd); /* execute the command */
 }
 
 void clean_objects(void)
 {
     for (int i = 0; source_files[i] != NULL; i++) 
     {
-        char cmd[128];	/* initialize cmd buffer */
+	int buffer_size = snprintf(NULL, 0,
+		"rm %s%s.o", object_fpath, source_files[i]);
+        char cmd[buffer_size + 1];	/* initialize cmd buffer */
         snprintf(cmd, sizeof(cmd),
         	"rm %s%s.o"
         	, object_fpath, source_files[i]);
