@@ -69,20 +69,20 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[]);
 extern const int n_to_arg;
 
 // data 
-extern char* TEXT_C_BASH;
-extern char* TEXT_C_BPYT;
-extern char* TEXT_C_BTOP;
-extern char* TEXT_C_CAVA;
-extern char* TEXT_C_FAST;
-extern char* TEXT_C_FUZZ;
-extern char* TEXT_C_GTKL;
-extern char* TEXT_C_HYPR;
-extern char* TEXT_C_KITT;
-extern char* TEXT_C_MPVF;
-extern char* TEXT_C_NVIM;
-extern char* TEXT_C_SWAY;
-extern char* TEXT_C_WAYB;
-extern char* TEXT_C_ZSHH;
+extern char* TEXT_C_BASH;   /* will be replaced by an array */
+extern char* TEXT_C_BPYT;   /* will be replaced by an array */
+extern char* TEXT_C_BTOP;   /* will be replaced by an array */
+extern char* TEXT_C_CAVA;   /* will be replaced by an array */
+extern char* TEXT_C_FAST;   /* will be replaced by an array */
+extern char* TEXT_C_FUZZ;   /* will be replaced by an array */
+extern char* TEXT_C_GTKL;   /* will be replaced by an array */
+extern char* TEXT_C_HYPR;   /* will be replaced by an array */
+extern char* TEXT_C_KITT;   /* will be replaced by an array */
+extern char* TEXT_C_MPVF;   /* will be replaced by an array */
+extern char* TEXT_C_NVIM;   /* will be replaced by an array */
+extern char* TEXT_C_SWAY;   /* will be replaced by an array */
+extern char* TEXT_C_WAYB;   /* will be replaced by an array */
+extern char* TEXT_C_ZSHH;   /* will be replaced by an array */
 
 // command line related
 // Initialized in globals.c

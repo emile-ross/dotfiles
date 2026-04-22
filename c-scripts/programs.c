@@ -91,9 +91,7 @@ void CAVA(bool archive_bl, float pver, bool pkginstall_bl)
 
 void FAST(bool archive_bl, float pver, bool pkginstall_bl)
 {
-    const char *path = malloc(22);
-    path = "~/.config/fastfetch/";
-
+    const char *path = "~/.config/fastfetch/";
     char cmd[768];
     if (archive_bl)
     {
