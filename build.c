@@ -9,9 +9,9 @@ char object_fpath[16] = "c-scripts/";
 char source_fpath[16] = "c-scripts/";
 
 const char output_binary_name[16] = "setup";	/* set the name of the binary file */
-
 /* Warnings flags */
-#define FLAG_BUFFER_SIZE (16)
+#define FLAG_BUFFER_SIZE (18)
+#define LOGGING_CMD_SIZE (64)
 
 const char *base_flags = " -W";
 const char Wextra_flag[FLAG_BUFFER_SIZE] = " -Wextra";
@@ -21,7 +21,9 @@ const char Wall_flag[FLAG_BUFFER_SIZE] = " -Wall";
 const char c99_flag[FLAG_BUFFER_SIZE] = " -std=c99";
 const char Wconversion_flag[FLAG_BUFFER_SIZE] = " -Wconversion";
 
-int num_flags = 0;
+const char logging_cmd[LOGGING_CMD_SIZE] = " 2>&1 | tee -a compile_log.txt";
+
+int size_all_flags;
 
 int size_source_filename = 24;
 
@@ -47,9 +49,9 @@ typedef enum
 } compiler_enum;
 
 void clean_objects(void);
-void compile_all_files(char *compiler, char *flags);
-void link_object_files(compiler_enum compiler_name_def, char *flags);
-void compilation(compiler_enum compiler_name_temp, bool error_flag_temp_bl, bool pedantic_flag_temp_bl, bool all_flag_temp_bl, bool extra_flag_temp_bl, bool c99_flag_temp_bl, bool conversion_bl);
+void compile_all_files(bool log, char *compiler, char *flags);
+void link_object_files(bool log, compiler_enum compiler_name_def, char *flags);
+void compilation(int number_flags, compiler_enum compiler_name_temp, bool log_bl, bool error_flag_temp_bl, bool pedantic_flag_temp_bl, bool all_flag_temp_bl, bool extra_flag_temp_bl, bool c99_flag_temp_bl, bool conversion_bl);
 
 int main(int argc, char *argv[])
 {
@@ -63,7 +65,10 @@ int main(int argc, char *argv[])
     bool c99_flag_bl = false;	    /* default is false */
     bool Wconversion_bl = false;    /* default is false */ 
 
-    bool compile_bl = true;	    /* default is true */
+    bool compile_bl = true; /* default is true */
+    bool log_bl = false;    /* default is false */
+
+    int num_flags = 0;
 
     for (int i = 1; i < argc; i++)
     {
@@ -125,6 +130,7 @@ int main(int argc, char *argv[])
     	else if (strcmp(argv[i], "std") == 0)
 	{
     	    compiler_name = ZIG;
+	    log_bl = true;
 
 	    c99_flag_bl = true;
 	    Wall_flag_bl = true;
@@ -132,6 +138,10 @@ int main(int argc, char *argv[])
 	    Wextra_flag_bl = true;
 	    Wconversion_bl = true;
 	    num_flags += 5;
+	}
+    	else if (strcmp(argv[i], "log") == 0)
+	{
+	    log_bl = true;
 	}
     	else
     	{
@@ -141,24 +151,37 @@ int main(int argc, char *argv[])
     
     if (compile_bl)
     {
-	compilation(compiler_name, Werror_flag_bl, Wpedantic_bl, Wall_flag_bl, Wextra_flag_bl, c99_flag_bl, Wconversion_bl);
+	compilation(num_flags, compiler_name, log_bl, Werror_flag_bl, Wpedantic_bl, Wall_flag_bl, Wextra_flag_bl, c99_flag_bl, Wconversion_bl);
     }
     return 0;
 }
 
-void compile_all_files(char *compiler, char *flags)
+void compile_all_files(bool log, char *compiler, char *flags)
 {
+    int command_size;
+    if (log)
+    {
+	command_size = (int)size_all_flags + LOGGING_CMD_SIZE + 1;
+    }
+    else
+    {
+	command_size = (int)size_all_flags;
+    }
     for (int i = 0; source_files[i] != NULL; i++) 
     {
-        char cmd[256];
+        char cmd[command_size];
         snprintf(cmd, sizeof(cmd),
         	"%s %s%s.c -o %s%s.o%s \n"
         	, compiler, source_fpath, source_files[i], object_fpath, source_files[i], flags);
+	if (log)
+	{
+	    strcat(cmd, logging_cmd);
+	}
 	system(cmd);
     }
 }
 
-void link_object_files(compiler_enum compiler_name_def, char *flags)
+void link_object_files(bool log, compiler_enum compiler_name_def, char *flags)
 {
     /* define the memory needed for the command buffer */
     int buffer_size_flags = snprintf(NULL, 0,
@@ -178,7 +201,15 @@ void link_object_files(compiler_enum compiler_name_def, char *flags)
     /* calculate total command buffer size
     this avoids all buffer overflows since it is based on the size of 
     all the strings composing this command */
-    int link_cmd_size = COMPILER_NAME_SIZE + obj_buffer_size + buffer_size_flags;
+    int link_cmd_size;
+    if (log)
+    {
+	link_cmd_size = COMPILER_NAME_SIZE + obj_buffer_size + buffer_size_flags + LOGGING_CMD_SIZE + 1;
+    }
+    else
+    {
+	link_cmd_size = COMPILER_NAME_SIZE + obj_buffer_size + buffer_size_flags + 1;
+    }
     char link_cmd[link_cmd_size];
 
     for (int i = 0; num_src_files > i; i++)
@@ -210,6 +241,11 @@ void link_object_files(compiler_enum compiler_name_def, char *flags)
 
     snprintf(link_cmd, sizeof(link_cmd),
 	    "%s %s -o %s %s", compiler_linking_string, source_files_obj_cmd, output_binary_name, flags);
+
+    if (log)
+    {
+	strcat(link_cmd, logging_cmd);
+    }
     system(link_cmd);
 }
 
@@ -225,7 +261,7 @@ void clean_objects(void)
     }
 }
 
-void compilation(compiler_enum compiler_name_temp, bool error_flag_temp_bl, bool pedantic_flag_temp_bl, bool all_flag_temp_bl, bool extra_flag_temp_bl, bool c99_flag_temp_bl, bool conversion_bl)
+void compilation(int number_flags, compiler_enum compiler_name_temp, bool log_bl, bool error_flag_temp_bl, bool pedantic_flag_temp_bl, bool all_flag_temp_bl, bool extra_flag_temp_bl, bool c99_flag_temp_bl, bool conversion_bl)
 {
     char compiler_name_cmd_temp[COMPILER_NAME_SIZE];
     compiler_name_cmd_temp[0] = '\0';
@@ -245,10 +281,10 @@ void compilation(compiler_enum compiler_name_temp, bool error_flag_temp_bl, bool
 	    exit(1);
     }
     
-    int size_all_flags_temp = num_flags * FLAG_BUFFER_SIZE ;
-    size_all_flags_temp++;
+    int size_all_flags = number_flags * FLAG_BUFFER_SIZE ;
+    size_all_flags++;
 
-    char all_flags[size_all_flags_temp];    /* initialize the all_flags buffer */
+    char all_flags[size_all_flags];    /* initialize the all_flags buffer */
     snprintf(all_flags, sizeof(all_flags), "%s", base_flags);	/* move base flags to all_flags */
 
     if (error_flag_temp_bl == true)
@@ -257,7 +293,7 @@ void compilation(compiler_enum compiler_name_temp, bool error_flag_temp_bl, bool
         strcat(all_flags, Werror_flag);	
     }
 
-    if (num_flags > 0)
+    if (number_flags > 0)
     {
 	if (pedantic_flag_temp_bl == true)
     	{
@@ -287,6 +323,6 @@ void compilation(compiler_enum compiler_name_temp, bool error_flag_temp_bl, bool
 	}
     }
 
-    compile_all_files(compiler_name_cmd_temp, all_flags);
-    link_object_files(compiler_name_temp, all_flags);
+    compile_all_files(log_bl, compiler_name_cmd_temp, all_flags);
+    link_object_files(log_bl, compiler_name_temp, all_flags);
 }
