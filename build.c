@@ -36,9 +36,9 @@ const char *source_files[] =
     "configuring",
     "error-handling",
     "functions",
-    "programs",
     "globals",
     "install",
+    "programs",
     "setup",
     "update",
     NULL 
@@ -73,6 +73,7 @@ int main(int argc, char *argv[])
 
     int num_flags = 0;
 
+	/* convert command line arguments to flags/compiler/options */
     for (int i = 1; i < argc; i++)
     {
 	if (strcmp(argv[i], "gcc") == 0)
@@ -153,7 +154,7 @@ int main(int argc, char *argv[])
     
     if (compile_bl)
     {
-	compilation(num_flags, compiler_name, log_bl, Werror_flag_bl, Wpedantic_bl, Wall_flag_bl, Wextra_flag_bl, c99_flag_bl, Wconversion_bl);
+		compilation(num_flags, compiler_name, log_bl, Werror_flag_bl, Wpedantic_bl, Wall_flag_bl, Wextra_flag_bl, c99_flag_bl, Wconversion_bl);
     }
     return 0;
 }
