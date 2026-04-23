@@ -71,14 +71,19 @@ int error_message(int err_code)
 	    snprintf(err_solution_temp, sizeof(err_solution_temp), "This could display if you haven't installed the hyprland config");	// also sway and .zshrc
 	    break;
 
-	case 206:
+	case POPEN_FAILED:
 	    snprintf(err_text_temp, sizeof(err_text_temp), "popen failed");
 	    snprintf(err_text_temp, sizeof(err_text_temp), "This could happen if your system only supports c99");
 	    break;
 	    
-	case 207:
+	case UNKNOWN_AWSM_VERSION:
 	    snprintf(err_text_temp, sizeof(err_text_temp), "Unknown version");
 	    snprintf(err_solution_temp, sizeof(err_solution_temp), "Try installing the dotfiles in order to fix the unknown version");
+	    break;
+
+	case INVALID_ARRAY_INDEX:
+	    snprintf(err_text_temp, sizeof(err_text_temp), "Missing arguments in the command");
+	    snprintf(err_solution_temp, sizeof(err_solution_temp), " ");
 	    break;
 
 	case 301:
@@ -99,7 +104,7 @@ int error_message(int err_code)
 	    snprintf(err_text_temp, sizeof(err_text_temp), "Missing arguments in the command");
 	    snprintf(err_solution_temp, sizeof(err_solution_temp), " ");
 	    break;
-		
+
 	default:
 	    snprintf(err_text_temp, sizeof(err_text_temp), "This error code isn't known");
 	    break;

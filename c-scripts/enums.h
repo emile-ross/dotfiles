@@ -20,7 +20,7 @@ typedef enum
     NEXT = V_3_3,
 } df_version;
 
-#define n_configs 14
+#define n_configs 15
 
 typedef enum 
 {
@@ -55,6 +55,7 @@ typedef enum
     NO_SUCH_FILE_OR_DIR = 205,
     POPEN_FAILED = 206,
     UNKNOWN_AWSM_VERSION = 207,
+    INVALID_ARRAY_INDEX = 208,
     CLI_UNKNOWN_PKG = 301,
     CLI_INVALID_CMD_SYNTAX = 302,
     CLI_INVALID_FLAG = 303,

@@ -92,6 +92,14 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 void config_description(char *package_t)
 {
     config_name description_index = detect_config_name(package_t);
+    if ((config_name)description_index > n_configs)
+    {
+	error_message((error_code_e)CLI_ARGS_MISSING);
+    }
+    else if ((config_name)description_index == 0)
+    {
+	error_message((error_code_e)CLI_UNKNOWN_PKG);
+    }
 
     char *description_arr[n_configs] =
     {
@@ -107,6 +115,7 @@ void config_description(char *package_t)
 	"Kitty is a fast, GPU based terminal emulator.\n",
 	"MPV is a cross-platform media player made for the command line.\n",
 	"Neovim is a modern Vi-based text editor.\n",
+	"Sway is a tiling window manager based on i3 (Written in C).\n",
 	"Waybar is an highly customizable\n",
 	"Zsh (Z shell) is a command line interpreter focused on speed and efficiency.\n",
     };
