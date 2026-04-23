@@ -118,8 +118,8 @@ extern char archive_before_install;
 extern int menu_one_i;
 extern const int max_menu_opt_n;
 extern bool fastfetch_config_apply;
-extern char distro[128];
-extern char parent[128];
+extern char distro[128];    /* distro string */
+extern char parent[128];    /* parent distro string (Ubuntu's Parent distro is Debian) */
 extern char initial_path[64];
 extern char inpath[64];
 char *get_initial_path(void);
