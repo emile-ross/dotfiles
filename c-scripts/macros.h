@@ -21,10 +21,10 @@
 
 // user input macro definitions
 // These are the values users must input in order to perform certain actions
-#define INPUT_BACK_VALUE 0
-#define INPUT_EXIT_VALUE 0
+#define INPUT_BACK_VALUE (0)
+#define INPUT_EXIT_VALUE (0)
 
 #define KEY_MAIN_MENU_CONFIGURE 3
 
 #define MENU_TEXT_SIZE (128)
-#define SHORT_TIMER 2
+#define SHORT_TIMER (2)

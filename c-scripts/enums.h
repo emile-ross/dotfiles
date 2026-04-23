@@ -20,6 +20,8 @@ typedef enum
     NEXT = V_3_3,
 } df_version;
 
+#define n_configs 14
+
 typedef enum 
 {
     unknown = 0,
