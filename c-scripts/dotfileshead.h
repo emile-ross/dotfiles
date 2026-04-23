@@ -61,7 +61,6 @@ extern long int time_timer_quarters;
 extern long int time_timer_seconds;
 
 //  command line arguments
-void config_description(char *package_t);
 void argument_config_install(char *package_t, char archiving_t, char pkginstall_t);
 void cmd_arg_install(int num_cmd_arguments_t, char *cmd_arg_v_t[], char config_archive_t, char pkg_install_t);
 void cli_arg_missing(char *first_command, char *type_of_missing_arg, char *user_flag_t);
@@ -83,6 +82,8 @@ extern char* TEXT_C_NVIM;   /* will be replaced by an array */
 extern char* TEXT_C_SWAY;   /* will be replaced by an array */
 extern char* TEXT_C_WAYB;   /* will be replaced by an array */
 extern char* TEXT_C_ZSHH;   /* will be replaced by an array */
+
+extern char *description_arr[n_configs];
 
 // command line related
 // Initialized in globals.c

@@ -54,7 +54,20 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 		for (int i = n_to_arg - 1; i < num_cmd_arguments; i++)
 		{
 		    // will print a short description for the package
-		    config_description(cmd_arg_v[i]);
+		    //config_description();
+		    config_name description_index = detect_config_name(cmd_arg_v[i]);
+
+		    if ((config_name)description_index > n_configs)
+		    {
+			error_message((error_code_e)CLI_ARGS_MISSING);
+		    }
+		    else if ((config_name)description_index == 0)
+		    {
+			error_message((error_code_e)CLI_UNKNOWN_PKG);
+		    }
+
+		    char *description = description_arr[(config_name)description_index];
+		    printf("%s\n", description);
 		}
 	    }
 	    else
@@ -87,41 +100,6 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 	return 0;
     }
     exit(0);
-}
-
-void config_description(char *package_t)
-{
-    config_name description_index = detect_config_name(package_t);
-    if ((config_name)description_index > n_configs)
-    {
-	error_message((error_code_e)CLI_ARGS_MISSING);
-    }
-    else if ((config_name)description_index == 0)
-    {
-	error_message((error_code_e)CLI_UNKNOWN_PKG);
-    }
-
-    char *description_arr[n_configs] =
-    {
-	"Unknown config\n",
-	"Bash, (Bourne Again SHell) is the default shell on most Linux distributions.\n",
-	"bpytop is a system resource monitor.\n",
-	"Btop is a system resource monitor.\n",
-	"Cava is a Cross-platform Audio Visualizer.\n",
-	"Fastfetch is a fast system information tool made in C.\n",
-	"Fuzzel is an App launcher and fuzzy finder based on rofi & dmenu.\n",
-	"Gtklock is a GTK lockscreen for Wayland.\n",
-	"Hyprland is a dynamic tiling window manager made for Wayland.\n",
-	"Kitty is a fast, GPU based terminal emulator.\n",
-	"MPV is a cross-platform media player made for the command line.\n",
-	"Neovim is a modern Vi-based text editor.\n",
-	"Sway is a tiling window manager based on i3 (Written in C).\n",
-	"Waybar is an highly customizable\n",
-	"Zsh (Z shell) is a command line interpreter focused on speed and efficiency.\n",
-    };
-
-    char *description = description_arr[(config_name)description_index];
-    printf("%s\n", description);
 }
 
 void argument_config_install(char *package_t, char archiving_t, char pkginstall_t)
