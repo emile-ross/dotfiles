@@ -1,6 +1,6 @@
 #include "dotfileshead.h"
 
-int error_message(int err_code)
+int error_message(error_code_e err_code)
 {
     char err_text_temp[128];
     char err_solution_temp[128];
@@ -110,17 +110,6 @@ int error_message(int err_code)
 	    break;
     }
 
-    switch (err_code)
-    {
-	case 909:
-	    printf("This error should never display (in theory) \n");
-	    printf("Meaning.. this is a bug inside of another bug...\n");
-	    break;
-
-	default:
-	    break;
-    }
-
     if (!skip_warning)
     {
         // print error code
@@ -133,7 +122,7 @@ int error_message(int err_code)
 
     if (critical)
     {
-        exit(err_code);
+        exit((int)err_code);
     }
 
     if (!skip_warning)	/* cannot be removed — even though this is the second check */

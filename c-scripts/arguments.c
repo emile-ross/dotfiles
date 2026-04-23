@@ -122,63 +122,6 @@ void config_description(char *package_t)
 
     char *description = description_arr[(config_name)description_index];
     printf("%s\n", description);
-
-    // switch (detect_config_name(package_t)) 
-    // {
-    //     case bash:
-    //         printf("Bash, (Bourne Again SHell) is the default shell on most Linux distributions.\n");
-    //         break;
-
-    //     case bpyt:
-    //         printf("bpytop is a system resource monitor.\n");
-    //         break;
-
-    //     case btop:
-    //         printf("btop is a system resource monitor.\n");
-    //         break;
-
-    //     case cava:
-    //         printf("Cava is a Cross-platform Audio Visualizer.\n");
-    //         break;
-
-    //     case fast:
-    //         printf("Fastfetch is a fast system information tool made in C.\n");
-    //         break;
-
-    //     case fuzz:
-    //         printf("Fuzzel is an App launcher and fuzzy finder based on rofi & dmenu.\n");
-    //         break;
-
-    //     case gtkl:
-    //         printf("Gtklock is a GTK lockscreen for Wayland.\n");
-    //         break;
-
-    //     case hypr:
-    //         printf("Hyprland is a dynamic tiling window manager made for Wayland.\n");
-    //         break;
-
-    //     case kitt:
-    //         printf("Kitty is a fast, GPU based terminal emulator.\n");
-    //         break;
-
-    //     case mpvf:
-    //         printf("MPV is a cross-platform media player made for the command line.\n");
-    //         break;
-
-    //     case nvim:
-    //         printf("Neovim is a modern Vi-based text editor.\n");
-    //         break;
- 
-    //     case wayb:
-    //         printf("Waybar is an highly customizable\n");
-    //         break;
-
-    //     case zshh:
-    //         printf("Zsh (Z shell) is a command line interpreter focused on speed and efficiency.\n");
-    //         break;
-    //     default:
-    //         printf("Unknown program.\n");
-    // }
 }
 
 void argument_config_install(char *package_t, char archiving_t, char pkginstall_t)
