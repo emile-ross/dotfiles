@@ -1,34 +1,31 @@
 BUILD_BINARY := $(wildcard build)
 
-DEBUG_BUILD_COMMAND = build.c -o build -Wall -Wextra -pedantic -Werror -std=c99
+DBGCMD = zig cc build.c -o build -Wall -Wextra -pedantic -Werror -std=c99
 
-existing_binaries:
+bin:
 
 ifeq ($(BUILD_BINARY),)
 	@gcc build.c -o build
 endif
 
-full: existing_binaries
+full: bin
 	@./build gcc -e
 
-gcc: existing_binaries
+setup: bin gcc
+gcc: bin
 	@./build gcc
 
-setup: existing_binaries
-	@./build gcc
-
-log: existing_binaries
+log: debug
 	@./build std -e log
 
-base: existing_binaries
-	@./build std -e
-
-zig: existing_binaries
+zig: bin
 	@./build std
 
-debug:
-	zig cc $(DEBUG_BUILD_COMMAND)
-	@#./build std
+base: debug
+	@./build std -e
 
-clean:
+debug:
+	$(DBGCMD)
+
+clean: bin
 	@./build clean
