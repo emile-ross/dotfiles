@@ -9,6 +9,7 @@ char object_fpath[16] = "c-scripts/";
 char source_fpath[16] = "c-scripts/";
 
 const char output_binary_name[16] = "setup";	/* set the name of the binary file */
+
 /* Warnings flags */
 #define FLAG_BUFFER_SIZE (18)
 #define LOGGING_CMD_SIZE (48)
@@ -294,13 +295,15 @@ void compilation(int number_flags, compiler_enum compiler_name_temp, bool log_bl
 	    exit(1);
     }
     
+    /* calculate the size of all flags
+     * you get the size by multiplying the number of flags by the size of each flag */
     int size_all_flags = number_flags * FLAG_BUFFER_SIZE ;
     size_all_flags++;
 
     char all_flags[size_all_flags];    /* initialize the all_flags buffer */
     snprintf(all_flags, sizeof(all_flags), "%s", base_flags);	/* move base flags to all_flags */
 
-    if (error_flag_temp_bl == true)
+    if (error_flag_temp_bl)
     {
 	/* append error flags to the end of the all_flags buffer */
         strcat(all_flags, Werror_flag);	
@@ -308,30 +311,33 @@ void compilation(int number_flags, compiler_enum compiler_name_temp, bool log_bl
 
     if (number_flags > 0)
     {
-	if (pedantic_flag_temp_bl == true)
+	if (pedantic_flag_temp_bl)
     	{
     	    /* append Wpedantic flag to the end of the all_flags buffer */
     	    strcat(all_flags, Wpedantic_flag);   
     	}
 
-    	if (extra_flag_temp_bl == true)
+    	if (extra_flag_temp_bl)
     	{
-    	    /* append extra flag to the end of the all_flags buffer */
+    	    /* append Wextra flag to the end of the all_flags buffer */
     	    strcat(all_flags, Wextra_flag);   
     	}
 
-    	if (all_flag_temp_bl == true)
+    	if (all_flag_temp_bl)
     	{
+    	    /* append Wall flag to the end of the all_flags buffer */
     	    strcat(all_flags, Wall_flag);   
     	}
 
     	if (c99_flag_temp_bl)
     	{
+    	    /* append -std=c99 flag to the end of the all_flags buffer */
     	    strcat(all_flags, c99_flag);   
     	}
 
 	if (conversion_bl)
 	{
+    	    /* append -Wconversion flag to the end of the all_flags buffer */
 	    strcat(all_flags, Wconversion_flag);
 	}
     }
