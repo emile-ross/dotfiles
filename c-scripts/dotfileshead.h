@@ -50,23 +50,23 @@ void configure_fastfetch(void);
 
 config_name detect_config_name(char *input);
 
-// time related
+/* time related */
 void countdown(int counter, int lines_to_skip);
 void wait_for_timeout(int timer_quarters, int timer_seconds);
 extern struct timespec install_timer;
-extern int timer_quarters; // max is 4
+extern int timer_quarters; /* max is 4 */
 extern int timer_seconds;
 extern long int time_timer_quarters;
 extern long int time_timer_seconds;
 
-//  command line arguments
+/*  command line arguments */
 void argument_config_install(char *package_t, char archiving_t, char pkginstall_t);
 void cmd_arg_install(int num_cmd_arguments_t, char *cmd_arg_v_t[], char config_archive_t, char pkg_install_t);
 void cli_arg_missing(char *first_command, char *type_of_missing_arg, char *user_flag_t);
 int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[]);
 extern const int n_to_arg;
 
-// data 
+/* data */
 extern char* TEXT_C_BASH;   /* will be replaced by an array */
 extern char* TEXT_C_BPYT;   /* will be replaced by an array */
 extern char* TEXT_C_BTOP;   /* will be replaced by an array */
@@ -84,8 +84,8 @@ extern char* TEXT_C_ZSHH;   /* will be replaced by an array */
 
 extern char *description_arr[n_configs];
 
-// command line related
-// Initialized in globals.c
+/* command line related
+* Initialized in globals.c */
 extern char* help_flag_arg_text;
 extern char* pkgi_flag_arg_text;
 extern char* conf_inst_flag_arg_text;
@@ -106,15 +106,15 @@ extern char opt_exit_text[16];
 extern char kitty_color_text[32];
 extern char kitty_fonts_text[32];
 
-// needs to be global
+/* needs to be global */
 extern char* theme_colour_text;
 extern float pver;
 extern int fastfetch_conf_export;
 extern const char *home;
-extern char full_install_opt; // if the user wants to install everything set to Y
+extern char full_install_opt; /* if the user wants to install everything set to Y */
 extern char archive_before_install;
 
-// main menu
+/* main menu */
 extern int menu_one_i;
 extern const int max_menu_opt_n;
 extern bool fastfetch_config_apply;
@@ -130,7 +130,7 @@ float* update(void);
 int full_update(char ARCHIVE, float pver);
 
 
-// fuzzel 
+/* fuzzel */
 void fuzzel_config_importing(void);
 extern int fuzzel_config_menu_choice;
 void apply_fuzzel_config(int config_choice_t);
@@ -139,6 +139,6 @@ extern char fuzzel_edit_config_text[32];
 extern char fuzzel_catppuccin_text[32];
 
 
-// errors
+/* errors */
 extern char errcode;
 int error_message(error_code_e err_code);

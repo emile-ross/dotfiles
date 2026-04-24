@@ -23,10 +23,8 @@ const char c99_flag[FLAG_BUFFER_SIZE] = " -std=c99";
 const char Wconversion_flag[FLAG_BUFFER_SIZE] = " -Wconversion";
 
 const char logging_cmd[LOGGING_CMD_SIZE] = " 2>&1 | tee compile_log.txt"; /* this will overwrite the compile_log.txt */
-/* const char logging_cmd[LOGGING_CMD_SIZE] = " 2>&1 | tee -a compile_log.txt"; */
 
 int size_all_flags;
-
 int size_source_filename = 24;
 
 #define num_src_files (9)
@@ -61,7 +59,7 @@ int main(int argc, char *argv[])
 {
     /* declare compiler_name enum */
     compiler_enum compiler_name;
-
+    
     bool Werror_flag_bl = false;    /* default is false */
     bool Wpedantic_bl = false;	    /* default is false */
     bool Wall_flag_bl = false;	    /* default is false */
@@ -74,7 +72,7 @@ int main(int argc, char *argv[])
 
     int num_flags = 0;
 
-	/* convert command line arguments to flags/compiler/options */
+    /* convert command line arguments to flags/compiler/options */
     for (int i = 1; i < argc; i++)
     {
 	if (strcmp(argv[i], "gcc") == 0)
@@ -155,7 +153,7 @@ int main(int argc, char *argv[])
     
     if (compile_bl)
     {
-		compilation(num_flags, compiler_name, log_bl, Werror_flag_bl, Wpedantic_bl, Wall_flag_bl, Wextra_flag_bl, c99_flag_bl, Wconversion_bl);
+	compilation(num_flags, compiler_name, log_bl, Werror_flag_bl, Wpedantic_bl, Wall_flag_bl, Wextra_flag_bl, c99_flag_bl, Wconversion_bl);
     }
     return 0;
 }
