@@ -125,7 +125,7 @@ void check_for_yay(void)
         clearbuffer();
         scanf(" %c", &YAY); // asks the user if they wanna install yay (needed)
 
-	bool install_yay = yn(YAY);
+	bool install_yay = y_n(YAY);
         if (install_yay)
         {
             // Check if makepkg is installed ( it is needed in order to compile yay )
@@ -204,7 +204,7 @@ void countdown(int counter, int lines_to_skip)
     }
 }
 
-bool yn(char yes_no)
+bool y_n(char yes_no)
 {
     if (yes_no == 'Y' || yes_no == 'y')
     {

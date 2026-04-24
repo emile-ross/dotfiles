@@ -15,8 +15,8 @@ void install_menu(void)
     printf(BOLD_S"\nProceed with installation (Y/n)\n"STYLE_END); // prompt user for input
     scanf(" %c", &full_install_opt);
 
-    bool archive_bl = yn(archive_before_install);
-    bool full_install_bl = yn(full_install_opt);
+    bool archive_bl = y_n(archive_before_install);
+    bool full_install_bl = y_n(full_install_opt);
     if (full_install_bl)
     {
         full_install(archive_bl, true);
