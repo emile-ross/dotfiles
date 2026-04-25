@@ -25,7 +25,7 @@
 #define INPUT_EXIT_VALUE (0)
 
 #define KEY_MAIN_MENU_CONFIGURE (3)
-#define NUM_ELEMENTS_MAIN_MENU (5)
+#define NUM_ELEMENTS_MAIN_MENU (4)
 
 #define MENU_TEXT_SIZE (128)
 #define SHORT_TIMER (2)

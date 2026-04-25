@@ -33,13 +33,22 @@
     char kitty_color_text[32] = "Change Kitty color scheme";
     char kitty_fonts_text[32] = "Change Kitty fonts";
     
-    char main_menu_text[128] = "Welcome to the setup utility for ImAwsumm's dotfiles";
+    char main_menu_title[128] = "Welcome to the setup utility for ImAwsumm's dotfiles";
     char opt_one_text[128] = "Install the dotfiles";
     char opt_the_text[128] = "Update your dotfiles";
     char opt_for_text[128] = "Custom configuration menu";
     char opt_fiv_text[128] = "Something else";
     char opt_exit_text[16] = "Exit";
     char opt_back_text[16] = "Back";
+
+char *main_menu_text[NUM_ELEMENTS_MAIN_MENU] = 
+{
+    "Install the dotfiles",
+    "Update your dotfiles",
+    "Custom configuration menu",
+    "Something else",
+};
+
 
     char *description_arr[n_configs] =
     {

@@ -11,8 +11,13 @@ int main(int argc, char *argv[])
     	/* sets the text for each option and each menu title
 	* this isn't really needed, it could all be replaced by a loop and an array */
     	clear();
-    	printf(BOLD_S ANSI_CYAN "%s\n\n" STYLE_END, main_menu_text );
-    	printf(BOLD_S " [1] " STYLE_END "%s\n", opt_one_text);
+    	printf(BOLD_S ANSI_CYAN "%s\n\n" STYLE_END, main_menu_title );
+	for (int i = 1; i < NUM_ELEMENTS_MAIN_MENU; i++)
+	{
+	    printf(BOLD_S " [%d] " STYLE_END "%s\n", i, main_menu_text[i]);
+	}
+
+    	printf(BOLD_S "\n [1] " STYLE_END "%s\n", opt_one_text);
     	printf(BOLD_S " [2] " STYLE_END "%s\n", opt_the_text);
     	printf(BOLD_S " [%d] " STYLE_END "%s\n", KEY_MAIN_MENU_CONFIGURE, opt_for_text);
     	printf(BOLD_S " [4] " STYLE_END "%s\n\n", opt_fiv_text);

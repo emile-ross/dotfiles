@@ -96,12 +96,14 @@ extern char kitty_config_menu_text[32];
 extern char fuzzel_config_menu_text[32];
 extern char zshforhumans_config_menu_text[32];
 
-extern char main_menu_text[128];
+extern char main_menu_title[128];
 extern char opt_one_text[MENU_TEXT_SIZE]; /* can be replaced by an array */
 extern char opt_the_text[MENU_TEXT_SIZE]; /* can be replaced by an array */
 extern char opt_for_text[MENU_TEXT_SIZE]; /* can be replaced by an array */
 extern char opt_fiv_text[MENU_TEXT_SIZE]; /* can be replaced by an array */
 extern char opt_exit_text[16];
+
+extern char *main_menu_text[NUM_ELEMENTS_MAIN_MENU];
 
 extern char kitty_color_text[32];
 extern char kitty_fonts_text[32];
