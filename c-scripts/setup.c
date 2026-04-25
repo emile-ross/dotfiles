@@ -13,8 +13,9 @@ int main(int argc, char *argv[])
 	for (int i = 0; i < NUM_ELEMENTS_MAIN_MENU; i++)
 	{
 	    int u_index = i + 1;
-	    printf(BOLD_S " [%d] " STYLE_END "%s\n", u_index, main_menu_text[i]);
+	    printf(BOLD_S "  [%d] " STYLE_END "%s\n", u_index, main_menu_text[i]);
 	}
+	printf("\n  "BOLD_S"[0] "STYLE_END"%s\n", opt_exit_text);
 
     	scanf(" %d", &menu_one_i);
     	if (menu_one_i == 1)
