@@ -8,7 +8,8 @@ int main(int argc, char *argv[])
 
     do
     {
-    	// sets the text for each option and each menu title
+    	/* sets the text for each option and each menu title
+	* this isn't really needed, it could all be replaced by a loop and an array */
     	clear();
     	printf(BOLD_S ANSI_CYAN "%s\n\n" STYLE_END, main_menu_text );
     	printf(BOLD_S " [1] " STYLE_END "%s\n", opt_one_text);
@@ -20,6 +21,7 @@ int main(int argc, char *argv[])
     	scanf(" %d", &menu_one_i);
     	if (menu_one_i == 1)
     	{
+	    /* launch the install menu it suggests some options to the user and then it executes full_install() */
 	    install_menu();
     	}
     	else if (menu_one_i == 2)
@@ -79,7 +81,7 @@ int main(int argc, char *argv[])
     	                }
     	            }
     	            while (fastfetch_config_choice > INPUT_BACK_VALUE);
-    	            // exits the while loop when the user types 0
+    	            /* exits the while loop when the user types 0 */
 	        }
 		else if (dotfiles_config_menu == 2)
     	        {
@@ -106,7 +108,7 @@ int main(int argc, char *argv[])
     	                    printf("\nThe install script can be used to install more fonts.");
     	                }
     	            }
-    	            while (kitty_config_choice > INPUT_BACK_VALUE); // exits the while loop when the user types 0
+    	            while (kitty_config_choice > INPUT_BACK_VALUE); /* exits the while loop when the user types 0 */
     	        }
 		else if (dotfiles_config_menu == 3)
 		{
@@ -192,7 +194,7 @@ int main(int argc, char *argv[])
 		}
     	    } 
     	    while (dotfiles_config_menu > INPUT_BACK_VALUE);
-    	    // exits the while loop when the user types 0
+    	    /* exits the while loop when the user types 0 */
     	}
     	else if (menu_one_i == 4)
     	{
@@ -233,10 +235,10 @@ int main(int argc, char *argv[])
     	}
     	else
     	{
-	    // this is caused by invalid input
-	    error_message(2);
+	    /* this is caused by invalid input */
+	    error_message(INVALID_INPUT);
     	}
     }
-    while (menu_one_i != 0);	// exits the while loop when the user types 0
+    while (menu_one_i != 0);	/* exits the while loop when the user types 0 */
     return 0;
 }
