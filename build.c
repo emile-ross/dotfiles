@@ -10,6 +10,8 @@ char source_fpath[16] = "c-scripts/";
 
 const char output_binary_name[16] = "setup";	/* set the name of the binary file */
 
+bool verbose = false;   /* default is false */ 
+
 /* Warnings flags */
 #define FLAG_BUFFER_SIZE (18)
 #define LOGGING_CMD_SIZE (48)
@@ -69,6 +71,7 @@ int main(int argc, char *argv[])
 
     bool compile_bl = true; /* default is true */
     bool log_bl = false;    /* default is false */
+
 
     int num_flags = 0;
 
@@ -145,6 +148,10 @@ int main(int argc, char *argv[])
 	{
 	    log_bl = true;
 	}
+    	else if (strcmp(argv[i], "-v") == 0)
+	{
+	    verbose = true;
+	}
     	else
     	{
     	    printf("Unknown argument: %s\n", argv[i]);
@@ -179,6 +186,10 @@ void compile_all_files(bool log, char *compiler, char *flags)
 	if (log)
 	{
 	    strcat(cmd, logging_cmd);
+	}
+	if (verbose)
+	{
+	    printf("%s\n", cmd);
 	}
 	system(cmd);
     }
@@ -256,6 +267,10 @@ void link_object_files(bool log, compiler_enum compiler_name_def, char *flags)
     {
 	strcat(link_cmd, logging_cmd);
     }
+    if (verbose)
+    {
+	printf("%s\n", link_cmd);
+    }
     system(link_cmd); /* execute the command */
 }
 
@@ -269,6 +284,12 @@ void clean_objects(void)
         snprintf(cmd, sizeof(cmd),
         	"rm %s%s.o"
         	, object_fpath, source_files[i]);
+
+	if (verbose)
+    	{
+    	    printf("%s\n", cmd);
+    	}
+
 	system(cmd);
     }
 }

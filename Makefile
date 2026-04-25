@@ -16,13 +16,13 @@ gcc: bin
 	@./build gcc
 
 log: debug
-	@./build std -e log
+	@./build std -e log -v
 
 zig: bin
 	@./build std
 
 base: debug
-	@./build std -e
+	@./build std -e -v
 
 debug:
 	$(DBGCMD)
