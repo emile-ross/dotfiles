@@ -276,21 +276,33 @@ void link_object_files(bool log, compiler_enum compiler_name_def, char *flags)
 
 void clean_objects(void)
 {
-    for (int i = 0; source_files[i] != NULL; i++) 
+    if (verbose)
     {
-	int buffer_size = snprintf(NULL, 0,
-		"rm %s%s.o", object_fpath, source_files[i]);
-        char cmd[buffer_size + 1];	/* initialize cmd buffer */
-        snprintf(cmd, sizeof(cmd),
-        	"rm %s%s.o"
-        	, object_fpath, source_files[i]);
-
-	if (verbose)
+	for (int i = 0; source_files[i] != NULL; i++) 
     	{
-    	    printf("%s\n", cmd);
-    	}
+    	    int buffer_size = snprintf(NULL, 0,
+    	    	"rm %s%s.o", object_fpath, source_files[i]);
+    	    char cmd[buffer_size + 1];	/* initialize cmd buffer */
+    	    snprintf(cmd, sizeof(cmd),
+    	    	"rm %s%s.o"
+    	    	, object_fpath, source_files[i]);
 
-	system(cmd);
+    	    printf("%s\n", cmd);
+    	    system(cmd);
+    	}
+    }
+    else
+    {
+	for (int i = 0; source_files[i] != NULL; i++) 
+    	{
+    	    int buffer_size = snprintf(NULL, 0,
+    	    	"rm %s%s.o", object_fpath, source_files[i]);
+    	    char cmd[buffer_size + 1];	/* initialize cmd buffer */
+    	    snprintf(cmd, sizeof(cmd),
+    	    	"rm %s%s.o"
+    	    	, object_fpath, source_files[i]);
+    	    system(cmd);
+    	}
     }
 }
 
