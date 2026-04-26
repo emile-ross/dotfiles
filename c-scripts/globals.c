@@ -5,21 +5,21 @@
 
 char *config_names[num_packages] = 
 {
-"Unknown Package",
-".bashrc",
-"Sway-WM config",
-"bpytop config";
-"btop config";
-"cava config";
-"fastfetch configs";
-"fuzzel configs";
-"gtklock config and style (appearance) ";
-"Hyprland-WM config + Hypridle config";
-"kitty terminal configs";
-"mpv config";
-"neovim config with lazy";
-"waybar config and style (appearance)";
-"zsh config (.zshrc)";
+    "Unknown Package",
+    ".bashrc",
+    "Sway-WM config",
+    "bpytop config",
+    "btop config",
+    "cava config",
+    "fastfetch configs",
+    "fuzzel configs",
+    "gtklock config and style (appearance) ",
+    "Hyprland-WM config + Hypridle config",
+    "kitty terminal configs",
+    "mpv config",
+    "neovim config with lazy",
+    "waybar config and style (appearance)",
+    "zsh config (.zshrc)",
 };
 
     char* TEXT_C_BASH = ".bashrc";
