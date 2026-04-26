@@ -3,7 +3,25 @@
 
 // Text available globally
 
-char *config_names[num_packages];
+char *config_names[num_packages] = 
+{
+"Unknown Package",
+".bashrc",
+"Sway-WM config",
+"bpytop config";
+"btop config";
+"cava config";
+"fastfetch configs";
+"fuzzel configs";
+"gtklock config and style (appearance) ";
+"Hyprland-WM config + Hypridle config";
+"kitty terminal configs";
+"mpv config";
+"neovim config with lazy";
+"waybar config and style (appearance)";
+"zsh config (.zshrc)";
+};
+
     char* TEXT_C_BASH = ".bashrc";
     char* TEXT_C_SWAY = "Sway-WM config";
     char* TEXT_C_BPYT = "bpytop config";
