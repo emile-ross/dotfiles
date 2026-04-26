@@ -8,7 +8,7 @@ void fuzzel_config_importing(void)
 
     struct stat st;
     char cmd[768];
-    if (stat(path, &st) == 0 && S_ISDIR(st.st_mode)) // check if the configs were already downloaded
+    if (stat(path, &st) == 0 && S_ISDIR(st.st_mode)) /* check if the configs were already downloaded */
     {
         printf("The fuzzel themes are already installed.\n");
     }
@@ -57,7 +57,7 @@ void fuzzel_config_importing(void)
     	endone:
 	;
     }
-    // theme color
+    /* theme color */
     printf(BOLD_S"Set the colour for your fuzzel config\n"STYLE_END);
 
     int theme_colour_user_opt;
@@ -66,7 +66,6 @@ void fuzzel_config_importing(void)
     fuzzel_colour_e fuzz_colour;
 
     printf(BOLD_S"[%d] "STYLE_END" %s "BOLD_S"blue"STYLE_END"\n", fuzz_colour = blue, colour_message_text);
-    //printf(BOLD_S"[1] "STYLE_END" %s "BOLD_S"blue"STYLE_END"\n", fuzz_colour = blue, colour_message_text);
     printf(BOLD_S"[%d] "STYLE_END" %s "BOLD_S"flamingo"STYLE_END"\n", fuzz_colour = flamingo, colour_message_text);
     printf(BOLD_S"[%d] "STYLE_END" %s "BOLD_S"green"STYLE_END"\n", fuzz_colour = green, colour_message_text);
     printf(BOLD_S"[%d] "STYLE_END" %s "BOLD_S"lavender"STYLE_END"\n", fuzz_colour = lavender, colour_message_text);
@@ -141,8 +140,8 @@ void fuzzel_config_importing(void)
     
     snprintf(cmd, sizeof(cmd),
 	    "mv -f %s/.config/fuzzel/fuzzel.ini %s/.config/fuzzel/before-link-fuzzel.ini ; "
-	    "ln -sf %s %s/.config/fuzzel/fuzzel.ini ; " // apply theme
-	    "ln -sf %s %s/.config/fuzzel/catppucin-fuzzel.ini" // keep track of the correct config with a symlink
+	    "ln -sf %s %s/.config/fuzzel/fuzzel.ini ; " /* apply theme */
+	    "ln -sf %s %s/.config/fuzzel/catppucin-fuzzel.ini" /* keep track of the correct config with a symlink */
 	    , home, home, fuz_theme_path, home, fuz_theme_path, home);
     system(cmd);
     fflush(stdout);
@@ -165,7 +164,7 @@ void fuzzel_config_importing(void)
 
 void apply_fuzzel_config(int config_choice_t)
 {
-    // create a 256 bytes buffer for the commands below
+    /* create a 256 bytes buffer for the commands below */
     char cmd[256]; 
     switch(config_choice_t)
     {
@@ -207,8 +206,8 @@ void apply_fuzzel_config(int config_choice_t)
             system(cmd);
 	    break;
         case 7:
-	    snprintf(cmd, 48, // requires 48 bytes exactly
-        	    "nvim ~/.config/fuzzel/custom-edited-fuzzel.ini "); // command to edit config (with nvim)
+	    snprintf(cmd, 48, /* requires 48 bytes exactly */
+        	    "nvim ~/.config/fuzzel/custom-edited-fuzzel.ini "); /* command to edit config (with nvim) */
             system(cmd);
             printf("The custom config was saved successfully\n");
             wait_for_timeout(1, 0);
@@ -225,7 +224,7 @@ void configure_fastfetch(void)
     {
         clear();
     
-	// create command buffer
+	/* create command buffer */
     	char cmd[128];
 
     	printf(BOLD_S"What file would you like to use as your fastfetch config?\n"STYLE_END);
@@ -277,5 +276,5 @@ void configure_fastfetch(void)
     	}
     }
     while (link_fastfetch_configs_opt > 0.0);
-    // exits the while loop when the user types 0
+    /* exits the while loop when the user types 0 */
 }
