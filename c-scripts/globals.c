@@ -3,7 +3,7 @@
 
 // Text available globally
 
-char *config_names[num_packages] = 
+char *config_names[n_configs] = 
 {
     "Unknown Package",
     ".bashrc",
