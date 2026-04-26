@@ -29,3 +29,4 @@
 
 #define MENU_TEXT_SIZE (128)
 #define SHORT_TIMER (2)
+#define n_configs (15)
