@@ -30,6 +30,21 @@ void NVIM(bool archive_bl, float pver, bool pkginstall_bl);
 void WAYB(bool archive_bl, float pver, bool pkginstall_bl);
 void ZSHH(bool archive_bl, float pver, bool pkginstall_bl);
 
+/* data */
+extern char* TEXT_C_BASH;   /* will be replaced by an array */
+extern char* TEXT_C_BPYT;   /* will be replaced by an array */
+extern char* TEXT_C_BTOP;   /* will be replaced by an array */
+extern char* TEXT_C_CAVA;   /* will be replaced by an array */
+extern char* TEXT_C_FAST;   /* will be replaced by an array */
+extern char* TEXT_C_FUZZ;   /* will be replaced by an array */
+extern char* TEXT_C_GTKL;   /* will be replaced by an array */
+extern char* TEXT_C_HYPR;   /* will be replaced by an array */
+extern char* TEXT_C_KITT;   /* will be replaced by an array */
+extern char* TEXT_C_MPVF;   /* will be replaced by an array */
+extern char* TEXT_C_NVIM;   /* will be replaced by an array */
+extern char* TEXT_C_SWAY;   /* will be replaced by an array */
+extern char* TEXT_C_WAYB;   /* will be replaced by an array */
+extern char* TEXT_C_ZSHH;   /* will be replaced by an array */
 
 void clear(void);
 void clearbuffer(void);
@@ -65,22 +80,6 @@ void cmd_arg_install(int num_cmd_arguments_t, char *cmd_arg_v_t[], char config_a
 void cli_arg_missing(char *first_command, char *type_of_missing_arg, char *user_flag_t);
 int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[]);
 extern const int n_to_arg;
-
-/* data */
-extern char* TEXT_C_BASH;   /* will be replaced by an array */
-extern char* TEXT_C_BPYT;   /* will be replaced by an array */
-extern char* TEXT_C_BTOP;   /* will be replaced by an array */
-extern char* TEXT_C_CAVA;   /* will be replaced by an array */
-extern char* TEXT_C_FAST;   /* will be replaced by an array */
-extern char* TEXT_C_FUZZ;   /* will be replaced by an array */
-extern char* TEXT_C_GTKL;   /* will be replaced by an array */
-extern char* TEXT_C_HYPR;   /* will be replaced by an array */
-extern char* TEXT_C_KITT;   /* will be replaced by an array */
-extern char* TEXT_C_MPVF;   /* will be replaced by an array */
-extern char* TEXT_C_NVIM;   /* will be replaced by an array */
-extern char* TEXT_C_SWAY;   /* will be replaced by an array */
-extern char* TEXT_C_WAYB;   /* will be replaced by an array */
-extern char* TEXT_C_ZSHH;   /* will be replaced by an array */
 
 extern char *description_arr[n_configs];
 
