@@ -2,6 +2,8 @@
 
 
 // Text available globally
+
+char *config_names[num_packages];
     char* TEXT_C_BASH = ".bashrc";
     char* TEXT_C_SWAY = "Sway-WM config";
     char* TEXT_C_BPYT = "bpytop config";
