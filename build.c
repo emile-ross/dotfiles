@@ -5,6 +5,8 @@
 
 #define COMPILER_NAME_SIZE (16)
 
+/* This is the object file path
+* and the second one is the source files path */
 char object_fpath[16] = "c-scripts/";
 char source_fpath[16] = "c-scripts/";
 
@@ -16,6 +18,7 @@ bool verbose = false;   /* default is false */
 #define FLAG_BUFFER_SIZE (18)
 #define LOGGING_CMD_SIZE (48)
 
+/* define the flags */
 const char *base_flags = " -W";
 const char Wextra_flag[FLAG_BUFFER_SIZE] = " -Wextra";
 const char Werror_flag[FLAG_BUFFER_SIZE] = " -Werror";
@@ -73,7 +76,7 @@ int main(int argc, char *argv[])
     bool log_bl = false;    /* default is false */
 
 
-    int num_flags = 0;
+    int num_flags = 0; /* initialize num_flags at 0 */
 
     /* convert command line arguments to flags/compiler/options */
     for (int i = 1; i < argc; i++)
@@ -152,6 +155,7 @@ int main(int argc, char *argv[])
 	{
 	    verbose = true;
 	}
+			/* else if (strcmp(argv[i], "macos") == 0) */
     	else
     	{
     	    printf("Unknown argument: %s\n", argv[i]);
