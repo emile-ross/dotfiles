@@ -84,6 +84,9 @@ git clone https://github.com/imawsumm/dotfiles
 cd dotfiles/
 make setup
 ```
+
+you can use ``make macos`` for macos
+
 Now, execute the binary with:
 ```sh
 ./setup
