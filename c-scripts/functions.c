@@ -17,15 +17,19 @@ void pre_startup(void)
     // gets the current working directory
     snprintf(inpath, sizeof(inpath), "%s", get_initial_path());
     get_os_name();
+    is_debian_bl = false;
+    is_arch_bl = false;
 
     if (strcmp(distro, "debian") == 0) 
     {
+	is_debian_bl = true;
 	//sets debian as the parent distro of (debian)
 	snprintf(parent, sizeof(parent),
 		"%s", distro);
     }
     else if (strcmp(distro, "arch") == 0) 
     {
+	is_arch_bl = true;
 	// sets arch as the parent distro of (arch)
 	snprintf(parent, sizeof(parent),
 		"%s", distro);

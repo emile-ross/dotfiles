@@ -122,5 +122,8 @@ char *main_menu_text[NUM_ELEMENTS_MAIN_MENU] =
     char distro[128] = "";
     char parent[128] = "";
     
+    bool is_debian_bl;
+    bool is_arch_bl;
+
     char initial_path[64];
     char inpath[64];
