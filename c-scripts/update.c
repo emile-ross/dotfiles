@@ -57,6 +57,8 @@ int full_update(char ARCHIVE, float pver)
 	    // do not break because we are also installing everything below
     	case V_2_5:
     	case V_3:
+			BPYT(ARCHIVE, pver, install_pkg_yn);
+		case V_3_1:
 	    BASH();
 	    HYPR(ARCHIVE, pver, install_pkg_yn);
 	    ZSHH(ARCHIVE, pver, install_pkg_yn);
@@ -64,12 +66,12 @@ int full_update(char ARCHIVE, float pver)
 	    break;
 
 	case STABLE:
-	    printf("\nYou are running the latest stableversion.\n");
+	    printf("\nYou are running the latest stable version.\n");
     	    wait_for_timeout(SHORT_TIMER, 0); // let the user read the message
     	    break;
 
 	case LATEST:
-	    printf("You are using the latest versioin, it is ahead of the latest stable release\n");
+	    printf("You are using the latest versioin, it is often ahead of the latest stable release\n");
 	    break;
 
     	default:
