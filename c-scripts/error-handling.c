@@ -86,12 +86,12 @@ int error_message(error_code_e err_code)
 	    snprintf(err_solution_temp, sizeof(err_solution_temp), " ");
 	    break;
 
-	case 301:
+	case CLI_UNKNOWN_PKG:
 	    snprintf(err_text_temp, sizeof(err_text_temp), "Unknown package");
 	    snprintf(err_solution_temp, sizeof(err_solution_temp), "Type the config name in lowercase");
 	    break;
 
-	case 302:
+	case CLI_INVALID_CMD_SYNTAX:
 	    snprintf(err_text_temp, sizeof(err_text_temp), "Invalid command syntax");
 	    break;
 

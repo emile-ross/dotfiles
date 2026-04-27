@@ -45,6 +45,7 @@ extern char* TEXT_C_NVIM;   /* will be replaced by an array */
 extern char* TEXT_C_SWAY;   /* will be replaced by an array */
 extern char* TEXT_C_WAYB;   /* will be replaced by an array */
 extern char* TEXT_C_ZSHH;   /* will be replaced by an array */
+extern char *config_names[n_configs];
 
 void clear(void);
 void clearbuffer(void);
