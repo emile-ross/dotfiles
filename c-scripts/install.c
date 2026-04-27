@@ -55,103 +55,70 @@ void install_configs(unsigned int custom_package_install)  // the partial instal
 
 	unsigned int package_name_index = custom_package_install;
 
-	if (package_name_index > n_configs)
+	if (package_name_index < n_configs && package_name_index > 0)
 	{
-	    error_message(CLI_UNKNOWN_PKG); // probably malicious
-	}
-	else if (package_name_index > 0)
-	{
-	    error_message(CLI_UNKNOWN_PKG);
+	    temp_conf_installed = config_names[package_name_index];
 	}
 	else
 	{
-	    printf("Lorem ipsum\n");
-	    temp_conf_installed = config_names[package_name_index];
+	    error_message(CLI_UNKNOWN_PKG); // probably malicious
 	}
 
     	switch (config_install_enum)
     	{
     	    case bash:
-    	        temp_conf_installed = (char*)(TEXT_C_BASH);
-
 		install_config_message(temp_conf_installed);
 		BASH();
 		break;
     	    case bpyt:
-    	        temp_conf_installed = (char*)(TEXT_C_BPYT);
-
 		install_config_message(temp_conf_installed);
 		BPYT(ARCHIVE_T, pver, PKGINSTALL_T);
 		break;
     	    case btop:
-    	        temp_conf_installed = (char*)(TEXT_C_BTOP);
-
 		install_config_message(temp_conf_installed);
 		BTOP(ARCHIVE_T, pver, PKGINSTALL_T);
 		break;
 	    case cava:
-    	        temp_conf_installed = (char*)(TEXT_C_CAVA);
-
 		install_config_message(temp_conf_installed);
 		CAVA(ARCHIVE_T, pver, PKGINSTALL_T);
 		break;
     	    case fast:
-    	        temp_conf_installed = (char*)(TEXT_C_FAST);
-
 		install_config_message(temp_conf_installed);
 		FAST(ARCHIVE_T, pver, PKGINSTALL_T);
 		break;
     	    case fuzz:
-    	        temp_conf_installed = (char*)(TEXT_C_FUZZ);
-
 		install_config_message(temp_conf_installed);
 		FUZZ(ARCHIVE_T, pver, PKGINSTALL_T);
 		break;
     	    case gtkl:
-    	        temp_conf_installed = (char*)(TEXT_C_GTKL);
-
 		install_config_message(temp_conf_installed);
 		GTKL(ARCHIVE_T, pver, PKGINSTALL_T);
 		break;
     	    case hypr:
-    	        temp_conf_installed = (char*)(TEXT_C_HYPR);
-
 		install_config_message(temp_conf_installed);
 		HYPR(ARCHIVE_T, pver, PKGINSTALL_T);
 		break;
     	    case kitt:
-    	        temp_conf_installed = (char*)(TEXT_C_KITT);
-
 		install_config_message(temp_conf_installed);
 		KITT(ARCHIVE_T, pver, PKGINSTALL_T);
 		break;
     	    case mpvf:
-    	        temp_conf_installed = (char*)(TEXT_C_MPVF);
-
 		install_config_message(temp_conf_installed);
 		MPVF(ARCHIVE_T, pver, PKGINSTALL_T);
 		break;
     	    case nvim:
-    	        temp_conf_installed = (char*)(TEXT_C_NVIM);
-
 		install_config_message(temp_conf_installed);
 		NVIM(ARCHIVE_T, pver, PKGINSTALL_T);
 		break;
     	    case sway:
-    	        temp_conf_installed = (char*)(TEXT_C_SWAY);
-
 		install_config_message(temp_conf_installed);
 		SWAY(ARCHIVE_T, pver, PKGINSTALL_T);
 		break;
     	    case wayb:
-    	        temp_conf_installed = (char*)(TEXT_C_WAYB);
-
 		install_config_message(temp_conf_installed);
 		WAYB(ARCHIVE_T, pver, PKGINSTALL_T);
 		break;
     	    case zshh:
-    	        temp_conf_installed = (char*)(TEXT_C_ZSHH);
-
 		install_config_message(temp_conf_installed);
 		ZSHH(ARCHIVE_T, pver, PKGINSTALL_T);
 		break;
