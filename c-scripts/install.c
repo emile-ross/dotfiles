@@ -33,12 +33,12 @@ void install_config_message(char *text)
     printf("\nInstalling %s \n", text);
 }
 
-void install_configs(unsigned int custom_package_install)  // the partial install script (configure which package or configuration to install)
+void install_configs(unsigned int custom_package_install)  /* the partial install script (configure which package or configuration to install) */
 {
     do
     {
 	bool install_success = true;
-	float pver = 0.0f; // assumes the user doesn't have the dotfiles
+	float pver = 0.0f; /* assumes the user doesn't have the dotfiles */
     	char* temp_conf_installed = NULL;
 
 	clearbuffer();
@@ -140,6 +140,7 @@ void install_configs(unsigned int custom_package_install)  // the partial instal
 
 void full_install(bool ARCHIVE_BL, bool full_install_bl)
 {
+    float previous_version = 0.0f; /* assumes the user doesn't have the dotfiles */
     if (full_install_bl)
     {
 	printf(BOLD_S"\nInstalling every configuration\n"STYLE_END);
@@ -151,17 +152,19 @@ void full_install(bool ARCHIVE_BL, bool full_install_bl)
 	{
 	    check_for_yay();
 	}
-	// actually install the dotfiles
-	full_config_install(ARCHIVE_BL, 0.0, true);
+	/* actually install the dotfiles */
+	full_config_install(ARCHIVE_BL, previous_version, true);
     }
     else
     {
 	unsigned int install_pkg_opt;
 	do
 	{
-	    // this is awful
-	    // it could all be replaced by a single array with all of the text 
-	    // (would be significantly faster, better, more maintainable...)
+	    /* this is awful
+	    * it could all be replaced by a single array with all of the text 
+	    * (would be significantly faster, better, more maintainable...) */
+
+	    /* this has now been fixed by looping through an array of strings */
 	    for (int i = 1; i < n_configs; i++)
 	    {
 		printf("\n[%d] Install %s ", i, config_names[i]);
