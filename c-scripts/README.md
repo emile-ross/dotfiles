@@ -6,10 +6,24 @@ Compile before executing.
 
 ## Compile using make 
 
+Compile with all warnings using the zig cc compiler
 ```bash
-make full
+make base
 ```
-or ``make base`` if you don't want any warning
+You can log the errors to a file using 
+```sh
+make log
+```
+
+Compile for MacOs
+```sh
+make macos
+```
+If this causes some problems, try removing the binary files and try again
+
+
+Use ``make gcc`` if you don't want any warning
+
 
 ## Compile using GCC 
 
