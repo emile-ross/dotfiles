@@ -23,6 +23,7 @@ void install_menu(void)
     }
     else
     {
+        full_install(archive_bl, false);
 	printf("Skipping full install\n");
     }
 }
@@ -62,8 +63,11 @@ void install_configs(unsigned int custom_package_install)  // the partial instal
 	{
 	    error_message(CLI_UNKNOWN_PKG);
 	}
-
-	//config_names[package_name_index]
+	else
+	{
+	    printf("Lorem ipsum\n");
+	    temp_conf_installed = config_names[package_name_index];
+	}
 
     	switch (config_install_enum)
     	{
