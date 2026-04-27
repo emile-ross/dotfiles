@@ -2,7 +2,11 @@
 
 int full_update(char ARCHIVE, float pver)
 {
-    check_for_yay();
+    if (is_arch_bl)
+    {
+	/* checks if yay is installed only if the distro is arch */
+	check_for_yay();
+    }
 
     int VAWSM = (int)(pver * 100);
     bool install_pkg_yn = false;
@@ -12,7 +16,8 @@ int full_update(char ARCHIVE, float pver)
     if (prev_update_version == (df_version)STABLE)
     {
 	printf("\nYou are running the latest stable version.\n");
-	wait_for_timeout(SHORT_TIMER, 0); // let the user read the message
+	getchar();
+	clearbuffer();
     }
     else
     {
@@ -21,7 +26,7 @@ int full_update(char ARCHIVE, float pver)
 	    case V_1:
 		printf("\nUpdating from %f\n", pver);
 		install_package(parent, "cava fuzzel kitty fastfetch waybar");
-        	// do not break because we are also installing everything below
+        	/* do not break because we are also installing everything below */
         	__attribute__ ((fallthrough));
             case V_1_2:
             case V_1_3:
