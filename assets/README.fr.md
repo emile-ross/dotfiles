@@ -94,18 +94,17 @@ Maintenant, exécutez le fichier en binaire avec:
 ### Compiler avec GCC
 
 ```sh
-git clone https://github.com/imawsumm/dotfiles
-cd dotfiles/
 gcc c-scripts/arguments.c \
     c-scripts/configuring.c \
     c-scripts/functions.c \
     c-scripts/install.c \
     c-scripts/error-handling.c \
     c-scripts/programs.c \
+    c-scripts/globals.c \
     c-scripts/setup.c \
     c-scripts/update.c \
     -o setup \
-    -Wall -Wextra
+    -Wall -Wextra -Wpedantic -std=c99
 ```
 
 Maintenant, exécutez le fichier en binaire avec:
