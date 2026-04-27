@@ -117,7 +117,6 @@ extern char full_install_opt; /* if the user wants to install everything set to 
 extern char archive_before_install;
 
 /* main menu */
-extern int menu_one_i;
 extern const int max_menu_opt_n;
 extern bool fastfetch_config_apply;
 extern char distro[128];    /* distro string */

@@ -15,9 +15,9 @@ setup: bin gcc
 gcc: bin
 	@./build gcc
 
-macos: bin
-    @rm setup
-    @./build clang
+macos:
+	@rm setup
+	@./build clang
 
 log: debug
 	@./build std -e log -v

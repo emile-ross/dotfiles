@@ -6,8 +6,10 @@ int main(int argc, char *argv[])
 
     parse_arguments(argc, argv);
 
+    int menu_one_i;
     do
     {
+	menu_one_i = 0;
     	clear();
     	printf(BOLD_S ANSI_CYAN "%s\n\n" STYLE_END, main_menu_title );
 	for (int i = 0; i < NUM_ELEMENTS_MAIN_MENU; i++)
@@ -62,9 +64,9 @@ int main(int argc, char *argv[])
     	                char fastfetch_preview_text[32] = "Preview fastfetch output";
     	                
     	                printf(BOLD_S ANSI_WHITE "%s\n\n"STYLE_END, fastfetch_config_menu_text );
-    	                printf(BOLD_S " [1] " STYLE_END "%s\n", fastfetch_preview_text);
-    	                printf(BOLD_S " [2] " STYLE_END "%s\n", fastfetch_edit_config_text);
-    	                printf(BOLD_S " [0] " STYLE_END "%s\n", opt_exit_text);
+    	                printf(BOLD_S "  [1] " STYLE_END "%s\n", fastfetch_preview_text);
+    	                printf(BOLD_S "	 [2] " STYLE_END "%s\n\n", fastfetch_edit_config_text);
+    	                printf(BOLD_S "  [0] " STYLE_END "%s\n", opt_exit_text);
 
 			clearbuffer();
     	                scanf("\n%d", &fastfetch_config_choice);
@@ -81,6 +83,7 @@ int main(int argc, char *argv[])
     	            }
     	            while (fastfetch_config_choice > INPUT_BACK_VALUE);
     	            /* exits the while loop when the user types 0 */
+		    clearbuffer();
 	        }
 		else if (dotfiles_config_menu == 2)
     	        {
@@ -116,10 +119,10 @@ int main(int argc, char *argv[])
 		        clear();
 
 			printf(BOLD_S ANSI_WHITE "%s\n\n"STYLE_END, fuzzel_config_menu_text);
-    	            	printf(BOLD_S " [1] " STYLE_END "%s\n", fuzzel_view_config_text);
-    	            	printf(BOLD_S " [2] " STYLE_END "%s\n",	fuzzel_edit_config_text);
-    	            	printf(BOLD_S " [3] " STYLE_END "%s\n",	fuzzel_catppuccin_text);
-    	            	printf(BOLD_S " [0] " STYLE_END "%s\n", opt_exit_text);
+    	            	printf(BOLD_S "  [1] " STYLE_END "%s\n", fuzzel_view_config_text);
+    	            	printf(BOLD_S "  [2] " STYLE_END "%s\n",	fuzzel_edit_config_text);
+    	            	printf(BOLD_S "  [3] " STYLE_END "%s\n",	fuzzel_catppuccin_text);
+    	            	printf(BOLD_S "  [0] " STYLE_END "%s\n", opt_exit_text);
 
 			clearbuffer();
 			scanf(" %d", &fuzzel_config_menu_choice);
@@ -127,7 +130,7 @@ int main(int argc, char *argv[])
 			if (fuzzel_config_menu_choice == 1)
 			{
 			    exec_cmd(24, "fuzzel");
-	    	            wait_for_timeout(1, 0);
+	    	            wait_for_timeout(SHORT_TIMER, 0);
 			}
 			else if (fuzzel_config_menu_choice == 2)
 			{
@@ -145,15 +148,15 @@ int main(int argc, char *argv[])
 				char fuzzel_config_edit_custom[32] = "Edit custom config";
 				
 				printf(BOLD_S ANSI_WHITE "%s\n\n"STYLE_END, fuzzel_edit_config_text);
-				printf(BOLD_S " [1] " STYLE_END "%s\n", fuzzel_config_one);
-				printf(BOLD_S " [2] " STYLE_END "%s\n",	fuzzel_config_old);
-				printf(BOLD_S " [3] " STYLE_END "%s\n",	fuzzel_config_vzero);
-				printf(BOLD_S " [4] " STYLE_END "%s\n\n", fuzzel_config_default);
-				printf(BOLD_S " [5] " STYLE_END "%s\n\n", fuzzel_config_catp);
+				printf(BOLD_S "  [1] " STYLE_END "%s\n", fuzzel_config_one);
+				printf(BOLD_S "  [2] " STYLE_END "%s\n", fuzzel_config_old);
+				printf(BOLD_S "  [3] " STYLE_END "%s\n", fuzzel_config_vzero);
+				printf(BOLD_S "  [4] " STYLE_END "%s\n\n", fuzzel_config_default);
+				printf(BOLD_S "  [5] " STYLE_END "%s\n\n", fuzzel_config_catp);
 				
-				printf(BOLD_S " [6] " STYLE_END "%s\n",	fuzzel_config_custom);
-				printf(BOLD_S " [7] " STYLE_END "%s\n\n", fuzzel_config_edit_custom);
-				printf(BOLD_S " [0] " STYLE_END "%s\n", opt_exit_text);
+				printf(BOLD_S "  [6] " STYLE_END "%s\n", fuzzel_config_custom);
+				printf(BOLD_S "  [7] " STYLE_END "%s\n\n", fuzzel_config_edit_custom);
+				printf(BOLD_S "  [0] " STYLE_END "%s\n", opt_exit_text);
 
 				clearbuffer();
 				scanf(" %d", &fuzzel_edit_menu_choice);
@@ -179,8 +182,8 @@ int main(int argc, char *argv[])
 			printf(ANSI_CYAN BOLD_S "%s\n"STYLE_END, zshforhumans_config_menu_text);
 			printf(BOLD_S "This will execute the zsh for humans script\n"STYLE_END);
 			printf(BOLD_S "Do you want to proceed with the configuration?\n\n"STYLE_END);
-    	            	printf(BOLD_S " [1] " STYLE_END "Yes\n");
-    	            	printf(BOLD_S " [0] " STYLE_END "%s (no)\n", opt_exit_text);
+    	            	printf(BOLD_S "  [1] " STYLE_END "Yes\n");
+    	            	printf(BOLD_S "  [0] " STYLE_END "%s (no)\n", opt_exit_text);
 
 			scanf(" %d", &zshforhumans_choice);
 			if (zshforhumans_choice == 1)
