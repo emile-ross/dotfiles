@@ -51,6 +51,20 @@ void install_configs(unsigned int custom_package_install)  // the partial instal
 	scanf(" %c", &PKGINSTALL_T);
 
 	config_name config_install_enum = custom_package_install;
+
+	unsigned int package_name_index = custom_package_install;
+
+	if (package_name_index > n_configs)
+	{
+	    error_message(CLI_UNKNOWN_PKG); // probably malicious
+	}
+	else if (package_name_index > 0)
+	{
+	    error_message(CLI_UNKNOWN_PKG);
+	}
+
+	//config_names[package_name_index]
+
     	switch (config_install_enum)
     	{
     	    case bash:
@@ -177,20 +191,10 @@ void full_install(bool ARCHIVE_BL, bool full_install_bl)
 	    // this is awful
 	    // it could all be replaced by a single array with all of the text 
 	    // (would be significantly faster, better, more maintainable...)
-	    printf("\n[1] Install %s ", TEXT_C_BASH);
-	    printf("\n[2] Install %s ", TEXT_C_BPYT);
-	    printf("\n[3] Install %s ", TEXT_C_BTOP);
-	    printf("\n[4] Install %s ", TEXT_C_CAVA);
-	    printf("\n[5] Install %s ", TEXT_C_FAST);
-	    printf("\n[6] Install %s ", TEXT_C_FUZZ);
-	    printf("\n[7] Install %s ", TEXT_C_GTKL);
-	    printf("\n[8] Install %s ", TEXT_C_HYPR);
-	    printf("\n[9] Install %s ", TEXT_C_KITT);
-	    printf("\n[10] Install %s ", TEXT_C_MPVF);
-	    printf("\n[11] Install %s ", TEXT_C_NVIM);
-	    printf("\n[12] Install %s ", TEXT_C_SWAY);
-	    printf("\n[13] Install %s ", TEXT_C_WAYB);
-	    printf("\n[14] Install %s ", TEXT_C_ZSHH);
+	    for (int i = 1; i < n_configs; i++)
+	    {
+		printf("\n[%d] Install %s ", i, config_names[i]);
+	    }
 	    
 	    clearbuffer();
 	    scanf(" %d", &install_pkg_opt);
