@@ -112,8 +112,7 @@ Maintenant, exécutez le fichier en binaire avec:
 ./setup
 ```
 
-
-Vous pouvez aussi ajouter l'étiquette ``--noconfirm`` afin d'éviter les avertissements lorsque vous installez les fichiers et afin de tout installer directement sur votre systeme.  
+Vous pouvez aussi ajouter l'étiquette ``--noconfirm`` afin d'éviter les avertissements lorsque vous installez les fichiers et afin de tout installer directement sur votre systeme.
 
 ```bash
 ./setup --noconfirm
@@ -146,7 +145,7 @@ des touches utiles a connaitre:
   super + C -> **Fermer la fenêtre**
 
 
-### ouvrir les applications
+### ouvrir les applications (dans Hyprland & SwayWm)
 
   super + R -> **exécuter [fuzzel](https://codeberg.org/dnkl/fuzzel)**
 >  (fuzzel exécute les applications présentes sur le système)
