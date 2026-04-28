@@ -155,7 +155,16 @@ int main(int argc, char *argv[])
 	{
 	    verbose = true;
 	}
-			/* else if (strcmp(argv[i], "macos") == 0) */
+	else if (strcmp(argv[i], "macos") == 0)
+	{
+	    compiler_name = CLANG;
+    	    c99_flag_bl = true;
+    	    Wall_flag_bl = true;
+    	    Wpedantic_bl = true;
+    	    Wextra_flag_bl = true;
+    	    Wconversion_bl = true;
+    	    num_flags += 5;
+	}
     	else
     	{
     	    printf("Unknown argument: %s\n", argv[i]);
