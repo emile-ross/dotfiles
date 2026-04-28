@@ -12,6 +12,8 @@ char source_fpath[16] = "c-scripts/";
 
 const char output_binary_name[16] = "setup";	/* set the name of the binary file */
 
+/*  the verbose option prints out the commands to the screen
+* it can be useful for debugging, recreating bugs or validating the compilling command */
 bool verbose = false;   /* default is false */ 
 
 /* Warnings flags */
