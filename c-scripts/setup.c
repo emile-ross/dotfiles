@@ -120,8 +120,8 @@ int main(int argc, char *argv[])
 
 			printf(BOLD_S ANSI_WHITE "%s\n\n"STYLE_END, fuzzel_config_menu_text);
     	            	printf(BOLD_S "  [1] " STYLE_END "%s\n", fuzzel_view_config_text);
-    	            	printf(BOLD_S "  [2] " STYLE_END "%s\n",	fuzzel_edit_config_text);
-    	            	printf(BOLD_S "  [3] " STYLE_END "%s\n",	fuzzel_catppuccin_text);
+    	            	printf(BOLD_S "  [2] " STYLE_END "%s\n", fuzzel_edit_config_text);
+    	            	printf(BOLD_S "  [3] " STYLE_END "%s\n", fuzzel_catppuccin_text);
     	            	printf(BOLD_S "  [0] " STYLE_END "%s\n", opt_exit_text);
 
 			clearbuffer();
@@ -182,8 +182,7 @@ int main(int argc, char *argv[])
 			printf(ANSI_CYAN BOLD_S "%s\n"STYLE_END, zshforhumans_config_menu_text);
 			printf(BOLD_S "This will execute the zsh for humans script\n"STYLE_END);
 			printf(BOLD_S "Do you want to proceed with the configuration?\n\n"STYLE_END);
-    	            	printf(BOLD_S "  [1] " STYLE_END "Yes\n");
-    	            	printf(BOLD_S "  [0] " STYLE_END "%s (no)\n", opt_exit_text);
+			yes_no_prompt();
 
 			scanf(" %d", &zshforhumans_choice);
 			if (zshforhumans_choice == 1)
@@ -209,9 +208,7 @@ int main(int argc, char *argv[])
     		char act_linux_water_text[128] = "Do you want to add the \"Activate Linux\" watermark?";
 
 		printf("\n%s\n", act_linux_water_text);
-
-		printf(BOLD_S "\n [1] Yes \n"STYLE_END);
-		printf(BOLD_S "\n [0] No \n"STYLE_END);
+		yes_no_prompt();
 
 		clearbuffer();
 	    	scanf("%d", &menu_activate_linux);

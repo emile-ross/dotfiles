@@ -33,39 +33,39 @@ int full_update(char ARCHIVE, float pver)
         	install_package(parent, "hyprpaper btop");
         	CAVA(ARCHIVE, pver, install_pkg_yn);
         	__attribute__ ((fallthrough));
-        	// do not break because we are also installing everything below
+        	/* do not break because we are also installing everything below */
             case V_1_4:
 		BTOP(ARCHIVE, pver, install_pkg_yn);
 		__attribute__ ((fallthrough));
-		// do not break because we are also installing everything below
+        	/* do not break because we are also installing everything below */
 	    case V_2:
 	        install_package(parent, "gtklock");
 	        KITT(ARCHIVE, pver, install_pkg_yn);
 	        __attribute__ ((fallthrough));
-	        // do not break because we are also installing everything below
+        	/* do not break because we are also installing everything below */
 	    case V_2_1:
 	        install_package(parent, "sway");
 	        WAYB(ARCHIVE, pver, install_pkg_yn);
 	        __attribute__ ((fallthrough));
-	        // do not break because we are also installing everything below
+	        /* do not break because we are also installing everything below */
 	    case V_2_2:
 	        SWAY(ARCHIVE, pver, install_pkg_yn);
 	        GTKL(ARCHIVE, pver, install_pkg_yn);
 	        install_package(parent, "mpv swaylock");
 	        __attribute__ ((fallthrough));
-	        // do not break because we are also installing everything below
+	        /* do not break because we are also installing everything below */
 	    case V_2_3:
 	        install_package(parent, "nvim");
 	        NVIM(ARCHIVE, pver, install_pkg_yn);
 	        FUZZ(ARCHIVE, pver, install_pkg_yn);
 	        MPVF(ARCHIVE, pver, install_pkg_yn);
 	        __attribute__ ((fallthrough));
-	        // do not break because we are also installing everything below
+	        /* do not break because we are also installing everything below */
 	    case V_2_4:
 		install_package(parent, "hyprland bpytop hyprlock");
 		BPYT(ARCHIVE, pver, install_pkg_yn);
 		__attribute__ ((fallthrough));
-		// do not break because we are also installing everything below
+	        /* do not break because we are also installing everything below */
             case V_2_5:
 	    case V_3:
 		BPYT(ARCHIVE, pver, install_pkg_yn);
@@ -80,7 +80,7 @@ int full_update(char ARCHIVE, float pver)
     
 	    case STABLE:
 		printf("\nYou are running the latest stable version.\n");
-		wait_for_timeout(SHORT_TIMER, 0); // let the user read the message
+		wait_for_timeout(SHORT_TIMER, 0); /* let the user read the message */
 		break;
     
 	    case LATEST:
@@ -100,27 +100,27 @@ float* update(void)
 {
     char *USERNAME = getenv("HOME");
 
-    // error message if username can't be fetched 
+    /* error message if username can't be fetched */
     if (USERNAME == NULL) 
     {
 	error_message(204);
         return NULL;
     }
 
-    // create path to config
+    /* create path to config */
     char HYPRPATH[64];
     snprintf(HYPRPATH, sizeof(HYPRPATH), 
 	    "%s/.config/hypr/hyprland.conf", USERNAME);
-	    // set the hyprland path with username
+	    /* set the hyprland path with username */
 
-    // open the file with HYPRPATH
+    /* open the file with HYPRPATH */
     FILE *file = fopen(HYPRPATH, "r");
     
-    // return error message when file isn't found
+    /* return error message when file isn't found */
     if (file == NULL) 
     {
 	error_message(205);
-	// returns null if the file can't be opened/found
+	/* returns null if the file can't be opened/found */
         return NULL;
     }
     static float VAWSM[32] = {0};

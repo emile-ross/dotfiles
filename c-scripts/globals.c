@@ -1,7 +1,7 @@
 #include "dotfileshead.h"
 
 
-// Text available globally
+/* Text available globally */
 
 char *config_names[n_configs] = 
 {
@@ -37,10 +37,10 @@ char *config_names[n_configs] =
     char* TEXT_C_WAYB = "waybar config and style (appearance)";
     char* TEXT_C_ZSHH = "zsh config (.zshrc)";
     
-    char* help_flag_arg_text = "--help";	// flag for the help menu
-    char* pkgi_flag_arg_text = "-p";	// flag to install a package
-    char* conf_inst_flag_arg_text = "-c";	// flag to install a config
-    char* conf_info_flag_arg_text = "-i";	// flag to install a package
+    char* help_flag_arg_text = "--help";	/* flag for the help menu */
+    char* pkgi_flag_arg_text = "-p";	/* flag to install a package */
+    char* conf_inst_flag_arg_text = "-c";	/* flag to install a config */
+    char* conf_info_flag_arg_text = "-i";	/* flag to install a package */
     
     char fuzzel_view_config_text[32] = "Preview Fuzzel appearance";
     char fuzzel_edit_config_text[32] = "Edit Fuzzel config";
@@ -89,13 +89,13 @@ char *main_menu_text[NUM_ELEMENTS_MAIN_MENU] =
 	"Zsh (Z shell) is a command line interpreter focused on speed and efficiency.",
     };
     
-// Global variables
+/* Global variables */
 
     const int max_menu_opt_n = 14;
 
-    // the position of the first argument in a command
-    // example: ``./setup -i nvim``
-    // nvim is the 3rd argument
+    /* the position of the first argument in a command
+    * example: ``./setup -i nvim``
+    * nvim is the 3rd argument */
     const int n_to_arg = 3;
 
     struct timespec install_timer;
@@ -106,7 +106,7 @@ char *main_menu_text[NUM_ELEMENTS_MAIN_MENU] =
     
     char ARCHIVE;
     char PKGINSTALL;
-    char full_install_opt; // if the user wants to install everything set to Y
+    char full_install_opt; /* if the user wants to install everything set to Y */
     char archive_before_install;
     char full_update_opt; 
     int fuzzel_config_menu_choice;
@@ -116,8 +116,8 @@ char *main_menu_text[NUM_ELEMENTS_MAIN_MENU] =
     int fastfetch_conf_export;
     bool fastfetch_config_apply;
     
-    // Distribution global variable
-    // it is used when installing packages with the right package manager
+    /* Distribution global variable
+    * it is used when installing packages with the right package manager */
     char distro[128] = "";
     char parent[128] = "";
     

@@ -9,10 +9,10 @@ void install_menu(void)
     
     scanf(" %c", &archive_before_install);
     printf(ANSI_RED BOLD_S"\nWARNING\n"STYLE_END BOLD_S"This will install every config.\n"STYLE_END);
-    printf(ITALICS_S"\nIn order to pick the configs you want, you need to use the custom configuration option\n"STYLE_END); // italics might not work on all terminals
+    printf(ITALICS_S"\nIn order to pick the configs you want, you need to use the custom configuration option\n"STYLE_END); /* italics might not work on all terminals */
     clearbuffer();
     
-    printf(BOLD_S"\nProceed with installation (Y/n)\n"STYLE_END); // prompt user for input
+    printf(BOLD_S"\nProceed with installation (Y/n)\n"STYLE_END); /* prompt user for input */
     scanf(" %c", &full_install_opt);
 
     bool archive_bl = y_n(archive_before_install);
@@ -61,7 +61,7 @@ void install_configs(unsigned int custom_package_install)  /* the partial instal
 	}
 	else
 	{
-	    error_message(CLI_UNKNOWN_PKG); // probably malicious
+	    error_message(CLI_UNKNOWN_PKG); /* probably malicious */
 	}
 
     	switch (config_install_enum)
@@ -182,8 +182,8 @@ void full_install(bool ARCHIVE_BL, bool full_install_bl)
 
 void full_config_install(bool ARCHIVE_BL, float previous_version_t, bool install_packages_t)
 {
-    // a list of all configs
-    // this will execute all configuration entries
+    /* a list of all configs
+    * this will execute all configuration entries */
     BASH();
     BPYT(ARCHIVE_BL, previous_version_t, install_packages_t);
     BTOP(ARCHIVE_BL, previous_version_t, install_packages_t);
