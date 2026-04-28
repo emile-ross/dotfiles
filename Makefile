@@ -1,11 +1,12 @@
 BUILD_BINARY := $(wildcard build)
 
 DBGCMD = zig cc build.c -o build -Wall -Wextra -pedantic -Werror -std=c99
+BUILD_CMD = gcc build.c -o build
 
 bin:
 
 ifeq ($(BUILD_BINARY),)
-	@gcc build.c -o build
+	@$(BUILD_CMD)
 endif
 
 full: bin
@@ -16,8 +17,8 @@ gcc: bin
 	@./build gcc
 
 macos:
-	@rm setup
-	@./build clang
+	@$(BUILD_CMD)
+	@./build macos
 
 log: debug
 	@./build std -e log -v
