@@ -126,3 +126,6 @@ char *main_menu_text[NUM_ELEMENTS_MAIN_MENU] =
 
     char initial_path[64];
     char inpath[64];
+
+    const char *home;
+
