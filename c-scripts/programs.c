@@ -3,18 +3,18 @@
 void BASH(void)
 {
     char BRCNAME[12] = ".bashrc-new";
-    // prompt to let the user know the bashrc isn't exported/replaced
+    /* prompt to let the user know the bashrc isn't exported/replaced */
     printf(UDRL_S"\nThe .bashrc file plays a very important role therefore, it was not replaced."STYLE_END);
     printf(UDRL_S"\nYou can find the new .bashrc file under the name %s\n"STYLE_END, BRCNAME);
 
-	// calculate the sufficient amount of memory to the buffer
+    /* calculate the sufficient amount of memory to the buffer */
     int mem_needed = snprintf(NULL, 0,
 	    "cp -f %s/shell/bash/.bashrc ~/%s", 
 	    inpath, BRCNAME);
 
     char *cmd = malloc((size_t)mem_needed + 1);
 
-	// execute the command with the according buffer size previously calculated (above)
+    /* execute the command with the according buffer size previously calculated (above) */
     snprintf(cmd, (size_t)mem_needed + 1,
              "cp -f %s/shell/bash/.bashrc ~/%s",
              inpath, BRCNAME);
@@ -177,8 +177,13 @@ void HYPR(bool archive_bl, float pver, bool pkginstall_bl)
     if (archive_bl)
     {
     	// archive hyprland configs
-	char cmd[1536];
-        snprintf(cmd, sizeof(cmd),
+	int mem_needed_move = snprintf(NULL, 0,
+		"mv ~/.config/hypr/hyprland.conf ~/.config/hypr/hyprland-oldv%.2f.conf ; "
+        	"mv ~/.config/hypr/hyprpaper.conf ~/.config/hypr/hyprpaper-oldv%.2f.conf ; "
+        	"mv ~/.config/hypr/hyprlock.conf ~/.config/hypr/hyprlock-oldv%.2f.conf ; "
+        	"mv ~/.config/hypr/hypridle.conf ~/.config/hypr/hypridle-oldv%.2f.conf", pver, pver, pver, pver);
+	char *cmd = malloc((size_t)mem_needed_move);
+        snprintf(cmd, (size_t)mem_needed_move,
 		"mv ~/.config/hypr/hyprland.conf ~/.config/hypr/hyprland-oldv%.2f.conf ; "
         	"mv ~/.config/hypr/hyprpaper.conf ~/.config/hypr/hyprpaper-oldv%.2f.conf ; "
         	"mv ~/.config/hypr/hyprlock.conf ~/.config/hypr/hyprlock-oldv%.2f.conf ; "
@@ -200,7 +205,7 @@ void HYPR(bool archive_bl, float pver, bool pkginstall_bl)
     	    "cp -f %s/hypr/hyprpaper.conf ~/.config/hypr",
 	    inpath, inpath, inpath, inpath, inpath);
 
-    char *cmd = malloc((size_t)mem_needed + 1); // allocate just enough memory for the buffer size
+    char *cmd = malloc((size_t)mem_needed + 1); /* allocate just enough memory for the buffer size */
 
     snprintf(cmd, (size_t)mem_needed + 1,
 	    "mkdir -p ~/.config/hypr/assets ; "
