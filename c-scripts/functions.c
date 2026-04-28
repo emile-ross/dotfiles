@@ -12,6 +12,12 @@ void clearbuffer(void)
     while (getchar() != '\n');
 }
 
+void block(void)
+{
+    printf("Press any key to continue\n");
+    getchar();
+}
+
 void pre_startup(void)
 {
     get_os_name();
@@ -101,7 +107,7 @@ int get_os_name(void)
     /* open /etc/os-release */
     FILE *fp = fopen("/etc/os-release", "r");
 
-    // fallback to /usr/lib if /etc/os-release fails
+    /* fallback to /usr/lib if /etc/os-release fails */
     if (!fp) fp = fopen("/usr/lib/os-release", "r"); 
     // error checking
     if (!fp) error_message(52);
@@ -110,10 +116,10 @@ int get_os_name(void)
 
     while (fgets(t_line, sizeof(t_line), fp)) 
     {
-	// store the value after '=' in char val
+	/* store the value after '=' in char val */
         char *val = strchr(t_line, '=') + 1;
 
-	// remove trailing newline
+	/* remove trailing newline */
         val[strcspn(val, "\"\n")] = '\0'; 
 
         if (strncmp(t_line, "ID=", 3) == 0) strcpy(distro, val);	    // store the value in char distro
