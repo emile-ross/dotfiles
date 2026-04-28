@@ -14,8 +14,6 @@ void clearbuffer(void)
 
 void pre_startup(void)
 {
-    /* gets the current working directory */
-    snprintf(inpath, sizeof(inpath), "%s", get_initial_path());
     get_os_name();
     is_debian_bl = false;
     is_arch_bl = false;
@@ -39,7 +37,8 @@ void pre_startup(void)
 	error_message(101);
     }
 
-    /* get home directory / username */
+    /* get home directory / username 
+     * and then, initialize [home] to the actual home dir */
     home = getenv("HOME");
 
     /* error message if username can't be fetched */
@@ -47,14 +46,17 @@ void pre_startup(void)
     {
 	error_message(204);
     }
+
+    /* get the current working directory */
+    snprintf(inpath, sizeof(inpath), "%s", get_initial_path());
 }
 
 char *get_initial_path(void)
 {
+    /* change directory to the dotfiles root (if possible) */
     chdir("dotfiles/");
 
     FILE *fp;
-    
     fp = popen("pwd", "r");
     
     if (fp == NULL) 
@@ -77,15 +79,15 @@ char *get_initial_path(void)
 
 void wait_for_timeout(int timer_quarters, int timer_seconds)
 {
-    if (timer_quarters < 4) // 4 quarters per second
+    if (timer_quarters < 4) /* 4 quarters per second */
     {
-	time_timer_quarters = timer_quarters * 250000000;   // convert quarters to nanoseconds
-	time_timer_seconds = timer_seconds;		    // set seconds
+	time_timer_quarters = timer_quarters * 250000000;   /* convert quarters to nanoseconds */
+	time_timer_seconds = timer_seconds;		    /* set seconds */
     }
     else
     {
 	time_timer_quarters = 0;
-	time_timer_seconds = timer_seconds + 1;	// adds 1 second if 4 >= quarters
+	time_timer_seconds = timer_seconds + 1;	/* adds 1 second if 4 >= quarters */
     }
 
     install_timer.tv_nsec = time_timer_quarters;
@@ -96,7 +98,7 @@ void wait_for_timeout(int timer_quarters, int timer_seconds)
 
 int get_os_name(void)
 {
-    // open /etc/os-release
+    /* open /etc/os-release */
     FILE *fp = fopen("/etc/os-release", "r");
 
     // fallback to /usr/lib if /etc/os-release fails
@@ -125,7 +127,7 @@ int get_os_name(void)
 
 void check_for_yay(void)
 {
-    // check if yay is present
+    /* check if yay is present */
     if (system("test -f /sbin/yay") == 0)
     {
 	printf("Yay already installed.\n");
@@ -180,17 +182,17 @@ void check_for_yay(void)
 
 void exec_cmd(int buffer_size, char *command_to_execute)
 {
-    // execute the command stored in command_to_execute
-    // using system() while ensuring output doesn't exceed buffer_size
+    /* execute the command stored in command_to_execute
+     * using system() while ensuring output doesn't exceed buffer_size */
     char command_exec[buffer_size];
     snprintf(command_exec, sizeof(command_exec), "%s", command_to_execute);
-    system(command_exec);   // execute command
+    system(command_exec);   /* execute command */
 }
 
 void countdown(int counter, int lines_to_skip)
 {
-    // total_time is the total time the execution should last 
-    // counter will be the variable used in the countdown 
+    /* total_time is the total time the execution should last 
+     * counter will be the variable used in the countdown */
 
     int total_time = counter;
 
@@ -198,7 +200,7 @@ void countdown(int counter, int lines_to_skip)
     {
         printf("%d ", counter);
     
-	// prints a "." to the screen each quarter of a second
+	/* prints a "." to the screen each quarter of a second */
         for (int j = 0; j < 3; j++)
         {
             printf(".");
@@ -207,7 +209,7 @@ void countdown(int counter, int lines_to_skip)
 	    wait_for_timeout(1, 0);
         }
 
-	// prints one newline everytime this is executed
+	/* prints one newline everytime this is executed */
         for (int k = 0; k < lines_to_skip; k++)
         {
 	    printf("\n");

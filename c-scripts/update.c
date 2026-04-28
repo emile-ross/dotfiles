@@ -21,70 +21,67 @@ int full_update(char ARCHIVE, float pver)
     }
     else
     {
+	switch (prev_update_version)
+	{
+	    case STABLE:
+		printf("\nYou are running the latest stable version.\n");
+		wait_for_timeout(SHORT_TIMER, 0); /* let the user read the message */
+		break;
+
+	    case LATEST:
+		printf("You are using the latest version, it is often ahead of the latest stable release\n");
+		break;
+	    default:
+		break;
+	}
+    
         switch (prev_update_version)
         {
 	    case V_1:
 		printf("\nUpdating from %f\n", pver);
 		install_package(parent, "cava fuzzel kitty fastfetch waybar");
-        	/* do not break because we are also installing everything below */
-        	__attribute__ ((fallthrough));
+        	__attribute__ ((fallthrough));	/* do not break because we are also installing everything below */
             case V_1_2:
             case V_1_3:
         	install_package(parent, "hyprpaper btop");
         	CAVA(ARCHIVE, pver, install_pkg_yn);
-        	__attribute__ ((fallthrough));
-        	/* do not break because we are also installing everything below */
+        	__attribute__ ((fallthrough));	/* do not break because we are also installing everything below */
             case V_1_4:
 		BTOP(ARCHIVE, pver, install_pkg_yn);
-		__attribute__ ((fallthrough));
-        	/* do not break because we are also installing everything below */
+        	__attribute__ ((fallthrough));	/* do not break because we are also installing everything below */
 	    case V_2:
 	        install_package(parent, "gtklock");
 	        KITT(ARCHIVE, pver, install_pkg_yn);
-	        __attribute__ ((fallthrough));
-        	/* do not break because we are also installing everything below */
+        	__attribute__ ((fallthrough));	/* do not break because we are also installing everything below */
 	    case V_2_1:
 	        install_package(parent, "sway");
 	        WAYB(ARCHIVE, pver, install_pkg_yn);
-	        __attribute__ ((fallthrough));
-	        /* do not break because we are also installing everything below */
+        	__attribute__ ((fallthrough));	/* do not break because we are also installing everything below */
 	    case V_2_2:
 	        SWAY(ARCHIVE, pver, install_pkg_yn);
 	        GTKL(ARCHIVE, pver, install_pkg_yn);
 	        install_package(parent, "mpv swaylock");
-	        __attribute__ ((fallthrough));
-	        /* do not break because we are also installing everything below */
+        	__attribute__ ((fallthrough));	/* do not break because we are also installing everything below */
 	    case V_2_3:
 	        install_package(parent, "nvim");
 	        NVIM(ARCHIVE, pver, install_pkg_yn);
 	        FUZZ(ARCHIVE, pver, install_pkg_yn);
 	        MPVF(ARCHIVE, pver, install_pkg_yn);
-	        __attribute__ ((fallthrough));
-	        /* do not break because we are also installing everything below */
+        	__attribute__ ((fallthrough));	/* do not break because we are also installing everything below */
 	    case V_2_4:
 		install_package(parent, "hyprland bpytop hyprlock");
 		BPYT(ARCHIVE, pver, install_pkg_yn);
-		__attribute__ ((fallthrough));
-	        /* do not break because we are also installing everything below */
+        	__attribute__ ((fallthrough));	/* do not break because we are also installing everything below */
             case V_2_5:
 	    case V_3:
 		BPYT(ARCHIVE, pver, install_pkg_yn);
-		__attribute__ ((fallthrough));
+        	__attribute__ ((fallthrough));	/* do not break because we are also installing everything below */
     
 	    case V_3_1:
 		BASH();
 		HYPR(ARCHIVE, pver, install_pkg_yn);
 		ZSHH(ARCHIVE, pver, install_pkg_yn);
 		printf("Update completed!\n");
-		break;
-    
-	    case STABLE:
-		printf("\nYou are running the latest stable version.\n");
-		wait_for_timeout(SHORT_TIMER, 0); /* let the user read the message */
-		break;
-    
-	    case LATEST:
-		printf("You are using the latest versioin, it is often ahead of the latest stable release\n");
 		break;
     
 	    default:
@@ -98,15 +95,6 @@ int full_update(char ARCHIVE, float pver)
 
 float* update(void) 
 {
-    char *home = getenv("HOME");
-
-    /* error message if username can't be fetched */
-    if (home == NULL) 
-    {
-	error_message(204);
-        return NULL;
-    }
-
     /* create path to config */
     char HYPRPATH[64];
     snprintf(HYPRPATH, sizeof(HYPRPATH), 
