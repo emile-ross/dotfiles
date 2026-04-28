@@ -25,11 +25,13 @@ int full_update(char ARCHIVE, float pver)
 	{
 	    case STABLE:
 		printf("\nYou are running the latest stable version.\n");
-		wait_for_timeout(SHORT_TIMER, 0); /* let the user read the message */
+		wait_for_timeout(SHORT_TIMER, 1); /* let the user read the message */
+		return 0;
 		break;
 
 	    case LATEST:
 		printf("You are using the latest version, it is often ahead of the latest stable release\n");
+		return 0;
 		break;
 	    default:
 		break;
@@ -63,7 +65,6 @@ int full_update(char ARCHIVE, float pver)
 	        install_package(parent, "mpv swaylock");
         	__attribute__ ((fallthrough));	/* do not break because we are also installing everything below */
 	    case V_2_3:
-	        install_package(parent, "nvim");
 	        NVIM(ARCHIVE, pver, install_pkg_yn);
 	        FUZZ(ARCHIVE, pver, install_pkg_yn);
 	        MPVF(ARCHIVE, pver, install_pkg_yn);
@@ -76,8 +77,11 @@ int full_update(char ARCHIVE, float pver)
 	    case V_3:
 		BPYT(ARCHIVE, pver, install_pkg_yn);
         	__attribute__ ((fallthrough));	/* do not break because we are also installing everything below */
-    
 	    case V_3_1:
+	        install_package(parent, "nvim");
+		goto update_version_number;
+
+	    update_version_number:
 		BASH();
 		HYPR(ARCHIVE, pver, install_pkg_yn);
 		ZSHH(ARCHIVE, pver, install_pkg_yn);

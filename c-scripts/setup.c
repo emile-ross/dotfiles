@@ -2,7 +2,6 @@
 
 int main(int argc, char *argv[])
 {
-    block();
     pre_startup();
 
     parse_arguments(argc, argv);
