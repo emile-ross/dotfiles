@@ -394,5 +394,5 @@ void configure_oh_my_zsh(void)
             "  sh -c \"$(wget -O- https://raw.githubusercontent.com/romkatv/zsh4humans/v5/install)\"; " 
             "fi");
     clearbuffer();
-    getchar(); // intended blocking behaviour
+    block(true);
 }
