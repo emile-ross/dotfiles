@@ -49,6 +49,7 @@ extern char *config_names[n_configs];
 
 void clear(void);
 void clearbuffer(void);
+void block(void);
 void pre_startup(void);
 bool y_n(char yes_no);
 

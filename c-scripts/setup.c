@@ -2,6 +2,7 @@
 
 int main(int argc, char *argv[])
 {
+    block();
     pre_startup();
 
     parse_arguments(argc, argv);
@@ -83,7 +84,6 @@ int main(int argc, char *argv[])
     	            }
     	            while (fastfetch_config_choice > INPUT_BACK_VALUE);
     	            /* exits the while loop when the user types 0 */
-		    clearbuffer();
 	        }
 		else if (dotfiles_config_menu == 2)
     	        {
