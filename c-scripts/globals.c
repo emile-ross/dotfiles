@@ -1,8 +1,9 @@
 #include "dotfileshead.h"
 
+/* This file initializes variables available globally */
 
-/* Text available globally */
-
+/* Section 1
+ * Text available globally */
 char *config_names[n_configs] = 
 {
     "Unknown Package",
@@ -61,14 +62,13 @@ char *config_names[n_configs] =
     char opt_exit_text[16] = "Exit";
     char opt_back_text[16] = "Back";
 
-char *main_menu_text[NUM_ELEMENTS_MAIN_MENU] = 
-{
-    "Install the dotfiles",
-    "Update your dotfiles",
-    "Custom configuration menu",
-    "Something else",
-};
-
+    char *main_menu_text[NUM_ELEMENTS_MAIN_MENU] =
+    {
+	"Install the dotfiles",
+	"Update your dotfiles",
+	"Custom configuration menu",
+	"Something else",
+    };
 
     char *description_arr[n_configs] =
     {
@@ -89,7 +89,9 @@ char *main_menu_text[NUM_ELEMENTS_MAIN_MENU] =
 	"Zsh (Z shell) is a command line interpreter focused on speed and efficiency.",
     };
     
-/* Global variables */
+
+/* Section 2
+ * Global variables */
 
     const int max_menu_opt_n = 14;
 
