@@ -223,3 +223,9 @@ bool y_n(char yes_no)
 	return false;
     }
 }
+
+void yes_no_prompt(void)
+{
+    printf(BOLD_S "\n  [1] Yes \n"STYLE_END);
+    printf(BOLD_S "\n  [0] No \n"STYLE_END);
+}

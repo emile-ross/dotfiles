@@ -220,7 +220,7 @@ void link_object_files(bool log, compiler_enum compiler_name_def, char *flags)
 
     int total_obj_path_size = 1;
     /* first loop to get the size of each object path
-     * and then store it in an array of sizes */
+    * and then store it in an array of sizes */
     for (int i = 0; source_files[i] != NULL; i++)
     {
 	int temp_obj_path_size = snprintf(NULL, 0,
