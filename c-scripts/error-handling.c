@@ -57,7 +57,7 @@ int error_message(error_code_e err_code)
 	    break;
 
 	case 104:
-	    snprintf(err_text_temp, sizeof(err_text_temp), "Could not find kitty package"); // not in use
+	    snprintf(err_text_temp, sizeof(err_text_temp), "Could not find kitty package"); /* not in use */
 	    break;
 
 	case 204:
@@ -67,8 +67,8 @@ int error_message(error_code_e err_code)
 	    break;
 
 	case 205:
-	    snprintf(err_text_temp, sizeof(err_text_temp), "No such file or directory"); // for hyprland.conf (when looking for version # )
-	    snprintf(err_solution_temp, sizeof(err_solution_temp), "This could display if you haven't installed the hyprland config");	// also sway and .zshrc
+	    snprintf(err_text_temp, sizeof(err_text_temp), "No such file or directory"); /* for hyprland.conf (when looking for version # ) */
+	    snprintf(err_solution_temp, sizeof(err_solution_temp), "This could display if you haven't installed the hyprland config");	/* also sway and .zshrc */
 	    break;
 
 	case POPEN_FAILED:
@@ -112,7 +112,7 @@ int error_message(error_code_e err_code)
 
     if (!skip_warning)
     {
-        // print error code
+        /* print error code */
         printf(ANSI_RED UDRL_S BOLD_S"Error\n"STYLE_END);
         printf(ANSI_RED BOLD_S"Error code: %d \n"STYLE_END, err_code);
     }
@@ -131,7 +131,7 @@ int error_message(error_code_e err_code)
     	printf("Press any key to continue\n");
 
 	clearbuffer();
-    	getchar();	// blocking behaviour 
+	block(false); /* blocks the program execution flow until the user types something */
     }
     return 0;
 }

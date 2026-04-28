@@ -16,7 +16,7 @@ int full_update(char ARCHIVE, float pver)
     if (prev_update_version == (df_version)STABLE)
     {
 	printf("\nYou are running the latest stable version.\n");
-	getchar();
+	block(true);
 	clearbuffer();
     }
     else
@@ -25,7 +25,7 @@ int full_update(char ARCHIVE, float pver)
 	{
 	    case STABLE:
 		printf("\nYou are running the latest stable version.\n");
-		wait_for_timeout(SHORT_TIMER, 1); /* let the user read the message */
+		block(true);
 		return 0;
 		break;
 

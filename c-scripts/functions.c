@@ -12,9 +12,13 @@ void clearbuffer(void)
     while (getchar() != '\n');
 }
 
-void block(void)
+void block(bool prompt)
 {
-    printf("Press any key to continue\n");
+    if (prompt)
+    {
+	printf("Press any key to continue\n");
+    }
+
     getchar();
 }
 

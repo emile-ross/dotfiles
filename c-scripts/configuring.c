@@ -3,7 +3,6 @@
 void fuzzel_config_importing(void)
 {
     char path[512];
-    char *home = getenv("HOME");
     snprintf(path, sizeof(path), "%s/.config/fuzzel/imported/fuzzel", home);
 
     struct stat st;
