@@ -2,19 +2,19 @@
 
 void clear(void)
 {
-    // clears the screen
+    /* clears the screen */
     printf("\033[2J\033[H");
 }
 
 void clearbuffer(void)
 {
-    // clears the imput buffer 
+    /* clears the imput buffer */
     while (getchar() != '\n');
 }
 
 void pre_startup(void)
 {
-    // gets the current working directory
+    /* gets the current working directory */
     snprintf(inpath, sizeof(inpath), "%s", get_initial_path());
     get_os_name();
     is_debian_bl = false;
@@ -23,20 +23,29 @@ void pre_startup(void)
     if (strcmp(distro, "debian") == 0) 
     {
 	is_debian_bl = true;
-	//sets debian as the parent distro of (debian)
+	/* sets debian as the parent distro of (debian) */
 	snprintf(parent, sizeof(parent),
 		"%s", distro);
     }
     else if (strcmp(distro, "arch") == 0) 
     {
 	is_arch_bl = true;
-	// sets arch as the parent distro of (arch)
+	/* sets arch as the parent distro of (arch) */
 	snprintf(parent, sizeof(parent),
 		"%s", distro);
     }
     else
     {
 	error_message(101);
+    }
+
+    /* get home directory / username */
+    home = getenv("HOME");
+
+    /* error message if username can't be fetched */
+    if (home == NULL) 
+    {
+	error_message(204);
     }
 }
 

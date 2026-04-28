@@ -98,10 +98,10 @@ int full_update(char ARCHIVE, float pver)
 
 float* update(void) 
 {
-    char *USERNAME = getenv("HOME");
+    char *home = getenv("HOME");
 
     /* error message if username can't be fetched */
-    if (USERNAME == NULL) 
+    if (home == NULL) 
     {
 	error_message(204);
         return NULL;
@@ -110,7 +110,7 @@ float* update(void)
     /* create path to config */
     char HYPRPATH[64];
     snprintf(HYPRPATH, sizeof(HYPRPATH), 
-	    "%s/.config/hypr/hyprland.conf", USERNAME);
+	    "%s/.config/hypr/hyprland.conf", home);
 	    /* set the hyprland path with username */
 
     /* open the file with HYPRPATH */
