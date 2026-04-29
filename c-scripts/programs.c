@@ -103,9 +103,9 @@ void FAST(bool archive_bl, float pver, bool pkginstall_bl)
     }
     if (pkginstall_bl)
     {
-	install_package(parent, "fastfetch"); // install fastfetch
+	install_package(parent, "fastfetch"); /* install fastfetch */
     }
-    // export fastfetch config
+    /* export fastfetch config */
     snprintf(cmd, sizeof(cmd),
 	    "rm %s ; "
 	    "mkdir -p %sassets ; "
@@ -115,6 +115,7 @@ void FAST(bool archive_bl, float pver, bool pkginstall_bl)
 	    "cp -f %s/fastfetch/config-other.jsonc ~/.config/fastfetch ; "
 	    "cp -f %s/fastfetch/config-default.jsonc ~/.config/fastfetch", path, path, inpath, path, inpath, path, inpath, inpath);
     system(cmd);
+	free(cmd);
 }
 void FUZZ(bool archive_bl, float pver, bool pkginstall_bl)
 {
