@@ -36,7 +36,7 @@ void BPYT(bool archive_bl, float pver, bool pkginstall_bl)
     }
     if (pkginstall_bl)
     {
-	install_package(parent, "bpytop"); // install bpytop package
+		install_package(parent, "bpytop"); /* install bpytop package */
     }
     // export bpytop config
     snprintf(cmd, sizeof(cmd),
@@ -58,9 +58,9 @@ void BTOP(bool archive_bl, float pver, bool pkginstall_bl)
     }
     if (pkginstall_bl)
     {
-	install_package(parent, "btop"); // install btop package
+	install_package(parent, "btop"); /* install btop package */
     }
-    // export btop config
+    /* export btop config */
     snprintf(cmd, sizeof(cmd),
 	   "mkdir -p ~/.config/btop ; "
 	   "cp -f %s/btop/btop.conf ~/.config/btop", inpath);
@@ -80,9 +80,9 @@ void CAVA(bool archive_bl, float pver, bool pkginstall_bl)
     }
     if (pkginstall_bl)
     {
-	install_package(parent, "cava"); // install cava package
+	install_package(parent, "cava"); /* install cava package */
     }
-    // export cava config
+    /* export cava config */
     snprintf(cmd, sizeof(cmd),
 	    "mkdir -p ~/.config/cava ; "
 	    "cp -f %s/cava/config ~/.config/cava/ ", inpath);
@@ -95,25 +95,25 @@ void FAST(bool archive_bl, float pver, bool pkginstall_bl)
     char cmd[768];
     if (archive_bl)
     {
-    	// backup fastfetch config
+    	/* backup fastfetch config */
     	snprintf(cmd, 96,
-		"mv %sconfig.jsonc "
-		"%sconfig-oldv%.2f.jsonc", path, path, pver);
+				"mv %sconfig.jsonc "
+				"%sconfig-oldv%.2f.jsonc", path, path, pver);
     	system(cmd);
     }
     if (pkginstall_bl)
     {
-	install_package(parent, "fastfetch"); /* install fastfetch */
+		install_package(parent, "fastfetch"); /* install fastfetch */
     }
     /* export fastfetch config */
     snprintf(cmd, sizeof(cmd),
-	    "rm %s ; "
-	    "mkdir -p %sassets ; "
-	    "cp -f %s/fastfetch/assets/*.png %sassets ; "
-	    "cp -f %s/fastfetch/config.jsonc %s ; "
-	    "cp -f ~/.config/fastfetch/config.jsonc ~/.config/fastfetch/config-duplicated.jsonc ; "
-	    "cp -f %s/fastfetch/config-other.jsonc ~/.config/fastfetch ; "
-	    "cp -f %s/fastfetch/config-default.jsonc ~/.config/fastfetch", path, path, inpath, path, inpath, path, inpath, inpath);
+			"rm %s ; "
+	    	"mkdir -p %sassets ; "
+	    	"cp -f %s/fastfetch/assets/*.png %sassets ; "
+	    	"cp -f %s/fastfetch/config.jsonc %s ; "
+	    	"cp -f ~/.config/fastfetch/config.jsonc ~/.config/fastfetch/config-duplicated.jsonc ; "
+	    	"cp -f %s/fastfetch/config-other.jsonc ~/.config/fastfetch ; "
+	    	"cp -f %s/fastfetch/config-default.jsonc ~/.config/fastfetch", path, path, inpath, path, inpath, path, inpath, inpath);
     system(cmd);
 	free(cmd);
 }
@@ -134,10 +134,10 @@ void FUZZ(bool archive_bl, float pver, bool pkginstall_bl)
     }
     if (pkginstall_bl)
     {
-	// install fuzzel package
-	install_package(parent, "fuzzel");
+		/* install fuzzel package */
+		install_package(parent, "fuzzel");
     }
-    // export fuzzel appearance
+    /* export fuzzel appearance */
     snprintf(cmd, 768,
             "mkdir -p ~/.config/fuzzel ; "
             "cp -f %s/fuzzel/old-fuzzel.ini ~/.config/fuzzel ; "
@@ -153,7 +153,7 @@ void GTKL(bool archive_bl, float pver, bool pkginstall_bl)
     char cmd[512];
     if (archive_bl)
     {
-    	// backup gtklock config
+    	/* backup gtklock config */
         snprintf(cmd, sizeof(cmd),
             	"mv ~/.config/gtklock/style.css "
     		"~/.config/gtklock/style-oldv%.2f.css", 
@@ -178,23 +178,24 @@ void HYPR(bool archive_bl, float pver, bool pkginstall_bl)
     if (archive_bl)
     {
     	// archive hyprland configs
-	int mem_needed_move = snprintf(NULL, 0,
-		"mv ~/.config/hypr/hyprland.conf ~/.config/hypr/hyprland-oldv%.2f.conf ; "
-        	"mv ~/.config/hypr/hyprpaper.conf ~/.config/hypr/hyprpaper-oldv%.2f.conf ; "
-        	"mv ~/.config/hypr/hyprlock.conf ~/.config/hypr/hyprlock-oldv%.2f.conf ; "
-        	"mv ~/.config/hypr/hypridle.conf ~/.config/hypr/hypridle-oldv%.2f.conf", pver, pver, pver, pver);
-	char *cmd = malloc((size_t)mem_needed_move);
-        snprintf(cmd, (size_t)mem_needed_move,
-		"mv ~/.config/hypr/hyprland.conf ~/.config/hypr/hyprland-oldv%.2f.conf ; "
-        	"mv ~/.config/hypr/hyprpaper.conf ~/.config/hypr/hyprpaper-oldv%.2f.conf ; "
-        	"mv ~/.config/hypr/hyprlock.conf ~/.config/hypr/hyprlock-oldv%.2f.conf ; "
-        	"mv ~/.config/hypr/hypridle.conf ~/.config/hypr/hypridle-oldv%.2f.conf", pver, pver, pver, pver);
-        system(cmd);
+		int mem_needed_move = snprintf(NULL, 0,
+				"mv ~/.config/hypr/hyprland.conf ~/.config/hypr/hyprland-oldv%.2f.conf ; "
+    	    	"mv ~/.config/hypr/hyprpaper.conf ~/.config/hypr/hyprpaper-oldv%.2f.conf ; "
+    	    	"mv ~/.config/hypr/hyprlock.conf ~/.config/hypr/hyprlock-oldv%.2f.conf ; "
+    	    	"mv ~/.config/hypr/hypridle.conf ~/.config/hypr/hypridle-oldv%.2f.conf", pver, pver, pver, pver);
+		char *cmd = malloc((size_t)mem_needed_move);
+
+    	snprintf(cmd, (size_t)mem_needed_move,
+				"mv ~/.config/hypr/hyprland.conf ~/.config/hypr/hyprland-oldv%.2f.conf ; "
+    	    	"mv ~/.config/hypr/hyprpaper.conf ~/.config/hypr/hyprpaper-oldv%.2f.conf ; "
+    	    	"mv ~/.config/hypr/hyprlock.conf ~/.config/hypr/hyprlock-oldv%.2f.conf ; "
+    	    	"mv ~/.config/hypr/hypridle.conf ~/.config/hypr/hypridle-oldv%.2f.conf", pver, pver, pver, pver);
+    	system(cmd);
     }
     if (pkginstall_bl)
     {
-	// install Hyprland packages
-	install_package(parent, "hyprlock hypridle hyprpaper hyprland");
+		// install Hyprland packages
+		install_package(parent, "hyprlock hypridle hyprpaper hyprland");
     }
     // export hyprland configs
     int mem_needed = snprintf(NULL, 0,
