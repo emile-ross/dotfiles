@@ -54,8 +54,14 @@ void pre_startup(void)
     /* error message if username can't be fetched */
     if (home == NULL) 
     {
-	error_message(204);
+		error_message(204);
     }
+
+	/* Add user_config_path definition
+	 * it needs to be the home dir + .config path
+	 * snprintf(user_config_path, sizeof(home), */
+
+
 
     /* get the current working directory */
     snprintf(inpath, sizeof(inpath), "%s", get_initial_path());

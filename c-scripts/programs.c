@@ -390,8 +390,8 @@ int install_package(char *pkg_type_distro, char *pkginstallname)
 
 void configure_oh_my_zsh(void)
 {
-    // using curl to download a program is not a good practice 
-    // but it's the recommended installation method
+    /* using curl to download a program is not a good practice
+	 * but it's the recommended installation method */
     system("if command -v curl >/dev/null 2>&1; then "
             "  sh -c \"$(curl -fsSL https://raw.githubusercontent.com/romkatv/zsh4humans/v5/install)\"; "
             "else "
