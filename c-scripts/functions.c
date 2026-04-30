@@ -16,7 +16,7 @@ void block(bool prompt)
 {
     if (prompt)
     {
-	printf("Press any key to continue\n");
+		printf("Press any key to continue\n");
     }
 
     getchar();
@@ -30,21 +30,21 @@ void pre_startup(void)
 
     if (strcmp(distro, "debian") == 0) 
     {
-	is_debian_bl = true;
-	/* sets debian as the parent distro of (debian) */
-	snprintf(parent, sizeof(parent),
-		"%s", distro);
+		is_debian_bl = true;
+		/* sets debian as the parent distro of (debian) */
+		snprintf(parent, sizeof(parent),
+				"%s", distro);
     }
     else if (strcmp(distro, "arch") == 0) 
     {
-	is_arch_bl = true;
-	/* sets arch as the parent distro of (arch) */
-	snprintf(parent, sizeof(parent),
-		"%s", distro);
+		is_arch_bl = true;
+		/* sets arch as the parent distro of (arch) */
+		snprintf(parent, sizeof(parent),
+				"%s", distro);
     }
     else
     {
-	error_message(101);
+		error_message(101);
     }
 
     /* get home directory / username 
@@ -59,10 +59,9 @@ void pre_startup(void)
 
 	/* Add user_config_path definition
 	 * it needs to be the home dir + .config path */
-	 snprintf(user_config_path, sizeof(user_config_path),
-		 "/home/%s/.config/", home);
+	snprintf(user_config_path, sizeof(user_config_path),
+			 "%s/.config/", home);
 	
-
     /* get the current working directory */
     snprintf(inpath, sizeof(inpath), "%s", get_initial_path());
 }
@@ -77,7 +76,7 @@ char *get_initial_path(void)
     
     if (fp == NULL) 
     {
-	error_message(206);
+		error_message(206);
         return NULL;
     }
  
@@ -97,13 +96,13 @@ void wait_for_timeout(int timer_quarters, int timer_seconds)
 {
     if (timer_quarters < 4) /* 4 quarters per second */
     {
-	time_timer_quarters = timer_quarters * 250000000;   /* convert quarters to nanoseconds */
-	time_timer_seconds = timer_seconds;		    /* set seconds */
+		time_timer_quarters = timer_quarters * 250000000;   /* convert quarters to nanoseconds */
+		time_timer_seconds = timer_seconds;		    /* set seconds */
     }
     else
     {
-	time_timer_quarters = 0;
-	time_timer_seconds = timer_seconds + 1;	/* adds 1 second if 4 >= quarters */
+		time_timer_quarters = 0;
+		time_timer_seconds = timer_seconds + 1;	/* adds 1 second if 4 >= quarters */
     }
 
     install_timer.tv_nsec = time_timer_quarters;
@@ -126,14 +125,14 @@ int get_os_name(void)
 
     while (fgets(t_line, sizeof(t_line), fp)) 
     {
-	/* store the value after '=' in char val */
+		/* store the value after '=' in char val */
         char *val = strchr(t_line, '=') + 1;
 
 	/* remove trailing newline */
         val[strcspn(val, "\"\n")] = '\0'; 
 
-        if (strncmp(t_line, "ID=", 3) == 0) strcpy(distro, val);	    // store the value in char distro
-        else if (strncmp(t_line, "ID_LIKE=", 8) == 0) strcpy(parent, val);  // store the value in char parent
+        if (strncmp(t_line, "ID=", 3) == 0) strcpy(distro, val);	    /* store the value in char distro */
+        else if (strncmp(t_line, "ID_LIKE=", 8) == 0) strcpy(parent, val);  /* store the value in char parent */
     }
 
     // close file
@@ -146,7 +145,7 @@ void check_for_yay(void)
     /* check if yay is present */
     if (system("test -f /sbin/yay") == 0)
     {
-	printf("Yay already installed.\n");
+		printf("Yay already installed.\n");
     }
     else
     {
@@ -154,40 +153,40 @@ void check_for_yay(void)
     
         char YAY;
         clearbuffer();
-        scanf(" %c", &YAY); // asks the user if they wanna install yay (needed)
+        scanf(" %c", &YAY); /* asks the user if they wanna install yay (needed) */
 
-	bool install_yay = y_n(YAY);
+		bool install_yay = y_n(YAY); /* convert the Y/n into a bool with the y_n() function */
         if (install_yay)
         {
-            // Check if makepkg is installed ( it is needed in order to compile yay )
+            /* Check if makepkg is installed ( it is needed in order to compile yay ) */
             if (system("command -v makepkg > /dev/null") != 0)
             {
-		printf("\nMakepkg is not installed. Installing 'base-devel' package group to proceed...\n");
-		exec_cmd(48, "sudo pacman -S --noconfirm base-devel");
+				printf("\nMakepkg is not installed. Installing 'base-devel' package group to proceed...\n");
+				exec_cmd(48, "sudo pacman -S --noconfirm base-devel");
                  
-                // Check if makepkg is available after installing the base-devel package
+                /* Check if makepkg is available after installing the base-devel package */
                 if (system("command -v makepkg > /dev/null") != 0)
                 {
-		    error_message(51);
+					error_message(51);
                 }
                 else
                 {
-		    printf("Makepkg has been successfully installed!\n");
+					printf("Makepkg has been successfully installed!\n");
                 }
             }
             else
             {
-		printf("Makepkg is already installed.\n");
-		exec_cmd(48, "sudo pacman -S --noconfirm base-devel"); // update base-devel
+				printf("Makepkg is already installed.\n");
+				exec_cmd(48, "sudo pacman -S --noconfirm base-devel"); /* update base-devel */
             }
-		char cmd[256];
-		snprintf(cmd, sizeof(cmd),
-			"git clone https://aur.archlinux.org/yay.git ; "	// download yay from aur
-			"cd yay ; "						//
-			"makepkg -si ; "					// build package from source
-			"cd ..");						//
-		system(cmd);
-		printf("\nYay is installed, congrats!\n");
+			char cmd[256];
+			snprintf(cmd, sizeof(cmd),
+					"git clone https://aur.archlinux.org/yay.git ; "	/* download yay from aur */
+					"cd yay ; "		
+					"makepkg -si ; " /* build package from source */
+					"cd ..");		
+			system(cmd);
+			printf("\nYay is installed, congrats!\n");
         }
         else
         {
@@ -216,21 +215,21 @@ void countdown(int counter, int lines_to_skip)
     {
         printf("%d ", counter);
     
-	/* prints a "." to the screen each quarter of a second */
+		/* prints a "." to the screen each quarter of a second */
         for (int j = 0; j < 3; j++)
         {
             printf(".");
             fflush(stdout);
-	    
-	    wait_for_timeout(1, 0);
+			wait_for_timeout(1, 0);
         }
 
 	/* prints one newline everytime this is executed */
         for (int k = 0; k < lines_to_skip; k++)
         {
-	    printf("\n");
+			printf("\n");
         }
-	wait_for_timeout(1, 0);
+		
+		wait_for_timeout(1, 0);
         counter--;
     }
 }
