@@ -9,8 +9,8 @@ void BASH(void)
 
     /* calculate the sufficient amount of memory to the buffer */
     int mem_needed = snprintf(NULL, 0,
-	    "cp -f %s/shell/bash/.bashrc ~/%s", 
-	    inpath, BRCNAME);
+			"cp -f %s/shell/bash/.bashrc ~/%s", 
+			inpath, BRCNAME);
 
     char *cmd = malloc((size_t)mem_needed + 1);
 
@@ -38,7 +38,7 @@ void BPYT(bool archive_bl, float pver, bool pkginstall_bl)
     {
 		install_package(parent, "bpytop"); /* install bpytop package */
     }
-    // export bpytop config
+    /* export bpytop config */
     snprintf(cmd, sizeof(cmd),
 			"mkdir -p %s/bpytop ; "
 	   		"cp -f %s/bpytop/bpytop.conf ~/.config/bpytop", config_path, inpath);
@@ -50,7 +50,7 @@ void BTOP(bool archive_bl, float pver, bool pkginstall_bl)
     char cmd[128];
     if (archive_bl)
     {
-    	// archive btop config
+    	/* archive btop config */
     	snprintf(cmd, sizeof(cmd),
 				"mv ~/.config/btop/btop.conf "
     			"~/.config/btop/btop-oldv%.2f.conf", pver);
@@ -72,7 +72,7 @@ void CAVA(bool archive_bl, float pver, bool pkginstall_bl)
     char cmd[128];
     if (archive_bl)
     {
-        // backup cava config
+        /* backup cava config */
         snprintf(cmd, sizeof(cmd),
 				"mv ~/.config/cava/config "
 				"~/.config/cava/config-oldv%.2f", pver);
@@ -113,7 +113,8 @@ void FAST(bool archive_bl, float pver, bool pkginstall_bl)
 	    	"cp -f %s/fastfetch/config.jsonc %s ; "
 	    	"cp -f ~/.config/fastfetch/config.jsonc ~/.config/fastfetch/config-duplicated.jsonc ; "
 	    	"cp -f %s/fastfetch/config-other.jsonc ~/.config/fastfetch ; "
-	    	"cp -f %s/fastfetch/config-default.jsonc ~/.config/fastfetch", path, path, inpath, path, inpath, path, inpath, inpath);
+	    	"cp -f %s/fastfetch/config-default.jsonc ~/.config/fastfetch"
+			, path, path, inpath, path, inpath, path, inpath, inpath);
     system(cmd);
 }
 void FUZZ(bool archive_bl, float pver, bool pkginstall_bl)
@@ -121,14 +122,14 @@ void FUZZ(bool archive_bl, float pver, bool pkginstall_bl)
     char cmd[1024];
     if (archive_bl)
     {
-    	// backup fuzzel config
+    	/* backup fuzzel config */
         snprintf(cmd, sizeof(cmd),
-				"mv ~/.config/fuzzel/fuzzel-duplicated.ini "
-				"~/.config/fuzzel/fuzzel-duplicated-oldv%.2f.ini ; "
+				"mv %s/fuzzel/fuzzel-duplicated.ini "
+				"%s/fuzzel/fuzzel-duplicated-oldv%.2f.ini ; "
 				"mv ~/.config/fuzzel/old-fuzzel.ini "
 				"~/.config/fuzzel/old-fuzzel-oldv%.2f.ini ; "
 				"mv ~/.config/fuzzel/fuzzel.ini "
-				"~/.config/fuzzel/fuzzel-oldv%.2f.ini", pver, pver, pver);
+				"~/.config/fuzzel/fuzzel-oldv%.2f.ini", config_path, config_path, pver, pver, pver);
     	system(cmd);
     }
     if (pkginstall_bl)
@@ -141,10 +142,10 @@ void FUZZ(bool archive_bl, float pver, bool pkginstall_bl)
             "mkdir -p ~/.config/fuzzel ; "
             "cp -f %s/fuzzel/old-fuzzel.ini ~/.config/fuzzel ; "
             "cp -f %s/fuzzel/default-fuzzel.ini ~/.config/fuzzel ; "
-	    "cp -f ~/.config/fuzzel/default-fuzzel.ini ~/.config/fuzzel/custom-edited-fuzzel.ini ; "
+			"cp -f ~/.config/fuzzel/default-fuzzel.ini ~/.config/fuzzel/custom-edited-fuzzel.ini ; "
             "cp -f %s/fuzzel/fuzzel.ini ~/.config/fuzzel ; "
-	    "mv ~/.config/fuzzel/fuzzel.ini ~/.config/fuzzel/fuzzel-duplicated.ini ; "
-	    "ln -sf ~/.config/fuzzel/fuzzel-duplicated.ini ~/.config/fuzzel/fuzzel.ini ", inpath, inpath, inpath);
+			"mv ~/.config/fuzzel/fuzzel.ini ~/.config/fuzzel/fuzzel-duplicated.ini ; "
+			"ln -sf ~/.config/fuzzel/fuzzel-duplicated.ini ~/.config/fuzzel/fuzzel.ini ", inpath, inpath, inpath);
     system(cmd);  		
 }
 void GTKL(bool archive_bl, float pver, bool pkginstall_bl)
@@ -155,14 +156,14 @@ void GTKL(bool archive_bl, float pver, bool pkginstall_bl)
     	/* backup gtklock config */
         snprintf(cmd, sizeof(cmd),
             	"mv ~/.config/gtklock/style.css "
-    		"~/.config/gtklock/style-oldv%.2f.css", 
-    		pver);
+				"~/.config/gtklock/style-oldv%.2f.css", 
+				pver);
     	system(cmd);
     }
     if (pkginstall_bl)
     {
-	// install gtklock package
-	install_package(parent, "gtklock");
+		// install gtklock package
+		install_package(parent, "gtklock");
     }
     // export gtklock config
     snprintf(cmd, 384,
@@ -229,8 +230,8 @@ void KITT(bool archive_bl, float pver, bool pkginstall_bl)
     {
     	/* backup kitty config */
         snprintf(cmd, sizeof(cmd),
-    		"mv ~/.config/kitty/kitty.conf "
-    		"~/.config/kitty/kitty-oldv%.2f.conf", pver);
+				"mv ~/.config/kitty/kitty.conf "
+				"~/.config/kitty/kitty-oldv%.2f.conf", pver);
     	system(cmd);
     }
     if (pkginstall_bl)
@@ -275,10 +276,10 @@ void NVIM(bool archive_bl, float pver, bool pkginstall_bl)
     if (archive_bl)
     {
         snprintf(cmd, sizeof(cmd),
-    	    	"mv ~/.config/nvim/init.lua ~/.config/nvim/init-oldv%.2f.lua ; "
-    	    	"mv ~/.config/nvim/lua/config/lazy.lua ~/.config/nvim/lua/config/lazy-oldv%.2f.lua ; "
-    	    	"mv ~/.config/nvim/lazy-lock.json ~/.config/nvim/lazy-lock-oldv%.2f.json",
-    	    	pver, pver, pver);
+    	    	"mv %s/nvim/init.lua ~/.config/nvim/init-oldv%.2f.lua ; "
+    	    	"mv %s/nvim/lua/config/lazy.lua ~/.config/nvim/lua/config/lazy-oldv%.2f.lua ; "
+    	    	"mv %s/nvim/lazy-lock.json ~/.config/nvim/lazy-lock-oldv%.2f.json",
+    	    	config_path, pver, config_path, pver, config_path, pver);
         system(cmd);
     }
     if (pkginstall_bl)
