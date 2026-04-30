@@ -25,13 +25,13 @@ void BASH(void)
 
 void BPYT(bool archive_bl, float pver, bool pkginstall_bl)
 {
-    char cmd[192];
+    char cmd[192]; /* can lead to truncation using malloc would be safer */
     if (archive_bl)
     {
     	/* archive bpytop config */
     	snprintf(cmd, sizeof(cmd),
-    		"mv ~/.config/bpytop/bpytop.conf "
-    		"~/.config/bpytop/bpytop-oldv%.2f.conf", pver);
+				"mv %s/bpytop/bpytop.conf "
+    			"%s/bpytop/bpytop-oldv%.2f.conf", config_path, config_path, pver);
     	system(cmd);
     }
     if (pkginstall_bl)
@@ -40,8 +40,8 @@ void BPYT(bool archive_bl, float pver, bool pkginstall_bl)
     }
     // export bpytop config
     snprintf(cmd, sizeof(cmd),
-	   "mkdir -p ~/.config/bpytop ; "
-	   "cp -f %s/bpytop/bpytop.conf ~/.config/bpytop", inpath);
+			"mkdir -p %s/bpytop ; "
+	   		"cp -f %s/bpytop/bpytop.conf ~/.config/bpytop", config_path, inpath);
     system(cmd);
 }
 
@@ -52,18 +52,18 @@ void BTOP(bool archive_bl, float pver, bool pkginstall_bl)
     {
     	// archive btop config
     	snprintf(cmd, sizeof(cmd),
-    		"mv ~/.config/btop/btop.conf "
-    		"~/.config/btop/btop-oldv%.2f.conf", pver);
+				"mv ~/.config/btop/btop.conf "
+    			"~/.config/btop/btop-oldv%.2f.conf", pver);
     	system(cmd);
     }
     if (pkginstall_bl)
     {
-	install_package(parent, "btop"); /* install btop package */
+		install_package(parent, "btop"); /* install btop package */
     }
     /* export btop config */
     snprintf(cmd, sizeof(cmd),
-	   "mkdir -p ~/.config/btop ; "
-	   "cp -f %s/btop/btop.conf ~/.config/btop", inpath);
+			"mkdir -p %s/btop ; "
+	   		"cp -f %s/btop/btop.conf ~/.config/btop", config_path, inpath);
     system(cmd);
 }
 
@@ -74,8 +74,8 @@ void CAVA(bool archive_bl, float pver, bool pkginstall_bl)
     {
         // backup cava config
         snprintf(cmd, sizeof(cmd),
-		"mv ~/.config/cava/config "
-		"~/.config/cava/config-oldv%.2f", pver);
+				"mv ~/.config/cava/config "
+				"~/.config/cava/config-oldv%.2f", pver);
         system(cmd);
     }
     if (pkginstall_bl)
@@ -84,8 +84,8 @@ void CAVA(bool archive_bl, float pver, bool pkginstall_bl)
     }
     /* export cava config */
     snprintf(cmd, sizeof(cmd),
-	    "mkdir -p ~/.config/cava ; "
-	    "cp -f %s/cava/config ~/.config/cava/ ", inpath);
+			"mkdir -p ~/.config/cava ; "
+			"cp -f %s/cava/config ~/.config/cava/ ", inpath);
     system(cmd);
 }
 
@@ -123,12 +123,12 @@ void FUZZ(bool archive_bl, float pver, bool pkginstall_bl)
     {
     	// backup fuzzel config
         snprintf(cmd, sizeof(cmd),
-		"mv ~/.config/fuzzel/fuzzel-duplicated.ini "
-		"~/.config/fuzzel/fuzzel-duplicated-oldv%.2f.ini ; "
-		"mv ~/.config/fuzzel/old-fuzzel.ini "
-		"~/.config/fuzzel/old-fuzzel-oldv%.2f.ini ; "
-		"mv ~/.config/fuzzel/fuzzel.ini "
-    		"~/.config/fuzzel/fuzzel-oldv%.2f.ini", pver, pver, pver);
+				"mv ~/.config/fuzzel/fuzzel-duplicated.ini "
+				"~/.config/fuzzel/fuzzel-duplicated-oldv%.2f.ini ; "
+				"mv ~/.config/fuzzel/old-fuzzel.ini "
+				"~/.config/fuzzel/old-fuzzel-oldv%.2f.ini ; "
+				"mv ~/.config/fuzzel/fuzzel.ini "
+				"~/.config/fuzzel/fuzzel-oldv%.2f.ini", pver, pver, pver);
     	system(cmd);
     }
     if (pkginstall_bl)
