@@ -149,4 +149,4 @@ extern char errcode;
 int error_message(error_code_e err_code);
 
 
-extern char user_config_path;
+extern char user_config_path[256];
