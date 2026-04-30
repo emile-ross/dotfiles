@@ -64,29 +64,29 @@ char *config_names[n_configs] =
 
     char *main_menu_text[NUM_ELEMENTS_MAIN_MENU] =
     {
-	"Install the dotfiles",
-	"Update your dotfiles",
-	"Custom configuration menu",
-	"Something else",
+		"Install the dotfiles",
+		"Update your dotfiles",
+		"Custom configuration menu",
+		"Something else",
     };
 
     char *description_arr[n_configs] =
     {
-	"Unknown config",
-	"Bash, (Bourne Again SHell) is the default shell on most Linux distributions.",
-	"bpytop is a system resource monitor.",
-	"Btop is a system resource monitor.",
-	"Cava is a Cross-platform Audio Visualizer.",
-	"Fastfetch is a fast system information tool made in C.",
-	"Fuzzel is an App launcher and fuzzy finder based on rofi & dmenu.",
-	"Gtklock is a GTK lockscreen for Wayland.",
-	"Hyprland is a dynamic tiling window manager made for Wayland.",
-	"Kitty is a fast, GPU based terminal emulator.",
-	"MPV is a cross-platform media player made for the command line.",
-	"Neovim is a modern Vi-based text editor.",
-	"Sway is a tiling window manager based on i3 (Written in C).",
-	"Waybar is an highly customizable",
-	"Zsh (Z shell) is a command line interpreter focused on speed and efficiency.",
+		"Unknown config",
+		"Bash, (Bourne Again SHell) is the default shell on most Linux distributions.",
+		"bpytop is a system resource monitor.",
+		"Btop is a system resource monitor.",
+		"Cava is a Cross-platform Audio Visualizer.",
+		"Fastfetch is a fast system information tool made in C.",
+		"Fuzzel is an App launcher and fuzzy finder based on rofi & dmenu.",
+		"Gtklock is a GTK lockscreen for Wayland.",
+		"Hyprland is a dynamic tiling window manager made for Wayland.",
+		"Kitty is a fast, GPU based terminal emulator.",
+		"MPV is a cross-platform media player made for the command line.",
+		"Neovim is a modern Vi-based text editor.",
+		"Sway is a tiling window manager based on i3 (Written in C).",
+		"Waybar is an highly customizable",
+		"Zsh (Z shell) is a command line interpreter focused on speed and efficiency.",
     };
     
 
@@ -131,3 +131,4 @@ char *config_names[n_configs] =
 
     const char *home;
 
+	char user_config_path;
