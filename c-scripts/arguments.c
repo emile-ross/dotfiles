@@ -231,8 +231,8 @@ config_name detect_config_name(char *input)
     int i = 1;
     while (HYPR_ARG_NAME[i] != NULL)
     {
-	if (strcmp(input, HYPR_ARG_NAME[i]) == 0) return hypr;
-	i++;
+		if (strcmp(input, HYPR_ARG_NAME[i]) == 0) return hypr;
+		i++;
     }
     // check for nvim
     i = 1;
