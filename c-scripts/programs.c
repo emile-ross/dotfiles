@@ -28,7 +28,7 @@ void BPYT(bool archive_bl, float pver, bool pkginstall_bl)
     char cmd[192];
     if (archive_bl)
     {
-    	// archive bpytop config
+    	/* archive bpytop config */
     	snprintf(cmd, sizeof(cmd),
     		"mv ~/.config/bpytop/bpytop.conf "
     		"~/.config/bpytop/bpytop-oldv%.2f.conf", pver);
@@ -115,7 +115,6 @@ void FAST(bool archive_bl, float pver, bool pkginstall_bl)
 	    	"cp -f %s/fastfetch/config-other.jsonc ~/.config/fastfetch ; "
 	    	"cp -f %s/fastfetch/config-default.jsonc ~/.config/fastfetch", path, path, inpath, path, inpath, path, inpath, inpath);
     system(cmd);
-	free(cmd);
 }
 void FUZZ(bool archive_bl, float pver, bool pkginstall_bl)
 {
@@ -177,15 +176,18 @@ void HYPR(bool archive_bl, float pver, bool pkginstall_bl)
 {
     if (archive_bl)
     {
-    	// archive hyprland configs
+		/* consider using rename() */
+
+
+    	/* archive hyprland configs */
 		int mem_needed_move = snprintf(NULL, 0,
 				"mv ~/.config/hypr/hyprland.conf ~/.config/hypr/hyprland-oldv%.2f.conf ; "
     	    	"mv ~/.config/hypr/hyprpaper.conf ~/.config/hypr/hyprpaper-oldv%.2f.conf ; "
     	    	"mv ~/.config/hypr/hyprlock.conf ~/.config/hypr/hyprlock-oldv%.2f.conf ; "
     	    	"mv ~/.config/hypr/hypridle.conf ~/.config/hypr/hypridle-oldv%.2f.conf", pver, pver, pver, pver);
-		char *cmd = malloc((size_t)mem_needed_move);
+		char *cmd = malloc((size_t)mem_needed_move + 1);
 
-    	snprintf(cmd, (size_t)mem_needed_move,
+    	snprintf(cmd, (size_t)mem_needed_move + 1,
 				"mv ~/.config/hypr/hyprland.conf ~/.config/hypr/hyprland-oldv%.2f.conf ; "
     	    	"mv ~/.config/hypr/hyprpaper.conf ~/.config/hypr/hyprpaper-oldv%.2f.conf ; "
     	    	"mv ~/.config/hypr/hyprlock.conf ~/.config/hypr/hyprlock-oldv%.2f.conf ; "
@@ -194,18 +196,18 @@ void HYPR(bool archive_bl, float pver, bool pkginstall_bl)
     }
     if (pkginstall_bl)
     {
-		// install Hyprland packages
+		/* install Hyprland packages */
 		install_package(parent, "hyprlock hypridle hyprpaper hyprland");
     }
-    // export hyprland configs
+    /* export hyprland configs */
     int mem_needed = snprintf(NULL, 0,
-	    "mkdir -p ~/.config/hypr/assets ; "
+			"mkdir -p ~/.config/hypr/assets ; "
     	    "cp -f %s/hypr/assets/lockscreen.png ~/.config/hypr/assets/ ; "
-	    "cp -f %s/hypr/hyprland.conf ~/.config/hypr ; "
+			"cp -f %s/hypr/hyprland.conf ~/.config/hypr ; "
     	    "cp -f %s/hypr/hypridle.conf ~/.config/hypr ; "
     	    "cp -f %s/hypr/hyprlock.conf ~/.config/hypr ; "
     	    "cp -f %s/hypr/hyprpaper.conf ~/.config/hypr",
-	    inpath, inpath, inpath, inpath, inpath);
+			inpath, inpath, inpath, inpath, inpath);
 
     char *cmd = malloc((size_t)mem_needed + 1); /* allocate just enough memory for the buffer size */
 
@@ -225,7 +227,7 @@ void KITT(bool archive_bl, float pver, bool pkginstall_bl)
     char cmd[256];
     if (archive_bl)
     {
-    	// backup kitty config
+    	/* backup kitty config */
         snprintf(cmd, sizeof(cmd),
     		"mv ~/.config/kitty/kitty.conf "
     		"~/.config/kitty/kitty-oldv%.2f.conf", pver);
@@ -233,11 +235,11 @@ void KITT(bool archive_bl, float pver, bool pkginstall_bl)
     }
     if (pkginstall_bl)
     {
-	// install kitty package
-	//  the kitty terminal is most likely already installed on your system
-	install_package(parent, "kitty");
+		/* install kitty package
+		 * the kitty terminal is most likely already installed on your system */
+		install_package(parent, "kitty");
     }
-    // export kitty config
+    /* export kitty config */
     snprintf(cmd, sizeof(cmd),
 	    "mkdir ~/.config/kitty ; "
 	    "cp -f %s/kitty/current-theme.conf ~/.config/kitty ; "
@@ -250,17 +252,17 @@ void MPVF(bool archive_bl, float pver, bool pkginstall_bl)
     char cmd[256];
     if (archive_bl)
     {
-    	// archive mpv config
+    	/* archive mpv config */
         snprintf(cmd, sizeof(cmd),
-		"mv ~/.config/mpv/mpv.conf ~/.config/mpv/mpv-oldv%.2f.conf ", pver);
-	system(cmd);
-	printf(BOLD_S"\nThe old "UDRL_S"mpv"STYLE_END BOLD_S" config was archived\n"STYLE_END);
+				"mv ~/.config/mpv/mpv.conf ~/.config/mpv/mpv-oldv%.2f.conf ", pver);
+		system(cmd);
+		printf(BOLD_S"\nThe old "UDRL_S"mpv"STYLE_END BOLD_S" config was archived\n"STYLE_END);
     }
     if (pkginstall_bl)
     {
-	install_package(parent, "mpv");
+		install_package(parent, "mpv");
     }
-    // export mpv config with shaders
+    /* export mpv config with shaders */
     snprintf(cmd, 128,
 	    "mkdir -p ~/.config/mpv/ ; "
             "cp -f %s/mpv/mpv.conf ~/.config/mpv ", inpath);
@@ -281,9 +283,9 @@ void NVIM(bool archive_bl, float pver, bool pkginstall_bl)
     }
     if (pkginstall_bl)
     {
-	// install neovim (nvim) package
-	// nvim is most likely already installed 
-	install_package(parent, "nvim lazygit");
+		/* install neovim (nvim) package 
+		 * nvim is most likely already installed  */
+		install_package(parent, "nvim lazygit");
     }
 
     // export nvim config
@@ -305,8 +307,8 @@ void SWAY(bool archive_bl, float pver, bool pkginstall_bl)
     }
     if (pkginstall_bl)
     {
-	// install sway package -- a system update is strongly recommended 
-	install_package(parent, "wlroots swaylock sway swayidle");
+		/* install sway package -- a system update is strongly recommended */
+		install_package(parent, "wlroots swaylock sway swayidle");
     }
     // export sway config
     snprintf(cmd, sizeof(cmd),
@@ -324,18 +326,18 @@ void WAYB(bool archive_bl, float pver, bool pkginstall_bl)
     {
     	// archive waybar
         snprintf(cmd, sizeof(cmd),
-		"mv %sconfig.jsonc ~/.config/waybar/config-oldv%.2f.jsonc ; "
-		"mv %sstyle.css ~/.config/waybar/style-oldv%.2f.css", path, pver, path, pver);
-	system(cmd);
+				"mv %sconfig.jsonc ~/.config/waybar/config-oldv%.2f.jsonc ; "
+				"mv %sstyle.css ~/.config/waybar/style-oldv%.2f.css", path, pver, path, pver);
+		system(cmd);
     }
     if (pkginstall_bl)
     {
-	install_package(parent, "waybar");
+		install_package(parent, "waybar");
     }
     // export waybar config and appearance
     snprintf(cmd, sizeof(cmd),
-	    "mkdir -p %s ; "
-	    "cp -f %s/waybar/style.css %s ; "
+			"mkdir -p %s ; "
+			"cp -f %s/waybar/style.css %s ; "
             "cp -f %s/waybar/config.jsonc %s", path, inpath, path, inpath, path);
     system(cmd);
 }

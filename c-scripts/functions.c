@@ -233,15 +233,15 @@ bool y_n(char yes_no)
 {
     if (yes_no == 'Y' || yes_no == 'y')
     {
-	return true;
+		return true;
     }
     else if (yes_no == 'T' || yes_no == 't')
     {
-	return true;
+		return true;
     }
     else
     {
-	return false;
+		return false;
     }
 }
 
