@@ -130,4 +130,4 @@ char *config_names[n_configs] =
     char inpath[64];
 
     const char *home;
-	char user_config_path[256];
+	char config_path[256];

@@ -59,8 +59,8 @@ void pre_startup(void)
 
 	/* Add user_config_path definition
 	 * it needs to be the home dir + .config path */
-	snprintf(user_config_path, sizeof(user_config_path),
-			 "%s/.config/", home);
+	snprintf(config_path, sizeof(config_path),
+			 "%s/.config", home);
 	
     /* get the current working directory */
     snprintf(inpath, sizeof(inpath), "%s", get_initial_path());
