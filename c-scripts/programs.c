@@ -43,13 +43,20 @@ void BPYT(bool archive_bl, float pver, bool pkginstall_bl)
 
 void BTOP(bool archive_bl, float pver, bool pkginstall_bl)
 {
+	const char *program_path_temp = "%s/btop";
+	int program_path_size = 1 + snprintf(NULL, 0, program_path_temp, config_path);
+
+	char *program_path = malloc((size_t)program_path_size);
+
+	snprintf(program_path, (size_t)program_path_size, program_path_temp, config_path);
+
     char cmd[128];
     if (archive_bl)
     {
     	/* archive btop config */
     	snprintf(cmd, sizeof(cmd),
-				"mv ~/.config/btop/btop.conf "
-    			"~/.config/btop/btop-oldv%.2f.conf", pver);
+				"mv %s/btop.conf "
+    			"~/.config/btop/btop-oldv%.2f.conf", program_path, pver);
     	system(cmd);
     }
     if (pkginstall_bl)
@@ -59,7 +66,7 @@ void BTOP(bool archive_bl, float pver, bool pkginstall_bl)
     /* export btop config */
     snprintf(cmd, sizeof(cmd),
 			"mkdir -p %s/btop ; "
-	   		"cp -f %s/btop/btop.conf ~/.config/btop", config_path, inpath);
+	   		"cp -f %s/btop/btop.conf %s/btop", config_path, inpath, config_path);
     system(cmd);
 }
 
