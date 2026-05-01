@@ -68,6 +68,7 @@ void BTOP(bool archive_bl, float pver, bool pkginstall_bl)
 			"mkdir -p %s/btop ; "
 	   		"cp -f %s/btop/btop.conf %s/btop", config_path, inpath, config_path);
     system(cmd);
+	free(program_path);
 }
 
 void CAVA(bool archive_bl, float pver, bool pkginstall_bl)
@@ -187,7 +188,7 @@ void HYPR(bool archive_bl, float pver, bool pkginstall_bl)
 
     if (archive_bl)
     {
-		/* consider using rename() */
+		/* TODO consider using rename() */
 
     	/* archive hyprland configs */
 		int mem_needed_move = snprintf(NULL, 0,
@@ -212,27 +213,29 @@ void HYPR(bool archive_bl, float pver, bool pkginstall_bl)
 		install_package(parent, "hyprlock hypridle hyprpaper hyprland");
     }
     /* export hyprland configs */
-    int mem_needed = snprintf(NULL, 0,
-			"mkdir -p ~/.config/hypr/assets ; "
-    	    "cp -f %s/hypr/assets/lockscreen.png ~/.config/hypr/assets/ ; "
-			"cp -f %s/hypr/hyprland.conf ~/.config/hypr ; "
-    	    "cp -f %s/hypr/hypridle.conf ~/.config/hypr ; "
-    	    "cp -f %s/hypr/hyprlock.conf ~/.config/hypr ; "
-    	    "cp -f %s/hypr/hyprpaper.conf ~/.config/hypr",
-			inpath, inpath, inpath, inpath, inpath);
+    int mem_needed = 1 + snprintf(NULL, 0,
+			"mkdir -p %s/assets ; "
+    	    "cp -f %s/hypr/assets/lockscreen.png %s/assets/ ; "
+			"cp -f %s/hypr/hyprland.conf %s ; "
+    	    "cp -f %s/hypr/hypridle.conf %s ; "
+    	    "cp -f %s/hypr/hyprlock.conf %s ; "
+    	    "cp -f %s/hypr/hyprpaper.conf %s",
+			program_path, inpath, program_path, inpath, program_path, inpath, program_path, inpath, program_path, inpath, program_path);
 
-    char *cmd = malloc((size_t)mem_needed + 1); /* allocate just enough memory for the buffer size */
+    char *cmd = malloc((size_t)mem_needed); /* allocate just enough memory for the buffer size */
 
-    snprintf(cmd, (size_t)mem_needed + 1,
-			"mkdir -p ~/.config/hypr/assets ; "
-    	    "cp -f %s/hypr/assets/lockscreen.png ~/.config/hypr/assets/ ; "
-			"cp -f %s/hypr/hyprland.conf ~/.config/hypr ; "
-    	    "cp -f %s/hypr/hypridle.conf ~/.config/hypr ; "
-    	    "cp -f %s/hypr/hyprlock.conf ~/.config/hypr ; "
-    	    "cp -f %s/hypr/hyprpaper.conf ~/.config/hypr",
-			inpath, inpath, inpath, inpath, inpath);
+    snprintf(cmd, (size_t)mem_needed,
+			"mkdir -p %s/assets ; "
+    	    "cp -f %s/hypr/assets/lockscreen.png %s/assets/ ; "
+			"cp -f %s/hypr/hyprland.conf %s ; "
+    	    "cp -f %s/hypr/hypridle.conf %s ; "
+    	    "cp -f %s/hypr/hyprlock.conf %s ; "
+    	    "cp -f %s/hypr/hyprpaper.conf %s",
+			program_path, inpath, program_path, inpath, program_path, inpath, program_path, inpath, program_path, inpath, program_path);
+
     system(cmd);
     free(cmd);
+	free(program_path);
 }
 void KITT(bool archive_bl, float pver, bool pkginstall_bl)
 {
