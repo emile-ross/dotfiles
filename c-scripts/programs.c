@@ -178,24 +178,32 @@ void GTKL(bool archive_bl, float pver, bool pkginstall_bl)
 
 void HYPR(bool archive_bl, float pver, bool pkginstall_bl)
 {
+	const char *program_path_temp = "%s/hypr";
+	int program_path_size = 1 + snprintf(NULL, 0, program_path_temp, config_path);
+
+	char *program_path = malloc((size_t)program_path_size);
+
+	snprintf(program_path, (size_t)program_path_size, program_path_temp, config_path);
+
     if (archive_bl)
     {
 		/* consider using rename() */
 
-
     	/* archive hyprland configs */
 		int mem_needed_move = snprintf(NULL, 0,
-				"mv ~/.config/hypr/hyprland.conf ~/.config/hypr/hyprland-oldv%.2f.conf ; "
-    	    	"mv ~/.config/hypr/hyprpaper.conf ~/.config/hypr/hyprpaper-oldv%.2f.conf ; "
-    	    	"mv ~/.config/hypr/hyprlock.conf ~/.config/hypr/hyprlock-oldv%.2f.conf ; "
-    	    	"mv ~/.config/hypr/hypridle.conf ~/.config/hypr/hypridle-oldv%.2f.conf", pver, pver, pver, pver);
+				"mv %s/hyprland.conf %s/hyprland-oldv%.2f.conf ; "
+    	    	"mv %s/hyprpaper.conf %s/hyprpaper-oldv%.2f.conf ; "
+    	    	"mv %s/hyprlock.conf %s/hyprlock-oldv%.2f.conf ; "
+    	    	"mv %s/hypridle.conf %s/hypridle-oldv%.2f.conf"
+				, program_path, program_path, pver, program_path, program_path, pver, program_path, program_path, pver, program_path, program_path, pver);
 		char *cmd = malloc((size_t)mem_needed_move + 1);
 
     	snprintf(cmd, (size_t)mem_needed_move + 1,
-				"mv ~/.config/hypr/hyprland.conf ~/.config/hypr/hyprland-oldv%.2f.conf ; "
-    	    	"mv ~/.config/hypr/hyprpaper.conf ~/.config/hypr/hyprpaper-oldv%.2f.conf ; "
-    	    	"mv ~/.config/hypr/hyprlock.conf ~/.config/hypr/hyprlock-oldv%.2f.conf ; "
-    	    	"mv ~/.config/hypr/hypridle.conf ~/.config/hypr/hypridle-oldv%.2f.conf", pver, pver, pver, pver);
+				"mv %s/hyprland.conf %s/hyprland-oldv%.2f.conf ; "
+    	    	"mv %s/hyprpaper.conf %s/hyprpaper-oldv%.2f.conf ; "
+    	    	"mv %s/hyprlock.conf %s/hyprlock-oldv%.2f.conf ; "
+    	    	"mv %s/hypridle.conf %s/hypridle-oldv%.2f.conf"
+				, program_path, program_path, pver, program_path, program_path, pver, program_path, program_path, pver, program_path, program_path, pver);
     	system(cmd);
     }
     if (pkginstall_bl)
@@ -353,8 +361,8 @@ void ZSHH(bool archive_bl, float pver, bool pkginstall_bl)
     {
     	// archive old zsh config
         snprintf(cmd, sizeof(cmd),
-		"mv ~/.zshrc ~/.zshrc-old-v%.2f", pver);
-	system(cmd);
+				"mv ~/.zshrc ~/.zshrc-old-v%.2f", pver);
+		system(cmd);
     }
 
     if (pkginstall_bl)
