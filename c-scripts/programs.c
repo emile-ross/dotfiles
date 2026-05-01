@@ -8,16 +8,12 @@ void BASH(void)
     printf(UDRL_S"\nYou can find the new .bashrc file under the name %s\n"STYLE_END, BRCNAME);
 
     /* calculate the sufficient amount of memory to the buffer */
-    int mem_needed = snprintf(NULL, 0,
-			"cp -f %s/shell/bash/.bashrc ~/%s", 
-			inpath, BRCNAME);
+	const char *command_format = "cp -f %s/shell/bash/.bashrc ~/%s";
+    int mem_needed = 1 + snprintf(NULL, 0, command_format, inpath, BRCNAME);
 
-    char *cmd = malloc((size_t)mem_needed + 1);
-
+    char *cmd = malloc((size_t)mem_needed);
     /* execute the command with the according buffer size previously calculated (above) */
-    snprintf(cmd, (size_t)mem_needed + 1,
-             "cp -f %s/shell/bash/.bashrc ~/%s",
-             inpath, BRCNAME);
+    snprintf(cmd, (size_t)mem_needed, command_format, inpath, BRCNAME);
     system(cmd);
 
     free(cmd);
@@ -213,13 +209,13 @@ void HYPR(bool archive_bl, float pver, bool pkginstall_bl)
     char *cmd = malloc((size_t)mem_needed + 1); /* allocate just enough memory for the buffer size */
 
     snprintf(cmd, (size_t)mem_needed + 1,
-	    "mkdir -p ~/.config/hypr/assets ; "
+			"mkdir -p ~/.config/hypr/assets ; "
     	    "cp -f %s/hypr/assets/lockscreen.png ~/.config/hypr/assets/ ; "
-	    "cp -f %s/hypr/hyprland.conf ~/.config/hypr ; "
+			"cp -f %s/hypr/hyprland.conf ~/.config/hypr ; "
     	    "cp -f %s/hypr/hypridle.conf ~/.config/hypr ; "
     	    "cp -f %s/hypr/hyprlock.conf ~/.config/hypr ; "
     	    "cp -f %s/hypr/hyprpaper.conf ~/.config/hypr",
-	    inpath, inpath, inpath, inpath, inpath);
+			inpath, inpath, inpath, inpath, inpath);
     system(cmd);
     free(cmd);
 }
@@ -242,9 +238,9 @@ void KITT(bool archive_bl, float pver, bool pkginstall_bl)
     }
     /* export kitty config */
     snprintf(cmd, sizeof(cmd),
-	    "mkdir ~/.config/kitty ; "
-	    "cp -f %s/kitty/current-theme.conf ~/.config/kitty ; "
-	    "cp -f %s/kitty/kitty.conf ~/.config/kitty", inpath, inpath);
+			"mkdir ~/.config/kitty ; "
+	    	"cp -f %s/kitty/current-theme.conf ~/.config/kitty ; "
+	    	"cp -f %s/kitty/kitty.conf ~/.config/kitty", inpath, inpath);
     system(cmd);
 }
 
@@ -265,7 +261,7 @@ void MPVF(bool archive_bl, float pver, bool pkginstall_bl)
     }
     /* export mpv config with shaders */
     snprintf(cmd, 128,
-	    "mkdir -p ~/.config/mpv/ ; "
+			"mkdir -p ~/.config/mpv/ ; "
             "cp -f %s/mpv/mpv.conf ~/.config/mpv ", inpath);
     system(cmd);
 }
