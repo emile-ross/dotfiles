@@ -204,10 +204,10 @@ void GTKL(bool archive_bl, float pver, bool pkginstall_bl)
     }
     if (pkginstall_bl)
     {
-		// install gtklock package
+		/* install gtklock package */
 		install_package(parent, "gtklock");
     }
-    // export gtklock config
+    /* export gtklock config */
     snprintf(cmd, 384,
             "mkdir -p ~/.config/gtklock/assets ; "
             "cp -f %s/gtklock/style.css ~/.config/gtklock ; "
@@ -404,6 +404,12 @@ void ZSHH(bool archive_bl, float pver, bool pkginstall_bl)
         snprintf(cmd, sizeof(cmd),
 				"mv ~/.zshrc ~/.zshrc-old-v%.2f", pver);
 		system(cmd);
+		char *new_f_path;
+		char *new_path;
+		const char *new_path = "~/.zshrc-old-v%.2f";
+		int path_size = 1 + snprintf(NULL, 0, new_path, pver);
+		snprintf(new_f_path, path_size, new_path, pver);
+		rename("~/.zshrc", new_f_path);
     }
 
     if (pkginstall_bl)
