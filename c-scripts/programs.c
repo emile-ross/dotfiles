@@ -78,6 +78,8 @@ void CAVA(bool archive_bl, float pver, bool pkginstall_bl)
 
 	char *program_path = malloc((size_t)program_path_size);
 
+	snprintf(program_path, (size_t)program_path_size, program_path_temp, config_path);
+
     char cmd[128];
     if (archive_bl)
     {
@@ -100,14 +102,37 @@ void CAVA(bool archive_bl, float pver, bool pkginstall_bl)
 
 void FAST(bool archive_bl, float pver, bool pkginstall_bl)
 {
-    const char *path = "~/.config/fastfetch/";
+	const char *program_path_temp = "%s/fastfetch";
+	int program_path_size = 1 + snprintf(NULL, 0, program_path_temp, config_path);
+
+	char *program_path = malloc((size_t)program_path_size);
+
+	snprintf(program_path, (size_t)program_path_size, program_path_temp, config_path);
+
     char cmd[768];
     if (archive_bl)
     {
+		char *config_path_temp = NULL;
+		char *out_config_temp = NULL;
+
+		strcpy(config_path_temp, program_path);
+		strcat(config_path_temp, "/config.jsonc");
+
+		const char *out_config_name = " %s/config-oldv%.2f.jsonc";
+
+		int mem_out_path = 1 + snprintf(NULL, 0, out_config_name, program_path, pver);
+
+		snprintf(out_config_temp, (size_t)mem_out_path, program_path, pver);
+
+		strcpy(out_config_temp, program_path);
+		strcat(out_config_temp, out_config_name);
+
+		rename(config_path_temp, out_config_temp);
+
     	/* backup fastfetch config */
     	snprintf(cmd, 96,
-				"mv %sconfig.jsonc "
-				"%sconfig-oldv%.2f.jsonc", path, path, pver);
+				"mv %s/config.jsonc "
+				"%s/config-oldv%.2f.jsonc", program_path, program_path, pver);
     	system(cmd);
     }
     if (pkginstall_bl)
@@ -117,13 +142,14 @@ void FAST(bool archive_bl, float pver, bool pkginstall_bl)
     /* export fastfetch config */
     snprintf(cmd, sizeof(cmd),
 			"rm %s ; "
-	    	"mkdir -p %sassets ; "
-	    	"cp -f %s/fastfetch/assets/*.png %sassets ; "
-	    	"cp -f %s/fastfetch/config.jsonc %s ; "
-	    	"cp -f ~/.config/fastfetch/config.jsonc ~/.config/fastfetch/config-duplicated.jsonc ; "
-	    	"cp -f %s/fastfetch/config-other.jsonc ~/.config/fastfetch ; "
-	    	"cp -f %s/fastfetch/config-default.jsonc ~/.config/fastfetch"
-			, path, path, inpath, path, inpath, path, inpath, inpath);
+	    	"mkdir -p %s/assets ; "
+	    	"cp -f %s/assets/*.png %s/assets/ ; "
+	    	"cp -f %s/fastfetch/config.jsonc %s/ ; "
+	    	"cp -f %s/config.jsonc %s/config-duplicated.jsonc ; "
+	    	"cp -f %s/fastfetch/config-other.jsonc %s/ ; "
+	    	"cp -f %s/fastfetch/config-default.jsonc %s/"
+			, program_path, program_path, inpath, program_path, inpath, program_path, inpath, program_path, inpath, program_path, inpath, program_path);
+
     system(cmd);
 }
 void FUZZ(bool archive_bl, float pver, bool pkginstall_bl)
