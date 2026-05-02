@@ -83,7 +83,7 @@ int main(int argc, char *argv[])
     /* convert command line arguments to flags/compiler/options */
     for (int i = 1; i < argc; i++)
     {
-	if (strcmp(argv[i], "gcc") == 0)
+		if (strcmp(argv[i], "gcc") == 0)
     	{
     	    compiler_name = GCC;
     	}
@@ -97,76 +97,76 @@ int main(int argc, char *argv[])
     	}
     	else if (strcmp(argv[i], "--base") == 0)
     	{
-	    Wall_flag_bl = true;
-	    Wpedantic_bl = true;
-	    Wextra_flag_bl = true;
-	    Wconversion_bl = true;
-	    num_flags += 4;
+			Wall_flag_bl = true;
+			Wpedantic_bl = true;
+	    	Wextra_flag_bl = true;
+	    	Wconversion_bl = true;
+	    	num_flags += 4;
     	}
-	else if (strcmp(argv[i], "-c") == 0)
-	{
-	    Wconversion_bl = true;
-	    num_flags++;
-	}
-	else if (strcmp(argv[i], "-a") == 0)
-	{
-	    Wall_flag_bl = true;
-	    num_flags++;
-	}
-	else if (strcmp(argv[i], "-x") == 0)
-	{
-    	    Wextra_flag_bl = true;
-	    num_flags++;
-	}
-	else if (strcmp(argv[i], "-e") == 0)
-	{
-    	    Werror_flag_bl = true;
-	    num_flags++;
-	}
-	else if (strcmp(argv[i], "-c99") == 0)
-	{
-	    c99_flag_bl = true;
-	    num_flags++;
-	}
+		else if (strcmp(argv[i], "-c") == 0)
+		{
+		    Wconversion_bl = true;
+		    num_flags++;
+		}
+		else if (strcmp(argv[i], "-a") == 0)
+		{
+		    Wall_flag_bl = true;
+		    num_flags++;
+		}
+		else if (strcmp(argv[i], "-x") == 0)
+		{
+    		Wextra_flag_bl = true;
+		    num_flags++;
+		}
+		else if (strcmp(argv[i], "-e") == 0)
+		{
+    		Werror_flag_bl = true;
+		    num_flags++;
+		}
+		else if (strcmp(argv[i], "-c99") == 0)
+		{
+		    c99_flag_bl = true;
+		    num_flags++;
+		}
     	else if (strcmp(argv[i], "-p") == 0 || strcmp(argv[i], "pedantic") == 0)
     	{
-	    Wpedantic_bl = true;
-	    num_flags++;
+		    Wpedantic_bl = true;
+		    num_flags++;
     	}
     	else if (strcmp(argv[i], "clean") == 0)
     	{
-	    clean_objects();
-	    compile_bl = false;	/* ignore the compilation step */
+		    clean_objects();
+		    compile_bl = false;	/* ignore the compilation step */
     	}
     	else if (strcmp(argv[i], "std") == 0)
-	{
-    	    compiler_name = ZIG;
+		{
+    		compiler_name = ZIG;
 
-	    c99_flag_bl = true;
-	    Wall_flag_bl = true;
-	    Wpedantic_bl = true;
-	    Wextra_flag_bl = true;
-	    Wconversion_bl = true;
-	    num_flags += 5;
-	}
-    	else if (strcmp(argv[i], "log") == 0)
-	{
-	    log_bl = true;
-	}
-    	else if (strcmp(argv[i], "-v") == 0)
-	{
-	    verbose = true;
-	}
-	else if (strcmp(argv[i], "macos") == 0)
-	{
-	    compiler_name = CLANG;
+		    c99_flag_bl = true;
+		    Wall_flag_bl = true;
+		    Wpedantic_bl = true;
+		    Wextra_flag_bl = true;
+		    Wconversion_bl = true;
+		    num_flags += 5;
+		}
+    		else if (strcmp(argv[i], "log") == 0)
+		{
+		    log_bl = true;
+		}
+    		else if (strcmp(argv[i], "-v") == 0)
+		{
+		    verbose = true;
+		}
+		else if (strcmp(argv[i], "macos") == 0)
+		{
+		    compiler_name = CLANG;
     	    c99_flag_bl = true;
     	    Wall_flag_bl = true;
     	    Wpedantic_bl = true;
     	    Wextra_flag_bl = true;
     	    Wconversion_bl = true;
-    	    num_flags += 5;
-	}
+    		num_flags += 5;
+		}
     	else
     	{
     	    printf("Unknown argument: %s\n", argv[i]);
@@ -175,7 +175,7 @@ int main(int argc, char *argv[])
     
     if (compile_bl)
     {
-	compilation(num_flags, compiler_name, log_bl, Werror_flag_bl, Wpedantic_bl, Wall_flag_bl, Wextra_flag_bl, c99_flag_bl, Wconversion_bl);
+		compilation(num_flags, compiler_name, log_bl, Werror_flag_bl, Wpedantic_bl, Wall_flag_bl, Wextra_flag_bl, c99_flag_bl, Wconversion_bl);
     }
     return 0;
 }
@@ -185,28 +185,29 @@ void compile_all_files(bool log, char *compiler, char *flags)
     int base_size = 1;
     if (log)
     {
-	base_size += LOGGING_CMD_SIZE;
+		base_size += LOGGING_CMD_SIZE;
     }
 
     for (int i = 0; source_files[i] != NULL; i++) 
     {
-	int command_size = base_size + snprintf(NULL, 0,
-        	"%s %s%s.c -o %s%s.o%s "
-        	, compiler, source_fpath, source_files[i], object_fpath, source_files[i], flags);
-		
-        char cmd[command_size];
-        snprintf(cmd, sizeof(cmd),
-        	"%s %s%s.c -o %s%s.o%s "
-        	, compiler, source_fpath, source_files[i], object_fpath, source_files[i], flags);
-	if (log)
-	{
-	    strcat(cmd, logging_cmd);
-	}
-	if (verbose)
-	{
-	    printf("%s\n", cmd);
-	}
-	system(cmd);
+		int command_size = base_size + snprintf(NULL, 0,
+    	    	"%s %s%s.c -o %s%s.o%s "
+    	    	, compiler, source_fpath, source_files[i], object_fpath, source_files[i], flags);
+			
+    	char cmd[command_size];
+    	snprintf(cmd, sizeof(cmd),
+				"%s %s%s.c -o %s%s.o%s "
+				, compiler, source_fpath, source_files[i], object_fpath, source_files[i], flags);
+
+		if (log)
+		{
+		    strcat(cmd, logging_cmd);
+		}
+		if (verbose)
+		{
+		    printf("%s\n", cmd);
+		}
+		system(cmd);
     }
 }
 
