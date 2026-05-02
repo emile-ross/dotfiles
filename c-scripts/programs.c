@@ -74,41 +74,44 @@ void BTOP(bool archive_bl, float pver, bool pkginstall_bl)
 void CAVA(bool archive_bl, float pver, bool pkginstall_bl)
 {
 	const char *program_path_temp = "%s/cava";
+	const char *program_name = "cava";
 	int program_path_size = 1 + snprintf(NULL, 0, program_path_temp, config_path);
 
 	char *program_path = malloc((size_t)program_path_size);
-
 	snprintf(program_path, (size_t)program_path_size, program_path_temp, config_path);
 
-    char cmd[128];
     if (archive_bl)
     {
         /* backup cava config */
-		char *config_path_temp = NULL;
-		char *out_config_temp = NULL;
+		const char *out_config_name = "%s/config-oldv%.2f";
+		const char *in_config_path = "%s/%s/config";
 
-		const char *out_config_name = " %s/config-oldv%.2f";
+		int mem_out_size = 1 + snprintf(NULL, 0, out_config_name, program_path, pver);
+		int mem_path_size = 1 + snprintf(NULL, 0, in_config_path, program_path);
+		char *out_config_temp = malloc((size_t)mem_out_size);
+		char *config_path_temp = malloc((size_t)mem_path_size);
 
-		int mem_out_path = 1 + snprintf(NULL, 0, out_config_name, program_path, pver);
+		snprintf(out_config_temp, (size_t)mem_out_size, program_path, pver);
 
-		snprintf(out_config_temp, (size_t)mem_out_path, program_path, pver);
-
-		strcpy(config_path_temp, program_path);
-		strcat(config_path_temp, "/config");
 		strcpy(out_config_temp, program_path);
 		strcat(out_config_temp, out_config_name);
 
 		rename(config_path_temp, out_config_temp);
+		free(out_config_temp);
+		free(config_path_temp);
     }
     if (pkginstall_bl)
     {
-	install_package(parent, "cava"); /* install cava package */
+		install_package(parent, (char*)program_name); /* install cava package */
     }
     /* export cava config */
-    snprintf(cmd, sizeof(cmd),
-			"mkdir -p %s ; "
-			"cp -f %s/cava/config %s/ ", program_path, inpath, program_path);
-    system(cmd);
+	const char *dir_cmd = "mkdir -p %s ; cp -f %s/%s/config %s/ ";
+    int mem_needed_cmd = 1 + snprintf(NULL, 0, dir_cmd, program_path, inpath, program_path, program_path);
+
+	char safe_cmd[mem_needed_cmd];
+    snprintf(safe_cmd, (size_t)mem_needed_cmd, dir_cmd, program_path, inpath, program_path, program_path);
+
+    system(safe_cmd);
 }
 
 void FAST(bool archive_bl, float pver, bool pkginstall_bl)
@@ -131,9 +134,9 @@ void FAST(bool archive_bl, float pver, bool pkginstall_bl)
 
 		const char *out_config_name = " %s/config-oldv%.2f.jsonc";
 
-		int mem_out_path = 1 + snprintf(NULL, 0, out_config_name, program_path, pver);
+		int mem_out_size = 1 + snprintf(NULL, 0, out_config_name, program_path, pver);
 
-		snprintf(out_config_temp, (size_t)mem_out_path, program_path, pver);
+		snprintf(out_config_temp, (size_t)mem_out_size, program_path, pver);
 
 		strcpy(out_config_temp, program_path);
 		strcat(out_config_temp, out_config_name);
@@ -404,7 +407,7 @@ void ZSHH(bool archive_bl, float pver, bool pkginstall_bl)
         snprintf(cmd, sizeof(cmd),
 				"mv ~/.zshrc ~/.zshrc-old-v%.2f", pver);
 		system(cmd);
-		char *new_f_path;
+		char *new_f_path = NULL;
 		const char *new_path = "~/.zshrc-old-v%.2f";
 		int path_size = 1 + snprintf(NULL, 0, new_path, pver);
 		snprintf(new_f_path, (size_t)path_size, new_path, pver);
@@ -424,7 +427,6 @@ void ZSHH(bool archive_bl, float pver, bool pkginstall_bl)
 
 int install_package(char *pkg_type_distro, char *pkginstallname)
 {
-    char cmd[512];
     if (strcmp(pkg_type_distro, "arch") == 0)
     {
         int cmd_size = 1 + snprintf(NULL , 0, "yay -S %s", pkginstallname);
