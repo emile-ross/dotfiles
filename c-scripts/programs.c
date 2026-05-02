@@ -73,13 +73,18 @@ void BTOP(bool archive_bl, float pver, bool pkginstall_bl)
 
 void CAVA(bool archive_bl, float pver, bool pkginstall_bl)
 {
+	const char *program_path_temp = "%s/cava";
+	int program_path_size = 1 + snprintf(NULL, 0, program_path_temp, config_path);
+
+	char *program_path = malloc((size_t)program_path_size);
+
     char cmd[128];
     if (archive_bl)
     {
         /* backup cava config */
         snprintf(cmd, sizeof(cmd),
-				"mv ~/.config/cava/config "
-				"~/.config/cava/config-oldv%.2f", pver);
+				"mv %s/config "
+				"%s/config-oldv%.2f", program_path, program_path, pver);
         system(cmd);
     }
     if (pkginstall_bl)
@@ -88,8 +93,8 @@ void CAVA(bool archive_bl, float pver, bool pkginstall_bl)
     }
     /* export cava config */
     snprintf(cmd, sizeof(cmd),
-			"mkdir -p ~/.config/cava ; "
-			"cp -f %s/cava/config ~/.config/cava/ ", inpath);
+			"mkdir -p %s ; "
+			"cp -f %s/cava/config %s/ ", program_path, inpath, program_path);
     system(cmd);
 }
 
@@ -303,7 +308,7 @@ void NVIM(bool archive_bl, float pver, bool pkginstall_bl)
 		install_package(parent, "nvim lazygit");
     }
 
-    // export nvim config
+    /* export nvim config */
     snprintf(cmd, sizeof(cmd),
 	    "mkdir -p ~/.config/nvim ; "
     	    "cp -f %s/nvim/init.lua ~/.config/nvim", inpath);
@@ -312,7 +317,7 @@ void NVIM(bool archive_bl, float pver, bool pkginstall_bl)
 
 void SWAY(bool archive_bl, float pver, bool pkginstall_bl)
 {
-    // sway window manager doesn't work without wlroots
+    /* sway window manager doesn't work without wlroots */
     char cmd[256];
     if (archive_bl)
     {
@@ -325,7 +330,7 @@ void SWAY(bool archive_bl, float pver, bool pkginstall_bl)
 		/* install sway package -- a system update is strongly recommended */
 		install_package(parent, "wlroots swaylock sway swayidle");
     }
-    // export sway config
+    /* export sway config */
     snprintf(cmd, sizeof(cmd),
 	    "mkdir -p ~/.config/sway ; "
 	    "cp -f %s/sway/config ~/.config/sway/ ; "
@@ -339,7 +344,7 @@ void WAYB(bool archive_bl, float pver, bool pkginstall_bl)
     char cmd[256];
     if (archive_bl)
     {
-    	// archive waybar
+    	/* archive waybar */
         snprintf(cmd, sizeof(cmd),
 				"mv %sconfig.jsonc ~/.config/waybar/config-oldv%.2f.jsonc ; "
 				"mv %sstyle.css ~/.config/waybar/style-oldv%.2f.css", path, pver, path, pver);
@@ -349,7 +354,7 @@ void WAYB(bool archive_bl, float pver, bool pkginstall_bl)
     {
 		install_package(parent, "waybar");
     }
-    // export waybar config and appearance
+    /* export waybar config and appearance */
     snprintf(cmd, sizeof(cmd),
 			"mkdir -p %s ; "
 			"cp -f %s/waybar/style.css %s ; "
@@ -362,7 +367,7 @@ void ZSHH(bool archive_bl, float pver, bool pkginstall_bl)
     char cmd[128];
     if (archive_bl)
     {
-    	// archive old zsh config
+    	/* archive old zsh config */
         snprintf(cmd, sizeof(cmd),
 				"mv ~/.zshrc ~/.zshrc-old-v%.2f", pver);
 		system(cmd);
