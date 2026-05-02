@@ -427,9 +427,11 @@ int install_package(char *pkg_type_distro, char *pkginstallname)
     char cmd[512];
     if (strcmp(pkg_type_distro, "arch") == 0)
     {
-        snprintf(cmd, sizeof(cmd),
+        int cmd_size = 1 + snprintf(NULL , 0, "yay -S %s", pkginstallname);
+		char cmd_arch[cmd_size];
+        snprintf(cmd_arch, (size_t)cmd_size,
                 "yay -S %s", pkginstallname);
-        system(cmd);
+        system(cmd_arch);
     }
     else if (strcmp(pkg_type_distro, "debian") == 0)
     {
