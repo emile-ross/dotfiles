@@ -405,10 +405,9 @@ void ZSHH(bool archive_bl, float pver, bool pkginstall_bl)
 				"mv ~/.zshrc ~/.zshrc-old-v%.2f", pver);
 		system(cmd);
 		char *new_f_path;
-		char *new_path;
 		const char *new_path = "~/.zshrc-old-v%.2f";
 		int path_size = 1 + snprintf(NULL, 0, new_path, pver);
-		snprintf(new_f_path, path_size, new_path, pver);
+		snprintf(new_f_path, (size_t)path_size, new_path, pver);
 		rename("~/.zshrc", new_f_path);
     }
 
@@ -434,9 +433,12 @@ int install_package(char *pkg_type_distro, char *pkginstallname)
     }
     else if (strcmp(pkg_type_distro, "debian") == 0)
     {
-        snprintf(cmd, sizeof(cmd),
+		int cmd_size = 1 + snprintf(NULL, 0, "sudo apt install %s", pkginstallname);
+		char cmd_deb[cmd_size];
+
+        snprintf(cmd_deb, (size_t)cmd_size,
                 "sudo apt install %s", pkginstallname);
-        system(cmd);
+        system(cmd_deb);
     }
     else 
     {
