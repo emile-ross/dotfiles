@@ -23,7 +23,7 @@ void BPYT(bool archive_bl, float pver, bool pkginstall_bl)
 {
 	const char *pkg_name = "bpytop";
 
-    char cmd[192]; /* can lead to truncation using malloc would be safer */
+    char cmd[192]; /* using malloc is now safer, it avoids truncation */
     if (archive_bl)
     {
 		/* evaluate original_path size */
@@ -32,15 +32,20 @@ void BPYT(bool archive_bl, float pver, bool pkginstall_bl)
 		int original_path_size = 1 + snprintf(NULL, 0, original_path, config_path, pkg_name);
 		int archived_path_size = 1 + snprintf(NULL, 0, archived_path, config_path, pkg_name, pver);
 
-		snprintf(input_file, original_path_size, original_path, config_path, pkg_name);
-		snprintf(output_file, original_path_size, original_path, config_path, pkg_name, pver);
+		/* allocate the corresponding amount of memory for the buffer
+		 * and then initialize both variables */
+		char *input_file = malloc((size_t)original_path_size);
+		char *output_file = malloc((size_t)archived_path_size);
+
+		snprintf(input_file, (size_t)original_path_size, original_path, config_path, pkg_name);
+		snprintf(output_file, (size_t)original_path_size, original_path, config_path, pkg_name, pver);
 
     	/* archive bpytop config */
 		rename(input_file, output_file);
-    	snprintf(cmd, sizeof(cmd),
-				"mv %s/bpytop/bpytop.conf "
-    			"%s/bpytop/bpytop-oldv%.2f.conf", config_path, config_path, pver);
-    	system(cmd);
+
+		/* free unused memory */
+		free(input_file);
+		free(output_file);
     }
     if (pkginstall_bl)
     {
@@ -241,7 +246,8 @@ void HYPR(bool archive_bl, float pver, bool pkginstall_bl)
 
     if (archive_bl)
     {
-		/* TODO consider using rename() */
+		/* TODO consider using rename() 
+		 * (just like the other functions) */
 
     	/* archive hyprland configs */
 		int mem_needed_move = snprintf(NULL, 0,
