@@ -21,10 +21,22 @@ void BASH(void)
 
 void BPYT(bool archive_bl, float pver, bool pkginstall_bl)
 {
+	const char *pkg_name = "bpytop";
+
     char cmd[192]; /* can lead to truncation using malloc would be safer */
     if (archive_bl)
     {
+		/* evaluate original_path size */
+		const char *original_path = "%s/%s/bpytop.conf";
+		const char *archived_path = "%s/%s/bpytop-oldv%.2f.conf";
+		int original_path_size = 1 + snprintf(NULL, 0, original_path, config_path, pkg_name);
+		int archived_path_size = 1 + snprintf(NULL, 0, archived_path, config_path, pkg_name, pver);
+
+		snprintf(input_file, original_path_size, original_path, config_path, pkg_name);
+		snprintf(output_file, original_path_size, original_path, config_path, pkg_name, pver);
+
     	/* archive bpytop config */
+		rename(input_file, output_file);
     	snprintf(cmd, sizeof(cmd),
 				"mv %s/bpytop/bpytop.conf "
     			"%s/bpytop/bpytop-oldv%.2f.conf", config_path, config_path, pver);
