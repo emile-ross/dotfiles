@@ -84,10 +84,21 @@ void CAVA(bool archive_bl, float pver, bool pkginstall_bl)
     if (archive_bl)
     {
         /* backup cava config */
-        snprintf(cmd, sizeof(cmd),
-				"mv %s/config "
-				"%s/config-oldv%.2f", program_path, program_path, pver);
-        system(cmd);
+		char *config_path_temp = NULL;
+		char *out_config_temp = NULL;
+
+		const char *out_config_name = " %s/config-oldv%.2f";
+
+		int mem_out_path = 1 + snprintf(NULL, 0, out_config_name, program_path, pver);
+
+		snprintf(out_config_temp, (size_t)mem_out_path, program_path, pver);
+
+		strcpy(config_path_temp, program_path);
+		strcat(config_path_temp, "/config");
+		strcpy(out_config_temp, program_path);
+		strcat(out_config_temp, out_config_name);
+
+		rename(config_path_temp, out_config_temp);
     }
     if (pkginstall_bl)
     {
@@ -127,13 +138,9 @@ void FAST(bool archive_bl, float pver, bool pkginstall_bl)
 		strcpy(out_config_temp, program_path);
 		strcat(out_config_temp, out_config_name);
 
+    	/* backup fastfetch config */
 		rename(config_path_temp, out_config_temp);
 
-    	/* backup fastfetch config */
-    	snprintf(cmd, 96,
-				"mv %s/config.jsonc "
-				"%s/config-oldv%.2f.jsonc", program_path, program_path, pver);
-    	system(cmd);
     }
     if (pkginstall_bl)
     {
