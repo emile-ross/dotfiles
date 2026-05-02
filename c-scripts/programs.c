@@ -128,6 +128,7 @@ void CAVA(bool archive_bl, float pver, bool pkginstall_bl)
 	char safe_cmd[mem_needed_cmd];
     snprintf(safe_cmd, (size_t)mem_needed_cmd, dir_cmd, program_path, inpath, program_path, program_path);
 
+	free(program_path);
     system(safe_cmd);
 }
 
@@ -177,6 +178,7 @@ void FAST(bool archive_bl, float pver, bool pkginstall_bl)
 	    	"cp -f %s/fastfetch/config-default.jsonc %s/"
 			, program_path, program_path, inpath, program_path, inpath, program_path, inpath, program_path, inpath, program_path, inpath, program_path);
 
+	free(program_path);
     system(cmd);
 }
 void FUZZ(bool archive_bl, float pver, bool pkginstall_bl)
@@ -265,6 +267,7 @@ void HYPR(bool archive_bl, float pver, bool pkginstall_bl)
     	    	"mv %s/hypridle.conf %s/hypridle-oldv%.2f.conf"
 				, program_path, program_path, pver, program_path, program_path, pver, program_path, program_path, pver, program_path, program_path, pver);
     	system(cmd);
+		free(cmd);
     }
     if (pkginstall_bl)
     {
@@ -429,6 +432,8 @@ void ZSHH(bool archive_bl, float pver, bool pkginstall_bl)
 		const char *new_path = "~/.zshrc-old-v%.2f";
 		int path_size = 1 + snprintf(NULL, 0, new_path, pver);
 		snprintf(new_f_path, (size_t)path_size, new_path, pver);
+
+		/* archive the old zsh config by renaming the previous file */
 		rename("~/.zshrc", new_f_path);
     }
 
