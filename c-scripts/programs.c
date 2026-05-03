@@ -230,9 +230,22 @@ void FUZZ(bool archive_bl, float pver, bool pkginstall_bl)
 }
 void GTKL(bool archive_bl, float pver, bool pkginstall_bl)
 {
+	const char *program_path_temp = "%s/gtklock";
+	int program_path_size = 1 + snprintf(NULL, 0, program_path_temp, config_path);
+
+	char *program_path = malloc((size_t)program_path_size);
+
+	snprintf(program_path, (size_t)program_path_size, program_path_temp, config_path);
+
     char cmd[512];
     if (archive_bl)
     {
+    	/* backup fuzzel config */
+		const char *source_file_path_temp = "%s/style.css";
+		char *source_file_path = NULL;
+		int mem_input = 1 + snprintf(NULL, 0, source_file_path_temp, program_path);
+		snprintf(source_file_path, (size_t)mem_input, source_file_path_temp, program_path);
+
     	/* backup gtklock config */
         snprintf(cmd, sizeof(cmd),
             	"mv ~/.config/gtklock/style.css "
