@@ -130,4 +130,41 @@ char *config_names[n_configs] =
     char inpath[64];
 
     const char *home;
+
+/* config installation / updates */
+
 	char config_path[256];
+
+char *config[15][5][2] =
+{
+	{
+		{ 
+			"%s/.bashrc",
+			"%s/.bashrc-oldv%.2f",
+		},
+		{
+			NULL,
+			NULL,
+		},
+	},
+	{
+		{
+			"%s/bpytop.conf",
+			"%s/bpytop-oldv%.2f.conf",
+		},
+		{
+			NULL,
+			NULL,
+		},
+	},
+	{
+		{
+			"%s/btop.conf",
+			"%s/btop-oldv%.2f.conf",
+		},
+		{
+			NULL,
+			NULL,
+		},
+	},
+};
