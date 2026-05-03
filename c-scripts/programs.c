@@ -194,9 +194,14 @@ void FUZZ(bool archive_bl, float pver, bool pkginstall_bl)
     if (archive_bl)
     {
     	/* backup fuzzel config */
-		int mem_input = 1 + snprintf(NULL, 0,"%s/fuzzel-duplicated.ini", program_path);
-		/* rename(
-		 */
+		const char *source_file_path_temp = "%s/fuzzel-duplicated.ini";
+		char *source_file_path = NULL;
+		int mem_input = 1 + snprintf(NULL, 0, source_file_path_temp, program_path);
+		snprintf(source_file_path, (size_t)mem_input, source_file_path_temp, program_path);
+
+		/* 
+		rename(source_file_path, 
+		*/
         snprintf(cmd, sizeof(cmd),
 				"mv %s/fuzzel/fuzzel-duplicated.ini "
 				"%s/fuzzel/fuzzel-duplicated-oldv%.2f.ini ; "
