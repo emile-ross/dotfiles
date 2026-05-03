@@ -157,10 +157,52 @@ char *config[15][5][2] =
 			NULL,
 		},
 	},
+	/* btop config */
 	{
 		{
 			"%s/btop.conf",
 			"%s/btop-oldv%.2f.conf",
+		},
+		{
+			NULL,
+			NULL,
+		},
+	},
+	/* cava config */
+	{
+		{
+			"%s/config",
+			"%s/config-cava-oldv%.2f",
+		},
+		{
+			NULL,
+			NULL,
+		},
+	},
+	/* fastfetch config */
+	{
+		{
+			"%s/config.jsonc",
+			"%s/config-fastfetch-oldv%.2f.jsonc",
+		},
+		{
+			NULL,
+			NULL,
+		},
+	},
+	/* fuzzel config */
+	{
+		{
+			"%s/fuzzel.ini",
+			"%s/fuzzel-oldv%.2f.ini",
+		},
+		{
+			"%s/old-fuzzel.ini",
+			"%s/old-fuzzel-oldv%.2f.ini",
+		},
+		{
+			"%s/fuzzel-duplicated.ini",
+			"%s/duplicated-fuzzel-oldv%.2f.ini",
 		},
 		{
 			NULL,
