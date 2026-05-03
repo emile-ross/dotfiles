@@ -60,12 +60,12 @@ void BPYT(bool archive_bl, float pver, bool pkginstall_bl)
 
 void BTOP(bool archive_bl, float pver, bool pkginstall_bl)
 {
-	const char *program_path_temp = "%s/btop";
-	int program_path_size = 1 + snprintf(NULL, 0, program_path_temp, config_path);
+	const char *program_config_path = "%s/btop";
+	int program_path_size = 1 + snprintf(NULL, 0, program_config_path, config_path);
 
 	char *program_path = malloc((size_t)program_path_size);
 
-	snprintf(program_path, (size_t)program_path_size, program_path_temp, config_path);
+	snprintf(program_path, (size_t)program_path_size, program_config_path, config_path);
 
     char cmd[128];
     if (archive_bl)
@@ -90,12 +90,12 @@ void BTOP(bool archive_bl, float pver, bool pkginstall_bl)
 
 void CAVA(bool archive_bl, float pver, bool pkginstall_bl)
 {
-	const char *program_path_temp = "%s/cava";
+	const char *program_config_path = "%s/cava";
 	const char *program_name = "cava";
-	int program_path_size = 1 + snprintf(NULL, 0, program_path_temp, config_path);
+	int program_path_size = 1 + snprintf(NULL, 0, program_config_path, config_path);
 
 	char *program_path = malloc((size_t)program_path_size);
-	snprintf(program_path, (size_t)program_path_size, program_path_temp, config_path);
+	snprintf(program_path, (size_t)program_path_size, program_config_path, config_path);
 
     if (archive_bl)
     {
@@ -134,12 +134,12 @@ void CAVA(bool archive_bl, float pver, bool pkginstall_bl)
 
 void FAST(bool archive_bl, float pver, bool pkginstall_bl)
 {
-	const char *program_path_temp = "%s/fastfetch";
-	int program_path_size = 1 + snprintf(NULL, 0, program_path_temp, config_path);
+	const char *program_config_path = "%s/fastfetch";
+	int program_path_size = 1 + snprintf(NULL, 0, program_config_path, config_path);
 
 	char *program_path = malloc((size_t)program_path_size);
 
-	snprintf(program_path, (size_t)program_path_size, program_path_temp, config_path);
+	snprintf(program_path, (size_t)program_path_size, program_config_path, config_path);
 
     char cmd[768];
     if (archive_bl)
@@ -183,12 +183,12 @@ void FAST(bool archive_bl, float pver, bool pkginstall_bl)
 }
 void FUZZ(bool archive_bl, float pver, bool pkginstall_bl)
 {
-	const char *program_path_temp = "%s/fuzzel";
-	int program_path_size = 1 + snprintf(NULL, 0, program_path_temp, config_path);
+	const char *program_config_path = "%s/fuzzel";
+	int program_path_size = 1 + snprintf(NULL, 0, program_config_path, config_path);
 
 	char *program_path = malloc((size_t)program_path_size);
 
-	snprintf(program_path, (size_t)program_path_size, program_path_temp, config_path);
+	snprintf(program_path, (size_t)program_path_size, program_config_path, config_path);
 
     char cmd[1024];
     if (archive_bl)
@@ -226,16 +226,17 @@ void FUZZ(bool archive_bl, float pver, bool pkginstall_bl)
 			"mv ~/.config/fuzzel/fuzzel.ini ~/.config/fuzzel/fuzzel-duplicated.ini ; "
 			"ln -sf ~/.config/fuzzel/fuzzel-duplicated.ini ~/.config/fuzzel/fuzzel.ini ", inpath, inpath, inpath);
     system(cmd);  		
+
 	free(program_path);
 }
 void GTKL(bool archive_bl, float pver, bool pkginstall_bl)
 {
-	const char *program_path_temp = "%s/gtklock";
-	int program_path_size = 1 + snprintf(NULL, 0, program_path_temp, config_path);
+	const char *program_config_path = "%s/gtklock";
+	int program_path_size = 1 + snprintf(NULL, 0, program_config_path, config_path);
 
 	char *program_path = malloc((size_t)program_path_size);
 
-	snprintf(program_path, (size_t)program_path_size, program_path_temp, config_path);
+	snprintf(program_path, (size_t)program_path_size, program_config_path, config_path);
 
     char cmd[512];
     if (archive_bl)
@@ -243,14 +244,14 @@ void GTKL(bool archive_bl, float pver, bool pkginstall_bl)
     	/* backup fuzzel config */
 		const char *source_file_path_temp = "%s/style.css";
 		char *source_file_path = NULL;
-		int mem_input = 1 + snprintf(NULL, 0, source_file_path_temp, program_path);
+		int mem_input = 1 + snprintf(NULL, 0, source_file_path_temp, program_config_path);
 		snprintf(source_file_path, (size_t)mem_input, source_file_path_temp, program_path);
 
     	/* backup gtklock config */
         snprintf(cmd, sizeof(cmd),
-            	"mv ~/.config/gtklock/style.css "
-				"~/.config/gtklock/style-oldv%.2f.css", 
-				pver);
+            	"mv %s/style.css "
+				"%s/style-oldv%.2f.css", 
+				program_path, program_path, pver);
     	system(cmd);
     }
     if (pkginstall_bl)
@@ -264,23 +265,28 @@ void GTKL(bool archive_bl, float pver, bool pkginstall_bl)
             "cp -f %s/gtklock/style.css ~/.config/gtklock ; "
             "cp -f %s/gtklock/lockscreen.jpg ~/.config/gtklock/assets", inpath, inpath);
     system(cmd);
+	free(program_path);
 }
 
 void HYPR(bool archive_bl, float pver, bool pkginstall_bl)
 {
-	const char *program_path_temp = "%s/hypr";
-	int program_path_size = 1 + snprintf(NULL, 0, program_path_temp, config_path);
+	const char *program_config_path = "%s/hypr";
+	int program_path_size = 1 + snprintf(NULL, 0, program_config_path, config_path);
 
 	char *program_path = malloc((size_t)program_path_size);
 
-	snprintf(program_path, (size_t)program_path_size, program_path_temp, config_path);
-
+	snprintf(program_path, (size_t)program_path_size, program_config_path, config_path);
     if (archive_bl)
     {
 		/* TODO consider using rename() 
-		 * (just like the other functions) */
+		 * (just like the other functions) 
+		 *
+		 *
+		 * archive hyprland configs
+		 * do something like this
+		 * rename("~/.config/hypr/hyprland.conf", "~/.config/hypr/hyprland-oldv0.0.conf"); 
+		*/
 
-    	/* archive hyprland configs */
 		int mem_needed_move = snprintf(NULL, 0,
 				"mv %s/hyprland.conf %s/hyprland-oldv%.2f.conf ; "
     	    	"mv %s/hyprpaper.conf %s/hyprpaper-oldv%.2f.conf ; "
