@@ -171,7 +171,7 @@ void FAST(bool archive_bl, float pver, bool pkginstall_bl)
     snprintf(cmd, sizeof(cmd),
 			"rm %s ; "
 	    	"mkdir -p %s/assets ; "
-	    	"cp -f %s/assets/*.png %s/assets/ ; "
+	    	"cp -f %s/fastfetch/assets/*.png %s/assets/ ; "
 	    	"cp -f %s/fastfetch/config.jsonc %s/ ; "
 	    	"cp -f %s/config.jsonc %s/config-duplicated.jsonc ; "
 	    	"cp -f %s/fastfetch/config-other.jsonc %s/ ; "
