@@ -183,10 +183,20 @@ void FAST(bool archive_bl, float pver, bool pkginstall_bl)
 }
 void FUZZ(bool archive_bl, float pver, bool pkginstall_bl)
 {
+	const char *program_path_temp = "%s/fuzzel";
+	int program_path_size = 1 + snprintf(NULL, 0, program_path_temp, config_path);
+
+	char *program_path = malloc((size_t)program_path_size);
+
+	snprintf(program_path, (size_t)program_path_size, program_path_temp, config_path);
+
     char cmd[1024];
     if (archive_bl)
     {
     	/* backup fuzzel config */
+		int mem_input = 1 + snprintf(NULL, 0,"%s/fuzzel-duplicated.ini", program_path);
+		/* rename(
+		 */
         snprintf(cmd, sizeof(cmd),
 				"mv %s/fuzzel/fuzzel-duplicated.ini "
 				"%s/fuzzel/fuzzel-duplicated-oldv%.2f.ini ; "
@@ -211,6 +221,7 @@ void FUZZ(bool archive_bl, float pver, bool pkginstall_bl)
 			"mv ~/.config/fuzzel/fuzzel.ini ~/.config/fuzzel/fuzzel-duplicated.ini ; "
 			"ln -sf ~/.config/fuzzel/fuzzel-duplicated.ini ~/.config/fuzzel/fuzzel.ini ", inpath, inpath, inpath);
     system(cmd);  		
+	free(program_path);
 }
 void GTKL(bool archive_bl, float pver, bool pkginstall_bl)
 {
