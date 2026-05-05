@@ -121,6 +121,7 @@ void CAVA(bool archive_bl, float pver, bool pkginstall_bl)
     {
 		install_package(parent, (char*)program_name); /* install cava package */
     }
+
     /* export cava config */
 	const char *dir_cmd = "mkdir -p %s ; cp -f %s/%s/config %s/ ";
     int mem_needed_cmd = 1 + snprintf(NULL, 0, dir_cmd, program_path, inpath, program_path, program_path);
@@ -280,7 +281,6 @@ void HYPR(bool archive_bl, float pver, bool pkginstall_bl)
     {
 		/* TODO consider using rename() 
 		 * (just like the other functions) 
-		 *
 		 *
 		 * archive hyprland configs
 		 * do something like this
@@ -463,6 +463,7 @@ void ZSHH(bool archive_bl, float pver, bool pkginstall_bl)
         snprintf(cmd, sizeof(cmd),
 				"mv ~/.zshrc ~/.zshrc-old-v%.2f", pver);
 		system(cmd);
+
 		char *new_f_path = NULL;
 		const char *new_path = "~/.zshrc-old-v%.2f";
 		int path_size = 1 + snprintf(NULL, 0, new_path, pver);
@@ -474,11 +475,16 @@ void ZSHH(bool archive_bl, float pver, bool pkginstall_bl)
 
     if (pkginstall_bl)
     {
-	install_package(parent, "zsh");
+		install_package(parent, "zsh");
     }
-    snprintf(cmd, 128, 
-	    "cp -f %s/shell/zsh/.zshrc ~/ ", inpath);
-    system(cmd);
+
+	const char *copy_config_cmd = "cp -f %s/shell/zsh/.zshrc %s/ ";
+	int mem_needed_cmd = 1 + snprintf(NULL, 0, copy_config_cmd, inpath, home);
+	char safe_cmd[mem_needed_cmd];
+
+    snprintf(safe_cmd, (size_t)mem_needed_cmd, 
+			copy_config_cmd, inpath, home);
+    system(safe_cmd);
 
     printf("Refer to the dotfiles configuration menu in order to configure zsh proprely (using zsh for humans)\n");
 }
