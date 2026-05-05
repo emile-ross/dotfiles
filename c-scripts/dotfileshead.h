@@ -148,5 +148,4 @@ extern char fuzzel_catppuccin_text[32];
 extern char errcode;
 int error_message(error_code_e err_code);
 
-
 extern char config_path[256];

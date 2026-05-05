@@ -24,7 +24,7 @@ void install_menu(void)
     else
     {
         full_install(archive_bl, false);
-	printf("Skipping full install\n");
+		printf("Skipping full install\n");
     }
 }
 
@@ -136,7 +136,7 @@ void install_configs(unsigned int custom_package_install)  /* the partial instal
 		}
 
 		/* relatively short pause */
-		wait_for_timeout(0, 1);
+		wait_for_timeout(0, LONG_TIMER);
     }
     while (custom_package_install > 0 && (int)custom_package_install < max_menu_opt_n);
 }
