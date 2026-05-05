@@ -248,44 +248,44 @@ void link_object_files(bool log, compiler_enum compiler_name_def, char *flags)
     char compiler_linking_string[COMPILER_NAME_SIZE];
     switch(compiler_name_def)
     {
-	case CLANG:
-	    snprintf(compiler_linking_string, COMPILER_NAME_SIZE - 1,
-		    "clang");
-	    break;
-	case GCC:
-	    snprintf(compiler_linking_string, COMPILER_NAME_SIZE - 1,
-		    "gcc");
-	    break;
-	case ZIG:
-	    snprintf(compiler_linking_string, COMPILER_NAME_SIZE - 1,
-		    "zig cc");
-	    break;
-        default: 
-	    printf("Unknown compiler\n");
-	    exit(1);
+		case CLANG:
+		    snprintf(compiler_linking_string, COMPILER_NAME_SIZE - 1,
+			    "clang");
+		    break;
+		case GCC:
+		    snprintf(compiler_linking_string, COMPILER_NAME_SIZE - 1,
+			    "gcc");
+		    break;
+		case ZIG:
+		    snprintf(compiler_linking_string, COMPILER_NAME_SIZE - 1,
+			    "zig cc");
+		    break;
+    	default: 
+		    printf("Unknown compiler\n");
+		    exit(1);
     }
     total_size += snprintf(NULL, 0,
-	    "%s %s %s", compiler_linking_string, output_binary_name, flags);
+			"%s %s %s", compiler_linking_string, output_binary_name, flags);
     total_size++;
 
     /* add the logging command buffer size if logging is enabled */
     if (log)
     {
-	total_size += LOGGING_CMD_SIZE;
+		total_size += LOGGING_CMD_SIZE;
     }
 
     char link_cmd[total_size];
     snprintf(link_cmd, sizeof(link_cmd),
-	    "%s %s -o %s %s", compiler_linking_string, source_files_obj_cmd, output_binary_name, flags);
+			"%s %s -o %s %s", compiler_linking_string, source_files_obj_cmd, output_binary_name, flags);
 
     /* append the logging command if it's enabled */
     if (log)
     {
-	strcat(link_cmd, logging_cmd);
+		strcat(link_cmd, logging_cmd);
     }
     if (verbose)
     {
-	printf("%s\n", link_cmd);
+		printf("%s\n", link_cmd);
     }
     system(link_cmd); /* execute the command */
 }

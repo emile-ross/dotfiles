@@ -17,7 +17,7 @@ void fuzzel_config_importing(void)
     	        "mkdir -p ~/.config/fuzzel/imported/ ; " 
     	        "cd ~/.config/fuzzel/imported/ ; "
     	        "git clone https://github.com/catppuccin/fuzzel.git ; "
-		"cd %s ", inpath);
+				"cd %s ", inpath);
     	system(cmd);
     }
 
@@ -153,7 +153,7 @@ void fuzzel_config_importing(void)
         printf("Successfully applied Fuzzel theme\n");
         printf("Theme type:"BOLD_S UDRL_S" %s \n"STYLE_END, theme_type_text);
         printf("Theme colour:"BOLD_S UDRL_S" %s \n"STYLE_END, theme_colour_text);
-	wait_for_timeout(0, 1);
+		wait_for_timeout(0, LONG_TIMER);
     }
     else
     {
