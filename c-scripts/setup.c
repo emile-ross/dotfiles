@@ -60,7 +60,6 @@ int main(int argc, char *argv[])
     	            do
     	            {
 						clear();
-
     	                char fastfetch_edit_config_text[48] = "Change the config fastfetch uses by default";
     	                char fastfetch_preview_text[32] = "Preview fastfetch output";
     	                
@@ -161,16 +160,16 @@ int main(int argc, char *argv[])
 								scanf(" %d", &fuzzel_edit_menu_choice);
                 		
 								apply_fuzzel_config(fuzzel_edit_menu_choice);
-							    }
-							    while (fuzzel_edit_menu_choice > INPUT_BACK_VALUE);
 							}
-							else if (fuzzel_config_menu_choice == 3)
-							{
-							    fuzzel_config_importing();
-							    wait_for_timeout(1, 0);
-							}
-						    }
-						    while (fuzzel_config_menu_choice > INPUT_BACK_VALUE);
+							while (fuzzel_edit_menu_choice > INPUT_BACK_VALUE);
+						}
+						else if (fuzzel_config_menu_choice == 3)
+						{
+							fuzzel_config_importing();
+							wait_for_timeout(SHORT_TIMER, 0);
+						}
+					}
+					while (fuzzel_config_menu_choice > INPUT_BACK_VALUE);
 				}
 				else if (dotfiles_config_menu == 4)
 				{
