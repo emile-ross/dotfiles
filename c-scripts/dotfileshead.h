@@ -111,41 +111,43 @@ extern char kitty_color_text[32];
 extern char kitty_fonts_text[32];
 
 /* needs to be global */
-extern char* theme_colour_text;
-extern float pver;
-extern int fastfetch_conf_export;
-extern const char *home;
-extern char full_install_opt; /* if the user wants to install everything set to Y */
-extern char archive_before_install;
+	extern char* theme_colour_text;
+	extern float pver;
+	extern int fastfetch_conf_export;
+	extern const char *home;
+	extern char full_install_opt; /* if the user wants to install everything set to Y */
+	extern char archive_before_install;
 
 /* main menu */
-extern const int max_menu_opt_n;
-extern bool fastfetch_config_apply;
-extern char distro[128];    /* distro string */
-extern char parent[128];    /* parent distro string (Ubuntu's Parent distro is Debian) */
-extern bool is_debian_bl;
-extern bool is_arch_bl;
-extern char initial_path[64];
-extern char inpath[64];
-char *get_initial_path(void);
-int get_os_name(void);
+	extern const int max_menu_opt_n;
+	extern bool fastfetch_config_apply;
+	extern char distro[128];    /* distro string */
+	extern char parent[128];    /* parent distro string (Ubuntu's Parent distro is Debian) */
+	extern bool is_debian_bl;
+	extern bool is_arch_bl;
+	extern char initial_path[64];
+	extern char inpath[64];
+	extern char config_path[256];
+	char *get_initial_path(void);
+	int get_os_name(void);
 
-extern char full_update_opt; 
-float* update(void);
-int full_update(char ARCHIVE, float pver);
+	extern char full_update_opt; 
+	float* update(void);
+	int full_update(char ARCHIVE, float pver);
 
 
 /* fuzzel */
-void fuzzel_config_importing(void);
-extern int fuzzel_config_menu_choice;
-void apply_fuzzel_config(int config_choice_t);
-extern char fuzzel_view_config_text[32];
-extern char fuzzel_edit_config_text[32];
-extern char fuzzel_catppuccin_text[32];
+	/* functions */
+	void fuzzel_config_importing(void);
+	void apply_fuzzel_config(int config_choice_t);
+
+	/* data */
+	extern int fuzzel_config_menu_choice;
+	extern char fuzzel_view_config_text[32];
+	extern char fuzzel_edit_config_text[32];
+	extern char fuzzel_catppuccin_text[32];
 
 
 /* errors */
-extern char errcode;
-int error_message(error_code_e err_code);
-
-extern char config_path[256];
+	extern char errcode;
+	int error_message(error_code_e err_code);
