@@ -98,6 +98,7 @@ int full_update(char ARCHIVE, float pver)
     return 0;
 }
 
+/* returns the VAWSM variable */
 float* update(void) 
 {
     /* create path to config */
@@ -112,7 +113,8 @@ float* update(void)
     /* return error message when file isn't found */
     if (file == NULL) 
     {
-		error_message(205);
+		/* error message no such file or directory */
+		error_message(NO_SUCH_FILE_OR_DIR);
 		/* returns null if the file can't be opened/found */
         return NULL;
     }
@@ -121,11 +123,13 @@ float* update(void)
     char line[384];
     while (fgets(line, sizeof(line), file)) 
     {
-        if (sscanf(line, "# AWSMVERSION: %31f[0-9.]", VAWSM) == 1) 
+		/* this is true if the line contains:
+		 * "# AWSMVERSION: " followed by a floating point number ranging from 0 to 9 */
+		if (sscanf(line, "# AWSMVERSION: %31f[0-9.]", VAWSM) == 1)
 		{
-            fclose(file);
-            return VAWSM;
-        }
+		    fclose(file);
+		    return VAWSM;
+		}
     }
     fclose(file);
     return 0;
