@@ -30,7 +30,7 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 		    {
 				/* prints an error message if there isn't a package specified in the command */
 				cli_arg_missing(cmd_arg_v[0], "package", cmd_arg_v[1]);
-				error_message(304);
+				error_message(CLI_ARGS_MISSING);
 		    }
 		}
 		else if (strcmp(cmd_arg_v[1], "-c") == 0 || strcmp(cmd_arg_v[1], "-C") == 0)
@@ -59,11 +59,11 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 
 				    if ((config_name)description_index > n_configs)
 				    {
-					error_message((error_code_e)CLI_ARGS_MISSING);
+						error_message((error_code_e)CLI_ARGS_MISSING);
 				    }
 				    else if ((config_name)description_index == 0)
 				    {
-					error_message((error_code_e)CLI_UNKNOWN_PKG);
+						error_message((error_code_e)CLI_UNKNOWN_PKG);
 				    }
 
 				    char *description = description_arr[(config_name)description_index];
@@ -74,7 +74,7 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 		    {
 				/* prints an error message if there isn't a package specified in the command */
 				cli_arg_missing(cmd_arg_v[0], "package", cmd_arg_v[1]);
-				error_message(304);
+				error_message(CLI_ARGS_MISSING);
 		    }
 		}
 		else if (strcmp(cmd_arg_v[1], "--help") == 0)
@@ -89,9 +89,10 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 		}
 		else
 		{
-		    /* prints an error message if the argument is invalid */
+		    /* triggers the "invalid command line argument" error
+			 * this is a critical error and it will crash the program */
 		    printf(BOLD_S ANSI_RED"%s: invalid option -- '%s'\n"STYLE_END, cmd_arg_v[0], cmd_arg_v[1]);
-		    error_message(303);
+		    error_message(CLI_INVALID_FLAG);
 		}
     }
     else
@@ -185,7 +186,7 @@ void cmd_arg_install(int num_cmd_arguments_t, char *cmd_arg_v_t[], char config_a
     {
 		/* prints an error message if there isn't any config name specified in the command */
 		cli_arg_missing(cmd_arg_v_t[0], "config name", cmd_arg_v_t[1]);
-		error_message(304);
+		error_message(CLI_ARGS_MISSING);
     }
 }
 
@@ -210,7 +211,7 @@ config_name detect_config_name(char *input)
         NULL,
     };
 
-    // match the name to the correct config name
+    /* match the name to the correct config name */
     if (strcmp(input, "bash") == 0) return bash;
     if (strcmp(input, "bpytop") == 0) return bpyt;
     if (strcmp(input, "btop") == 0) return btop;

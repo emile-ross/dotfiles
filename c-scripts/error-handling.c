@@ -10,8 +10,8 @@ int error_message(error_code_e err_code)
     
     if (err_code >= 300 && err_code <= 400)
     {
-	critical = true;
-	skip_warning = true;
+		critical = true;
+		skip_warning = true;
     }
 
     error_code_e error_msg_code = (error_code_e)err_code;
@@ -21,93 +21,92 @@ int error_message(error_code_e err_code)
 
     switch (error_msg_code)
     {
-	case INVALID_INPUT:
-	    snprintf(err_text_temp, sizeof(err_text_temp), "Exiting.. (invalid character)");
-	    critical = true;
-	    break;
+		case INVALID_INPUT:
+		    snprintf(err_text_temp, sizeof(err_text_temp), "Exiting.. (invalid character)");
+		    critical = true;
+		    break;
 
-	case YAY_INST_U:
-	    snprintf(err_text_temp, sizeof(err_text_temp), "Yay is needed for the k4dd..installation");
-	    snprintf(err_solution_temp, sizeof(err_solution_temp), "Give the program permission to install Yay");
-	    break;
+		case YAY_INST_U:
+		    snprintf(err_text_temp, sizeof(err_text_temp), "Yay is needed for the k4dd..installation");
+		    snprintf(err_solution_temp, sizeof(err_solution_temp), "Give the program permission to install Yay");
+		    break;
 
-	case FEATURE_IN_DEV:
-	    snprintf(err_text_temp, sizeof(err_text_temp), "This feature hasn't been implemented");
-	    snprintf(err_solution_temp, sizeof(err_solution_temp), "Try updating the dotfiles");
-	    break;
+		case FEATURE_IN_DEV:
+		    snprintf(err_text_temp, sizeof(err_text_temp), "This feature hasn't been implemented");
+		    snprintf(err_solution_temp, sizeof(err_solution_temp), "Try updating the dotfiles");
+		    break;
 
-	case FEAT_DEPRECATED:
-	    snprintf(err_text_temp, sizeof(err_text_temp), "This feature will be removed/deprecated");
-	    snprintf(err_solution_temp, sizeof(err_solution_temp), "Read the documentation to learn about the existing features");
-	    break;
+		case FEAT_DEPRECATED:
+		    snprintf(err_text_temp, sizeof(err_text_temp), "This feature will be removed/deprecated");
+		    snprintf(err_solution_temp, sizeof(err_solution_temp), "Read the documentation to learn about the existing features");
+		    break;
 
-	case 51:
-	    snprintf(err_text_temp, sizeof(err_text_temp), "Makepkg installation failed. Please check your system configuration.");
-	    snprintf(err_solution_temp, sizeof(err_solution_temp), "Helpful link: \"https://wiki.archlinux.org/title/Makepkg\"");
-	    break;
+		case 51:
+		    snprintf(err_text_temp, sizeof(err_text_temp), "Makepkg installation failed. Please check your system configuration.");
+		    snprintf(err_solution_temp, sizeof(err_solution_temp), "Helpful link: \"https://wiki.archlinux.org/title/Makepkg\"");
+		    break;
 
-	case 101:
-	    snprintf(err_text_temp, sizeof(err_text_temp), "Unsupported distribution");
-	    snprintf(err_solution_temp, sizeof(err_solution_temp), "Supported distros: \nArch Based \nDebian Based");
-	    break;
+		case 101:
+		    snprintf(err_text_temp, sizeof(err_text_temp), "Unsupported distribution");
+		    snprintf(err_solution_temp, sizeof(err_solution_temp), "Supported distros: \nArch Based \nDebian Based");
+		    break;
 
-	case 103:
-	    snprintf(err_text_temp, sizeof(err_text_temp), "Could not apply fuzzel theme");
-	    snprintf(err_solution_temp, sizeof(err_solution_temp), "Try again.  Report the issue if this keeps happening.");
-	    break;
+		case 103:
+		    snprintf(err_text_temp, sizeof(err_text_temp), "Could not apply fuzzel theme");
+		    snprintf(err_solution_temp, sizeof(err_solution_temp), "Try again.  Report the issue if this keeps happening.");
+		    break;
 
-	case 104:
-	    snprintf(err_text_temp, sizeof(err_text_temp), "Could not find kitty package"); /* not in use */
-	    break;
+		case 104:
+		    snprintf(err_text_temp, sizeof(err_text_temp), "Could not find kitty package"); /* not in use */
+		    break;
 
-	case 204:
-	    snprintf(err_text_temp, sizeof(err_text_temp), "Can't find home directory");
-	    snprintf(err_solution_temp, sizeof(err_solution_temp), "Try running \"ls /home/\"\nif that doesn't do it \"useradd -m -d /home/[YOUR_USERNAME]/ -s /bin/bash -G sudo [YOUR_USERNAME]\"");
-	    critical = true;
-	    break;
+		case FAIL_FIND_HOME_DIR:
+		    snprintf(err_text_temp, sizeof(err_text_temp), "Can't find home directory");
+		    snprintf(err_solution_temp, sizeof(err_solution_temp),
+					"Try running \"ls /home/\"\nif that doesn't do it \"useradd -m -d /home/[YOUR_USERNAME]/ -s /bin/bash -G sudo [YOUR_USERNAME]\"");
+		    critical = true;
+		    break;
 
-	case 205:
-	    snprintf(err_text_temp, sizeof(err_text_temp), "No such file or directory"); /* for hyprland.conf (when looking for version # ) */
-	    snprintf(err_solution_temp, sizeof(err_solution_temp), "This could display if you haven't installed the hyprland config");	/* also sway and .zshrc */
-	    break;
+		case NO_SUCH_FILE_OR_DIR:
+			/* for hyprland.conf (when looking for version # ) */
+		    snprintf(err_text_temp, sizeof(err_text_temp), "No such file or directory");
 
-	case POPEN_FAILED:
-	    snprintf(err_text_temp, sizeof(err_text_temp), "popen failed");
-	    snprintf(err_text_temp, sizeof(err_text_temp), "This could happen if your system only supports c99");
-	    break;
-	    
-	case UNKNOWN_AWSM_VERSION:
-	    snprintf(err_text_temp, sizeof(err_text_temp), "Unknown version");
-	    snprintf(err_solution_temp, sizeof(err_solution_temp), "Try installing the dotfiles in order to fix the unknown version");
-	    break;
+			/* also sway and .zshrc */
+		    snprintf(err_solution_temp, sizeof(err_solution_temp), "This could display if you haven't installed the hyprland config");
+		    break;
 
-	case INVALID_ARRAY_INDEX:
-	    snprintf(err_text_temp, sizeof(err_text_temp), "Missing arguments in the command");
-	    snprintf(err_solution_temp, sizeof(err_solution_temp), " ");
-	    break;
+		case POPEN_FAILED:
+		    snprintf(err_text_temp, sizeof(err_text_temp), "popen failed");
+		    snprintf(err_text_temp, sizeof(err_text_temp), "This could happen if your system only supports c99");
+		    break;
+		    
+		case UNKNOWN_AWSM_VERSION:
+		    snprintf(err_text_temp, sizeof(err_text_temp), "Unknown version");
+		    snprintf(err_solution_temp, sizeof(err_solution_temp), "Try installing the dotfiles in order to fix the unknown version");
+		    break;
 
-	case CLI_UNKNOWN_PKG:
-	    snprintf(err_text_temp, sizeof(err_text_temp), "Unknown package");
-	    snprintf(err_solution_temp, sizeof(err_solution_temp), "Type the config name in lowercase");
-	    break;
+		case CLI_UNKNOWN_PKG:
+		    snprintf(err_text_temp, sizeof(err_text_temp), "Unknown package");
+		    snprintf(err_solution_temp, sizeof(err_solution_temp), "Type the config name in lowercase");
+		    break;
 
-	case CLI_INVALID_CMD_SYNTAX:
-	    snprintf(err_text_temp, sizeof(err_text_temp), "Invalid command syntax");
-	    break;
+		case CLI_INVALID_CMD_SYNTAX:
+		    snprintf(err_text_temp, sizeof(err_text_temp), "Invalid command syntax");
+		    break;
 
-	case CLI_INVALID_FLAG:
-	    snprintf(err_text_temp, sizeof(err_text_temp), "Invalid flag");
-	    snprintf(err_solution_temp, sizeof(err_solution_temp), "Use the %s flag to display the valid flags", help_flag_arg_text);
-	    break;
-		
-	case CLI_ARGS_MISSING:
-	    snprintf(err_text_temp, sizeof(err_text_temp), "Missing arguments in the command");
-	    snprintf(err_solution_temp, sizeof(err_solution_temp), " ");
-	    break;
+		case CLI_INVALID_FLAG:
+		    snprintf(err_text_temp, sizeof(err_text_temp), "Invalid flag");
+		    snprintf(err_solution_temp, sizeof(err_solution_temp), "Use the %s flag to display the valid flags", help_flag_arg_text);
+		    break;
+			
+		case CLI_ARGS_MISSING:
+		    snprintf(err_text_temp, sizeof(err_text_temp), "Missing arguments in the command");
+		    snprintf(err_solution_temp, sizeof(err_solution_temp), "Use the --help flag to display the help menu");
+		    break;
 
-	default:
-	    snprintf(err_text_temp, sizeof(err_text_temp), "This error code isn't known");
-	    break;
+		default:
+		    snprintf(err_text_temp, sizeof(err_text_temp), "This error code isn't known");
+		    break;
     }
 
     if (!skip_warning)
