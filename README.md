@@ -92,31 +92,6 @@ Now, execute the binary with:
 ./setup
 ```
 
-**or**
-
-**Compile using GCC**
-```sh
-git clone https://github.com/imawsumm/dotfiles
-cd dotfiles/
-gcc c-scripts/arguments.c \
-    c-scripts/configuring.c \
-    c-scripts/functions.c \
-    c-scripts/install.c \
-    c-scripts/error-handling.c \
-    c-scripts/programs.c \
-    c-scripts/globals.c \
-    c-scripts/setup.c \
-    c-scripts/update.c \
-    -o setup \
-    -Wall -Wextra
-```
-
-Now, execute the binary with:
-```sh
-./setup
-```
-
-
 note: This only compiles the code necessary for the install script. 
 
 You can also append the ``--noconfirm`` flag in order to install without any prompts.
