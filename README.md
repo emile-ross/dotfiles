@@ -33,7 +33,7 @@ If you want to **Install** your dotfiles, click [here](#Install)
   </tr>
 </table>
 
-<img src="assets/menu.png" alt="Installer ui preview" width=320>
+<img src="assets/menu.png" alt="Installer ui preview" width=350>
 
 ## prerequisites
 - an Arch based distribution of linux (Windows will **never** get support)
@@ -85,7 +85,11 @@ cd dotfiles/
 make setup
 ```
 
-you can use ``make macos`` for macos
+For macos, you can use 
+
+```sh
+make macos
+```
 
 Now, execute the binary with:
 ```sh
@@ -164,6 +168,7 @@ ALT + 2 -> **focus firefox**
 ALT + 0 -> **focus obs**
 
 If you ever encounter an issue please report it by providing the issue you are experiencing with a log, it helps me improve this script. 
+
 
 # Credits 
 
