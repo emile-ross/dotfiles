@@ -255,3 +255,41 @@ void yes_no_prompt(void)
     printf(BOLD_S "\n  [1] Yes \n"STYLE_END);
     printf(BOLD_S "\n  [0] No \n"STYLE_END);
 }
+
+char *package_name(config_name config)
+{
+	switch (config)
+	{
+		case bash:
+			return ".bashrc";
+		case bpyt:
+			return "bpytop config";
+		case btop:
+			return "btop config";
+		case cava:
+			return "cava config";
+		case fast:
+			return "fastfetch configs";
+		case fuzz:
+			return "fuzzel configs";
+		case gtkl:
+			return "gtklock config and style (appearance) ";
+		case hypr:
+			return "Hyprland-WM config + Hypridle config";
+		case kitt:
+			return "kitty terminal configs";
+		case mpvf:
+			return "mpv config";
+		case nvim:
+			return "neovim config with lazy";
+		case sway:
+			return "Sway-WM config";
+		case wayb:
+			return "waybar config and style (appearance)";
+		case zshh:
+			return "zsh config (.zshrc)";
+		case unknown:
+		default:
+			return NULL;
+	}
+}
