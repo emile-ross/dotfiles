@@ -1,15 +1,17 @@
-# ImAwsum's dotfiles
+# My dotfiles
 Dotfiles are files used to customize your system to your liking.  You can modify them by editing config files using a text editor ([Neovim](https://github.com/neovim/neovim)).
 
 [Voir cette page en francais][fr]
 
 If you want to **Install** your dotfiles, click [here](#Install)
 
+many configurations would have been impossible without these free ressources: [Credits](#Credits)
+
 
 <table>
   <tr>
     <th>desktop with kitty</th>
-    <th>neovim with telescope</th>
+    <th>neovim with telescope</fth>
   </tr>
   <tr>
     <td align="center">
@@ -112,14 +114,14 @@ example: ``./setup -c hyprland`` installs the hyprland config *(only the configs
 
 You can also use the ``-p`` flag in order to install a package with the correct package manager
 
-example: ``./setup -p cava`` This would install cava *(only the package, use ``-c`` for configs)*
+example: ``./setup -p cafva`` This would install cava *(only the package, use ``-c`` for configs)*
 
 ## Keybinds for Hyprland
 Useful keybinds to know:
 (super = "Windows key")
  
  super + Q -> **execute kitty**
-> (the default terminal)
+> (the default terminal)f
 
 super + M -> **exit hyprland**
 
@@ -153,6 +155,7 @@ super + 0 -> **execute [OBS](https://github.com/obsproject/obs-studio)**
 > (an open source program to stream and record videos)
 
 ## Multi Tasking
+
 super + F1 -> **switch to Workspace 1**
 
 super + shift + F1 -> **move window to Workspace 1** 
