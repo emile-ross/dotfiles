@@ -29,6 +29,7 @@ const char Wall_flag[FLAG_BUFFER_SIZE] = " -Wall";
 const char c99_flag[FLAG_BUFFER_SIZE] = " -std=c99";
 const char Wconversion_flag[FLAG_BUFFER_SIZE] = " -Wconversion";
 
+/* TODO: add date to log file path in the future ? */
 const char logging_cmd[LOGGING_CMD_SIZE] = " 2>&1 | tee compile_log.txt"; /* this will overwrite the compile_log.txt */
 
 int size_all_flags;
@@ -149,8 +150,9 @@ int main(int argc, char *argv[])
 		    Wconversion_bl = true;
 		    num_flags += 5;
 		}
-    		else if (strcmp(argv[i], "log") == 0)
+    	else if (strcmp(argv[i], "log") == 0)
 		{
+			/* the log_bl will log all errors the compiler encounters to a file */
 		    log_bl = true;
 		}
     		else if (strcmp(argv[i], "-v") == 0)
@@ -294,14 +296,14 @@ void clean_objects(void)
 {
     if (verbose)
     {
-	for (int i = 0; source_files[i] != NULL; i++) 
+		for (int i = 0; source_files[i] != NULL; i++) 
     	{
     	    int buffer_size = snprintf(NULL, 0,
-    	    	"rm %s%s.o", object_fpath, source_files[i]);
+					"rm %s%s.o", object_fpath, source_files[i]);
     	    char cmd[buffer_size + 1];	/* initialize cmd buffer */
     	    snprintf(cmd, sizeof(cmd),
-    	    	"rm %s%s.o"
-    	    	, object_fpath, source_files[i]);
+					"rm %s%s.o"
+    	    		, object_fpath, source_files[i]);
 
     	    printf("%s\n", cmd);
     	    system(cmd);
@@ -309,7 +311,7 @@ void clean_objects(void)
     }
     else
     {
-	for (int i = 0; source_files[i] != NULL; i++) 
+		for (int i = 0; source_files[i] != NULL; i++) 
     	{
     	    int buffer_size = snprintf(NULL, 0,
     	    	"rm %s%s.o", object_fpath, source_files[i]);
@@ -352,13 +354,13 @@ void compilation(int number_flags, compiler_enum compiler_name_temp, bool log_bl
 
     if (error_flag_temp_bl)
     {
-	/* append error flags to the end of the all_flags buffer */
+		/* append error flags to the end of the all_flags buffer */
         strcat(all_flags, Werror_flag);	
     }
 
     if (number_flags > 0)
     {
-	if (pedantic_flag_temp_bl)
+		if (pedantic_flag_temp_bl)
     	{
     	    /* append Wpedantic flag to the end of the all_flags buffer */
     	    strcat(all_flags, Wpedantic_flag);   
@@ -382,11 +384,11 @@ void compilation(int number_flags, compiler_enum compiler_name_temp, bool log_bl
     	    strcat(all_flags, c99_flag);   
     	}
 
-	if (conversion_bl)
-	{
-    	    /* append -Wconversion flag to the end of the all_flags buffer */
-	    strcat(all_flags, Wconversion_flag);
-	}
+		if (conversion_bl)
+		{
+			/* append -Wconversion flag to the end of the all_flags buffer */
+		    strcat(all_flags, Wconversion_flag);
+		}
     }
 
     compile_all_files(log_bl, compiler_name_cmd_temp, all_flags);
