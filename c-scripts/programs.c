@@ -2,21 +2,21 @@
 
 void BASH(void)
 {
-    char BRCNAME[12] = ".bashrc-new";
-    /* prompt to let the user know the bashrc isn't exported/replaced */
-    printf(UDRL_S"\nThe .bashrc file plays a very important role therefore, it was not replaced."STYLE_END);
-    printf(UDRL_S"\nYou can find the new .bashrc file under the name %s\n"STYLE_END, BRCNAME);
-
-    /* calculate the sufficient amount of memory to the buffer */
+	char BRCNAME[12] = ".bashrc-new";
+	/* prompt to let the user know the bashrc isn't exported/replaced */
+	printf(UDRL_S"\nThe .bashrc file plays a very important role therefore, it was not replaced."STYLE_END);
+	printf(UDRL_S"\nYou can find the new .bashrc file under the name %s\n"STYLE_END, BRCNAME);
+	
+	/* calculate the sufficient amount of memory to the buffer */
 	const char *command_format = "cp -f %s/shell/bash/.bashrc ~/%s";
-    int mem_needed = 1 + snprintf(NULL, 0, command_format, inpath, BRCNAME);
-
-    char *cmd = malloc((size_t)mem_needed);
-    /* execute the command with the according buffer size previously calculated (above) */
-    snprintf(cmd, (size_t)mem_needed, command_format, inpath, BRCNAME);
-    system(cmd);
-
-    free(cmd);
+	int mem_needed = 1 + snprintf(NULL, 0, command_format, inpath, BRCNAME);
+	
+	char *cmd = malloc((size_t)mem_needed);
+	/* execute the command with the according buffer size previously calculated (above) */
+	snprintf(cmd, (size_t)mem_needed, command_format, inpath, BRCNAME);
+	system(cmd);
+	
+	free(cmd);
 }
 
 void BPYT(bool archive_bl, float pver, bool pkginstall_bl)
@@ -39,23 +39,24 @@ void BPYT(bool archive_bl, float pver, bool pkginstall_bl)
 		
 		snprintf(input_file, (size_t)original_path_size, original_path, config_path, pkg_name);
 		snprintf(output_file, (size_t)original_path_size, original_path, config_path, pkg_name, pver);
-
+		
 		/* archive bpytop config */
 		rename(input_file, output_file);
-
+		
 		/* free unused memory */
 		free(input_file);
 		free(output_file);
 	}
+
 	if (pkginstall_bl)
 	{
 		install_package(parent, "bpytop"); /* install bpytop package */
 	}
 	/* export bpytop config */
-    	snprintf(cmd, sizeof(cmd),
+	snprintf(cmd, sizeof(cmd),
 			"mkdir -p %s/bpytop ; "
 			"cp -f %s/bpytop/bpytop.conf ~/.config/bpytop", config_path, inpath);
-    	system(cmd);
+	system(cmd);
 }
 
 void BTOP(bool archive_bl, float pver, bool pkginstall_bl)
@@ -68,17 +69,17 @@ void BTOP(bool archive_bl, float pver, bool pkginstall_bl)
 	snprintf(program_path, (size_t)program_path_size, program_config_path, config_path);
 
 	char cmd[128];
-    	if (archive_bl)
-    	{
-    		/* archive btop config */
-    		snprintf(cmd, sizeof(cmd),
-    	    			"mv %s/btop.conf "
-    				"~/.config/btop/btop-oldv%.2f.conf", program_path, pver);
-    		system(cmd);
+	if (archive_bl)
+	{
+		/* archive btop config */
+		snprintf(cmd, sizeof(cmd),
+				"mv %s/btop.conf "
+				"~/.config/btop/btop-oldv%.2f.conf", program_path, pver);
+		system(cmd);
     	}
     	if (pkginstall_bl)
     	{
-    	    	install_package(parent, "btop"); /* install btop package */
+		install_package(parent, "btop"); /* install btop package */
     	}
     	/* export btop config */
 	snprintf(cmd, sizeof(cmd),
@@ -93,54 +94,57 @@ void CAVA(bool archive_bl, float pver, bool pkginstall_bl)
 	const char *program_config_path = "%s/cava";
 	const char *program_name = "cava";
 	int program_path_size = 1 + snprintf(NULL, 0, program_config_path, config_path);
-
+	
 	char *program_path = malloc((size_t)program_path_size);
 	snprintf(program_path, (size_t)program_path_size, program_config_path, config_path);
-
+	
 	if (archive_bl)
-    	{
+	{
 		/* backup cava config */
-    	    	const char *out_config_name = "%s/config-oldv%.2f";
-    	    	const char *in_config_path = "%s/%s/config";
-
-    	    	int mem_out_size = 1 + snprintf(NULL, 0, out_config_name, program_path, pver);
-    	    	int mem_path_size = 1 + snprintf(NULL, 0, in_config_path, program_path);
-    	    	char *out_config_temp = malloc((size_t)mem_out_size);
-    	    	char *config_path_temp = malloc((size_t)mem_path_size);
-
-    	    	snprintf(out_config_temp, (size_t)mem_out_size, program_path, pver);
-
-    	    	strcpy(out_config_temp, program_path);
-    	    	strcat(out_config_temp, out_config_name);
-
-    	    	rename(config_path_temp, out_config_temp);
-    	    	free(out_config_temp);
-    	    	free(config_path_temp);
-    	}
-
-    	if (pkginstall_bl)
-    	{
-    	    	install_package(parent, (char*)program_name); /* install cava package */
-    	}
-
+	    	const char *out_config_name = "%s/config-oldv%.2f";
+	    	const char *in_config_path = "%s/%s/config";
+	
+	    	int mem_out_size = 1 + snprintf(NULL, 0, out_config_name, program_path, pver);
+	    	int mem_path_size = 1 + snprintf(NULL, 0, in_config_path, program_path);
+	    	char *out_config_temp = malloc((size_t)mem_out_size);
+	    	char *config_path_temp = malloc((size_t)mem_path_size);
+	
+	    	snprintf(out_config_temp, (size_t)mem_out_size, program_path, pver);
+	
+	    	strcpy(out_config_temp, program_path);
+	    	strcat(out_config_temp, out_config_name);
+	
+	    	rename(config_path_temp, out_config_temp);
+	    	free(out_config_temp);
+	    	free(config_path_temp);
+	}
+	
+	if (pkginstall_bl)
+	{
+	    	install_package(parent, (char*)program_name); /* install cava package */
+	}
+	
 	/* export cava config */
 	const char *dir_cmd = "mkdir -p %s ; cp -f %s/%s/config %s/ ";
 	int mem_needed_cmd = 1 + snprintf(NULL, 0, dir_cmd, program_path, inpath, program_path, program_path);
-
+	
 	char safe_cmd[mem_needed_cmd];
 	snprintf(safe_cmd, (size_t)mem_needed_cmd, dir_cmd, program_path, inpath, program_path, program_path);
-
+	
 	free(program_path);
-    system(safe_cmd);
+	system(safe_cmd);
 }
 
 void FAST(bool archive_bl, float pver, bool pkginstall_bl)
 {
 	const char *program_config_path = "%s/fastfetch";
+	int temp_path_size = 1 + snprintf(NULL, 0, program_config_path, inpath);
 	int program_path_size = 1 + snprintf(NULL, 0, program_config_path, config_path);
 
-	char *program_path = malloc((size_t)program_path_size);
+	char *temp_path = malloc((size_t)temp_path_size);
+	snprintf(temp_path, (size_t)temp_path_size, program_config_path, inpath);
 
+	char *program_path = malloc((size_t)program_path_size);
 	snprintf(program_path, (size_t)program_path_size, program_config_path, config_path);
 
 	char cmd[768];
@@ -167,6 +171,7 @@ void FAST(bool archive_bl, float pver, bool pkginstall_bl)
 		/* backup fastfetch config */
 		rename(config_path_temp, out_config_temp);
 	}
+
 	if (pkginstall_bl)
     	{
     	    	install_package(parent, "fastfetch"); /* install fastfetch */
@@ -177,11 +182,12 @@ void FAST(bool archive_bl, float pver, bool pkginstall_bl)
 			"mkdir -p %s/assets ; "
 			"cp -f %s/fastfetch/assets/*.png %s/assets/ ; "
 			"cp -f %s/fastfetch/config.jsonc %s/ ; "
-			"cp -f %s/config.jsonc %s/config-duplicated.jsonc ; "
+			"cp -f %s/fastfetch/config.jsonc %s/config-duplicated.jsonc ; "
 			"cp -f %s/fastfetch/config-other.jsonc %s/ ; "
 			"cp -f %s/fastfetch/config-default.jsonc %s/"
 			, program_path, program_path, inpath, program_path, inpath, program_path, inpath, program_path, inpath, program_path, inpath, program_path);
     	system(cmd);
+	printf("%s \n\n ", cmd);
 	free(program_path);
 }
 void FUZZ(bool archive_bl, float pver, bool pkginstall_bl)
@@ -231,10 +237,10 @@ void FUZZ(bool archive_bl, float pver, bool pkginstall_bl)
 
 	snprintf(cmd, (size_t)mem_needed_cmd,
 			"mkdir -p ~/.config/fuzzel ; "
-        		"cp -f %s/fuzzel/old-fuzzel.ini ~/.config/fuzzel ; "
-        		"cp -f %s/fuzzel/default-fuzzel.ini ~/.config/fuzzel ; "
+			"cp -f %s/fuzzel/old-fuzzel.ini ~/.config/fuzzel ; "
+			"cp -f %s/fuzzel/default-fuzzel.ini ~/.config/fuzzel ; "
 			"cp -f ~/.config/fuzzel/default-fuzzel.ini ~/.config/fuzzel/custom-edited-fuzzel.ini ; "
-        		"cp -f %s/fuzzel/fuzzel.ini ~/.config/fuzzel ; "
+			"cp -f %s/fuzzel/fuzzel.ini ~/.config/fuzzel ; "
 			"mv ~/.config/fuzzel/fuzzel.ini ~/.config/fuzzel/fuzzel-duplicated.ini ; "
 			"ln -sf ~/.config/fuzzel/fuzzel-duplicated.ini ~/.config/fuzzel/fuzzel.ini ", inpath, inpath, inpath);
 	system(cmd);  		
@@ -244,7 +250,6 @@ void GTKL(bool archive_bl, float pver, bool pkginstall_bl)
 {
 	const char *program_config_path = "%s/gtklock";
 	int program_path_size = 1 + snprintf(NULL, 0, program_config_path, config_path);
-
 	char *program_path = malloc((size_t)program_path_size);
 	snprintf(program_path, (size_t)program_path_size, program_config_path, config_path);
 
@@ -417,56 +422,56 @@ void NVIM(bool archive_bl, float pver, bool pkginstall_bl)
 
 void SWAY(bool archive_bl, float pver, bool pkginstall_bl)
 {
-    /* sway window manager doesn't work without wlroots */
-    char cmd[256];
-    if (archive_bl)
-    {
-        snprintf(cmd, 64,
-    	    	"mv ~/.config/sway/config ~/.config/sway/config-oldv%.2f ", pver);
-        system(cmd);
-    }
-    if (pkginstall_bl)
-    {
+	/* sway window manager doesn't work without wlroots */
+	char cmd[256];
+	if (archive_bl)
+	{
+		snprintf(cmd, 64,
+				"mv ~/.config/sway/config ~/.config/sway/config-oldv%.2f ", pver);
+		system(cmd);
+	}
+	if (pkginstall_bl)
+	{
 		/* install sway package -- a system update is strongly recommended */
 		install_package(parent, "wlroots swaylock sway swayidle");
-    }
-    /* export sway config */
-    snprintf(cmd, sizeof(cmd),
+	}
+	/* export sway config */
+	snprintf(cmd, sizeof(cmd),
 			"mkdir -p ~/.config/sway ; "
-	    	"cp -f %s/sway/config ~/.config/sway/ ; "
-    	    "cp -f %s/sway/config-default ~/.config/sway", inpath, inpath);
-    system(cmd);
+			"cp -f %s/sway/config ~/.config/sway/ ; "
+			"cp -f %s/sway/config-default ~/.config/sway", inpath, inpath);
+	system(cmd);
 }
 
 void WAYB(bool archive_bl, float pver, bool pkginstall_bl)
 {
-    const char *path = "~/.config/waybar/";
-    char cmd[256];
-    if (archive_bl)
-    {
-    	/* archive waybar */
-        snprintf(cmd, sizeof(cmd),
+	const char *path = "~/.config/waybar/";
+	char cmd[256];
+	if (archive_bl)
+	{
+		/* archive waybar */
+		snprintf(cmd, sizeof(cmd),
 				"mv %sconfig.jsonc ~/.config/waybar/config-oldv%.2f.jsonc ; "
 				"mv %sstyle.css ~/.config/waybar/style-oldv%.2f.css", path, pver, path, pver);
 		system(cmd);
-    }
-    if (pkginstall_bl)
-    {
+	}
+	if (pkginstall_bl)
+	{
 		install_package(parent, "waybar");
-    }
-    /* export waybar config and appearance */
-    snprintf(cmd, sizeof(cmd),
+	}
+	/* export waybar config and appearance */
+	snprintf(cmd, sizeof(cmd),
 			"mkdir -p %s ; "
 			"cp -f %s/waybar/style.css %s ; "
-            "cp -f %s/waybar/config.jsonc %s", path, inpath, path, inpath, path);
-    system(cmd);
+			"cp -f %s/waybar/config.jsonc %s", path, inpath, path, inpath, path);
+	system(cmd);
 }
 
 void ZSHH(bool archive_bl, float pver, bool pkginstall_bl)
 {
-    char cmd[128];
-    if (archive_bl)
-    {
+	char cmd[128];
+	if (archive_bl)
+	{
 		/* archive old zsh config */
 		char *archiving_template = "mv ~/.zshrc ~/.zshrc-old-v%.2f";
 		int archiving_size = snprintf(NULL, 0, archiving_template, pver);
@@ -477,64 +482,62 @@ void ZSHH(bool archive_bl, float pver, bool pkginstall_bl)
 		const char *new_path = "~/.zshrc-old-v%.2f";
 		int path_size = 1 + snprintf(NULL, 0, new_path, pver);
 		snprintf(new_f_path, (size_t)path_size, new_path, pver);
-
+		
 		/* archive the old zsh config by renaming the previous file */
 		rename("~/.zshrc", new_f_path);
-    }
-
-    if (pkginstall_bl)
-    {
+	}
+	
+	if (pkginstall_bl)
+	{
 		install_package(parent, "zsh");
-    }
+	}
 
 	const char *copy_config_cmd = "cp -f %s/shell/zsh/.zshrc %s/ ";
 	int mem_needed_cmd = 1 + snprintf(NULL, 0, copy_config_cmd, inpath, home);
 	char safe_cmd[mem_needed_cmd];
 
-    snprintf(safe_cmd, (size_t)mem_needed_cmd, 
+	snprintf(safe_cmd, (size_t)mem_needed_cmd, 
 			copy_config_cmd, inpath, home);
-    system(safe_cmd);
-
-    printf("Refer to the dotfiles configuration menu in order to configure zsh proprely (using zsh for humans)\n");
+	system(safe_cmd);
+	printf("Refer to the dotfiles configuration menu in order to configure zsh proprely (using zsh for humans)\n");
 }
 
 int install_package(char *pkg_type_distro, char *pkginstallname)
 {
-    if (strcmp(pkg_type_distro, "arch") == 0)
-    {
-        int cmd_size = 1 + snprintf(NULL , 0, "yay -S %s", pkginstallname);
+	if (strcmp(pkg_type_distro, "arch") == 0)
+	{
+		int cmd_size = 1 + snprintf(NULL , 0, "yay -S %s", pkginstallname);
 		char cmd_arch[cmd_size];
-        snprintf(cmd_arch, (size_t)cmd_size,
-                "yay -S %s", pkginstallname);
-        system(cmd_arch);
-    }
-    else if (strcmp(pkg_type_distro, "debian") == 0)
-    {
+		snprintf(cmd_arch, (size_t)cmd_size,
+				"yay -S %s", pkginstallname);
+		system(cmd_arch);
+	}
+	else if (strcmp(pkg_type_distro, "debian") == 0)
+	{
 		int cmd_size = 1 + snprintf(NULL, 0, "sudo apt install %s", pkginstallname);
 		char cmd_deb[cmd_size];
-
-        snprintf(cmd_deb, (size_t)cmd_size,
-                "sudo apt install %s", pkginstallname);
-        system(cmd_deb);
-    }
-    else 
-    {
-    	printf("Your distribution is not supported.\n");
-    	wait_for_timeout(SHORT_TIMER, 1);
-    }
-
-    return 0;
+		snprintf(cmd_deb, (size_t)cmd_size,
+				"sudo apt install %s", pkginstallname);
+		system(cmd_deb);
+	}
+	else 
+	{
+		printf("Your distribution is not supported.\n");
+		wait_for_timeout(SHORT_TIMER, 1);
+	}
+	
+	return 0;
 }
 
 void configure_oh_my_zsh(void)
 {
-    /* using curl to download a program is not a good practice
+	/* using curl to download a program is not a good practice
 	 * but it's the recommended installation method */
-    system("if command -v curl >/dev/null 2>&1; then "
-            "  sh -c \"$(curl -fsSL https://raw.githubusercontent.com/romkatv/zsh4humans/v5/install)\"; "
-            "else "
-            "  sh -c \"$(wget -O- https://raw.githubusercontent.com/romkatv/zsh4humans/v5/install)\"; " 
-            "fi");
-    clearbuffer();
-    block(true);
+	system("if command -v curl >/dev/null 2>&1; then "
+			"  sh -c \"$(curl -fsSL https://raw.githubusercontent.com/romkatv/zsh4humans/v5/install)\"; "
+        		"else "
+        		"  sh -c \"$(wget -O- https://raw.githubusercontent.com/romkatv/zsh4humans/v5/install)\"; " 
+        		"fi");
+	clearbuffer();
+	block(true);
 }
