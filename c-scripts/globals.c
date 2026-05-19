@@ -23,20 +23,6 @@ char *config_names[n_configs] =
     "zsh config (.zshrc)",
 };
 
-    char* TEXT_C_BASH = ".bashrc";
-    char* TEXT_C_SWAY = "Sway-WM config";
-    char* TEXT_C_BPYT = "bpytop config";
-    char* TEXT_C_BTOP = "btop config";
-    char* TEXT_C_CAVA = "cava config";
-    char* TEXT_C_FAST = "fastfetch configs";
-    char* TEXT_C_FUZZ = "fuzzel configs";
-    char* TEXT_C_GTKL = "gtklock config and style (appearance) ";
-    char* TEXT_C_HYPR = "Hyprland-WM config + Hypridle config";
-    char* TEXT_C_KITT = "kitty terminal configs";
-    char* TEXT_C_MPVF = "mpv config";
-    char* TEXT_C_NVIM = "neovim config with lazy";
-    char* TEXT_C_WAYB = "waybar config and style (appearance)";
-    char* TEXT_C_ZSHH = "zsh config (.zshrc)";
     
     char* help_flag_arg_text = "--help";	/* flag for the help menu */
     char* pkgi_flag_arg_text = "-p";	/* flag to install a package */
