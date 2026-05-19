@@ -291,12 +291,49 @@ void HYPR(bool archive_bl, float pver, bool pkginstall_bl)
 	char *temp_path = malloc((size_t)temp_path_size);
 	snprintf(temp_path, (size_t)temp_path_size, program_config_path, inpath);
 
-
 	char *program_path = malloc((size_t)program_path_size);
-
 	snprintf(program_path, (size_t)program_path_size, program_config_path, config_path);
+
+	int config_file_size = 16;
+
+	char *config_file[5] = 
+	{
+		"hypridle",
+		"hyprland",
+		"hyprlock",
+		"hyprpaper",
+		NULL,
+	};
+
 	if (archive_bl)
 	{
+		char *file_suffix_template = "-oldv%.2f.conf";
+		int file_suffix_size = 1 + snprintf(NULL, 0, file_suffix_template, pver);
+		int archive_file_size = file_suffix_size + config_file_size;
+		int archive_file_path_size = archive_file_size + program_path_size;
+
+		char file_suffix[file_suffix_size];
+		snprintf(file_suffix, (size_t)file_suffix_size, file_suffix_template, pver);
+
+		for (int i = 0; config_file[i] != NULL; i++)
+		{
+			char destination_file_name[archive_file_path_size];
+			char config_file_temp[config_file_size];
+			strcpy(config_file_temp, config_file[i]);
+
+			strcpy(destination_file_name, program_path);
+			strcat(destination_file_name, "/");
+			strcat(destination_file_name, config_file_temp);
+			strcat(destination_file_name, file_suffix);
+
+			strcat(config_file_temp, ".conf");
+			char source_path[archive_file_path_size];
+			strcpy(source_path, program_path);
+			strcat(source_path, "/");
+			strcat(source_path, config_file_temp);
+
+			rename(source_path, destination_file_name);
+		}
 		/* TODO consider using rename() 
 		 * (just like the other functions) 
 		 *
@@ -307,9 +344,9 @@ void HYPR(bool archive_bl, float pver, bool pkginstall_bl)
 		
 		int mem_needed_move = snprintf(NULL, 0,
 				"mv %s/hyprland.conf %s/hyprland-oldv%.2f.conf ; "
-		"mv %s/hyprpaper.conf %s/hyprpaper-oldv%.2f.conf ; "
-		"mv %s/hyprlock.conf %s/hyprlock-oldv%.2f.conf ; "
-		"mv %s/hypridle.conf %s/hypridle-oldv%.2f.conf"
+				"mv %s/hyprpaper.conf %s/hyprpaper-oldv%.2f.conf ; "
+				"mv %s/hyprlock.conf %s/hyprlock-oldv%.2f.conf ; "
+				"mv %s/hypridle.conf %s/hypridle-oldv%.2f.conf "
 				, program_path, program_path, pver, program_path, program_path, pver, program_path, program_path, pver, program_path, program_path, pver);
 		char *cmd = malloc((size_t)mem_needed_move + 1);
 		
@@ -317,11 +354,12 @@ void HYPR(bool archive_bl, float pver, bool pkginstall_bl)
 				"mv %s/hyprland.conf %s/hyprland-oldv%.2f.conf ; "
 				"mv %s/hyprpaper.conf %s/hyprpaper-oldv%.2f.conf ; "
     	    			"mv %s/hyprlock.conf %s/hyprlock-oldv%.2f.conf ; "
-    	    			"mv %s/hypridle.conf %s/hypridle-oldv%.2f.conf"
+    	    			"mv %s/hypridle.conf %s/hypridle-oldv%.2f.conf "
 				, program_path, program_path, pver, program_path, program_path, pver, program_path, program_path, pver, program_path, program_path, pver);
 		system(cmd);
 		free(cmd);
 	}
+
 	if (pkginstall_bl)
 	{
 		/* install Hyprland packages */
@@ -338,16 +376,14 @@ void HYPR(bool archive_bl, float pver, bool pkginstall_bl)
 			program_path, inpath, program_path, inpath, program_path, inpath, program_path, inpath, program_path, inpath, program_path);
 
 	char *cmd = malloc((size_t)mem_needed); /* allocate just enough memory for the buffer size */
-
 	snprintf(cmd, (size_t)mem_needed,
 			"mkdir -p %s/assets ; "
-			"cp -f %s/hypr/assets/lockscreen.png %s/assets/ ; "
-			"cp -f %s/hypr/hyprland.conf %s ; "
-			"cp -f %s/hypr/hypridle.conf %s ; "
-			"cp -f %s/hypr/hyprlock.conf %s ; "
-			"cp -f %s/hypr/hyprpaper.conf %s",
-			program_path, inpath, program_path, inpath, program_path, inpath, program_path, inpath, program_path, inpath, program_path);
-
+			"cp -f %s/assets/lockscreen.png %s/assets/ ; "
+			"cp -f %s/hyprland.conf %s ; "
+			"cp -f %s/hypridle.conf %s ; "
+			"cp -f %s/hyprlock.conf %s ; "
+			"cp -f %s/hyprpaper.conf %s",
+			program_path, temp_path, program_path, temp_path, program_path, temp_path, program_path, temp_path, program_path, temp_path, program_path);
 	system(cmd);
     	free(cmd);
 	free(program_path);
