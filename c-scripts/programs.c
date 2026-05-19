@@ -23,39 +23,39 @@ void BPYT(bool archive_bl, float pver, bool pkginstall_bl)
 {
 	const char *pkg_name = "bpytop";
 
-    char cmd[192]; /* using malloc is now safer, it avoids truncation */
-    if (archive_bl)
-    {
+	char cmd[192]; /* using malloc is now safer, it avoids truncation */
+	if (archive_bl)
+	{
 		/* evaluate original_path size */
 		const char *original_path = "%s/%s/bpytop.conf";
 		const char *archived_path = "%s/%s/bpytop-oldv%.2f.conf";
 		int original_path_size = 1 + snprintf(NULL, 0, original_path, config_path, pkg_name);
 		int archived_path_size = 1 + snprintf(NULL, 0, archived_path, config_path, pkg_name, pver);
-
+		
 		/* allocate the corresponding amount of memory for the buffer
 		 * and then initialize both variables */
 		char *input_file = malloc((size_t)original_path_size);
 		char *output_file = malloc((size_t)archived_path_size);
-
+		
 		snprintf(input_file, (size_t)original_path_size, original_path, config_path, pkg_name);
 		snprintf(output_file, (size_t)original_path_size, original_path, config_path, pkg_name, pver);
 
-    	/* archive bpytop config */
+		/* archive bpytop config */
 		rename(input_file, output_file);
 
 		/* free unused memory */
 		free(input_file);
 		free(output_file);
-    }
-    if (pkginstall_bl)
-    {
+	}
+	if (pkginstall_bl)
+	{
 		install_package(parent, "bpytop"); /* install bpytop package */
-    }
-    /* export bpytop config */
-    snprintf(cmd, sizeof(cmd),
+	}
+	/* export bpytop config */
+    	snprintf(cmd, sizeof(cmd),
 			"mkdir -p %s/bpytop ; "
-	   		"cp -f %s/bpytop/bpytop.conf ~/.config/bpytop", config_path, inpath);
-    system(cmd);
+			"cp -f %s/bpytop/bpytop.conf ~/.config/bpytop", config_path, inpath);
+    	system(cmd);
 }
 
 void BTOP(bool archive_bl, float pver, bool pkginstall_bl)
@@ -67,24 +67,24 @@ void BTOP(bool archive_bl, float pver, bool pkginstall_bl)
 
 	snprintf(program_path, (size_t)program_path_size, program_config_path, config_path);
 
-    char cmd[128];
-    if (archive_bl)
-    {
-    	/* archive btop config */
-    	snprintf(cmd, sizeof(cmd),
-				"mv %s/btop.conf "
-    			"~/.config/btop/btop-oldv%.2f.conf", program_path, pver);
+	char cmd[128];
+    	if (archive_bl)
+    	{
+    		/* archive btop config */
+    		snprintf(cmd, sizeof(cmd),
+    	    			"mv %s/btop.conf "
+    				"~/.config/btop/btop-oldv%.2f.conf", program_path, pver);
+    		system(cmd);
+    	}
+    	if (pkginstall_bl)
+    	{
+    	    	install_package(parent, "btop"); /* install btop package */
+    	}
+    	/* export btop config */
+	snprintf(cmd, sizeof(cmd),
+    	    		"mkdir -p %s/btop ; "
+    	       		"cp -f %s/btop/btop.conf %s/btop", config_path, inpath, config_path);
     	system(cmd);
-    }
-    if (pkginstall_bl)
-    {
-		install_package(parent, "btop"); /* install btop package */
-    }
-    /* export btop config */
-    snprintf(cmd, sizeof(cmd),
-			"mkdir -p %s/btop ; "
-	   		"cp -f %s/btop/btop.conf %s/btop", config_path, inpath, config_path);
-    system(cmd);
 	free(program_path);
 }
 
@@ -97,37 +97,38 @@ void CAVA(bool archive_bl, float pver, bool pkginstall_bl)
 	char *program_path = malloc((size_t)program_path_size);
 	snprintf(program_path, (size_t)program_path_size, program_config_path, config_path);
 
-    if (archive_bl)
-    {
-        /* backup cava config */
-		const char *out_config_name = "%s/config-oldv%.2f";
-		const char *in_config_path = "%s/%s/config";
+	if (archive_bl)
+    	{
+		/* backup cava config */
+    	    	const char *out_config_name = "%s/config-oldv%.2f";
+    	    	const char *in_config_path = "%s/%s/config";
 
-		int mem_out_size = 1 + snprintf(NULL, 0, out_config_name, program_path, pver);
-		int mem_path_size = 1 + snprintf(NULL, 0, in_config_path, program_path);
-		char *out_config_temp = malloc((size_t)mem_out_size);
-		char *config_path_temp = malloc((size_t)mem_path_size);
+    	    	int mem_out_size = 1 + snprintf(NULL, 0, out_config_name, program_path, pver);
+    	    	int mem_path_size = 1 + snprintf(NULL, 0, in_config_path, program_path);
+    	    	char *out_config_temp = malloc((size_t)mem_out_size);
+    	    	char *config_path_temp = malloc((size_t)mem_path_size);
 
-		snprintf(out_config_temp, (size_t)mem_out_size, program_path, pver);
+    	    	snprintf(out_config_temp, (size_t)mem_out_size, program_path, pver);
 
-		strcpy(out_config_temp, program_path);
-		strcat(out_config_temp, out_config_name);
+    	    	strcpy(out_config_temp, program_path);
+    	    	strcat(out_config_temp, out_config_name);
 
-		rename(config_path_temp, out_config_temp);
-		free(out_config_temp);
-		free(config_path_temp);
-    }
-    if (pkginstall_bl)
-    {
-		install_package(parent, (char*)program_name); /* install cava package */
-    }
+    	    	rename(config_path_temp, out_config_temp);
+    	    	free(out_config_temp);
+    	    	free(config_path_temp);
+    	}
 
-    /* export cava config */
+    	if (pkginstall_bl)
+    	{
+    	    	install_package(parent, (char*)program_name); /* install cava package */
+    	}
+
+	/* export cava config */
 	const char *dir_cmd = "mkdir -p %s ; cp -f %s/%s/config %s/ ";
-    int mem_needed_cmd = 1 + snprintf(NULL, 0, dir_cmd, program_path, inpath, program_path, program_path);
+	int mem_needed_cmd = 1 + snprintf(NULL, 0, dir_cmd, program_path, inpath, program_path, program_path);
 
 	char safe_cmd[mem_needed_cmd];
-    snprintf(safe_cmd, (size_t)mem_needed_cmd, dir_cmd, program_path, inpath, program_path, program_path);
+	snprintf(safe_cmd, (size_t)mem_needed_cmd, dir_cmd, program_path, inpath, program_path, program_path);
 
 	free(program_path);
     system(safe_cmd);
@@ -142,49 +143,46 @@ void FAST(bool archive_bl, float pver, bool pkginstall_bl)
 
 	snprintf(program_path, (size_t)program_path_size, program_config_path, config_path);
 
-    char cmd[768];
-    if (archive_bl)
-    {
+	char cmd[768];
+    	if (archive_bl)
+    	{
 		int temp_size = 1 + snprintf(NULL, 0, "%s", program_path);
 		char out_config_temp[temp_size];
 		snprintf(out_config_temp, (size_t)temp_size, "%s", program_path);
-
+		
 		const char *template_config_name = "/config.jsonc";
 		int in_path_temp_size = 1 + snprintf(NULL, 0, "%s", template_config_name);
-
+		
 		char config_path_temp[in_path_temp_size];
 		snprintf(config_path_temp, (size_t)in_path_temp_size, "%s", template_config_name);
-
+		
 		const char *out_config_name = " %s/config-oldv%.2f.jsonc";
-
+		
 		int mem_out_size = 1 + snprintf(NULL, 0, out_config_name, program_path, pver);
-
+		
 		snprintf(out_config_temp, (size_t)mem_out_size, program_path, pver);
-
+		
 		strcpy(out_config_temp, program_path);
 		strcat(out_config_temp, out_config_name);
-
-    	/* backup fastfetch config */
+		/* backup fastfetch config */
 		rename(config_path_temp, out_config_temp);
-
-    }
-    if (pkginstall_bl)
-    {
-		install_package(parent, "fastfetch"); /* install fastfetch */
-    }
-    /* export fastfetch config */
-    snprintf(cmd, sizeof(cmd),
+	}
+	if (pkginstall_bl)
+    	{
+    	    	install_package(parent, "fastfetch"); /* install fastfetch */
+    	}
+	/* export fastfetch config */
+    	snprintf(cmd, sizeof(cmd),
 			"rm %s ; "
-	    	"mkdir -p %s/assets ; "
-	    	"cp -f %s/fastfetch/assets/*.png %s/assets/ ; "
-	    	"cp -f %s/fastfetch/config.jsonc %s/ ; "
-	    	"cp -f %s/config.jsonc %s/config-duplicated.jsonc ; "
-	    	"cp -f %s/fastfetch/config-other.jsonc %s/ ; "
-	    	"cp -f %s/fastfetch/config-default.jsonc %s/"
+			"mkdir -p %s/assets ; "
+			"cp -f %s/fastfetch/assets/*.png %s/assets/ ; "
+			"cp -f %s/fastfetch/config.jsonc %s/ ; "
+			"cp -f %s/config.jsonc %s/config-duplicated.jsonc ; "
+			"cp -f %s/fastfetch/config-other.jsonc %s/ ; "
+			"cp -f %s/fastfetch/config-default.jsonc %s/"
 			, program_path, program_path, inpath, program_path, inpath, program_path, inpath, program_path, inpath, program_path, inpath, program_path);
-
+    	system(cmd);
 	free(program_path);
-    system(cmd);
 }
 void FUZZ(bool archive_bl, float pver, bool pkginstall_bl)
 {
@@ -195,52 +193,51 @@ void FUZZ(bool archive_bl, float pver, bool pkginstall_bl)
 
 	snprintf(program_path, (size_t)program_path_size, program_config_path, config_path);
 
-    char cmd[1024];
-    if (archive_bl)
-    {
-    	/* backup fuzzel config */
+	char cmd[1024];
+    	if (archive_bl)
+    	{
+		/* backup fuzzel config */
 		const char *source_file_path_temp = "%s/fuzzel-duplicated.ini";
 		char *source_file_path = NULL;
 		int mem_input = 1 + snprintf(NULL, 0, source_file_path_temp, program_path);
 		snprintf(source_file_path, (size_t)mem_input, source_file_path_temp, program_path);
-
+		
 		/* 
 		rename(source_file_path, 
 		*/
-        snprintf(cmd, sizeof(cmd),
+		snprintf(cmd, sizeof(cmd),
 				"mv %s/fuzzel/fuzzel-duplicated.ini "
 				"%s/fuzzel/fuzzel-duplicated-oldv%.2f.ini ; "
 				"mv ~/.config/fuzzel/old-fuzzel.ini "
 				"~/.config/fuzzel/old-fuzzel-oldv%.2f.ini ; "
 				"mv ~/.config/fuzzel/fuzzel.ini "
 				"~/.config/fuzzel/fuzzel-oldv%.2f.ini", config_path, config_path, pver, pver, pver);
-    	system(cmd);
-    }
-    if (pkginstall_bl)
-    {
+		system(cmd);
+	}
+	if (pkginstall_bl)
+    	{
 		/* install fuzzel package */
 		install_package(parent, "fuzzel");
-    }
-    /* export fuzzel appearance */
+	}
+	/* export fuzzel appearance */
 	int mem_needed_cmd = 1 + snprintf(NULL, 0, 
-            "mkdir -p ~/.config/fuzzel ; "
-            "cp -f %s/fuzzel/old-fuzzel.ini ~/.config/fuzzel ; "
-            "cp -f %s/fuzzel/default-fuzzel.ini ~/.config/fuzzel ; "
+			"mkdir -p ~/.config/fuzzel ; "
+			"cp -f %s/fuzzel/old-fuzzel.ini ~/.config/fuzzel ; "
+			"cp -f %s/fuzzel/default-fuzzel.ini ~/.config/fuzzel ; "
 			"cp -f ~/.config/fuzzel/default-fuzzel.ini ~/.config/fuzzel/custom-edited-fuzzel.ini ; "
-            "cp -f %s/fuzzel/fuzzel.ini ~/.config/fuzzel ; "
+			"cp -f %s/fuzzel/fuzzel.ini ~/.config/fuzzel ; "
 			"mv ~/.config/fuzzel/fuzzel.ini ~/.config/fuzzel/fuzzel-duplicated.ini ; "
 			"ln -sf ~/.config/fuzzel/fuzzel-duplicated.ini ~/.config/fuzzel/fuzzel.ini ", inpath, inpath, inpath);
 
-    snprintf(cmd, (size_t)mem_needed_cmd,
-            "mkdir -p ~/.config/fuzzel ; "
-            "cp -f %s/fuzzel/old-fuzzel.ini ~/.config/fuzzel ; "
-            "cp -f %s/fuzzel/default-fuzzel.ini ~/.config/fuzzel ; "
+	snprintf(cmd, (size_t)mem_needed_cmd,
+			"mkdir -p ~/.config/fuzzel ; "
+        		"cp -f %s/fuzzel/old-fuzzel.ini ~/.config/fuzzel ; "
+        		"cp -f %s/fuzzel/default-fuzzel.ini ~/.config/fuzzel ; "
 			"cp -f ~/.config/fuzzel/default-fuzzel.ini ~/.config/fuzzel/custom-edited-fuzzel.ini ; "
-            "cp -f %s/fuzzel/fuzzel.ini ~/.config/fuzzel ; "
+        		"cp -f %s/fuzzel/fuzzel.ini ~/.config/fuzzel ; "
 			"mv ~/.config/fuzzel/fuzzel.ini ~/.config/fuzzel/fuzzel-duplicated.ini ; "
 			"ln -sf ~/.config/fuzzel/fuzzel-duplicated.ini ~/.config/fuzzel/fuzzel.ini ", inpath, inpath, inpath);
-    system(cmd);  		
-
+	system(cmd);  		
 	free(program_path);
 }
 void GTKL(bool archive_bl, float pver, bool pkginstall_bl)
@@ -249,36 +246,34 @@ void GTKL(bool archive_bl, float pver, bool pkginstall_bl)
 	int program_path_size = 1 + snprintf(NULL, 0, program_config_path, config_path);
 
 	char *program_path = malloc((size_t)program_path_size);
-
 	snprintf(program_path, (size_t)program_path_size, program_config_path, config_path);
 
-    char cmd[512];
-    if (archive_bl)
-    {
-    	/* backup fuzzel config */
+	char cmd[512];
+    	if (archive_bl)
+    	{
+		/* backup fuzzel config */
 		const char *source_file_path_temp = "%s/style.css";
 		char *source_file_path = NULL;
 		int mem_input = 1 + snprintf(NULL, 0, source_file_path_temp, program_config_path);
 		snprintf(source_file_path, (size_t)mem_input, source_file_path_temp, program_path);
 
-    	/* backup gtklock config */
-        snprintf(cmd, sizeof(cmd),
-            	"mv %s/style.css "
-				"%s/style-oldv%.2f.css", 
-				program_path, program_path, pver);
+		/* backup gtklock config */
+        	snprintf(cmd, sizeof(cmd),
+			"mv %s/style.css "
+			"%s/style-oldv%.2f.css", program_path, program_path, pver);
+    		system(cmd);
+	}
+    	if (pkginstall_bl)
+    	{
+    	    	/* install gtklock package */
+    	    	install_package(parent, "gtklock");
+    	}
+	/* export gtklock config */
+    	snprintf(cmd, 384,
+			"mkdir -p ~/.config/gtklock/assets ; "
+			"cp -f %s/gtklock/style.css ~/.config/gtklock ; "
+			"cp -f %s/gtklock/lockscreen.jpg ~/.config/gtklock/assets", inpath, inpath);
     	system(cmd);
-    }
-    if (pkginstall_bl)
-    {
-		/* install gtklock package */
-		install_package(parent, "gtklock");
-    }
-    /* export gtklock config */
-    snprintf(cmd, 384,
-            "mkdir -p ~/.config/gtklock/assets ; "
-            "cp -f %s/gtklock/style.css ~/.config/gtklock ; "
-            "cp -f %s/gtklock/lockscreen.jpg ~/.config/gtklock/assets", inpath, inpath);
-    system(cmd);
 	free(program_path);
 }
 
@@ -290,8 +285,8 @@ void HYPR(bool archive_bl, float pver, bool pkginstall_bl)
 	char *program_path = malloc((size_t)program_path_size);
 
 	snprintf(program_path, (size_t)program_path_size, program_config_path, config_path);
-    if (archive_bl)
-    {
+	if (archive_bl)
+	{
 		/* TODO consider using rename() 
 		 * (just like the other functions) 
 		 *
@@ -299,125 +294,125 @@ void HYPR(bool archive_bl, float pver, bool pkginstall_bl)
 		 * do something like this
 		 * rename("~/.config/hypr/hyprland.conf", "~/.config/hypr/hyprland-oldv0.0.conf"); 
 		*/
-
+		
 		int mem_needed_move = snprintf(NULL, 0,
 				"mv %s/hyprland.conf %s/hyprland-oldv%.2f.conf ; "
-    	    	"mv %s/hyprpaper.conf %s/hyprpaper-oldv%.2f.conf ; "
-    	    	"mv %s/hyprlock.conf %s/hyprlock-oldv%.2f.conf ; "
-    	    	"mv %s/hypridle.conf %s/hypridle-oldv%.2f.conf"
+		"mv %s/hyprpaper.conf %s/hyprpaper-oldv%.2f.conf ; "
+		"mv %s/hyprlock.conf %s/hyprlock-oldv%.2f.conf ; "
+		"mv %s/hypridle.conf %s/hypridle-oldv%.2f.conf"
 				, program_path, program_path, pver, program_path, program_path, pver, program_path, program_path, pver, program_path, program_path, pver);
 		char *cmd = malloc((size_t)mem_needed_move + 1);
-
-    	snprintf(cmd, (size_t)mem_needed_move + 1,
+		
+		snprintf(cmd, (size_t)mem_needed_move + 1,
 				"mv %s/hyprland.conf %s/hyprland-oldv%.2f.conf ; "
-    	    	"mv %s/hyprpaper.conf %s/hyprpaper-oldv%.2f.conf ; "
-    	    	"mv %s/hyprlock.conf %s/hyprlock-oldv%.2f.conf ; "
-    	    	"mv %s/hypridle.conf %s/hypridle-oldv%.2f.conf"
+				"mv %s/hyprpaper.conf %s/hyprpaper-oldv%.2f.conf ; "
+    	    			"mv %s/hyprlock.conf %s/hyprlock-oldv%.2f.conf ; "
+    	    			"mv %s/hypridle.conf %s/hypridle-oldv%.2f.conf"
 				, program_path, program_path, pver, program_path, program_path, pver, program_path, program_path, pver, program_path, program_path, pver);
-    	system(cmd);
+		system(cmd);
 		free(cmd);
-    }
-    if (pkginstall_bl)
-    {
+	}
+	if (pkginstall_bl)
+	{
 		/* install Hyprland packages */
 		install_package(parent, "hyprlock hypridle hyprpaper hyprland");
-    }
-    /* export hyprland configs */
-    int mem_needed = 1 + snprintf(NULL, 0,
+    	}
+	/* export hyprland configs */
+	int mem_needed = 1 + snprintf(NULL, 0,
 			"mkdir -p %s/assets ; "
-    	    "cp -f %s/hypr/assets/lockscreen.png %s/assets/ ; "
+			"cp -f %s/hypr/assets/lockscreen.png %s/assets/ ; "
 			"cp -f %s/hypr/hyprland.conf %s ; "
-    	    "cp -f %s/hypr/hypridle.conf %s ; "
-    	    "cp -f %s/hypr/hyprlock.conf %s ; "
-    	    "cp -f %s/hypr/hyprpaper.conf %s",
+			"cp -f %s/hypr/hypridle.conf %s ; "
+			"cp -f %s/hypr/hyprlock.conf %s ; "
+			"cp -f %s/hypr/hyprpaper.conf %s",
 			program_path, inpath, program_path, inpath, program_path, inpath, program_path, inpath, program_path, inpath, program_path);
 
-    char *cmd = malloc((size_t)mem_needed); /* allocate just enough memory for the buffer size */
+	char *cmd = malloc((size_t)mem_needed); /* allocate just enough memory for the buffer size */
 
-    snprintf(cmd, (size_t)mem_needed,
+	snprintf(cmd, (size_t)mem_needed,
 			"mkdir -p %s/assets ; "
-    	    "cp -f %s/hypr/assets/lockscreen.png %s/assets/ ; "
+			"cp -f %s/hypr/assets/lockscreen.png %s/assets/ ; "
 			"cp -f %s/hypr/hyprland.conf %s ; "
-    	    "cp -f %s/hypr/hypridle.conf %s ; "
-    	    "cp -f %s/hypr/hyprlock.conf %s ; "
-    	    "cp -f %s/hypr/hyprpaper.conf %s",
+			"cp -f %s/hypr/hypridle.conf %s ; "
+			"cp -f %s/hypr/hyprlock.conf %s ; "
+			"cp -f %s/hypr/hyprpaper.conf %s",
 			program_path, inpath, program_path, inpath, program_path, inpath, program_path, inpath, program_path, inpath, program_path);
 
-    system(cmd);
-    free(cmd);
+	system(cmd);
+    	free(cmd);
 	free(program_path);
 }
 void KITT(bool archive_bl, float pver, bool pkginstall_bl)
 {
-    char cmd[256];
-    if (archive_bl)
-    {
-    	/* backup kitty config */
-        snprintf(cmd, sizeof(cmd),
-				"mv ~/.config/kitty/kitty.conf "
-				"~/.config/kitty/kitty-oldv%.2f.conf", pver);
-    	system(cmd);
-    }
-    if (pkginstall_bl)
-    {
+	char cmd[256];
+	if (archive_bl)
+	{
+		/* backup kitty config */
+		snprintf(cmd, sizeof(cmd),
+		"mv ~/.config/kitty/kitty.conf "
+		"~/.config/kitty/kitty-oldv%.2f.conf", pver);
+		system(cmd);
+	}
+	if (pkginstall_bl)
+	{
 		/* install kitty package
 		 * the kitty terminal is most likely already installed on your system */
 		install_package(parent, "kitty");
-    }
-    /* export kitty config */
-    snprintf(cmd, sizeof(cmd),
+	}
+	/* export kitty config */
+	snprintf(cmd, sizeof(cmd),
 			"mkdir ~/.config/kitty ; "
-	    	"cp -f %s/kitty/current-theme.conf ~/.config/kitty ; "
-	    	"cp -f %s/kitty/kitty.conf ~/.config/kitty", inpath, inpath);
-    system(cmd);
+			"cp -f %s/kitty/current-theme.conf ~/.config/kitty ; "
+			"cp -f %s/kitty/kitty.conf ~/.config/kitty", inpath, inpath);
+	system(cmd);
 }
 
 void MPVF(bool archive_bl, float pver, bool pkginstall_bl)
 {
-    char cmd[256];
-    if (archive_bl)
-    {
-    	/* archive mpv config */
-        snprintf(cmd, sizeof(cmd),
-				"mv ~/.config/mpv/mpv.conf ~/.config/mpv/mpv-oldv%.2f.conf ", pver);
+	char cmd[256];
+	if (archive_bl)
+	{
+		/* archive mpv config */
+		snprintf(cmd, sizeof(cmd),
+		"mv ~/.config/mpv/mpv.conf ~/.config/mpv/mpv-oldv%.2f.conf ", pver);
 		system(cmd);
 		printf(BOLD_S"\nThe old "UDRL_S"mpv"STYLE_END BOLD_S" config was archived\n"STYLE_END);
-    }
-    if (pkginstall_bl)
-    {
+	}
+	if (pkginstall_bl)
+	{
 		install_package(parent, "mpv");
-    }
-    /* export mpv config with shaders */
-    snprintf(cmd, 192,
+	}
+	/* export mpv config with shaders */
+	snprintf(cmd, 192,
 			"mkdir -p ~/.config/mpv/ ; "
-            "cp -f %s/mpv/mpv.conf ~/.config/mpv ", inpath);
-    system(cmd);
+			"cp -f %s/mpv/mpv.conf ~/.config/mpv ", inpath);
+	system(cmd);
 }
 
 void NVIM(bool archive_bl, float pver, bool pkginstall_bl)
 {
-    char cmd[256];
-    if (archive_bl)
-    {
-        snprintf(cmd, sizeof(cmd),
-    	    	"mv %s/nvim/init.lua ~/.config/nvim/init-oldv%.2f.lua ; "
-    	    	"mv %s/nvim/lua/config/lazy.lua ~/.config/nvim/lua/config/lazy-oldv%.2f.lua ; "
-    	    	"mv %s/nvim/lazy-lock.json ~/.config/nvim/lazy-lock-oldv%.2f.json",
-    	    	config_path, pver, config_path, pver, config_path, pver);
-        system(cmd);
-    }
-    if (pkginstall_bl)
-    {
+	char cmd[256];
+	if (archive_bl)
+	{
+		snprintf(cmd, sizeof(cmd),
+		        	"mv %s/nvim/init.lua ~/.config/nvim/init-oldv%.2f.lua ; "
+		        	"mv %s/nvim/lua/config/lazy.lua ~/.config/nvim/lua/config/lazy-oldv%.2f.lua ; "
+		        	"mv %s/nvim/lazy-lock.json ~/.config/nvim/lazy-lock-oldv%.2f.json",
+		        	config_path, pver, config_path, pver, config_path, pver);
+		system(cmd);
+	}
+	if (pkginstall_bl)
+	{
 		/* install neovim (nvim) package 
 		 * nvim is most likely already installed  */
 		install_package(parent, "nvim lazygit");
-    }
-
-    /* export nvim config */
-    snprintf(cmd, sizeof(cmd),
+	}
+	
+	/* export nvim config */
+	snprintf(cmd, sizeof(cmd),
 			"mkdir -p ~/.config/nvim ; "
-    	    "cp -f %s/nvim/init.lua ~/.config/nvim", inpath);
-    system(cmd);
+			"cp -f %s/nvim/init.lua ~/.config/nvim", inpath);
+	system(cmd);
 }
 
 void SWAY(bool archive_bl, float pver, bool pkginstall_bl)
@@ -472,12 +467,12 @@ void ZSHH(bool archive_bl, float pver, bool pkginstall_bl)
     char cmd[128];
     if (archive_bl)
     {
-    	/* archive old zsh config */
+		/* archive old zsh config */
 		char *archiving_template = "mv ~/.zshrc ~/.zshrc-old-v%.2f";
 		int archiving_size = snprintf(NULL, 0, archiving_template, pver);
-        snprintf(cmd, (size_t)archiving_size, archiving_template, pver);
+		snprintf(cmd, (size_t)archiving_size, archiving_template, pver);
 		system(cmd);
-
+		
 		char *new_f_path = NULL;
 		const char *new_path = "~/.zshrc-old-v%.2f";
 		int path_size = 1 + snprintf(NULL, 0, new_path, pver);
