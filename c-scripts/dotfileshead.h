@@ -31,20 +31,6 @@ void WAYB(bool archive_bl, float pver, bool pkginstall_bl);
 void ZSHH(bool archive_bl, float pver, bool pkginstall_bl);
 
 /* data */
-extern char* TEXT_C_BASH;   /* will be replaced by an array */
-extern char* TEXT_C_BPYT;   /* will be replaced by an array */
-extern char* TEXT_C_BTOP;   /* will be replaced by an array */
-extern char* TEXT_C_CAVA;   /* will be replaced by an array */
-extern char* TEXT_C_FAST;   /* will be replaced by an array */
-extern char* TEXT_C_FUZZ;   /* will be replaced by an array */
-extern char* TEXT_C_GTKL;   /* will be replaced by an array */
-extern char* TEXT_C_HYPR;   /* will be replaced by an array */
-extern char* TEXT_C_KITT;   /* will be replaced by an array */
-extern char* TEXT_C_MPVF;   /* will be replaced by an array */
-extern char* TEXT_C_NVIM;   /* will be replaced by an array */
-extern char* TEXT_C_SWAY;   /* will be replaced by an array */
-extern char* TEXT_C_WAYB;   /* will be replaced by an array */
-extern char* TEXT_C_ZSHH;   /* will be replaced by an array */
 extern char *config_names[n_configs];
 
 void clear(void);
