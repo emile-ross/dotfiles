@@ -180,12 +180,12 @@ void FAST(bool archive_bl, float pver, bool pkginstall_bl)
     	snprintf(cmd, sizeof(cmd),
 			"rm %s ; "
 			"mkdir -p %s/assets ; "
-			"cp -f %s/fastfetch/assets/*.png %s/assets/ ; "
-			"cp -f %s/fastfetch/config.jsonc %s/ ; "
-			"cp -f %s/fastfetch/config.jsonc %s/config-duplicated.jsonc ; "
-			"cp -f %s/fastfetch/config-other.jsonc %s/ ; "
-			"cp -f %s/fastfetch/config-default.jsonc %s/"
-			, program_path, program_path, inpath, program_path, inpath, program_path, inpath, program_path, inpath, program_path, inpath, program_path);
+			"cp -f %s/assets/*.png %s/assets/ ; "
+			"cp -f %s/config.jsonc %s/ ; "
+			"cp -f %s/config.jsonc %s/config-duplicated.jsonc ; "
+			"cp -f %s/config-other.jsonc %s/ ; "
+			"cp -f %s/config-default.jsonc %s/"
+			, program_path, program_path, temp_path, program_path, temp_path, program_path, temp_path, program_path, temp_path, program_path, temp_path, program_path);
     	system(cmd);
 	printf("%s \n\n ", cmd);
 	free(program_path);
@@ -285,7 +285,12 @@ void GTKL(bool archive_bl, float pver, bool pkginstall_bl)
 void HYPR(bool archive_bl, float pver, bool pkginstall_bl)
 {
 	const char *program_config_path = "%s/hypr";
+	int temp_path_size = 1 + snprintf(NULL, 0, program_config_path, inpath);
 	int program_path_size = 1 + snprintf(NULL, 0, program_config_path, config_path);
+
+	char *temp_path = malloc((size_t)temp_path_size);
+	snprintf(temp_path, (size_t)temp_path_size, program_config_path, inpath);
+
 
 	char *program_path = malloc((size_t)program_path_size);
 
@@ -495,10 +500,9 @@ void ZSHH(bool archive_bl, float pver, bool pkginstall_bl)
 	const char *copy_config_cmd = "cp -f %s/shell/zsh/.zshrc %s/ ";
 	int mem_needed_cmd = 1 + snprintf(NULL, 0, copy_config_cmd, inpath, home);
 	char safe_cmd[mem_needed_cmd];
-
-	snprintf(safe_cmd, (size_t)mem_needed_cmd, 
-			copy_config_cmd, inpath, home);
+	snprintf(safe_cmd, (size_t)mem_needed_cmd, copy_config_cmd, inpath, home);
 	system(safe_cmd);
+
 	printf("Refer to the dotfiles configuration menu in order to configure zsh proprely (using zsh for humans)\n");
 }
 
