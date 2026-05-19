@@ -222,7 +222,16 @@ void FUZZ(bool archive_bl, float pver, bool pkginstall_bl)
 		install_package(parent, "fuzzel");
     }
     /* export fuzzel appearance */
-    snprintf(cmd, 768,
+	int mem_needed_cmd = 1 + snprintf(NULL, 0, 
+            "mkdir -p ~/.config/fuzzel ; "
+            "cp -f %s/fuzzel/old-fuzzel.ini ~/.config/fuzzel ; "
+            "cp -f %s/fuzzel/default-fuzzel.ini ~/.config/fuzzel ; "
+			"cp -f ~/.config/fuzzel/default-fuzzel.ini ~/.config/fuzzel/custom-edited-fuzzel.ini ; "
+            "cp -f %s/fuzzel/fuzzel.ini ~/.config/fuzzel ; "
+			"mv ~/.config/fuzzel/fuzzel.ini ~/.config/fuzzel/fuzzel-duplicated.ini ; "
+			"ln -sf ~/.config/fuzzel/fuzzel-duplicated.ini ~/.config/fuzzel/fuzzel.ini ", inpath, inpath, inpath);
+
+    snprintf(cmd, (size_t)mem_needed_cmd,
             "mkdir -p ~/.config/fuzzel ; "
             "cp -f %s/fuzzel/old-fuzzel.ini ~/.config/fuzzel ; "
             "cp -f %s/fuzzel/default-fuzzel.ini ~/.config/fuzzel ; "
@@ -379,7 +388,7 @@ void MPVF(bool archive_bl, float pver, bool pkginstall_bl)
 		install_package(parent, "mpv");
     }
     /* export mpv config with shaders */
-    snprintf(cmd, 128,
+    snprintf(cmd, 192,
 			"mkdir -p ~/.config/mpv/ ; "
             "cp -f %s/mpv/mpv.conf ~/.config/mpv ", inpath);
     system(cmd);
@@ -406,7 +415,7 @@ void NVIM(bool archive_bl, float pver, bool pkginstall_bl)
 
     /* export nvim config */
     snprintf(cmd, sizeof(cmd),
-	    "mkdir -p ~/.config/nvim ; "
+			"mkdir -p ~/.config/nvim ; "
     	    "cp -f %s/nvim/init.lua ~/.config/nvim", inpath);
     system(cmd);
 }
@@ -428,8 +437,8 @@ void SWAY(bool archive_bl, float pver, bool pkginstall_bl)
     }
     /* export sway config */
     snprintf(cmd, sizeof(cmd),
-	    "mkdir -p ~/.config/sway ; "
-	    "cp -f %s/sway/config ~/.config/sway/ ; "
+			"mkdir -p ~/.config/sway ; "
+	    	"cp -f %s/sway/config ~/.config/sway/ ; "
     	    "cp -f %s/sway/config-default ~/.config/sway", inpath, inpath);
     system(cmd);
 }
@@ -465,7 +474,8 @@ void ZSHH(bool archive_bl, float pver, bool pkginstall_bl)
     {
     	/* archive old zsh config */
 		char *archiving_template = "mv ~/.zshrc ~/.zshrc-old-v%.2f";
-        snprintf(cmd, sizeof(cmd), archiving_template, pver);
+		int archiving_size = snprintf(NULL, 0, archiving_template, pver);
+        snprintf(cmd, (size_t)archiving_size, archiving_template, pver);
 		system(cmd);
 
 		char *new_f_path = NULL;
