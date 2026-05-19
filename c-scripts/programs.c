@@ -145,11 +145,15 @@ void FAST(bool archive_bl, float pver, bool pkginstall_bl)
     char cmd[768];
     if (archive_bl)
     {
-		char *config_path_temp = NULL;
-		char *out_config_temp = NULL;
+		int temp_size = 1 + snprintf(NULL, 0, "%s", program_path);
+		char out_config_temp[temp_size];
+		snprintf(out_config_temp, (size_t)temp_size, "%s", program_path);
 
-		strcpy(config_path_temp, program_path);
-		strcat(config_path_temp, "/config.jsonc");
+		const char *template_config_name = "/config.jsonc";
+		int in_path_temp_size = 1 + snprintf(NULL, 0, "%s", template_config_name);
+
+		char config_path_temp[in_path_temp_size];
+		snprintf(config_path_temp, (size_t)in_path_temp_size, "%s", template_config_name);
 
 		const char *out_config_name = " %s/config-oldv%.2f.jsonc";
 
