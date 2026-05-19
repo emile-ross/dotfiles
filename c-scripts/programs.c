@@ -2,10 +2,12 @@
 
 void BASH(void)
 {
-	char BRCNAME[12] = ".bashrc-new";
+	/* replace with ".bashrc" in order to replace the default bash config */
+	char BRCNAME[12] = ".bashrc-new"; 
+
 	/* prompt to let the user know the bashrc isn't exported/replaced */
 	printf(UDRL_S"\nThe .bashrc file plays a very important role therefore, it was not replaced."STYLE_END);
-	printf(UDRL_S"\nYou can find the new .bashrc file under the name %s\n"STYLE_END, BRCNAME);
+	printf(UDRL_S"\nYou can find the new .bashrc file under the new name %s\n"STYLE_END, BRCNAME);
 	
 	/* calculate the sufficient amount of memory to the buffer */
 	const char *command_format = "cp -f %s/shell/bash/.bashrc ~/%s";
@@ -189,6 +191,7 @@ void FAST(bool archive_bl, float pver, bool pkginstall_bl)
     	system(cmd);
 	printf("%s \n\n ", cmd);
 	free(program_path);
+	free(temp_path);
 }
 void FUZZ(bool archive_bl, float pver, bool pkginstall_bl)
 {
@@ -386,6 +389,7 @@ void HYPR(bool archive_bl, float pver, bool pkginstall_bl)
 			program_path, temp_path, program_path, temp_path, program_path, temp_path, program_path, temp_path, program_path, temp_path, program_path);
 	system(cmd);
     	free(cmd);
+	free(temp_path);
 	free(program_path);
 }
 void KITT(bool archive_bl, float pver, bool pkginstall_bl)
