@@ -464,8 +464,8 @@ void ZSHH(bool archive_bl, float pver, bool pkginstall_bl)
     if (archive_bl)
     {
     	/* archive old zsh config */
-        snprintf(cmd, sizeof(cmd),
-				"mv ~/.zshrc ~/.zshrc-old-v%.2f", pver);
+		char *archiving_template = "mv ~/.zshrc ~/.zshrc-old-v%.2f";
+        snprintf(cmd, sizeof(cmd), archiving_template, pver);
 		system(cmd);
 
 		char *new_f_path = NULL;
