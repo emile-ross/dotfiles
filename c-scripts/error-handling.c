@@ -41,13 +41,18 @@ int error_message(error_code_e err_code)
 		snprintf(err_solution_temp, sizeof(err_solution_temp), "Read the documentation to learn about the existing features");
 		break;
 		
-	case 51:
+	case MAKEPKG_FAIL:
 		snprintf(err_text_temp, sizeof(err_text_temp), "Makepkg installation failed. Please check your system configuration.");
 		snprintf(err_solution_temp, sizeof(err_solution_temp), "Helpful link: \"https://wiki.archlinux.org/title/Makepkg\"");
 		break;
 
 	case RENAME_FAIL:
 		snprintf(err_text_temp, sizeof(err_text_temp), "rename() function failed");
+		break;
+
+	case MALLOC_FAIL:
+		snprintf(err_text_temp, sizeof(err_text_temp), "malloc() function failed");
+		snprintf(err_solution_temp, sizeof(err_solution_temp), " ");
 		break;
 
 	case 101:
