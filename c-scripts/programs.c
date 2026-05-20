@@ -61,7 +61,7 @@ void BPYT(bool archive_bl, float pver, bool pkginstall_bl)
 	system(cmd);
 }
 
-void BTOP(bool archive_bl, float pver, bool pkginstall_bl)
+void BTOP(bool archive_bl, bool pkginstall_bl)
 {
 	const char *program_config_path = "%s/btop";
 	int program_path_size = 1 + snprintf(NULL, 0, program_config_path, config_path);
@@ -73,11 +73,7 @@ void BTOP(bool archive_bl, float pver, bool pkginstall_bl)
 	char cmd[128];
 	if (archive_bl)
 	{
-		/* archive btop config */
-		snprintf(cmd, sizeof(cmd),
-				"mv %s/btop.conf "
-				"~/.config/btop/btop-oldv%.2f.conf", program_path, pver);
-		system(cmd);
+		file_archiving("btop", "btop", ".conf");
     	}
     	if (pkginstall_bl)
     	{
@@ -211,9 +207,6 @@ void FUZZ(bool archive_bl, float pver, bool pkginstall_bl)
 		int mem_input = 1 + snprintf(NULL, 0, source_file_path_temp, program_path);
 		snprintf(source_file_path, (size_t)mem_input, source_file_path_temp, program_path);
 		
-		/* 
-		rename(source_file_path, 
-		*/
 		snprintf(cmd, sizeof(cmd),
 				"mv %s/fuzzel/fuzzel-duplicated.ini "
 				"%s/fuzzel/fuzzel-duplicated-oldv%.2f.ini ; "
@@ -337,12 +330,8 @@ void HYPR(bool archive_bl, float pver, bool pkginstall_bl)
 
 			rename(source_path, destination_file_name);
 		}
-		/* TODO consider using rename() 
-		 * (just like the other functions) 
-		 *
-		 * archive hyprland configs
-		 * do something like this
-		 * rename("~/.config/hypr/hyprland.conf", "~/.config/hypr/hyprland-oldv0.0.conf"); 
+		/* TODO:
+		 * make use of the archiving function
 		*/
 		
 		int mem_needed_move = snprintf(NULL, 0,
@@ -441,6 +430,7 @@ void MPVF(bool archive_bl, float pver, bool pkginstall_bl)
 
 void NVIM(bool archive_bl, float pver, bool pkginstall_bl)
 {
+
 	char cmd[256];
 	if (archive_bl)
 	{
