@@ -598,10 +598,12 @@ void file_archiving(char *program_name, char *config_file, char *file_extention)
 	int program_path_size = 1 + snprintf(NULL, 0, program_config_path, config_path, program_name);
 
 	char *program_path = malloc((size_t)program_path_size);
+	if (!program_path) return;
 	snprintf(program_path, (size_t)program_path_size, program_config_path, config_path, program_name);
 
 	int file_suffix_size = 1 + snprintf(NULL, 0, archiving_file_suffix_template, pver);
 	char *file_suffix = malloc((size_t)file_suffix_size); /* allocate memory to the file_suffix */
+	if (!file_suffix) return; /* exit if the malloc call fails */
 	snprintf(file_suffix, (size_t)file_suffix_size, archiving_file_suffix_template, pver);
 
 	/* calculate the config_file size */
@@ -612,12 +614,14 @@ void file_archiving(char *program_name, char *config_file, char *file_extention)
 	int destination_file_size = 1 + snprintf(NULL, 0, "%s/%s%s%s", program_path, config_file, file_suffix, file_extention);
 
 	char *destination_file = malloc((size_t)destination_file_size);
+	if (!destination_file) return;
 	snprintf(destination_file, (size_t)destination_file_size, "%s/%s%s%s", program_path, config_file, file_suffix, file_extention);
 	free(file_suffix); /* not used by the src_file */
 
 	int src_file_size = 1 + snprintf(NULL, 0, "%s/%s%s", program_path, config_file, file_extention);
 	char *src_file = malloc((size_t)src_file_size);
-	snprintf(src_file, (size_t)destination_file_size, "%s/%s%s", program_path, config_file, file_extention);
+	if (!src_file) return;
+	snprintf(src_file, (size_t)src_file_size, "%s/%s%s", program_path, config_file, file_extention);
 
 	printf("%s\n%s\n", destination_file, src_file);
 	rename(src_file, destination_file);

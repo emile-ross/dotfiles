@@ -5,7 +5,7 @@ int main(int argc, char *argv[])
 	pre_startup();
 	
 	parse_arguments(argc, argv);
-	
+
 	int menu_one_i;
 	do
 	{
@@ -100,7 +100,7 @@ int main(int argc, char *argv[])
 		
 						if (kitty_config_choice == 1)
 						{
-								exec_cmd(16, "kitten themes");
+							exec_cmd(16, "kitten themes");
 						}
 						else if (kitty_config_choice == 2)
 						{
@@ -131,11 +131,11 @@ int main(int argc, char *argv[])
 						}
 						else if (fuzzel_config_menu_choice == 2)
 						{
-						    int fuzzel_edit_menu_choice;
-						    do
-						    {
+							int fuzzel_edit_menu_choice;
+							do
+							{
 								clear();
-		        		
+								
 								char fuzzel_config_one[32] = "Use fuzzel-duplicated.ini";
 								char fuzzel_config_old[32] = "Use old-fuzzel.ini";
 								char fuzzel_config_vzero[32] = "Use fuzzel-v0.0.ini";
@@ -154,10 +154,10 @@ int main(int argc, char *argv[])
 								printf(BOLD_S "  [6] " STYLE_END "%s\n", fuzzel_config_custom);
 								printf(BOLD_S "  [7] " STYLE_END "%s\n\n", fuzzel_config_edit_custom);
 								printf(BOLD_S "  [0] " STYLE_END "%s\n", opt_exit_text);
-		        		
+								
 								clearbuffer();
 								scanf(" %d", &fuzzel_edit_menu_choice);
-		        		
+								
 								apply_fuzzel_config(fuzzel_edit_menu_choice);
 							}
 							while (fuzzel_edit_menu_choice > INPUT_BACK_VALUE);
@@ -168,7 +168,7 @@ int main(int argc, char *argv[])
 							wait_for_timeout(SHORT_TIMER, 0);
 						}
 					}
-						while (fuzzel_config_menu_choice > INPUT_BACK_VALUE);
+					while (fuzzel_config_menu_choice > INPUT_BACK_VALUE);
 				}
 				else if (dotfiles_config_menu == 4)
 				{
@@ -196,33 +196,33 @@ int main(int argc, char *argv[])
 		}
 		else if (menu_one_i == 4)
 		{
-				int menu_activate_linux;
-				do
+			int menu_activate_linux;
+			do
+			{
+				clear();
+				printf(BOLD_S "%s\n"STYLE_END, opt_fiv_text );
+				
+				char act_linux_water_text[128] = "Do you want to add the \"Activate Linux\" watermark?";
+				
+				printf("\n%s\n", act_linux_water_text);
+				yes_no_prompt();
+				
+				clearbuffer();
+				scanf("%d", &menu_activate_linux);
+				
+				if (menu_activate_linux == 1)
 				{
-					clear();
-					printf(BOLD_S "%s\n"STYLE_END, opt_fiv_text );
-			
-					char act_linux_water_text[128] = "Do you want to add the \"Activate Linux\" watermark?";
-		
-					printf("\n%s\n", act_linux_water_text);
-					yes_no_prompt();
-		
-					clearbuffer();
-					scanf("%d", &menu_activate_linux);
-		
-					if (menu_activate_linux == 1)
-					{
-						install_package("arch", "activate-linux-git");
-			    		exec_cmd(24, "activate-linux-git");
-		
-		    	    printf("\nHere is something cool!\n\n");
-		    	    printf("Look at the bottom right of your screen\n");
-						printf("Use "BOLD_S"^C (Control+C)"STYLE_END" to close the program.\n");
-		    	    	printf("You can use a command like \""UDRL_S"activate-linux -t Activate\\ Arch-Linux -m Go\\ to\\ archlinux.org/donate/\\ to\\ activate"STYLE_END"\" \n");
-		    	    	printf("These flags allow you to add a custom message or title\n");
-					}
+					install_package("arch", "activate-linux-git");
+					exec_cmd(24, "activate-linux-git");
+
+					printf("\nHere is something cool!\n\n");
+			    		printf("Look at the bottom right of your screen\n");
+					printf("Use "BOLD_S"^C (Control+C)"STYLE_END" to close the program.\n");
+					printf("You can use a command like \""UDRL_S"activate-linux -t Activate\\ Arch-Linux -m Go\\ to\\ archlinux.org/donate/\\ to\\ activate"STYLE_END"\" \n");
+					printf("These flags allow you to add a custom message or title\n");
 				}
-				while (menu_activate_linux > INPUT_BACK_VALUE);
+			}
+			while (menu_activate_linux > INPUT_BACK_VALUE);
 		}
 		else if (menu_one_i == INPUT_EXIT_VALUE || menu_one_i > 4)
 		{
