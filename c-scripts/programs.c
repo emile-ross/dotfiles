@@ -399,8 +399,8 @@ void KITT(bool archive_bl, float pver, bool pkginstall_bl)
 	{
 		/* backup kitty config */
 		snprintf(cmd, sizeof(cmd),
-		"mv ~/.config/kitty/kitty.conf "
-		"~/.config/kitty/kitty-oldv%.2f.conf", pver);
+				"mv ~/.config/kitty/kitty.conf "
+				"~/.config/kitty/kitty-oldv%.2f.conf", pver);
 		system(cmd);
 	}
 	if (pkginstall_bl)
@@ -584,4 +584,49 @@ void configure_oh_my_zsh(void)
         		"fi");
 	clearbuffer();
 	block(true);
+}
+
+
+void file_archiving(char *program_name, char *config_file, char *file_extention)
+{
+	char *program_config_path = "%s/%s";
+	int temp_path_size = 1 + snprintf(NULL, 0, program_config_path, config_path, program_name);
+	int program_path_size = 1 + snprintf(NULL, 0, program_config_path, config_path, program_name);
+
+	char *temp_path = malloc((size_t)temp_path_size);
+	snprintf(temp_path, (size_t)temp_path_size, program_config_path, config_path, program_name);
+
+	char *program_path = malloc((size_t)program_path_size);
+	snprintf(program_path, (size_t)program_path_size, program_config_path, config_path, program_name);
+
+	int file_extention_size = snprintf(NULL, 0, "%s ", file_extention);
+	int config_file_size = 16 + file_extention_size; /* the 16 represents the max size of the config file name length */
+	int file_suffix_size = 1 + snprintf(NULL, 0, archiving_file_suffix_template, pver);
+
+	int archive_file_size = file_suffix_size + config_file_size;
+	int archive_file_path_size = archive_file_size + program_path_size;
+
+	char file_suffix[file_suffix_size];
+	snprintf(file_suffix, (size_t)file_suffix_size, archiving_file_suffix_template, pver);
+
+	char destination_file_name[archive_file_path_size];
+	char config_file_temp[config_file_size];
+	strcpy(config_file_temp, config_file);
+
+	strcpy(destination_file_name, program_path);
+	strcat(destination_file_name, "/");
+	strcat(destination_file_name, config_file_temp);
+	strcat(destination_file_name, file_suffix);
+	strcat(destination_file_name, file_extention);
+
+	strcat(config_file_temp, file_extention);
+	char source_path[archive_file_path_size];
+	strcpy(source_path, program_path);
+	strcat(source_path, "/");
+	strcat(source_path, config_file_temp);
+
+	printf("%s\n%s\n", source_path, destination_file_name);
+
+	/* don't rename yet since this isn't fully bug free
+	 * rename(source_path, destination_file_name); */
 }
