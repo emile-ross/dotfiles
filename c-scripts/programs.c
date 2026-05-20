@@ -589,44 +589,43 @@ void configure_oh_my_zsh(void)
 
 void file_archiving(char *program_name, char *config_file, char *file_extention)
 {
-	char *program_config_path = "%s/%s";
-	int temp_path_size = 1 + snprintf(NULL, 0, program_config_path, config_path, program_name);
-	int program_path_size = 1 + snprintf(NULL, 0, program_config_path, config_path, program_name);
+	/* initialize the template for the program config path 
+	 * this will represent the full path to the config including the config name
+	 * example: /home/admin/.config/nvim */
+	char *program_config_path = "%s/%s/";
 
-	char *temp_path = malloc((size_t)temp_path_size);
-	snprintf(temp_path, (size_t)temp_path_size, program_config_path, config_path, program_name);
+	/* calculate the size of all strings */
+	int program_path_size = 1 + snprintf(NULL, 0, program_config_path, config_path, program_name);
 
 	char *program_path = malloc((size_t)program_path_size);
 	snprintf(program_path, (size_t)program_path_size, program_config_path, config_path, program_name);
 
 	int file_extention_size = snprintf(NULL, 0, "%s ", file_extention);
-	int config_file_size = 16 + file_extention_size; /* the 16 represents the max size of the config file name length */
 	int file_suffix_size = 1 + snprintf(NULL, 0, archiving_file_suffix_template, pver);
 
-	int archive_file_size = file_suffix_size + config_file_size;
-	int archive_file_path_size = archive_file_size + program_path_size;
+	int archive_file_path_size = program_path_size + file_suffix_size + file_extention_size;
 
 	char file_suffix[file_suffix_size];
 	snprintf(file_suffix, (size_t)file_suffix_size, archiving_file_suffix_template, pver);
 
-	char destination_file_name[archive_file_path_size];
+	/* calculate the config_file size */
+	int config_file_size = 1 + snprintf(NULL, 0, "%s", config_file);
 	char config_file_temp[config_file_size];
-	strcpy(config_file_temp, config_file);
+	snprintf(config_file_temp, (size_t)config_file_size, "%s", config_file);
 
-	strcpy(destination_file_name, program_path);
-	strcat(destination_file_name, "/");
-	strcat(destination_file_name, config_file_temp);
-	strcat(destination_file_name, file_suffix);
-	strcat(destination_file_name, file_extention);
+	char destination_file[archive_file_path_size];
 
-	strcat(config_file_temp, file_extention);
+	/* craft the src string and the dest string */
+	strcpy(destination_file, program_path);
+	strcat(destination_file, config_file_temp);
+	strcat(destination_file, file_suffix);
+	strcat(destination_file, file_extention);
+
 	char source_path[archive_file_path_size];
 	strcpy(source_path, program_path);
-	strcat(source_path, "/");
 	strcat(source_path, config_file_temp);
+	strcat(source_path, file_extention);
 
-	printf("%s\n%s\n", source_path, destination_file_name);
-
-	/* don't rename yet since this isn't fully bug free
-	 * rename(source_path, destination_file_name); */
+	rename(source_path, destination_file);
+	free(program_path);
 }

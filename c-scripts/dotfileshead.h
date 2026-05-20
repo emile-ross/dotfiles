@@ -30,6 +30,8 @@ void NVIM(bool archive_bl, float pver, bool pkginstall_bl);
 void WAYB(bool archive_bl, float pver, bool pkginstall_bl);
 void ZSHH(bool archive_bl, float pver, bool pkginstall_bl);
 
+void file_archiving(char *program_config_path, char *config_file, char *file_extention);
+
 /* data */
 extern char *config_names[n_configs];
 
@@ -104,6 +106,7 @@ extern char kitty_fonts_text[32];
 	extern const char *home;
 	extern char full_install_opt; /* if the user wants to install everything set to Y */
 	extern char archive_before_install;
+	extern char *archiving_file_suffix_template;
 
 /* main menu */
 	extern const int max_menu_opt_n;
