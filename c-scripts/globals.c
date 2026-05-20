@@ -196,3 +196,7 @@ char *config[15][5][2] =
 		},
 	},
 };
+
+
+/* File archiving */
+char *archiving_file_suffix_template = "-oldv%.2f";
