@@ -592,7 +592,7 @@ void file_archiving(char *program_name, char *config_file, char *file_extention)
 	/* initialize the template for the program config path 
 	 * this will represent the full path to the config including the config name
 	 * example: /home/admin/.config/nvim */
-	char *program_config_path = "%s/%s/";
+	char *program_config_path = "%s/%s";
 
 	/* calculate the size of all strings */
 	int program_path_size = 1 + snprintf(NULL, 0, program_config_path, config_path, program_name);
@@ -600,12 +600,8 @@ void file_archiving(char *program_name, char *config_file, char *file_extention)
 	char *program_path = malloc((size_t)program_path_size);
 	snprintf(program_path, (size_t)program_path_size, program_config_path, config_path, program_name);
 
-	int file_extention_size = snprintf(NULL, 0, "%s ", file_extention);
 	int file_suffix_size = 1 + snprintf(NULL, 0, archiving_file_suffix_template, pver);
-
-	int archive_file_path_size = program_path_size + file_suffix_size + file_extention_size;
-
-	char file_suffix[file_suffix_size];
+	char *file_suffix = malloc((size_t)file_suffix_size); /* allocate memory to the file_suffix */
 	snprintf(file_suffix, (size_t)file_suffix_size, archiving_file_suffix_template, pver);
 
 	/* calculate the config_file size */
@@ -613,19 +609,19 @@ void file_archiving(char *program_name, char *config_file, char *file_extention)
 	char config_file_temp[config_file_size];
 	snprintf(config_file_temp, (size_t)config_file_size, "%s", config_file);
 
-	char destination_file[archive_file_path_size];
+	int destination_file_size = 1 + snprintf(NULL, 0, "%s/%s%s%s", program_path, config_file, file_suffix, file_extention);
 
-	/* craft the src string and the dest string */
-	strcpy(destination_file, program_path);
-	strcat(destination_file, config_file_temp);
-	strcat(destination_file, file_suffix);
-	strcat(destination_file, file_extention);
+	char *destination_file = malloc((size_t)destination_file_size);
+	snprintf(destination_file, (size_t)destination_file_size, "%s/%s%s%s", program_path, config_file, file_suffix, file_extention);
+	free(file_suffix); /* not used by the src_file */
 
-	char source_path[archive_file_path_size];
-	strcpy(source_path, program_path);
-	strcat(source_path, config_file_temp);
-	strcat(source_path, file_extention);
+	int src_file_size = 1 + snprintf(NULL, 0, "%s/%s%s", program_path, config_file, file_extention);
+	char *src_file = malloc((size_t)src_file_size);
+	snprintf(src_file, (size_t)destination_file_size, "%s/%s%s", program_path, config_file, file_extention);
 
-	rename(source_path, destination_file);
+	printf("%s\n%s\n", destination_file, src_file);
+	rename(src_file, destination_file);
+	free(src_file);
+	free(destination_file);
 	free(program_path);
 }
