@@ -81,6 +81,7 @@ extern char* help_flag_arg_text;
 extern char* pkgi_flag_arg_text;
 extern char* conf_inst_flag_arg_text;
 extern char* conf_info_flag_arg_text;
+extern bool verbose;
 
 extern char fastfetch_config_menu_text[32];
 extern char kitty_config_menu_text[32];
