@@ -213,47 +213,47 @@ void countdown(int counter, int lines_to_skip)
 	
 	for (int i = 0; i < total_time; i++)
 	{
-	    printf("%d ", counter);
+		printf("%d ", counter);
+
+		/* prints a "." to the screen each quarter of a second */
+		for (int j = 0; j < 3; j++)
+		{
+			printf(".");
+			fflush(stdout);
+			wait_for_timeout(1, 0);
+		}
 	
-	    	/* prints a "." to the screen each quarter of a second */
-	    for (int j = 0; j < 3; j++)
-	    {
-	        printf(".");
-	        fflush(stdout);
-	    		wait_for_timeout(1, 0);
-	    }
-	
-	    /* prints one newline everytime this is executed */
-	    for (int k = 0; k < lines_to_skip; k++)
-	    {
-	    		printf("\n");
-	    }
-	    	
-	    	wait_for_timeout(1, 0);
-	    counter--;
+		/* prints one newline everytime this is executed */
+		for (int k = 0; k < lines_to_skip; k++)
+		{
+			printf("\n");
+		}
+			
+		wait_for_timeout(1, 0);
+		counter--;
 	}
 }
 
 bool y_n(char yes_no)
 {
-    if (yes_no == 'Y' || yes_no == 'y')
-    {
+	if (yes_no == 'Y' || yes_no == 'y')
+	{
 		return true;
-    }
-    else if (yes_no == 'T' || yes_no == 't')
-    {
-		return true;
-    }
-    else
-    {
+	}
+	else if (yes_no == 'T' || yes_no == 't')
+	{
+	    	return true;
+	}
+	else
+	{
 		return false;
-    }
+	}
 }
 
 void yes_no_prompt(void)
 {
-    printf(BOLD_S "\n  [1] Yes \n"STYLE_END);
-    printf(BOLD_S "\n  [0] No \n"STYLE_END);
+	printf(BOLD_S "\n  [1] Yes \n"STYLE_END);
+	printf(BOLD_S "\n  [0] No \n"STYLE_END);
 }
 
 char *package_name(config_name config)
