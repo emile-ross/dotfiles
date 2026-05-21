@@ -21,7 +21,7 @@ void BASH(void)
 	free(cmd);
 }
 
-void BPYT(bool archive_bl, float pver, bool pkginstall_bl)
+void BPYT(bool archive_bl, bool pkginstall_bl)
 {
 	char *pkg_name = "bpytop";
 
@@ -114,7 +114,7 @@ void CAVA(bool archive_bl, float pver, bool pkginstall_bl)
 	system(safe_cmd);
 }
 
-void FAST(bool archive_bl, float pver, bool pkginstall_bl)
+void FAST(bool archive_bl, bool pkginstall_bl)
 {
 	const char *program_config_path = "%s/fastfetch";
 	int temp_path_size = 1 + snprintf(NULL, 0, program_config_path, inpath);
@@ -151,7 +151,7 @@ void FAST(bool archive_bl, float pver, bool pkginstall_bl)
 	free(program_path);
 	free(temp_path);
 }
-void FUZZ(bool archive_bl, float pver, bool pkginstall_bl)
+void FUZZ(bool archive_bl, bool pkginstall_bl)
 {
 	const char *program_config_path = "%s/fuzzel";
 	int program_path_size = 1 + snprintf(NULL, 0, program_config_path, config_path);
@@ -193,7 +193,7 @@ void FUZZ(bool archive_bl, float pver, bool pkginstall_bl)
 	system(cmd);  		
 	free(program_path);
 }
-void GTKL(bool archive_bl, float pver, bool pkginstall_bl)
+void GTKL(bool archive_bl, bool pkginstall_bl)
 {
 	const char *program_config_path = "%s/gtklock";
 	int program_path_size = 1 + snprintf(NULL, 0, program_config_path, config_path);
@@ -219,7 +219,7 @@ void GTKL(bool archive_bl, float pver, bool pkginstall_bl)
 	free(program_path);
 }
 
-void HYPR(bool archive_bl, float pver, bool pkginstall_bl)
+void HYPR(bool archive_bl, bool pkginstall_bl)
 {
 	const char *program_config_path = "%s/hypr";
 	int temp_path_size = 1 + snprintf(NULL, 0, program_config_path, inpath);
@@ -277,7 +277,7 @@ void HYPR(bool archive_bl, float pver, bool pkginstall_bl)
 	free(temp_path);
 	free(program_path);
 }
-void KITT(bool archive_bl, float pver, bool pkginstall_bl)
+void KITT(bool archive_bl, bool pkginstall_bl)
 {
 	char cmd[256];
 	if (archive_bl)
@@ -298,7 +298,7 @@ void KITT(bool archive_bl, float pver, bool pkginstall_bl)
 	system(cmd);
 }
 
-void MPVF(bool archive_bl, float pver, bool pkginstall_bl)
+void MPVF(bool archive_bl, bool pkginstall_bl)
 {
 	char cmd[256];
 	if (archive_bl)
@@ -316,7 +316,7 @@ void MPVF(bool archive_bl, float pver, bool pkginstall_bl)
 	system(cmd);
 }
 
-void NVIM(bool archive_bl, float pver, bool pkginstall_bl)
+void NVIM(bool archive_bl, bool pkginstall_bl)
 {
 
 	char cmd[256];
