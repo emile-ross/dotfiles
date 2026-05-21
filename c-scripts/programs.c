@@ -148,26 +148,7 @@ void FAST(bool archive_bl, float pver, bool pkginstall_bl)
 	char cmd[768];
     	if (archive_bl)
     	{
-		int temp_size = 1 + snprintf(NULL, 0, "%s", program_path);
-		char out_config_temp[temp_size];
-		snprintf(out_config_temp, (size_t)temp_size, "%s", program_path);
-		
-		const char *template_config_name = "/config.jsonc";
-		int in_path_temp_size = 1 + snprintf(NULL, 0, "%s", template_config_name);
-		
-		char config_path_temp[in_path_temp_size];
-		snprintf(config_path_temp, (size_t)in_path_temp_size, "%s", template_config_name);
-		
-		const char *out_config_name = " %s/config-oldv%.2f.jsonc";
-		
-		int mem_out_size = 1 + snprintf(NULL, 0, out_config_name, program_path, pver);
-		
-		snprintf(out_config_temp, (size_t)mem_out_size, program_path, pver);
-		
-		strcpy(out_config_temp, program_path);
-		strcat(out_config_temp, out_config_name);
-		/* backup fastfetch config */
-		rename(config_path_temp, out_config_temp);
+		file_archiving("fastfetch", "config", ".jsonc");
 	}
 
 	if (pkginstall_bl)
@@ -386,11 +367,7 @@ void KITT(bool archive_bl, float pver, bool pkginstall_bl)
 	char cmd[256];
 	if (archive_bl)
 	{
-		/* backup kitty config */
-		snprintf(cmd, sizeof(cmd),
-				"mv ~/.config/kitty/kitty.conf "
-				"~/.config/kitty/kitty-oldv%.2f.conf", pver);
-		system(cmd);
+		file_archiving("kitty", "kitty", ".conf");
 	}
 	if (pkginstall_bl)
 	{
@@ -411,11 +388,7 @@ void MPVF(bool archive_bl, float pver, bool pkginstall_bl)
 	char cmd[256];
 	if (archive_bl)
 	{
-		/* archive mpv config */
-		snprintf(cmd, sizeof(cmd),
-		"mv ~/.config/mpv/mpv.conf ~/.config/mpv/mpv-oldv%.2f.conf ", pver);
-		system(cmd);
-		printf(BOLD_S"\nThe old "UDRL_S"mpv"STYLE_END BOLD_S" config was archived\n"STYLE_END);
+		file_archiving("mpv", "mpv", ".conf");
 	}
 	if (pkginstall_bl)
 	{
