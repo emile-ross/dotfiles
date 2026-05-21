@@ -118,7 +118,7 @@ void argument_config_install(char *package_t, char archiving_t, char pkginstall_
             break;
 
         case btop:
-	    BTOP(archiving_t, version, pkginstall_t);
+	    BTOP(archiving_t, pkginstall_t);
             break;
 
         case cava:

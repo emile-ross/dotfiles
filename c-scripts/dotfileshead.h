@@ -17,7 +17,7 @@
 
 void BASH(void);
 void SWAY(bool archive_bl, float pver, bool pkginstall_bl);
-void BTOP(bool archive_bl, float pver, bool pkginstall_bl);
+void BTOP(bool archive_bl, bool pkginstall_bl);
 void BPYT(bool archive_bl, float pver, bool pkginstall_bl);
 void CAVA(bool archive_bl, float pver, bool pkginstall_bl);
 void FAST(bool archive_bl, float pver, bool pkginstall_bl);

@@ -50,7 +50,7 @@ int full_update(char ARCHIVE, float pver)
         		CAVA(ARCHIVE, pver, install_pkg_yn);
         		__attribute__ ((fallthrough));	/* do not break because we are also installing everything below */
             case V_1_4:
-				BTOP(ARCHIVE, pver, install_pkg_yn);
+				BTOP(ARCHIVE, install_pkg_yn);
 				__attribute__ ((fallthrough));	/* do not break because we are also installing everything below */
 			case V_2:
 	    	    install_package(parent, "gtklock");
