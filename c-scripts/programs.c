@@ -68,7 +68,7 @@ void BTOP(bool archive_bl, bool pkginstall_bl)
 	free(program_path);
 }
 
-void CAVA(bool archive_bl, float pver, bool pkginstall_bl)
+void CAVA(bool archive_bl, bool pkginstall_bl)
 {
 	const char *program_config_path = "%s/cava";
 	const char *program_name = "cava";
@@ -79,7 +79,9 @@ void CAVA(bool archive_bl, float pver, bool pkginstall_bl)
 	
 	if (archive_bl)
 	{
-		/* backup cava config */
+		file_archiving("cava", "config", NULL);
+		/*
+		 backup cava config
 	    	const char *out_config_name = "%s/config-oldv%.2f";
 	    	const char *in_config_path = "%s/%s/config";
 	
@@ -96,6 +98,7 @@ void CAVA(bool archive_bl, float pver, bool pkginstall_bl)
 	    	rename(config_path_temp, out_config_temp);
 	    	free(out_config_temp);
 	    	free(config_path_temp);
+		*/
 	}
 	
 	if (pkginstall_bl)
@@ -469,6 +472,13 @@ void file_archiving(char *program_name, char *config_file, char *file_extention)
 	 * example: /home/admin/.config/nvim */
 	char *program_config_path = "%s/%s";
 
+	bool extention_bl = true;
+	if (file_extention == NULL)
+	{
+		extention_bl = false;
+		printf("HEEEEEEEEEEEE\n");
+	}
+
 	/* calculate the size of all strings */
 	int program_path_size = 1 + snprintf(NULL, 0, program_config_path, config_path, program_name);
 
@@ -486,17 +496,39 @@ void file_archiving(char *program_name, char *config_file, char *file_extention)
 	char config_file_temp[config_file_size];
 	snprintf(config_file_temp, (size_t)config_file_size, "%s", config_file);
 
-	int destination_file_size = 1 + snprintf(NULL, 0, "%s/%s%s%s", program_path, config_file, file_suffix, file_extention);
+	int destination_file_size = 1;
+	if (extention_bl)
+	{
+		destination_file_size += snprintf(NULL, 0, "%s/%s%s%s", program_path, config_file, file_suffix, file_extention);
+	}
+	else
+	{
+		destination_file_size += snprintf(NULL, 0, "%s/%s%s", program_path, config_file, file_suffix);
+	}
 
 	char *destination_file = malloc((size_t)destination_file_size);
 	if (!destination_file) return;
-	snprintf(destination_file, (size_t)destination_file_size, "%s/%s%s%s", program_path, config_file, file_suffix, file_extention);
-	free(file_suffix); /* not used by the src_file */
+	char *src_file;
+	if (extention_bl)
+	{
+		snprintf(destination_file, (size_t)destination_file_size, "%s/%s%s%s", program_path, config_file, file_suffix, file_extention);
 
-	int src_file_size = 1 + snprintf(NULL, 0, "%s/%s%s", program_path, config_file, file_extention);
-	char *src_file = malloc((size_t)src_file_size);
-	if (!src_file) return;
-	snprintf(src_file, (size_t)src_file_size, "%s/%s%s", program_path, config_file, file_extention);
+		int src_file_size = 1 + snprintf(NULL, 0, "%s/%s%s", program_path, config_file, file_extention);
+		src_file = malloc((size_t)src_file_size);
+		if (!src_file) return;
+		snprintf(src_file, (size_t)src_file_size, "%s/%s%s", program_path, config_file, file_extention);
+	}
+	else
+	{
+		snprintf(destination_file, (size_t)destination_file_size, "%s/%s%s", program_path, config_file, file_suffix);
+
+		int src_file_size = 1 + snprintf(NULL, 0, "%s/%s", program_path, config_file);
+		src_file = malloc((size_t)src_file_size);
+		if (!src_file) return;
+		snprintf(src_file, (size_t)src_file_size, "%s/%s", program_path, config_file);
+	}
+
+	free(file_suffix); /* not used by the src_file */
 
 	/* print the destination and source file paths */
 	if (verbose)
