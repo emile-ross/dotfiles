@@ -114,7 +114,7 @@ void argument_config_install(char *package_t, char archiving_t, char pkginstall_
             break;
 
         case bpyt:
-	    BPYT(archiving_t, version, pkginstall_t);
+	    BPYT(archiving_t, pkginstall_t);
             break;
 
         case btop:
@@ -126,31 +126,31 @@ void argument_config_install(char *package_t, char archiving_t, char pkginstall_
             break;
 
         case fast:
-	    FAST(archiving_t, version, pkginstall_t);
+	    FAST(archiving_t, pkginstall_t);
             break;
 
         case fuzz:
-	    FUZZ(archiving_t, version, pkginstall_t);
+	    FUZZ(archiving_t, pkginstall_t);
             break;
 
         case gtkl:
-	    GTKL(archiving_t, version, pkginstall_t);
+	    GTKL(archiving_t, pkginstall_t);
             break;
 
         case hypr:
-	    HYPR(archiving_t, version, pkginstall_t);
+	    HYPR(archiving_t, pkginstall_t);
             break;
 
 	case kitt:
-	    KITT(archiving_t, version, pkginstall_t);
+	    KITT(archiving_t, pkginstall_t);
             break;
 
         case mpvf:
-	    MPVF(archiving_t, version, pkginstall_t);
+	    MPVF(archiving_t, pkginstall_t);
             break;
 
         case nvim:
-	    NVIM(archiving_t, version, pkginstall_t);
+	    NVIM(archiving_t, pkginstall_t);
             break;
  
         case sway:
