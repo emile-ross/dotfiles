@@ -613,7 +613,12 @@ void file_archiving(char *program_name, char *config_file, char *file_extention)
 	if (!src_file) return;
 	snprintf(src_file, (size_t)src_file_size, "%s/%s%s", program_path, config_file, file_extention);
 
-	printf("%s\n%s\n", destination_file, src_file);
+	/* print the destination and source file paths */
+	if (verbose)
+	{
+		printf("source file path:%s\ndestination file path: %s\n", src_file, destination_file);
+	}
+
 	rename(src_file, destination_file);
 	free(src_file);
 	free(destination_file);
