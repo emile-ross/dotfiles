@@ -72,7 +72,7 @@ void install_configs(unsigned int custom_package_install)  /* the partial instal
 			break;
 		case bpyt:
 			install_config_message(temp_conf_installed);
-			BPYT(ARCHIVE_T, pver, PKGINSTALL_T);
+			BPYT(ARCHIVE_T, PKGINSTALL_T);
 			break;
 		case btop:
 			install_config_message(temp_conf_installed);
@@ -84,31 +84,31 @@ void install_configs(unsigned int custom_package_install)  /* the partial instal
 			break;
 		case fast:
 			install_config_message(temp_conf_installed);
-			FAST(ARCHIVE_T, pver, PKGINSTALL_T);
+			FAST(ARCHIVE_T, PKGINSTALL_T);
 			break;
 		case fuzz:
 			install_config_message(temp_conf_installed);
-			FUZZ(ARCHIVE_T, pver, PKGINSTALL_T);
+			FUZZ(ARCHIVE_T, PKGINSTALL_T);
 			break;
 		case gtkl:
 			install_config_message(temp_conf_installed);
-			GTKL(ARCHIVE_T, pver, PKGINSTALL_T);
+			GTKL(ARCHIVE_T, PKGINSTALL_T);
 			break;
 		case hypr:
 			install_config_message(temp_conf_installed);
-			HYPR(ARCHIVE_T, pver, PKGINSTALL_T);
+			HYPR(ARCHIVE_T, PKGINSTALL_T);
 			break;
 		case kitt:
 			install_config_message(temp_conf_installed);
-			KITT(ARCHIVE_T, pver, PKGINSTALL_T);
+			KITT(ARCHIVE_T, PKGINSTALL_T);
 			break;
 		case mpvf:
 			install_config_message(temp_conf_installed);
-			MPVF(ARCHIVE_T, pver, PKGINSTALL_T);
+			MPVF(ARCHIVE_T, PKGINSTALL_T);
 			break;
 		case nvim:
 			install_config_message(temp_conf_installed);
-			NVIM(ARCHIVE_T, pver, PKGINSTALL_T);
+			NVIM(ARCHIVE_T, PKGINSTALL_T);
 			break;
 		case sway:
 			install_config_message(temp_conf_installed);
@@ -132,7 +132,7 @@ void install_configs(unsigned int custom_package_install)  /* the partial instal
 		if (install_success)
 		{
 			/* print success message if enabled */
-		    printf(UDRL_S"\nInstalled %s successfully.\n"STYLE_END, temp_conf_installed);
+			printf(UDRL_S"\nInstalled %s successfully.\n"STYLE_END, temp_conf_installed);
 		}
 
 		/* relatively short pause */
@@ -187,16 +187,16 @@ void full_config_install(bool ARCHIVE_BL, float previous_version_t, bool install
 	/* a list of all configs
 	* this will execute all configuration entries */
 	BASH();
-	BPYT(ARCHIVE_BL, previous_version_t, install_packages_t);
+	BPYT(ARCHIVE_BL, install_packages_t);
 	BTOP(ARCHIVE_BL, install_packages_t);
 	CAVA(ARCHIVE_BL, previous_version_t, install_packages_t);
-	FAST(ARCHIVE_BL, previous_version_t, install_packages_t);
-	FUZZ(ARCHIVE_BL, previous_version_t, install_packages_t);
-	GTKL(ARCHIVE_BL, previous_version_t, install_packages_t);
-	HYPR(ARCHIVE_BL, previous_version_t, install_packages_t);
-	KITT(ARCHIVE_BL, previous_version_t, install_packages_t);
-	MPVF(ARCHIVE_BL, previous_version_t, install_packages_t);
-	NVIM(ARCHIVE_BL, previous_version_t, install_packages_t);
+	FAST(ARCHIVE_BL, install_packages_t);
+	FUZZ(ARCHIVE_BL, install_packages_t);
+	GTKL(ARCHIVE_BL, install_packages_t);
+	HYPR(ARCHIVE_BL, install_packages_t);
+	KITT(ARCHIVE_BL, install_packages_t);
+	MPVF(ARCHIVE_BL, install_packages_t);
+	NVIM(ARCHIVE_BL, install_packages_t);
 	SWAY(ARCHIVE_BL, previous_version_t, install_packages_t);
 	WAYB(ARCHIVE_BL, previous_version_t, install_packages_t);
 	ZSHH(ARCHIVE_BL, previous_version_t, install_packages_t);
