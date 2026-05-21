@@ -23,31 +23,12 @@ void BASH(void)
 
 void BPYT(bool archive_bl, float pver, bool pkginstall_bl)
 {
-	const char *pkg_name = "bpytop";
+	char *pkg_name = "bpytop";
 
 	char cmd[192]; /* using malloc is now safer, it avoids truncation */
 	if (archive_bl)
 	{
-		/* evaluate original_path size */
-		const char *original_path = "%s/%s/bpytop.conf";
-		const char *archived_path = "%s/%s/bpytop-oldv%.2f.conf";
-		int original_path_size = 1 + snprintf(NULL, 0, original_path, config_path, pkg_name);
-		int archived_path_size = 1 + snprintf(NULL, 0, archived_path, config_path, pkg_name, pver);
-		
-		/* allocate the corresponding amount of memory for the buffer
-		 * and then initialize both variables */
-		char *input_file = malloc((size_t)original_path_size);
-		char *output_file = malloc((size_t)archived_path_size);
-		
-		snprintf(input_file, (size_t)original_path_size, original_path, config_path, pkg_name);
-		snprintf(output_file, (size_t)original_path_size, original_path, config_path, pkg_name, pver);
-		
-		/* archive bpytop config */
-		rename(input_file, output_file);
-		
-		/* free unused memory */
-		free(input_file);
-		free(output_file);
+		file_archiving(pkg_name, pkg_name, ".conf");
 	}
 
 	if (pkginstall_bl)
@@ -182,20 +163,9 @@ void FUZZ(bool archive_bl, float pver, bool pkginstall_bl)
 	char cmd[1024];
     	if (archive_bl)
     	{
-		/* backup fuzzel config */
-		const char *source_file_path_temp = "%s/fuzzel-duplicated.ini";
-		char *source_file_path = NULL;
-		int mem_input = 1 + snprintf(NULL, 0, source_file_path_temp, program_path);
-		snprintf(source_file_path, (size_t)mem_input, source_file_path_temp, program_path);
-		
-		snprintf(cmd, sizeof(cmd),
-				"mv %s/fuzzel/fuzzel-duplicated.ini "
-				"%s/fuzzel/fuzzel-duplicated-oldv%.2f.ini ; "
-				"mv ~/.config/fuzzel/old-fuzzel.ini "
-				"~/.config/fuzzel/old-fuzzel-oldv%.2f.ini ; "
-				"mv ~/.config/fuzzel/fuzzel.ini "
-				"~/.config/fuzzel/fuzzel-oldv%.2f.ini", config_path, config_path, pver, pver, pver);
-		system(cmd);
+		file_archiving("fuzzel", "fuzzel", ".ini");
+		file_archiving("fuzzel", "fuzzel-duplicated", ".ini");
+		file_archiving("fuzzel", "old-fuzzel", ".ini");
 	}
 	if (pkginstall_bl)
     	{
@@ -233,17 +203,7 @@ void GTKL(bool archive_bl, float pver, bool pkginstall_bl)
 	char cmd[512];
     	if (archive_bl)
     	{
-		/* backup fuzzel config */
-		const char *source_file_path_temp = "%s/style.css";
-		char *source_file_path = NULL;
-		int mem_input = 1 + snprintf(NULL, 0, source_file_path_temp, program_config_path);
-		snprintf(source_file_path, (size_t)mem_input, source_file_path_temp, program_path);
-
-		/* backup gtklock config */
-        	snprintf(cmd, sizeof(cmd),
-			"mv %s/style.css "
-			"%s/style-oldv%.2f.css", program_path, program_path, pver);
-    		system(cmd);
+		file_archiving("gtklock", "style", ".css");
 	}
     	if (pkginstall_bl)
     	{
@@ -271,8 +231,6 @@ void HYPR(bool archive_bl, float pver, bool pkginstall_bl)
 	char *program_path = malloc((size_t)program_path_size);
 	snprintf(program_path, (size_t)program_path_size, program_config_path, config_path);
 
-	int config_file_size = 16;
-
 	char *config_file[5] = 
 	{
 		"hypridle",
@@ -284,53 +242,10 @@ void HYPR(bool archive_bl, float pver, bool pkginstall_bl)
 
 	if (archive_bl)
 	{
-		char *file_suffix_template = "-oldv%.2f.conf";
-		int file_suffix_size = 1 + snprintf(NULL, 0, file_suffix_template, pver);
-		int archive_file_size = file_suffix_size + config_file_size;
-		int archive_file_path_size = archive_file_size + program_path_size;
-
-		char file_suffix[file_suffix_size];
-		snprintf(file_suffix, (size_t)file_suffix_size, file_suffix_template, pver);
-
-		for (int i = 0; config_file[i] != NULL; i++)
+		for (int i = 0; i < 5; i++)
 		{
-			char destination_file_name[archive_file_path_size];
-			char config_file_temp[config_file_size];
-			strcpy(config_file_temp, config_file[i]);
-
-			strcpy(destination_file_name, program_path);
-			strcat(destination_file_name, "/");
-			strcat(destination_file_name, config_file_temp);
-			strcat(destination_file_name, file_suffix);
-
-			strcat(config_file_temp, ".conf");
-			char source_path[archive_file_path_size];
-			strcpy(source_path, program_path);
-			strcat(source_path, "/");
-			strcat(source_path, config_file_temp);
-
-			rename(source_path, destination_file_name);
+			file_archiving("hypr", config_file[i], ".conf");
 		}
-		/* TODO:
-		 * make use of the archiving function
-		*/
-		
-		int mem_needed_move = snprintf(NULL, 0,
-				"mv %s/hyprland.conf %s/hyprland-oldv%.2f.conf ; "
-				"mv %s/hyprpaper.conf %s/hyprpaper-oldv%.2f.conf ; "
-				"mv %s/hyprlock.conf %s/hyprlock-oldv%.2f.conf ; "
-				"mv %s/hypridle.conf %s/hypridle-oldv%.2f.conf "
-				, program_path, program_path, pver, program_path, program_path, pver, program_path, program_path, pver, program_path, program_path, pver);
-		char *cmd = malloc((size_t)mem_needed_move + 1);
-		
-		snprintf(cmd, (size_t)mem_needed_move + 1,
-				"mv %s/hyprland.conf %s/hyprland-oldv%.2f.conf ; "
-				"mv %s/hyprpaper.conf %s/hyprpaper-oldv%.2f.conf ; "
-    	    			"mv %s/hyprlock.conf %s/hyprlock-oldv%.2f.conf ; "
-    	    			"mv %s/hypridle.conf %s/hypridle-oldv%.2f.conf "
-				, program_path, program_path, pver, program_path, program_path, pver, program_path, program_path, pver, program_path, program_path, pver);
-		system(cmd);
-		free(cmd);
 	}
 
 	if (pkginstall_bl)
@@ -407,12 +322,9 @@ void NVIM(bool archive_bl, float pver, bool pkginstall_bl)
 	char cmd[256];
 	if (archive_bl)
 	{
-		snprintf(cmd, sizeof(cmd),
-		        	"mv %s/nvim/init.lua ~/.config/nvim/init-oldv%.2f.lua ; "
-		        	"mv %s/nvim/lua/config/lazy.lua ~/.config/nvim/lua/config/lazy-oldv%.2f.lua ; "
-		        	"mv %s/nvim/lazy-lock.json ~/.config/nvim/lazy-lock-oldv%.2f.json",
-		        	config_path, pver, config_path, pver, config_path, pver);
-		system(cmd);
+		file_archiving("nvim", "init", ".lua");
+		file_archiving("nvim/lua/config", "lazy", ".lua");
+		file_archiving("nvim", "lazy-lock", ".json");
 	}
 	if (pkginstall_bl)
 	{
