@@ -108,11 +108,15 @@ void CAVA(bool archive_bl, bool pkginstall_bl)
 	
 	/* export cava config */
 	const char *dir_cmd = "mkdir -p %s ; cp -f %s/%s/config %s/ ";
-	int mem_needed_cmd = 1 + snprintf(NULL, 0, dir_cmd, program_path, inpath, program_path, program_path);
+	int mem_needed_cmd = 1 + snprintf(NULL, 0, dir_cmd, program_path, inpath, "cava", program_path);
 	
 	char safe_cmd[mem_needed_cmd];
-	snprintf(safe_cmd, (size_t)mem_needed_cmd, dir_cmd, program_path, inpath, program_path, program_path);
-	
+	snprintf(safe_cmd, (size_t)mem_needed_cmd, dir_cmd, program_path, inpath, "cava", program_path);
+
+	if (verbose)
+	{
+		printf("%s\n", safe_cmd);
+	}
 	free(program_path);
 	system(safe_cmd);
 }
@@ -464,7 +468,6 @@ void configure_oh_my_zsh(void)
 	block(true);
 }
 
-
 void file_archiving(char *program_name, char *config_file, char *file_extention)
 {
 	/* initialize the template for the program config path 
@@ -476,7 +479,6 @@ void file_archiving(char *program_name, char *config_file, char *file_extention)
 	if (file_extention == NULL)
 	{
 		extention_bl = false;
-		printf("HEEEEEEEEEEEE\n");
 	}
 
 	/* calculate the size of all strings */
