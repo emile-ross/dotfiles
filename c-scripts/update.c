@@ -47,7 +47,7 @@ int full_update(char ARCHIVE, float pver)
 			case V_1_2:
 			case V_1_3:
 	    			install_package(parent, "hyprpaper btop");
-	    		CAVA(ARCHIVE, pver, install_pkg_yn);
+	    		CAVA(ARCHIVE, install_pkg_yn);
 	    		__attribute__ ((fallthrough));	/* do not break because we are also installing everything below */
 	        case V_1_4:
 	    			BTOP(ARCHIVE, install_pkg_yn);
@@ -58,10 +58,10 @@ int full_update(char ARCHIVE, float pver)
 	    		__attribute__ ((fallthrough));	/* do not break because we are also installing everything below */
 	        	case V_2_1:
 	        	    install_package(parent, "sway");
-	        	    WAYB(ARCHIVE, pver, install_pkg_yn);
+	        	    WAYB(ARCHIVE, install_pkg_yn);
 	    		__attribute__ ((fallthrough));	/* do not break because we are also installing everything below */
 	        	case V_2_2:
-	        	    SWAY(ARCHIVE, pver, install_pkg_yn);
+	        	    SWAY(ARCHIVE, install_pkg_yn);
 	        	    GTKL(ARCHIVE, install_pkg_yn);
 	        	    install_package(parent, "mpv swaylock");
 	    		__attribute__ ((fallthrough));	/* do not break because we are also installing everything below */
