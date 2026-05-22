@@ -80,7 +80,7 @@ void install_configs(unsigned int custom_package_install)  /* the partial instal
 			break;
 		case cava:
 			install_config_message(temp_conf_installed);
-			CAVA(ARCHIVE_T, pver, PKGINSTALL_T);
+			CAVA(ARCHIVE_T, PKGINSTALL_T);
 			break;
 		case fast:
 			install_config_message(temp_conf_installed);
@@ -112,11 +112,11 @@ void install_configs(unsigned int custom_package_install)  /* the partial instal
 			break;
 		case sway:
 			install_config_message(temp_conf_installed);
-			SWAY(ARCHIVE_T, pver, PKGINSTALL_T);
+			SWAY(ARCHIVE_T, PKGINSTALL_T);
 			break;
 		case wayb:
 			install_config_message(temp_conf_installed);
-			WAYB(ARCHIVE_T, pver, PKGINSTALL_T);
+			WAYB(ARCHIVE_T, PKGINSTALL_T);
 			break;
 		case zshh:
 			install_config_message(temp_conf_installed);
@@ -189,7 +189,7 @@ void full_config_install(bool ARCHIVE_BL, float previous_version_t, bool install
 	BASH();
 	BPYT(ARCHIVE_BL, install_packages_t);
 	BTOP(ARCHIVE_BL, install_packages_t);
-	CAVA(ARCHIVE_BL, previous_version_t, install_packages_t);
+	CAVA(ARCHIVE_BL, install_packages_t);
 	FAST(ARCHIVE_BL, install_packages_t);
 	FUZZ(ARCHIVE_BL, install_packages_t);
 	GTKL(ARCHIVE_BL, install_packages_t);
@@ -197,7 +197,7 @@ void full_config_install(bool ARCHIVE_BL, float previous_version_t, bool install
 	KITT(ARCHIVE_BL, install_packages_t);
 	MPVF(ARCHIVE_BL, install_packages_t);
 	NVIM(ARCHIVE_BL, install_packages_t);
-	SWAY(ARCHIVE_BL, previous_version_t, install_packages_t);
-	WAYB(ARCHIVE_BL, previous_version_t, install_packages_t);
+	SWAY(ARCHIVE_BL, install_packages_t);
+	WAYB(ARCHIVE_BL, install_packages_t);
 	ZSHH(ARCHIVE_BL, previous_version_t, install_packages_t);
 }

@@ -80,25 +80,6 @@ void CAVA(bool archive_bl, bool pkginstall_bl)
 	if (archive_bl)
 	{
 		file_archiving("cava", "config", NULL);
-		/*
-		 backup cava config
-	    	const char *out_config_name = "%s/config-oldv%.2f";
-	    	const char *in_config_path = "%s/%s/config";
-	
-	    	int mem_out_size = 1 + snprintf(NULL, 0, out_config_name, program_path, pver);
-	    	int mem_path_size = 1 + snprintf(NULL, 0, in_config_path, program_path);
-	    	char *out_config_temp = malloc((size_t)mem_out_size);
-	    	char *config_path_temp = malloc((size_t)mem_path_size);
-	
-	    	snprintf(out_config_temp, (size_t)mem_out_size, program_path, pver);
-	
-	    	strcpy(out_config_temp, program_path);
-	    	strcat(out_config_temp, out_config_name);
-	
-	    	rename(config_path_temp, out_config_temp);
-	    	free(out_config_temp);
-	    	free(config_path_temp);
-		*/
 	}
 	
 	if (pkginstall_bl)
@@ -347,16 +328,15 @@ void NVIM(bool archive_bl, bool pkginstall_bl)
 	system(cmd);
 }
 
-void SWAY(bool archive_bl, float pver, bool pkginstall_bl)
+void SWAY(bool archive_bl, bool pkginstall_bl)
 {
 	/* sway window manager doesn't work without wlroots */
 	char cmd[256];
 	if (archive_bl)
 	{
-		snprintf(cmd, 64,
-				"mv ~/.config/sway/config ~/.config/sway/config-oldv%.2f ", pver);
-		system(cmd);
+		file_archiving("sway", "config", NULL);
 	}
+
 	if (pkginstall_bl)
 	{
 		/* install sway package -- a system update is strongly recommended */
@@ -370,17 +350,15 @@ void SWAY(bool archive_bl, float pver, bool pkginstall_bl)
 	system(cmd);
 }
 
-void WAYB(bool archive_bl, float pver, bool pkginstall_bl)
+void WAYB(bool archive_bl, bool pkginstall_bl)
 {
 	const char *path = "~/.config/waybar/";
 	char cmd[256];
 	if (archive_bl)
 	{
 		/* archive waybar */
-		snprintf(cmd, sizeof(cmd),
-				"mv %sconfig.jsonc ~/.config/waybar/config-oldv%.2f.jsonc ; "
-				"mv %sstyle.css ~/.config/waybar/style-oldv%.2f.css", path, pver, path, pver);
-		system(cmd);
+		file_archiving("waybar", "config", ".jsonc");
+		file_archiving("waybar", "style", ".css");
 	}
 	if (pkginstall_bl)
 	{
