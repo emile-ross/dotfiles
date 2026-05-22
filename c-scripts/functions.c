@@ -260,36 +260,41 @@ char *package_name(config_name config)
 {
 	switch (config)
 	{
-		case bash:
-			return ".bashrc";
-		case bpyt:
-			return "bpytop config";
-		case btop:
-			return "btop config";
-		case cava:
-			return "cava config";
-		case fast:
-			return "fastfetch configs";
-		case fuzz:
-			return "fuzzel configs";
-		case gtkl:
-			return "gtklock config and style (appearance) ";
-		case hypr:
-			return "Hyprland-WM config + Hypridle config";
-		case kitt:
-			return "kitty terminal configs";
-		case mpvf:
-			return "mpv config";
-		case nvim:
-			return "neovim config with lazy";
-		case sway:
-			return "Sway-WM config";
-		case wayb:
-			return "waybar config and style (appearance)";
-		case zshh:
-			return "zsh config (.zshrc)";
-		case unknown:
-		default:
-			return NULL;
+	case bash:
+		return ".bashrc";
+	case bpyt:
+		return "bpytop config";
+	case btop:
+		return "btop config";
+	case cava:
+		return "cava config";
+	case fast:
+		return "fastfetch configs";
+	case fuzz:
+		return "fuzzel configs";
+	case gtkl:
+		return "gtklock config and style (appearance) ";
+	case hypr:
+		return "Hyprland-WM config + Hypridle config";
+	case kitt:
+		return "kitty terminal configs";
+	case mpvf:
+		return "mpv config";
+	case nvim:
+		return "neovim config with lazy";
+	case sway:
+		return "Sway-WM config";
+	case wayb:
+		return "waybar config and style (appearance)";
+	case zshh:
+		return "zsh config (.zshrc)";
+	case unknown:
+	default:
+		return NULL;
 	}
+}
+
+void verbose_path_print(char *file_path, char *file_name)
+{
+	printf("The %s file \nwas exported to: %s\n", file_name, file_path);
 }
