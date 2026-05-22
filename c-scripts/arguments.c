@@ -8,99 +8,99 @@ void cli_arg_missing(char *first_command, char *type_of_missing_arg, char *user_
 
 int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 {
-    if (num_cmd_arguments > 1) /* checks how many arguments were used */
-    {
-		/* checks if the command was ran with the --noconfirm flag */
-
-		if (strcmp(cmd_arg_v[1], "--noconfirm") == 0) 
-		{
-		    printf(BOLD_S"Proceeding with full install\n"STYLE_END);
-		    full_install('y', 'y');
-		}
-		else if (strcmp(cmd_arg_v[1], "-p") == 0 || strcmp(cmd_arg_v[1], "-P") == 0)
-		{
-		    if (num_cmd_arguments >= n_to_arg)
-		    {
+	if (num_cmd_arguments > 1) /* checks how many arguments were used */
+	{
+	    	/* checks if the command was ran with the --noconfirm flag */
+	
+	    	if (strcmp(cmd_arg_v[1], "--noconfirm") == 0) 
+	    	{
+			printf(BOLD_S"Proceeding with full install\n"STYLE_END);
+			full_install('y', 'y');
+	    	}
+	    	else if (strcmp(cmd_arg_v[1], "-p") == 0 || strcmp(cmd_arg_v[1], "-P") == 0)
+	    	{
+			if (num_cmd_arguments >= n_to_arg)
+			{
 				for (int i = n_to_arg - 1; i < num_cmd_arguments; i++)
 				{
-				    install_package(parent, cmd_arg_v[i]); 
+					install_package(parent, cmd_arg_v[i]); 
 				}
-		    }
-		    else
-		    {
+			}
+			else
+			{
 				/* prints an error message if there isn't a package specified in the command */
 				cli_arg_missing(cmd_arg_v[0], "package", cmd_arg_v[1]);
 				error_message(CLI_ARGS_MISSING);
-		    }
-		}
-		else if (strcmp(cmd_arg_v[1], "-c") == 0 || strcmp(cmd_arg_v[1], "-C") == 0)
-		{
-		    if (strcmp(cmd_arg_v[1], "-C") == 0)
-		    {
-				error_message(7);
-		    }
-		    cmd_arg_install(num_cmd_arguments, cmd_arg_v, 'Y', 'N');
-		}
-		else if (strcmp(cmd_arg_v[1], "-i") == 0 || strcmp(cmd_arg_v[1], "-I") == 0)
-		{
-		    /* loops through the arguments in order to pass them one at a time */
-		    if (strcmp(cmd_arg_v[1], "-I") == 0)
-		    {
-				error_message(7);
-		    }
-
-		    if (num_cmd_arguments >= n_to_arg)
-		    {
-				for (int i = n_to_arg - 1; i < num_cmd_arguments; i++)
-				{
-				    /* will print a short description for the package
-				     *config_description(); */
-				    config_name description_index = detect_config_name(cmd_arg_v[i]);
-
-				    if ((config_name)description_index > n_configs)
-				    {
-						error_message((error_code_e)CLI_ARGS_MISSING);
-				    }
-				    else if ((config_name)description_index == 0)
-				    {
-						error_message((error_code_e)CLI_UNKNOWN_PKG);
-				    }
-
-				    char *description = description_arr[(config_name)description_index];
-				    printf("%s\n", description);
-				}
-		    }
-		    else
-		    {
-				/* prints an error message if there isn't a package specified in the command */
-				cli_arg_missing(cmd_arg_v[0], "package", cmd_arg_v[1]);
-				error_message(CLI_ARGS_MISSING);
-		    }
-		}
-		else if (strcmp(cmd_arg_v[1], "--help") == 0)
-		{
-		    printf(BOLD_S"Help menu\n"STYLE_END);
-		    printf("-c	    	[CONFIG NAME] \n");
-		    printf("	apply specified config \n");
-		    printf("-p	    	[PACKAGE] \n");
-		    printf("	install specified package \n");
-		    printf("-i	    	[CONFIG NAME] \n");
-		    printf("	print a short description of the package\n");
-		}
-		else
-		{
-		    /* triggers the "invalid command line argument" error
-			 * this is a critical error and it will crash the program */
-		    printf(BOLD_S ANSI_RED"%s: invalid option -- '%s'\n"STYLE_END, cmd_arg_v[0], cmd_arg_v[1]);
-		    error_message(CLI_INVALID_FLAG);
-		}
-    }
-    else
-    {
-		/* if no argument is found (most cases) */
-		return 0;
-    }
-    exit(0);
+			}
+	    	}
+	    	else if (strcmp(cmd_arg_v[1], "-c") == 0 || strcmp(cmd_arg_v[1], "-C") == 0)
+	    	{
+	    	    if (strcmp(cmd_arg_v[1], "-C") == 0)
+	    	    {
+	    			error_message(7);
+	    	    }
+	    	    cmd_arg_install(num_cmd_arguments, cmd_arg_v, 'Y', 'N');
+	    	}
+	    	else if (strcmp(cmd_arg_v[1], "-i") == 0 || strcmp(cmd_arg_v[1], "-I") == 0)
+	    	{
+			/* loops through the arguments in order to pass them one at a time */
+			if (strcmp(cmd_arg_v[1], "-I") == 0)
+			{
+			    	error_message(7);
+			}
+			
+			if (num_cmd_arguments >= n_to_arg)
+			{
+			    	for (int i = n_to_arg - 1; i < num_cmd_arguments; i++)
+			    	{
+					/* will print a short description for the package
+					 *config_description(); */
+					config_name description_index = detect_config_name(cmd_arg_v[i]);
+					
+					if ((config_name)description_index > n_configs)
+					{
+					    	error_message((error_code_e)CLI_ARGS_MISSING);
+					}
+					else if ((config_name)description_index == 0)
+					{
+					    	error_message((error_code_e)CLI_UNKNOWN_PKG);
+					}
+					
+					char *description = description_arr[(config_name)description_index];
+					printf("%s\n", description);
+			    	}
+			}
+			else
+			{
+			    	/* prints an error message if there isn't a package specified in the command */
+			    	cli_arg_missing(cmd_arg_v[0], "package", cmd_arg_v[1]);
+			    	error_message(CLI_ARGS_MISSING);
+			}
+	    	}
+	    	else if (strcmp(cmd_arg_v[1], "--help") == 0)
+	    	{
+	    	    printf(BOLD_S"Help menu\n"STYLE_END);
+	    	    printf("-c	    	[CONFIG NAME] \n");
+	    	    printf("	apply specified config \n");
+	    	    printf("-p	    	[PACKAGE] \n");
+	    	    printf("	install specified package \n");
+	    	    printf("-i	    	[CONFIG NAME] \n");
+	    	    printf("	print a short description of the package\n");
+	    	}
+	    	else
+	    	{
+	    	    /* triggers the "invalid command line argument" error
+	    		 * this is a critical error and it will crash the program */
+	    	    printf(BOLD_S ANSI_RED"%s: invalid option -- '%s'\n"STYLE_END, cmd_arg_v[0], cmd_arg_v[1]);
+	    	    error_message(CLI_INVALID_FLAG);
+	    	}
+	}
+	else
+	{
+	    	/* if no argument is found (most cases) */
+	    	return 0;
+	}
+	exit(0);
 }
 
 void argument_config_install(char *package_t, char archiving_t, char pkginstall_t)
@@ -122,7 +122,7 @@ void argument_config_install(char *package_t, char archiving_t, char pkginstall_
             break;
 
         case cava:
-	    CAVA(archiving_t, version, pkginstall_t);
+	    CAVA(archiving_t, pkginstall_t);
             break;
 
         case fast:
@@ -154,11 +154,11 @@ void argument_config_install(char *package_t, char archiving_t, char pkginstall_
             break;
  
         case sway:
-	    SWAY(archiving_t, version, pkginstall_t);
+	    SWAY(archiving_t, pkginstall_t);
             break;
 
         case wayb:
-	    WAYB(archiving_t, version, pkginstall_t);
+	    WAYB(archiving_t, pkginstall_t);
             break;
 
 	case zshh:
