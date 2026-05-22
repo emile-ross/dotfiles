@@ -18,7 +18,7 @@
 void BASH(void);
 void BTOP(bool archive_bl, bool pkginstall_bl);
 void BPYT(bool archive_bl, bool pkginstall_bl);
-void CAVA(bool archive_bl, float pver, bool pkginstall_bl);
+void CAVA(bool archive_bl, bool pkginstall_bl);
 void FAST(bool archive_bl, bool pkginstall_bl);
 void FUZZ(bool archive_bl, bool pkginstall_bl);
 void GTKL(bool archive_bl, bool pkginstall_bl);
@@ -26,8 +26,8 @@ void HYPR(bool archive_bl, bool pkginstall_bl);
 void KITT(bool archive_bl, bool pkginstall_bl);
 void MPVF(bool archive_bl, bool pkginstall_bl);
 void NVIM(bool archive_bl, bool pkginstall_bl);
-void SWAY(bool archive_bl, float pver, bool pkginstall_bl);
-void WAYB(bool archive_bl, float pver, bool pkginstall_bl);
+void SWAY(bool archive_bl, bool pkginstall_bl);
+void WAYB(bool archive_bl, bool pkginstall_bl);
 void ZSHH(bool archive_bl, float pver, bool pkginstall_bl);
 
 void file_archiving(char *program_config_path, char *config_file, char *file_extention);
