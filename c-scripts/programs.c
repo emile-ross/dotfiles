@@ -521,3 +521,20 @@ void file_archiving(char *program_name, char *config_file, char *file_extention)
 	free(destination_file);
 	free(program_path);
 }
+
+void file_exporting(char *program_name, char *config_name, char *file_extention)
+{
+	char *source_path_template = "%s/%s/%s";
+
+	int file_path_size = 1;
+
+	if (file_extention == NULL)
+	{
+		file_path_size += snprintf(NULL, 0, config_name);
+	}
+	else
+	{
+		file_path_size += snprintf(NULL, 0, config_name);
+		file_path_size += snprintf(NULL, 0, file_extention);
+	}
+}
