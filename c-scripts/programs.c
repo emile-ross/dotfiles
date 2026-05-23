@@ -524,27 +524,52 @@ void file_archiving(char *program_name, char *config_file, char *file_extention)
 
 void file_exporting(char *program_name, char *config_name, char *file_extention)
 {
-	char *source_path_template = "%s/%s/%s";
+	char *dest_file_path_template = "%s/%s/%s";
 
 	int file_path_size = 1;
 
+	int config_file_name_size = 1;
 
-	if (file_extention != NULL)
+
+	if (file_extention == NULL)
 	{
-		file_path_size += snprintf(NULL, 0, "%s", file_extention);
+		config_file_name_size += snprintf(NULL, 0, "%s", config_name);
+	}
+	else
+	{
+		config_file_name_size += snprintf(NULL, 0, "%s%s", config_name, file_extention);
 	}
 
-	file_path_size += snprintf(NULL, 0, source_path_template, config_path, program_name, config_name);
+	char *config_file_name = malloc((size_t)config_file_name_size);
+
+	if (file_extention == NULL)
+	{
+		snprintf(config_file_name, (size_t)config_file_name_size, "%s", config_name);
+	}
+	else
+	{
+		snprintf(config_file_name, (size_t)config_file_name_size, "%s%s", config_name, file_extention);
+	}
+
+	file_path_size += config_file_name_size;
+
+	file_path_size += snprintf(NULL, 0, dest_file_path_template, config_path, program_name, config_name);
 
 	char *dest_file_path = malloc((size_t)file_path_size);
 
-	snprintf(dest_file_path, (size_t)file_path_size, source_path_template, config_path, program_name, config_name);
+	snprintf(dest_file_path, (size_t)file_path_size, dest_file_path_template, config_path, program_name, config_file_name);
 
-	if (file_extention != NULL)
-	{
-		strcat(dest_file_path, file_extention);
-	}
+	char *source_path_template = "%s/%s/%s";
+	int source_path_size = 1 + snprintf(NULL, 0, source_path_template, inpath, program_name, config_file_name);
+
+	char *source_path = malloc((size_t)source_path_size);
+
+	snprintf(source_path, (size_t)source_path_size, source_path_template, inpath, program_name, config_file_name);
 
 	printf("%s\n", dest_file_path);
+	printf("%s\n", source_path);
+
 	free(dest_file_path);
+	free(config_file_name);
+	free(source_path);
 }
