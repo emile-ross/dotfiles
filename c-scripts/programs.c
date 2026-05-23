@@ -528,13 +528,23 @@ void file_exporting(char *program_name, char *config_name, char *file_extention)
 
 	int file_path_size = 1;
 
-	if (file_extention == NULL)
+
+	if (file_extention != NULL)
 	{
-		file_path_size += snprintf(NULL, 0, config_name);
+		file_path_size += snprintf(NULL, 0, "%s", file_extention);
 	}
-	else
+
+	file_path_size += snprintf(NULL, 0, source_path_template, config_path, program_name, config_name);
+
+	char *dest_file_path = malloc((size_t)file_path_size);
+
+	snprintf(dest_file_path, (size_t)file_path_size, source_path_template, config_path, program_name, config_name);
+
+	if (file_extention != NULL)
 	{
-		file_path_size += snprintf(NULL, 0, config_name);
-		file_path_size += snprintf(NULL, 0, file_extention);
+		strcat(dest_file_path, file_extention);
 	}
+
+	printf("%s\n", dest_file_path);
+	free(dest_file_path);
 }
