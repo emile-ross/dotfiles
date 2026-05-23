@@ -209,12 +209,6 @@ void GTKL(bool archive_bl, bool pkginstall_bl)
 
 void HYPR(bool archive_bl, bool pkginstall_bl)
 {
-	const char *program_config_path = "%s/hypr";
-	int program_path_size = 1 + snprintf(NULL, 0, program_config_path, config_path);
-
-	char *program_path = malloc((size_t)program_path_size);
-	snprintf(program_path, (size_t)program_path_size, program_config_path, config_path);
-
 	char *config_file[5] = 
 	{
 		"hypridle",
@@ -244,11 +238,10 @@ void HYPR(bool archive_bl, bool pkginstall_bl)
 	}
 
 	char cmd[384];
-	snprintf(cmd, sizeof(cmd), "mkdir -p %s/assets", program_path);
+	snprintf(cmd, sizeof(cmd), "mkdir -p %s/.config/hypr/assets", home);
 	system(cmd);
 
 	file_exporting("hypr/assets", "lockscreen", ".png");
-	free(program_path);
 }
 void KITT(bool archive_bl, bool pkginstall_bl)
 {
@@ -289,7 +282,6 @@ void MPVF(bool archive_bl, bool pkginstall_bl)
 
 void NVIM(bool archive_bl, bool pkginstall_bl)
 {
-	char cmd[32];
 	if (archive_bl)
 	{
 		file_archiving("nvim", "init", ".lua");
@@ -302,9 +294,8 @@ void NVIM(bool archive_bl, bool pkginstall_bl)
 		 * nvim is most likely already installed  */
 		install_package(parent, "nvim lazygit");
 	}
+	system("mkdir -p ~/.config/nvim");
 	/* export nvim config */
-	snprintf(cmd, sizeof(cmd), "mkdir -p ~/.config/nvim");
-	system(cmd);
 	file_exporting("nvim", "init", ".lua");
 }
 
@@ -334,7 +325,6 @@ void SWAY(bool archive_bl, bool pkginstall_bl)
 void WAYB(bool archive_bl, bool pkginstall_bl)
 {
 	char *name = "waybar";
-	char cmd[32];
 	if (archive_bl)
 	{
 		/* archive waybar */
@@ -350,8 +340,7 @@ void WAYB(bool archive_bl, bool pkginstall_bl)
 	file_exporting(name, "style", ".css");
 	file_exporting(name, "config", ".jsonc");
 
-	snprintf(cmd, sizeof(cmd), "mkdir -p ~/.config/waybar/");
-	system(cmd);
+	system("mkdir -p ~/.config/waybar/");
 }
 
 void ZSHH(bool archive_bl, float pver, bool pkginstall_bl)
