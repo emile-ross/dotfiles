@@ -565,11 +565,26 @@ void file_exporting(char *program_name, char *config_name, char *file_extention)
 	char *source_path = malloc((size_t)source_path_size);
 
 	snprintf(source_path, (size_t)source_path_size, source_path_template, inpath, program_name, config_file_name);
-
-	printf("%s\n", dest_file_path);
-	printf("%s\n", source_path);
-
-	free(dest_file_path);
 	free(config_file_name);
+
+	int exporting_cmd_size = 1;
+
+	/* the 2 spaces are intentional, the command expects 2 arguments separated by a space */
+	char *exporting_cmd_template = "cp -f %s %s";
+	exporting_cmd_size += snprintf(NULL, 0, "%s", exporting_cmd_template); 
+	exporting_cmd_size += file_path_size;
+	exporting_cmd_size += source_path_size;
+
+	char *exporting_cmd = malloc((size_t)exporting_cmd_size);
+	snprintf(exporting_cmd, (size_t)exporting_cmd_size, exporting_cmd_template, source_path, dest_file_path);
+
+	if (verbose)
+	{
+		printf("%s\n", dest_file_path);
+		printf("%s\n", source_path);
+		printf("%s\n", exporting_cmd);
+	}
+	
+	free(dest_file_path);
 	free(source_path);
 }
