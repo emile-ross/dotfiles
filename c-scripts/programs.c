@@ -210,11 +210,7 @@ void GTKL(bool archive_bl, bool pkginstall_bl)
 void HYPR(bool archive_bl, bool pkginstall_bl)
 {
 	const char *program_config_path = "%s/hypr";
-	int temp_path_size = 1 + snprintf(NULL, 0, program_config_path, inpath);
 	int program_path_size = 1 + snprintf(NULL, 0, program_config_path, config_path);
-
-	char *temp_path = malloc((size_t)temp_path_size);
-	snprintf(temp_path, (size_t)temp_path_size, program_config_path, inpath);
 
 	char *program_path = malloc((size_t)program_path_size);
 	snprintf(program_path, (size_t)program_path_size, program_config_path, config_path);
@@ -230,7 +226,7 @@ void HYPR(bool archive_bl, bool pkginstall_bl)
 
 	if (archive_bl)
 	{
-		for (int i = 0; i < 5; i++)
+		for (int i = 0; config_file[i] != NULL; i++)
 		{
 			file_archiving("hypr", config_file[i], ".conf");
 		}
@@ -242,32 +238,20 @@ void HYPR(bool archive_bl, bool pkginstall_bl)
 		install_package(parent, "hyprlock hypridle hyprpaper hyprland");
     	}
 	/* export hyprland configs */
-	int mem_needed = 1 + snprintf(NULL, 0,
-			"mkdir -p %s/assets ; "
-			"cp -f %s/hypr/assets/lockscreen.png %s/assets/ ; "
-			"cp -f %s/hypr/hyprland.conf %s ; "
-			"cp -f %s/hypr/hypridle.conf %s ; "
-			"cp -f %s/hypr/hyprlock.conf %s ; "
-			"cp -f %s/hypr/hyprpaper.conf %s",
-			program_path, inpath, program_path, inpath, program_path, inpath, program_path, inpath, program_path, inpath, program_path);
+	for (int i = 0; config_file[i] != NULL; i++)
+	{
+		file_exporting("hypr", config_file[i], ".conf");
+	}
 
-	char *cmd = malloc((size_t)mem_needed); /* allocate just enough memory for the buffer size */
-	snprintf(cmd, (size_t)mem_needed,
-			"mkdir -p %s/assets ; "
-			"cp -f %s/assets/lockscreen.png %s/assets/ ; "
-			"cp -f %s/hyprland.conf %s ; "
-			"cp -f %s/hypridle.conf %s ; "
-			"cp -f %s/hyprlock.conf %s ; "
-			"cp -f %s/hyprpaper.conf %s",
-			program_path, temp_path, program_path, temp_path, program_path, temp_path, program_path, temp_path, program_path, temp_path, program_path);
+	char cmd[384];
+	snprintf(cmd, sizeof(cmd), "mkdir -p %s/assets", program_path);
 	system(cmd);
-    	free(cmd);
-	free(temp_path);
+
+	file_exporting("hypr/assets", "lockscreen", ".png");
 	free(program_path);
 }
 void KITT(bool archive_bl, bool pkginstall_bl)
 {
-	char cmd[256];
 	if (archive_bl)
 	{
 		file_archiving("kitty", "kitty", ".conf");
@@ -279,10 +263,10 @@ void KITT(bool archive_bl, bool pkginstall_bl)
 		install_package(parent, "kitty");
 	}
 	/* export kitty config */
-	snprintf(cmd, sizeof(cmd),
-			"mkdir ~/.config/kitty ; "
-			"cp -f %s/kitty/current-theme.conf ~/.config/kitty ; "
-			"cp -f %s/kitty/kitty.conf ~/.config/kitty", inpath, inpath);
+	file_exporting("kitty", "current-theme", ".conf");
+	file_exporting("kitty", "kitty", ".conf");
+	char cmd[32];
+	snprintf(cmd, sizeof(cmd), "mkdir ~/.config/kitty");
 	system(cmd);
 }
 
@@ -298,16 +282,14 @@ void MPVF(bool archive_bl, bool pkginstall_bl)
 		install_package(parent, "mpv");
 	}
 	/* export mpv config with shaders */
-	snprintf(cmd, 192,
-			"mkdir -p ~/.config/mpv/ ; "
-			"cp -f %s/mpv/mpv.conf ~/.config/mpv ", inpath);
+	snprintf(cmd, 32, "mkdir -p ~/.config/mpv/");
+	file_exporting("mpv", "mpv", ".conf");
 	system(cmd);
 }
 
 void NVIM(bool archive_bl, bool pkginstall_bl)
 {
-
-	char cmd[256];
+	char cmd[32];
 	if (archive_bl)
 	{
 		file_archiving("nvim", "init", ".lua");
@@ -320,21 +302,20 @@ void NVIM(bool archive_bl, bool pkginstall_bl)
 		 * nvim is most likely already installed  */
 		install_package(parent, "nvim lazygit");
 	}
-	
 	/* export nvim config */
-	snprintf(cmd, sizeof(cmd),
-			"mkdir -p ~/.config/nvim ; "
-			"cp -f %s/nvim/init.lua ~/.config/nvim", inpath);
+	snprintf(cmd, sizeof(cmd), "mkdir -p ~/.config/nvim");
 	system(cmd);
+	file_exporting("nvim", "init", ".lua");
 }
 
 void SWAY(bool archive_bl, bool pkginstall_bl)
 {
 	/* sway window manager doesn't work without wlroots */
+	char *name = "sway";
 	char cmd[256];
 	if (archive_bl)
 	{
-		file_archiving("sway", "config", NULL);
+		file_archiving(name, "config", NULL);
 	}
 
 	if (pkginstall_bl)
@@ -343,36 +324,33 @@ void SWAY(bool archive_bl, bool pkginstall_bl)
 		install_package(parent, "wlroots swaylock sway swayidle");
 	}
 	/* export sway config */
-	snprintf(cmd, sizeof(cmd),
-			"mkdir -p ~/.config/sway ; "
-			"cp -f %s/sway/config ~/.config/sway/ ; "
-			"cp -f %s/sway/config-default ~/.config/sway", inpath, inpath);
+	file_exporting(name, "config", NULL);
+	file_exporting(name, "config-default", NULL);
+
+	snprintf(cmd, sizeof(cmd), "mkdir -p ~/.config/sway");
 	system(cmd);
 }
 
 void WAYB(bool archive_bl, bool pkginstall_bl)
 {
-	const char *path = "~/.config/waybar/";
-	char cmd[256];
+	char *name = "waybar";
+	char cmd[32];
 	if (archive_bl)
 	{
 		/* archive waybar */
-		file_archiving("waybar", "config", ".jsonc");
-		file_archiving("waybar", "style", ".css");
+		file_archiving(name, "config", ".jsonc");
+		file_archiving(name, "style", ".css");
 	}
 	if (pkginstall_bl)
 	{
-		install_package(parent, "waybar");
+		install_package(parent, name);
 	}
+
 	/* export waybar config and appearance */
+	file_exporting(name, "style", ".css");
+	file_exporting(name, "config", ".jsonc");
 
-	file_exporting("waybar", "style", ".css");
-	file_exporting("waybar", "config", ".jsonc");
-
-	snprintf(cmd, sizeof(cmd),
-			"mkdir -p %s ; "
-			"cp -f %s/waybar/style.css %s ; "
-			"cp -f %s/waybar/config.jsonc %s", path, inpath, path, inpath, path);
+	snprintf(cmd, sizeof(cmd), "mkdir -p ~/.config/waybar/");
 	system(cmd);
 }
 
