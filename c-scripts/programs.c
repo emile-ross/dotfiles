@@ -365,6 +365,10 @@ void WAYB(bool archive_bl, bool pkginstall_bl)
 		install_package(parent, "waybar");
 	}
 	/* export waybar config and appearance */
+
+	file_exporting("waybar", "style", ".css");
+	file_exporting("waybar", "config", ".jsonc");
+
 	snprintf(cmd, sizeof(cmd),
 			"mkdir -p %s ; "
 			"cp -f %s/waybar/style.css %s ; "
@@ -552,17 +556,15 @@ void file_exporting(char *program_name, char *config_name, char *file_extention)
 	}
 
 	file_path_size += config_file_name_size;
-
 	file_path_size += snprintf(NULL, 0, dest_file_path_template, config_path, program_name, config_name);
 
-	char *dest_file_path = malloc((size_t)file_path_size);
-
-	snprintf(dest_file_path, (size_t)file_path_size, dest_file_path_template, config_path, program_name, config_file_name);
+	char *dest_file_path = malloc((size_t)file_path_size); /* allocate memory */
+	snprintf(dest_file_path, (size_t)file_path_size, dest_file_path_template, config_path, program_name, config_file_name); /* write to memory/buffer */
 
 	char *source_path_template = "%s/%s/%s";
 	int source_path_size = 1 + snprintf(NULL, 0, source_path_template, inpath, program_name, config_file_name);
 
-	char *source_path = malloc((size_t)source_path_size);
+	char *source_path = malloc((size_t)source_path_size);	/* allocate memory */
 
 	snprintf(source_path, (size_t)source_path_size, source_path_template, inpath, program_name, config_file_name);
 	free(config_file_name);
@@ -575,7 +577,7 @@ void file_exporting(char *program_name, char *config_name, char *file_extention)
 	exporting_cmd_size += file_path_size;
 	exporting_cmd_size += source_path_size;
 
-	char *exporting_cmd = malloc((size_t)exporting_cmd_size);
+	char *exporting_cmd = malloc((size_t)exporting_cmd_size); /* allocate memory */
 	snprintf(exporting_cmd, (size_t)exporting_cmd_size, exporting_cmd_template, source_path, dest_file_path);
 
 	if (verbose)
@@ -585,6 +587,9 @@ void file_exporting(char *program_name, char *config_name, char *file_extention)
 		printf("%s\n", exporting_cmd);
 	}
 	
+	system(exporting_cmd); /* execute final command */
+
+	free(exporting_cmd);
 	free(dest_file_path);
 	free(source_path);
 }

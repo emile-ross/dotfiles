@@ -46,7 +46,9 @@ void install_menu(void);
 void full_install(bool ARCHIVE_BL, bool full_install_bl);
 void full_config_install(bool ARCHIVE_BL, float previous_version_t, bool install_packages_t);
 void install_configs(unsigned int custom_package_install);
+void install_config_message(char *text);
 void copyfiles(int fastfetch_conf_export);
+void file_exporting(char *program_name, char *config_name, char *file_extention);
 void check_for_yay(void);
 void exec_cmd(int buffer_size, char *command_to_execute);
 void link_fastfetch_configs(void);
@@ -77,12 +79,12 @@ extern char *description_arr[n_configs];
 
 /* command line related
 * Initialized in globals.c */
-extern char* help_flag_arg_text;
-extern char* pkgi_flag_arg_text;
-extern char* conf_inst_flag_arg_text;
-extern char* conf_info_flag_arg_text;
-extern bool verbose;
-void verbose_path_print(char *file_path, char *file_name);
+	extern char* help_flag_arg_text;
+	extern char* pkgi_flag_arg_text;
+	extern char* conf_inst_flag_arg_text;
+	extern char* conf_info_flag_arg_text;
+	extern bool verbose;
+	void verbose_path_print(char *file_path, char *file_name);
 
 extern char fastfetch_config_menu_text[32];
 extern char kitty_config_menu_text[32];
