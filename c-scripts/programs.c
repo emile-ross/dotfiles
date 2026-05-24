@@ -17,7 +17,6 @@ void BASH(void)
 	/* execute the command with the according buffer size previously calculated (above) */
 	snprintf(cmd, (size_t)mem_needed, command_format, inpath, BRCNAME);
 	system(cmd);
-	
 	free(cmd);
 }
 
@@ -199,11 +198,11 @@ void GTKL(bool archive_bl, bool pkginstall_bl)
     	    	install_package(parent, "gtklock");
     	}
 	/* export gtklock config */
-    	snprintf(cmd, 384,
-			"mkdir -p ~/.config/gtklock/assets ; "
-			"cp -f %s/gtklock/style.css ~/.config/gtklock ; "
-			"cp -f %s/gtklock/lockscreen.jpg ~/.config/gtklock/assets", inpath, inpath);
-    	system(cmd);
+    	system("mkdir -p ~/.config/gtklock/assets");
+
+	file_exporting("gtklock", "style", ".css");
+	file_exporting("gtklock", "lockscreen", ".jpg");
+
 	free(program_path);
 }
 
