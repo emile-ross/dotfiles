@@ -275,9 +275,8 @@ void MPVF(bool archive_bl, bool pkginstall_bl)
 		install_package(parent, "mpv");
 	}
 	/* export mpv config with shaders */
-	snprintf(cmd, 32, "mkdir -p ~/.config/mpv/");
+	system("mkdir -p ~/.config/mpv/"); /* create directory before copying file */
 	file_exporting("mpv", "mpv", ".conf");
-	system(cmd);
 }
 
 void NVIM(bool archive_bl, bool pkginstall_bl)
@@ -303,7 +302,6 @@ void SWAY(bool archive_bl, bool pkginstall_bl)
 {
 	/* sway window manager doesn't work without wlroots */
 	char *name = "sway";
-	char cmd[256];
 	if (archive_bl)
 	{
 		file_archiving(name, "config", NULL);
@@ -318,8 +316,7 @@ void SWAY(bool archive_bl, bool pkginstall_bl)
 	file_exporting(name, "config", NULL);
 	file_exporting(name, "config-default", NULL);
 
-	snprintf(cmd, sizeof(cmd), "mkdir -p ~/.config/sway");
-	system(cmd);
+	system("mkdir -p ~/.config/sway");
 }
 
 void WAYB(bool archive_bl, bool pkginstall_bl)
