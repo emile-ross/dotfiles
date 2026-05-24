@@ -23,8 +23,6 @@ void BASH(void)
 void BPYT(bool archive_bl, bool pkginstall_bl)
 {
 	char *pkg_name = "bpytop";
-
-	char cmd[192]; /* using malloc is now safer, it avoids truncation */
 	if (archive_bl)
 	{
 		file_archiving(pkg_name, pkg_name, ".conf");
@@ -32,25 +30,15 @@ void BPYT(bool archive_bl, bool pkginstall_bl)
 
 	if (pkginstall_bl)
 	{
-		install_package(parent, "bpytop"); /* install bpytop package */
+		install_package(parent, pkg_name); /* install bpytop package */
 	}
 	/* export bpytop config */
-	snprintf(cmd, sizeof(cmd),
-			"mkdir -p %s/bpytop ; "
-			"cp -f %s/bpytop/bpytop.conf ~/.config/bpytop", config_path, inpath);
-	system(cmd);
+	system("mkdir -p ~/.config/bpytop");
+	file_exporting(pkg_name, pkg_name, ".conf");
 }
 
 void BTOP(bool archive_bl, bool pkginstall_bl)
 {
-	const char *program_config_path = "%s/btop";
-	int program_path_size = 1 + snprintf(NULL, 0, program_config_path, config_path);
-
-	char *program_path = malloc((size_t)program_path_size);
-
-	snprintf(program_path, (size_t)program_path_size, program_config_path, config_path);
-
-	char cmd[128];
 	if (archive_bl)
 	{
 		file_archiving("btop", "btop", ".conf");
@@ -60,11 +48,8 @@ void BTOP(bool archive_bl, bool pkginstall_bl)
 		install_package(parent, "btop"); /* install btop package */
     	}
     	/* export btop config */
-	snprintf(cmd, sizeof(cmd),
-    	    		"mkdir -p %s/btop ; "
-    	       		"cp -f %s/btop/btop.conf %s/btop", config_path, inpath, config_path);
-    	system(cmd);
-	free(program_path);
+	system("mkdir -p ~/.config/btop");
+	file_exporting("btop", "btop", ".conf");
 }
 
 void CAVA(bool archive_bl, bool pkginstall_bl)
@@ -187,7 +172,6 @@ void GTKL(bool archive_bl, bool pkginstall_bl)
 	char *program_path = malloc((size_t)program_path_size);
 	snprintf(program_path, (size_t)program_path_size, program_config_path, config_path);
 
-	char cmd[512];
     	if (archive_bl)
     	{
 		file_archiving("gtklock", "style", ".css");
@@ -257,14 +241,11 @@ void KITT(bool archive_bl, bool pkginstall_bl)
 	/* export kitty config */
 	file_exporting("kitty", "current-theme", ".conf");
 	file_exporting("kitty", "kitty", ".conf");
-	char cmd[32];
-	snprintf(cmd, sizeof(cmd), "mkdir ~/.config/kitty");
-	system(cmd);
+	system("mkdir ~/.config/kitty");
 }
 
 void MPVF(bool archive_bl, bool pkginstall_bl)
 {
-	char cmd[256];
 	if (archive_bl)
 	{
 		file_archiving("mpv", "mpv", ".conf");
