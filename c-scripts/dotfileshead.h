@@ -31,6 +31,7 @@ void WAYB(bool archive_bl, bool pkginstall_bl);
 void ZSHH(bool archive_bl, float pver, bool pkginstall_bl);
 
 void file_archiving(char *program_config_path, char *config_file, char *file_extention);
+void link_file(char *source_path, char *link_path);
 
 /* data */
 extern char *config_names[n_configs];
@@ -68,12 +69,12 @@ extern long int time_timer_quarters;
 extern long int time_timer_seconds;
 
 /*  command line arguments */
-char *package_name(config_name config);
-void argument_config_install(char *package_t, char archiving_t, char pkginstall_t);
-void cmd_arg_install(int num_cmd_arguments_t, char *cmd_arg_v_t[], char config_archive_t, char pkg_install_t);
-void cli_arg_missing(char *first_command, char *type_of_missing_arg, char *user_flag_t);
-int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[]);
-extern const int n_to_arg;
+	char *package_name(config_name config);
+	void argument_config_install(char *package_t, char archiving_t, char pkginstall_t);
+	void cmd_arg_install(int num_cmd_arguments_t, char *cmd_arg_v_t[], char config_archive_t, char pkg_install_t);
+	void cli_arg_missing(char *first_command, char *type_of_missing_arg, char *user_flag_t);
+	int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[]);
+	extern const int n_to_arg;
 
 extern char *description_arr[n_configs];
 
@@ -92,10 +93,10 @@ extern char fuzzel_config_menu_text[32];
 extern char zshforhumans_config_menu_text[32];
 
 extern char main_menu_title[128];
-extern char opt_one_text[MENU_TEXT_SIZE]; /* can be replaced by an array */
-extern char opt_the_text[MENU_TEXT_SIZE]; /* can be replaced by an array */
-extern char opt_for_text[MENU_TEXT_SIZE]; /* can be replaced by an array */
-extern char opt_fiv_text[MENU_TEXT_SIZE]; /* can be replaced by an array */
+extern char opt_one_text[MENU_TEXT_SIZE];
+extern char opt_the_text[MENU_TEXT_SIZE];
+extern char opt_for_text[MENU_TEXT_SIZE];
+extern char opt_fiv_text[MENU_TEXT_SIZE];
 extern char opt_exit_text[16];
 
 extern char *main_menu_text[NUM_ELEMENTS_MAIN_MENU];
