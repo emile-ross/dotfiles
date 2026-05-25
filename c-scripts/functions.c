@@ -10,6 +10,11 @@ void clearbuffer(void)
 {
 	/* clears the imput buffer */
 	while (getchar() != '\n');
+
+	if (verbose)
+	{
+		printf("Buffer was cleared\n");
+	}
 }
 
 void block(bool prompt)
@@ -17,6 +22,11 @@ void block(bool prompt)
 	if (prompt)
 	{
 	    	printf("Press any key to continue\n");
+	}
+
+	if (verbose)
+	{
+		printf("(Execution flow is blocked)\n");
 	}
 	
 	getchar();
@@ -298,7 +308,6 @@ void verbose_path_print(char *file_path, char *file_name)
 {
 	printf("The %s file \nwas exported to: %s\n", file_name, file_path);
 }
-
 void link_file(char *source_path, char *link_path)
 {
 	char *link_command_path_template = "ln -sf %s %s";
@@ -311,6 +320,11 @@ void link_file(char *source_path, char *link_path)
 	snprintf(link_command, (size_t)link_command_size, link_command_path_template, source_path, link_path);
 
 	/* execute the command */
+	if (verbose)
+	{
+		printf("%s\n", link_command);
+	}
+
 	system(link_command);
 
 	free(link_command);
