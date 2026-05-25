@@ -299,14 +299,7 @@ void verbose_path_print(char *file_path, char *file_name)
 	printf("The %s file \nwas exported to: %s\n", file_name, file_path);
 }
 
-void link(char *source_path, char *link_path)
+void link_file(char *source_path, char *link_path)
 {
-
-	/*
-		example command:
-		"ln -sf ~/.config/fuzzel/fuzzel-duplicated.ini ~/.config/fuzzel/fuzzel.ini "
-	*/
-
 	char *link_command_path_template = "ln -sf %s %s";
-
 }
