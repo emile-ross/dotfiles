@@ -302,4 +302,10 @@ void verbose_path_print(char *file_path, char *file_name)
 void link_file(char *source_path, char *link_path)
 {
 	char *link_command_path_template = "ln -sf %s %s";
+
+	int link_command_size = 1 + snprintf(NULL, 0, link_command_path_template, source_path, link_path);
+
+	char *link_command = malloc(link_command_size);
+
+	snprintf(link_command, link_command_size, link_command_path_template, source_path, link_path);
 }
