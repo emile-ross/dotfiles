@@ -123,6 +123,7 @@ void FAST(bool archive_bl, bool pkginstall_bl)
 	free(program_path);
 	free(temp_path);
 }
+
 void FUZZ(bool archive_bl, bool pkginstall_bl)
 {
 	const char *program_config_path = "%s/fuzzel";
@@ -149,19 +150,17 @@ void FUZZ(bool archive_bl, bool pkginstall_bl)
 	file_exporting("fuzzel", "old-fuzzel", ".ini");
 	file_exporting("fuzzel", "default-fuzzel", ".ini");
 
-	int mem_needed_cmd = 1 + snprintf(NULL, 0, 
-			"mkdir -p ~/.config/fuzzel ; "
-			"ln -sf ~/.config/fuzzel/fuzzel-duplicated.ini ~/.config/fuzzel/fuzzel.ini ");
-
-	snprintf(cmd, (size_t)mem_needed_cmd,
-			"mkdir -p ~/.config/fuzzel ; "
-			"ln -sf ~/.config/fuzzel/fuzzel-duplicated.ini ~/.config/fuzzel/fuzzel.ini ");
+	system("mkdir -p ~/.config/fuzzel"); /* create directory */
+	link_file("~/.config/fuzzel/fuzzel-duplicated.ini", "~/.config/fuzzel/fuzzel.ini");
 	system(cmd);  		
+
 	/*
 	 * we must execute these commands
 			"cp -f ~/.config/fuzzel/default-fuzzel.ini ~/.config/fuzzel/custom-edited-fuzzel.ini ; "
 			"mv ~/.config/fuzzel/fuzzel.ini ~/.config/fuzzel/fuzzel-duplicated.ini ; "
 	*/
+	system("mkdir -p ~/.config/fuzzel");
+
 	free(program_path);
 }
 void GTKL(bool archive_bl, bool pkginstall_bl)
