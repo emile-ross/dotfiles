@@ -151,21 +151,14 @@ void FUZZ(bool archive_bl, bool pkginstall_bl)
 
 	int mem_needed_cmd = 1 + snprintf(NULL, 0, 
 			"mkdir -p ~/.config/fuzzel ; "
-			"cp -f %s/fuzzel/old-fuzzel.ini ~/.config/fuzzel ; "
-			"cp -f %s/fuzzel/default-fuzzel.ini ~/.config/fuzzel ; "
-			"cp -f ~/.config/fuzzel/default-fuzzel.ini ~/.config/fuzzel/custom-edited-fuzzel.ini ; "
-			"cp -f %s/fuzzel/fuzzel.ini ~/.config/fuzzel ; "
-			"mv ~/.config/fuzzel/fuzzel.ini ~/.config/fuzzel/fuzzel-duplicated.ini ; "
-			"ln -sf ~/.config/fuzzel/fuzzel-duplicated.ini ~/.config/fuzzel/fuzzel.ini ", inpath, inpath, inpath);
+			"ln -sf ~/.config/fuzzel/fuzzel-duplicated.ini ~/.config/fuzzel/fuzzel.ini ");
 
 	snprintf(cmd, (size_t)mem_needed_cmd,
 			"mkdir -p ~/.config/fuzzel ; "
-			"cp -f %s/fuzzel/old-fuzzel.ini ~/.config/fuzzel ; "
-			"cp -f %s/fuzzel/default-fuzzel.ini ~/.config/fuzzel ; "
-			"cp -f %s/fuzzel/fuzzel.ini ~/.config/fuzzel ; "
-			"ln -sf ~/.config/fuzzel/fuzzel-duplicated.ini ~/.config/fuzzel/fuzzel.ini ", inpath, inpath, inpath);
+			"ln -sf ~/.config/fuzzel/fuzzel-duplicated.ini ~/.config/fuzzel/fuzzel.ini ");
 	system(cmd);  		
 	/*
+	 * we must execute these commands
 			"cp -f ~/.config/fuzzel/default-fuzzel.ini ~/.config/fuzzel/custom-edited-fuzzel.ini ; "
 			"mv ~/.config/fuzzel/fuzzel.ini ~/.config/fuzzel/fuzzel-duplicated.ini ; "
 	*/
