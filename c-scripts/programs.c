@@ -145,6 +145,10 @@ void FUZZ(bool archive_bl, bool pkginstall_bl)
 		install_package(parent, "fuzzel");
 	}
 	/* export fuzzel appearance */
+	file_exporting("fuzzel", "fuzzel", ".ini");
+	file_exporting("fuzzel", "old-fuzzel", ".ini");
+	file_exporting("fuzzel", "default-fuzzel", ".ini");
+
 	int mem_needed_cmd = 1 + snprintf(NULL, 0, 
 			"mkdir -p ~/.config/fuzzel ; "
 			"cp -f %s/fuzzel/old-fuzzel.ini ~/.config/fuzzel ; "
@@ -158,11 +162,13 @@ void FUZZ(bool archive_bl, bool pkginstall_bl)
 			"mkdir -p ~/.config/fuzzel ; "
 			"cp -f %s/fuzzel/old-fuzzel.ini ~/.config/fuzzel ; "
 			"cp -f %s/fuzzel/default-fuzzel.ini ~/.config/fuzzel ; "
-			"cp -f ~/.config/fuzzel/default-fuzzel.ini ~/.config/fuzzel/custom-edited-fuzzel.ini ; "
 			"cp -f %s/fuzzel/fuzzel.ini ~/.config/fuzzel ; "
-			"mv ~/.config/fuzzel/fuzzel.ini ~/.config/fuzzel/fuzzel-duplicated.ini ; "
 			"ln -sf ~/.config/fuzzel/fuzzel-duplicated.ini ~/.config/fuzzel/fuzzel.ini ", inpath, inpath, inpath);
 	system(cmd);  		
+	/*
+			"cp -f ~/.config/fuzzel/default-fuzzel.ini ~/.config/fuzzel/custom-edited-fuzzel.ini ; "
+			"mv ~/.config/fuzzel/fuzzel.ini ~/.config/fuzzel/fuzzel-duplicated.ini ; "
+	*/
 	free(program_path);
 }
 void GTKL(bool archive_bl, bool pkginstall_bl)
@@ -183,7 +189,6 @@ void GTKL(bool archive_bl, bool pkginstall_bl)
     	}
 	/* export gtklock config */
     	system("mkdir -p ~/.config/gtklock/assets");
-
 	file_exporting("gtklock", "style", ".css");
 	file_exporting("gtklock", "lockscreen", ".jpg");
 
