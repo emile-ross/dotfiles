@@ -303,9 +303,15 @@ void link_file(char *source_path, char *link_path)
 {
 	char *link_command_path_template = "ln -sf %s %s";
 
+	/* calculate the size of the string */
 	int link_command_size = 1 + snprintf(NULL, 0, link_command_path_template, source_path, link_path);
+	char *link_command = malloc((size_t)link_command_size); /* allocate memory */
 
-	char *link_command = malloc(link_command_size);
+	/* write to the buffer */
+	snprintf(link_command, (size_t)link_command_size, link_command_path_template, source_path, link_path);
 
-	snprintf(link_command, link_command_size, link_command_path_template, source_path, link_path);
+	/* execute the command */
+	system(link_command);
+
+	free(link_command);
 }
