@@ -7,6 +7,9 @@ Compile before executing.
 ## Compile using make 
 
 Compile with all warnings using the zig cc compiler
+
+make sure you are in the root directory of the repository when executing the makefile
+
 ```bash
 make base
 ```
@@ -20,7 +23,6 @@ Compile for MacOs
 make macos
 ```
 If this causes some problems, try removing the binary files and try again
-
 
 Use ``make gcc`` if you don't want any warning
 
@@ -38,7 +40,7 @@ gcc arguments.c \
     globals.c \
     update.c \
     -o setup \
-    -Wall -Wextra -Wpedantic -std=c99
+    -Wall -Wextra -Wpedantic -std=c99 -Wconversion -Werror
 ./setup
 ```
 
@@ -55,7 +57,7 @@ zig cc arguments.c \
     globals.c \
     update.c \
     -o setup \
-    -Wall -Wextra -Wpedantic -std=c99
+    -Wall -Wextra -Wpedantic -std=c99 -Wconversion
 ./setup
 ```
 
