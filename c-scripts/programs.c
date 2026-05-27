@@ -13,11 +13,11 @@ void BASH(void)
 	const char *command_format = "cp -f %s/shell/bash/.bashrc ~/%s";
 	int mem_needed = 1 + snprintf(NULL, 0, command_format, inpath, BRCNAME);
 	
-	char *cmd = malloc((size_t)mem_needed);
+	char *bash_cmd = malloc((size_t)mem_needed);
 	/* execute the command with the according buffer size previously calculated (above) */
-	snprintf(cmd, (size_t)mem_needed, command_format, inpath, BRCNAME);
-	system(cmd);
-	free(cmd);
+	snprintf(bash_cmd, (size_t)mem_needed, command_format, inpath, BRCNAME);
+	system(bash_cmd);
+	free(bash_cmd);
 }
 
 void BPYT(bool archive_bl, bool pkginstall_bl)
@@ -98,7 +98,6 @@ void FAST(bool archive_bl, bool pkginstall_bl)
 	char *program_path = malloc((size_t)program_path_size);
 	snprintf(program_path, (size_t)program_path_size, program_config_path, config_path);
 
-	char cmd[768];
     	if (archive_bl)
     	{
 		file_archiving("fastfetch", "config", ".jsonc");
@@ -109,17 +108,28 @@ void FAST(bool archive_bl, bool pkginstall_bl)
     	    	install_package(parent, "fastfetch"); /* install fastfetch */
     	}
 	/* export fastfetch config */
-    	snprintf(cmd, sizeof(cmd),
-			"rm %s ; "
-			"mkdir -p %s/assets ; "
-			"cp -f %s/assets/*.png %s/assets/ ; "
-			"cp -f %s/config.jsonc %s/ ; "
-			"cp -f %s/config.jsonc %s/config-duplicated.jsonc ; "
-			"cp -f %s/config-other.jsonc %s/ ; "
-			"cp -f %s/config-default.jsonc %s/"
-			, program_path, program_path, temp_path, program_path, temp_path, program_path, temp_path, program_path, temp_path, program_path, temp_path, program_path);
-    	system(cmd);
-	printf("%s \n\n ", cmd);
+	file_exporting("fastfetch", "config", ".conf");
+	file_exporting("fastfetch", "config-other", ".conf");
+	file_exporting("fastfetch", "config-default", ".conf");
+
+	char *command_template = 
+		"rm %s ; "
+		"mkdir -p %s/assets ; "
+		"cp -f %s/assets/*.png %s/assets/ ; "
+		"cp -f %s/config.jsonc %s/config-duplicated.jsonc";
+
+    	size_t command_size = 1 + (size_t)snprintf(NULL, 0, command_template, program_path, program_path, temp_path, program_path, program_path, program_path);
+
+	char *fastfetch_cmd = malloc(command_size);
+
+    	snprintf(fastfetch_cmd, command_size, command_template, program_path, program_path, temp_path, program_path, program_path, program_path);
+    	system(fastfetch_cmd);
+
+	if (verbose)
+	{
+		printf("%s \n\n ", fastfetch_cmd);
+	}
+
 	free(program_path);
 	free(temp_path);
 }
@@ -133,7 +143,6 @@ void FUZZ(bool archive_bl, bool pkginstall_bl)
 
 	snprintf(program_path, (size_t)program_path_size, program_config_path, config_path);
 
-	char cmd[1024];
     	if (archive_bl)
     	{
 		file_archiving("fuzzel", "fuzzel", ".ini");
@@ -152,10 +161,8 @@ void FUZZ(bool archive_bl, bool pkginstall_bl)
 
 	system("mkdir -p ~/.config/fuzzel"); /* create directory */
 	link_file("~/.config/fuzzel/fuzzel-duplicated.ini", "~/.config/fuzzel/fuzzel.ini");
-	system(cmd);  		
 
-	/*
-	 * we must execute these commands
+	/* we must execute these commands
 			"cp -f ~/.config/fuzzel/default-fuzzel.ini ~/.config/fuzzel/custom-edited-fuzzel.ini ; "
 			"mv ~/.config/fuzzel/fuzzel.ini ~/.config/fuzzel/fuzzel-duplicated.ini ; "
 	*/
@@ -319,14 +326,16 @@ void WAYB(bool archive_bl, bool pkginstall_bl)
 
 void ZSHH(bool archive_bl, float pver, bool pkginstall_bl)
 {
-	char cmd[128];
 	if (archive_bl)
 	{
 		/* archive old zsh config */
 		char *archiving_template = "mv ~/.zshrc ~/.zshrc-old-v%.2f";
 		int archiving_size = snprintf(NULL, 0, archiving_template, pver);
-		snprintf(cmd, (size_t)archiving_size, archiving_template, pver);
-		system(cmd);
+		char *archive_command = malloc((size_t)archiving_size);
+		snprintf(archive_command, (size_t)archiving_size, archiving_template, pver);
+
+		system(archive_command);
+		free(archive_command); /* free after use */
 		
 		char *new_f_path = NULL;
 		const char *new_path = "~/.zshrc-old-v%.2f";
