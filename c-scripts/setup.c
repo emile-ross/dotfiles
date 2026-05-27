@@ -126,8 +126,8 @@ int main(int argc, char *argv[])
 		        		
 						if (fuzzel_config_menu_choice == 1)
 						{
-						    exec_cmd(24, "fuzzel");
-		    				    wait_for_timeout(SHORT_TIMER, 0);
+							exec_cmd(24, "fuzzel");
+							wait_for_timeout(SHORT_TIMER, 0);
 						}
 						else if (fuzzel_config_menu_choice == 2)
 						{
