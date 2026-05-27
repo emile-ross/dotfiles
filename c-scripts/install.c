@@ -45,11 +45,13 @@ void install_configs(unsigned int custom_package_install)  /* the partial instal
 		printf("Do you want to archive your old config?"BOLD_S"(Y/n)\n"STYLE_END);
 		char ARCHIVE_T;
 		scanf(" %c", &ARCHIVE_T);
+		bool archive_bl = y_n(ARCHIVE_T);
 		
 		clearbuffer();
 		printf("Do you want to install the package "BOLD_S"(Y/n)\n"STYLE_END);
 		char PKGINSTALL_T;
 		scanf(" %c", &PKGINSTALL_T);
+		bool pkginstall_bl = y_n(PKGINSTALL_T);
 		
 		config_name config_install_enum = custom_package_install;
 		
@@ -72,55 +74,55 @@ void install_configs(unsigned int custom_package_install)  /* the partial instal
 			break;
 		case bpyt:
 			install_config_message(temp_conf_installed);
-			BPYT(ARCHIVE_T, PKGINSTALL_T);
+			BPYT(archive_bl, pkginstall_bl);
 			break;
 		case btop:
 			install_config_message(temp_conf_installed);
-			BTOP(ARCHIVE_T, PKGINSTALL_T);
+			BTOP(archive_bl, pkginstall_bl);
 			break;
 		case cava:
 			install_config_message(temp_conf_installed);
-			CAVA(ARCHIVE_T, PKGINSTALL_T);
+			CAVA(archive_bl, pkginstall_bl);
 			break;
 		case fast:
 			install_config_message(temp_conf_installed);
-			FAST(ARCHIVE_T, PKGINSTALL_T);
+			FAST(archive_bl, pkginstall_bl);
 			break;
 		case fuzz:
 			install_config_message(temp_conf_installed);
-			FUZZ(ARCHIVE_T, PKGINSTALL_T);
+			FUZZ(archive_bl, pkginstall_bl);
 			break;
 		case gtkl:
 			install_config_message(temp_conf_installed);
-			GTKL(ARCHIVE_T, PKGINSTALL_T);
+			GTKL(archive_bl, pkginstall_bl);
 			break;
 		case hypr:
 			install_config_message(temp_conf_installed);
-			HYPR(ARCHIVE_T, PKGINSTALL_T);
+			HYPR(archive_bl, pkginstall_bl);
 			break;
 		case kitt:
 			install_config_message(temp_conf_installed);
-			KITT(ARCHIVE_T, PKGINSTALL_T);
+			KITT(archive_bl, pkginstall_bl);
 			break;
 		case mpvf:
 			install_config_message(temp_conf_installed);
-			MPVF(ARCHIVE_T, PKGINSTALL_T);
+			MPVF(archive_bl, pkginstall_bl);
 			break;
 		case nvim:
 			install_config_message(temp_conf_installed);
-			NVIM(ARCHIVE_T, PKGINSTALL_T);
+			NVIM(archive_bl, pkginstall_bl);
 			break;
 		case sway:
 			install_config_message(temp_conf_installed);
-			SWAY(ARCHIVE_T, PKGINSTALL_T);
+			SWAY(archive_bl, pkginstall_bl);
 			break;
 		case wayb:
 			install_config_message(temp_conf_installed);
-			WAYB(ARCHIVE_T, PKGINSTALL_T);
+			WAYB(archive_bl, pkginstall_bl);
 			break;
 		case zshh:
 			install_config_message(temp_conf_installed);
-			ZSHH(ARCHIVE_T, pver, PKGINSTALL_T);
+			ZSHH(archive_bl, pver, pkginstall_bl);
 			break;
 		default:
 			printf(ANSI_RED"\nInvalid character\n"STYLE_END);
@@ -165,9 +167,9 @@ void full_install(bool ARCHIVE_BL, bool full_install_bl)
 		{
 			/* this is awful
 			* it could all be replaced by a single array with all of the text 
-			* (would be significantly faster, better, more maintainable...) */
-			
-			/* this has now been fixed by looping through an array of strings */
+			* (would be significantly faster, better, more maintainable...) 
+			*
+			* this has now been fixed by looping through an array of strings */
 			for (int i = 1; i < n_configs; i++)
 			{
 				printf("\n[%d] Install %s ", i, config_names[i]);
@@ -182,22 +184,22 @@ void full_install(bool ARCHIVE_BL, bool full_install_bl)
 }
 
 
-void full_config_install(bool ARCHIVE_BL, float previous_version_t, bool install_packages_t)
+void full_config_install(bool ARCHIVE_BL, float previous_version_t, bool PKGINSTALL_BL)
 {
 	/* a list of all configs
 	* this will execute all configuration entries */
 	BASH();
-	BPYT(ARCHIVE_BL, install_packages_t);
-	BTOP(ARCHIVE_BL, install_packages_t);
-	CAVA(ARCHIVE_BL, install_packages_t);
-	FAST(ARCHIVE_BL, install_packages_t);
-	FUZZ(ARCHIVE_BL, install_packages_t);
-	GTKL(ARCHIVE_BL, install_packages_t);
-	HYPR(ARCHIVE_BL, install_packages_t);
-	KITT(ARCHIVE_BL, install_packages_t);
-	MPVF(ARCHIVE_BL, install_packages_t);
-	NVIM(ARCHIVE_BL, install_packages_t);
-	SWAY(ARCHIVE_BL, install_packages_t);
-	WAYB(ARCHIVE_BL, install_packages_t);
-	ZSHH(ARCHIVE_BL, previous_version_t, install_packages_t);
+	BPYT(ARCHIVE_BL, PKGINSTALL_BL);
+	BTOP(ARCHIVE_BL, PKGINSTALL_BL);
+	CAVA(ARCHIVE_BL, PKGINSTALL_BL);
+	FAST(ARCHIVE_BL, PKGINSTALL_BL);
+	FUZZ(ARCHIVE_BL, PKGINSTALL_BL);
+	GTKL(ARCHIVE_BL, PKGINSTALL_BL);
+	HYPR(ARCHIVE_BL, PKGINSTALL_BL);
+	KITT(ARCHIVE_BL, PKGINSTALL_BL);
+	MPVF(ARCHIVE_BL, PKGINSTALL_BL);
+	NVIM(ARCHIVE_BL, PKGINSTALL_BL);
+	SWAY(ARCHIVE_BL, PKGINSTALL_BL);
+	WAYB(ARCHIVE_BL, PKGINSTALL_BL);
+	ZSHH(ARCHIVE_BL, previous_version_t, PKGINSTALL_BL);
 }

@@ -11,7 +11,6 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 	if (num_cmd_arguments > 1) /* checks how many arguments were used */
 	{
 	    	/* checks if the command was ran with the --noconfirm flag */
-	
 	    	if (strcmp(cmd_arg_v[1], "--noconfirm") == 0) 
 	    	{
 			printf(BOLD_S"Proceeding with full install\n"STYLE_END);
@@ -35,11 +34,10 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 	    	}
 	    	else if (strcmp(cmd_arg_v[1], "-c") == 0 || strcmp(cmd_arg_v[1], "-C") == 0)
 	    	{
-	    	    if (strcmp(cmd_arg_v[1], "-C") == 0)
-	    	    {
-	    			error_message(7);
-	    	    }
-	    	    cmd_arg_install(num_cmd_arguments, cmd_arg_v, 'Y', 'N');
+			if (strcmp(cmd_arg_v[1], "-C") == 0)
+			{
+				error_message(7);
+			}
 	    	}
 	    	else if (strcmp(cmd_arg_v[1], "-i") == 0 || strcmp(cmd_arg_v[1], "-I") == 0)
 	    	{
@@ -79,20 +77,20 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 	    	}
 	    	else if (strcmp(cmd_arg_v[1], "--help") == 0)
 	    	{
-	    	    printf(BOLD_S"Help menu\n"STYLE_END);
-	    	    printf("-c	    	[CONFIG NAME] \n");
-	    	    printf("	apply specified config \n");
-	    	    printf("-p	    	[PACKAGE] \n");
-	    	    printf("	install specified package \n");
-	    	    printf("-i	    	[CONFIG NAME] \n");
-	    	    printf("	print a short description of the package\n");
+			printf(BOLD_S"Help menu\n"STYLE_END);
+			printf("-c	    	[CONFIG NAME] \n");
+			printf("	apply specified config \n");
+			printf("-p	    	[PACKAGE] \n");
+			printf("	install specified package \n");
+			printf("-i	    	[CONFIG NAME] \n");
+			printf("	print a short description of the package\n");
 	    	}
 	    	else
 	    	{
-	    	    /* triggers the "invalid command line argument" error
-	    		 * this is a critical error and it will crash the program */
-	    	    printf(BOLD_S ANSI_RED"%s: invalid option -- '%s'\n"STYLE_END, cmd_arg_v[0], cmd_arg_v[1]);
-	    	    error_message(CLI_INVALID_FLAG);
+			/* triggers the "invalid command line argument" error
+			 * this is a critical error and it will crash the program */
+			printf(BOLD_S ANSI_RED"%s: invalid option -- '%s'\n"STYLE_END, cmd_arg_v[0], cmd_arg_v[1]);
+			error_message(CLI_INVALID_FLAG);
 	    	}
 	}
 	else
@@ -105,146 +103,146 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 
 void argument_config_install(char *package_t, char archiving_t, char pkginstall_t)
 {
-    float version = 0.0;
+	float version = 0.0;
+	
+	switch (detect_config_name(package_t)) 
+	{
+		case bash:
+			BASH();
+			break;
+		
+		case bpyt:
+			BPYT(archiving_t, pkginstall_t);
+			break;
 
-    switch (detect_config_name(package_t)) 
-    {
-        case bash:
-	    BASH();
-            break;
-
-        case bpyt:
-	    BPYT(archiving_t, pkginstall_t);
-            break;
-
-        case btop:
-	    BTOP(archiving_t, pkginstall_t);
-            break;
-
-        case cava:
-	    CAVA(archiving_t, pkginstall_t);
-            break;
-
-        case fast:
-	    FAST(archiving_t, pkginstall_t);
-            break;
-
-        case fuzz:
-	    FUZZ(archiving_t, pkginstall_t);
-            break;
-
-        case gtkl:
-	    GTKL(archiving_t, pkginstall_t);
-            break;
-
-        case hypr:
-	    HYPR(archiving_t, pkginstall_t);
-            break;
-
-	case kitt:
-	    KITT(archiving_t, pkginstall_t);
-            break;
-
-        case mpvf:
-	    MPVF(archiving_t, pkginstall_t);
-            break;
-
-        case nvim:
-	    NVIM(archiving_t, pkginstall_t);
-            break;
- 
-        case sway:
-	    SWAY(archiving_t, pkginstall_t);
-            break;
-
-        case wayb:
-	    WAYB(archiving_t, pkginstall_t);
-            break;
-
-	case zshh:
-	    ZSHH(archiving_t, version, pkginstall_t);
-	    break;
-
-        default:
-	    error_message(301);
-	    break;
-    }
+		case btop:
+			BTOP(archiving_t, pkginstall_t);
+			break;
+		
+		case cava:
+			CAVA(archiving_t, pkginstall_t);
+		    	break;
+		
+		case fast:
+			FAST(archiving_t, pkginstall_t);
+		    	break;
+		
+		case fuzz:
+			FUZZ(archiving_t, pkginstall_t);
+		    	break;
+		
+		case gtkl:
+			GTKL(archiving_t, pkginstall_t);
+		    	break;
+		
+		case hypr:
+			HYPR(archiving_t, pkginstall_t);
+		    	break;
+		
+		case kitt:
+			KITT(archiving_t, pkginstall_t);
+		    	break;
+		
+		case mpvf:
+			MPVF(archiving_t, pkginstall_t);
+		    	break;
+		
+		case nvim:
+			NVIM(archiving_t, pkginstall_t);
+		    	break;
+		
+		case sway:
+			SWAY(archiving_t, pkginstall_t);
+		    	break;
+		
+		case wayb:
+			WAYB(archiving_t, pkginstall_t);
+		    	break;
+		
+		case zshh:
+			ZSHH(archiving_t, version, pkginstall_t);
+		    	break;
+		
+		default:
+			error_message(301);
+		    	break;
+	}
 }
 
 void cmd_arg_install(int num_cmd_arguments_t, char *cmd_arg_v_t[], char config_archive_t, char pkg_install_t)
 {
-    if (num_cmd_arguments_t >= n_to_arg)
-    {
-	for (int i = n_to_arg - 1; i < num_cmd_arguments_t; i++)
+	if (num_cmd_arguments_t >= n_to_arg)
 	{
-	    /* support for different operating systems might come in the future...
-	     * will print the arguments instead of executing the command (useless) */
-	    argument_config_install(cmd_arg_v_t[i], config_archive_t, pkg_install_t);
+		for (int i = n_to_arg - 1; i < num_cmd_arguments_t; i++)
+		{
+			/* support for different operating systems might come in the future...
+			 * will print the arguments instead of executing the command (useless) */
+			argument_config_install(cmd_arg_v_t[i], config_archive_t, pkg_install_t);
+		}
 	}
-    }
-    else
-    {
+	else
+	{
 		/* prints an error message if there isn't any config name specified in the command */
 		cli_arg_missing(cmd_arg_v_t[0], "config name", cmd_arg_v_t[1]);
 		error_message(CLI_ARGS_MISSING);
-    }
+	}
 }
 
 config_name detect_config_name(char *input) 
 {
-    char *HYPR_ARG_NAME[5] = 
-    {
-        "hyprland",
-        "Hyprland",
-        "hypr",
-        "Hypr",
-        NULL,
-    };
-
-    char *NVIM_ARG_NAME[6] = 
-    {
-        "nvim",
-        "neovim",
-        "Neovim",
-        "NeoVim",
-        "Nvim",
-        NULL,
-    };
-
-    /* match the name to the correct config name */
-    if (strcmp(input, "bash") == 0) return bash;
-    if (strcmp(input, "bpytop") == 0) return bpyt;
-    if (strcmp(input, "btop") == 0) return btop;
-    if (strcmp(input, "cava") == 0) return cava;
-    if (strcmp(input, "fastfetch") == 0) return fast;
-    if (strcmp(input, "fuzzel") == 0) return fuzz;
-    if (strcmp(input, "gtklock") == 0) return gtkl;
-    if (strcmp(input, HYPR_ARG_NAME[0]) == 0) return hypr;
-    if (strcmp(input, "kitty") == 0) return kitt;
-    if (strcmp(input, "mpv") == 0) return mpvf;
-    if (strcmp(input, "nvim") == 0) return nvim;
-    if (strcmp(input, "sway") == 0) return sway;
-    if (strcmp(input, "waybar") == 0) return wayb;
-    if (strcmp(input, "zsh") == 0) return zshh;
-
-    /* alternative names
-     * check for hyprland */
-    int i = 1;
-    while (HYPR_ARG_NAME[i] != NULL)
-    {
-		if (strcmp(input, HYPR_ARG_NAME[i]) == 0) return hypr;
-		i++;
-    }
-    /* check for nvim */
-    i = 1;
-    while (NVIM_ARG_NAME[i] != NULL)
-    {
-		if (strcmp(input, NVIM_ARG_NAME[i]) == 0) return nvim;
-		i++;
-    }
-
-    if (strcmp(input, "swaywm") == 0) return sway;
-    if (strcmp(input, "fast") == 0) return fast;
-    if (strcmp(input, "fuzz") == 0) return fuzz;
-    return unknown;
+	char *HYPR_ARG_NAME[5] = 
+	{
+		"hyprland",
+		"Hyprland",
+		"hypr",
+		"Hypr",
+		NULL,
+	};
+	
+	char *NVIM_ARG_NAME[6] = 
+	{
+		"nvim",
+		"neovim",
+		"Neovim",
+		"NeoVim",
+		"Nvim",
+		NULL,
+	};
+	
+	/* match the name to the correct config name */
+	if (strcmp(input, "bash") == 0) return bash;
+	if (strcmp(input, "bpytop") == 0) return bpyt;
+	if (strcmp(input, "btop") == 0) return btop;
+	if (strcmp(input, "cava") == 0) return cava;
+	if (strcmp(input, "fastfetch") == 0) return fast;
+	if (strcmp(input, "fuzzel") == 0) return fuzz;
+	if (strcmp(input, "gtklock") == 0) return gtkl;
+	if (strcmp(input, HYPR_ARG_NAME[0]) == 0) return hypr;
+	if (strcmp(input, "kitty") == 0) return kitt;
+	if (strcmp(input, "mpv") == 0) return mpvf;
+	if (strcmp(input, "nvim") == 0) return nvim;
+	if (strcmp(input, "sway") == 0) return sway;
+	if (strcmp(input, "waybar") == 0) return wayb;
+	if (strcmp(input, "zsh") == 0) return zshh;
+	
+	/* alternative names
+	 * check for hyprland */
+	int i = 1;
+	while (HYPR_ARG_NAME[i] != NULL)
+	{
+	    	if (strcmp(input, HYPR_ARG_NAME[i]) == 0) return hypr;
+	    	i++;
+	}
+	/* check for nvim */
+	i = 1;
+	while (NVIM_ARG_NAME[i] != NULL)
+	{
+	    	if (strcmp(input, NVIM_ARG_NAME[i]) == 0) return nvim;
+	    	i++;
+	}
+	
+	if (strcmp(input, "swaywm") == 0) return sway;
+	if (strcmp(input, "fast") == 0) return fast;
+	if (strcmp(input, "fuzz") == 0) return fuzz;
+	return unknown;
 }
