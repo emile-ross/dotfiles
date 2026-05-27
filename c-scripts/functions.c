@@ -226,7 +226,7 @@ void countdown(int counter, int lines_to_skip)
 		printf("%d ", counter);
 
 		/* prints a "." to the screen each quarter of a second */
-		for (int j = 0; j < 3; j++)
+		for (int a = 0; a < 3; a++)
 		{
 			printf(".");
 			fflush(stdout);
@@ -234,7 +234,7 @@ void countdown(int counter, int lines_to_skip)
 		}
 	
 		/* prints one newline everytime this is executed */
-		for (int k = 0; k < lines_to_skip; k++)
+		for (int b = 0; b < lines_to_skip; b++)
 		{
 			printf("\n");
 		}
