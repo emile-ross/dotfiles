@@ -31,3 +31,4 @@
 #define SHORT_TIMER (2)
 #define LONG_TIMER (1) /* this is in seconds */
 #define n_configs (15)
+#define menu_text_size (32)
