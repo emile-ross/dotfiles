@@ -203,3 +203,59 @@ void full_config_install(bool ARCHIVE_BL, float previous_version_t, bool PKGINST
 	WAYB(ARCHIVE_BL, PKGINSTALL_BL);
 	ZSHH(ARCHIVE_BL, previous_version_t, PKGINSTALL_BL);
 }
+
+void check_for_yay(void)
+{
+	/* check if yay is present */
+    	if (system("test -f /sbin/yay") == 0)
+    	{
+		printf("Yay already installed.\n");
+    	}
+    	else
+    	{
+		printf("Yay is not installed, do you want to install it? (Y/n): ");
+    
+		char YAY;
+        	clearbuffer();
+        	scanf(" %c", &YAY); /* asks the user if they wanna install yay (needed) */
+
+			bool install_yay = y_n(YAY); /* convert the Y/n into a bool with the y_n() function */
+        	if (install_yay)
+        	{
+			/* Check if makepkg is installed ( it is needed in order to compile yay ) */
+			if (system("command -v makepkg > /dev/null") != 0)
+			{
+				printf("\nMakepkg is not installed. Installing 'base-devel' package group to proceed...\n");
+				exec_cmd(48, "sudo pacman -S --noconfirm base-devel");
+ 
+				/* Check if makepkg is available after installing the base-devel package */
+				if (system("command -v makepkg > /dev/null") != 0)
+				{
+					error_message(51);
+				}
+				else
+				{
+					printf("Makepkg has been successfully installed!\n");
+				}
+			}
+        	    	else
+        	    	{
+				printf("Makepkg is already installed.\n");
+				exec_cmd(48, "sudo pacman -S --noconfirm base-devel"); /* update base-devel */
+			}
+			
+			char cmd[256];
+			snprintf(cmd, sizeof(cmd),
+					"git clone https://aur.archlinux.org/yay.git ; "	/* download yay from aur */
+					"cd yay ; "		
+					"makepkg -si ; " /* build package from source */
+					"cd ..");		
+			system(cmd);
+			printf("\nYay is installed, congrats!\n");
+        	}
+		else
+        	{
+			error_message(5);
+		}
+	}
+}
