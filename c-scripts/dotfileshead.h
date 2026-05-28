@@ -40,10 +40,10 @@ void link_file(char *source_path, char *link_path);
 	void pre_startup(void);
 	bool y_n(char yes_no);
 	void exec_cmd(int buffer_size, char *command_to_execute);
-	void check_for_yay(void);
 
 int install_package(char *pkg_type_distro, char *pkginstallname);
 void install_menu(void);
+void check_for_yay(void);
 void full_install(bool ARCHIVE_BL, bool full_install_bl);
 void full_config_install(bool ARCHIVE_BL, float previous_version_t, bool install_packages_t);
 void install_configs(unsigned int custom_package_install);

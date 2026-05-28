@@ -2,8 +2,11 @@
 
 void fuzzel_config_importing(void)
 {
-	char path[512];
-	snprintf(path, sizeof(path), "%s/.config/fuzzel/imported/fuzzel", home);
+	char *path_template = "%s/.config/fuzzel/imported/fuzzel";
+
+	size_t path_size = 1 + (size_t)snprintf(NULL, 0, path_template, home);
+	char *path = malloc(path_size);
+	snprintf(path, path_size, path_template, home);
 	
 	struct stat st;
 	char cmd[768];
@@ -21,6 +24,8 @@ void fuzzel_config_importing(void)
 				"cd %s ", inpath);
 		system(cmd);
 	}
+
+	free(path);
 
 	int theme_type_user_opt;
 	char* theme_type_text;
