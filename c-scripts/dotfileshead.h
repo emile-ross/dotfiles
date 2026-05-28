@@ -33,11 +33,14 @@ void file_archiving(char *program_config_path, char *config_file, char *file_ext
 void link_file(char *source_path, char *link_path);
 
 
-void clear(void);
-void clearbuffer(void);
-void block(bool prompt);
-void pre_startup(void);
-bool y_n(char yes_no);
+/* initialise in functions.c */
+	void clear(void);
+	void clearbuffer(void);
+	void block(bool prompt);
+	void pre_startup(void);
+	bool y_n(char yes_no);
+	void exec_cmd(int buffer_size, char *command_to_execute);
+	void check_for_yay(void);
 
 int install_package(char *pkg_type_distro, char *pkginstallname);
 void install_menu(void);
@@ -47,8 +50,6 @@ void install_configs(unsigned int custom_package_install);
 void install_config_message(char *text);
 void copyfiles(int fastfetch_conf_export);
 void file_exporting(char *program_name, char *config_name, char *file_extention);
-void check_for_yay(void);
-void exec_cmd(int buffer_size, char *command_to_execute);
 void link_fastfetch_configs(void);
 void configure_oh_my_zsh(void);
 void configure_fastfetch(void);
@@ -90,22 +91,23 @@ config_name detect_config_name(char *input);
 
 /* data */
 	extern char *config_names[n_configs];
-	extern char fastfetch_config_menu_text[32];
-	extern char kitty_config_menu_text[32];
-	extern char fuzzel_config_menu_text[32];
-	extern char zshforhumans_config_menu_text[32];
+	extern char fastfetch_config_menu_text[menu_text_size];
+	extern char kitty_config_menu_text[menu_text_size];
+	extern char fuzzel_config_menu_text[menu_text_size];
+	extern char zshforhumans_config_menu_text[menu_text_size];
 
-extern char main_menu_title[128];
-extern char opt_one_text[MENU_TEXT_SIZE];
-extern char opt_the_text[MENU_TEXT_SIZE];
-extern char opt_for_text[MENU_TEXT_SIZE];
-extern char opt_fiv_text[MENU_TEXT_SIZE];
-extern char opt_exit_text[16];
+	extern char kitty_color_text[menu_text_size];
+	extern char kitty_fonts_text[menu_text_size];
+
+	extern char main_menu_title[128];
+	extern char opt_one_text[MENU_TEXT_SIZE];
+	extern char opt_the_text[MENU_TEXT_SIZE];
+	extern char opt_for_text[MENU_TEXT_SIZE];
+	extern char opt_fiv_text[MENU_TEXT_SIZE];
+	extern char opt_exit_text[16];
 
 extern char *main_menu_text[NUM_ELEMENTS_MAIN_MENU];
 
-extern char kitty_color_text[32];
-extern char kitty_fonts_text[32];
 
 /* needs to be global */
 	extern char* theme_colour_text;
