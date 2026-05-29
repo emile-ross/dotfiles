@@ -14,7 +14,7 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 	    	if (strcmp(cmd_arg_v[1], "--noconfirm") == 0) 
 	    	{
 			printf(BOLD_S"Proceeding with full install\n"STYLE_END);
-			full_install('y', 'y');
+			full_install(true, true);
 	    	}
 	    	else if (strcmp(cmd_arg_v[1], "-p") == 0 || strcmp(cmd_arg_v[1], "-P") == 0)
 	    	{

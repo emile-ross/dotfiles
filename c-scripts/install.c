@@ -143,7 +143,7 @@ void install_configs(unsigned int custom_package_install)  /* the partial instal
     	while (custom_package_install > 0 && (int)custom_package_install < max_menu_opt_n);
 }
 
-void full_install(bool ARCHIVE_BL, bool full_install_bl)
+void full_install(bool archive_bl, bool full_install_bl)
 {
 	float previous_version = 0.0f; /* assumes the user doesn't have the dotfiles */
 	if (full_install_bl)
@@ -158,7 +158,7 @@ void full_install(bool ARCHIVE_BL, bool full_install_bl)
 			check_for_yay();
 		}
 		/* actually install the dotfiles */
-		full_config_install(ARCHIVE_BL, previous_version, true);
+		full_config_install(archive_bl, previous_version, true);
 	}
 	else
 	{
