@@ -44,7 +44,7 @@ void link_file(char *source_path, char *link_path);
 int install_package(char *pkg_type_distro, char *pkginstallname);
 void install_menu(void);
 void check_for_yay(void);
-void full_install(bool ARCHIVE_BL, bool full_install_bl);
+void full_install(bool archive_bl, bool full_install_bl);
 void full_config_install(bool ARCHIVE_BL, float previous_version_t, bool install_packages_t);
 void install_configs(unsigned int custom_package_install);
 void install_config_message(char *text);
@@ -93,8 +93,14 @@ config_name detect_config_name(char *input);
 	extern char *config_names[n_configs];
 	extern char fastfetch_config_menu_text[menu_text_size];
 	extern char kitty_config_menu_text[menu_text_size];
-	extern char fuzzel_config_menu_text[menu_text_size];
 	extern char zshforhumans_config_menu_text[menu_text_size];
+
+	/* fuzzel */
+		extern char fuzzel_config_menu_text[menu_text_size];
+		extern int fuzzel_config_menu_choice;
+		extern char fuzzel_view_config_text[menu_text_size];
+		extern char fuzzel_edit_config_text[menu_text_size];
+		extern char fuzzel_catppuccin_text[menu_text_size];
 
 	extern char kitty_color_text[menu_text_size];
 	extern char kitty_fonts_text[menu_text_size];
@@ -105,9 +111,7 @@ config_name detect_config_name(char *input);
 	extern char opt_for_text[MENU_TEXT_SIZE];
 	extern char opt_fiv_text[MENU_TEXT_SIZE];
 	extern char opt_exit_text[16];
-
-extern char *main_menu_text[NUM_ELEMENTS_MAIN_MENU];
-
+	extern char *main_menu_text[NUM_ELEMENTS_MAIN_MENU];
 
 /* needs to be global */
 	extern char* theme_colour_text;
@@ -136,17 +140,9 @@ extern char *main_menu_text[NUM_ELEMENTS_MAIN_MENU];
 	int full_update(char ARCHIVE, float pver);
 
 
-/* fuzzel */
-	/* functions */
-		void fuzzel_config_importing(void);
-		void apply_fuzzel_config(int config_choice_t);
-
-	/* data */
-		extern int fuzzel_config_menu_choice;
-		extern char fuzzel_view_config_text[32];
-		extern char fuzzel_edit_config_text[32];
-		extern char fuzzel_catppuccin_text[32];
-
+/* fuzzel functions */
+	void fuzzel_config_importing(void);
+	void apply_fuzzel_config(int config_choice_t);
 
 /* errors */
 	extern char errcode;
