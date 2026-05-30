@@ -183,40 +183,40 @@ int main(int argc, char *argv[])
 
 void compile_all_files(bool log, char *compiler, char *flags)
 {
-    int base_size = 1;
-    if (log)
-    {
-		base_size += LOGGING_CMD_SIZE;
-    }
-
-    for (int i = 0; source_files[i] != NULL; i++) 
-    {
-		int command_size = base_size + snprintf(NULL, 0,
-    	    	"%s %s%s.c -o %s%s.o%s "
-    	    	, compiler, source_fpath, source_files[i], object_fpath, source_files[i], flags);
-			
-    	char cmd[command_size];
-    	snprintf(cmd, sizeof(cmd),
+	int base_size = 1;
+	if (log)
+	{
+	    	base_size += LOGGING_CMD_SIZE;
+	}
+	
+	for (int i = 0; source_files[i] != NULL; i++) 
+	{
+	    	int command_size = base_size + snprintf(NULL, 0,
 				"%s %s%s.c -o %s%s.o%s "
 				, compiler, source_fpath, source_files[i], object_fpath, source_files[i], flags);
-
-		if (log)
-		{
-		    strcat(cmd, logging_cmd);
-		}
-		if (verbose)
-		{
-		    printf("%s\n", cmd);
-		}
-		system(cmd);
-    }
+	    		
+		char cmd[command_size];
+		snprintf(cmd, sizeof(cmd),
+				"%s %s%s.c -o %s%s.o%s "
+				, compiler, source_fpath, source_files[i], object_fpath, source_files[i], flags);
+	
+	    	if (log)
+	    	{
+			strcat(cmd, logging_cmd);
+	    	}
+	    	if (verbose)
+	    	{
+			printf("%s\n", cmd);
+	    	}
+	    	system(cmd);
+	}
 }
 
 void link_object_files(bool log, compiler_enum compiler_name_def, char *flags)
 {
 	/* define the memory needed for the command buffer */
 	int buffer_size_flags = snprintf(NULL, 0,
-	        "%s -o -c", flags);
+			"%s -o -c", flags);
 	
 	int buf_size[num_src_files];
 	
@@ -249,22 +249,23 @@ void link_object_files(bool log, compiler_enum compiler_name_def, char *flags)
 	char compiler_linking_string[COMPILER_NAME_SIZE];
 	switch(compiler_name_def)
 	{
-	    	case CLANG:
-			snprintf(compiler_linking_string, COMPILER_NAME_SIZE - 1,
-					"clang");
-			break;
-	    	case GCC:
-			snprintf(compiler_linking_string, COMPILER_NAME_SIZE - 1,
-					"gcc");
-			break;
-	    	case ZIG:
-			snprintf(compiler_linking_string, COMPILER_NAME_SIZE - 1,
-					"zig cc");
-			break;
-		default: 
-			printf("Unknown compiler\n");
-			exit(1);
+	case CLANG:
+		snprintf(compiler_linking_string, COMPILER_NAME_SIZE - 1,
+				"clang");
+		break;
+	case GCC:
+		snprintf(compiler_linking_string, COMPILER_NAME_SIZE - 1,
+				"gcc");
+		break;
+	case ZIG:
+		snprintf(compiler_linking_string, COMPILER_NAME_SIZE - 1,
+				"zig cc");
+		break;
+	default: 
+		printf("Unknown compiler\n");
+		exit(1);
 	}
+
 	total_size += snprintf(NULL, 0,
 	    		"%s %s %s", compiler_linking_string, output_binary_name, flags);
 	total_size++;
@@ -392,4 +393,23 @@ void compilation(int number_flags, compiler_enum compiler_name_temp, bool log_bl
 	
 	compile_all_files(log_bl, compiler_name_cmd_temp, all_flags);
 	link_object_files(log_bl, compiler_name_temp, all_flags);
+}
+
+char *logging_string(void)
+{
+	char *logging_cmd_template = " 2>&1 | tee compile_log-%s.txt";
+
+	time_t time_at_compile = time(NULL);
+	struct tm *t = localtime(&time_at_compile);
+
+	size_t time_string_size = 1 + strftime(NULL, 0, "%Y-%m-%d-%H:%M", t);
+	char *time_string = malloc(time_string_size);
+	strftime(time_string, time_string_size, "%Y-%m-%d-%H:%M", t);
+
+	size_t logging_string_size = 1 + snprintf(NULL, 0, logging_cmd_template, time_string);
+
+	char *logging_string = NULL;
+	snprintf(logging_string, logging_string_size, logging_cmd_template, time_string);
+
+	return logging_string;
 }
