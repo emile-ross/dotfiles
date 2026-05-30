@@ -1,7 +1,7 @@
 HISTSIZE=4000
 HISTFILESIZE=8000
 
-# AWSMVERSION: 3.2
+# AWSMVERSION: 3.3
 
 alias l='ls -a --color=auto'
 alias pls='sudo'
