@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <time.h>
 #include <string.h>
 
 #define COMPILER_NAME_SIZE (16)
@@ -39,23 +40,23 @@ int size_source_filename = 24;
 
 const char *source_files[] = 
 { 
-    "arguments",
-    "configuring",
-    "error-handling",
-    "functions",
-    "globals",
-    "install",
-    "programs",
-    "setup",
-    "update",
-    NULL 
+	"arguments",
+	"configuring",
+	"error-handling",
+	"functions",
+	"globals",
+	"install",
+	"programs",
+	"setup",
+	"update",
+	NULL 
 };
 
 typedef enum 
 {
-    CLANG,
-    ZIG,
-    GCC
+	CLANG,
+	ZIG,
+	GCC
 } compiler_enum;
 
 void clean_objects(void);
@@ -65,114 +66,112 @@ void compilation(int number_flags, compiler_enum compiler_name_temp, bool log_bl
 
 int main(int argc, char *argv[])
 {
-    /* declare compiler_name enum */
-    compiler_enum compiler_name;
-    
-    bool Werror_flag_bl = false;    /* default is false */
-    bool Wpedantic_bl = false;	    /* default is false */
-    bool Wall_flag_bl = false;	    /* default is false */
-    bool Wextra_flag_bl = false;    /* default is false */
-    bool c99_flag_bl = false;	    /* default is false */
-    bool Wconversion_bl = false;    /* default is false */ 
-
-    bool compile_bl = true; /* default is true */
-    bool log_bl = false;    /* default is false */
-
-
-    int num_flags = 0; /* initialize num_flags at 0 */
-
-    /* convert command line arguments to flags/compiler/options */
-    for (int i = 1; i < argc; i++)
-    {
+	/* declare compiler_name enum */
+	compiler_enum compiler_name;
+	
+	bool Werror_flag_bl = false;    /* default is false */
+	bool Wpedantic_bl = false;	    /* default is false */
+	bool Wall_flag_bl = false;	    /* default is false */
+	bool Wextra_flag_bl = false;    /* default is false */
+	bool c99_flag_bl = false;	    /* default is false */
+	bool Wconversion_bl = false;    /* default is false */ 
+	
+	bool compile_bl = true; /* default is true */
+	bool log_bl = false;    /* default is false */
+	
+	int num_flags = 0; /* initialize num_flags at 0 */
+	
+	/* convert command line arguments to flags/compiler/options */
+	for (int i = 1; i < argc; i++)
+	{
 		if (strcmp(argv[i], "gcc") == 0)
-    	{
-    	    compiler_name = GCC;
-    	}
-    	else if (strcmp(argv[i], "zig") == 0)
-    	{
-    	    compiler_name = ZIG;
-    	}
-    	else if (strcmp(argv[i], "clang") == 0)
-    	{
-    	    compiler_name = CLANG;
-    	}
-    	else if (strcmp(argv[i], "--base") == 0)
-    	{
+		{
+			compiler_name = GCC;
+		}
+		else if (strcmp(argv[i], "zig") == 0)
+		{
+			compiler_name = ZIG;
+		}
+		else if (strcmp(argv[i], "clang") == 0)
+		{
+			compiler_name = CLANG;
+		}
+		else if (strcmp(argv[i], "--base") == 0)
+		{
 			Wall_flag_bl = true;
 			Wpedantic_bl = true;
-	    	Wextra_flag_bl = true;
-	    	Wconversion_bl = true;
-	    	num_flags += 4;
-    	}
+			Wextra_flag_bl = true;
+			Wconversion_bl = true;
+			num_flags += 4;
+		}
 		else if (strcmp(argv[i], "-c") == 0)
 		{
-		    Wconversion_bl = true;
-		    num_flags++;
+			Wconversion_bl = true;
+			num_flags++;
 		}
 		else if (strcmp(argv[i], "-a") == 0)
 		{
-		    Wall_flag_bl = true;
-		    num_flags++;
+			Wall_flag_bl = true;
+			num_flags++;
 		}
 		else if (strcmp(argv[i], "-x") == 0)
 		{
-    		Wextra_flag_bl = true;
-		    num_flags++;
+			Wextra_flag_bl = true;
+			num_flags++;
 		}
 		else if (strcmp(argv[i], "-e") == 0)
 		{
-    		Werror_flag_bl = true;
-		    num_flags++;
+			Werror_flag_bl = true;
+			num_flags++;
 		}
 		else if (strcmp(argv[i], "-c99") == 0)
 		{
-		    c99_flag_bl = true;
-		    num_flags++;
+			c99_flag_bl = true;
+			num_flags++;
 		}
-    	else if (strcmp(argv[i], "-p") == 0 || strcmp(argv[i], "pedantic") == 0)
-    	{
-		    Wpedantic_bl = true;
-		    num_flags++;
-    	}
-    	else if (strcmp(argv[i], "clean") == 0)
-    	{
-		    clean_objects();
-		    compile_bl = false;	/* ignore the compilation step */
-    	}
-    	else if (strcmp(argv[i], "std") == 0)
+		else if (strcmp(argv[i], "-p") == 0 || strcmp(argv[i], "pedantic") == 0)
 		{
-    		compiler_name = ZIG;
-
-		    c99_flag_bl = true;
-		    Wall_flag_bl = true;
-		    Wpedantic_bl = true;
-		    Wextra_flag_bl = true;
-		    Wconversion_bl = true;
-		    num_flags += 5;
+			Wpedantic_bl = true;
+			num_flags++;
 		}
-    	else if (strcmp(argv[i], "log") == 0)
+		else if (strcmp(argv[i], "clean") == 0)
+		{
+			clean_objects();
+			compile_bl = false;	/* ignore the compilation step */
+		}
+		else if (strcmp(argv[i], "std") == 0)
+		{
+			compiler_name = ZIG;
+			c99_flag_bl = true;
+			Wall_flag_bl = true;
+			Wpedantic_bl = true;
+			Wextra_flag_bl = true;
+			Wconversion_bl = true;
+			num_flags += 5;
+		}
+		else if (strcmp(argv[i], "log") == 0)
 		{
 			/* the log_bl will log all errors the compiler encounters to a file */
-		    log_bl = true;
+			log_bl = true;
 		}
-    		else if (strcmp(argv[i], "-v") == 0)
+		else if (strcmp(argv[i], "-v") == 0)
 		{
-		    verbose = true;
+			verbose = true;
 		}
 		else if (strcmp(argv[i], "macos") == 0)
 		{
-		    compiler_name = CLANG;
-    	    c99_flag_bl = true;
-    	    Wall_flag_bl = true;
-    	    Wpedantic_bl = true;
-    	    Wextra_flag_bl = true;
-    	    Wconversion_bl = true;
-    		num_flags += 5;
+			compiler_name = CLANG;
+			c99_flag_bl = true;
+			Wall_flag_bl = true;
+			Wpedantic_bl = true;
+			Wextra_flag_bl = true;
+			Wconversion_bl = true;
+			num_flags += 5;
 		}
-    	else
-    	{
-    	    printf("Unknown argument: %s\n", argv[i]);
-    	}
+		else
+		{
+			printf("Unknown argument: %s\n", argv[i]);
+		}
     }
     
     if (compile_bl)
