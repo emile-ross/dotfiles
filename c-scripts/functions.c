@@ -54,7 +54,7 @@ void pre_startup(void)
 	}
 	else
 	{
-	    	error_message(101);
+	    	error_message(UNSUPPORTED_DISTRO);
 	}
 	
 	/* get home directory / username 
@@ -64,7 +64,7 @@ void pre_startup(void)
 	/* error message if username can't be fetched */
 	if (home == NULL) 
 	{
-	    	error_message(204);
+	    	error_message(FAIL_FIND_HOME_DIR);
 	}
 	/* Add user_config_path definition
 	 * it needs to be the home dir + .config path */
@@ -85,7 +85,7 @@ char *get_initial_path(void)
 	
 	if (fp == NULL) 
 	{
-	    	error_message(206);
+	    	error_message(POPEN_FAILED);
 	    	return NULL;
 	}
 	
@@ -128,7 +128,7 @@ int get_os_name(void)
 	/* fallback to /usr/lib if /etc/os-release fails */
 	if (!fp) fp = fopen("/usr/lib/os-release", "r"); 
 	/* error checking */
-	if (!fp) error_message(52);
+	if (!fp) error_message(RENAME_FAIL);
 	
 	char t_line[256];
 

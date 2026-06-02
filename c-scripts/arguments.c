@@ -36,7 +36,7 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 	    	{
 			if (strcmp(cmd_arg_v[1], "-C") == 0)
 			{
-				error_message(7);
+				error_message(FEAT_DEPRECATED);
 			}
 	    	}
 	    	else if (strcmp(cmd_arg_v[1], "-i") == 0 || strcmp(cmd_arg_v[1], "-I") == 0)
@@ -44,7 +44,7 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 			/* loops through the arguments in order to pass them one at a time */
 			if (strcmp(cmd_arg_v[1], "-I") == 0)
 			{
-			    	error_message(7);
+			    	error_message(FEAT_DEPRECATED);
 			}
 			
 			if (num_cmd_arguments >= n_to_arg)
@@ -164,7 +164,7 @@ void argument_config_install(char *package_t, char archiving_t, char pkginstall_
 		    	break;
 		
 		default:
-			error_message(301);
+			error_message(CLI_UNKNOWN_PKG);
 		    	break;
 	}
 }
@@ -243,6 +243,9 @@ config_name detect_config_name(char *input)
 	
 	if (strcmp(input, "swaywm") == 0) return sway;
 	if (strcmp(input, "fast") == 0) return fast;
+	if (strcmp(input, "bpyt") == 0) return bpyt;
+	if (strcmp(input, "gtkl") == 0) return gtkl;
+	if (strcmp(input, "wayb") == 0) return wayb;
 	if (strcmp(input, "fuzz") == 0) return fuzz;
 	return unknown;
 }
