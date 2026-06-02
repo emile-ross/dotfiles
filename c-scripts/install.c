@@ -231,7 +231,7 @@ void check_for_yay(void)
 				/* Check if makepkg is available after installing the base-devel package */
 				if (system("command -v makepkg > /dev/null") != 0)
 				{
-					error_message(51);
+					error_message(MAKEPKG_FAIL);
 				}
 				else
 				{
@@ -255,7 +255,7 @@ void check_for_yay(void)
         	}
 		else
         	{
-			error_message(5);
+			error_message(YAY_INST_U);
 		}
 	}
 }
