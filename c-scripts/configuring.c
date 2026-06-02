@@ -45,22 +45,20 @@ void fuzzel_config_importing(void)
 	{
 	case 1:
 		theme_type_text = "catppuccin-latte";
-		goto endone;
+		break;
 	case 2:
 		theme_type_text = "catppuccin-frappe";
-		goto endone;
+		break;
 	case 3:
 		theme_type_text = "catppuccin-macchiato";
-		goto endone;
+		break;
 	case 4:
 		theme_type_text = "catppuccin-mocha";
-		goto endone;
+		break;
 	default:
 		theme_type_text = NULL;
 		printf("Try again.\n");
-		goto endone;
-	endone:
-	;
+		break;
 	}
 	/* theme color */
 	printf(BOLD_S"Set the colour for your fuzzel config\n"STYLE_END);
