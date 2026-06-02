@@ -6,7 +6,7 @@
  - telescope
  - snacks
  - lualine
- - catppuccin (theme
+ - catppuccin theme
     
 
   You can edit the file located at ``~/.config/nvim/init.lua`` in order to make changes to neovim.
