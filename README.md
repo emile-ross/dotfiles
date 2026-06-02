@@ -82,7 +82,7 @@ You can use this script to install your dotfiles, update your dotfiles and confi
 The makefile compiles the entire source-code by executing the code in the ``build.c`` file.  
 
 ```sh
-git clone https://github.com/imawsumm/dotfiles
+git clone https://github.com/emile-ross/dotfiles
 cd dotfiles/
 make setup
 ```
