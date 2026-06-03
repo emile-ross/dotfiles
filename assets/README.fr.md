@@ -1,7 +1,7 @@
 # Configuration du système
 Les (dotfiles) sont des fichiers utilisés pour modifier votre système.  Vous pouvez les modifier en utilisant un éditeur de texte comme ([Neovim](https://github.com/neovim/neovim)).
 
-[View this page in english](https://github.com/emile-ross/dotfiles#emile-ross-dotfiles)
+[View this page in english](https://github.com/emile-ross/dotfiles)
 *(la version en francais n'est pas à jour et elle peut contenir des erreurs)*
 
 Si vous voulez **Installer** vos configurations, cliquez [ici](#Installer)
@@ -85,11 +85,12 @@ git clone https://github.com/emile-ross/dotfiles
 cd dotfiles/
 make setup
 ```
+Pour macos, vous pouvez utiliser la commande suivante:
 
-Maintenant, exécutez le fichier en binaire avec:
-```c
-./setup
+```sh
+make macos
 ```
+
 
 ### Compiler avec GCC
 
@@ -185,7 +186,7 @@ ALT + 2 -> **focus firefox**
 ALT + 0 -> **focus obs**
 
 
-Si jamais vous rencontrez un problème, veuillez le signaler en fournissant un "log", cela m'aide à améliorer ce script.
+Si jamais vous rencontrez un problème, veuillez le signaler en fournissant les traces du programme (logs), cela m'aide à améliorer ce script.
 
 # Crédits
 
