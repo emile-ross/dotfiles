@@ -17,7 +17,13 @@ void fuzzel_config_importing(void)
     	}
     	else 
     	{
-		snprintf(cmd, 256,
+		size_t cmd_size = 1 + (size_t)snprintf(NULL, 0,
+				"mkdir -p ~/.config/fuzzel/imported/ ; " 
+				"cd ~/.config/fuzzel/imported/ ; "
+				"git clone https://github.com/catppuccin/fuzzel.git ; "
+				"cd %s ", inpath);
+
+		snprintf(cmd, cmd_size,
 				"mkdir -p ~/.config/fuzzel/imported/ ; " 
 				"cd ~/.config/fuzzel/imported/ ; "
 				"git clone https://github.com/catppuccin/fuzzel.git ; "
