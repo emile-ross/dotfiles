@@ -1,7 +1,7 @@
 # Configuration du système
 Les (dotfiles) sont des fichiers utilisés pour modifier votre système.  Vous pouvez les modifier en utilisant un éditeur de texte comme ([Neovim](https://github.com/neovim/neovim)).
 
-[View this page in english](https://github.com/imawsumm/dotfiles#imawsums-dotfiles)
+[View this page in english](https://github.com/emile-ross/dotfiles#emile-ross-dotfiles)
 *(la version en francais n'est pas à jour et elle peut contenir des erreurs)*
 
 Si vous voulez **Installer** vos configurations, cliquez [ici](#Installer)
@@ -78,10 +78,10 @@ Plus de fonctionnalités sont à venir.
 ### Compiler avec make
 
 
-Le makefile compile tout le code source en en exécutant le code dans le fichier « [build.c](https://github.com/ImAwsumm/dotfiles/blob/main/build.c). ».  
+Le makefile compile tout le code source en en exécutant le code dans le fichier « [build.c](https://github.com/emile-ross/dotfiles/blob/main/build.c). ».  
 
 ```sh
-git clone https://github.com/imawsumm/dotfiles
+git clone https://github.com/emile-ross/dotfiles
 cd dotfiles/
 make setup
 ```
