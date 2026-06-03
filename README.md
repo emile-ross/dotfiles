@@ -1,5 +1,6 @@
 # My dotfiles
-Dotfiles are files used to customize your system to your liking.  You can modify them by editing config files using a text editor ([Neovim](https://github.com/neovim/neovim)).
+Dotfiles are files used to customize your system to your liking.  
+You can modify them by editing config files using a text editor ([Neovim](https://github.com/neovim/neovim)).
 
 [Voir cette page en francais][fr]
 
@@ -117,11 +118,13 @@ You can also use the ``-p`` flag in order to install a package with the correct 
 example: ``./setup -p cafva`` This would install cava *(only the package, use ``-c`` for configs)*
 
 ## Keybinds for Hyprland
+
 Useful keybinds to know:
-(super = "Windows key")
+
+ (super = "Windows key")
  
  super + Q -> **execute kitty**
-> (the default terminal)f
+> (the default terminal)
 
 super + M -> **exit hyprland**
 

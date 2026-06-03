@@ -8,11 +8,12 @@ Compile before executing.
 
 Compile with all warnings using the zig cc compiler
 
-make sure you are in the root directory of the repository when executing the makefile
+> make sure you are in the root directory of the repository when executing the makefile
 
 ```bash
 make base
 ```
+
 You can log the errors to a file using 
 ```sh
 make log
@@ -22,9 +23,10 @@ Compile for MacOs
 ```sh
 make macos
 ```
-If this causes some problems, try removing the binary files and try again
 
-Use ``make gcc`` if you don't want any warning
+Use ``make gcc`` if you don't want any warnings
+
+If this causes some problems, try removing the binary files and try again
 
 
 ## Compile using GCC 
@@ -40,7 +42,7 @@ gcc arguments.c \
     globals.c \
     update.c \
     -o setup \
-    -Wall -Wextra -Wpedantic -std=c99 -Wconversion -Werror
+    -Wall -Wextra -Wpedantic -std=c99 -Wconversion -Werror -Wshadow
 ./setup
 ```
 
@@ -57,7 +59,7 @@ zig cc arguments.c \
     globals.c \
     update.c \
     -o setup \
-    -Wall -Wextra -Wpedantic -std=c99 -Wconversion
+    -Wall -Wextra -Wpedantic -std=c99 -Wconversion  -Wshadow
 ./setup
 ```
 
