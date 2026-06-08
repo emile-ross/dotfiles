@@ -228,62 +228,62 @@ void apply_fuzzel_config(int config_choice_t)
 
 void configure_fastfetch(void)
 {
-    int link_fastfetch_configs_opt = -20;
-    do
-    {
-        clear();
-    
-	/* create command buffer */
-    	char cmd[128];
-
-    	printf(BOLD_S"What file would you like to use as your fastfetch config?\n"STYLE_END);
-
-	if (fastfetch_config_apply == true)
+	int link_fastfetch_configs_opt = -20;
+	do
 	{
-	    if (link_fastfetch_configs_opt == -20)
-	    {
-		printf(ANSI_LGREEN"The fastfetch config "BOLD_S"has already been applied.\n\n"STYLE_END);
-	    }
-	    else
-	    {
-		printf(ANSI_GREEN"The fastfetch config "BOLD_S"was applied successfully.\n\n"STYLE_END);
-	    }
+		clear();
+		
+		/* create command buffer */
+		char cmd[128];
+		
+		printf(BOLD_S"What file would you like to use as your fastfetch config?\n"STYLE_END);
+		
+		if (fastfetch_config_apply == true)
+		{
+			if (link_fastfetch_configs_opt == -20)
+			{
+				printf(ANSI_LGREEN"The fastfetch config "BOLD_S"has already been applied.\n\n"STYLE_END);
+			}
+			else
+			{
+				printf(ANSI_GREEN"The fastfetch config "BOLD_S"was applied successfully.\n\n"STYLE_END);
+			}
+		}
+		else
+		{
+			printf("\n");
+		}
+		
+		printf(BOLD_S " [1] "STYLE_END"config-default.jsonc\n");
+		printf(BOLD_S " [2] "STYLE_END"config-other.jsonc\n");
+		printf(BOLD_S " [3] "STYLE_END"config-duplicated.jsonc\n");
+		printf(BOLD_S " [0] "STYLE_END "%s\n", opt_exit_text);
+		
+		clearbuffer();
+		scanf("%d", &link_fastfetch_configs_opt);
+		
+		if (link_fastfetch_configs_opt == 1)
+		{
+			snprintf(cmd, sizeof(cmd),
+					"ln -fs ~/.config/fastfetch/config-default.jsonc ~/.config/fastfetch/config.jsonc");
+			system(cmd);
+			fastfetch_config_apply = true;
+		}
+		else if (link_fastfetch_configs_opt == 2)
+		{
+			snprintf(cmd, sizeof(cmd),
+					"ln -fs ~/.config/fastfetch/config-other.jsonc ~/.config/fastfetch/config.jsonc");
+			system(cmd);
+			fastfetch_config_apply = true;
+		}
+		else if (link_fastfetch_configs_opt == 3)
+		{
+			snprintf(cmd, sizeof(cmd),
+					"ln -fs ~/.config/fastfetch/config-duplicated.jsonc ~/.config/fastfetch/config.jsonc");
+			system(cmd);
+			fastfetch_config_apply = true;
+		}
 	}
-	else
-	{
-	    printf("\n");
-	}
-
-    	printf(BOLD_S " [1] "STYLE_END"config-default.jsonc\n");
-    	printf(BOLD_S " [2] "STYLE_END"config-other.jsonc\n");
-    	printf(BOLD_S " [3] "STYLE_END"config-duplicated.jsonc\n");
-    	printf(BOLD_S " [0] "STYLE_END "%s\n", opt_exit_text);
-
-        clearbuffer();
-    	scanf("%d", &link_fastfetch_configs_opt);
-    
-    	if (link_fastfetch_configs_opt == 1)
-    	{
-    	    snprintf(cmd, sizeof(cmd),
-        	    "ln -fs ~/.config/fastfetch/config-default.jsonc ~/.config/fastfetch/config.jsonc");
-    	    system(cmd);
-	    fastfetch_config_apply = true;
-    	}
-    	else if (link_fastfetch_configs_opt == 2)
-    	{
-    	    snprintf(cmd, sizeof(cmd),
-        	    "ln -fs ~/.config/fastfetch/config-other.jsonc ~/.config/fastfetch/config.jsonc");
-    	    system(cmd);
-	    fastfetch_config_apply = true;
-    	}
-    	else if (link_fastfetch_configs_opt == 3)
-    	{
-    	    snprintf(cmd, sizeof(cmd),
-        	    "ln -fs ~/.config/fastfetch/config-duplicated.jsonc ~/.config/fastfetch/config.jsonc");
-    	    system(cmd);
-	    fastfetch_config_apply = true;
-    	}
-    }
-    while (link_fastfetch_configs_opt > 0.0);
-    /* exits the while loop when the user types 0 */
+    	while (link_fastfetch_configs_opt > 0.0);
+    	/* exits the while loop when the user types 0 */
 }
