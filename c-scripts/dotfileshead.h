@@ -31,6 +31,7 @@ void ZSHH(bool archive_bl, float pver, bool pkginstall_bl);
 
 void file_archiving(char *program_config_path, char *config_file, char *file_extention);
 void link_file(char *source_path, char *link_path);
+void make_dir(char *program_name);
 
 
 /* initialise in functions.c */
