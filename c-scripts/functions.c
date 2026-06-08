@@ -277,13 +277,22 @@ void link_file(char *source_path, char *link_path)
 
 void make_dir(char *program_name)
 {
-	char *directory_path_template = "mkdir -p %s/.config/%s";
+	char *directory_path_template = "mkdir -p %s/.config/%s/";
 
+	/* calculate the directory_path string size */
 	size_t directory_path_size = 1 + (size_t)snprintf(NULL, 0, directory_path_template, home, program_name);
-	char *mkdir_cmd = malloc(directory_path_size);
+	char *mkdir_cmd = malloc(directory_path_size);	/* allocate memory for the mkdir_cmd */
 
+	/* write to the mkdir_cmd buffer */
 	snprintf(mkdir_cmd, directory_path_size, directory_path_template, home, program_name);
-	printf("%s", mkdir_cmd);
+
+	if (verbose)
+	{
+		printf("%s", mkdir_cmd);
+	}
+
+	system(mkdir_cmd);	/* execute command */
+
 	free(mkdir_cmd);
 }
 
