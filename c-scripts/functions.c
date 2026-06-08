@@ -252,6 +252,7 @@ void verbose_path_print(char *file_path, char *file_name)
 {
 	printf("The %s file \nwas exported to: %s\n", file_name, file_path);
 }
+
 void link_file(char *source_path, char *link_path)
 {
 	char *link_command_path_template = "ln -sf %s %s";
@@ -273,3 +274,16 @@ void link_file(char *source_path, char *link_path)
 
 	free(link_command);
 }
+
+void make_dir(char *program_name)
+{
+	char *directory_path_template = "mkdir -p %s/.config/%s";
+
+	size_t directory_path_size = 1 + (size_t)snprintf(NULL, 0, directory_path_template, home, program_name);
+	char *mkdir_cmd = malloc(directory_path_size);
+
+	snprintf(mkdir_cmd, directory_path_size, directory_path_template, home, program_name);
+	printf("%s", mkdir_cmd);
+	free(mkdir_cmd);
+}
+
