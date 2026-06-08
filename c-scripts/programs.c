@@ -442,6 +442,7 @@ void file_archiving(char *program_name, char *config_file, char *file_extention)
 
 	char *destination_file = malloc((size_t)destination_file_size);
 	if (!destination_file) return;
+
 	char *src_file;
 	if (extention_bl)
 	{
@@ -449,6 +450,7 @@ void file_archiving(char *program_name, char *config_file, char *file_extention)
 
 		int src_file_size = 1 + snprintf(NULL, 0, "%s/%s%s", program_path, config_file, file_extention);
 		src_file = malloc((size_t)src_file_size);
+
 		if (!src_file) return;
 		snprintf(src_file, (size_t)src_file_size, "%s/%s%s", program_path, config_file, file_extention);
 	}
@@ -458,6 +460,7 @@ void file_archiving(char *program_name, char *config_file, char *file_extention)
 
 		int src_file_size = 1 + snprintf(NULL, 0, "%s/%s", program_path, config_file);
 		src_file = malloc((size_t)src_file_size);
+
 		if (!src_file) return;
 		snprintf(src_file, (size_t)src_file_size, "%s/%s", program_path, config_file);
 	}

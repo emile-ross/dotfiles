@@ -2,8 +2,8 @@
 
 void cli_arg_missing(char *first_command, char *type_of_missing_arg, char *user_flag_t)
 {
-    /* prints an error message if there isn't a package specified in the command */
-    printf(BOLD_S ANSI_RED"%s: missing %s after -- '%s'\n"STYLE_END, first_command, type_of_missing_arg, user_flag_t);
+	/* prints an error message if there isn't a package specified in the command */
+	printf(BOLD_S ANSI_RED"%s: missing %s after -- '%s'\n"STYLE_END, first_command, type_of_missing_arg, user_flag_t);
 }
 
 int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
@@ -107,65 +107,65 @@ void argument_config_install(char *package_t, char archiving_t, char pkginstall_
 	
 	switch (detect_config_name(package_t)) 
 	{
-		case bash:
-			BASH();
-			break;
-		
-		case bpyt:
-			BPYT(archiving_t, pkginstall_t);
-			break;
+	case bash:
+		BASH();
+		break;
+	
+	case bpyt:
+		BPYT(archiving_t, pkginstall_t);
+		break;
 
-		case btop:
-			BTOP(archiving_t, pkginstall_t);
-			break;
-		
-		case cava:
-			CAVA(archiving_t, pkginstall_t);
-		    	break;
-		
-		case fast:
-			FAST(archiving_t, pkginstall_t);
-		    	break;
-		
-		case fuzz:
-			FUZZ(archiving_t, pkginstall_t);
-		    	break;
-		
-		case gtkl:
-			GTKL(archiving_t, pkginstall_t);
-		    	break;
-		
-		case hypr:
-			HYPR(archiving_t, pkginstall_t);
-		    	break;
-		
-		case kitt:
-			KITT(archiving_t, pkginstall_t);
-		    	break;
-		
-		case mpvf:
-			MPVF(archiving_t, pkginstall_t);
-		    	break;
-		
-		case nvim:
-			NVIM(archiving_t, pkginstall_t);
-		    	break;
-		
-		case sway:
-			SWAY(archiving_t, pkginstall_t);
-		    	break;
-		
-		case wayb:
-			WAYB(archiving_t, pkginstall_t);
-		    	break;
-		
-		case zshh:
-			ZSHH(archiving_t, version, pkginstall_t);
-		    	break;
-		
-		default:
-			error_message(CLI_UNKNOWN_PKG);
-		    	break;
+	case btop:
+		BTOP(archiving_t, pkginstall_t);
+		break;
+	
+	case cava:
+		CAVA(archiving_t, pkginstall_t);
+	    	break;
+	
+	case fast:
+		FAST(archiving_t, pkginstall_t);
+	    	break;
+	
+	case fuzz:
+		FUZZ(archiving_t, pkginstall_t);
+	    	break;
+	
+	case gtkl:
+		GTKL(archiving_t, pkginstall_t);
+	    	break;
+	
+	case hypr:
+		HYPR(archiving_t, pkginstall_t);
+	    	break;
+	
+	case kitt:
+		KITT(archiving_t, pkginstall_t);
+	    	break;
+	
+	case mpvf:
+		MPVF(archiving_t, pkginstall_t);
+	    	break;
+	
+	case nvim:
+		NVIM(archiving_t, pkginstall_t);
+	    	break;
+	
+	case sway:
+		SWAY(archiving_t, pkginstall_t);
+	    	break;
+	
+	case wayb:
+		WAYB(archiving_t, pkginstall_t);
+	    	break;
+	
+	case zshh:
+		ZSHH(archiving_t, version, pkginstall_t);
+	    	break;
+	
+	default:
+		error_message(CLI_UNKNOWN_PKG);
+	    	break;
 	}
 }
 
