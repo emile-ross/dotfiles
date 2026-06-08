@@ -8,7 +8,6 @@ If you want to **Install** your dotfiles, click [here](#Install)
 
 many configurations would have been impossible without these free ressources: [Credits](#Credits)
 
-
 <table>
   <tr>
     <th>desktop with kitty</th>
@@ -41,7 +40,6 @@ many configurations would have been impossible without these free ressources: [C
 ## prerequisites
 - an Arch based distribution of linux (Windows will **never** get support)
 - Hyprland isn't required but still recomended in order to benefit from all configurations
-  
 
 ## programs modified 
 
@@ -51,7 +49,7 @@ When doing a full installation, you are installing all of the following programs
   - lazy, telescope and lualine
 - **hyprland**
   - with hypridle
-- sway (not fully implemented)
+- sway
   - with swaybar confguration
 - **waybar**
 - btop
@@ -85,6 +83,11 @@ The makefile compiles the entire source-code by executing the code in the ``buil
 ```sh
 git clone https://github.com/emile-ross/dotfiles
 cd dotfiles/
+```
+
+Compile for most linux distros using this command:
+
+```sh
 make setup
 ```
 
