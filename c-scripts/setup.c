@@ -3,7 +3,7 @@
 int main(int argc, char *argv[])
 {
 	pre_startup();
-	
+
 	parse_arguments(argc, argv);
 
 	int menu_one_i;
@@ -29,15 +29,15 @@ int main(int argc, char *argv[])
 		else if (menu_one_i == 2)
 		{
 			clear();
-			float *version = update();
-			printf(ANSI_GREY"\nDetected Version: %.2f\n"STYLE_END, *version);
+			float version = *get_version();
+			printf(ANSI_GREY"\nDetected Version: %.2f\n"STYLE_END, version);
 			printf(BOLD_S "%s\n\n"STYLE_END, opt_the_text );
 			printf("\nDo you want to backup your old dotfiles before updating? (Y/n)\n");
 			char backuptemp;
 			
 			clearbuffer();
 			scanf("%c", &backuptemp);
-			full_update(backuptemp, *version);
+			full_update(backuptemp, version);
 		}
 		else if (menu_one_i == KEY_MAIN_MENU_CONFIGURE)
 		{
