@@ -218,8 +218,8 @@ void check_for_yay(void)
 		char YAY;
         	clearbuffer();
         	scanf(" %c", &YAY); /* asks the user if they wanna install yay (needed) */
+		bool install_yay = y_n(YAY); /* convert the Y/n into a bool with the y_n() function */
 
-			bool install_yay = y_n(YAY); /* convert the Y/n into a bool with the y_n() function */
         	if (install_yay)
         	{
 			/* Check if makepkg is installed ( it is needed in order to compile yay ) */

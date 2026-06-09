@@ -99,7 +99,7 @@ int full_update(char archive_file, float pver)
 }
 
 /* returns the VAWSM variable */
-float* update(void) 
+float* get_version(void) 
 {
 	/* create path to config */
 	char *hyprpath_template = "%s/.config/hypr/hyprland.conf";
