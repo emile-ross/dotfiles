@@ -172,13 +172,13 @@ int main(int argc, char *argv[])
 		{
 			printf("Unknown argument: %s\n", argv[i]);
 		}
-    }
-    
-    if (compile_bl)
-    {
+	}
+
+	if (compile_bl)
+	{
 		compilation(num_flags, compiler_name, log_bl, Werror_flag_bl, Wpedantic_bl, Wall_flag_bl, Wextra_flag_bl, c99_flag_bl, Wconversion_bl);
-    }
-    return 0;
+	}
+	return 0;
 }
 
 void compile_all_files(bool log, char *compiler, char *flags)
@@ -192,6 +192,7 @@ void compile_all_files(bool log, char *compiler, char *flags)
 	for (int i = 0; source_files[i] != NULL; i++) 
 	{
 		char *command_template = "%s %s%s.c -o %s%s.o%s ";
+
 		/* calculate the command length */
 		size_t command_size = base_size + (size_t)snprintf(NULL, 0, command_template, compiler, source_fpath, source_files[i], object_fpath, source_files[i], flags);
 		
@@ -202,12 +203,14 @@ void compile_all_files(bool log, char *compiler, char *flags)
 		{
 			strcat(compile_cmd, logging_cmd);
 		}
+
 		if (verbose)
 		{
 			/* print out the command to the screen if the user chose the verbose option */
 			printf("%s\n", compile_cmd);
 		}
 		system(compile_cmd);
+		free(compile_cmd);	/* release memory (not used anymore) */
 	}
 }
 
