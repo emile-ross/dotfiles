@@ -137,7 +137,8 @@ config_name detect_config_name(char *input);
 	int get_os_name(void);
 
 	extern char full_update_opt; 
-	float* update(void);
+	float* get_version(void);
+
 	int full_update(char ARCHIVE, float pver);
 
 
