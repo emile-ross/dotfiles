@@ -140,7 +140,6 @@ void FUZZ(bool archive_bl, bool pkginstall_bl)
 	int program_path_size = 1 + snprintf(NULL, 0, program_config_path, config_path);
 
 	char *program_path = malloc((size_t)program_path_size);
-
 	snprintf(program_path, (size_t)program_path_size, program_config_path, config_path);
 
     	if (archive_bl)
@@ -162,12 +161,7 @@ void FUZZ(bool archive_bl, bool pkginstall_bl)
 	system("mkdir -p ~/.config/fuzzel"); /* create directory */
 	link_file("~/.config/fuzzel/fuzzel-duplicated.ini", "~/.config/fuzzel/fuzzel.ini");
 
-	/* we must execute these commands
-			"cp -f ~/.config/fuzzel/default-fuzzel.ini ~/.config/fuzzel/custom-edited-fuzzel.ini ; "
-			"mv ~/.config/fuzzel/fuzzel.ini ~/.config/fuzzel/fuzzel-duplicated.ini ; "
-	*/
-	system("mkdir -p ~/.config/fuzzel");
-
+	make_dir("fuzzel");
 	free(program_path);
 }
 void GTKL(bool archive_bl, bool pkginstall_bl)
@@ -187,7 +181,7 @@ void GTKL(bool archive_bl, bool pkginstall_bl)
     	    	install_package(parent, "gtklock");
     	}
 	/* export gtklock config */
-    	system("mkdir -p ~/.config/gtklock/assets");
+	make_dir("gtklock/assets");
 	file_exporting("gtklock", "style", ".css");
 	file_exporting("gtklock", "lockscreen", ".jpg");
 
@@ -223,11 +217,7 @@ void HYPR(bool archive_bl, bool pkginstall_bl)
 	{
 		file_exporting("hypr", config_file[i], ".conf");
 	}
-
-	char cmd[384];
-	snprintf(cmd, sizeof(cmd), "mkdir -p %s/.config/hypr/assets", home);
-	system(cmd);
-
+	make_dir("hypr/assets");
 	file_exporting("hypr/assets", "lockscreen", ".png");
 }
 void KITT(bool archive_bl, bool pkginstall_bl)
@@ -245,7 +235,7 @@ void KITT(bool archive_bl, bool pkginstall_bl)
 	/* export kitty config */
 	file_exporting("kitty", "current-theme", ".conf");
 	file_exporting("kitty", "kitty", ".conf");
-	system("mkdir ~/.config/kitty");
+	make_dir("kitty");
 }
 
 void MPVF(bool archive_bl, bool pkginstall_bl)
@@ -259,7 +249,7 @@ void MPVF(bool archive_bl, bool pkginstall_bl)
 		install_package(parent, "mpv");
 	}
 	/* export mpv config with shaders */
-	system("mkdir -p ~/.config/mpv/"); /* create directory before copying file */
+	make_dir("mpv");	/* create directory before copying file */
 	file_exporting("mpv", "mpv", ".conf");
 }
 
@@ -277,7 +267,7 @@ void NVIM(bool archive_bl, bool pkginstall_bl)
 		 * nvim is most likely already installed  */
 		install_package(parent, "nvim lazygit");
 	}
-	system("mkdir -p ~/.config/nvim");
+	make_dir("nvim");
 	/* export nvim config */
 	file_exporting("nvim", "init", ".lua");
 }
@@ -300,7 +290,7 @@ void SWAY(bool archive_bl, bool pkginstall_bl)
 	file_exporting(name, "config", NULL);
 	file_exporting(name, "config-default", NULL);
 
-	system("mkdir -p ~/.config/sway");
+	make_dir("sway");
 }
 
 void WAYB(bool archive_bl, bool pkginstall_bl)
