@@ -74,9 +74,9 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 			    	cli_arg_missing(cmd_arg_v[0], "package", cmd_arg_v[1]);
 			    	error_message(CLI_ARGS_MISSING);
 			}
-	    	}
-	    	else if (strcmp(cmd_arg_v[1], "--help") == 0)
-	    	{
+		}
+		else if (strcmp(cmd_arg_v[1], "--help") == 0)
+		{
 			printf(BOLD_S"Help menu\n"STYLE_END);
 			printf("-c	    	[CONFIG NAME] \n");
 			printf("	apply specified config \n");
@@ -84,14 +84,19 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 			printf("	install specified package \n");
 			printf("-i	    	[CONFIG NAME] \n");
 			printf("	print a short description of the package\n");
-	    	}
-	    	else
-	    	{
+		}
+		else if (strcmp(cmd_arg_v[1], "-v") == 0 || strcmp(cmd_arg_v[1], "--version") == 0)
+		{
+			float program_version = *get_version();
+			printf("Version is: "BOLD_S"%lf"STYLE_END, program_version);
+		}
+		else
+		{
 			/* triggers the "invalid command line argument" error
 			 * this is a critical error and it will crash the program */
 			printf(BOLD_S ANSI_RED"%s: invalid option -- '%s'\n"STYLE_END, cmd_arg_v[0], cmd_arg_v[1]);
 			error_message(CLI_INVALID_FLAG);
-	    	}
+		}
 	}
 	else
 	{
