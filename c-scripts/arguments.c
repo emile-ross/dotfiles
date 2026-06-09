@@ -10,14 +10,14 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 {
 	if (num_cmd_arguments > 1) /* checks how many arguments were used */
 	{
-	    	/* checks if the command was ran with the --noconfirm flag */
-	    	if (strcmp(cmd_arg_v[1], "--noconfirm") == 0) 
-	    	{
+		/* checks if the command was ran with the --noconfirm flag */
+		if (strcmp(cmd_arg_v[1], "--noconfirm") == 0) 
+		{
 			printf(BOLD_S"Proceeding with full install\n"STYLE_END);
 			full_install(true, true);
-	    	}
-	    	else if (strcmp(cmd_arg_v[1], "-p") == 0 || strcmp(cmd_arg_v[1], "-P") == 0)
-	    	{
+		}
+		else if (strcmp(cmd_arg_v[1], "-p") == 0 || strcmp(cmd_arg_v[1], "-P") == 0)
+		{
 			if (num_cmd_arguments >= n_to_arg)
 			{
 				for (int i = n_to_arg - 1; i < num_cmd_arguments; i++)
@@ -31,20 +31,20 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 				cli_arg_missing(cmd_arg_v[0], "package", cmd_arg_v[1]);
 				error_message(CLI_ARGS_MISSING);
 			}
-	    	}
-	    	else if (strcmp(cmd_arg_v[1], "-c") == 0 || strcmp(cmd_arg_v[1], "-C") == 0)
-	    	{
+		}
+		else if (strcmp(cmd_arg_v[1], "-c") == 0 || strcmp(cmd_arg_v[1], "-C") == 0)
+		{
 			if (strcmp(cmd_arg_v[1], "-C") == 0)
 			{
 				error_message(FEAT_DEPRECATED);
 			}
-	    	}
-	    	else if (strcmp(cmd_arg_v[1], "-i") == 0 || strcmp(cmd_arg_v[1], "-I") == 0)
-	    	{
+		}
+		else if (strcmp(cmd_arg_v[1], "-i") == 0 || strcmp(cmd_arg_v[1], "-I") == 0)
+		{
 			/* loops through the arguments in order to pass them one at a time */
 			if (strcmp(cmd_arg_v[1], "-I") == 0)
 			{
-			    	error_message(FEAT_DEPRECATED);
+				error_message(FEAT_DEPRECATED);
 			}
 			
 			if (num_cmd_arguments >= n_to_arg)
@@ -57,13 +57,12 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 					
 					if ((config_name)description_index > n_configs)
 					{
-					    	error_message((error_code_e)CLI_ARGS_MISSING);
+						error_message((error_code_e)CLI_ARGS_MISSING);
 					}
 					else if ((config_name)description_index == 0)
 					{
-					    	error_message((error_code_e)CLI_UNKNOWN_PKG);
+						error_message((error_code_e)CLI_UNKNOWN_PKG);
 					}
-					
 					char *description = description_arr[(config_name)description_index];
 					printf("%s\n", description);
 			    	}
@@ -88,7 +87,7 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 		else if (strcmp(cmd_arg_v[1], "-v") == 0 || strcmp(cmd_arg_v[1], "--version") == 0)
 		{
 			float program_version = *get_version();
-			printf("Version is: "BOLD_S"%.2lf"STYLE_END, program_version);
+			printf("Version is: "BOLD_S"%.2lf\n"STYLE_END, program_version);
 		}
 		else
 		{
@@ -100,8 +99,8 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 	}
 	else
 	{
-	    	/* if no argument is found (most cases) */
-	    	return 0;
+		/* if no argument is found (most cases) */
+		return 0;
 	}
 	exit(0);
 }
@@ -203,7 +202,6 @@ config_name detect_config_name(char *input)
 		"Hypr",
 		NULL,
 	};
-	
 	char *NVIM_ARG_NAME[6] = 
 	{
 		"nvim",

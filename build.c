@@ -183,32 +183,31 @@ int main(int argc, char *argv[])
 
 void compile_all_files(bool log, char *compiler, char *flags)
 {
-	int base_size = 1;
+	size_t base_size = 1;
 	if (log)
 	{
-	    	base_size += LOGGING_CMD_SIZE;
+		base_size += LOGGING_CMD_SIZE;
 	}
 	
 	for (int i = 0; source_files[i] != NULL; i++) 
 	{
-	    	int command_size = base_size + snprintf(NULL, 0,
-				"%s %s%s.c -o %s%s.o%s "
-				, compiler, source_fpath, source_files[i], object_fpath, source_files[i], flags);
-	    		
-		char cmd[command_size];
-		snprintf(cmd, sizeof(cmd),
-				"%s %s%s.c -o %s%s.o%s "
-				, compiler, source_fpath, source_files[i], object_fpath, source_files[i], flags);
-	
-	    	if (log)
-	    	{
-			strcat(cmd, logging_cmd);
-	    	}
-	    	if (verbose)
-	    	{
-			printf("%s\n", cmd);
-	    	}
-	    	system(cmd);
+		char *command_template = "%s %s%s.c -o %s%s.o%s ";
+		/* calculate the command length */
+		size_t command_size = base_size + (size_t)snprintf(NULL, 0, command_template, compiler, source_fpath, source_files[i], object_fpath, source_files[i], flags);
+		
+		char *compile_cmd = malloc(command_size);	/* allocate memory for the compile_cmd */
+		snprintf(compile_cmd, command_size, command_template, compiler, source_fpath, source_files[i], object_fpath, source_files[i], flags);
+		
+		if (log)
+		{
+			strcat(compile_cmd, logging_cmd);
+		}
+		if (verbose)
+		{
+			/* print out the command to the screen if the user chose the verbose option */
+			printf("%s\n", compile_cmd);
+		}
+		system(compile_cmd);
 	}
 }
 
