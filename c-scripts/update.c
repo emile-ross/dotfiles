@@ -103,10 +103,10 @@ float* get_version(void)
 {
 	/* create path to config */
 	char *hyprpath_template = "%s/.config/hypr/hyprland.conf";
-	size_t hyprpath_size = 1 + (size_t)snprintf(NULL, 0, "%s", hyprpath_template);
+	size_t hyprpath_size = 1 + (size_t)snprintf(NULL, 0, hyprpath_template, home);
 	char *hyprpath = malloc(hyprpath_size);
 
-	snprintf(hyprpath, sizeof(hyprpath), hyprpath_template, home);
+	snprintf(hyprpath, hyprpath_size, hyprpath_template, home);
 	/* set the hyprland path with username */
 
 	/* open the file with hyprpath */

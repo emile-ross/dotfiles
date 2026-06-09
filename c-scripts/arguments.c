@@ -88,7 +88,7 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 		else if (strcmp(cmd_arg_v[1], "-v") == 0 || strcmp(cmd_arg_v[1], "--version") == 0)
 		{
 			float program_version = *get_version();
-			printf("Version is: "BOLD_S"%lf"STYLE_END, program_version);
+			printf("Version is: "BOLD_S"%.2lf"STYLE_END, program_version);
 		}
 		else
 		{
