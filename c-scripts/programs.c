@@ -33,7 +33,7 @@ void BPYT(bool archive_bl, bool pkginstall_bl)
 		install_package(parent, pkg_name); /* install bpytop package */
 	}
 	/* export bpytop config */
-	system("mkdir -p ~/.config/bpytop");
+	make_dir("bpytop");
 	file_exporting(pkg_name, pkg_name, ".conf");
 }
 
@@ -48,7 +48,7 @@ void BTOP(bool archive_bl, bool pkginstall_bl)
 		install_package(parent, "btop"); /* install btop package */
     	}
     	/* export btop config */
-	system("mkdir -p ~/.config/btop");
+	make_dir("btop");
 	file_exporting("btop", "btop", ".conf");
 }
 
@@ -112,17 +112,18 @@ void FAST(bool archive_bl, bool pkginstall_bl)
 	file_exporting("fastfetch", "config-other", ".conf");
 	file_exporting("fastfetch", "config-default", ".conf");
 
+	make_dir("fastfetch/assets");
+
 	char *command_template = 
 		"rm %s ; "
-		"mkdir -p %s/assets ; "
 		"cp -f %s/assets/*.png %s/assets/ ; "
 		"cp -f %s/config.jsonc %s/config-duplicated.jsonc";
 
-    	size_t command_size = 1 + (size_t)snprintf(NULL, 0, command_template, program_path, program_path, temp_path, program_path, program_path, program_path);
+    	size_t command_size = 1 + (size_t)snprintf(NULL, 0, command_template, program_path, temp_path, program_path, program_path, program_path);
 
 	char *fastfetch_cmd = malloc(command_size);
 
-    	snprintf(fastfetch_cmd, command_size, command_template, program_path, program_path, temp_path, program_path, program_path, program_path);
+    	snprintf(fastfetch_cmd, command_size, command_template, program_path, temp_path, program_path, program_path, program_path);
     	system(fastfetch_cmd);
 
 	if (verbose)
@@ -158,7 +159,6 @@ void FUZZ(bool archive_bl, bool pkginstall_bl)
 	file_exporting("fuzzel", "old-fuzzel", ".ini");
 	file_exporting("fuzzel", "default-fuzzel", ".ini");
 
-	system("mkdir -p ~/.config/fuzzel"); /* create directory */
 	link_file("~/.config/fuzzel/fuzzel-duplicated.ini", "~/.config/fuzzel/fuzzel.ini");
 
 	make_dir("fuzzel");
@@ -311,7 +311,7 @@ void WAYB(bool archive_bl, bool pkginstall_bl)
 	file_exporting(name, "style", ".css");
 	file_exporting(name, "config", ".jsonc");
 
-	system("mkdir -p ~/.config/waybar/");
+	make_dir("waybar");
 }
 
 void ZSHH(bool archive_bl, float pver, bool pkginstall_bl)
