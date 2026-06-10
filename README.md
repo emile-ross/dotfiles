@@ -6,6 +6,8 @@ You can modify them by editing config files using a text editor ([Neovim](https:
 
 If you want to **Install** your dotfiles, click [here](#Install)
 
+Flags [documentation](docs/flags.md)
+
 many configurations would have been impossible without these free ressources: [Credits](#Credits)
 
 <table>
@@ -179,7 +181,7 @@ ALT + 0 -> **focus obs**
 If you ever encounter an issue please report it by providing the issue you are experiencing with a log, it helps me improve this script. 
 
 
-# Credits 
+## Credits 
 
 Many configs were directly from or inspired by [@kzndotsh](https://github.com/kzndotsh)
 
