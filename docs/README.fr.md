@@ -2,6 +2,8 @@
 
 [View this page in english][en]
 
+[Documentation](docs/flags.md) pour les drapeaux (En Anglais)
+
 ## Cette traduction est incomplète
 La version en anglais est plus claire, complète et précise.
 ## Aide 
