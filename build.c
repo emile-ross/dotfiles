@@ -300,12 +300,11 @@ void clean_objects(void)
 	{
 	    	for (int i = 0; source_files[i] != NULL; i++) 
 		{
-			int buffer_size = snprintf(NULL, 0,
-	    		    		"rm %s%s.o", object_fpath, source_files[i]);
+			char *command_template = "rm %s%s.o";
+
+			int buffer_size = snprintf(NULL, 0, command_template, object_fpath, source_files[i]);
 			char cmd[buffer_size + 1];	/* initialize cmd buffer */
-			snprintf(cmd, sizeof(cmd),
-	    		    		"rm %s%s.o"
-					, object_fpath, source_files[i]);
+			snprintf(cmd, (size_t)buffer_size, command_template, object_fpath, source_files[i]);
 	
 			printf("%s\n", cmd);
 			system(cmd);
