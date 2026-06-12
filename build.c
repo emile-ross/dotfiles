@@ -283,19 +283,22 @@ void link_object_files(bool log, compiler_enum compiler_name_def, char *flags)
 	
 	/* add the logging command buffer size if logging is enabled */
 
+	size_t logging_addr = 0;
+
 	if (log)
 	{
-	    	total_size += LOGGING_CMD_SIZE;
+		total_size += (int)strlen(logging_string(&logging_addr));
 	}
 	
-	char link_cmd[total_size];
-	snprintf(link_cmd, sizeof(link_cmd),
+	char *link_cmd = malloc((size_t)total_size);
+	snprintf(link_cmd, (size_t)total_size,
 	    		"%s %s -o %s %s", compiler_linking_string, source_files_obj_cmd, output_binary_name, flags);
 	
 	/* append the logging command if it's enabled */
 	if (log)
 	{
-	    	strcat(link_cmd, logging_cmd);
+	    	strcat(link_cmd, (char*)logging_addr);
+		free((void*)logging_addr);
 	}
 	if (verbose)
 	{
@@ -424,11 +427,11 @@ char *logging_string(size_t *result_ptr)
 
 	size_t logging_string_size = 1 + snprintf(NULL, 0, logging_cmd_template, time_string);
 
-	char *logging_string = malloc(logging_string_size);
-	*result_ptr = (size_t)logging_string;
-	snprintf(logging_string, logging_string_size, logging_cmd_template, time_string);
+	char *full_logging_string = malloc(logging_string_size);
+	*result_ptr = (size_t)full_logging_string;
+	snprintf(full_logging_string, logging_string_size, logging_cmd_template, time_string);
 
 	free(time_string);
 
-	return logging_string;
+	return full_logging_string;
 }
