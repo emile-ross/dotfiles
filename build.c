@@ -187,9 +187,10 @@ int main(int argc, char *argv[])
 void compile_all_files(bool log, char *compiler, char *flags)
 {
 	size_t base_size = 1;
+	size_t logging_addr;
 	if (log)
 	{
-		base_size += LOGGING_CMD_SIZE;
+		base_size += strlen(logging_string(&logging_addr));
 	}
 	
 	for (int i = 0; source_files[i] != NULL; i++) 
@@ -204,7 +205,7 @@ void compile_all_files(bool log, char *compiler, char *flags)
 		
 		if (log)
 		{
-			strcat(compile_cmd, logging_cmd);
+			strcat(compile_cmd, (char*)logging_addr);
 		}
 
 		if (verbose)
@@ -214,6 +215,11 @@ void compile_all_files(bool log, char *compiler, char *flags)
 		}
 		system(compile_cmd);
 		free(compile_cmd);	/* release memory (not used anymore) */
+	}
+
+	if (log)
+	{
+		free((void*)logging_addr);
 	}
 }
 
@@ -276,6 +282,7 @@ void link_object_files(bool log, compiler_enum compiler_name_def, char *flags)
 	total_size++;
 	
 	/* add the logging command buffer size if logging is enabled */
+
 	if (log)
 	{
 	    	total_size += LOGGING_CMD_SIZE;
@@ -401,7 +408,7 @@ void compilation(int number_flags, compiler_enum compiler_name_temp, bool log_bl
 
 char *logging_string(size_t *result_ptr)
 {
-	char *logging_cmd_template = " 2>&1 | tee compile_log-%s.txt";
+	char *logging_cmd_template = " 2>&1 | tee -a compile_log-%s.txt";
 
 	time_t time_at_compile = time(NULL);
 	struct tm *t = localtime(&time_at_compile);
@@ -424,11 +431,4 @@ char *logging_string(size_t *result_ptr)
 	free(time_string);
 
 	return logging_string;
-
-	/*	example implementation 
-	size_t logging_addr = 0;
-	printf("%s\n", logging_string(&logging_addr));
-	free((void*)logging_addr);
-	exit(0);
-	*/
 }
