@@ -4,6 +4,9 @@
 #include <time.h>
 #include <string.h>
 
+
+char *logging_string(size_t *result_ptr);
+
 #define COMPILER_NAME_SIZE (16)
 
 /* This is the object file path
@@ -396,21 +399,36 @@ void compilation(int number_flags, compiler_enum compiler_name_temp, bool log_bl
 	link_object_files(log_bl, compiler_name_temp, all_flags);
 }
 
-char *logging_string(void)
+char *logging_string(size_t *result_ptr)
 {
 	char *logging_cmd_template = " 2>&1 | tee compile_log-%s.txt";
 
 	time_t time_at_compile = time(NULL);
 	struct tm *t = localtime(&time_at_compile);
+	if (t == NULL)
+	{
+		return NULL;
+	}
 
-	size_t time_string_size = 1 + strftime(NULL, 0, "%Y-%m-%d-%H:%M", t);
-	char *time_string = malloc(time_string_size);
-	strftime(time_string, time_string_size, "%Y-%m-%d-%H:%M", t);
+	size_t max_time_len = 192;
+
+	char *time_string = malloc(max_time_len);
+	strftime(time_string, max_time_len, "%Y-%m-%d-%H:%M:%S", t);
 
 	size_t logging_string_size = 1 + snprintf(NULL, 0, logging_cmd_template, time_string);
 
-	char *logging_string = NULL;
+	char *logging_string = malloc(logging_string_size);
+	*result_ptr = (size_t)logging_string;
 	snprintf(logging_string, logging_string_size, logging_cmd_template, time_string);
 
+	free(time_string);
+
 	return logging_string;
+
+	/*	example implementation 
+	size_t logging_addr = 0;
+	printf("%s\n", logging_string(&logging_addr));
+	free((void*)logging_addr);
+	exit(0);
+	*/
 }
