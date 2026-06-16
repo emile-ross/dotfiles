@@ -38,16 +38,60 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 			{
 				error_message(FEAT_DEPRECATED);
 			}
+
 			config_name config_to_install = detect_config_name(cmd_arg_v[2]);
 
-			if (config_fn_exec(config_to_install, true, false, 0.0) != 0)
+			int ret_value = config_fn_exec(config_to_install, true, false, 0.0);
+
+			char *package_name_str = malloc(100);
+			if (ret_value != 0)
 			{
-				error_message(CLI_UNKNOWN_PKG);
+				while (1)
+				{
+					char buffer[100];
+
+					printf("Invalid package name\nType package name:");
+
+					if (fgets(buffer, sizeof(buffer), stdin) == NULL)
+					{
+						printf("Failed to parse input.\n");
+						wait_for_timeout(0, 1);
+					}
+
+					/* calculate string length for trailing newline removal */
+					size_t len = strlen(buffer);
+
+					if (len > 0 && buffer[len - 1] == '\n')
+					{
+						/* replace trailing \n with a NULL terminator */
+						buffer[len - 1] = '\0';
+					}
+
+					config_name config_type = detect_config_name(buffer);
+					
+					ret_value = config_fn_exec(config_type, true, false, 0.0);
+					if (ret_value == 0)
+					{
+						snprintf(package_name_str, 100, "%s", buffer);
+						break;
+					}
+					else
+					{
+						printf(ANSI_RED"Invalid package.\n"STYLE_END);
+					}
+					printf("\n");
+				}
 			}
 			else
 			{
-				printf("Successfully installed %s config\n", cmd_arg_v[2]);
+				snprintf(package_name_str, 100, "%s", cmd_arg_v[2]);
 			}
+
+			if (ret_value == 0)
+			{
+				printf(ANSI_GREEN"Successfully installed %s config\n"STYLE_END, package_name_str);
+			}
+			free(package_name_str);
 		}
 		else if (strcmp(cmd_arg_v[1], "-i") == 0 || strcmp(cmd_arg_v[1], "-I") == 0)
 		{
