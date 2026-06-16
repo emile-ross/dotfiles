@@ -36,6 +36,8 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 		{
 			config_name config_to_install = detect_config_name(cmd_arg_v[2]);
 
+			config_fn_exec(config_to_install, true, false, 0.0);
+
 			if (strcmp(cmd_arg_v[1], "-C") == 0)
 			{
 				error_message(FEAT_DEPRECATED);
