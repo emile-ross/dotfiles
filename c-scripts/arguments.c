@@ -43,18 +43,18 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 
 			int ret_value = config_fn_exec(config_to_install, true, false, 0.0);
 
-			char *package_name_str = malloc(100);
+			size_t package_str_length = 100;
+			char *package_name_str = malloc(package_str_length);
 			if (ret_value != 0)
 			{
 				while (1)
 				{
-					char buffer[100];
+					char buffer[package_str_length];
+					printf(ANSI_RED"Invalid package name\n"STYLE_END"Type package name: ");
 
-					printf("Invalid package name\nType package name:");
-
-					if (fgets(buffer, sizeof(buffer), stdin) == NULL)
+					if (fgets(buffer, (int)package_str_length, stdin) == NULL)
 					{
-						printf("Failed to parse input.\n");
+						printf(ANSI_RED"Failed to parse input.\n"STYLE_END);
 						wait_for_timeout(0, 1);
 					}
 
@@ -72,19 +72,15 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 					ret_value = config_fn_exec(config_type, true, false, 0.0);
 					if (ret_value == 0)
 					{
-						snprintf(package_name_str, 100, "%s", buffer);
+						snprintf(package_name_str, package_str_length, "%s", buffer);
 						break;
-					}
-					else
-					{
-						printf(ANSI_RED"Invalid package.\n"STYLE_END);
 					}
 					printf("\n");
 				}
 			}
 			else
 			{
-				snprintf(package_name_str, 100, "%s", cmd_arg_v[2]);
+				snprintf(package_name_str, package_str_length, "%s", cmd_arg_v[2]);
 			}
 
 			if (ret_value == 0)
