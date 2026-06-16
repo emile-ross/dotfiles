@@ -34,13 +34,19 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 		}
 		else if (strcmp(cmd_arg_v[1], "-c") == 0 || strcmp(cmd_arg_v[1], "-C") == 0)
 		{
-			config_name config_to_install = detect_config_name(cmd_arg_v[2]);
-
-			config_fn_exec(config_to_install, true, false, 0.0);
-
 			if (strcmp(cmd_arg_v[1], "-C") == 0)
 			{
 				error_message(FEAT_DEPRECATED);
+			}
+			config_name config_to_install = detect_config_name(cmd_arg_v[2]);
+
+			if (config_fn_exec(config_to_install, true, false, 0.0) != 0)
+			{
+				error_message(CLI_UNKNOWN_PKG);
+			}
+			else
+			{
+				printf("Successfully installed %s config\n", cmd_arg_v[2]);
 			}
 		}
 		else if (strcmp(cmd_arg_v[1], "-i") == 0 || strcmp(cmd_arg_v[1], "-I") == 0)
@@ -199,7 +205,7 @@ config_name detect_config_name(char *input)
 	return unknown;
 }
 
-void config_fn_exec(config_name config_type, bool archive_bl, bool package_bl, float version)
+int config_fn_exec(config_name config_type, bool archive_bl, bool package_bl, float version)
 {
 	switch (config_type) 
 	{
@@ -260,7 +266,8 @@ void config_fn_exec(config_name config_type, bool archive_bl, bool package_bl, f
 	    	break;
 	
 	default:
-		error_message(CLI_UNKNOWN_PKG);
-	    	break;
+		return 1;
 	}
+
+	return 0;
 }

@@ -73,7 +73,7 @@ config_name detect_config_name(char *input);
 
 /*  command line arguments */
 	char *package_name(config_name config);
-	void config_fn_exec(config_name config_type, bool archive_bl, bool package_bl, float version);
+	int config_fn_exec(config_name config_type, bool archive_bl, bool package_bl, float version);
 	void argument_config_install(char *package_t, char archiving_t, char pkginstall_t);
 	void cmd_arg_install(int num_cmd_arguments_t, char *cmd_arg_v_t[], char config_archive_t, char pkg_install_t);
 	void cli_arg_missing(char *first_command, char *type_of_missing_arg, char *user_flag_t);
