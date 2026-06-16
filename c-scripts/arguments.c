@@ -38,6 +38,9 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 			{
 				error_message(FEAT_DEPRECATED);
 			}
+
+			config_name config_to_install = detect_config_name(cmd_arg_v[2]);
+
 		}
 		else if (strcmp(cmd_arg_v[1], "-i") == 0 || strcmp(cmd_arg_v[1], "-I") == 0)
 		{
@@ -109,6 +112,8 @@ void argument_config_install(char *package_t, char archiving_t, char pkginstall_
 {
 	float version = 0.0;
 	
+	bool package_bl = y_n(pkginstall_t);
+	bool archive_bl = y_n(archiving_t);
 	switch (detect_config_name(package_t)) 
 	{
 	case bash:
@@ -116,55 +121,55 @@ void argument_config_install(char *package_t, char archiving_t, char pkginstall_
 		break;
 	
 	case bpyt:
-		BPYT(archiving_t, pkginstall_t);
+		BPYT(archive_bl, package_bl);
 		break;
 
 	case btop:
-		BTOP(archiving_t, pkginstall_t);
+		BTOP(archive_bl, package_bl);
 		break;
 	
 	case cava:
-		CAVA(archiving_t, pkginstall_t);
+		CAVA(archive_bl, package_bl);
 	    	break;
 	
 	case fast:
-		FAST(archiving_t, pkginstall_t);
+		FAST(archive_bl, package_bl);
 	    	break;
 	
 	case fuzz:
-		FUZZ(archiving_t, pkginstall_t);
+		FUZZ(archive_bl, package_bl);
 	    	break;
 	
 	case gtkl:
-		GTKL(archiving_t, pkginstall_t);
+		GTKL(archive_bl, package_bl);
 	    	break;
 	
 	case hypr:
-		HYPR(archiving_t, pkginstall_t);
+		HYPR(archive_bl, package_bl);
 	    	break;
 	
 	case kitt:
-		KITT(archiving_t, pkginstall_t);
+		KITT(archive_bl, package_bl);
 	    	break;
 	
 	case mpvf:
-		MPVF(archiving_t, pkginstall_t);
+		MPVF(archive_bl, package_bl);
 	    	break;
 	
 	case nvim:
-		NVIM(archiving_t, pkginstall_t);
+		NVIM(archive_bl, package_bl);
 	    	break;
 	
 	case sway:
-		SWAY(archiving_t, pkginstall_t);
+		SWAY(archive_bl, package_bl);
 	    	break;
 	
 	case wayb:
-		WAYB(archiving_t, pkginstall_t);
+		WAYB(archive_bl, package_bl);
 	    	break;
 	
 	case zshh:
-		ZSHH(archiving_t, version, pkginstall_t);
+		ZSHH(archive_bl, version, package_bl);
 	    	break;
 	
 	default:
