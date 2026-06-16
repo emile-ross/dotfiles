@@ -34,13 +34,12 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 		}
 		else if (strcmp(cmd_arg_v[1], "-c") == 0 || strcmp(cmd_arg_v[1], "-C") == 0)
 		{
+			config_name config_to_install = detect_config_name(cmd_arg_v[2]);
+
 			if (strcmp(cmd_arg_v[1], "-C") == 0)
 			{
 				error_message(FEAT_DEPRECATED);
 			}
-
-			config_name config_to_install = detect_config_name(cmd_arg_v[2]);
-
 		}
 		else if (strcmp(cmd_arg_v[1], "-i") == 0 || strcmp(cmd_arg_v[1], "-I") == 0)
 		{
@@ -114,68 +113,8 @@ void argument_config_install(char *package_t, char archiving_t, char pkginstall_
 	
 	bool package_bl = y_n(pkginstall_t);
 	bool archive_bl = y_n(archiving_t);
-	switch (detect_config_name(package_t)) 
-	{
-	case bash:
-		BASH();
-		break;
-	
-	case bpyt:
-		BPYT(archive_bl, package_bl);
-		break;
 
-	case btop:
-		BTOP(archive_bl, package_bl);
-		break;
-	
-	case cava:
-		CAVA(archive_bl, package_bl);
-	    	break;
-	
-	case fast:
-		FAST(archive_bl, package_bl);
-	    	break;
-	
-	case fuzz:
-		FUZZ(archive_bl, package_bl);
-	    	break;
-	
-	case gtkl:
-		GTKL(archive_bl, package_bl);
-	    	break;
-	
-	case hypr:
-		HYPR(archive_bl, package_bl);
-	    	break;
-	
-	case kitt:
-		KITT(archive_bl, package_bl);
-	    	break;
-	
-	case mpvf:
-		MPVF(archive_bl, package_bl);
-	    	break;
-	
-	case nvim:
-		NVIM(archive_bl, package_bl);
-	    	break;
-	
-	case sway:
-		SWAY(archive_bl, package_bl);
-	    	break;
-	
-	case wayb:
-		WAYB(archive_bl, package_bl);
-	    	break;
-	
-	case zshh:
-		ZSHH(archive_bl, version, package_bl);
-	    	break;
-	
-	default:
-		error_message(CLI_UNKNOWN_PKG);
-	    	break;
-	}
+	config_fn_exec(detect_config_name(package_t), archive_bl, package_bl, version);
 }
 
 void cmd_arg_install(int num_cmd_arguments_t, char *cmd_arg_v_t[], char config_archive_t, char pkg_install_t)
@@ -256,4 +195,70 @@ config_name detect_config_name(char *input)
 	if (strcmp(input, "wayb") == 0) return wayb;
 	if (strcmp(input, "fuzz") == 0) return fuzz;
 	return unknown;
+}
+
+void config_fn_exec(config_name config_type, bool archive_bl, bool package_bl, float version)
+{
+	switch (config_type) 
+	{
+	case bash:
+		BASH();
+		break;
+	
+	case bpyt:
+		BPYT(archive_bl, package_bl);
+		break;
+
+	case btop:
+		BTOP(archive_bl, package_bl);
+		break;
+	
+	case cava:
+		CAVA(archive_bl, package_bl);
+	    	break;
+	
+	case fast:
+		FAST(archive_bl, package_bl);
+	    	break;
+	
+	case fuzz:
+		FUZZ(archive_bl, package_bl);
+	    	break;
+	
+	case gtkl:
+		GTKL(archive_bl, package_bl);
+	    	break;
+	
+	case hypr:
+		HYPR(archive_bl, package_bl);
+	    	break;
+	
+	case kitt:
+		KITT(archive_bl, package_bl);
+	    	break;
+	
+	case mpvf:
+		MPVF(archive_bl, package_bl);
+	    	break;
+	
+	case nvim:
+		NVIM(archive_bl, package_bl);
+	    	break;
+	
+	case sway:
+		SWAY(archive_bl, package_bl);
+	    	break;
+	
+	case wayb:
+		WAYB(archive_bl, package_bl);
+	    	break;
+	
+	case zshh:
+		ZSHH(archive_bl, version, package_bl);
+	    	break;
+	
+	default:
+		error_message(CLI_UNKNOWN_PKG);
+	    	break;
+	}
 }
