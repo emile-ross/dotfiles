@@ -410,7 +410,7 @@ void compilation(int number_flags, compiler_enum compiler_name_temp, bool log_bl
 
 char *logging_string(size_t *result_ptr)
 {
-	char *logging_cmd_template = " 2>&1 | tee -a ";
+	char *logging_cmd_template = " 2>&1 | tee -a ";	/* with the filename at the end */
 
 	time_t time_at_compile = time(NULL);
 	struct tm *t = localtime(&time_at_compile);
@@ -419,7 +419,7 @@ char *logging_string(size_t *result_ptr)
 		return NULL;
 	}
 
-	size_t max_time_len = 192;
+	size_t max_time_len = 192;	/* since strftime() can't calculate the string size on it's own */
 
 	char *time_string = malloc(max_time_len);
 	strftime(time_string, max_time_len, "%Y-%m-%d-%H:%M:%S", t);
@@ -428,14 +428,16 @@ char *logging_string(size_t *result_ptr)
 	char *filename = malloc(filename_size);
 	snprintf(filename, filename_size, logging_filename, time_string);
 
-	size_t logging_string_size = 1 + snprintf(NULL, 0, logging_cmd_template);
+	size_t logging_string_size = 1 + strlen(logging_cmd_template);
 	logging_string_size += filename_size;
 
 	char *full_logging_string = malloc(logging_string_size);
 	*result_ptr = (size_t)full_logging_string;
-	snprintf(full_logging_string, logging_string_size, logging_cmd_template);
-	strcat(full_logging_string, filename);
 
+	strcpy(full_logging_string, logging_cmd_template);
+	strcat(full_logging_string, filename);	/* append filename */
+
+	free(filename);
 	free(time_string);
 
 	return full_logging_string;
