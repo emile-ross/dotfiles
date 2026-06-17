@@ -4,6 +4,7 @@
 #include <time.h>
 #include <string.h>
 
+const char *logging_filename;
 
 char *logging_string(size_t *result_ptr);
 
@@ -11,14 +12,14 @@ char *logging_string(size_t *result_ptr);
 
 /* This is the object file path
 * and the second one is the source files path */
-char object_fpath[16] = "c-scripts/";
-char source_fpath[16] = "c-scripts/";
+const char object_fpath[16] = "c-scripts/";
+const char source_fpath[16] = "c-scripts/";
 
 const char output_binary_name[16] = "setup";	/* set the name of the binary file */
 
 /*  the verbose option prints out the commands to the screen
 * it can be useful for debugging, recreating bugs or validating the compilling command */
-bool verbose = false;   /* default is false */ 
+const bool verbose = false;   /* default is false */ 
 
 /* Warnings flags */
 #define FLAG_BUFFER_SIZE (18)
@@ -36,8 +37,7 @@ const char Wconversion_flag[FLAG_BUFFER_SIZE] = " -Wconversion";
 /* TODO: add date to log file path in the future ? */
 const char logging_cmd[LOGGING_CMD_SIZE] = " 2>&1 | tee compile_log.txt"; /* this will overwrite the compile_log.txt */
 
-int size_all_flags;
-int size_source_filename = 24;
+extern int size_all_flags;
 
 #define num_src_files (9)
 
