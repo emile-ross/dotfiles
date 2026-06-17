@@ -4,7 +4,7 @@
 #include <time.h>
 #include <string.h>
 
-const char *logging_filename;
+const char *logging_filename = "compilation-%s.log"; /* %s representing the date */
 
 char *logging_string(size_t *result_ptr);
 
@@ -19,7 +19,7 @@ const char output_binary_name[16] = "setup";	/* set the name of the binary file 
 
 /*  the verbose option prints out the commands to the screen
 * it can be useful for debugging, recreating bugs or validating the compilling command */
-const bool verbose = false;   /* default is false */ 
+bool verbose = false;   /* default is false */ 
 
 /* Warnings flags */
 #define FLAG_BUFFER_SIZE (18)
@@ -35,7 +35,6 @@ const char c99_flag[FLAG_BUFFER_SIZE] = " -std=c99";
 const char Wconversion_flag[FLAG_BUFFER_SIZE] = " -Wconversion";
 
 /* TODO: add date to log file path in the future ? */
-const char logging_cmd[LOGGING_CMD_SIZE] = " 2>&1 | tee compile_log.txt"; /* this will overwrite the compile_log.txt */
 
 extern int size_all_flags;
 
@@ -411,7 +410,7 @@ void compilation(int number_flags, compiler_enum compiler_name_temp, bool log_bl
 
 char *logging_string(size_t *result_ptr)
 {
-	char *logging_cmd_template = " 2>&1 | tee -a compile_log-%s.txt";
+	char *logging_cmd_template = " 2>&1 | tee -a ";
 
 	time_t time_at_compile = time(NULL);
 	struct tm *t = localtime(&time_at_compile);
@@ -425,11 +424,17 @@ char *logging_string(size_t *result_ptr)
 	char *time_string = malloc(max_time_len);
 	strftime(time_string, max_time_len, "%Y-%m-%d-%H:%M:%S", t);
 
-	size_t logging_string_size = 1 + snprintf(NULL, 0, logging_cmd_template, time_string);
+	size_t filename_size = 1 + (size_t)snprintf(NULL, 0, logging_filename, time_string);
+	char *filename = malloc(filename_size);
+	snprintf(filename, filename_size, logging_filename, time_string);
+
+	size_t logging_string_size = 1 + snprintf(NULL, 0, logging_cmd_template);
+	logging_string_size += filename_size;
 
 	char *full_logging_string = malloc(logging_string_size);
 	*result_ptr = (size_t)full_logging_string;
-	snprintf(full_logging_string, logging_string_size, logging_cmd_template, time_string);
+	snprintf(full_logging_string, logging_string_size, logging_cmd_template);
+	strcat(full_logging_string, filename);
 
 	free(time_string);
 
