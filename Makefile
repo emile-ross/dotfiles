@@ -1,6 +1,6 @@
 BUILD_BINARY := $(wildcard build)
 
-DBGCMD = zig cc build.c -o build -Wall -Wextra -pedantic -Werror -std=c99
+DBGCMD = zig cc build.c -o build -Wall -Wextra -Wpedantic -Werror -std=c99
 BUILD_CMD = gcc build.c -o build
 
 bin:

@@ -127,12 +127,15 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 		else if (strcmp(cmd_arg_v[1], "--help") == 0)
 		{
 			printf(BOLD_S"Help menu\n"STYLE_END);
-			printf("-c	    	[CONFIG NAME] \n");
+
+			printf("--noconfirm     [CONFIG NAME] \n");
+			printf("	install all configs and packages without confirmations\n");
+			printf("-c              [CONFIG NAME] \n");
 			printf("	apply specified config \n");
-			printf("-p	    	[PACKAGE] \n");
-			printf("	install specified package \n");
-			printf("-i	    	[CONFIG NAME] \n");
+			printf("-i              [CONFIG NAME] \n");
 			printf("	print a short description of the package\n");
+			printf("-p              [PACKAGE] \n");
+			printf("	install specified package \n");
 		}
 		else if (strcmp(cmd_arg_v[1], "-v") == 0 || strcmp(cmd_arg_v[1], "--version") == 0)
 		{
