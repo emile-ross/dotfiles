@@ -199,11 +199,12 @@ void HYPR(bool archive_bl, bool pkginstall_bl)
 		NULL,
 	};
 
+	char *config_directory = "hypr";
 	if (archive_bl)
 	{
 		for (int i = 0; config_file[i] != NULL; i++)
 		{
-			file_archiving("hypr", config_file[i], ".conf");
+			file_archiving(config_directory, config_file[i], ".conf");
 		}
 	}
 
@@ -215,51 +216,56 @@ void HYPR(bool archive_bl, bool pkginstall_bl)
 	/* export hyprland configs */
 	for (int i = 0; config_file[i] != NULL; i++)
 	{
-		file_exporting("hypr", config_file[i], ".conf");
+		file_exporting(config_directory, config_file[i], ".conf");
 	}
-	make_dir("hypr/assets");
-	file_exporting("hypr/assets", "lockscreen", ".png");
+
+	char *assets_directory = "hypr/assets";
+	make_dir(assets_directory);
+	file_exporting(assets_directory, "lockscreen", ".png");
 }
 void KITT(bool archive_bl, bool pkginstall_bl)
 {
+	char *name = "kitty";
 	if (archive_bl)
 	{
-		file_archiving("kitty", "kitty", ".conf");
+		file_archiving(name, name, ".conf");
 	}
 	if (pkginstall_bl)
 	{
 		/* install kitty package
 		 * the kitty terminal is most likely already installed on your system */
-		install_package(parent, "kitty");
+		install_package(parent, name);
 	}
 	/* export kitty config */
-	file_exporting("kitty", "current-theme", ".conf");
-	file_exporting("kitty", "kitty", ".conf");
-	make_dir("kitty");
+	file_exporting(name, "current-theme", ".conf");
+	file_exporting(name, name, ".conf");
+	make_dir(name);
 }
 
 void MPVF(bool archive_bl, bool pkginstall_bl)
 {
+	char *name = "mpv";
 	if (archive_bl)
 	{
-		file_archiving("mpv", "mpv", ".conf");
+		file_archiving(name, name, ".conf");
 	}
 	if (pkginstall_bl)
 	{
-		install_package(parent, "mpv");
+		install_package(parent, name);
 	}
 	/* export mpv config with shaders */
-	make_dir("mpv");	/* create directory before copying file */
-	file_exporting("mpv", "mpv", ".conf");
+	make_dir(name);	/* create directory before copying file */
+	file_exporting(name, name, ".conf");
 }
 
 void NVIM(bool archive_bl, bool pkginstall_bl)
 {
+	char *name = "nvim";
 	if (archive_bl)
 	{
-		file_archiving("nvim", "init", ".lua");
+		file_archiving(name, "init", ".lua");
 		file_archiving("nvim/lua/config", "lazy", ".lua");
-		file_archiving("nvim", "lazy-lock", ".json");
+		file_archiving(name, "lazy-lock", ".json");
 	}
 	if (pkginstall_bl)
 	{
@@ -267,9 +273,9 @@ void NVIM(bool archive_bl, bool pkginstall_bl)
 		 * nvim is most likely already installed  */
 		install_package(parent, "nvim lazygit");
 	}
-	make_dir("nvim");
+	make_dir(name);
 	/* export nvim config */
-	file_exporting("nvim", "init", ".lua");
+	file_exporting(name, "init", ".lua");
 }
 
 void SWAY(bool archive_bl, bool pkginstall_bl)
@@ -290,7 +296,7 @@ void SWAY(bool archive_bl, bool pkginstall_bl)
 	file_exporting(name, "config", NULL);
 	file_exporting(name, "config-default", NULL);
 
-	make_dir("sway");
+	make_dir(name);
 }
 
 void WAYB(bool archive_bl, bool pkginstall_bl)
@@ -311,7 +317,7 @@ void WAYB(bool archive_bl, bool pkginstall_bl)
 	file_exporting(name, "style", ".css");
 	file_exporting(name, "config", ".jsonc");
 
-	make_dir("waybar");
+	make_dir(name);
 }
 
 void ZSHH(bool archive_bl, float pver, bool pkginstall_bl)
