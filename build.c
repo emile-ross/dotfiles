@@ -1,8 +1,8 @@
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
-#include <time.h>
 #include <string.h>
+#include <time.h>
 
 const char *logging_filename = "compilation-%s.log"; /* %s representing the date */
 

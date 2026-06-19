@@ -316,19 +316,25 @@ long get_long(const char *message, const long lower_bound, const long upper_boun
 			/* convert from string to long */
 			user_input = strtol(input_buffer, &endptr, 10);
 
+			/* avoids checking for \n by simply checking the number of characters
+			 * contained in the endptr string 
+			 * if the length is greater than 1, this means that the input contained 
+			 * at least 1 invalid character (1 + 1) so 2 including \n */
+			size_t invalid_input_length = strlen(endptr);	
+
 			if (strcmp(input_buffer, endptr) == 0)
 			{
 				/* no number was found */
 				if (i >= max_attempts)
 					error_message(INVALID_INPUT);
 			}
-			else if (*endptr != '\0')
+			else if (invalid_input_length > 1)
 			{
 				/* some character was rejected since it isn't a number */
 				if (i >= max_attempts)
 					error_message(INVALID_INPUT);
 			}
-			else if (user_input <= upper_bound || user_input < lower_bound)	/* bound checking */
+			else if (user_input > upper_bound || user_input < lower_bound)	/* bound checking */
 			{
 				if (i >= max_attempts)
 					error_message(OOB_INPUT);
