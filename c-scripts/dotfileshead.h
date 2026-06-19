@@ -4,11 +4,11 @@
 #include "enums.h"
 #include "macros.h"
 
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-#include <stdbool.h>
 
 #include <unistd.h>
 #include <sys/stat.h>

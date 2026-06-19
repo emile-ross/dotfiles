@@ -296,3 +296,21 @@ void make_dir(const char *program_name)
 	free(mkdir_cmd);
 }
 
+int get_input(const long upper_bound, const long lower_bound)
+{
+	size_t max_size = 192;
+	char *input_buffer = malloc(max_size);
+	char *endptr;
+	long user_input = -1;
+	
+	if (fgets(input_buffer, (int)max_size, stdin) == NULL)
+	{
+		printf("Failed to parse input.\n");
+		error_message(INVALID_INPUT);
+	}
+	
+	user_input = strtol(input_buffer, &endptr, 10);
+	
+	free(input_buffer);
+	return (int)user_input;
+}
