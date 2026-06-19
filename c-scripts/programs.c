@@ -328,7 +328,7 @@ void ZSHH(bool archive_bl, float pver, bool pkginstall_bl)
 	{
 		/* archive old zsh config */
 		char *archiving_template = "mv ~/.zshrc ~/.zshrc-old-v%.2f";
-		int archiving_size = snprintf(NULL, 0, archiving_template, pver);
+		int archiving_size = 1 + snprintf(NULL, 0, archiving_template, pver);
 		char *archive_command = malloc((size_t)archiving_size);
 		snprintf(archive_command, (size_t)archiving_size, archiving_template, pver);
 
