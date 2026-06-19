@@ -7,7 +7,7 @@ void BASH(void)
 
 	/* prompt to let the user know the bashrc isn't exported/replaced */
 	printf(UDRL_S"\nThe .bashrc file plays a very important role therefore, it was not replaced."STYLE_END);
-	printf(UDRL_S"\nYou can find the new .bashrc file under the new name %s\n"STYLE_END, BRCNAME);
+	printf("\nYou can find the new .bashrc file under the new name %s\n", BRCNAME);
 	
 	/* calculate the sufficient amount of memory to the buffer */
 	const char *command_format = "cp -f %s/shell/bash/.bashrc ~/%s";
