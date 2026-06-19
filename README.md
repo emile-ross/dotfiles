@@ -48,11 +48,11 @@ many configurations would have been impossible without these free ressources: [C
 When doing a full installation, you are installing all of the following programs:
 
 - **neovim**
-  - lazy, telescope and lualine
+    - lazy, telescope and lualine
 - **hyprland**
-  - with hypridle
+    - with hypridle
 - sway
-  - with swaybar confguration
+    - with swaybar confguration
 - **waybar**
 - btop
 - bpytop 
@@ -60,12 +60,12 @@ When doing a full installation, you are installing all of the following programs
 - fastfetch
 - fuzzel
 - gtklock
-  - custom lockscreen background
+    - custom lockscreen background
 - kitty
-  - font options
-  - color scheme
+    - font options
+    - color scheme
 - mpv
-  - with shaders
+    - with shaders
 
 --- 
 
@@ -112,7 +112,7 @@ You can also append the ``--noconfirm`` flag in order to install without any pro
 ./setup --noconfirm
 ```
 
-**Partial Install**
+### Partial Install
 
 You can use the ``-c`` flag in order to install a single config
 
@@ -126,7 +126,7 @@ example: ``./setup -p cafva`` This would install cava *(only the package, use ``
 
 Useful keybinds to know:
 
- (super = "Windows key")
+(super = "Windows key")
  
  super + Q -> **execute kitty**
 > (the default terminal)

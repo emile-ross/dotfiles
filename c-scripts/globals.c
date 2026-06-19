@@ -89,10 +89,6 @@ char *config_names[n_configs] =
 	const int n_to_arg = 3;
 	
 	struct timespec install_timer;
-	int timer_quarters;
-	int timer_seconds;
-	long int time_timer_quarters;
-	long int time_timer_seconds;
 	
 	char ARCHIVE;
 	char PKGINSTALL;
