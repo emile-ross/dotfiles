@@ -17,10 +17,9 @@ int main(int argc, char *argv[])
 			int u_index = i + 1;
 			printf(BOLD_S "  [%d] " STYLE_END "%s\n", u_index, main_menu_text[i]);
 		}
-		
 		printf("\n  "BOLD_S"[0] "STYLE_END"%s\n", opt_exit_text);
-		
-		scanf(" %d", &menu_one_i);
+
+		menu_one_i = (int)get_long(NULL, 0, 5);
 		if (menu_one_i == 1)
 		{
 			/* launch the install menu it suggests some options to the user and then it executes full_install() */
@@ -41,7 +40,7 @@ int main(int argc, char *argv[])
 		}
 		else if (menu_one_i == KEY_MAIN_MENU_CONFIGURE)
 		{
-			int dotfiles_config_menu = -1;
+			long dotfiles_config_menu;
 			do
 			{
 				clear();
@@ -52,11 +51,10 @@ int main(int argc, char *argv[])
 		        	printf(BOLD_S " [4] " STYLE_END UDRL_S"%s"STYLE_END"\n", zshforhumans_config_menu_text);
 		        	printf(BOLD_S " [0] " STYLE_END "%s\n", opt_exit_text);
 		
-				clearbuffer();
-				scanf(" %d", &dotfiles_config_menu);
+				dotfiles_config_menu = get_long(NULL, 0, 4);
 				if (dotfiles_config_menu == 1)
 		        	{
-					int fastfetch_config_choice;
+					long fastfetch_config_choice;
 					do
 					{
 						clear();
@@ -68,8 +66,7 @@ int main(int argc, char *argv[])
 						printf(BOLD_S "  [2] " STYLE_END "%s\n\n", fastfetch_edit_config_text);
 						printf(BOLD_S "  [0] " STYLE_END "%s\n", opt_exit_text);
 						
-						clearbuffer();
-						scanf("\n%d", &fastfetch_config_choice);
+						fastfetch_config_choice = get_long("\n", 0, 2);
 		
 						if (fastfetch_config_choice == 1)
 		                		{
@@ -86,7 +83,7 @@ int main(int argc, char *argv[])
 				}
 				else if (dotfiles_config_menu == 2)
 				{
-					int kitty_config_choice;
+					long kitty_config_choice;
 					do
 					{
 						clear();
@@ -95,8 +92,7 @@ int main(int argc, char *argv[])
 		                		printf(BOLD_S " [2] " STYLE_END "%s\n", kitty_fonts_text);
 		                		printf(BOLD_S " [0] " STYLE_END "%s\n", opt_exit_text);
 		
-						clearbuffer();
-						scanf("%d", &kitty_config_choice);
+						kitty_config_choice = get_long(NULL, 0, 2);
 		
 						if (kitty_config_choice == 1)
 						{
@@ -112,6 +108,7 @@ int main(int argc, char *argv[])
 				}
 				else if (dotfiles_config_menu == 3)
 				{
+					long fuzzel_menu_choice = -1;
 					do
 					{
 						clear();
@@ -121,17 +118,16 @@ int main(int argc, char *argv[])
 		            			printf(BOLD_S "  [3] " STYLE_END "%s\n", fuzzel_catppuccin_text);
 		            			printf(BOLD_S "  [0] " STYLE_END "%s\n", opt_exit_text);
 		
-						clearbuffer();
-						scanf(" %d", &fuzzel_config_menu_choice);
+						fuzzel_menu_choice = get_long("\n ", 0, 3);
 		        		
-						if (fuzzel_config_menu_choice == 1)
+						if (fuzzel_menu_choice == 1)
 						{
 							exec_cmd(24, "fuzzel");
 							wait_for_timeout(SHORT_TIMER, 0);
 						}
-						else if (fuzzel_config_menu_choice == 2)
+						else if (fuzzel_menu_choice == 2)
 						{
-							int fuzzel_edit_menu_choice;
+							long fuzzel_edit_menu_choice;
 							do
 							{
 								clear();
@@ -155,24 +151,23 @@ int main(int argc, char *argv[])
 								printf(BOLD_S "  [7] " STYLE_END "%s\n\n", fuzzel_config_edit_custom);
 								printf(BOLD_S "  [0] " STYLE_END "%s\n", opt_exit_text);
 								
-								clearbuffer();
-								scanf(" %d", &fuzzel_edit_menu_choice);
+								fuzzel_edit_menu_choice = get_long(" ", 0, 7);
 								
-								apply_fuzzel_config(fuzzel_edit_menu_choice);
+								apply_fuzzel_config((int)fuzzel_edit_menu_choice);
 							}
 							while (fuzzel_edit_menu_choice > INPUT_BACK_VALUE);
 						}
-						else if (fuzzel_config_menu_choice == 3)
+						else if (fuzzel_menu_choice == 3)
 						{
 							fuzzel_config_importing();
 							wait_for_timeout(SHORT_TIMER, 0);
 						}
 					}
-					while (fuzzel_config_menu_choice > INPUT_BACK_VALUE);
+					while (fuzzel_menu_choice > INPUT_BACK_VALUE);
 				}
 				else if (dotfiles_config_menu == 4)
 				{
-					int zshforhumans_choice;
+					long zsh_choice = 0;
 					do
 					{
 						clear();
@@ -181,14 +176,14 @@ int main(int argc, char *argv[])
 						printf(BOLD_S "Do you want to proceed with the configuration?\n\n"STYLE_END);
 						yes_no_prompt();
 						
-						scanf(" %d", &zshforhumans_choice);
-						if (zshforhumans_choice == 1)
+						zsh_choice = get_long(NULL, 0, 1);
+						if (zsh_choice == 1)
 						{
 							clear();
 							configure_oh_my_zsh();
 						}
 					}
-			 		while (zshforhumans_choice > INPUT_BACK_VALUE);
+			 		while (zsh_choice > INPUT_BACK_VALUE);
 				}			
 			} 
 			while (dotfiles_config_menu > INPUT_BACK_VALUE);
@@ -207,8 +202,7 @@ int main(int argc, char *argv[])
 				printf("\n%s\n", act_linux_water_text);
 				yes_no_prompt();
 				
-				clearbuffer();
-				scanf("%d", &menu_activate_linux);
+				menu_activate_linux = (int)get_long(NULL, 0, 1);
 				
 				if (menu_activate_linux == 1)
 				{
