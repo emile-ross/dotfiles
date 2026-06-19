@@ -316,16 +316,27 @@ long get_long(const char *message, const long lower_bound, const long upper_boun
 			/* convert from string to long */
 			user_input = strtol(input_buffer, &endptr, 10);
 
-			/* bound checking */
-			if (user_input <= upper_bound || user_input < lower_bound)
+			if (strcmp(input_buffer, endptr) == 0)
 			{
-				free(input_buffer);
-				return user_input;
+				/* no number was found */
+				if (i >= max_attempts)
+					error_message(INVALID_INPUT);
 			}
-			else
+			else if (*endptr != '\0')
+			{
+				/* some character was rejected since it isn't a number */
+				if (i >= max_attempts)
+					error_message(INVALID_INPUT);
+			}
+			else if (user_input <= upper_bound || user_input < lower_bound)	/* bound checking */
 			{
 				if (i >= max_attempts)
 					error_message(OOB_INPUT);
+			}
+			else
+			{
+				free(input_buffer);
+				return user_input;
 			}
 		}
 		else
@@ -337,7 +348,7 @@ long get_long(const char *message, const long lower_bound, const long upper_boun
 			}
 		}
 
-		printf("\nInvalid input, try again\n");
+		printf(UDRL_S"Invalid input"STYLE_END", try again\n");
 		free(input_buffer);
 		i++;
 	}
