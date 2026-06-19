@@ -39,17 +39,19 @@ void BPYT(bool archive_bl, bool pkginstall_bl)
 
 void BTOP(bool archive_bl, bool pkginstall_bl)
 {
+	const char *package_name = "btop";
+	const char *file_extention = ".conf";
 	if (archive_bl)
 	{
-		file_archiving("btop", "btop", ".conf");
+		file_archiving(package_name, package_name, file_extention);
     	}
     	if (pkginstall_bl)
     	{
-		install_package(parent, "btop"); /* install btop package */
+		install_package(parent, package_name); /* install btop package */
     	}
     	/* export btop config */
-	make_dir("btop");
-	file_exporting("btop", "btop", ".conf");
+	make_dir(package_name);
+	file_exporting(package_name, package_name, file_extention);
 }
 
 void CAVA(bool archive_bl, bool pkginstall_bl)
@@ -63,7 +65,7 @@ void CAVA(bool archive_bl, bool pkginstall_bl)
 	
 	if (archive_bl)
 	{
-		file_archiving("cava", "config", NULL);
+		file_archiving(program_name, "config", NULL);
 	}
 	
 	if (pkginstall_bl)
@@ -73,10 +75,10 @@ void CAVA(bool archive_bl, bool pkginstall_bl)
 	
 	/* export cava config */
 	const char *dir_cmd = "mkdir -p %s ; cp -f %s/%s/config %s/ ";
-	int mem_needed_cmd = 1 + snprintf(NULL, 0, dir_cmd, program_path, inpath, "cava", program_path);
+	int mem_needed_cmd = 1 + snprintf(NULL, 0, dir_cmd, program_path, inpath, program_name, program_path);
 	
 	char safe_cmd[mem_needed_cmd];
-	snprintf(safe_cmd, (size_t)mem_needed_cmd, dir_cmd, program_path, inpath, "cava", program_path);
+	snprintf(safe_cmd, (size_t)mem_needed_cmd, dir_cmd, program_path, inpath, program_name, program_path);
 
 	if (verbose)
 	{
@@ -356,7 +358,7 @@ void ZSHH(bool archive_bl, float pver, bool pkginstall_bl)
 	printf("Refer to the dotfiles configuration menu in order to configure zsh proprely (using zsh for humans)\n");
 }
 
-int install_package(char *pkg_type_distro, char *pkginstallname)
+int install_package(const char *pkg_type_distro, const char *pkginstallname)
 {
 	if (strcmp(pkg_type_distro, "arch") == 0)
 	{
@@ -396,12 +398,12 @@ void configure_oh_my_zsh(void)
 	block(true);
 }
 
-void file_archiving(char *program_name, char *config_file, char *file_extention)
+void file_archiving(const char *program_config_path, const char *config_file, const char *file_extention)
 {
 	/* initialize the template for the program config path 
 	 * this will represent the full path to the config including the config name
 	 * example: /home/admin/.config/nvim */
-	char *program_config_path = "%s/%s";
+	const char *program_config_path_template = "%s/%s";
 
 	bool extention_bl = true;
 	if (file_extention == NULL)
@@ -410,11 +412,11 @@ void file_archiving(char *program_name, char *config_file, char *file_extention)
 	}
 
 	/* calculate the size of all strings */
-	int program_path_size = 1 + snprintf(NULL, 0, program_config_path, config_path, program_name);
+	int program_path_size = 1 + snprintf(NULL, 0, program_config_path_template, config_path, program_config_path);
 
 	char *program_path = malloc((size_t)program_path_size);
 	if (!program_path) return;
-	snprintf(program_path, (size_t)program_path_size, program_config_path, config_path, program_name);
+	snprintf(program_path, (size_t)program_path_size, program_config_path_template, config_path, program_config_path);
 
 	int file_suffix_size = 1 + snprintf(NULL, 0, archiving_file_suffix_template, pver);
 	char *file_suffix = malloc((size_t)file_suffix_size); /* allocate memory to the file_suffix */
@@ -475,7 +477,7 @@ void file_archiving(char *program_name, char *config_file, char *file_extention)
 	free(program_path);
 }
 
-void file_exporting(char *program_name, char *config_name, char *file_extention)
+void file_exporting(const char *program_name, const char *config_name, const char *file_extention)
 {
 	char *dest_file_path_template = "%s/%s/%s";
 

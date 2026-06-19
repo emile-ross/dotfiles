@@ -29,9 +29,11 @@ void SWAY(bool archive_bl, bool pkginstall_bl);
 void WAYB(bool archive_bl, bool pkginstall_bl);
 void ZSHH(bool archive_bl, float pver, bool pkginstall_bl);
 
-void file_archiving(char *program_config_path, char *config_file, char *file_extention);
-void link_file(char *source_path, char *link_path);
-void make_dir(char *program_name);
+int install_package(const char *pkg_type_distro, const char *pkginstallname);
+void file_archiving(const char *program_config_path, const char *config_file, const char *file_extention);
+void file_exporting(const char *program_name, const char *config_name, const char *file_extention);
+void link_file(const char *source_path, const char *link_path);	/* link path is the target path */
+void make_dir(const char *program_name);
 
 
 /* initialise in functions.c */
@@ -42,7 +44,6 @@ void make_dir(char *program_name);
 	bool y_n(char yes_no);
 	void exec_cmd(int buffer_size, char *command_to_execute);
 
-int install_package(char *pkg_type_distro, char *pkginstallname);
 void install_menu(void);
 void check_for_yay(void);
 void full_install(bool archive_bl, bool full_install_bl);
@@ -50,7 +51,6 @@ void full_config_install(bool ARCHIVE_BL, float previous_version_t, bool install
 void install_configs(unsigned int custom_package_install);
 void install_config_message(char *text);
 void copyfiles(int fastfetch_conf_export);
-void file_exporting(char *program_name, char *config_name, char *file_extention);
 void link_fastfetch_configs(void);
 void configure_oh_my_zsh(void);
 void configure_fastfetch(void);
