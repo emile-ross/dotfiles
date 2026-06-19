@@ -17,12 +17,18 @@ int error_message(error_code_e err_code)
 	error_code_e error_msg_code = (error_code_e)err_code;
 	
 	/* error code assignment from the err_code variable
-	 * enum error_code_e error_message_code = err_code;	*/
+	 * enum error_code_e error_message_code = err_code; */
 	
 	switch (error_msg_code)
 	{
 	case INVALID_INPUT:
 		snprintf(err_text_temp, sizeof(err_text_temp), "Exiting.. (invalid character)");
+		critical = true;
+		break;
+	
+	case OOB_INPUT:
+		snprintf(err_text_temp, sizeof(err_text_temp), "Invalid input");
+		snprintf(err_solution_temp, sizeof(err_solution_temp), "The input is out of bounds");
 		critical = true;
 		break;
 	
@@ -55,7 +61,7 @@ int error_message(error_code_e err_code)
 		snprintf(err_solution_temp, sizeof(err_solution_temp), " ");
 		break;
 
-	case 101:
+	case UNSUPPORTED_DISTRO:
 		snprintf(err_text_temp, sizeof(err_text_temp), "Unsupported distribution");
 		snprintf(err_solution_temp, sizeof(err_solution_temp), "Supported distros: \nArch Based \nDebian Based");
 		break;

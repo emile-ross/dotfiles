@@ -41,6 +41,7 @@ typedef enum
 typedef enum
 {
 	INVALID_INPUT = 2,
+	OOB_INPUT = 3,
 	YAY_INST_U = 5,
 	FEATURE_IN_DEV = 6,
 	FEAT_DEPRECATED = 7,
