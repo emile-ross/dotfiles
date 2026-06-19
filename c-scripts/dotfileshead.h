@@ -15,8 +15,8 @@
 
 
 void BASH(void);
-void BTOP(bool archive_bl, bool pkginstall_bl);
 void BPYT(bool archive_bl, bool pkginstall_bl);
+void BTOP(bool archive_bl, bool pkginstall_bl);
 void CAVA(bool archive_bl, bool pkginstall_bl);
 void FAST(bool archive_bl, bool pkginstall_bl);
 void FUZZ(bool archive_bl, bool pkginstall_bl);
@@ -37,23 +37,24 @@ void make_dir(const char *program_name);
 
 
 /* initialise in functions.c */
+	bool y_n(char yes_no);
+	int get_input(const long upper_bound, const long lower_bound);
+	void block(bool prompt);
 	void clear(void);
 	void clearbuffer(void);
-	void block(bool prompt);
-	void pre_startup(void);
-	bool y_n(char yes_no);
 	void exec_cmd(int buffer_size, char *command_to_execute);
+	void pre_startup(void);
 
-void install_menu(void);
 void check_for_yay(void);
-void full_install(bool archive_bl, bool full_install_bl);
-void full_config_install(bool ARCHIVE_BL, float previous_version_t, bool install_packages_t);
-void install_configs(unsigned int custom_package_install);
-void install_config_message(char *text);
+void configure_fastfetch(void);
+void configure_oh_my_zsh(void);
 void copyfiles(int fastfetch_conf_export);
 void link_fastfetch_configs(void);
-void configure_oh_my_zsh(void);
-void configure_fastfetch(void);
+void full_config_install(bool ARCHIVE_BL, float previous_version_t, bool install_packages_t);
+void full_install(bool archive_bl, bool full_install_bl);
+void install_config_message(char *text);
+void install_configs(unsigned int custom_package_install);
+void install_menu(void);
 
 config_name detect_config_name(char *input);
 

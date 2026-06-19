@@ -1,4 +1,5 @@
 #include "dotfileshead.h"
+#include <limits.h>
 
 void clear(void)
 {
@@ -311,6 +312,16 @@ int get_input(const long upper_bound, const long lower_bound)
 	
 	user_input = strtol(input_buffer, &endptr, 10);
 	
+	if (user_input > upper_bound || user_input < lower_bound)
+	{
+		error_message(OOB_INPUT);
+	}
+
+	if (user_input > INT_MAX || user_input < INT_MIN)
+	{
+		error_message(OOB_INPUT);
+	}
+
 	free(input_buffer);
 	return (int)user_input;
 }
