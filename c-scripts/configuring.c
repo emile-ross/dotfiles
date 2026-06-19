@@ -33,8 +33,8 @@ void fuzzel_config_importing(void)
 
 	free(path);
 
-	int theme_type_user_opt;
-	char* theme_type_text;
+	long theme_type_user_opt;
+	char* theme_type_text = malloc(32);
 	
 	clear();
 	printf(BOLD_S"Choose your fuzzel theme type\n"STYLE_END);
@@ -45,25 +45,26 @@ void fuzzel_config_importing(void)
 	printf(BOLD_S"[4]"STYLE_END" catppuccin-mocha (very dark)\n");
 	
 	clearbuffer();
-	scanf(" %d", &theme_type_user_opt);
+	theme_type_user_opt = get_long(" ", 1, 4);
 	
 	switch(theme_type_user_opt)
 	{
 	case 1:
-		theme_type_text = "catppuccin-latte";
+		strcpy(theme_type_text, "catppuccin-latte");
 		break;
 	case 2:
-		theme_type_text = "catppuccin-frappe";
+		strcpy(theme_type_text, "catppuccin-frappe");
 		break;
 	case 3:
-		theme_type_text = "catppuccin-macchiato";
+		strcpy(theme_type_text, "catppuccin-macchiato");
 		break;
 	case 4:
-		theme_type_text = "catppuccin-mocha";
+		strcpy(theme_type_text, "catppuccin-mocha");
 		break;
 	default:
-		theme_type_text = NULL;
-		printf("Try again.\n");
+		error_message(FUZZ_THEME_INVALID);
+		printf("Invalid input.\n");
+		strcpy(theme_type_text, "Invalid-theme");
 		break;
 	}
 	/* theme color */
@@ -164,9 +165,11 @@ void fuzzel_config_importing(void)
 		printf("Theme type:"BOLD_S UDRL_S" %s \n"STYLE_END, theme_type_text);
 		printf("Theme colour:"BOLD_S UDRL_S" %s \n"STYLE_END, theme_colour_text);
 		wait_for_timeout(0, LONG_TIMER);
+		free(theme_type_text);
 	}
 	else
 	{
+		free(theme_type_text);
 		error_message(FUZZ_THEME_FAIL);
 	}
 }

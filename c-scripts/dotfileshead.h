@@ -94,7 +94,6 @@ config_name detect_config_name(char *input);
 
 	/* fuzzel */
 		extern char fuzzel_config_menu_text[menu_text_size];
-		extern int fuzzel_config_menu_choice;
 		extern char fuzzel_view_config_text[menu_text_size];
 		extern char fuzzel_edit_config_text[menu_text_size];
 		extern char fuzzel_catppuccin_text[menu_text_size];

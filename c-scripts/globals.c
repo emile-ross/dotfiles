@@ -95,7 +95,6 @@ char *config_names[n_configs] =
 	char full_install_opt; /* if the user wants to install everything set to Y */
 	char archive_before_install;
 	char full_update_opt; 
-	int fuzzel_config_menu_choice;
 	char* theme_colour_text;
 	float pver;
 	

@@ -72,6 +72,11 @@ int error_message(error_code_e err_code)
 		snprintf(err_solution_temp, sizeof(err_solution_temp), "Supported distros: \nArch Based \nDebian Based");
 		break;
 		
+	case FUZZ_THEME_INVALID:
+		snprintf(err_text_temp, sizeof(err_text_temp), "Invalid fuzzel theme");
+		snprintf(err_solution_temp, sizeof(err_solution_temp), "Try again.  Report the issue if this keeps happening.");
+		break;
+		
 	case FUZZ_THEME_FAIL:
 		snprintf(err_text_temp, sizeof(err_text_temp), "Could not apply fuzzel theme");
 		snprintf(err_solution_temp, sizeof(err_solution_temp), "Try again.  Report the issue if this keeps happening.");
