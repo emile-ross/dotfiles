@@ -65,7 +65,7 @@ int main(int argc, char *argv[])
 						
 						printf(BOLD_S ANSI_WHITE "%s\n\n"STYLE_END, fastfetch_config_menu_text );
 						printf(BOLD_S "  [1] " STYLE_END "%s\n", fastfetch_preview_text);
-						printf(BOLD_S "	 [2] " STYLE_END "%s\n\n", fastfetch_edit_config_text);
+						printf(BOLD_S "  [2] " STYLE_END "%s\n\n", fastfetch_edit_config_text);
 						printf(BOLD_S "  [0] " STYLE_END "%s\n", opt_exit_text);
 						
 						clearbuffer();
