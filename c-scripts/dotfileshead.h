@@ -60,16 +60,10 @@ config_name detect_config_name(char *input);
 /* time related */
 	void yes_no_prompt(void);
 	void countdown(int counter, int lines_to_skip);
-	void wait_for_timeout(int timer_quarters, int timer_seconds);
+	void wait_for_timeout(long quarters, long seconds);
 
 	/* struct */
 	extern struct timespec install_timer; 
-
-	/* data */
-	extern int timer_quarters; /* max is 4 */
-	extern int timer_seconds;
-	extern long int time_timer_quarters;
-	extern long int time_timer_seconds;
 
 /*  command line arguments */
 	char *package_name(config_name config);

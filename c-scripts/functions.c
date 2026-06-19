@@ -101,21 +101,20 @@ char *get_initial_path(void)
 	return initial_path;
 }
 
-void wait_for_timeout(int timer_quarters, int timer_seconds)
+void wait_for_timeout(long quarters, long seconds)
 {
-	if (timer_quarters < 4) /* 4 quarters per second */
+	if (quarters < 4) /* 4 quarters per second */
 	{
-		time_timer_quarters = timer_quarters * 250000000;   /* convert quarters to nanoseconds */
-		time_timer_seconds = timer_seconds;		    /* set seconds */
+		quarters *= 250000000;   /* convert quarters to nanoseconds */
 	}
 	else
 	{
-		time_timer_quarters = 0;
-		time_timer_seconds = timer_seconds + 1;	/* adds 1 second if 4 >= quarters */
+		quarters = 0;
+		seconds += 1;	/* adds 1 second if 4 >= quarters */
 	}
 
-	install_timer.tv_nsec = time_timer_quarters;
-    	install_timer.tv_sec = time_timer_seconds;
+	install_timer.tv_nsec = quarters;
+    	install_timer.tv_sec = seconds;
     	nanosleep(&install_timer, NULL);
 }
 

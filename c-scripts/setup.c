@@ -41,7 +41,7 @@ int main(int argc, char *argv[])
 		}
 		else if (menu_one_i == KEY_MAIN_MENU_CONFIGURE)
 		{
-			int dotfiles_config_menu;
+			int dotfiles_config_menu = -1;
 			do
 			{
 				clear();

@@ -234,7 +234,8 @@ void configure_fastfetch(void)
 		clear();
 		
 		/* create command buffer */
-		char cmd[128];
+		size_t buffer_size = 128;
+		char *command_buffer = malloc(buffer_size);
 		
 		printf(BOLD_S"What file would you like to use as your fastfetch config?\n"STYLE_END);
 		
@@ -264,25 +265,26 @@ void configure_fastfetch(void)
 		
 		if (link_fastfetch_configs_opt == 1)
 		{
-			snprintf(cmd, sizeof(cmd),
+			snprintf(command_buffer, buffer_size,
 					"ln -fs ~/.config/fastfetch/config-default.jsonc ~/.config/fastfetch/config.jsonc");
-			system(cmd);
+			system(command_buffer);
 			fastfetch_config_apply = true;
 		}
 		else if (link_fastfetch_configs_opt == 2)
 		{
-			snprintf(cmd, sizeof(cmd),
+			snprintf(command_buffer, buffer_size,
 					"ln -fs ~/.config/fastfetch/config-other.jsonc ~/.config/fastfetch/config.jsonc");
-			system(cmd);
+			system(command_buffer);
 			fastfetch_config_apply = true;
 		}
 		else if (link_fastfetch_configs_opt == 3)
 		{
-			snprintf(cmd, sizeof(cmd),
+			snprintf(command_buffer, buffer_size,
 					"ln -fs ~/.config/fastfetch/config-duplicated.jsonc ~/.config/fastfetch/config.jsonc");
-			system(cmd);
+			system(command_buffer);
 			fastfetch_config_apply = true;
 		}
+		free(command_buffer);
 	}
     	while (link_fastfetch_configs_opt > 0.0);
     	/* exits the while loop when the user types 0 */
