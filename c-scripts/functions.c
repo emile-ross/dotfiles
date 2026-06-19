@@ -299,29 +299,52 @@ void make_dir(const char *program_name)
 
 int get_input(const long upper_bound, const long lower_bound)
 {
-	size_t max_size = 192;
-	char *input_buffer = malloc(max_size);
-	char *endptr;
-	long user_input = -1;
+	const size_t max_size = 192;
+	const int max_attempts = 5;
 	
-	if (fgets(input_buffer, (int)max_size, stdin) == NULL)
+	int i = 0;
+	while (1)
 	{
-		printf("Failed to parse input.\n");
-		error_message(INVALID_INPUT);
-	}
-	
-	user_input = strtol(input_buffer, &endptr, 10);
-	
-	if (user_input > upper_bound || user_input < lower_bound)
-	{
-		error_message(OOB_INPUT);
+		long user_input = -1;
+		char *input_buffer = malloc(max_size);
+		char *endptr;
+
+		if (fgets(input_buffer, (int)max_size, stdin) != NULL)
+		{
+			user_input = strtol(input_buffer, &endptr, 10);
+			if (user_input <= upper_bound || user_input < lower_bound)
+			{
+				if (user_input < INT_MAX || user_input > INT_MIN)
+				{
+					free(input_buffer);
+					return (int)user_input;
+				}
+				else
+				{
+					if (i >= max_attempts)
+						error_message(OOB_INPUT);
+				}
+			}
+			else
+			{
+				if (i >= max_attempts)
+					error_message(OOB_INPUT);
+			}
+		}
+		else
+		{
+			if (i >= max_attempts)
+			{
+				printf("Failed to parse input.\n");
+				error_message(INVALID_INPUT);
+			}
+		}
+
+		printf("Invalid input, try again\n");
+		free(input_buffer);
+		i++;
 	}
 
-	if (user_input > INT_MAX || user_input < INT_MIN)
-	{
-		error_message(OOB_INPUT);
-	}
-
-	free(input_buffer);
-	return (int)user_input;
+	error_message(INPUT_FAIL);
+	return -1;
 }
