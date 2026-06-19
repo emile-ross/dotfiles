@@ -335,9 +335,9 @@ void ZSHH(bool archive_bl, float pver, bool pkginstall_bl)
 		system(archive_command);
 		free(archive_command); /* free after use */
 		
-		char *new_f_path = NULL;
 		const char *new_path = "~/.zshrc-old-v%.2f";
 		int path_size = 1 + snprintf(NULL, 0, new_path, pver);
+		char *new_f_path = malloc((size_t)path_size);
 		snprintf(new_f_path, (size_t)path_size, new_path, pver);
 		
 		/* archive the old zsh config by renaming the previous file */
@@ -349,11 +349,12 @@ void ZSHH(bool archive_bl, float pver, bool pkginstall_bl)
 		install_package(parent, "zsh");
 	}
 
-	const char *copy_config_cmd = "cp -f %s/shell/zsh/.zshrc %s/ ";
-	int mem_needed_cmd = 1 + snprintf(NULL, 0, copy_config_cmd, inpath, home);
-	char safe_cmd[mem_needed_cmd];
-	snprintf(safe_cmd, (size_t)mem_needed_cmd, copy_config_cmd, inpath, home);
+	const char *config_cmd_template = "cp -f %s/shell/zsh/.zshrc %s/ ";
+	size_t mem_needed_cmd = 1 + (size_t)snprintf(NULL, 0, config_cmd_template, inpath, home);
+	char *safe_cmd = malloc(mem_needed_cmd);
+	snprintf(safe_cmd, (size_t)mem_needed_cmd, config_cmd_template, inpath, home);
 	system(safe_cmd);
+	free(safe_cmd);
 
 	printf("Refer to the dotfiles configuration menu in order to configure zsh proprely (using zsh for humans)\n");
 }

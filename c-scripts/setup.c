@@ -33,7 +33,7 @@ int main(int argc, char *argv[])
 			printf(ANSI_GREY"\nDetected Version: %.2f\n"STYLE_END, version);
 			printf(BOLD_S "%s\n\n"STYLE_END, opt_the_text );
 			printf("\nDo you want to backup your old dotfiles before updating? (Y/n)\n");
-			char backuptemp;
+			char backuptemp = -1;
 			
 			clearbuffer();
 			scanf("%c", &backuptemp);
@@ -73,7 +73,7 @@ int main(int argc, char *argv[])
 		
 						if (fastfetch_config_choice == 1)
 		                		{
-							exec_cmd(16, "fastfetch");
+							exec_cmd(12, "fastfetch");
 							wait_for_timeout(0, 2);
 		                		}
 						else if (fastfetch_config_choice == 2)
