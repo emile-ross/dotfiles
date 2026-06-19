@@ -18,7 +18,7 @@ void clearbuffer(void)
 	}
 }
 
-void block(bool prompt)
+void block(const bool prompt)
 {
 	if (prompt)
 	{
@@ -149,7 +149,7 @@ int get_os_name(void)
 	return 0;
 }
 
-void exec_cmd(int buffer_size, char *command_to_execute)
+void exec_cmd(const int buffer_size, const char *command_to_execute)
 {
 	/* execute the command stored in command_to_execute
 	 * using system() while ensuring output doesn't exceed buffer_size */
@@ -188,7 +188,7 @@ void countdown(int counter, int lines_to_skip)
 	}
 }
 
-bool y_n(char yes_no)
+bool y_n(const char yes_no)
 {
 	if (yes_no == 'Y' || yes_no == 'y')
 	{
@@ -297,7 +297,7 @@ void make_dir(const char *program_name)
 	free(mkdir_cmd);
 }
 
-int get_input(const long upper_bound, const long lower_bound)
+long get_long(const char *message, const long lower_bound, const long upper_bound)
 {
 	const size_t max_size = 192;
 	const int max_attempts = 5;
@@ -305,25 +305,22 @@ int get_input(const long upper_bound, const long lower_bound)
 	int i = 0;
 	while (1)
 	{
+		if (message != NULL)
+			printf("%s: ", message);
 		long user_input = -1;
 		char *input_buffer = malloc(max_size);
 		char *endptr;
 
 		if (fgets(input_buffer, (int)max_size, stdin) != NULL)
 		{
+			/* convert from string to long */
 			user_input = strtol(input_buffer, &endptr, 10);
+
+			/* bound checking */
 			if (user_input <= upper_bound || user_input < lower_bound)
 			{
-				if (user_input < INT_MAX || user_input > INT_MIN)
-				{
-					free(input_buffer);
-					return (int)user_input;
-				}
-				else
-				{
-					if (i >= max_attempts)
-						error_message(OOB_INPUT);
-				}
+				free(input_buffer);
+				return user_input;
 			}
 			else
 			{
@@ -340,7 +337,7 @@ int get_input(const long upper_bound, const long lower_bound)
 			}
 		}
 
-		printf("Invalid input, try again\n");
+		printf("\nInvalid input, try again\n");
 		free(input_buffer);
 		i++;
 	}

@@ -37,12 +37,12 @@ void make_dir(const char *program_name);
 
 
 /* initialise in functions.c */
-	bool y_n(char yes_no);
-	int get_input(const long upper_bound, const long lower_bound);
-	void block(bool prompt);
+	bool y_n(const char yes_no);
+	long get_long(const char *message, const long lower_bound, const long upper_bound);
+	void block(const bool prompt);
 	void clear(void);
 	void clearbuffer(void);
-	void exec_cmd(int buffer_size, char *command_to_execute);
+	void exec_cmd(const int buffer_size, const char *command_to_execute);
 	void pre_startup(void);
 
 void check_for_yay(void);

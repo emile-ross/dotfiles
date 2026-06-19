@@ -31,6 +31,12 @@ int error_message(error_code_e err_code)
 		snprintf(err_solution_temp, sizeof(err_solution_temp), "The input is out of bounds");
 		critical = true;
 		break;
+
+	case INPUT_FAIL:
+		snprintf(err_text_temp, sizeof(err_text_temp), "Failed to gather user input");
+		snprintf(err_solution_temp, sizeof(err_solution_temp), "The user couldn't satisfy the program with valid input");
+		critical = true;
+		break;
 	
 	case YAY_INST_U:
 		snprintf(err_text_temp, sizeof(err_text_temp), "Yay is needed for the k4dd..installation");
