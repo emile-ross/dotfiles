@@ -8,7 +8,7 @@
     /*"source": "~/.config/fastfetch/assets/image.webp",*/
     /*the directory above can be changed to anything you want*/
     "width": 32,
-    "height": 15
+    "height": 20
  /* make sure the width and the height is well ajusted in order for your icon to have the same aspect ratio */
   },
 
