@@ -1,6 +1,8 @@
 # My dotfiles
 Dotfiles are files used to customize your system to your liking.  
 You can modify them by editing config files using a text editor ([Neovim](https://github.com/neovim/neovim)).
+Made for Arch Linux
+[![Arch Linux](https://img.shields.io/badge/Arch%20Linux-1793D1?logo=arch-linux&logoColor=fff)](#)
 
 [Voir cette page en francais][fr]
 

@@ -70,7 +70,7 @@ void fuzzel_config_importing(void)
 	/* theme color */
 	printf(BOLD_S"Set the colour for your fuzzel config\n"STYLE_END);
 	
-	int theme_colour_user_opt;
+	long user_colour_opt;
 	char colour_message_text[16] = "Use the colour";
 	
 	fuzzel_colour_e fuzz_colour;
@@ -90,10 +90,9 @@ void fuzzel_config_importing(void)
 	printf(BOLD_S"[%d]"STYLE_END" %s "BOLD_S"teal"STYLE_END"\n", fuzz_colour = teal, colour_message_text);
 	printf(BOLD_S"[%d]"STYLE_END" %s "BOLD_S"yellow"STYLE_END"\n", fuzz_colour = yellow, colour_message_text);
 	
-	clearbuffer();
-	scanf(" %d", &theme_colour_user_opt);
+	user_colour_opt = get_long(NULL, 1, 14);
 	
-	fuzzel_colour_e theme_colour_name = (fuzzel_colour_e)theme_colour_user_opt;
+	fuzzel_colour_e theme_colour_name = (fuzzel_colour_e)user_colour_opt;
 	
 	switch(theme_colour_name)
 	{
@@ -231,7 +230,7 @@ void apply_fuzzel_config(int config_choice_t)
 
 void configure_fastfetch(void)
 {
-	int link_fastfetch_configs_opt = -20;
+	long fastfetch_opt = -20;
 	do
 	{
 		clear();
@@ -244,7 +243,7 @@ void configure_fastfetch(void)
 		
 		if (fastfetch_config_apply == true)
 		{
-			if (link_fastfetch_configs_opt == -20)
+			if (fastfetch_opt == -20)
 			{
 				printf(ANSI_LGREEN"The fastfetch config "BOLD_S"has already been applied.\n\n"STYLE_END);
 			}
@@ -263,24 +262,23 @@ void configure_fastfetch(void)
 		printf(BOLD_S " [3] "STYLE_END"config-duplicated.jsonc\n");
 		printf(BOLD_S " [0] "STYLE_END "%s\n", opt_exit_text);
 		
-		clearbuffer();
-		scanf("%d", &link_fastfetch_configs_opt);
+		fastfetch_opt = get_long(NULL, 0, 3);
 		
-		if (link_fastfetch_configs_opt == 1)
+		if (fastfetch_opt == 1)
 		{
 			snprintf(command_buffer, buffer_size,
 					"ln -fs ~/.config/fastfetch/config-default.jsonc ~/.config/fastfetch/config.jsonc");
 			system(command_buffer);
 			fastfetch_config_apply = true;
 		}
-		else if (link_fastfetch_configs_opt == 2)
+		else if (fastfetch_opt == 2)
 		{
 			snprintf(command_buffer, buffer_size,
 					"ln -fs ~/.config/fastfetch/config-other.jsonc ~/.config/fastfetch/config.jsonc");
 			system(command_buffer);
 			fastfetch_config_apply = true;
 		}
-		else if (link_fastfetch_configs_opt == 3)
+		else if (fastfetch_opt == 3)
 		{
 			snprintf(command_buffer, buffer_size,
 					"ln -fs ~/.config/fastfetch/config-duplicated.jsonc ~/.config/fastfetch/config.jsonc");
@@ -289,6 +287,6 @@ void configure_fastfetch(void)
 		}
 		free(command_buffer);
 	}
-    	while (link_fastfetch_configs_opt > 0.0);
+    	while (fastfetch_opt > 0);
     	/* exits the while loop when the user types 0 */
 }
