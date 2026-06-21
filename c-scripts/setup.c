@@ -45,11 +45,11 @@ int main(int argc, char *argv[])
 			{
 				clear();
 				printf(BOLD_S ANSI_WHITE "%s\n\n"STYLE_END, opt_for_text );
-				printf(BOLD_S " [1] " STYLE_END UDRL_S"%s"STYLE_END"\n", fastfetch_config_menu_text);
-		        	printf(BOLD_S " [2] " STYLE_END UDRL_S"%s"STYLE_END"\n", kitty_config_menu_text);
-		        	printf(BOLD_S " [3] " STYLE_END UDRL_S"%s"STYLE_END"\n", fuzzel_config_menu_text);
-		        	printf(BOLD_S " [4] " STYLE_END UDRL_S"%s"STYLE_END"\n", zshforhumans_config_menu_text);
-		        	printf(BOLD_S " [0] " STYLE_END "%s\n", opt_exit_text);
+				printf(BOLD_S "  [1] " STYLE_END UDRL_S"%s"STYLE_END"\n", fastfetch_config_menu_text);
+		        	printf(BOLD_S "  [2] " STYLE_END UDRL_S"%s"STYLE_END"\n", kitty_config_menu_text);
+		        	printf(BOLD_S "  [3] " STYLE_END UDRL_S"%s"STYLE_END"\n", fuzzel_config_menu_text);
+		        	printf(BOLD_S "  [4] " STYLE_END UDRL_S"%s"STYLE_END"\n\n", zshforhumans_config_menu_text);
+		        	printf(BOLD_S "  [0] " STYLE_END "%s\n", opt_exit_text);
 		
 				dotfiles_config_menu = get_long(NULL, 0, 4);
 				if (dotfiles_config_menu == 1)
@@ -66,7 +66,7 @@ int main(int argc, char *argv[])
 						printf(BOLD_S "  [2] " STYLE_END "%s\n\n", fastfetch_edit_config_text);
 						printf(BOLD_S "  [0] " STYLE_END "%s\n", opt_exit_text);
 						
-						fastfetch_config_choice = get_long("\n", 0, 2);
+						fastfetch_config_choice = get_long(NULL, 0, 2);
 		
 						if (fastfetch_config_choice == 1)
 		                		{

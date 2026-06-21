@@ -39,12 +39,11 @@ void fuzzel_config_importing(void)
 	clear();
 	printf(BOLD_S"Choose your fuzzel theme type\n"STYLE_END);
 	
-	printf(BOLD_S"[1]"STYLE_END" catppuccin-latte (light mode)\n");
-	printf(BOLD_S"[2]"STYLE_END" catppuccin-frappe (grey)\n");
-	printf(BOLD_S"[3]"STYLE_END" catppuccin-macchiato (dark)\n");
-	printf(BOLD_S"[4]"STYLE_END" catppuccin-mocha (very dark)\n");
+	printf(BOLD_S"  [1]"STYLE_END" catppuccin-latte (light mode)\n");
+	printf(BOLD_S"  [2]"STYLE_END" catppuccin-frappe (grey)\n");
+	printf(BOLD_S"  [3]"STYLE_END" catppuccin-macchiato (dark)\n");
+	printf(BOLD_S"  [4]"STYLE_END" catppuccin-mocha (very dark)\n");
 	
-	clearbuffer();
 	theme_type_user_opt = get_long(" ", 1, 4);
 	
 	switch(theme_type_user_opt)
@@ -75,20 +74,20 @@ void fuzzel_config_importing(void)
 	
 	fuzzel_colour_e fuzz_colour;
 	
-	printf(BOLD_S"[%d] "STYLE_END" %s "BOLD_S"blue"STYLE_END"\n", fuzz_colour = blue, colour_message_text);
-	printf(BOLD_S"[%d] "STYLE_END" %s "BOLD_S"flamingo"STYLE_END"\n", fuzz_colour = flamingo, colour_message_text);
-	printf(BOLD_S"[%d] "STYLE_END" %s "BOLD_S"green"STYLE_END"\n", fuzz_colour = green, colour_message_text);
-	printf(BOLD_S"[%d] "STYLE_END" %s "BOLD_S"lavender"STYLE_END"\n", fuzz_colour = lavender, colour_message_text);
-	printf(BOLD_S"[%d] "STYLE_END" %s "BOLD_S"maroon"STYLE_END"\n", fuzz_colour = maroon, colour_message_text);
-	printf(BOLD_S"[%d] "STYLE_END" %s "BOLD_S"mauve"STYLE_END"\n", fuzz_colour = mauve, colour_message_text);
-	printf(BOLD_S"[%d] "STYLE_END" %s "BOLD_S"peach"STYLE_END"\n", fuzz_colour = peach, colour_message_text);
-	printf(BOLD_S"[%d] "STYLE_END" %s "BOLD_S"pink"STYLE_END"\n", fuzz_colour = pink, colour_message_text);
-	printf(BOLD_S"[%d] "STYLE_END" %s "BOLD_S"red"STYLE_END"\n", fuzz_colour = red, colour_message_text);
-	printf(BOLD_S"[%d]"STYLE_END" %s "BOLD_S"rosewater"STYLE_END"\n", fuzz_colour = rosewater, colour_message_text);
-	printf(BOLD_S"[%d]"STYLE_END" %s "BOLD_S"sapphire"STYLE_END"\n", fuzz_colour = sapphire, colour_message_text);
-	printf(BOLD_S"[%d]"STYLE_END" %s "BOLD_S"sky"STYLE_END"\n", fuzz_colour = sky, colour_message_text);
-	printf(BOLD_S"[%d]"STYLE_END" %s "BOLD_S"teal"STYLE_END"\n", fuzz_colour = teal, colour_message_text);
-	printf(BOLD_S"[%d]"STYLE_END" %s "BOLD_S"yellow"STYLE_END"\n", fuzz_colour = yellow, colour_message_text);
+	printf(BOLD_S"  [%d] "STYLE_END" %s "BOLD_S"blue"STYLE_END"\n", fuzz_colour = blue, colour_message_text);
+	printf(BOLD_S"  [%d] "STYLE_END" %s "BOLD_S"flamingo"STYLE_END"\n", fuzz_colour = flamingo, colour_message_text);
+	printf(BOLD_S"  [%d] "STYLE_END" %s "BOLD_S"green"STYLE_END"\n", fuzz_colour = green, colour_message_text);
+	printf(BOLD_S"  [%d] "STYLE_END" %s "BOLD_S"lavender"STYLE_END"\n", fuzz_colour = lavender, colour_message_text);
+	printf(BOLD_S"  [%d] "STYLE_END" %s "BOLD_S"maroon"STYLE_END"\n", fuzz_colour = maroon, colour_message_text);
+	printf(BOLD_S"  [%d] "STYLE_END" %s "BOLD_S"mauve"STYLE_END"\n", fuzz_colour = mauve, colour_message_text);
+	printf(BOLD_S"  [%d] "STYLE_END" %s "BOLD_S"peach"STYLE_END"\n", fuzz_colour = peach, colour_message_text);
+	printf(BOLD_S"  [%d] "STYLE_END" %s "BOLD_S"pink"STYLE_END"\n", fuzz_colour = pink, colour_message_text);
+	printf(BOLD_S"  [%d] "STYLE_END" %s "BOLD_S"red"STYLE_END"\n", fuzz_colour = red, colour_message_text);
+	printf(BOLD_S"  [%d]"STYLE_END" %s "BOLD_S"rosewater"STYLE_END"\n", fuzz_colour = rosewater, colour_message_text);
+	printf(BOLD_S"  [%d]"STYLE_END" %s "BOLD_S"sapphire"STYLE_END"\n", fuzz_colour = sapphire, colour_message_text);
+	printf(BOLD_S"  [%d]"STYLE_END" %s "BOLD_S"sky"STYLE_END"\n", fuzz_colour = sky, colour_message_text);
+	printf(BOLD_S"  [%d]"STYLE_END" %s "BOLD_S"teal"STYLE_END"\n", fuzz_colour = teal, colour_message_text);
+	printf(BOLD_S"  [%d]"STYLE_END" %s "BOLD_S"yellow"STYLE_END"\n", fuzz_colour = yellow, colour_message_text);
 	
 	user_colour_opt = get_long(NULL, 1, 14);
 	
@@ -257,10 +256,10 @@ void configure_fastfetch(void)
 			printf("\n");
 		}
 		
-		printf(BOLD_S " [1] "STYLE_END"config-default.jsonc\n");
-		printf(BOLD_S " [2] "STYLE_END"config-other.jsonc\n");
-		printf(BOLD_S " [3] "STYLE_END"config-duplicated.jsonc\n");
-		printf(BOLD_S " [0] "STYLE_END "%s\n", opt_exit_text);
+		printf(BOLD_S "  [1] "STYLE_END"config-default.jsonc\n");
+		printf(BOLD_S "  [2] "STYLE_END"config-other.jsonc\n");
+		printf(BOLD_S "  [3] "STYLE_END"config-duplicated.jsonc\n\n");
+		printf(BOLD_S "  [0] "STYLE_END "%s\n", opt_exit_text);
 		
 		fastfetch_opt = get_long(NULL, 0, 3);
 		

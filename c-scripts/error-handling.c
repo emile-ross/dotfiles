@@ -142,7 +142,11 @@ int error_message(error_code_e err_code)
 	}
 	
 	printf(ANSI_RED BOLD_S"%s \n"STYLE_END, err_text_temp);
-	printf(ANSI_RED BOLD_S"%s \n"STYLE_END, err_solution_temp);
+
+	if (strcmp(err_solution_temp, "\0") != 0)
+	{
+		printf(ANSI_RED BOLD_S"%s \n"STYLE_END, err_solution_temp);
+	}
 	
 	if (critical)
 	{

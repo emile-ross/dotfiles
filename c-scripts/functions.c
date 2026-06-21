@@ -306,7 +306,7 @@ long get_long(const char *message, const long lower_bound, const long upper_boun
 	while (1)
 	{
 		if (message != NULL)
-			printf("%s: ", message);
+			printf("%s ", message);
 		long user_input = -1;
 		char *input_buffer = malloc(max_size);
 		char *endptr;
