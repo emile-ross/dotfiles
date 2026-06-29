@@ -5,6 +5,9 @@ BUILD_BINARY := $(wildcard build)
 DBGCMD = zig cc build.c -o build -Wall -Wextra -Wpedantic -Werror -std=c99
 BUILD_CMD = gcc build.c -o build
 
+BASE_FLAGS = -Wall -Wextra -Wpedantic -std=c99
+DEBUG_FLAGS = -g -std=c99 -Wconversion 
+
 SRC_FILES := arguments configuring error-handling functions globals install programs setup update
 
 OUT = -o setup
@@ -38,7 +41,7 @@ zig: bin
 	@./build std
 
 base: debug
-	$(BASE_CMD)
+	$(BASE_CMD) $(DEBUG_FLAGS)
 	@./build std -e -v
 
 
