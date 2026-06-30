@@ -155,8 +155,14 @@ void exec_cmd(const int buffer_size, const char *command_to_execute)
 	 * using system() while ensuring output doesn't exceed buffer_size */
 	char *command_exec = malloc((size_t)buffer_size);
 
-	snprintf(command_exec, (size_t)buffer_size, "%s", command_to_execute);
+	int return_value = snprintf(command_exec, (size_t)buffer_size, "%s", command_to_execute);
 	system(command_exec);   /* execute command */
+
+	if (return_value > buffer_size)
+	{
+		fprintf(stderr, "Failed to execute \"%s\"\n", command_to_execute);
+		error_message(CMD_EXEC_FAIL);
+	}
 
 	free(command_exec);
 }

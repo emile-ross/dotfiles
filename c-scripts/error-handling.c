@@ -100,6 +100,11 @@ int error_message(error_code_e err_code)
 		snprintf(err_solution_temp, sizeof(err_solution_temp), "This could display if you haven't installed the hyprland config");
 		break;
 	
+	case CMD_EXEC_FAIL:
+		snprintf(err_text_temp, sizeof(err_text_temp), "Command execution failed");
+		snprintf(err_text_temp, sizeof(err_text_temp), "Commands failed to load into the buffer before being executed by the system() function");
+		break;
+
 	case POPEN_FAILED:
 		snprintf(err_text_temp, sizeof(err_text_temp), "popen failed");
 		snprintf(err_text_temp, sizeof(err_text_temp), "This could happen if your system only supports c99");

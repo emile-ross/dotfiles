@@ -62,6 +62,7 @@ typedef enum
 	CLI_INVALID_CMD_SYNTAX = 302,
 	CLI_INVALID_FLAG = 303,
 	CLI_ARGS_MISSING = 304,
+	CMD_EXEC_FAIL = 305,
 } error_code_e;
 
 typedef enum
