@@ -153,9 +153,12 @@ void exec_cmd(const int buffer_size, const char *command_to_execute)
 {
 	/* execute the command stored in command_to_execute
 	 * using system() while ensuring output doesn't exceed buffer_size */
-	char command_exec[buffer_size];
-	snprintf(command_exec, sizeof(command_exec), "%s", command_to_execute);
+	char *command_exec = malloc((size_t)buffer_size);
+
+	snprintf(command_exec, (size_t)buffer_size, "%s", command_to_execute);
 	system(command_exec);   /* execute command */
+
+	free(command_exec);
 }
 
 void countdown(int counter, int lines_to_skip)
