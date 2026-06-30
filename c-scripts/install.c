@@ -162,7 +162,7 @@ void full_install(bool archive_bl, bool full_install_bl)
 	}
 	else
 	{
-		unsigned int install_pkg_opt;
+		uint8_t install_pkg_opt = 255;
 		do
 		{
 			/* this is awful
@@ -175,7 +175,7 @@ void full_install(bool archive_bl, bool full_install_bl)
 				printf("\n[%d] Install %s ", i, config_names[i]);
 			}
 			clearbuffer();
-			scanf(" %d", &install_pkg_opt);
+			scanf(" %hhu", &install_pkg_opt);
 			install_configs(install_pkg_opt);
 		}
 		while (install_pkg_opt > 0);

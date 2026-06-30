@@ -40,17 +40,10 @@ require("lazy").setup({
  		vim.cmd.colorscheme "catppuccin"
  		end,
  	},
-	
 	{
 		"folke/snacks.nvim",
 		---@type snacks.Config
-		opts = 
-		{
-			indent = 
-			{
-			    -- config
-			},
-		},
+		opts = { },
 	},
 	{ -- telescope 
 		'nvim-telescope/telescope.nvim', tag = '0.1.8',
