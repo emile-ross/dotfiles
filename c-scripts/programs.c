@@ -265,7 +265,10 @@ void NVIM(bool archive_bl, bool pkginstall_bl)
 	char *name = "nvim";
 	if (archive_bl)
 	{
+		/* both config files can be found in nvim/ */
 		file_archiving(name, "init", ".lua");
+		file_archiving(name, "dark-init", ".lua");
+
 		file_archiving("nvim/lua/config", "lazy", ".lua");
 		file_archiving(name, "lazy-lock", ".json");
 	}
