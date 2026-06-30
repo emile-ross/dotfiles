@@ -1,0 +1,9 @@
+build
+setup
+id_rsa
+ID_RSA
+*.o
+c-scripts/*.o
+*_SECRET.asc
+ID_RSA
+id_rsa
