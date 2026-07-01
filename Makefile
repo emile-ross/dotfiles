@@ -15,7 +15,7 @@ SRC_FILES := arguments configuring error-handling functions globals install prog
 OUT = -o setup
 BASE_CMD = $(CC) $(SRC_FILES) $(OUT)
 
-FILENAMES := $(addprefix c-scripts/, $(SRC_FILES))
+FILENAMES := $(addprefix src/, $(SRC_FILES))
 SRC_FILES := $(addsuffix .c, $(FILENAMES))
 
 
@@ -37,5 +37,6 @@ zig: base
 base:
 	$(BASE_CMD) $(BASE_FLAGS) $(DEBUG_FLAGS)
 
-clean: bin
-	@./build clean
+clean:
+	rm src/*.o
+	rm *.log

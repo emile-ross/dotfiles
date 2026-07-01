@@ -12,8 +12,8 @@ char *logging_string(size_t *result_ptr);
 
 /* This is the object file path
 * and the second one is the source files path */
-const char object_fpath[16] = "c-scripts/";
-const char source_fpath[16] = "c-scripts/";
+const char object_fpath[8] = "src/";
+const char source_fpath[8] = "src/";
 
 const char output_binary_name[16] = "setup";	/* set the name of the binary file */
 
