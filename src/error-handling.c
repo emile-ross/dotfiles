@@ -147,15 +147,15 @@ int error_message(error_code_e err_code)
 	if (!skip_warning)
 	{
 		/* print error code */
-		printf(ANSI_RED UDRL_S BOLD_S"Error\n"STYLE_END);
-		printf(ANSI_RED BOLD_S"Error code: %d \n"STYLE_END, err_code);
+		fprintf(stderr, ANSI_RED UDRL_S BOLD_S"Error\n"STYLE_END);
+		fprintf(stderr, ANSI_RED BOLD_S"Error code: %d \n"STYLE_END, err_code);
 	}
 	
-	printf(ANSI_RED BOLD_S"%s \n"STYLE_END, err_text_temp);
+	fprintf(stderr, ANSI_RED BOLD_S"%s \n"STYLE_END, err_text_temp);
 
 	if (strcmp(err_solution_temp, "\0") != 0)
 	{
-		printf(ANSI_RED BOLD_S"%s \n"STYLE_END, err_solution_temp);
+		fprintf(stderr, ANSI_RED BOLD_S"%s \n"STYLE_END, err_solution_temp);
 	}
 	
 	if (critical)
