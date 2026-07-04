@@ -34,7 +34,8 @@ void fuzzel_config_importing(void)
 	free(path);
 
 	long theme_type_user_opt;
-	char* theme_type_text = malloc(32);
+	const size_t max_len = 32;
+	char* theme_type_text = malloc(max_len);
 	
 	clear();
 	printf(BOLD_S"Choose your fuzzel theme type\n"STYLE_END);
@@ -49,21 +50,21 @@ void fuzzel_config_importing(void)
 	switch(theme_type_user_opt)
 	{
 	case 1:
-		strcpy(theme_type_text, "catppuccin-latte");
+		strncpy(theme_type_text, "catppuccin-latte", max_len);
 		break;
 	case 2:
-		strcpy(theme_type_text, "catppuccin-frappe");
+		strncpy(theme_type_text, "catppuccin-frappe", max_len);
 		break;
 	case 3:
-		strcpy(theme_type_text, "catppuccin-macchiato");
+		strncpy(theme_type_text, "catppuccin-macchiato", max_len);
 		break;
 	case 4:
-		strcpy(theme_type_text, "catppuccin-mocha");
+		strncpy(theme_type_text, "catppuccin-mocha", max_len);
 		break;
 	default:
 		error_message(FUZZ_THEME_INVALID);
 		printf("Invalid input.\n");
-		strcpy(theme_type_text, "Invalid-theme");
+		strncpy(theme_type_text, "Invalid-theme", max_len);
 		break;
 	}
 	/* theme color */
@@ -74,6 +75,7 @@ void fuzzel_config_importing(void)
 	
 	fuzzel_colour_e fuzz_colour;
 	
+	/* TODO replace with for loop */
 	printf(BOLD_S"  [%d] "STYLE_END" %s "BOLD_S"blue"STYLE_END"\n", fuzz_colour = blue, colour_message_text);
 	printf(BOLD_S"  [%d] "STYLE_END" %s "BOLD_S"flamingo"STYLE_END"\n", fuzz_colour = flamingo, colour_message_text);
 	printf(BOLD_S"  [%d] "STYLE_END" %s "BOLD_S"green"STYLE_END"\n", fuzz_colour = green, colour_message_text);
@@ -93,7 +95,7 @@ void fuzzel_config_importing(void)
 	
 	fuzzel_colour_e theme_colour_name = (fuzzel_colour_e)user_colour_opt;
 	
-	switch(theme_colour_name)
+	switch (theme_colour_name)
 	{
 	case blue:
 		theme_colour_text = "blue";
@@ -229,20 +231,19 @@ void apply_fuzzel_config(int config_choice_t)
 
 void configure_fastfetch(void)
 {
-	long fastfetch_opt = -20;
+	long fastfetch_opt = -1;
+	/* create command buffer */
+	size_t buffer_size = 128;
+	char *command_buffer = malloc(buffer_size);
 	do
 	{
 		clear();
-		
-		/* create command buffer */
-		size_t buffer_size = 128;
-		char *command_buffer = malloc(buffer_size);
 		
 		printf(BOLD_S"What file would you like to use as your fastfetch config?\n"STYLE_END);
 		
 		if (fastfetch_config_apply == true)
 		{
-			if (fastfetch_opt == -20)
+			if (fastfetch_opt == -1)
 			{
 				printf(ANSI_LGREEN"The fastfetch config "BOLD_S"has already been applied.\n\n"STYLE_END);
 			}
@@ -284,8 +285,9 @@ void configure_fastfetch(void)
 			system(command_buffer);
 			fastfetch_config_apply = true;
 		}
-		free(command_buffer);
 	}
     	while (fastfetch_opt > 0);
+
+	free(command_buffer);
     	/* exits the while loop when the user types 0 */
 }
