@@ -196,6 +196,7 @@ void GTKL(bool archive_bl, bool pkginstall_bl)
 
 void HYPR(bool archive_bl, bool pkginstall_bl)
 {
+	char *file_extention = ".conf";
 	char *config_file[5] = 
 	{
 		"hypridle",
@@ -210,25 +211,29 @@ void HYPR(bool archive_bl, bool pkginstall_bl)
 	{
 		for (int i = 0; config_file[i] != NULL; i++)
 		{
-			file_archiving(config_directory, config_file[i], ".conf");
+			file_archiving(config_directory, config_file[i], file_extention);
 		}
 	}
 
 	if (pkginstall_bl)
 	{
 		/* install Hyprland packages */
-		install_package(parent, "hyprlock hypridle hyprpaper hyprland");
+		for (int i = 0; config_file[i] != NULL; i++)
+		{
+			install_package(parent, config_file[i]);
+		}
     	}
 	/* export hyprland configs */
 	for (int i = 0; config_file[i] != NULL; i++)
 	{
-		file_exporting(config_directory, config_file[i], ".conf");
+		file_exporting(config_directory, config_file[i], file_extention);
 	}
 
 	char *assets_directory = "hypr/assets";
 	make_dir(assets_directory);
 	file_exporting(assets_directory, "lockscreen", ".png");
 }
+
 void KITT(bool archive_bl, bool pkginstall_bl)
 {
 	char *name = "kitty";
@@ -490,7 +495,6 @@ void file_exporting(const char *program_name, const char *config_name, const cha
 	char *dest_file_path_template = "%s/%s/%s";
 
 	int file_path_size = 1;
-
 	int config_file_name_size = 1;
 
 
