@@ -548,3 +548,13 @@ void file_exporting(const char *program_name, const char *config_name, const cha
 	free(dest_file_path);
 	free(source_path);
 }
+
+size_t string_size()
+{
+	int return_value = snprintf();
+	if (return_value >= 0)
+	{
+		error_message(INVALID_BUFFER_SIZE);
+	}
+	size_t size = 1 + (size_t)return_value;
+}
