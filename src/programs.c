@@ -172,24 +172,26 @@ void FUZZ(bool archive_bl, bool pkginstall_bl)
 }
 void GTKL(bool archive_bl, bool pkginstall_bl)
 {
+	char *program_name = "gtklock";
 	const char *program_config_path = "%s/gtklock";
 	int program_path_size = 1 + snprintf(NULL, 0, program_config_path, config_path);
+
 	char *program_path = malloc((size_t)program_path_size);
 	snprintf(program_path, (size_t)program_path_size, program_config_path, config_path);
 
     	if (archive_bl)
     	{
-		file_archiving("gtklock", "style", ".css");
+		file_archiving(program_name, "style", ".css");
 	}
     	if (pkginstall_bl)
     	{
     	    	/* install gtklock package */
-    	    	install_package(parent, "gtklock");
+    	    	install_package(parent, program_name);
     	}
 	/* export gtklock config */
 	make_dir("gtklock/assets");
-	file_exporting("gtklock", "style", ".css");
-	file_exporting("gtklock", "lockscreen", ".jpg");
+	file_exporting(program_name, "style", ".css");
+	file_exporting(program_name, "lockscreen", ".jpg");
 
 	free(program_path);
 }
@@ -365,6 +367,7 @@ void ZSHH(bool archive_bl, float pver, bool pkginstall_bl)
 	const char *config_cmd_template = "cp -f %s/shell/zsh/.zshrc %s/ ";
 	size_t mem_needed_cmd = 1 + (size_t)snprintf(NULL, 0, config_cmd_template, inpath, home);
 	char *safe_cmd = malloc(mem_needed_cmd);
+
 	snprintf(safe_cmd, (size_t)mem_needed_cmd, config_cmd_template, inpath, home);
 	system(safe_cmd);
 	free(safe_cmd);
