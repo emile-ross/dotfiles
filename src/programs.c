@@ -14,9 +14,9 @@ void BASH(void)
 	
 	/* calculate the sufficient amount of memory to the buffer */
 	const char *command_format = "cp -f %s/shell/bash/.bashrc ~/%s";
-	int mem_needed = 1 + snprintf(NULL, 0, command_format, inpath, BRCNAME);
+	size_t mem_needed = string_size(true, command_format, inpath, BRCNAME);
 	
-	char *bash_cmd = malloc((size_t)mem_needed);
+	char *bash_cmd = malloc(mem_needed);
 	/* execute the command with the according buffer size previously calculated (above) */
 	snprintf(bash_cmd, (size_t)mem_needed, command_format, inpath, BRCNAME);
 	system(bash_cmd);
@@ -61,7 +61,7 @@ void CAVA(bool archive_bl, bool pkginstall_bl)
 {
 	const char *program_config_path = "%s/cava";
 	const char *program_name = "cava";
-	int program_path_size = 1 + snprintf(NULL, 0, program_config_path, config_path);
+	int program_path_size = string_size(true, program_config_path, config_path);
 	
 	char *program_path = malloc((size_t)program_path_size);
 	snprintf(program_path, (size_t)program_path_size, program_config_path, config_path);
