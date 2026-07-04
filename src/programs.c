@@ -59,12 +59,12 @@ void BTOP(bool archive_bl, bool pkginstall_bl)
 
 void CAVA(bool archive_bl, bool pkginstall_bl)
 {
-	const char *program_config_path = "%s/cava";
 	const char *program_name = "cava";
-	int program_path_size = string_size(true, program_config_path, config_path);
+	const char *program_config_path = "%s/%s";
+	int program_path_size = string_size(true, program_config_path, config_path, program_name);
 	
 	char *program_path = malloc((size_t)program_path_size);
-	snprintf(program_path, (size_t)program_path_size, program_config_path, config_path);
+	snprintf(program_path, (size_t)program_path_size, program_config_path, config_path, program_name);
 	
 	if (archive_bl)
 	{
@@ -93,15 +93,16 @@ void CAVA(bool archive_bl, bool pkginstall_bl)
 
 void FAST(bool archive_bl, bool pkginstall_bl)
 {
-	const char *program_config_path = "%s/fastfetch";
-	int temp_path_size = 1 + snprintf(NULL, 0, program_config_path, inpath);
-	int program_path_size = 1 + snprintf(NULL, 0, program_config_path, config_path);
+	const char *program_name = "fastfetch";
+	const char *program_config_path = "%s/%s";
+	int temp_path_size = 1 + snprintf(NULL, 0, program_config_path, inpath, program_name);
+	int program_path_size = 1 + snprintf(NULL, 0, program_config_path, config_path, program_name);
 
 	char *temp_path = malloc((size_t)temp_path_size);
-	snprintf(temp_path, (size_t)temp_path_size, program_config_path, inpath);
+	snprintf(temp_path, (size_t)temp_path_size, program_config_path, inpath, program_name);
 
 	char *program_path = malloc((size_t)program_path_size);
-	snprintf(program_path, (size_t)program_path_size, program_config_path, config_path);
+	snprintf(program_path, (size_t)program_path_size, program_config_path, config_path, program_name);
 
     	if (archive_bl)
     	{
@@ -496,7 +497,7 @@ void file_archiving(const char *program_config_path, const char *config_file, co
 
 void file_exporting(const char *program_name, const char *config_name, const char *file_extention)
 {
-	char *dest_file_path_template = "%s/%s/%s";
+	const char *dest_file_path_template = "%s/%s/%s";
 
 	int file_path_size = 1;
 	int config_file_name_size = 1;
