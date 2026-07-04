@@ -1,6 +1,8 @@
 #include "dotfileshead.h"
 #include <stdarg.h>
 
+size_t string_size(bool terminate, const char *restrict format, ...);
+
 void BASH(void)
 {
 	/* replace with ".bashrc" in order to replace the default bash config */
@@ -34,7 +36,7 @@ void BPYT(bool archive_bl, bool pkginstall_bl)
 		install_package(parent, pkg_name); /* install bpytop package */
 	}
 	/* export bpytop config */
-	make_dir("bpytop");
+	make_dir(pkg_name);
 	file_exporting(pkg_name, pkg_name, ".conf");
 }
 
@@ -530,7 +532,7 @@ void file_exporting(const char *program_name, const char *config_name, const cha
 
 	/* the 2 spaces are intentional, the command expects 2 arguments separated by a space */
 	char *exporting_cmd_template = "cp -f %s %s";
-	exporting_cmd_size += snprintf(NULL, 0, "%s", exporting_cmd_template); 
+	exporting_cmd_size += string_size(false, exporting_cmd_template);
 	exporting_cmd_size += file_path_size;
 	exporting_cmd_size += source_path_size;
 
