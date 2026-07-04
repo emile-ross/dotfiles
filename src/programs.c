@@ -354,6 +354,7 @@ void ZSHH(bool archive_bl, float pver, bool pkginstall_bl)
 		
 		/* archive the old zsh config by renaming the previous file */
 		rename("~/.zshrc", new_f_path);
+		free(new_f_path);
 	}
 	
 	if (pkginstall_bl)
