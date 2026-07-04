@@ -127,15 +127,16 @@ void FAST(bool archive_bl, bool pkginstall_bl)
 	char *fastfetch_cmd = malloc(command_size);
 
     	snprintf(fastfetch_cmd, command_size, command_template, program_path, temp_path, program_path, program_path, program_path);
-    	system(fastfetch_cmd);
+	free(program_path);
+	free(temp_path);
 
+    	system(fastfetch_cmd);
 	if (verbose)
 	{
 		printf("%s \n\n ", fastfetch_cmd);
 	}
+	free(fastfetch_cmd);
 
-	free(program_path);
-	free(temp_path);
 }
 
 void FUZZ(bool archive_bl, bool pkginstall_bl)
