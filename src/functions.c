@@ -154,15 +154,16 @@ void exec_cmd(const int buffer_size, const char *command_to_execute)
 	/* execute the command stored in command_to_execute
 	 * using system() while ensuring output doesn't exceed buffer_size */
 	char *command_exec = malloc((size_t)buffer_size);
-
 	int return_value = snprintf(command_exec, (size_t)buffer_size, "%s", command_to_execute);
-	system(command_exec);   /* execute command */
 
 	if (return_value > buffer_size)
 	{
 		fprintf(stderr, "Failed to execute \"%s\"\n", command_to_execute);
+		free(command_exec);
 		error_message(CMD_EXEC_FAIL);
+		exit(1);	/* in order to avoid a use after free */
 	}
+	system(command_exec);   /* execute command */
 
 	free(command_exec);
 }
@@ -336,18 +337,30 @@ long get_long(const char *message, const long lower_bound, const long upper_boun
 			{
 				/* no number was found */
 				if (i >= max_attempts)
+				{
+					free(input_buffer);
 					error_message(INVALID_INPUT);
+					exit(1);	/* avoid use after free */
+				}
 			}
 			else if (invalid_input_length > 1)
 			{
 				/* some character was rejected since it isn't a number */
 				if (i >= max_attempts)
+				{
+					free(input_buffer);
 					error_message(INVALID_INPUT);
+					exit(1);	/* avoid use after free */
+				}
 			}
 			else if (user_input > upper_bound || user_input < lower_bound)	/* bound checking */
 			{
 				if (i >= max_attempts)
+				{
+					free(input_buffer);
 					error_message(OOB_INPUT);
+					exit(1);	/* avoid use after free */
+				}
 			}
 			else
 			{
@@ -360,7 +373,9 @@ long get_long(const char *message, const long lower_bound, const long upper_boun
 			if (i >= max_attempts)
 			{
 				printf("Failed to parse input.\n");
+				free(input_buffer);
 				error_message(INVALID_INPUT);
+				exit(1);	/* avoid use after free */
 			}
 		}
 
