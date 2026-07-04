@@ -82,7 +82,7 @@ int error_message(error_code_e err_code)
 		snprintf(err_solution_temp, sizeof(err_solution_temp), "Try again.  Report the issue if this keeps happening.");
 		break;
 		
-	case 104:
+	case KITTY_PKG_NOT_FOUND:
 		snprintf(err_text_temp, sizeof(err_text_temp), "Could not find kitty package"); /* not in use */
 		break;
 	
@@ -115,6 +115,11 @@ int error_message(error_code_e err_code)
 		snprintf(err_solution_temp, sizeof(err_solution_temp), "Try installing the dotfiles in order to fix the unknown version");
 		break;
 	
+	case INVALID_BUFFER_SIZE:
+		snprintf(err_text_temp, sizeof(err_text_temp), "Invalid buffer size");
+		snprintf(err_solution_temp, sizeof(err_solution_temp), "the string size was evaluated to be 0 or less");
+		break;
+
 	case CLI_UNKNOWN_PKG:
 		snprintf(err_text_temp, sizeof(err_text_temp), "Unknown package");
 		snprintf(err_solution_temp, sizeof(err_solution_temp), "Type the config name in lowercase");
