@@ -39,14 +39,14 @@ void pre_startup(void)
 	is_debian_bl = false;
 	is_arch_bl = false;
 	
-	if (strcmp(distro, "debian") == 0) 
+	if (strcmp(distro, "debian") == 0 || strcmp(distro, "ubuntu") == 0) 
 	{
 	    	is_debian_bl = true;
 	    	/* sets debian as the parent distro of (debian) */
 	    	snprintf(parent, sizeof(parent),
 	    			"%s", distro);
 	}
-	else if (strcmp(distro, "arch") == 0) 
+	else if (strcmp(distro, "arch") == 0)
 	{
 	    	is_arch_bl = true;
 	    	/* sets arch as the parent distro of (arch) */
@@ -191,8 +191,9 @@ void countdown(int counter, int lines_to_skip)
 		{
 			printf("\n");
 		}
-			
-		wait_for_timeout(1, 0);
+
+		/* cant be replaced by LONG_TIMER since this needs to always be 1 seconds */
+		wait_for_timeout(1, 0);	
 		counter--;
 	}
 }

@@ -4,15 +4,15 @@
 #include "enums.h"
 #include "macros.h"
 
+#include <stdarg.h>
 #include <stdbool.h>
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdint.h>
 #include <string.h>
-#include <time.h>
-
-#include <unistd.h>
 #include <sys/stat.h>
+#include <time.h>
+#include <unistd.h>
 
 
 void BASH(void);
@@ -46,6 +46,7 @@ void make_dir(const char *program_name);
 	void exec_cmd(const int buffer_size, const char *command_to_execute);
 	void pre_startup(void);
 
+size_t string_size(bool terminate, const char *restrict format, ...);
 void check_for_yay(void);
 void configure_fastfetch(void);
 void configure_oh_my_zsh(void);

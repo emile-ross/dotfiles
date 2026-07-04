@@ -1,7 +1,4 @@
 #include "dotfileshead.h"
-#include <stdarg.h>
-
-size_t string_size(bool terminate, const char *restrict format, ...);
 
 void BASH(void)
 {
@@ -61,10 +58,10 @@ void CAVA(bool archive_bl, bool pkginstall_bl)
 {
 	const char *program_name = "cava";
 	const char *program_config_path = "%s/%s";
-	int program_path_size = string_size(true, program_config_path, config_path, program_name);
+	size_t program_path_size = string_size(true, program_config_path, config_path, program_name);
 	
-	char *program_path = malloc((size_t)program_path_size);
-	snprintf(program_path, (size_t)program_path_size, program_config_path, config_path, program_name);
+	char *program_path = malloc(program_path_size);
+	snprintf(program_path, program_path_size, program_config_path, config_path, program_name);
 	
 	if (archive_bl)
 	{
@@ -78,10 +75,10 @@ void CAVA(bool archive_bl, bool pkginstall_bl)
 	
 	/* export cava config */
 	const char *dir_cmd = "mkdir -p %s ; cp -f %s/%s/config %s/ ";
-	int mem_needed_cmd = 1 + snprintf(NULL, 0, dir_cmd, program_path, inpath, program_name, program_path);
+	size_t mem_needed_cmd = string_size(true, dir_cmd, program_path, inpath, program_name, program_path);
 	
-	char safe_cmd[mem_needed_cmd];
-	snprintf(safe_cmd, (size_t)mem_needed_cmd, dir_cmd, program_path, inpath, program_name, program_path);
+	char *safe_cmd = malloc(mem_needed_cmd);
+	snprintf(safe_cmd, mem_needed_cmd, dir_cmd, program_path, inpath, program_name, program_path);
 
 	if (verbose)
 	{
@@ -89,6 +86,7 @@ void CAVA(bool archive_bl, bool pkginstall_bl)
 	}
 	free(program_path);
 	system(safe_cmd);
+	free(safe_cmd);
 }
 
 void FAST(bool archive_bl, bool pkginstall_bl)
@@ -509,7 +507,7 @@ void file_exporting(const char *program_name, const char *config_name, const cha
 	}
 	else
 	{
-		confir_file_name_size += string_size(false, dest_file_path_template, "%s%s", config_name, file_extention);
+		config_file_name_size += string_size(false, dest_file_path_template, "%s%s", config_name, file_extention);
 	}
 
 	char *config_file_name = malloc((size_t)config_file_name_size);
@@ -530,7 +528,7 @@ void file_exporting(const char *program_name, const char *config_name, const cha
 	snprintf(dest_file_path, (size_t)file_path_size, dest_file_path_template, config_path, program_name, config_file_name); /* write to memory/buffer */
 
 	char *source_path_template = "%s/%s/%s";
-	int source_path_size = string_size(true, source_path_template, inpath, program_name, config_file_name);
+	size_t source_path_size = string_size(true, source_path_template, inpath, program_name, config_file_name);
 
 	char *source_path = malloc((size_t)source_path_size);	/* allocate memory */
 
