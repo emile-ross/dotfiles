@@ -32,15 +32,9 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 				error_message(CLI_ARGS_MISSING);
 			}
 		}
-		else if (strcmp(cmd_arg_v[1], "-c") == 0 || strcmp(cmd_arg_v[1], "-C") == 0)
+		else if (strcmp(cmd_arg_v[1], "-c") == 0)
 		{
-			if (strcmp(cmd_arg_v[1], "-C") == 0)
-			{
-				error_message(FEAT_DEPRECATED);
-			}
-
 			config_name config_to_install = detect_config_name(cmd_arg_v[2]);
-
 			int ret_value = config_fn_exec(config_to_install, true, false, 0.0);
 
 			size_t package_str_length = 100;
@@ -54,8 +48,8 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 
 					if (fgets(buffer, (int)package_str_length, stdin) == NULL)
 					{
-						printf(ANSI_RED"Failed to parse input.\n"STYLE_END);
-						wait_for_timeout(0, 1);
+						fprintf(stderr, ANSI_RED"Failed to parse input.\n"STYLE_END);
+						wait_for_timeout(0, SHORT_TIMER);
 					}
 
 					/* calculate string length for trailing newline removal */
@@ -72,8 +66,12 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 					ret_value = config_fn_exec(config_type, true, false, 0.0);
 					if (ret_value == 0)
 					{
-						snprintf(package_name_str, package_str_length, "%s", buffer);
-						break;
+						int ret = snprintf(package_name_str, package_str_length, "%s", buffer);
+						/* if this condition is false, the string was truncated */
+						if (!(ret > (int)package_str_length))
+						{
+							break;
+						}
 					}
 					printf("\n");
 				}
