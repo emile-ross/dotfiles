@@ -474,11 +474,11 @@ void file_archiving(const char *program_config_path, const char *config_file, co
 	{
 		snprintf(destination_file, (size_t)destination_file_size, "%s/%s%s", program_path, config_file, file_suffix);
 
-		int src_file_size = 1 + snprintf(NULL, 0, "%s/%s", program_path, config_file);
-		src_file = malloc((size_t)src_file_size);
+		size_t src_file_size = string_size(false, "%s/%s", program_path, config_file);
+		src_file = malloc(src_file_size);
 
 		if (!src_file) return;
-		snprintf(src_file, (size_t)src_file_size, "%s/%s", program_path, config_file);
+		snprintf(src_file, src_file_size, "%s/%s", program_path, config_file);
 	}
 
 	free(file_suffix); /* not used by the src_file */
@@ -505,11 +505,11 @@ void file_exporting(const char *program_name, const char *config_name, const cha
 
 	if (file_extention == NULL)
 	{
-		config_file_name_size += snprintf(NULL, 0, "%s", config_name);
+		config_file_name_size += strlen(config_name);
 	}
 	else
 	{
-		config_file_name_size += snprintf(NULL, 0, "%s%s", config_name, file_extention);
+		confir_file_name_size += string_size(false, dest_file_path_template, "%s%s", config_name, file_extention);
 	}
 
 	char *config_file_name = malloc((size_t)config_file_name_size);
@@ -524,13 +524,13 @@ void file_exporting(const char *program_name, const char *config_name, const cha
 	}
 
 	file_path_size += config_file_name_size;
-	file_path_size += snprintf(NULL, 0, dest_file_path_template, config_path, program_name, config_name);
+	file_path_size += string_size(false, dest_file_path_template, config_path, program_name, config_name);
 
 	char *dest_file_path = malloc((size_t)file_path_size); /* allocate memory */
 	snprintf(dest_file_path, (size_t)file_path_size, dest_file_path_template, config_path, program_name, config_file_name); /* write to memory/buffer */
 
 	char *source_path_template = "%s/%s/%s";
-	int source_path_size = 1 + snprintf(NULL, 0, source_path_template, inpath, program_name, config_file_name);
+	int source_path_size = string_size(true, source_path_template, inpath, program_name, config_file_name);
 
 	char *source_path = malloc((size_t)source_path_size);	/* allocate memory */
 
