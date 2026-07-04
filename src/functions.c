@@ -282,7 +282,6 @@ void link_file(const char *source_path, const char *link_path)
 	}
 
 	system(link_command);
-
 	free(link_command);
 }
 
@@ -304,22 +303,24 @@ void make_dir(const char *program_name)
 	}
 
 	system(mkdir_cmd);	/* execute command */
-
 	free(mkdir_cmd);
 }
 
 long get_long(const char *message, const long lower_bound, const long upper_bound)
 {
 	const size_t max_size = 192;
-	const int max_attempts = 5;
+	const int max_attempts = 6;
 	
 	int i = 0;
+
+	char *input_buffer = malloc(max_size);
+
 	while (1)
 	{
 		if (message != NULL)
 			printf("%s ", message);
+
 		long user_input = -1;
-		char *input_buffer = malloc(max_size);
 		char *endptr;
 
 		if (fgets(input_buffer, (int)max_size, stdin) != NULL)
@@ -380,10 +381,10 @@ long get_long(const char *message, const long lower_bound, const long upper_boun
 		}
 
 		printf(UDRL_S"Invalid input"STYLE_END", try again\n");
-		free(input_buffer);
 		i++;
 	}
 
+	free(input_buffer);
 	error_message(INPUT_FAIL);
 	return -1;
 }

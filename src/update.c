@@ -125,7 +125,7 @@ float* get_version(void)
 
 	static float VAWSM[32] = {0};
 	
-	char line[384];
+	char *line = malloc(512);
 	while (fgets(line, sizeof(line), file)) 
 	{
 		/* this is true if the line contains:
@@ -133,9 +133,11 @@ float* get_version(void)
 		if (sscanf(line, "# AWSMVERSION: %31f[0-9.]", VAWSM) == 1)
 		{
 			fclose(file);
+			free(line);
 			return VAWSM;
 		}
 	}
 	fclose(file);
+	free(line);
 	return 0;
 }

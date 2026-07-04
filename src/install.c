@@ -125,7 +125,7 @@ void install_configs(unsigned int custom_package_install)  /* the partial instal
 			ZSHH(archive_bl, pver, pkginstall_bl);
 			break;
 		default:
-			printf(ANSI_RED"\nInvalid character\n"STYLE_END);
+			fprintf(stderr, ANSI_RED"\nInvalid character\n"STYLE_END);
 			install_success = false;
 			wait_for_timeout(SHORT_TIMER, 0);
 			break;
