@@ -1,4 +1,5 @@
 #include "dotfileshead.h"
+#include <stdarg.h>
 
 void BASH(void)
 {
@@ -549,12 +550,22 @@ void file_exporting(const char *program_name, const char *config_name, const cha
 	free(source_path);
 }
 
-size_t string_size()
+size_t string_size(bool terminate, const char *restrict format, ...)
 {
-	int return_value = snprintf();
+	va_list args;
+	va_start(args, format);
+	int return_value = vsnprintf(NULL, 0, format, args);
+	va_end(args);
+
 	if (return_value >= 0)
 	{
 		error_message(INVALID_BUFFER_SIZE);
 	}
-	size_t size = 1 + (size_t)return_value;
+
+	size_t size = (size_t)return_value;
+	if (terminate)
+	{
+		size++;
+	}
+	return size;
 }
