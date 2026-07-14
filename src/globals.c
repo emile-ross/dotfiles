@@ -8,7 +8,6 @@ char *config_names[n_configs] =
 {
 	"Unknown Package",
 	".bashrc",
-	"Sway-WM config",
 	"bpytop config",
 	"btop config",
 	"cava config",
@@ -19,6 +18,7 @@ char *config_names[n_configs] =
 	"kitty terminal configs",
 	"mpv config",
 	"neovim config with lazy",
+	"Sway-WM config",
 	"waybar config and style (appearance)",
 	"zsh config (.zshrc)",
 };

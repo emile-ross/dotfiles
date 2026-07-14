@@ -54,7 +54,6 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 
 					/* calculate string length for trailing newline removal */
 					size_t len = strlen(buffer);
-
 					if (len > 0 && buffer[len - 1] == '\n')
 					{
 						/* replace trailing \n with a NULL terminator */
