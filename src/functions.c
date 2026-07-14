@@ -388,3 +388,22 @@ long get_long(const char *message, const long lower_bound, const long upper_boun
 	error_message(INPUT_FAIL);
 	return -1;
 }
+
+/* unspecified array size 
+ * the array must be null terminated */
+int free_buffers(void *buffers_to_free[])
+{
+	if (buffers_to_free == NULL)
+	{
+		return 0;
+	}
+
+	uint8_t i = 0;
+	do 
+	{
+		free(buffers_to_free[i]);
+		i++;
+	}
+	while (buffers_to_free[i] != NULL);
+	return 0;
+}

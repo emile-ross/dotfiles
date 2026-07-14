@@ -72,7 +72,7 @@ void CAVA(bool archive_bl, bool pkginstall_bl)
 	
 	if (pkginstall_bl)
 	{
-	    	install_package(parent, (char*)program_name); /* install cava package */
+	    	install_package(parent, (const char*)program_name); /* install cava package */
 	}
 	
 	/* export cava config */
