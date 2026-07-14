@@ -140,6 +140,11 @@ int error_message(error_code_e err_code)
 		snprintf(err_solution_temp, sizeof(err_solution_temp), "Use the --help flag to display the help menu");
 		break;
 	
+	case NON_NULL_TERMINATED:
+		snprintf(err_text_temp, sizeof(err_text_temp), "The buffer array isn't NULL terminated");
+		snprintf(err_solution_temp, sizeof(err_solution_temp), "The buffer arrays are supposed to be null terminated in order to be freed");
+		break;
+	
 	default:
 		snprintf(err_text_temp, sizeof(err_text_temp), "This error code isn't known");
 		break;
