@@ -32,3 +32,5 @@
 #define LONG_TIMER (1) /* this is in seconds */
 #define n_configs (15)
 #define menu_text_size (32)
+
+#define UINT8MAX 255

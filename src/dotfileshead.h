@@ -55,7 +55,7 @@ void link_fastfetch_configs(void);
 void full_config_install(bool ARCHIVE_BL, float previous_version_t, bool install_packages_t);
 void full_install(bool archive_bl, bool full_install_bl);
 void install_config_message(char *text);
-void install_configs(uint8_t custom_package_install);
+void dinstall_configs(uint8_t custom_package_install);
 void install_menu(void);
 
 config_name detect_config_name(char *input);

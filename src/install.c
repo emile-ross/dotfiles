@@ -33,6 +33,7 @@ void install_config_message(char *text)
 	printf("\nInstalling %s \n", text);
 }
 
+/* this function is never used but it could easily be used */
 void install_configs(uint8_t custom_package_install)  /* the partial install script (configure which package or configuration to install) */
 {
 	do
@@ -172,8 +173,9 @@ void full_install(bool archive_bl, bool full_install_bl)
 			{
 				printf("\n[%d] Install %s ", i, config_names[i]);
 			}
-			clearbuffer();
-			scanf(" %hhu", &install_pkg_opt);
+			/* cast from long to uint8_t is safe since there is already bounds checking
+			 * within the get_long() function (we provide UINT8MAX as the upper bound) */
+			install_pkg_opt = (uint8_t)get_long(" ", 0, UINT8MAX);
 			install_configs(install_pkg_opt);
 		}
 		while (install_pkg_opt > 0);
