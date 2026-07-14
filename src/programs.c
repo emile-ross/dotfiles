@@ -479,7 +479,8 @@ void file_archiving(const char *program_config_path, const char *config_file, co
 		snprintf(destination_file, (size_t)destination_file_size, "%s/%s%s", program_path, config_file, file_suffix);
 		free(file_suffix); /* not used by the src_file */
 
-		size_t src_file_size = string_size(false, "%s/%s", program_path, config_file);
+		void *arr[2] = { program_path, NULL };
+		size_t src_file_size = string_size(arr, false, "%s/%s", program_path, config_file);
 		src_file = malloc(src_file_size);
 
 		if (!src_file) return;
