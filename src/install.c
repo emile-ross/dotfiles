@@ -33,12 +33,12 @@ void install_config_message(char *text)
 	printf("\nInstalling %s \n", text);
 }
 
-void install_configs(unsigned int custom_package_install)  /* the partial install script (configure which package or configuration to install) */
+void install_configs(uint8_t custom_package_install)  /* the partial install script (configure which package or configuration to install) */
 {
 	do
 	{
 		bool install_success = true;
-		float pver = 0.0f; /* assumes the user doesn't have the dotfiles */
+		pver = 0.0f; /* assumes the user doesn't have the dotfiles */
 		char* temp_conf_installed = NULL;
 		
 		clearbuffer();
@@ -55,11 +55,9 @@ void install_configs(unsigned int custom_package_install)  /* the partial instal
 		
 		config_name config_install_enum = custom_package_install;
 		
-		unsigned int package_name_index = custom_package_install;
-		
-		if (package_name_index < n_configs && package_name_index > 0)
+		if (custom_package_install < n_configs && custom_package_install > 0)
 		{
-			temp_conf_installed = config_names[package_name_index];
+			temp_conf_installed = config_names[custom_package_install];
 		}
 		else
 		{

@@ -340,23 +340,23 @@ void WAYB(bool archive_bl, bool pkginstall_bl)
 	make_dir(name);
 }
 
-void ZSHH(bool archive_bl, float pver, bool pkginstall_bl)
+void ZSHH(bool archive_bl, float fversion, bool pkginstall_bl)
 {
 	if (archive_bl)
 	{
 		/* archive old zsh config */
 		char *archiving_template = "mv ~/.zshrc ~/.zshrc-old-v%.2f";
-		int archiving_size = 1 + snprintf(NULL, 0, archiving_template, pver);
+		int archiving_size = 1 + snprintf(NULL, 0, archiving_template, fversion);
 		char *archive_command = malloc((size_t)archiving_size);
-		snprintf(archive_command, (size_t)archiving_size, archiving_template, pver);
+		snprintf(archive_command, (size_t)archiving_size, archiving_template, fversion);
 
 		system(archive_command);
 		free(archive_command); /* free after use */
 		
 		const char *new_path = "~/.zshrc-old-v%.2f";
-		int path_size = 1 + snprintf(NULL, 0, new_path, pver);
+		int path_size = 1 + snprintf(NULL, 0, new_path, fversion);
 		char *new_f_path = malloc((size_t)path_size);
-		snprintf(new_f_path, (size_t)path_size, new_path, pver);
+		snprintf(new_f_path, (size_t)path_size, new_path, fversion);
 		
 		/* archive the old zsh config by renaming the previous file */
 		rename("~/.zshrc", new_f_path);
@@ -504,7 +504,7 @@ void file_exporting(const char *program_name, const char *config_name, const cha
 {
 	const char *dest_file_path_template = "%s/%s/%s";
 
-	int file_path_size = 1;
+	size_t file_path_size = 1;
 	size_t config_file_name_size = 1;
 
 
@@ -528,8 +528,8 @@ void file_exporting(const char *program_name, const char *config_name, const cha
 		snprintf(config_file_name, (size_t)config_file_name_size, "%s%s", config_name, file_extention);
 	}
 
-	file_path_size += config_file_name_size;
 	void *arr[4] = { config_file_name, NULL, NULL, NULL };
+	file_path_size += config_file_name_size;
 	file_path_size += string_size(arr, false, dest_file_path_template, config_path, program_name, config_name);
 
 	char *dest_file_path = malloc((size_t)file_path_size); /* allocate memory */
@@ -539,9 +539,9 @@ void file_exporting(const char *program_name, const char *config_name, const cha
 	arr[1] = dest_file_path;
 	size_t source_path_size = string_size(arr, true, source_path_template, inpath, program_name, config_file_name);
 
-	char *source_path = malloc((size_t)source_path_size);	/* allocate memory */
+	char *source_path = malloc(source_path_size);	/* allocate memory */
 
-	snprintf(source_path, (size_t)source_path_size, source_path_template, inpath, program_name, config_file_name);
+	snprintf(source_path, source_path_size, source_path_template, inpath, program_name, config_file_name);
 	free(config_file_name);
 	arr[0] = source_path;	/* add to the arr (buffers to free) 
 	also overwrites the config_file_name buffer at the same time */
@@ -550,8 +550,7 @@ void file_exporting(const char *program_name, const char *config_name, const cha
 	/* the 2 spaces are intentional, the command expects 2 arguments separated by a space */
 	char *exporting_cmd_template = "cp -f %s %s";
 	size_t exporting_cmd_size = 1 + string_size(arr, false, exporting_cmd_template);
-	exporting_cmd_size += file_path_size;
-	exporting_cmd_size += source_path_size;
+	exporting_cmd_size += file_path_size + source_path_size;
 
 	char *exporting_cmd = malloc(exporting_cmd_size); /* allocate memory */
 	snprintf(exporting_cmd, exporting_cmd_size, exporting_cmd_template, source_path, dest_file_path);

@@ -28,7 +28,7 @@ void MPVF(bool archive_bl, bool pkginstall_bl);
 void NVIM(bool archive_bl, bool pkginstall_bl);
 void SWAY(bool archive_bl, bool pkginstall_bl);
 void WAYB(bool archive_bl, bool pkginstall_bl);
-void ZSHH(bool archive_bl, float pver, bool pkginstall_bl);
+void ZSHH(bool archive_bl, float fversion, bool pkginstall_bl);
 
 int install_package(const char *pkg_type_distro, const char *pkginstallname);
 void file_archiving(const char *program_config_path, const char *config_file, const char *file_extention);
@@ -55,7 +55,7 @@ void link_fastfetch_configs(void);
 void full_config_install(bool ARCHIVE_BL, float previous_version_t, bool install_packages_t);
 void full_install(bool archive_bl, bool full_install_bl);
 void install_config_message(char *text);
-void install_configs(unsigned int custom_package_install);
+void install_configs(uint8_t custom_package_install);
 void install_menu(void);
 
 config_name detect_config_name(char *input);

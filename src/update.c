@@ -1,6 +1,6 @@
 #include "dotfileshead.h"
 
-int full_update(char archive_file, float pver)
+int full_update(char archive_file, float version)
 {
 	if (is_arch_bl)
 	{
@@ -8,7 +8,7 @@ int full_update(char archive_file, float pver)
 		check_for_yay();
 	}
 	
-	int VAWSM = (int)(pver * 100);
+	int VAWSM = (int)(version * 100);
 	bool install_pkg_yn = false;
 	
 	df_version prev_update_version = (df_version)VAWSM;
@@ -42,7 +42,7 @@ int full_update(char archive_file, float pver)
 		switch (prev_update_version)
 		{
 		case V_1:
-			printf("\nUpdating from %f\n", pver);
+			printf("\nUpdating from %f\n", version);
 			install_package(parent, "cava fuzzel kitty fastfetch waybar");
 			__attribute__ ((fallthrough));	/* do not break because we are also installing everything below */
 		case V_1_2:
@@ -85,7 +85,7 @@ int full_update(char archive_file, float pver)
 		update_version_number:
 			BASH();
 			HYPR(archive_bl, install_pkg_yn);
-			ZSHH(archive_bl, pver, install_pkg_yn);
+			ZSHH(archive_bl, version, install_pkg_yn);
 			printf("Update completed!\n");
 			break;
 		
