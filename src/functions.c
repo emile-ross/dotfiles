@@ -310,7 +310,6 @@ long get_long(const char *message, const long lower_bound, const long upper_boun
 {
 	const size_t max_size = 192;
 	const int max_attempts = 6;
-	
 	int i = 0;
 
 	char *input_buffer = malloc(max_size);

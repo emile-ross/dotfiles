@@ -65,6 +65,7 @@ int error_message(error_code_e err_code)
 	case MALLOC_FAIL:
 		snprintf(err_text_temp, sizeof(err_text_temp), "malloc() function failed");
 		snprintf(err_solution_temp, sizeof(err_solution_temp), " ");
+	    	critical = true;
 		break;
 
 	case UNSUPPORTED_DISTRO:
