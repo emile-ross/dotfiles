@@ -11,7 +11,7 @@ void BASH(void)
 	
 	/* calculate the sufficient amount of memory to the buffer */
 	const char *command_format = "cp -f %s/shell/bash/.bashrc ~/%s";
-	size_t mem_needed = string_size(true, command_format, inpath, BRCNAME);
+	size_t mem_needed = string_size(NULL, true, command_format, inpath, BRCNAME);
 	
 	char *bash_cmd = malloc(mem_needed);
 	/* execute the command with the according buffer size previously calculated (above) */
@@ -478,6 +478,7 @@ void file_archiving(const char *program_config_path, const char *config_file, co
 		if (!src_file) return;
 		snprintf(src_file, src_file_size, "%s/%s", program_path, config_file);
 	}
+	free(program_path);
 
 	free(file_suffix); /* not used by the src_file */
 
@@ -490,7 +491,6 @@ void file_archiving(const char *program_config_path, const char *config_file, co
 	rename(src_file, destination_file);
 	free(src_file);
 	free(destination_file);
-	free(program_path);
 }
 
 void file_exporting(const char *program_name, const char *config_name, const char *file_extention)
