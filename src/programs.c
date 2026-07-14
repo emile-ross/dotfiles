@@ -505,7 +505,7 @@ void file_exporting(const char *program_name, const char *config_name, const cha
 	const char *dest_file_path_template = "%s/%s/%s";
 
 	int file_path_size = 1;
-	int config_file_name_size = 1;
+	size_t config_file_name_size = 1;
 
 
 	if (file_extention == NULL)
@@ -546,16 +546,15 @@ void file_exporting(const char *program_name, const char *config_name, const cha
 	arr[0] = source_path;	/* add to the arr (buffers to free) 
 	also overwrites the config_file_name buffer at the same time */
 
-	int exporting_cmd_size = 1;
 
 	/* the 2 spaces are intentional, the command expects 2 arguments separated by a space */
 	char *exporting_cmd_template = "cp -f %s %s";
-	exporting_cmd_size += string_size(arr, false, exporting_cmd_template);
+	size_t exporting_cmd_size = 1 + string_size(arr, false, exporting_cmd_template);
 	exporting_cmd_size += file_path_size;
 	exporting_cmd_size += source_path_size;
 
-	char *exporting_cmd = malloc((size_t)exporting_cmd_size); /* allocate memory */
-	snprintf(exporting_cmd, (size_t)exporting_cmd_size, exporting_cmd_template, source_path, dest_file_path);
+	char *exporting_cmd = malloc(exporting_cmd_size); /* allocate memory */
+	snprintf(exporting_cmd, exporting_cmd_size, exporting_cmd_template, source_path, dest_file_path);
 
 	if (verbose)
 	{
