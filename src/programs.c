@@ -79,7 +79,7 @@ void CAVA(bool archive_bl, bool pkginstall_bl)
 	{
 		program_path,
 		NULL
-	}
+	};
 	size_t mem_needed_cmd = string_size(arr, true, dir_cmd, program_path, inpath, program_name, program_path);
 	
 	char *safe_cmd = malloc(mem_needed_cmd);
@@ -527,13 +527,15 @@ void file_exporting(const char *program_name, const char *config_name, const cha
 	}
 
 	file_path_size += config_file_name_size;
-	file_path_size += string_size(false, dest_file_path_template, config_path, program_name, config_name);
+	void *arr[4] = { config_file_name, NULL };
+	file_path_size += string_size(arr, false, dest_file_path_template, config_path, program_name, config_name);
 
 	char *dest_file_path = malloc((size_t)file_path_size); /* allocate memory */
 	snprintf(dest_file_path, (size_t)file_path_size, dest_file_path_template, config_path, program_name, config_file_name); /* write to memory/buffer */
 
 	char *source_path_template = "%s/%s/%s";
-	size_t source_path_size = string_size(true, source_path_template, inpath, program_name, config_file_name);
+	arr = { config_file_name, dest_file_path, NULL };
+	size_t source_path_size = string_size(arr, true, source_path_template, inpath, program_name, config_file_name);
 
 	char *source_path = malloc((size_t)source_path_size);	/* allocate memory */
 
@@ -544,7 +546,8 @@ void file_exporting(const char *program_name, const char *config_name, const cha
 
 	/* the 2 spaces are intentional, the command expects 2 arguments separated by a space */
 	char *exporting_cmd_template = "cp -f %s %s";
-	exporting_cmd_size += string_size(false, exporting_cmd_template);
+	arr = { config_file_name, dest_file_path, source_path, NULL };
+	exporting_cmd_size += string_size(arr, false, exporting_cmd_template);
 	exporting_cmd_size += file_path_size;
 	exporting_cmd_size += source_path_size;
 
