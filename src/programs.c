@@ -84,12 +84,12 @@ void CAVA(bool archive_bl, bool pkginstall_bl)
 	
 	char *safe_cmd = malloc(mem_needed_cmd);
 	snprintf(safe_cmd, mem_needed_cmd, dir_cmd, program_path, inpath, program_name, program_path);
+	free(program_path);
 
 	if (verbose)
 	{
 		printf("%s\n", safe_cmd);
 	}
-	free(program_path);
 	system(safe_cmd);
 	free(safe_cmd);
 }
@@ -485,7 +485,6 @@ void file_archiving(const char *program_config_path, const char *config_file, co
 
 		if (!src_file) return;
 		snprintf(src_file, src_file_size, "%s/%s", program_path, config_file);
-		free(file_suffix); /* not used by the src_file */
 	}
 	free(program_path);
 
@@ -564,12 +563,11 @@ void file_exporting(const char *program_name, const char *config_name, const cha
 		printf("%s\n", source_path);
 		printf("%s\n", exporting_cmd);
 	}
-	
-	system(exporting_cmd); /* execute final command */
-
-	free(exporting_cmd);
 	free(dest_file_path);
 	free(source_path);
+	
+	system(exporting_cmd); /* execute final command */
+	free(exporting_cmd);
 }
 
 size_t string_size(void *buf_to_free[], bool terminate, const char *restrict format, ...)
