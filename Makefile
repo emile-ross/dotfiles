@@ -1,6 +1,6 @@
 CC := clang
 
-BASE_FLAGS = -Wall -Wextra -Wpedantic -std=c99
+BASE_FLAGS = -Wall -Wextra -Wpedantic -std=c99 -Wconversion -Wshadow
 DEBUG_FLAGS = -g -std=c99 -Wconversion 
 
 ALL_FLAGS = $(BASE_FLAGS) $(DEBUG_FLAGS)
@@ -20,7 +20,7 @@ setup:
 
 zig: base
 base:
-	$(BASE_CMD) $(BASE_FLAGS) $(DEBUG_FLAGS)
+	$(BASE_CMD) $(BASE_FLAGS) $(DEBUG_FLAGS) -Werror
 
 clean:
 	rm src/*.o
