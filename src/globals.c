@@ -1,4 +1,4 @@
-#include "dotfileshead.h"
+#include "header.h"
 
 /* This file initializes variables available globally */
 
