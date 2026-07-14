@@ -14,6 +14,8 @@ void BASH(void)
 	size_t mem_needed = string_size(NULL, true, command_format, inpath, BRCNAME);
 	
 	char *bash_cmd = malloc(mem_needed);
+	if (bash_cmd == NULL)
+		error_message(MALLOC_FAIL);
 	/* execute the command with the according buffer size previously calculated (above) */
 	snprintf(bash_cmd, (size_t)mem_needed, command_format, inpath, BRCNAME);
 	system(bash_cmd);
@@ -518,6 +520,8 @@ void file_exporting(const char *program_name, const char *config_name, const cha
 	}
 
 	char *config_file_name = malloc((size_t)config_file_name_size);
+	if (config_file_name == NULL)
+		error_message(MALLOC_FAIL);
 
 	if (file_extention == NULL)
 	{

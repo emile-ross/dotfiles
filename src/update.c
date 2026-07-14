@@ -105,6 +105,8 @@ float* get_version(void)
 	char *hyprpath_template = "%s/.config/hypr/hyprland.conf";
 	size_t hyprpath_size = 1 + (size_t)snprintf(NULL, 0, hyprpath_template, home);
 	char *hyprpath = malloc(hyprpath_size);
+	if (hyprpath == NULL)
+		error_message(MALLOC_FAIL);
 
 	snprintf(hyprpath, hyprpath_size, hyprpath_template, home);
 	/* set the hyprland path with username */
@@ -125,6 +127,9 @@ float* get_version(void)
 	static float VAWSM[32] = {0};
 	
 	char *line = malloc(512);
+	if (line == NULL)
+		error_message(MALLOC_FAIL);
+		
 	while (fgets(line, sizeof(line), file)) 
 	{
 		/* this is true if the line contains:

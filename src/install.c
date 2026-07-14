@@ -50,7 +50,7 @@ void install_configs(uint8_t custom_package_install)  /* the partial install scr
 		
 		clearbuffer();
 		printf("Do you want to install the package "BOLD_S"(Y/n)\n"STYLE_END);
-		char PKGINSTALL_T;
+		char PKGINSTALL_T = '\0';
 		scanf(" %c", &PKGINSTALL_T);
 		bool pkginstall_bl = y_n(PKGINSTALL_T);
 		
@@ -215,7 +215,7 @@ void check_for_yay(void)
     	{
 		printf("Yay is not installed, do you want to install it? (Y/n): ");
     
-		char YAY;
+		char YAY = '\0';
         	clearbuffer();
         	scanf(" %c", &YAY); /* asks the user if they wanna install yay (needed) */
 		bool install_yay = y_n(YAY); /* convert the Y/n into a bool with the y_n() function */
