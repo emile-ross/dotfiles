@@ -527,26 +527,27 @@ void file_exporting(const char *program_name, const char *config_name, const cha
 	}
 
 	file_path_size += config_file_name_size;
-	void *arr[4] = { config_file_name, NULL };
+	void *arr[4] = { config_file_name, NULL, NULL, NULL };
 	file_path_size += string_size(arr, false, dest_file_path_template, config_path, program_name, config_name);
 
 	char *dest_file_path = malloc((size_t)file_path_size); /* allocate memory */
 	snprintf(dest_file_path, (size_t)file_path_size, dest_file_path_template, config_path, program_name, config_file_name); /* write to memory/buffer */
 
 	char *source_path_template = "%s/%s/%s";
-	arr = { config_file_name, dest_file_path, NULL };
+	arr[1] = dest_file_path;
 	size_t source_path_size = string_size(arr, true, source_path_template, inpath, program_name, config_file_name);
 
 	char *source_path = malloc((size_t)source_path_size);	/* allocate memory */
 
 	snprintf(source_path, (size_t)source_path_size, source_path_template, inpath, program_name, config_file_name);
 	free(config_file_name);
+	arr[0] = source_path;	/* add to the arr (buffers to free) 
+	also overwrites the config_file_name buffer at the same time */
 
 	int exporting_cmd_size = 1;
 
 	/* the 2 spaces are intentional, the command expects 2 arguments separated by a space */
 	char *exporting_cmd_template = "cp -f %s %s";
-	arr = { config_file_name, dest_file_path, source_path, NULL };
 	exporting_cmd_size += string_size(arr, false, exporting_cmd_template);
 	exporting_cmd_size += file_path_size;
 	exporting_cmd_size += source_path_size;
