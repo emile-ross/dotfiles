@@ -403,6 +403,12 @@ int free_buffers(void *buffers_to_free[])
 		free(buffers_to_free[i]);
 		i++;
 	}
-	while (buffers_to_free[i] != NULL);
+	while (buffers_to_free[i] != NULL && i < UINT8MAX);
+	
+	if (i >= UINT8MAX)
+	{
+		error_message(NON_NULL_TERMINATED);
+	}
+
 	return 0;
 }
