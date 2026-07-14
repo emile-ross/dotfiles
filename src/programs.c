@@ -560,7 +560,7 @@ void file_exporting(const char *program_name, const char *config_name, const cha
 	free(source_path);
 }
 
-size_t string_size(void *buf_to_free, bool terminate, const char *restrict format, ...)
+size_t string_size(void *buf_to_free[], bool terminate, const char *restrict format, ...)
 {
 	va_list args;
 	va_start(args, format);
@@ -569,6 +569,16 @@ size_t string_size(void *buf_to_free, bool terminate, const char *restrict forma
 
 	if (return_value >= 0)
 	{
+		if (buf_to_free != NULL)
+		{
+			uint8_t i = 0;
+			do 
+			{
+				free(buf_to_free[i]);
+				i++;
+			}
+			while (buf_to_free[i] != NULL);
+		}
 		error_message(INVALID_BUFFER_SIZE);
 	}
 
