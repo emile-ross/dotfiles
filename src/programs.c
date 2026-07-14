@@ -466,6 +466,7 @@ void file_archiving(const char *program_config_path, const char *config_file, co
 	if (extention_bl)
 	{
 		snprintf(destination_file, (size_t)destination_file_size, "%s/%s%s%s", program_path, config_file, file_suffix, file_extention);
+		free(file_suffix); /* not used by the src_file */
 
 		int src_file_size = 1 + snprintf(NULL, 0, "%s/%s%s", program_path, config_file, file_extention);
 		src_file = malloc((size_t)src_file_size);
@@ -476,16 +477,17 @@ void file_archiving(const char *program_config_path, const char *config_file, co
 	else
 	{
 		snprintf(destination_file, (size_t)destination_file_size, "%s/%s%s", program_path, config_file, file_suffix);
+		free(file_suffix); /* not used by the src_file */
 
 		size_t src_file_size = string_size(false, "%s/%s", program_path, config_file);
 		src_file = malloc(src_file_size);
 
 		if (!src_file) return;
 		snprintf(src_file, src_file_size, "%s/%s", program_path, config_file);
+		free(file_suffix); /* not used by the src_file */
 	}
 	free(program_path);
 
-	free(file_suffix); /* not used by the src_file */
 
 	/* print the destination and source file paths */
 	if (verbose)
