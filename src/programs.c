@@ -58,7 +58,7 @@ void CAVA(bool archive_bl, bool pkginstall_bl)
 {
 	const char *program_name = "cava";
 	const char *program_config_path = "%s/%s";
-	size_t program_path_size = string_size(true, program_config_path, config_path, program_name);
+	size_t program_path_size = string_size(NULL, true, program_config_path, config_path, program_name);
 	
 	char *program_path = malloc(program_path_size);
 	snprintf(program_path, program_path_size, program_config_path, config_path, program_name);
@@ -75,7 +75,12 @@ void CAVA(bool archive_bl, bool pkginstall_bl)
 	
 	/* export cava config */
 	const char *dir_cmd = "mkdir -p %s ; cp -f %s/%s/config %s/ ";
-	size_t mem_needed_cmd = string_size(true, dir_cmd, program_path, inpath, program_name, program_path);
+	void *arr[2] = 
+	{
+		program_path,
+		NULL
+	}
+	size_t mem_needed_cmd = string_size(arr, true, dir_cmd, program_path, inpath, program_name, program_path);
 	
 	char *safe_cmd = malloc(mem_needed_cmd);
 	snprintf(safe_cmd, mem_needed_cmd, dir_cmd, program_path, inpath, program_name, program_path);
@@ -507,7 +512,7 @@ void file_exporting(const char *program_name, const char *config_name, const cha
 	}
 	else
 	{
-		config_file_name_size += string_size(false, dest_file_path_template, "%s%s", config_name, file_extention);
+		config_file_name_size += string_size(NULL, false, dest_file_path_template, "%s%s", config_name, file_extention);
 	}
 
 	char *config_file_name = malloc((size_t)config_file_name_size);
