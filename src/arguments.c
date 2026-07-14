@@ -37,7 +37,7 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 			config_name config_to_install = detect_config_name(cmd_arg_v[2]);
 			int ret_value = config_fn_exec(config_to_install, true, false, 0.0);
 
-			size_t package_str_length = 100;
+			const size_t package_str_length = 100;
 			char *package_name_str = malloc(package_str_length);
 			if (ret_value != 0)
 			{

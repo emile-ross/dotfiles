@@ -1,7 +1,4 @@
 CC := gcc
-
-BUILD_BINARY := $(wildcard build)
-
 DBGCMD = $(CC) build.c -o build $(ALL_FLAGS) -Werror
 BUILD_CMD = gcc build.c -o build
 
