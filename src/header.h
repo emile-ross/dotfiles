@@ -46,6 +46,7 @@ void make_dir(const char *program_name);
 	void pre_startup(void);
 
 size_t string_size(void *buf_to_free[], bool terminate, const char *restrict format, ...);
+int free_buffers(void *buffers_to_free[]);
 void check_for_yay(void);
 void configure_fastfetch(void);
 void configure_oh_my_zsh(void);
