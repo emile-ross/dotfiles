@@ -560,7 +560,7 @@ void file_exporting(const char *program_name, const char *config_name, const cha
 	free(source_path);
 }
 
-size_t string_size(bool terminate, const char *restrict format, ...)
+size_t string_size(void *buf_to_free, bool terminate, const char *restrict format, ...)
 {
 	va_list args;
 	va_start(args, format);
