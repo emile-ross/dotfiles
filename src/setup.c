@@ -69,14 +69,14 @@ int main(int argc, char *argv[])
 						fastfetch_config_choice = get_long(NULL, 0, 2);
 		
 						if (fastfetch_config_choice == 1)
-		                		{
+						{
 							exec_cmd(12, "fastfetch");
 							wait_for_timeout(0, 2);
-		                		}
+						}
 						else if (fastfetch_config_choice == 2)
-		                		{
+						{
 							configure_fastfetch();
-		                		}
+						}
 					}
 					while (fastfetch_config_choice > INPUT_BACK_VALUE);
 					/* exits the while loop when the user types 0 */
@@ -88,9 +88,9 @@ int main(int argc, char *argv[])
 					{
 						clear();
 						printf(BOLD_S ANSI_WHITE "%s\n\n"STYLE_END, kitty_config_menu_text );
-		                		printf(BOLD_S " [1] " STYLE_END "%s\n", kitty_color_text);
-		                		printf(BOLD_S " [2] " STYLE_END "%s\n", kitty_fonts_text);
-		                		printf(BOLD_S " [0] " STYLE_END "%s\n", opt_exit_text);
+						printf(BOLD_S " [1] " STYLE_END "%s\n", kitty_color_text);
+						printf(BOLD_S " [2] " STYLE_END "%s\n", kitty_fonts_text);
+						printf(BOLD_S " [0] " STYLE_END "%s\n", opt_exit_text);
 		
 						kitty_config_choice = get_long(NULL, 0, 2);
 		
@@ -114,9 +114,9 @@ int main(int argc, char *argv[])
 						clear();
 						printf(BOLD_S ANSI_WHITE "%s\n\n"STYLE_END, fuzzel_config_menu_text);
 						printf(BOLD_S "  [1] " STYLE_END "%s\n", fuzzel_view_config_text);
-		            			printf(BOLD_S "  [2] " STYLE_END "%s\n", fuzzel_edit_config_text);
-		            			printf(BOLD_S "  [3] " STYLE_END "%s\n", fuzzel_catppuccin_text);
-		            			printf(BOLD_S "  [0] " STYLE_END "%s\n", opt_exit_text);
+						printf(BOLD_S "  [2] " STYLE_END "%s\n", fuzzel_edit_config_text);
+						printf(BOLD_S "  [3] " STYLE_END "%s\n", fuzzel_catppuccin_text);
+						printf(BOLD_S "  [0] " STYLE_END "%s\n", opt_exit_text);
 		
 						fuzzel_menu_choice = get_long("\n ", 0, 3);
 		        		
@@ -210,7 +210,7 @@ int main(int argc, char *argv[])
 					exec_cmd(24, "activate-linux-git");
 
 					printf("\nHere is something cool!\n\n");
-			    		printf("Look at the bottom right of your screen\n");
+					printf("Look at the bottom right of your screen\n");
 					printf("Use "BOLD_S"^C (Control+C)"STYLE_END" to close the program.\n");
 					printf("You can use a command like \""UDRL_S"activate-linux -t Activate\\ Arch-Linux -m Go\\ to\\ archlinux.org/donate/\\ to\\ activate"STYLE_END"\" \n");
 					printf("These flags allow you to add a custom message or title\n");

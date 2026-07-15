@@ -3,20 +3,22 @@
 void fuzzel_config_importing(void)
 {
 	char *path_template = "%s/.config/fuzzel/imported/fuzzel";
-
+	
 	size_t path_size = 1 + (size_t)snprintf(NULL, 0, path_template, home);
 	char *path = malloc(path_size);
 	snprintf(path, path_size, path_template, home);
 	
 	struct stat st;
 	char cmd[768];
-
+	
 	if (stat(path, &st) == 0 && S_ISDIR(st.st_mode)) /* check if the configs were already downloaded */
-    	{
+	{
+		free(path);
 		printf("The fuzzel themes are already installed.\n");
-    	}
-    	else 
-    	{
+	}
+	else 
+	{
+		free(path);
 		size_t cmd_size = 1 + (size_t)snprintf(NULL, 0,
 				"mkdir -p ~/.config/fuzzel/imported/ ; " 
 				"cd ~/.config/fuzzel/imported/ ; "
@@ -31,7 +33,6 @@ void fuzzel_config_importing(void)
 		system(cmd);
 	}
 
-	free(path);
 
 	long theme_type_user_opt;
 	const size_t max_len = 32;

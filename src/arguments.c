@@ -256,7 +256,7 @@ int config_fn_exec(config_name config_type, bool archive_bl, bool package_bl, fl
 	case bpyt:
 		BPYT(archive_bl, package_bl);
 		break;
-
+	
 	case btop:
 		BTOP(archive_bl, package_bl);
 		break;
@@ -308,6 +308,6 @@ int config_fn_exec(config_name config_type, bool archive_bl, bool package_bl, fl
 	default:
 		return 1;
 	}
-
+	
 	return 0;
 }

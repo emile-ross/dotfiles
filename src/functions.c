@@ -44,7 +44,7 @@ void pre_startup(void)
 	    	is_debian_bl = true;
 	    	/* sets debian as the parent distro of (debian) */
 	    	snprintf(parent, sizeof(parent),
-	    			"%s", distro);
+					"%s", distro);
 	}
 	else if (strcmp(distro, "arch") == 0)
 	{
@@ -55,7 +55,7 @@ void pre_startup(void)
 	}
 	else
 	{
-	    	error_message(UNSUPPORTED_DISTRO);
+		error_message(UNSUPPORTED_DISTRO);
 	}
 	
 	/* get home directory / username 
@@ -86,8 +86,8 @@ char *get_initial_path(void)
 	
 	if (fp == NULL) 
 	{
-	    	error_message(POPEN_FAILED);
-	    	return NULL;
+		error_message(POPEN_FAILED);
+		return NULL;
 	}
 	
 	if (fgets(initial_path, sizeof(initial_path), fp) == NULL)
@@ -207,7 +207,7 @@ bool y_n(const char yes_no)
 	}
 	else if (yes_no == 'T' || yes_no == 't')
 	{
-	    	return true;
+		return true;
 	}
 	else
 	{

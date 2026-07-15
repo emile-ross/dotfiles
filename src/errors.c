@@ -10,8 +10,8 @@ int error_message(error_code_e err_code)
 	
 	if (err_code >= 300 && err_code <= 400)
 	{
-	    	critical = true;
-	    	skip_warning = true;
+		critical = true;
+		skip_warning = true;
 	}
 	
 	error_code_e error_msg_code = (error_code_e)err_code;
