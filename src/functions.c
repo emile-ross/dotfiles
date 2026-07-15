@@ -408,6 +408,7 @@ int free_buffers(void *buffers_to_free[])
 	if (i >= UINT8MAX)
 	{
 		error_message(NON_NULL_TERMINATED);
+		return 1;
 	}
 
 	return 0;

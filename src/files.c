@@ -79,16 +79,7 @@ size_t string_size(void *buf_to_free[], bool terminate, const char *restrict for
 
 	if (return_value >= 0)
 	{
-		if (buf_to_free != NULL)
-		{
-			uint8_t i = 0;
-			do 
-			{
-				free(buf_to_free[i]);
-				i++;
-			}
-			while (buf_to_free[i] != NULL);
-		}
+		free_buffers(buf_to_free);
 		error_message(INVALID_BUFFER_SIZE);
 	}
 
