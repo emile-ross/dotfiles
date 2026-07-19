@@ -2,8 +2,8 @@
 
 int error_message(error_code_e err_code)
 {
-	char err_text_temp[128];
-	char err_solution_temp[128];
+	char err_text_temp[128] = "\0";
+	char err_solution_temp[128] = "\0";
 	
 	bool critical = false;	/* default is false */
 	bool skip_warning = false;	/* default is false */
