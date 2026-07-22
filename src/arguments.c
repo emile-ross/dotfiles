@@ -9,6 +9,8 @@ void cli_arg_missing(char *first_command, char *type_of_missing_arg, char *user_
 int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 {
 	if (num_cmd_arguments > 1) /* checks how many arguments were used */
+	const uint8_t min_args = 1;
+	uint8_t argi = min_args;
 	{
 		/* checks if the command was ran with the --noconfirm flag */
 		if (strcmp(cmd_arg_v[1], "--noconfirm") == 0) 
@@ -86,14 +88,9 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 			}
 			free(package_name_str);
 		}
-		else if (strcmp(cmd_arg_v[1], "-i") == 0 || strcmp(cmd_arg_v[1], "-I") == 0)
+		else if (strcmp(cmd_arg_v[argi], "-i") == 0)
 		{
 			/* loops through the arguments in order to pass them one at a time */
-			if (strcmp(cmd_arg_v[1], "-I") == 0)
-			{
-				error_message(FEAT_DEPRECATED);
-			}
-			
 			if (num_cmd_arguments >= n_to_arg)
 			{
 			    	for (int i = n_to_arg - 1; i < num_cmd_arguments; i++)
