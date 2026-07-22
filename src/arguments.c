@@ -1,5 +1,7 @@
 #include "header.h"
 
+#include <stdint.h>
+
 void cli_arg_missing(char *first_command, char *type_of_missing_arg, char *user_flag_t)
 {
 	/* prints an error message if there isn't a package specified in the command */
@@ -8,21 +10,21 @@ void cli_arg_missing(char *first_command, char *type_of_missing_arg, char *user_
 
 int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 {
-	if (num_cmd_arguments > 1) /* checks how many arguments were used */
 	const uint8_t min_args = 1;
 	uint8_t argi = min_args;
+	if (num_cmd_arguments > min_args) /* checks how many arguments were used */
 	{
 		/* checks if the command was ran with the --noconfirm flag */
-		if (strcmp(cmd_arg_v[1], "--noconfirm") == 0) 
+		if (strcmp(cmd_arg_v[argi], "--noconfirm") == 0) 
 		{
 			printf(BOLD_S"Proceeding with full install\n"STYLE_END);
 			full_install(true, true);
 		}
-		else if (strcmp(cmd_arg_v[1], "-p") == 0 || strcmp(cmd_arg_v[1], "-P") == 0)
+		else if (strcmp(cmd_arg_v[argi], "-p") == 0 || strcmp(cmd_arg_v[argi], "-P") == 0)
 		{
 			if (num_cmd_arguments >= n_to_arg)
 			{
-				for (int i = n_to_arg - 1; i < num_cmd_arguments; i++)
+				for (int i = n_to_arg - argi; i < num_cmd_arguments; i++)
 				{
 					install_package(parent, cmd_arg_v[i]); 
 				}
@@ -30,17 +32,18 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 			else
 			{
 				/* prints an error message if there isn't a package specified in the command */
-				cli_arg_missing(cmd_arg_v[0], "package", cmd_arg_v[1]);
+				cli_arg_missing(cmd_arg_v[0], "package", cmd_arg_v[argi]);
 				error_message(CLI_ARGS_MISSING);
 			}
 		}
-		else if (strcmp(cmd_arg_v[1], "-c") == 0)
+		else if (strcmp(cmd_arg_v[argi], "-c") == 0)
 		{
 			config_name config_to_install = detect_config_name(cmd_arg_v[2]);
 			int ret_value = config_fn_exec(config_to_install, true, false, 0.0);
 
 			const size_t package_str_length = 100;
 			char *package_name_str = malloc(package_str_length);
+
 			if (ret_value != 0)
 			{
 				while (1)
@@ -93,7 +96,7 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 			/* loops through the arguments in order to pass them one at a time */
 			if (num_cmd_arguments >= n_to_arg)
 			{
-			    	for (int i = n_to_arg - 1; i < num_cmd_arguments; i++)
+			    	for (int i = n_to_arg - argi; i < num_cmd_arguments; i++)
 			    	{
 					/* will print a short description for the package
 					 *config_description(); */
@@ -114,11 +117,11 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 			else
 			{
 			    	/* prints an error message if there isn't a package specified in the command */
-			    	cli_arg_missing(cmd_arg_v[0], "package", cmd_arg_v[1]);
+			    	cli_arg_missing(cmd_arg_v[0], "package", cmd_arg_v[argi]);
 			    	error_message(CLI_ARGS_MISSING);
 			}
 		}
-		else if (strcmp(cmd_arg_v[1], "--help") == 0)
+		else if (strcmp(cmd_arg_v[argi], "--help") == 0)
 		{
 			printf(BOLD_S"Help menu\n"STYLE_END);
 
@@ -131,7 +134,7 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 			printf("-p              [PACKAGE] \n");
 			printf("	install specified package \n");
 		}
-		else if (strcmp(cmd_arg_v[1], "-v") == 0 || strcmp(cmd_arg_v[1], "--version") == 0)
+		else if (strcmp(cmd_arg_v[argi], "-v") == 0 || strcmp(cmd_arg_v[argi], "--version") == 0)
 		{
 			float program_version = *get_version();
 			printf("Version is: "BOLD_S"%.2lf\n"STYLE_END, program_version);
@@ -140,7 +143,7 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 		{
 			/* triggers the "invalid command line argument" error
 			 * this is a critical error and it will crash the program */
-			printf(BOLD_S ANSI_RED"%s: invalid option -- '%s'\n"STYLE_END, cmd_arg_v[0], cmd_arg_v[1]);
+			printf(BOLD_S ANSI_RED"%s: invalid option -- '%s'\n"STYLE_END, cmd_arg_v[0], cmd_arg_v[argi]);
 			error_message(CLI_INVALID_FLAG);
 		}
 	}
