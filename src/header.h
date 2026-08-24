@@ -79,6 +79,9 @@ config_name detect_config_name(char *input);
 	extern const int n_to_arg;
 	extern char *description_arr[n_configs];
 
+/* compare.c */
+	bool cmp(const char *arg, const char *flag);
+
 /* command line related
 * Initialized in globals.c */
 	extern char* help_flag_arg_text;
