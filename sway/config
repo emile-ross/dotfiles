@@ -23,13 +23,13 @@ set $term kitty
 
 
 ## Your preferred application launcher
-set $menu fuzzel
+set $menu rofi -show
 
 ## Your lockscreen
 
 # set $lock swaylock
 # set $lock gtklock -c ~/.config/gtklock/style.css
-set $lock hyprlock
+set $lock swaylock -f -c 000000
 
 
 ## set keybinds for common programs
@@ -95,6 +95,7 @@ set $fileManager dolphin
     bindsym $mod+1 exec $floorp
     bindsym $mod+2 exec $firefox
     bindsym $mod+3 exec $chrome
+    bindsym $mod+T exec teams-for-linux
 
     #bindsym $mod+1 exec $obs
 
