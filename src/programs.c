@@ -383,18 +383,18 @@ void ZSHH(bool archive_bl, float fversion, bool pkginstall_bl)
 
 int install_package(const char *pkg_type_distro, const char *pkginstallname)
 {
-	if (strcmp(pkg_type_distro, "arch") == 0)
+	if (scmp(pkg_type_distro, "arch"))
 	{
 		int cmd_size = 1 + snprintf(NULL , 0, "yay -S %s", pkginstallname);
-		char cmd_arch[cmd_size];
+		char *cmd_arch = malloc((unsigned)cmd_size);
 		snprintf(cmd_arch, (size_t)cmd_size,
 				"yay -S %s", pkginstallname);
 		system(cmd_arch);
 	}
-	else if (strcmp(pkg_type_distro, "debian") == 0)
+	else if (cmp(pkg_type_distro, "debian", "ubuntu"))
 	{
 		int cmd_size = 1 + snprintf(NULL, 0, "sudo apt install %s", pkginstallname);
-		char cmd_deb[cmd_size];
+		char *cmd_deb = malloc((unsigned)cmd_size);
 		snprintf(cmd_deb, (size_t)cmd_size,
 				"sudo apt install %s", pkginstallname);
 		system(cmd_deb);
