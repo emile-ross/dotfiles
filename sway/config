@@ -17,27 +17,27 @@ set $down j
 set $up k
 set $right l
 
-## Your preferred terminal emulator
-
-set $term kitty
-
-
-## Your preferred application launcher
-set $menu rofi -show
-
-## Your lockscreen
+## lockscreen
 
 # set $lock swaylock
 # set $lock gtklock -c ~/.config/gtklock/style.css
 set $lock swaylock -f -c 000000
 
+## terminal emulator
+
+set $term kitty
+
+
+##  application launcher
+set $menu rofi -show
 
 ## set keybinds for common programs
 ### Output configuration
 
 set $floorp floorp
 set $firefox firefox
-set $chrome chromium
+set $chrome google-chrome-stable
+set $librewolf librewolf
 set $obs obs
 set $fileManager dolphin
 
