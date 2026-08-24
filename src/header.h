@@ -80,7 +80,8 @@ config_name detect_config_name(char *input);
 	extern char *description_arr[n_configs];
 
 /* compare.c */
-	bool cmp(const char *arg, const char *flag);
+	bool cmp(const char *arg, const char *s_flag, const char *l_flag);
+	bool scmp(const char *arg, const char *flag);
 
 /* command line related
 * Initialized in globals.c */

@@ -12,7 +12,6 @@ BASE_CMD = $(CC) $(SRC_FILES) $(OUT)
 FILENAMES := $(addprefix src/, $(SRC_FILES))
 SRC_FILES := $(addsuffix .c, $(FILENAMES))
 
-macos: setup
 setup:
 	$(BASE_CMD) $(DEBUG_FLAGS) $(BASE_FLAGS)
 
