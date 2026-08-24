@@ -24,11 +24,9 @@ set $right l
 set $lock swaylock -f -c 000000
 
 ## terminal emulator
-
 set $term kitty
 
-
-##  application launcher
+## application launcher
 set $menu rofi -show
 
 ## set keybinds for common programs
@@ -95,6 +93,7 @@ set $fileManager dolphin
     bindsym $mod+1 exec $floorp
     bindsym $mod+2 exec $firefox
     bindsym $mod+3 exec $chrome
+    bindsym $mod+4 exec $librewolf
     bindsym $mod+T exec teams-for-linux
 
     #bindsym $mod+1 exec $obs
@@ -102,13 +101,12 @@ set $fileManager dolphin
     # Kill focused window
     bindsym $mod+C kill
 
-    # Start your launcher
+    # start launcher
     # bindsym $mod+R exec $menu
     bindsym $mod+D exec $menu
 
     # execute the default locking program
     bindsym $alt+L exec $lock
-
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
