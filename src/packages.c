@@ -11,6 +11,15 @@ int install_package(const char *pkg_type_distro, const char *pkginstallname)
 		system(cmd_arch);
 		free(cmd_arch);
 	}
+	else if (scmp(pkg_type_distro, "fedora"))
+	{
+		int cmd_size = 1 + snprintf(NULL, 0, "sudo dnf install %s", pkginstallname);
+		char *cmd_deb = malloc((unsigned)cmd_size);
+		snprintf(cmd_deb, (unsigned)cmd_size,
+				"sudo apt install %s", pkginstallname);
+		system(cmd_deb);
+		free(cmd_deb);
+	}
 	else if (cmp(pkg_type_distro, "debian", "ubuntu"))
 	{
 		int cmd_size = 1 + snprintf(NULL, 0, "sudo apt install %s", pkginstallname);
