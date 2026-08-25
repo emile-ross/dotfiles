@@ -35,22 +35,10 @@ void block(const bool prompt)
 void pre_startup(void)
 {
 	get_os_name();
-	is_debian_bl = false;
 	is_arch_bl = false;
 	
 	if (strcmp(distro, "debian") == 0 || strcmp(distro, "ubuntu") == 0) 
 	{
-	    	is_debian_bl = true;
-	    	/* sets debian as the parent distro of (debian) */
-	    	snprintf(parent, sizeof(parent),
-					"%s", distro);
-	}
-	else if (strcmp(distro, "arch") == 0)
-	{
-	    	is_arch_bl = true;
-	    	/* sets arch as the parent distro of (arch) */
-	    	snprintf(parent, sizeof(parent),
-	    			"%s", distro);
 	}
 	else
 	{
