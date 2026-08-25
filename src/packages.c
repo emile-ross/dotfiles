@@ -1,6 +1,6 @@
 #include "header.h"
 
-int install_package(const char *pkg_type_distro, const char *pkginstallname)
+int install_package(distro_type pkg_type_distro, const char *pkginstallname)
 {
 	if (scmp(pkg_type_distro, "arch"))
 	{
