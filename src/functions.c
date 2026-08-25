@@ -1,8 +1,4 @@
 #include "header.h"
-#include <limits.h>
-
-extern char distro[128];    /* distro string */
-extern char parent[128];    /* parent distro string (Ubuntu's Parent distro is Debian) */
 
 void clear(void)
 {
@@ -150,9 +146,23 @@ int get_os_name(void)
 		else if (strncmp(t_line, "ID_LIKE=", 8) == 0) strcpy(parent, val);  /* store the value in char parent */
 	}
 
-
-	if (cmp(parent, "debian", "ubuntu") || scmp(distro, "zorin"))
+	const uint8_t max_dists = 5;
+	char *distros[max_dists] = { 0 };
+	uint8_t i = 0;
+	for (; i < strlen(parent); i++)
 	{
+		size_t len = strcspn(parent, " ");
+		parent[len] = '\0';
+		strcpy(distros[i], parent);
+		
+		*(parent) += len;
+	}
+	distros[i++] = '\0';
+
+	for (uint8_t j = 0; j <= i; j++)
+	{
+		if (cmp(distros[j], "debian", "ubuntu") || scmp(distros[j], "zorin"))
+
 	}
 
 	/* close file */
