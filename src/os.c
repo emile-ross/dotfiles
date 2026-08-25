@@ -1,5 +1,7 @@
 #include "header.h"
 
+distro_type parent_d;
+
 int get_os_name(void)
 {
 	/* open /etc/os-release */
@@ -28,22 +30,27 @@ int get_os_name(void)
 	}
 
 	const uint8_t max_dists = 5;
-	char *distros[max_dists] = { 0 };
+	char *distros[max_dists];
 	uint8_t i = 0;
 	for (; i < strlen(parent); i++)
 	{
-		size_t len = strcspn(parent, " ");
+		size_t len = strcspn(parent, " \0");
 		parent[len] = '\0';
 		strcpy(distros[i], parent);
 		
 		*(parent) += len;
 	}
-	distros[i++] = '\0';
+	distros[i++] = NULL;
 
 	for (uint8_t j = 0; j <= i; j++)
 	{
 		if (cmp(distros[j], "debian", "ubuntu") || scmp(distros[j], "zorin"))
 		{
+			distro[j] = debian_linux;
+		}
+		if (cmp(distros[j], "debian", "ubuntu") || scmp(distros[j], "zorin"))
+		{
+			distro[j] = debian_linux;
 		}
 	}
 

@@ -26,7 +26,7 @@ int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[])
 			{
 				for (int i = n_to_arg - argi; i < num_cmd_arguments; i++)
 				{
-					install_package(parent, cmd_arg_v[i]); 
+					install_package(parent_d, cmd_arg_v[i]); 
 				}
 			}
 			else
