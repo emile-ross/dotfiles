@@ -35,15 +35,6 @@ void block(const bool prompt)
 void pre_startup(void)
 {
 	get_os_name();
-	is_arch_bl = false;
-	
-	if (strcmp(distro, "debian") == 0 || strcmp(distro, "ubuntu") == 0) 
-	{
-	}
-	else
-	{
-		error_message(UNSUPPORTED_DISTRO);
-	}
 	
 	/* get home directory / username 
 	 * and then, initialize [home] to the actual home dir */
