@@ -29,7 +29,7 @@ void SWAY(bool archive_bl, bool pkginstall_bl);
 void WAYB(bool archive_bl, bool pkginstall_bl);
 void ZSHH(bool archive_bl, float fversion, bool pkginstall_bl);
 
-int install_package(const char *pkg_type_distro, const char *pkginstallname);
+int install_package(distro_type distro, const char *pkginstallname);
 void file_archiving(const char *program_config_path, const char *config_file, const char *file_extention);
 void file_exporting(const char *program_name, const char *config_name, const char *file_extention);
 void link_file(const char *source_path, const char *link_path);	/* link path is the target path */
@@ -132,7 +132,7 @@ config_name detect_config_name(char *input);
 	extern char config_path[256];
 	char *get_initial_path(void);
 	int get_os_name(void);
-	extern distro_type distro_parent;
+	extern distro_type parent_d;
 
 	extern char full_update_opt; 
 	float* get_version(void);

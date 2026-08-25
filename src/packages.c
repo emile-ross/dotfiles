@@ -1,8 +1,8 @@
 #include "header.h"
 
-int install_package(distro_type pkg_type_distro, const char *pkginstallname)
+int install_package(distro_type distro, const char *pkginstallname)
 {
-	if (pkg_type_distro == arch_linux))
+	if (distro == arch_linux))
 	{
 		int cmd_size = 1 + snprintf(NULL , 0, "yay -S %s", pkginstallname);
 		char *cmd_arch = malloc((unsigned)cmd_size);
@@ -11,7 +11,7 @@ int install_package(distro_type pkg_type_distro, const char *pkginstallname)
 		system(cmd_arch);
 		free(cmd_arch);
 	}
-	else if (pkg_type_distro == fedora_linux))
+	else if (distro == fedora_linux))
 	{
 		int cmd_size = 1 + snprintf(NULL, 0, "sudo dnf install %s", pkginstallname);
 		char *cmd_deb = malloc((unsigned)cmd_size);
@@ -20,7 +20,7 @@ int install_package(distro_type pkg_type_distro, const char *pkginstallname)
 		system(cmd_deb);
 		free(cmd_deb);
 	}
-	else if ((pkg_type_distro == debian_linux) || (pkg_type_distro == ubuntu_linux))
+	else if ((distro == debian_linux) || (distro == ubuntu_linux))
 	{
 		int cmd_size = 1 + snprintf(NULL, 0, "sudo apt install %s", pkginstallname);
 		char *cmd_deb = malloc((unsigned)cmd_size);

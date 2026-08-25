@@ -45,28 +45,28 @@ int full_update(char archive_file, float version)
 		{
 		case V_1:
 			printf("\nUpdating from %f\n", version);
-			install_package(distro_parent, "cava fuzzel kitty fastfetch waybar");
+			install_package(parent_d, "cava fuzzel kitty fastfetch waybar");
 			__attribute__ ((fallthrough));	/* do not break because we are also installing everything below */
 		case V_1_2:
 		case V_1_3:
-			install_package(distro_parent, "hyprpaper btop");
+			install_package(parent_d, "hyprpaper btop");
 			CAVA(archive_bl, install_pkg_yn);
 			__attribute__ ((fallthrough));	/* do not break because we are also installing everything below */
 		case V_1_4:
 			BTOP(archive_bl, install_pkg_yn);
 			__attribute__ ((fallthrough));	/* do not break because we are also installing everything below */
 		case V_2:
-			install_package(distro_parent, "gtklock");
+			install_package(parent_d, "gtklock");
 			KITT(archive_bl, install_pkg_yn);
 		__attribute__ ((fallthrough));	/* do not break because we are also installing everything below */
 		case V_2_1:
-			install_package(distro_parent, "sway");
+			install_package(parent_d, "sway");
 			WAYB(archive_bl, install_pkg_yn);
 			__attribute__ ((fallthrough));	/* do not break because we are also installing everything below */
 		case V_2_2:
 			SWAY(archive_bl, install_pkg_yn);
 			GTKL(archive_bl, install_pkg_yn);
-			install_package(distro_parent, "mpv swaylock");
+			install_package(parent_d, "mpv swaylock");
 			__attribute__ ((fallthrough));	/* do not break because we are also installing everything below */
 		case V_2_3:
 			NVIM(archive_bl, install_pkg_yn);
@@ -74,14 +74,14 @@ int full_update(char archive_file, float version)
 			MPVF(archive_bl, install_pkg_yn);
 			__attribute__ ((fallthrough));	/* do not break because we are also installing everything below */
 		case V_2_4:
-			install_package(distro_parent, "hyprland bpytop hyprlock");
+			install_package(parent_d, "hyprland bpytop hyprlock");
 			__attribute__ ((fallthrough));	/* do not break because we are also installing everything below */
 		case V_2_5:
 		case V_3:
 			BPYT(archive_bl, install_pkg_yn);
 			__attribute__ ((fallthrough));	/* do not break because we are also installing everything below */
 		case V_3_1:
-			install_package(distro_parent, "nvim");
+			install_package(parent_d, "nvim");
 			goto update_version_number;
 		
 		update_version_number:
