@@ -33,4 +33,7 @@
 #define n_configs (15)
 #define menu_text_size (32)
 
+#define UINT16MAX 65535
+#define INT16MAX 32768
 #define UINT8MAX 255
+#define INT8MAX 127
