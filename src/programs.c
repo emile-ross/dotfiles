@@ -32,7 +32,7 @@ void BPYT(bool archive_bl, bool pkginstall_bl)
 
 	if (pkginstall_bl)
 	{
-		install_package(parent, pkg_name); /* install bpytop package */
+		install_package(parent_d, pkg_name); /* install bpytop package */
 	}
 	/* export bpytop config */
 	make_dir(pkg_name);
@@ -46,10 +46,10 @@ void BTOP(bool archive_bl, bool pkginstall_bl)
 	if (archive_bl)
 	{
 		file_archiving(package_name, package_name, file_extention);
-    	}
-    	if (pkginstall_bl)
-    	{
-		install_package(parent, package_name); /* install btop package */
+	}
+	if (pkginstall_bl)
+	{
+		install_package(parent_d, package_name); /* install btop package */
     	}
     	/* export btop config */
 	make_dir(package_name);
@@ -72,7 +72,7 @@ void CAVA(bool archive_bl, bool pkginstall_bl)
 	
 	if (pkginstall_bl)
 	{
-	    	install_package(parent, (const char*)program_name); /* install cava package */
+	    	install_package(parent_d, (const char*)program_name); /* install cava package */
 	}
 	
 	/* export cava config */
@@ -116,7 +116,7 @@ void FAST(bool archive_bl, bool pkginstall_bl)
 
 	if (pkginstall_bl)
     	{
-    	    	install_package(parent, "fastfetch"); /* install fastfetch */
+    	    	install_package(parent_d, "fastfetch"); /* install fastfetch */
     	}
 	/* export fastfetch config */
 	file_exporting("fastfetch", "config", ".conf");
@@ -164,7 +164,7 @@ void FUZZ(bool archive_bl, bool pkginstall_bl)
 	if (pkginstall_bl)
     	{
 		/* install fuzzel package */
-		install_package(parent, "fuzzel");
+		install_package(parent_d, "fuzzel");
 	}
 	/* export fuzzel appearance */
 	file_exporting("fuzzel", "fuzzel", ".ini");
@@ -192,7 +192,7 @@ void GTKL(bool archive_bl, bool pkginstall_bl)
     	if (pkginstall_bl)
     	{
     	    	/* install gtklock package */
-    	    	install_package(parent, program_name);
+    	    	install_package(parent_d, program_name);
     	}
 	/* export gtklock config */
 	make_dir("gtklock/assets");
@@ -228,7 +228,7 @@ void HYPR(bool archive_bl, bool pkginstall_bl)
 		/* install Hyprland packages */
 		for (int i = 0; config_file[i] != NULL; i++)
 		{
-			install_package(parent, config_file[i]);
+			install_package(parent_d, config_file[i]);
 		}
     	}
 	/* export hyprland configs */
@@ -253,7 +253,7 @@ void KITT(bool archive_bl, bool pkginstall_bl)
 	{
 		/* install kitty package
 		 * the kitty terminal is most likely already installed on your system */
-		install_package(parent, name);
+		install_package(parent_d, name);
 	}
 	/* export kitty config */
 	file_exporting(name, "current-theme", ".conf");
@@ -270,7 +270,7 @@ void MPVF(bool archive_bl, bool pkginstall_bl)
 	}
 	if (pkginstall_bl)
 	{
-		install_package(parent, name);
+		install_package(parent_d, name);
 	}
 	/* export mpv config with shaders */
 	make_dir(name);	/* create directory before copying file */
@@ -293,7 +293,7 @@ void NVIM(bool archive_bl, bool pkginstall_bl)
 	{
 		/* install neovim (nvim) package 
 		 * nvim is most likely already installed  */
-		install_package(parent, "nvim lazygit");
+		install_package(parent_d, "nvim lazygit");
 	}
 	make_dir(name);
 	/* export nvim config */
@@ -312,7 +312,7 @@ void SWAY(bool archive_bl, bool pkginstall_bl)
 	if (pkginstall_bl)
 	{
 		/* install sway package -- a system update is strongly recommended */
-		install_package(parent, "wlroots swaylock sway swayidle");
+		install_package(parent_d, "wlroots swaylock sway swayidle");
 	}
 	/* export sway config */
 	file_exporting(name, "config", NULL);
@@ -332,7 +332,7 @@ void WAYB(bool archive_bl, bool pkginstall_bl)
 	}
 	if (pkginstall_bl)
 	{
-		install_package(parent, name);
+		install_package(parent_d, name);
 	}
 
 	/* export waybar config and appearance */
@@ -367,7 +367,7 @@ void ZSHH(bool archive_bl, float fversion, bool pkginstall_bl)
 	
 	if (pkginstall_bl)
 	{
-		install_package(parent, "zsh");
+		install_package(parent_d, "zsh");
 	}
 
 	const char *config_cmd_template = "cp -f %s/shell/zsh/.zshrc %s/ ";
@@ -388,9 +388,9 @@ void configure_oh_my_zsh(void)
 	 * but it's the recommended installation method */
 	system("if command -v curl >/dev/null 2>&1; then "
 			"  sh -c \"$(curl -fsSL https://raw.githubusercontent.com/romkatv/zsh4humans/v5/install)\"; "
-        		"else "
-        		"  sh -c \"$(wget -O- https://raw.githubusercontent.com/romkatv/zsh4humans/v5/install)\"; " 
-        		"fi");
+			"else "
+			"  sh -c \"$(wget -O- https://raw.githubusercontent.com/romkatv/zsh4humans/v5/install)\"; " 
+			"fi");
 	clearbuffer();
 	block(true);
 }
