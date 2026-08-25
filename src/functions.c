@@ -1,6 +1,9 @@
 #include "header.h"
 #include <limits.h>
 
+extern char distro[128];    /* distro string */
+extern char parent[128];    /* parent distro string (Ubuntu's Parent distro is Debian) */
+
 void clear(void)
 {
 	/* clears the screen */
@@ -131,6 +134,9 @@ int get_os_name(void)
 	if (!fp) error_message(RENAME_FAIL);
 	
 	char t_line[256];
+	size_t size = 128;
+	char *distro = malloc(size);
+	char *parent = malloc(size);
 
 	while (fgets(t_line, sizeof(t_line), fp)) 
 	{
@@ -144,8 +150,16 @@ int get_os_name(void)
 		else if (strncmp(t_line, "ID_LIKE=", 8) == 0) strcpy(parent, val);  /* store the value in char parent */
 	}
 
+
+	if (cmp(parent, "debian", "ubuntu") || scmp(distro, "zorin"))
+	{
+	}
+
 	/* close file */
 	fclose(fp);
+	free(distro);
+	free(parent);
+
 	return 0;
 }
 
