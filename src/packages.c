@@ -2,7 +2,7 @@
 
 int install_package(distro_type pkg_type_distro, const char *pkginstallname)
 {
-	if (scmp(pkg_type_distro, "arch"))
+	if (pkg_type_distro == arch_linux))
 	{
 		int cmd_size = 1 + snprintf(NULL , 0, "yay -S %s", pkginstallname);
 		char *cmd_arch = malloc((unsigned)cmd_size);
@@ -11,7 +11,7 @@ int install_package(distro_type pkg_type_distro, const char *pkginstallname)
 		system(cmd_arch);
 		free(cmd_arch);
 	}
-	else if (scmp(pkg_type_distro, "fedora"))
+	else if (pkg_type_distro == fedora_linux))
 	{
 		int cmd_size = 1 + snprintf(NULL, 0, "sudo dnf install %s", pkginstallname);
 		char *cmd_deb = malloc((unsigned)cmd_size);
@@ -20,7 +20,7 @@ int install_package(distro_type pkg_type_distro, const char *pkginstallname)
 		system(cmd_deb);
 		free(cmd_deb);
 	}
-	else if (cmp(pkg_type_distro, "debian", "ubuntu"))
+	else if ((pkg_type_distro == debian_linux) || (pkg_type_distro == ubuntu_linux))
 	{
 		int cmd_size = 1 + snprintf(NULL, 0, "sudo apt install %s", pkginstallname);
 		char *cmd_deb = malloc((unsigned)cmd_size);
