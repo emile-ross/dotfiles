@@ -25,8 +25,18 @@ int get_os_name(void)
 		/* remove trailing newline */
 		val[strcspn(val, "\"\n")] = '\0'; 
 		
-		if (strncmp(t_line, "ID=", 3) == 0) strcpy(distro, val);	    /* store the value in char distro */
-		else if (strncmp(t_line, "ID_LIKE=", 8) == 0) strcpy(parent, val);  /* store the value in char parent */
+		if (strncmp(t_line, "ID=", 3) == 0) strcpy(distro, val);	/* store the value in char distro */
+
+		if (strcmp(distro, "arch linux") == 0)
+		{
+			parent_d = arch_linux;
+		}
+		else if (strcmp(distro, "debian") == 0)
+		{
+			parent_d = debian_linux;
+		}
+
+		if (strncmp(t_line, "ID_LIKE=", 8) == 0) strcpy(parent, val);	/* store the value in char parent */
 	}
 
 	const uint8_t max_dists = 5;
@@ -46,11 +56,11 @@ int get_os_name(void)
 	{
 		if (cmp(distros[j], "debian", "ubuntu") || scmp(distros[j], "zorin"))
 		{
-			distro[j] = debian_linux;
+			parent_d = debian_linux;
 		}
 		if (cmp(distros[j], "debian", "ubuntu") || scmp(distros[j], "zorin"))
 		{
-			distro[j] = debian_linux;
+			parent_d = debian_linux;
 		}
 	}
 
