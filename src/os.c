@@ -27,11 +27,11 @@ int get_os_name(void)
 		
 		if (strncmp(t_line, "ID=", 3) == 0) strcpy(distro, val);	/* store the value in char distro */
 
-		if (strcmp(distro, "arch linux") == 0)
+		if (scmp(distro, "arch linux"))
 		{
 			parent_d = arch_linux;
 		}
-		else if (strcmp(distro, "debian") == 0)
+		else if (cmp(distro, "debian", "ubuntu"))
 		{
 			parent_d = debian_linux;
 		}
