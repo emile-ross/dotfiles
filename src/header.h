@@ -127,12 +127,12 @@ config_name detect_config_name(char *input);
 /* main menu */
 	extern const int max_menu_opt_n;
 	extern bool fastfetch_config_apply;
-	extern distro_type distro_parent;
 	extern char initial_path[64];
 	extern char inpath[64];
 	extern char config_path[256];
 	char *get_initial_path(void);
 	int get_os_name(void);
+	extern distro_type distro_parent;
 
 	extern char full_update_opt; 
 	float* get_version(void);
