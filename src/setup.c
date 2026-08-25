@@ -206,7 +206,7 @@ int main(int argc, char *argv[])
 				
 				if (menu_activate_linux == 1)
 				{
-					install_package("arch", "activate-linux-git");
+					install_package(parent_d, "activate-linux-git");
 					exec_cmd(24, "activate-linux-git");
 
 					printf("\nHere is something cool!\n\n");

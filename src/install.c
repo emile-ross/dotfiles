@@ -152,11 +152,11 @@ void full_install(bool archive_bl, bool full_install_bl)
 		
 		countdown(3, 1);
 		
-		if (strcmp(parent, "arch") == 0)
+		if (parent_d == arch_linux)
 		{
 			check_for_yay();
 		}
-		/* actually install the dotfiles */
+		/* proceed with the installation of the dotfiles */
 		full_config_install(archive_bl, previous_version, true);
 	}
 	else
@@ -164,11 +164,7 @@ void full_install(bool archive_bl, bool full_install_bl)
 		uint8_t install_pkg_opt = 255;
 		do
 		{
-			/* this is awful
-			* it could all be replaced by a single array with all of the text 
-			* (would be significantly faster, better, more maintainable...) 
-			*
-			* this has now been fixed by looping through an array of strings */
+			/* loop through an array of config names in order to display them */
 			for (int i = 1; i < n_configs; i++)
 			{
 				printf("\n[%d] Install %s ", i, config_names[i]);
