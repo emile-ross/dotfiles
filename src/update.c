@@ -1,12 +1,14 @@
 #include "header.h"
 
-int full_update(char archive_file, float version)
+int full_update(char archive_file, float version, char *os_str[])
 {
+	/*
 	if (is_arch_bl)
 	{
-		/* checks if yay is installed only if the distro is arch */
+		checks if yay is installed only if the distro is arch
 		check_for_yay();
 	}
+	*/
 	
 	int VAWSM = (int)(version * 100);
 	bool install_pkg_yn = false;

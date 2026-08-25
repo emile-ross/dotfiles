@@ -129,8 +129,6 @@ config_name detect_config_name(char *input);
 	extern bool fastfetch_config_apply;
 	extern char distro[128];    /* distro string */
 	extern char parent[128];    /* parent distro string (Ubuntu's Parent distro is Debian) */
-	extern bool is_debian_bl;
-	extern bool is_arch_bl;
 	extern char initial_path[64];
 	extern char inpath[64];
 	extern char config_path[256];
