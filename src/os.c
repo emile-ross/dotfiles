@@ -54,11 +54,11 @@ int get_os_name(void)
 
 	for (uint8_t j = 0; j <= i; j++)
 	{
-		if (cmp(distros[j], "debian", "ubuntu") || scmp(distros[j], "zorin"))
+		if (scmp(distros[j], "arch linux"))
 		{
-			parent_d = debian_linux;
+			parent_d = arch_linux;
 		}
-		if (cmp(distros[j], "debian", "ubuntu") || scmp(distros[j], "zorin"))
+		if (cmp(distros[j], "arch linux", "ubuntu") || scmp(distros[j], "zorin"))
 		{
 			parent_d = debian_linux;
 		}
