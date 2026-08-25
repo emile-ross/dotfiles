@@ -84,3 +84,13 @@ typedef enum
 	teal,
 	yellow,
 } fuzzel_colour_e;
+
+typedef enum
+{
+	arch_linux = 1,
+	artix_linux,
+	debian_linux,
+	fedora_linux,
+	ubuntu_linux,
+	zorin_linux,
+} distro_type;

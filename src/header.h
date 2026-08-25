@@ -127,8 +127,7 @@ config_name detect_config_name(char *input);
 /* main menu */
 	extern const int max_menu_opt_n;
 	extern bool fastfetch_config_apply;
-	extern char distro[128];    /* distro string */
-	extern char parent[128];    /* parent distro string (Ubuntu's Parent distro is Debian) */
+	extern distro_type distro_parent;
 	extern char initial_path[64];
 	extern char inpath[64];
 	extern char config_path[256];
