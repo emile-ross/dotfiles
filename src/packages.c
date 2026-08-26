@@ -1,6 +1,5 @@
 #include "header.h"
 
-void pkg_cmd(const char *cmd_format, char *pkg);
 
 int install_package(distro_type distro, const char *pkginstallname)
 {
@@ -25,7 +24,7 @@ int install_package(distro_type distro, const char *pkginstallname)
 	return 0;
 }
 
-void pkg_cmd(const char *cmd_format, char *pkg)
+void pkg_cmd(const char *cmd_format, const char *pkg)
 {
 	int cmd_size = 1 + snprintf(NULL, 0, cmd_format, pkg);
 
