@@ -25,12 +25,12 @@ int get_os_name(void)
 		/* remove trailing newline */
 		val[strcspn(val, "\"\n")] = '\0'; 
 
-		Bool noDist = true;
+		bool noDist = true;
 		
 		if (strncmp(t_line, "ID=", 3) == 0)
 		{
 			strcpy(distro, val);	/* store the value in char distro */
-			noDist = False;
+			noDist = false;
 		}
 
 
@@ -46,7 +46,7 @@ int get_os_name(void)
 		if (strncmp(t_line, "ID_LIKE=", 8) == 0)
 		{
 			strcpy(parent, val);	/* store the value in char parent */
-			noDist = False;
+			noDist = false;
 		}
 	}
 
