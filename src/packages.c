@@ -4,10 +4,11 @@ int install_package(distro_type distro, const char *pkginstallname)
 {
 	if (distro == arch_linux)
 	{
-		int cmd_size = 1 + snprintf(NULL , 0, "yay -S %s", pkginstallname);
+		char *yay_cmd = "yay -S %s";
+		int cmd_size = 1 + snprintf(NULL , 0, yay_cmd, pkginstallname);
 		char *cmd_arch = malloc((unsigned)cmd_size);
 		snprintf(cmd_arch, (size_t)cmd_size,
-				"yay -S %s", pkginstallname);
+				yay_cmd, pkginstallname);
 		system(cmd_arch);
 		free(cmd_arch);
 	}
@@ -23,10 +24,11 @@ int install_package(distro_type distro, const char *pkginstallname)
 	}
 	else if ((distro == debian_linux) || (distro == ubuntu_linux))
 	{
-		int cmd_size = 1 + snprintf(NULL, 0, "sudo apt install %s", pkginstallname);
+		char *apt_cmd = "sudo apt install %s";
+		int cmd_size = 1 + snprintf(NULL, 0, apt_cmd, pkginstallname);
 		char *cmd_deb = malloc((unsigned)cmd_size);
 		snprintf(cmd_deb, (unsigned)cmd_size,
-				"sudo apt install %s", pkginstallname);
+				apt_cmd, pkginstallname);
 		system(cmd_deb);
 		free(cmd_deb);
 	}
