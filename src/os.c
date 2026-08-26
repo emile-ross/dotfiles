@@ -48,6 +48,14 @@ int get_os_name(void)
 			strcpy(parent, val);	/* store the value in char parent */
 			noDist = false;
 		}
+
+		if (noDist)
+		{
+			fprintf(stderr, "failed to get the distro name in /etc/os-release\n");
+			free(parent);
+			free(distro);
+			exit(1);
+		}
 	}
 
 	const uint8_t max_dists = 5;

@@ -103,8 +103,6 @@ char *config_names[n_configs] =
 	
 	/* Distribution global variable
 	* it is used when installing packages with the right package manager */
-	char distro[128] = "";
-	char parent[128] = "";
 	
 	bool is_debian_bl;
 	bool is_arch_bl;
