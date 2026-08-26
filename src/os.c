@@ -52,11 +52,13 @@ int get_os_name(void)
 		if (noDist)
 		{
 			fprintf(stderr, "failed to get the distro name in /etc/os-release\n");
+			fclose(fp);
 			free(parent);
 			free(distro);
 			exit(1);
 		}
 	}
+	fclose(fp);
 
 	const uint8_t max_dists = 5;
 	char *distros[max_dists];
@@ -84,7 +86,6 @@ int get_os_name(void)
 	}
 
 	/* close file */
-	fclose(fp);
 	free(distro);
 	free(parent);
 
