@@ -13,10 +13,11 @@ int install_package(distro_type distro, const char *pkginstallname)
 	}
 	else if (distro == fedora_linux)
 	{
-		int cmd_size = 1 + snprintf(NULL, 0, "sudo dnf install %s", pkginstallname);
+		char *dnf_cmd = "sudo dnf install %s";
+		int cmd_size = 1 + snprintf(NULL, 0, dnf_cmd, pkginstallname);
 		char *cmd_deb = malloc((unsigned)cmd_size);
 		snprintf(cmd_deb, (unsigned)cmd_size,
-				"sudo dnf install %s", pkginstallname);
+				dnf_cmd, pkginstallname);
 		system(cmd_deb);
 		free(cmd_deb);
 	}
