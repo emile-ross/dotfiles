@@ -16,7 +16,7 @@ int install_package(distro_type distro, const char *pkginstallname)
 		int cmd_size = 1 + snprintf(NULL, 0, "sudo dnf install %s", pkginstallname);
 		char *cmd_deb = malloc((unsigned)cmd_size);
 		snprintf(cmd_deb, (unsigned)cmd_size,
-				"sudo apt install %s", pkginstallname);
+				"sudo dnf install %s", pkginstallname);
 		system(cmd_deb);
 		free(cmd_deb);
 	}
