@@ -1,36 +1,20 @@
 #include "header.h"
 
+void pkg_cmd(const char *cmd_format, char *pkg);
+
 int install_package(distro_type distro, const char *pkginstallname)
 {
 	if (distro == arch_linux)
 	{
-		char *yay_cmd = "yay -S %s";
-		int cmd_size = 1 + snprintf(NULL , 0, yay_cmd, pkginstallname);
-		char *cmd_arch = malloc((unsigned)cmd_size);
-		snprintf(cmd_arch, (size_t)cmd_size,
-				yay_cmd, pkginstallname);
-		system(cmd_arch);
-		free(cmd_arch);
+		pkg_cmd("yay -S %s", pkginstallname);
 	}
 	else if (distro == fedora_linux)
 	{
-		char *dnf_cmd = "sudo dnf install %s";
-		int cmd_size = 1 + snprintf(NULL, 0, dnf_cmd, pkginstallname);
-		char *cmd_deb = malloc((unsigned)cmd_size);
-		snprintf(cmd_deb, (unsigned)cmd_size,
-				dnf_cmd, pkginstallname);
-		system(cmd_deb);
-		free(cmd_deb);
+		pkg_cmd("sudo dnf install %s", pkginstallname);
 	}
 	else if ((distro == debian_linux) || (distro == ubuntu_linux))
 	{
-		char *apt_cmd = "sudo apt install %s";
-		int cmd_size = 1 + snprintf(NULL, 0, apt_cmd, pkginstallname);
-		char *cmd_deb = malloc((unsigned)cmd_size);
-		snprintf(cmd_deb, (unsigned)cmd_size,
-				apt_cmd, pkginstallname);
-		system(cmd_deb);
-		free(cmd_deb);
+		pkg_cmd("sudo apt install %s", pkginstallname);
 	}
 	else 
 	{
