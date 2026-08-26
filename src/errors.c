@@ -116,6 +116,11 @@ int error_message(error_code_e err_code)
 		snprintf(err_solution_temp, sizeof(err_solution_temp), "Try installing the dotfiles in order to fix the unknown version");
 		break;
 	
+	case BUFFER_SIZE_FAIL:
+		snprintf(err_text_temp, sizeof(err_text_temp), "Buffer write fail");
+		snprintf(err_solution_temp, sizeof(err_solution_temp), "snprintf() call failed because the string was truncated");
+		break;
+
 	case INVALID_BUFFER_SIZE:
 		snprintf(err_text_temp, sizeof(err_text_temp), "Invalid buffer size");
 		snprintf(err_solution_temp, sizeof(err_solution_temp), "the string size was evaluated to be 0 or less by snprintf()");
