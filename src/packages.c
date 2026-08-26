@@ -44,9 +44,15 @@ int install_package(distro_type distro, const char *pkginstallname)
 void pkg_cmd(const char *cmd_format, char *pkg)
 {
 	int cmd_size = 1 + snprintf(NULL, 0, cmd_format, pkg);
+
 	char *cmd = malloc((unsigned)cmd_size);
-	snprintf(cmd, (unsigned)cmd_size,
-			cmd_format, pkg);
+	int ret = snprintf(cmd, (unsigned)cmd_size, cmd_format, pkg);
+
+	if (ret > cmd_size)
+	{
+		error_message(BUFFER_SIZE_FAIL);
+	}
+
 	system(cmd);
 	free(cmd);
 }
