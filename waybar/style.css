@@ -2,7 +2,7 @@
   min-height: 0;
   min-width: 0;
   font-family: Lexend, "JetBrainsMono NFP";
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
 }
 
@@ -36,7 +36,7 @@ window#waybar {
 
 #workspaces button.urgent {
   background-color: #1e1e2e;
-  color: #f38ba8;
+  color: #ff8ba8;
 }
 
 #clock,
@@ -79,7 +79,7 @@ window#waybar.empty #window {
 }
 
 #memory {
-  color: #cba6f7;
+  color: #b6f5c6;
 }
 
 #clock {
