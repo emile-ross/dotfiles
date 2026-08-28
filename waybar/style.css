@@ -66,15 +66,15 @@ window#waybar
 #custom-updates:hover,
 #temperature:hover 
 {
-    background-color: #575757;
+	background-color: #575757;
 }
 #workspaces button.active 
 {
-    background-color: #50fa7b;
-    color: #282a36;
+	background-color: #50fa7b;
+	color: #282a36;
 }
 #workspaces button.focused 
 {
-    background-color: #8be9fd;
-    color: #282a36;
+	background-color: #8be9fd;
+	color: #282a36;
 }
