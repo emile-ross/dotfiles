@@ -308,6 +308,12 @@ void ROFI(bool archive_bl, bool pkginstall_bl)
 	{
 		file_archiving(package_name, package_name, file_extention);
 	}
+	if (pkginstall_bl)
+	{
+		install_package(parent_d, package_name); /* install rofi package */
+	}
+    	/* export btop config */
+	make_dir(package_name);
 	file_exporting(package_name, package_name, file_extention);
 }
 
