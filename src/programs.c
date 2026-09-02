@@ -300,6 +300,17 @@ void NVIM(bool archive_bl, bool pkginstall_bl)
 	file_exporting(name, "init", ".lua");
 }
 
+void ROFI(bool archive_bl, bool pkginstall_bl)
+{
+	const char *package_name = "rofi";
+	const char *file_extention = ".rasi";
+	if (archive_bl)
+	{
+		file_archiving(package_name, package_name, file_extention);
+	}
+	file_exporting(package_name, package_name, file_extention);
+}
+
 void SWAY(bool archive_bl, bool pkginstall_bl)
 {
 	/* sway window manager doesn't work without wlroots */
