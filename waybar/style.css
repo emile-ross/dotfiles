@@ -49,11 +49,11 @@ window#waybar {
 #tray,
 #memory,
 #window {
-  padding: 0.3rem 0.6rem;
+  padding: 0.3rem 0.7rem;
   margin: 0.4rem 0.25rem;
-  border-radius: 6px;
-  /* background-color: #181825; */
-  background-color: #1e1e2e;
+  border-radius: 7px;
+  /* background-color: #1e1e2e; */
+  background-color: rgba(30, 30, 46, 0.45);
 }
 
 #custom-sep {
