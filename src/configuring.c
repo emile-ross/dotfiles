@@ -50,10 +50,10 @@ void fuzzel_config_importing(void)
 	clear();
 	printf(BOLD_S"Choose your fuzzel theme type\n"STYLE_END);
 	
-	printf(BOLD_S"  [1]"STYLE_END" catppuccin-latte (light mode)\n");
-	printf(BOLD_S"  [2]"STYLE_END" catppuccin-frappe (grey)\n");
-	printf(BOLD_S"  [3]"STYLE_END" catppuccin-macchiato (dark)\n");
-	printf(BOLD_S"  [4]"STYLE_END" catppuccin-mocha (very dark)\n");
+	printf(BOLD_S"  [%d]"STYLE_END" catppuccin-latte (light mode)\n", latte);
+	printf(BOLD_S"  [%d]"STYLE_END" catppuccin-frappe (grey)\n", frappe);
+	printf(BOLD_S"  [%d]"STYLE_END" catppuccin-macchiato (dark)\n", macchiato);
+	printf(BOLD_S"  [%d]"STYLE_END" catppuccin-mocha (very dark)\n", mocha);
 	
 	theme_type_user_opt = (colourscheme)get_long(" ", 1, 4);
 	
