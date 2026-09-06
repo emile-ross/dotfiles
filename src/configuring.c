@@ -1,5 +1,14 @@
 #include "header.h"
 
+typedef enum
+{
+	latte = 1,
+	frappe = 2,
+	macchiato = 3,
+	mocha = 4
+} colourscheme;
+
+
 void fuzzel_config_importing(void)
 {
 	char *path_template = "%s/.config/fuzzel/imported/fuzzel";
@@ -19,7 +28,7 @@ void fuzzel_config_importing(void)
 	else 
 	{
 		free(path);
-		size_t cmd_size = 1 + (size_t)snprintf(NULL, 0,
+		size_t cmd_size = 1 + (unsigned)snprintf(NULL, 0,
 				"mkdir -p ~/.config/fuzzel/imported/ ; " 
 				"cd ~/.config/fuzzel/imported/ ; "
 				"git clone https://github.com/catppuccin/fuzzel.git ; "
