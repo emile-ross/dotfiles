@@ -356,6 +356,9 @@ void WAYB(bool archive_bl, bool pkginstall_bl)
 	file_exporting(name, "style", ".css");
 	file_exporting(name, "config", ".jsonc");
 
+	file_exporting(name, "old-style", ".css");
+	file_exporting(name, "old-config", ".jsonc");
+
 	make_dir(name);
 }
 
