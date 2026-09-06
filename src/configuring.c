@@ -43,7 +43,7 @@ void fuzzel_config_importing(void)
 	}
 
 
-	long theme_type_user_opt;
+	colourscheme theme_type_user_opt;
 	const size_t max_len = 32;
 	char* theme_type_text = malloc(max_len);
 	
@@ -55,20 +55,20 @@ void fuzzel_config_importing(void)
 	printf(BOLD_S"  [3]"STYLE_END" catppuccin-macchiato (dark)\n");
 	printf(BOLD_S"  [4]"STYLE_END" catppuccin-mocha (very dark)\n");
 	
-	theme_type_user_opt = get_long(" ", 1, 4);
+	theme_type_user_opt = (colourscheme)get_long(" ", 1, 4);
 	
 	switch(theme_type_user_opt)
 	{
-	case 1:
+	case latte:
 		strncpy(theme_type_text, "catppuccin-latte", max_len);
 		break;
-	case 2:
+	case frappe:
 		strncpy(theme_type_text, "catppuccin-frappe", max_len);
 		break;
-	case 3:
+	case macchiato:
 		strncpy(theme_type_text, "catppuccin-macchiato", max_len);
 		break;
-	case 4:
+	case mocha:
 		strncpy(theme_type_text, "catppuccin-mocha", max_len);
 		break;
 	default:
