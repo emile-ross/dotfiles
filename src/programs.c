@@ -431,14 +431,14 @@ void file_archiving(const char *program_config_path, const char *config_file, co
 	/* calculate the size of all strings */
 	int program_path_size = 1 + snprintf(NULL, 0, program_config_path_template, config_path, program_config_path);
 
-	char *program_path = malloc((size_t)program_path_size);
+	char *program_path = malloc((unsigned)program_path_size);
 	if (!program_path) return;
-	snprintf(program_path, (size_t)program_path_size, program_config_path_template, config_path, program_config_path);
+	snprintf(program_path, (unsigned)program_path_size, program_config_path_template, config_path, program_config_path);
 
 	int file_suffix_size = 1 + snprintf(NULL, 0, archiving_file_suffix_template, pver);
-	char *file_suffix = malloc((size_t)file_suffix_size); /* allocate memory to the file_suffix */
+	char *file_suffix = malloc((unsigned)file_suffix_size); /* allocate memory to the file_suffix */
 	if (!file_suffix) return; /* exit if the malloc call fails */
-	snprintf(file_suffix, (size_t)file_suffix_size, archiving_file_suffix_template, pver);
+	snprintf(file_suffix, (unsigned)file_suffix_size, archiving_file_suffix_template, pver);
 
 	/* calculate the config_file size */
 	int config_file_size = 1 + snprintf(NULL, 0, "%s", config_file);
