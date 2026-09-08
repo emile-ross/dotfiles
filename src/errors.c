@@ -102,7 +102,7 @@ int error_message(error_code_e err_code)
 		/* for hyprland.conf (when looking for version # ) */
 		snprintf(err_text_temp, sizeof(err_text_temp), "No such file or directory");
 		/* also sway and .zshrc */
-		snprintf(err_solution_temp, sizeof(err_solution_temp), "This could display if you haven't installed the hyprland config");
+		snprintf(err_solution_temp, sizeof(err_solution_temp), "This could display if you haven't installed the hyprland config, the sway config or the zshrc");
 		break;
 	
 	case CMD_EXEC_FAIL:

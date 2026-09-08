@@ -10,10 +10,10 @@ int get_os_name(void)
 	/* fallback to /usr/lib if /etc/os-release fails */
 	if (!fp) fp = fopen("/usr/lib/os-release", "r"); 
 	/* error checking */
-	if (!fp) error_message(RENAME_FAIL);
+	if (fp == NULL) error_message(FILE_OS_RELEASE_FAIL);
 	
-	char t_line[256];
-	size_t size = 128;
+	char t_line[320];
+	size_t size = 256;
 	char *distro = malloc(size);
 	char *parent = malloc(size);
 
@@ -32,11 +32,23 @@ int get_os_name(void)
 			strcpy(distro, val);	/* store the value in char distro */
 			DistFound = true;
 		}
+		else
+		{
+			if (verbose)
+				printf("\'ID=\' not found in comparaison\n");
+		}
 
+		
+		if (verbose)
+		{
+			printf("line in config : %s\ndistro: %s", val, distro);
+		}
 
 		if (cmp(distro, "arch linux", "arch"))
 		{
 			parent_d = arch_linux;
+			if (verbose)
+				printf("Distro is arch linux");
 		}
 		else if (cmp(distro, "debian", "ubuntu"))
 		{
