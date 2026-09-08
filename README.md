@@ -55,13 +55,15 @@ When doing a full installation, you are installing all of the following programs
 - **hyprland**
     - with hypridle
 - sway
-    - with swaybar confguration
+    - with swaybg config
 - **waybar**
 - btop
 - bpytop 
 - cava
 - fastfetch
 - fuzzel
+- rofi
+    - with colour schemes
 - gtklock
     - custom lockscreen background
 - kitty
