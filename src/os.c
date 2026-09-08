@@ -25,16 +25,16 @@ int get_os_name(void)
 		/* remove trailing newline */
 		val[strcspn(val, "\"\n")] = '\0'; 
 
-		bool noDist = true;
+		bool DistFound = false;
 		
 		if (strncmp(t_line, "ID=", 3) == 0)
 		{
 			strcpy(distro, val);	/* store the value in char distro */
-			noDist = false;
+			DistFound = true;
 		}
 
 
-		if (scmp(distro, "arch linux"))
+		if (cmp(distro, "arch linux", "arch"))
 		{
 			parent_d = arch_linux;
 		}
@@ -46,10 +46,10 @@ int get_os_name(void)
 		if (strncmp(t_line, "ID_LIKE=", 8) == 0)
 		{
 			strcpy(parent, val);	/* store the value in char parent */
-			noDist = false;
+			DistFound = true;
 		}
 
-		if (noDist)
+		if (!DistFound)
 		{
 			fprintf(stderr, "failed to get the distro name in /etc/os-release\n");
 			fclose(fp);
