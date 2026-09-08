@@ -94,6 +94,10 @@ int error_message(error_code_e err_code)
 		critical = true;
 		break;
 	
+	case FILE_OS_RELEASE_FAIL:
+		snprintf(err_text_temp, sizeof(err_text_temp), "Failed to open /etc/os-release file (for getting distro name)"); 
+		break;
+
 	case NO_SUCH_FILE_OR_DIR:
 		/* for hyprland.conf (when looking for version # ) */
 		snprintf(err_text_temp, sizeof(err_text_temp), "No such file or directory");
