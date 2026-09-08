@@ -49,6 +49,11 @@ int get_os_name(void)
 			DistFound = true;
 		}
 
+		if (cmp(parent, "debian", "ubuntu"))
+		{
+			parent_d = debian_linux;
+		}
+
 		if (!DistFound)
 		{
 			fprintf(stderr, "failed to get the distro name in /etc/os-release\n");
