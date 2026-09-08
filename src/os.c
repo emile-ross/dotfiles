@@ -41,18 +41,20 @@ int get_os_name(void)
 		
 		if (verbose)
 		{
-			printf("line in config : %s\ndistro: %s", val, distro);
+			printf("line in config : %s\ndistro: %s\n", val, distro);
 		}
 
 		if (cmp(distro, "arch linux", "arch"))
 		{
 			parent_d = arch_linux;
 			if (verbose)
-				printf("Distro is arch linux");
+				printf("Distro is arch linux\n");
+			break;
 		}
 		else if (cmp(distro, "debian", "ubuntu"))
 		{
 			parent_d = debian_linux;
+			break;
 		}
 
 		if (strncmp(t_line, "ID_LIKE=", 8) == 0)
@@ -61,10 +63,6 @@ int get_os_name(void)
 			DistFound = true;
 		}
 
-		if (cmp(parent, "debian", "ubuntu"))
-		{
-			parent_d = debian_linux;
-		}
 
 		if (!DistFound)
 		{
