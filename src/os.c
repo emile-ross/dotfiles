@@ -17,13 +17,27 @@ int get_os_name(void)
 	const uint8_t max_dists = 5;
 	char *distros[max_dists];
 	uint8_t i = 0;
-	for (; i < strlen(parent); i++)
+	
+	while (*parent != '\0' && i < max_dists)
 	{
-		size_t len = strcspn(parent, " \0");
-		parent[len] = '\0';
-		strcpy(distros[i], parent);
+		while (*parent == ' ')
+			parent++;
 		
-		*(parent) += len;
+		if (*parent == '\0')
+			break;
+		
+		size_t len = strcspn(parent, " ");
+		parent[len] = '\0';	/* terminate string*/
+
+		distros[i] = strdup(parent);	/* duplicate string & allocate memory */
+
+		if (distros[i] == NULL)
+		{
+			error_message(MALLOC_FAIL);
+		}
+
+		i++;
+		parent += len + 1;
 	}
 
 	distros[i++] = NULL;
@@ -74,7 +88,7 @@ char *get_distro_name(char *output_distro, size_t output_len, const char *restri
 		{	
 			/* store the value in char *output_distro */
 			int ret = 1 + snprintf(distro, output_len, "%s", val);
-			if (ret >= output_len)
+			if (ret >= (signed)output_len)
 			{
 				/* not using realloc() because the possible copy 
 				 * operation could be useless if the kernel can't extend our buffer */
