@@ -95,4 +95,5 @@ typedef enum
 	fedora_linux,
 	ubuntu_linux,
 	zorin_linux,
+	unknown_distro
 } distro_type;

@@ -48,7 +48,7 @@ int get_os_name(void)
 }
 
 
-char *get_distro_name(char *output_distro, const char *restrict tag_lookup)
+char *get_distro_name(char *output_distro, size_t output_len, const char *restrict tag_lookup)
 {
 	/* open /etc/os-release */
 	FILE *fp = fopen("/etc/os-release", "r");
@@ -71,12 +71,23 @@ char *get_distro_name(char *output_distro, const char *restrict tag_lookup)
 		 * if it matches, this stores the remainder of the line into the
 		 * buffer '' */
 		if (strncmp(t_line, tag_lookup, tag_length) == 0)
-		{
-			strncpy(distro, val);	/* store the value in char distro */
-			if (verbose)
+		{	
+			/* store the value in char *output_distro */
+			int ret = 1 + snprintf(distro, output_len, "%s", val);
+			if (ret >= output_len)
+			{
+				/* not using realloc() because the possible copy 
+				 * operation could be useless if the kernel can't extend our buffer */
+				free(output_distro);
+				output_len = (1 + strlen(val));
+				output_distro = malloc();
+				snprintf(distro, output_len, "%s", val);
+				return distro;
+			}
 		}
 	}
 	fclose(fp);
+	return NULL;
 }
 
 distro_type validate_distro_name(const char *restrict distro)
@@ -93,5 +104,9 @@ distro_type validate_distro_name(const char *restrict distro)
 	else if (cmp(distro, "debian", "ubuntu"))
 	{
 		return debian_linux;
+	}
+	else
+	{
+		return unknown_distro;
 	}
 }
