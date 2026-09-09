@@ -12,69 +12,26 @@ int get_os_name(void)
 	/* error checking */
 	if (fp == NULL) error_message(FILE_OS_RELEASE_FAIL);
 	
-	char t_line[320];
 	size_t size = 256;
 	char *distro = malloc(size);
 	char *parent = NULL;
 
-	while (fgets(t_line, sizeof(t_line), fp)) 
+	if (cmp(distro, "arch linux", "arch"))
 	{
+		parent_d = arch_linux;
+		if (verbose)
+			printf("Distro is arch linux\n");
+	}
+	else if (scmp(distro, "fedora"))
+	{
+		/* distro found */
+		parent_d = fedora_linux;
+	}
+	else if (cmp(distro, "debian", "ubuntu"))
+	{
+		parent_d = debian_linux;
+	}
 
-
-		if (cmp(distro, "arch linux", "arch"))
-		{
-			parent_d = arch_linux;
-			if (verbose)
-				printf("Distro is arch linux\n");
-			break;
-		}
-		else if (scmp(distro, "fedora"))
-		{
-			/* distro found */
-			parent_d = fedora_linux;
-			break;
-		}
-		else if (cmp(distro, "debian", "ubuntu"))
-		{
-			parent_d = debian_linux;
-			break;
-		}
-		else
-		{
-			do {
-				if (strncmp(t_line, "ID_LIKE=", 8) == 0)
-				{
-					if (parent != NULL)
-						fprintf(stderr, "warning: reallocating parent distro buffer\n");
-					parent = malloc(size);
-					if (parent == NULL)
-						error_message(MALLOC_FAIL);
-
-					strcpy(parent, val);	/* store the value in char parent */
-				}
-				else
-					break;
-
-				if (cmp(parent, "debian", "ubuntu"))
-				{
-					parent_d = debian_linux;
-					break;
-				}
-			} while (0);
-		}
-
-
-		/*
-		if (!DistFound)
-		{
-			fprintf(stderr, "failed to get the distro name in /etc/os-release\n");
-			fclose(fp);
-			if (parent != NULL)
-				free(parent);
-			free(distro);
-			exit(1);
-		}
-		*/
 	}
 	fclose(fp);
 
