@@ -24,13 +24,12 @@ int get_os_name(void)
 
 		/* remove trailing newline */
 		val[strcspn(val, "\"\n")] = '\0'; 
-
-		bool DistFound = false;
 		
 		if (strncmp(t_line, "ID=", 3) == 0)
 		{
 			strcpy(distro, val);	/* store the value in char distro */
-			DistFound = true;
+			if (verbose)
+				printf("line in config : %s\ndistro: %s\n", val, distro);
 		}
 		else
 		{
@@ -38,17 +37,18 @@ int get_os_name(void)
 				printf("\'ID=\' not found in comparaison\n");
 		}
 
-		
-		if (verbose)
-		{
-			printf("line in config : %s\ndistro: %s\n", val, distro);
-		}
 
 		if (cmp(distro, "arch linux", "arch"))
 		{
 			parent_d = arch_linux;
 			if (verbose)
 				printf("Distro is arch linux\n");
+			break;
+		}
+		else if (scmp(distro, "fedora"))
+		{
+			/* distro found */
+			parent_d = fedora_linux;
 			break;
 		}
 		else if (cmp(distro, "debian", "ubuntu"))
@@ -59,15 +59,15 @@ int get_os_name(void)
 		else
 		{
 			do {
-				parent = malloc(size);
-				if (parent == NULL)
-				{
-					error_message(MALLOC_FAIL);
-				}
 				if (strncmp(t_line, "ID_LIKE=", 8) == 0)
 				{
+					if (parent != NULL)
+						fprintf(stderr, "warning: reallocating parent distro buffer\n");
+					parent = malloc(size);
+					if (parent == NULL)
+						error_message(MALLOC_FAIL);
+
 					strcpy(parent, val);	/* store the value in char parent */
-					DistFound = true;
 				}
 				else
 					break;
@@ -81,14 +81,17 @@ int get_os_name(void)
 		}
 
 
+		/*
 		if (!DistFound)
 		{
 			fprintf(stderr, "failed to get the distro name in /etc/os-release\n");
 			fclose(fp);
-			free(parent);
+			if (parent != NULL)
+				free(parent);
 			free(distro);
 			exit(1);
 		}
+		*/
 	}
 	fclose(fp);
 
