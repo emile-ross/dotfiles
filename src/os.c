@@ -15,7 +15,7 @@ int get_os_name(void)
 	char t_line[320];
 	size_t size = 256;
 	char *distro = malloc(size);
-	char *parent = malloc(size);
+	char *parent = NULL;
 
 	while (fgets(t_line, sizeof(t_line), fp)) 
 	{
@@ -56,11 +56,28 @@ int get_os_name(void)
 			parent_d = debian_linux;
 			break;
 		}
-
-		if (strncmp(t_line, "ID_LIKE=", 8) == 0)
+		else
 		{
-			strcpy(parent, val);	/* store the value in char parent */
-			DistFound = true;
+			do {
+				parent = malloc(size);
+				if (parent == NULL)
+				{
+					error_message(MALLOC_FAIL);
+				}
+				if (strncmp(t_line, "ID_LIKE=", 8) == 0)
+				{
+					strcpy(parent, val);	/* store the value in char parent */
+					DistFound = true;
+				}
+				else
+					break;
+
+				if (cmp(parent, "debian", "ubuntu"))
+				{
+					parent_d = debian_linux;
+					break;
+				}
+			} while (0);
 		}
 
 
