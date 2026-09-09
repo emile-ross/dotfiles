@@ -3,6 +3,7 @@
 distro_type parent_d;
 
 distro_type validate_distro_name(const char *restrict distro);
+bool table_matching(const char *restrict str, const char *restrict distros[]);
 
 int get_os_name(void)
 {
@@ -128,11 +129,24 @@ distro_type validate_distro_name(const char *restrict distro)
 	}
 }
 
-bool table_matching(const char *restrict distros[])
+bool table_matching(const char *restrict str, const char *restrict distros[])
 {
+	/* could provide a small performance boost when the string gets
+	 * skipped for it's length rather than it's contents */
+	size_t str_size = strlen(str);
+
 	uint8_t i = 0;
 	while (distros[i] != NULL)
 	{
+		size_t len = strlen(distros[i]);
+		if (str_size >= len)
+		{
+			if (strncmp(str, distros[i], len) == 0)
+			{
+				return true;
+			}
+		}
+		i++;
 	}
-	return true;
+	return false;
 }
