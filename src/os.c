@@ -7,9 +7,8 @@ distro_type validate_distro_name(const char *restrict distro);
 int get_os_name(void)
 {
 	size_t size = 256;
-	char *distro = malloc(size);
+	char *distro = calloc(size, sizeof(char));
 	char *parent = NULL;
-
 
 	/* compare the distro name agaisnt known distros or parents */
 	parent_d = validate_distro_name(distro);
@@ -87,16 +86,16 @@ char *get_distro_name(char *output_distro, size_t output_len, const char *restri
 		if (strncmp(t_line, tag_lookup, tag_length) == 0)
 		{	
 			/* store the value in char *output_distro */
-			int ret = 1 + snprintf(distro, output_len, "%s", val);
+			int ret = 1 + snprintf(output_distro, output_len, "%s", val);
 			if (ret >= (signed)output_len)
 			{
 				/* not using realloc() because the possible copy 
 				 * operation could be useless if the kernel can't extend our buffer */
 				free(output_distro);
 				output_len = (1 + strlen(val));
-				output_distro = malloc();
-				snprintf(distro, output_len, "%s", val);
-				return distro;
+				output_distro = malloc(output_len);
+				snprintf(output_distro, output_len, "%s", val);
+				return output_distro;
 			}
 		}
 	}
