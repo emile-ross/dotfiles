@@ -12,6 +12,10 @@ int get_os_name(void)
 
 	/* compare the distro name agaisnt known distros or parents */
 	parent_d = validate_distro_name(distro);
+	if (parent_d == unknown_distro)
+	{
+		error_message(UNSUPPORTED_DISTRO);
+	}
 
 	const uint8_t max_dists = 5;
 	char *distros[max_dists];
@@ -109,17 +113,26 @@ distro_type validate_distro_name(const char *restrict distro)
 	{
 		return arch_linux;
 	}
-	else if (scmp(distro, "fedora"))
+	else if (cmp(distro, "fedora", "rhel"))
 	{
-		/* distro found */
 		return fedora_linux;
 	}
-	else if (cmp(distro, "debian", "ubuntu"))
+	else if (cmp(distro, "debian", "ubuntu") || cmp(distro, "zorin", "linuxmint"))
 	{
 		return debian_linux;
 	}
 	else
 	{
+		/* distro not found */
 		return unknown_distro;
 	}
+}
+
+bool table_matching(const char *restrict distros[])
+{
+	uint8_t i = 0;
+	while (distros[i] != NULL)
+	{
+	}
+	return true;
 }
