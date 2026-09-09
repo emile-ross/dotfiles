@@ -19,23 +19,6 @@ int get_os_name(void)
 
 	while (fgets(t_line, sizeof(t_line), fp)) 
 	{
-		/* store the value after '=' in char val */
-		char *val = strchr(t_line, '=') + 1;
-
-		/* remove trailing newline */
-		val[strcspn(val, "\"\n")] = '\0'; 
-		
-		if (strncmp(t_line, "ID=", 3) == 0)
-		{
-			strcpy(distro, val);	/* store the value in char distro */
-			if (verbose)
-				printf("line in config : %s\ndistro: %s\n", val, distro);
-		}
-		else
-		{
-			if (verbose)
-				printf("\'ID=\' not found in comparaison\n");
-		}
 
 
 		if (cmp(distro, "arch linux", "arch"))
@@ -128,3 +111,30 @@ int get_os_name(void)
 }
 
 
+char *get_distro_name(void)
+{
+	while (fgets(t_line, sizeof(t_line), fp)) 
+	{
+		char *val = strchr(t_line, '=') + 1;
+
+		/* remove trailing newline */
+		val[strcspn(val, "\"\n")] = '\0'; 
+
+		if (strncmp(t_line, "ID=", 3) == 0)
+		{
+			strcpy(distro, val);	/* store the value in char distro */
+			if (verbose)
+				printf("line in config : %s\ndistro: %s\n", val, distro);
+		}
+		else if (strncmp(t_line, "ID_LIKE=", 8) == 0)
+		{
+			if (parent != NULL)
+				fprintf(stderr, "warning: reallocating parent distro buffer\n");
+			parent = malloc(size);
+			if (parent == NULL)
+				error_message(MALLOC_FAIL);
+
+			strcpy(parent, val);	/* store the value in char parent */
+		}
+	}
+}
