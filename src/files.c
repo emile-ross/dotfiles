@@ -1,6 +1,6 @@
 #include "header.h"
 
-void file_exporting(const char *program_name, const char *config_name, const char *file_extention)
+void file_exporting(const char *program_name, const char *text_config_name, const char *file_extention)
 {
 	const char *dest_fp_template = "%s/%s/%s";
 
@@ -9,11 +9,11 @@ void file_exporting(const char *program_name, const char *config_name, const cha
 
 	if (file_extention == NULL)
 	{
-		fp_size += strlen(config_name);
+		fp_size += strlen(text_config_name);
 	}
 	else
 	{
-		fp_size += string_size(NULL, false, dest_fp_template, "%s%s", config_name, file_extention);
+		fp_size += string_size(NULL, false, dest_fp_template, "%s%s", text_config_name, file_extention);
 	}
 
 	char *config_file_name = malloc((size_t)fp_size);
@@ -22,16 +22,16 @@ void file_exporting(const char *program_name, const char *config_name, const cha
 
 	if (file_extention == NULL)
 	{
-		snprintf(config_file_name, (size_t)fp_size, "%s", config_name);
+		snprintf(config_file_name, (size_t)fp_size, "%s", text_config_name);
 	}
 	else
 	{
-		snprintf(config_file_name, (size_t)fp_size, "%s%s", config_name, file_extention);
+		snprintf(config_file_name, (size_t)fp_size, "%s%s", text_config_name, file_extention);
 	}
 
 	void *arr[4] = { config_file_name, NULL, NULL, NULL };
 	file_path_size += fp_size;
-	file_path_size += string_size(arr, false, dest_fp_template, config_path, program_name, config_name);
+	file_path_size += string_size(arr, false, dest_fp_template, config_path, program_name, text_config_name);
 
 	char *dest_fp = malloc((size_t)file_path_size); /* allocate memory */
 	snprintf(dest_fp, (size_t)file_path_size, dest_fp_template, config_path, program_name, config_file_name); /* write to memory/buffer */

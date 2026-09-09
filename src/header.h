@@ -33,7 +33,7 @@ int install_package(distro_type distro, const char *pkginstallname);
 void pkg_cmd(const char *cmd_format, const char *pkg);
 
 void file_archiving(const char *program_config_path, const char *config_file, const char *file_extention);
-void file_exporting(const char *program_name, const char *config_name, const char *file_extention);
+void file_exporting(const char *program_name, const char *text_config_name, const char *file_extention);
 void link_file(const char *source_path, const char *link_path);	/* link path is the target path */
 void make_dir(const char *program_name);
 
