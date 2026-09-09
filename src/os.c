@@ -16,21 +16,6 @@ int get_os_name(void)
 	char *distro = malloc(size);
 	char *parent = NULL;
 
-	if (cmp(distro, "arch linux", "arch"))
-	{
-		parent_d = arch_linux;
-		if (verbose)
-			printf("Distro is arch linux\n");
-	}
-	else if (scmp(distro, "fedora"))
-	{
-		/* distro found */
-		parent_d = fedora_linux;
-	}
-	else if (cmp(distro, "debian", "ubuntu"))
-	{
-		parent_d = debian_linux;
-	}
 
 	}
 	fclose(fp);
@@ -88,5 +73,20 @@ char *get_distro_name(char *output_distro, const *restrict char tag_lookup)
 			strncpy(distro, val);	/* store the value in char distro */
 			if (verbose)
 		}
+	}
+distro_type validate_distro_name(const char *restrict distro)
+{
+	if (cmp(distro, "arch linux", "arch"))
+	{
+		return arch_linux;
+	}
+	else if (scmp(distro, "fedora"))
+	{
+		/* distro found */
+		return fedora_linux;
+	}
+	else if (cmp(distro, "debian", "ubuntu"))
+	{
+		return debian_linux;
 	}
 }
