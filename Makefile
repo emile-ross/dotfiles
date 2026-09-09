@@ -1,4 +1,4 @@
-CC := clang
+CC := gcc
 
 BASE_FLAGS = -Wall -Wextra -Wpedantic -std=c99 -Wconversion -Wshadow -Wundef -Wcast-qual -Wcast-align
 DEBUG_FLAGS = -g -std=c99  
@@ -17,7 +17,7 @@ setup:
 
 zig: base
 base:
-	$(BASE_CMD) $(BASE_FLAGS) $(DEBUG_FLAGS) -Werror 
+	$(BASE_CMD) $(BASE_FLAGS) $(DEBUG_FLAGS) -Werror
 
 clean:
-	rm src/*.o
+	@rm setup
