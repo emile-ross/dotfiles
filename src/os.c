@@ -46,6 +46,7 @@ int get_os_name(void)
 		
 		*(parent) += len;
 	}
+
 	distros[i++] = NULL;
 
 	for (uint8_t j = 0; j <= i; j++)
@@ -68,8 +69,10 @@ int get_os_name(void)
 }
 
 
-char *get_distro_name(void)
+char *get_distro_name(char *output_distro, const *restrict char tag_lookup)
 {
+	char t_line[320];
+	size_t tag_length = strlen(tag_lookup);
 	while (fgets(t_line, sizeof(t_line), fp)) 
 	{
 		char *val = strchr(t_line, '=') + 1;
@@ -77,21 +80,13 @@ char *get_distro_name(void)
 		/* remove trailing newline */
 		val[strcspn(val, "\"\n")] = '\0'; 
 
-		if (strncmp(t_line, "ID=", 3) == 0)
+		/* match the tag being passed into the function to the line start 
+		 * if it matches, this stores the remainder of the line into the
+		 * buffer '' */
+		if (strncmp(t_line, tag_lookup, tag_length) == 0)
 		{
-			strcpy(distro, val);	/* store the value in char distro */
+			strncpy(distro, val);	/* store the value in char distro */
 			if (verbose)
-				printf("line in config : %s\ndistro: %s\n", val, distro);
-		}
-		else if (strncmp(t_line, "ID_LIKE=", 8) == 0)
-		{
-			if (parent != NULL)
-				fprintf(stderr, "warning: reallocating parent distro buffer\n");
-			parent = malloc(size);
-			if (parent == NULL)
-				error_message(MALLOC_FAIL);
-
-			strcpy(parent, val);	/* store the value in char parent */
 		}
 	}
 }
