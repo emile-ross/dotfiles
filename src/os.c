@@ -2,23 +2,17 @@
 
 distro_type parent_d;
 
+distro_type validate_distro_name(const char *restrict distro);
+
 int get_os_name(void)
 {
-	/* open /etc/os-release */
-	FILE *fp = fopen("/etc/os-release", "r");
-	
-	/* fallback to /usr/lib if /etc/os-release fails */
-	if (!fp) fp = fopen("/usr/lib/os-release", "r"); 
-	/* error checking */
-	if (fp == NULL) error_message(FILE_OS_RELEASE_FAIL);
-	
 	size_t size = 256;
 	char *distro = malloc(size);
 	char *parent = NULL;
 
 
-	}
-	fclose(fp);
+	/* compare the distro name agaisnt known distros or parents */
+	parent_d = validate_distro_name(distro);
 
 	const uint8_t max_dists = 5;
 	char *distros[max_dists];
@@ -54,8 +48,16 @@ int get_os_name(void)
 }
 
 
-char *get_distro_name(char *output_distro, const *restrict char tag_lookup)
+char *get_distro_name(char *output_distro, const char *restrict tag_lookup)
 {
+	/* open /etc/os-release */
+	FILE *fp = fopen("/etc/os-release", "r");
+	
+	/* fallback to /usr/lib if /etc/os-release fails */
+	if (!fp) fp = fopen("/usr/lib/os-release", "r"); 
+	/* error checking */
+	if (fp == NULL) error_message(FILE_OS_RELEASE_FAIL);
+	
 	char t_line[320];
 	size_t tag_length = strlen(tag_lookup);
 	while (fgets(t_line, sizeof(t_line), fp)) 
@@ -74,6 +76,9 @@ char *get_distro_name(char *output_distro, const *restrict char tag_lookup)
 			if (verbose)
 		}
 	}
+	fclose(fp);
+}
+
 distro_type validate_distro_name(const char *restrict distro)
 {
 	if (cmp(distro, "arch linux", "arch"))
