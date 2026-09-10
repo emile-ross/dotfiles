@@ -4,13 +4,15 @@ BASE_FLAGS = -Wall -Wextra -Wpedantic -std=c99 -Wconversion -Wshadow -Wundef -Wc
 DEBUG_FLAGS = -g -std=c99  
 
 ALL_FLAGS = $(BASE_FLAGS) $(DEBUG_FLAGS)
-SRC_FILES := arguments compare configuring errors files functions globals install os packages programs setup update
+SRC_FILES := arguments compare configuring errors files functions globals install packages programs setup update
+OS_FILES := os
 
 OUT = -o setup
 BASE_CMD = $(CC) $(SRC_FILES) $(OUT)
 
 FILENAMES := $(addprefix src/, $(SRC_FILES))
-SRC_FILES := $(addsuffix .c, $(FILENAMES))
+OS_RELATED := $(addprefix src/os/, $(OS_FILES))
+SRC_FILES := $(addsuffix .c, $(FILENAMES)) $(addsuffix .c, $(OS_RELATED))
 
 setup:
 	$(BASE_CMD) $(BASE_FLAGS)
