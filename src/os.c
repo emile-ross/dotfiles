@@ -15,6 +15,8 @@ int get_os_name(void)
 	char *parent = NULL;
 
 	/* compare the distro name agaisnt known distros or parents */
+	get_distro_name(distro, size, "ID=");
+	get_distro_name(distro, size, "ID_LIKE=");
 	parent_d = validate_distro_name(distro);
 	if (parent_d == unknown_distro)
 	{
@@ -113,7 +115,7 @@ char *get_distro_name(char *output_distro, size_t output_len, const char *restri
 
 distro_type validate_distro_name(const char *restrict distro)
 {
-	if (MATCH( "fedora", "rhel"))
+	if (MATCH("fedora", "rhel"))
 	{
 	    return fedora_linux;
 	}
