@@ -50,7 +50,7 @@ void file_exporting(const char *program_name, const char *text_config_name, cons
 
 	/* the 2 spaces are intentional, the command expects 2 arguments separated by a space */
 	char *exporting_cmd_template = "cp -f %s %s";
-	size_t exporting_cmd_size = 1 + string_size(arr, false, exporting_cmd_template);
+	size_t exporting_cmd_size = string_size(arr, true, exporting_cmd_template);
 	exporting_cmd_size += file_path_size + source_path_size;
 
 	char *exporting_cmd = malloc(exporting_cmd_size); /* allocate memory */
@@ -76,7 +76,7 @@ size_t string_size(void *buf_to_free[], bool terminate, const char *restrict for
 	int return_value = vsnprintf(NULL, 0, format, args);
 	va_end(args);
 
-	if (return_value >= 0)
+	if (return_value <= 0)
 	{
 		free_buffers(buf_to_free);
 		error_message(INVALID_BUFFER_SIZE);
