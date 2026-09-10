@@ -16,9 +16,20 @@ int get_os_name(void)
 	char *parent = NULL;
 
 	/* compare the distro name agaisnt known distros or parents */
-	get_distro_name(distro, size, "ID=");
-	get_distro_name(distro, size, "ID_LIKE=");
+	if (!(get_distro_name(distro, size, "ID=")))
+	{
+		fprintf(stderr, "Failed to find a distro name under the ID tag in /etc/os-release\n");
+		exit(-1);
+	}
+
 	parent_d = validate_distro_name(distro);
+
+	if (!(get_distro_name(distro, size, "ID_LIKE=")))
+	{
+		fprintf(stderr, "Failed to find a distro name under the ID_LIKE tag in /etc/os-release\n");
+		exit(-1);
+	}
+
 	if (parent_d == unknown_distro)
 	{
 		error_message(UNSUPPORTED_DISTRO);
