@@ -113,35 +113,15 @@ char *get_distro_name(char *output_distro, size_t output_len, const char *restri
 
 distro_type validate_distro_name(const char *restrict distro)
 {
-	const char *restrict arch[3] = 
-	{
-		"arch linux",
-		"arch",
-		NULL
-	};
-
-	const char *restrict debian[5] = 
-	{
-		"debian",
-		"ubuntu",
-		"zorin",
-		"linuxmint",
-		NULL
-	};
-
-	if (MATCH(
-		"fedora",
-		"rhel",
-		NULL
-		))
+	if (MATCH( "fedora", "rhel"))
 	{
 	    return fedora_linux;
 	}
-	else if (table_matching(distro, arch))
+	else if (MATCH("arch linux", "arch"))
 	{
 		return arch_linux;
 	}
-	else if (table_matching(distro, debian))
+	else if (MATCH("debian", "ubuntu", "zorin", "linuxmint"))
 	{
 		return debian_linux;
 	}
