@@ -117,13 +117,6 @@ distro_type validate_distro_name(const char *restrict distro)
 		NULL
 	};
 
-	const char *restrict fedora[3] = 
-	{
-		"fedora",
-		"rhel",
-		NULL
-	};
-
 	const char *restrict debian[5] = 
 	{
 		"debian",
@@ -132,9 +125,14 @@ distro_type validate_distro_name(const char *restrict distro)
 		"linuxmint",
 		NULL
 	};
-	if (table_matching(distro, fedora))
+
+	if (table_matching(distro, (const char *[]) {
+		"fedora",
+		"rhel",
+		NULL
+		}))
 	{
-		return fedora_linux;
+	    return fedora_linux;
 	}
 	else if (table_matching(distro, arch))
 	{
