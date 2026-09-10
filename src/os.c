@@ -1,12 +1,13 @@
 #include "header.h"
 
 #define MATCH(...) \
-    table_matching(distro, (const char *[]){ __VA_ARGS__, NULL })
+	table_matching(distro, (const char *[]){ __VA_ARGS__, NULL })
 
 distro_type parent_d;
 
 distro_type validate_distro_name(const char *restrict distro);
 bool table_matching(const char *restrict str, const char *restrict distros[]);
+char *get_distro_name(char *output_distro, size_t output_len, const char *restrict tag_lookup, bool *success);
 
 int get_os_name(void)
 {
@@ -71,7 +72,7 @@ int get_os_name(void)
 }
 
 
-char *get_distro_name(char *output_distro, size_t output_len, const char *restrict tag_lookup)
+char *get_distro_name(char *output_distro, size_t output_len, const char *restrict tag_lookup, bool *success)
 {
 	/* open /etc/os-release */
 	FILE *fp = fopen("/etc/os-release", "r");
@@ -107,6 +108,7 @@ char *get_distro_name(char *output_distro, size_t output_len, const char *restri
 				snprintf(output_distro, output_len, "%s", val);
 				return output_distro;
 			}
+			*(success) = true;
 		}
 	}
 	fclose(fp);
