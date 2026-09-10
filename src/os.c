@@ -1,5 +1,8 @@
 #include "header.h"
 
+#define MATCH(...) \
+    table_matching(distro, (const char *[]){ __VA_ARGS__, NULL })
+
 distro_type parent_d;
 
 distro_type validate_distro_name(const char *restrict distro);
@@ -126,11 +129,11 @@ distro_type validate_distro_name(const char *restrict distro)
 		NULL
 	};
 
-	if (table_matching(distro, (const char *[]) {
+	if (MATCH(
 		"fedora",
 		"rhel",
 		NULL
-		}))
+		))
 	{
 	    return fedora_linux;
 	}
