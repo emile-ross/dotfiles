@@ -24,15 +24,15 @@ int get_os_name(void)
 
 	parent_d = validate_distro_name(distro);
 
-	if (!(get_distro_name(distro, size, "ID_LIKE=")))
-	{
-		fprintf(stderr, "Failed to find a distro name under the ID_LIKE tag in /etc/os-release\n");
-		exit(-1);
-	}
-
 	if (parent_d == unknown_distro)
 	{
 		error_message(UNSUPPORTED_DISTRO);
+	}
+
+	if (!(get_distro_name(parent, size, "ID_LIKE=")))
+	{
+		fprintf(stderr, "Failed to find a distro name under the ID_LIKE tag in /etc/os-release\n");
+		exit(-1);
 	}
 
 	const uint8_t max_dists = 5;
@@ -107,6 +107,14 @@ bool get_distro_name(char *output_distro, size_t output_len, const char *restric
 		 * buffer '' */
 		if (strncmp(t_line, tag_lookup, tag_length) == 0)
 		{	
+			if (output_distro == NULL)
+			{
+				if (output_len == 0)
+				{
+					output_len = 128;
+				}
+				output_distro = malloc(output_len);
+			}
 			/* store the value in char *output_distro */
 			int ret = 1 + snprintf(output_distro, output_len, "%s", val);
 			if (ret >= (signed)output_len)
