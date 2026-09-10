@@ -118,6 +118,13 @@ distro_type validate_distro_name(const char *restrict distro)
 	};
 
 	table_matching(distro, arch);
+	const char *restrict fedora[3] = 
+	{
+		"fedora",
+		"rhel",
+		NULL
+	};
+	table_matching(distro, fedora);
 	if (cmp(distro, "arch linux", "arch"))
 	{
 		return arch_linux;
@@ -127,7 +134,7 @@ distro_type validate_distro_name(const char *restrict distro)
 		return fedora_linux;
 	}
 
-	const char *restrict debian[3] = 
+	const char *restrict debian[5] = 
 	{
 		"debian",
 		"ubuntu",
@@ -135,6 +142,8 @@ distro_type validate_distro_name(const char *restrict distro)
 		"linuxmint",
 		NULL
 	};
+
+	table_matching(distro, debian);
 
 	else if (cmp(distro, "debian", "ubuntu") || cmp(distro, "zorin", "linuxmint"))
 	{
