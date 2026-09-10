@@ -34,50 +34,6 @@ int get_os_name(void)
 		error_message(UNSUPPORTED_DISTRO);
 	}
 
-	const uint8_t max_dists = 5;
-	char *distros[max_dists];
-	uint8_t i = 0;
-	
-	while (*parent != '\0' && i < max_dists)
-	{
-		while (*parent == ' ')
-			parent++;
-		
-		if (*parent == '\0')
-			break;
-		
-		size_t len = strcspn(parent, " ");
-		parent[len] = '\0';	/* terminate string*/
-
-		distros[i] = strdup(parent);	/* duplicate string & allocate memory */
-
-		if (distros[i] == NULL)
-		{
-			error_message(MALLOC_FAIL);
-		}
-
-		i++;
-		parent += len + 1;
-	}
-
-	distros[i++] = NULL;
-
-	for (uint8_t j = 0; j <= i; j++)
-	{
-		if (scmp(distros[j], "arch linux"))
-		{
-			parent_d = arch_linux;
-		}
-		if (cmp(distros[j], "arch linux", "ubuntu") || scmp(distros[j], "zorin"))
-		{
-			parent_d = debian_linux;
-		}
-	}
-
-	/* close file */
-	free(distro);
-	free(parent);
-
 	return 0;
 }
 
