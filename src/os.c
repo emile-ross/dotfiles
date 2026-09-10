@@ -3,11 +3,11 @@
 #define MATCH(...) \
 	table_matching(distro, (const char *[]){ __VA_ARGS__, NULL })
 
-distro_type parent_d;
+distro_type parent_d = unknown_distro;
 
 distro_type validate_distro_name(const char *restrict distro);
 bool table_matching(const char *restrict str, const char *restrict distros[]);
-char *get_distro_name(char *output_distro, size_t output_len, const char *restrict tag_lookup, bool *success);
+bool get_distro_name(char *output_distro, size_t output_len, const char *restrict tag_lookup);
 
 int get_os_name(void)
 {
@@ -72,7 +72,7 @@ int get_os_name(void)
 }
 
 
-char *get_distro_name(char *output_distro, size_t output_len, const char *restrict tag_lookup, bool *success)
+bool get_distro_name(char *output_distro, size_t output_len, const char *restrict tag_lookup)
 {
 	/* open /etc/os-release */
 	FILE *fp = fopen("/etc/os-release", "r");
@@ -106,13 +106,13 @@ char *get_distro_name(char *output_distro, size_t output_len, const char *restri
 				output_len = (1 + strlen(val));
 				output_distro = malloc(output_len);
 				snprintf(output_distro, output_len, "%s", val);
-				return output_distro;
 			}
-			*(success) = true;
+			fclose(fp);
+			return true;
 		}
 	}
 	fclose(fp);
-	return NULL;
+	return false;
 }
 
 distro_type validate_distro_name(const char *restrict distro)
