@@ -24,6 +24,7 @@ vim.opt.tabstop = 8
 vim.opt.softtabstop = 8
 vim.opt.shiftwidth = 8
 
+vim.opt.scrolloff = 6
 
 
 -- setup must be called before loading
@@ -41,6 +42,18 @@ require("lazy").setup({
 			vim.cmd.colorscheme "catppuccin"
 		end,
 	},
+-- 	{
+-- 	    "rebelot/kanagawa.nvim",
+-- 	    priority = 1000,
+-- 	    config = function()
+-- 	      require("kanagawa").setup({
+-- 		      theme = "wave", -- "wave", "dragon", or "lotus" 
+-- 	      })
+-- 		require("kanagawa").setup()
+-- 	      vim.cmd.colorscheme("kanagawa")
+-- 	      -- compile = false,             -- enable compiling the colorscheme
+--       end,
+--     },
 	
 	{
 		"folke/snacks.nvim",
