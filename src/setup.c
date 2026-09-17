@@ -127,7 +127,7 @@ int main(int argc, char *argv[])
 						}
 						else if (fuzzel_menu_choice == 2)
 						{
-							long fuzzel_edit_menu_choice;
+							long fuzzel_edit_menu_choice = 0;
 							do
 							{
 								clear();

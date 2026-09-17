@@ -81,6 +81,8 @@ require("lazy").setup({
 })
 
 vim.keymap.set("n", '<C-l>', ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>")
+vim.keymap.set("x", '<C-p>', "\"_dP")
 local builtin = require("telescope.builtin")
-vim.keymap.set('n', '<C-p>', builtin.find_files, {})
+vim.keymap.set('n', '<C-s>', builtin.find_files, {})
 require('lualine').setup()
+
