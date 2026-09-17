@@ -16,6 +16,7 @@ void BASH(void)
 	char *bash_cmd = malloc(mem_needed);
 	if (bash_cmd == NULL)
 		error_message(MALLOC_FAIL);
+
 	/* execute the command with the according buffer size previously calculated (above) */
 	snprintf(bash_cmd, (size_t)mem_needed, command_format, inpath, BRCNAME);
 	system(bash_cmd);
