@@ -26,39 +26,25 @@ vim.opt.shiftwidth = 8
 
 vim.opt.scrolloff = 6
 
-
 -- setup must be called before loading
 
+-- Using lazy.nvim
 require("lazy").setup({
-	{
-		"catppuccin/nvim",
-		name = "catppuccin",
-		priority = 1000,
-		config = function()
-			require("catppuccin").setup({
-				flavour = "mocha", -- latte, frappe, macchiato, mocha
-				transparent_background = false,
-			})
-			vim.cmd.colorscheme "catppuccin"
-		end,
-	},
--- 	{
--- 	    "rebelot/kanagawa.nvim",
--- 	    priority = 1000,
--- 	    config = function()
--- 	      require("kanagawa").setup({
--- 		      theme = "wave", -- "wave", "dragon", or "lotus" 
--- 	      })
--- 		require("kanagawa").setup()
--- 	      vim.cmd.colorscheme("kanagawa")
--- 	      -- compile = false,             -- enable compiling the colorscheme
---       end,
---     },
-	
+ 	{
+ 		"catppuccin/nvim",
+ 		name = "catppuccin",
+ 		priority = 1000,
+ 		config = function()
+ 			require("catppuccin").setup({
+ 				flavour = "mocha", -- latte, frappe, macchiato, mocha
+ 				transparent_background = true,
+ 			})
+ 		vim.cmd.colorscheme "catppuccin"
+ 		end,
+ 	},
 	{
 		"folke/snacks.nvim",
-		---@type snacks.Config
-		opts = 
+		opts = ---@type snacks.Config
 		{
 			indent = 
 			{
