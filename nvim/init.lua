@@ -24,6 +24,10 @@ vim.opt.tabstop = 8
 vim.opt.softtabstop = 8
 vim.opt.shiftwidth = 8
 
+
+
+-- setup must be called before loading
+
 require("lazy").setup({
 	{
 		"catppuccin/nvim",
@@ -63,6 +67,7 @@ require("lazy").setup({
 	}
 })
 
+vim.keymap.set("n", '<C-l>', ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>")
 local builtin = require("telescope.builtin")
 vim.keymap.set('n', '<C-p>', builtin.find_files, {})
 require('lualine').setup()
