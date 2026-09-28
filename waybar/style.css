@@ -70,11 +70,13 @@ window#waybar.empty #window {
 }
 
 #cpu {
-  color: #94E2D5;
+  /* color: #94E2D5; */
+  color: #FFFFFF;
 }
 
 #memory {
-  color: #B6F5C6;
+  /* color: #B6F5C6; */
+  color: #FFFFFF;
 }
 
 #clock {
