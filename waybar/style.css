@@ -3,7 +3,7 @@
   min-width: 0;
   font-family: Lexend, "JetBrainsMono NFP";
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 window#waybar {
@@ -21,22 +21,22 @@ window#waybar {
   border-radius: 6px;
   /* background-color: #181825; */
   background-color: rgba(30, 30, 46, 0.6);
-  color: #cdd6f4;
+  color: #CDD6F4;
 }
 
 #workspaces button:hover {
-  color: #1e1e2e;
-  background-color: #cdd6f4;
+  color: #1E1E2E;
+  background-color: #CDD6F4;
 }
 
 #workspaces button.active {
-  background-color: #1e1e2e;
-  color: #89b4fa;
+  background-color: #1E1E2E;
+  color: #89B4FA;
 }
 
 #workspaces button.urgent {
-  background-color: #1e1e2e;
-  color: #ff8ba8;
+  background-color: #1E1E2E;
+  color: #FF8BA8;
 }
 
 #clock,
@@ -58,7 +58,7 @@ window#waybar {
 
 #custom-sep {
   padding: 0px;
-  color: #585b70;
+  color: #585B70;
 }
 
 window#waybar.empty #window {
@@ -66,42 +66,42 @@ window#waybar.empty #window {
 }
 
 #battery {
-  color: #94e2d5;
+  color: #94E2D5;
 }
 
 #cpu {
-  color: #94e2d5;
+  color: #94E2D5;
 }
 
 #memory {
-  color: #b6f5c6;
+  color: #B6F5C6;
 }
 
 #clock {
-  color: #74c7ec;
+  color: #74C7EC;
 }
 
 #clock.simpleclock {
-  color: #89b4fa;
+  color: #89B4FA;
 }
 
 #window {
-  color: #cdd6f4;
+  color: #CDD6F4;
 }
 
 #pulseaudio {
-  color: #b4befe;
+  color: #B4BEFE;
 }
 
 #pulseaudio.muted {
-  color: #a6adc8;
+  color: #A6ADC8;
 }
 
 #custom-logo {
-  color: #89b4fa;
+  color: #89B4FA;
 }
 
 tooltip {
   background-color: #181825;
-  border: 2px solid #89b4fa;
+  border: 2px solid #89B4FA;
 }
