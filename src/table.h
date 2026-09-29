@@ -6,13 +6,57 @@ program bash =
 	"shell/bash/"
 	NULL,
 }
+program bpytop = 
+{
+	"~/.config/bpytop",
+	"bpytop.conf",
+	"bpytop/"
+	"bpytop",
+}
+program btop = 
+{
+	"~/.config/btop/",
+	"btop.conf",
+	"btop/"
+	"btop",
+}
+program cava = 
+{
+	"~/.config/cava/",
+	"config",
+	"cava/"
+	"cava",
+}
 
+program fastfetch = 
+{
+	"~/.config/fastfetch/",
+	"config.conf config-other.conf config-default.conf",
+	"fastfetch/"
+	"fastfetch",
+}
+
+program fuzzel = 
+{
+	"~/.config/fuzzel/",
+	"fuzzel.ini old-fuzzel.ini default-fuzzel.ini fuzzel-duplicated.ini",
+	"fuzzel/"
+	"fuzzel",
+}
+
+program gtklock = 
+{
+	"~/.config/gtklock/",
+	"style.css lockscreen.jpg",
+	"gtklock/"
+	"gtklock",
+}
 
 program hyprland = 
 {
 	"~/.config/hypr/",
 	"hyprland.conf hypridle.conf hyprlock.conf hyprpaper.conf",
-	"hypr//"
+	"hypr/"
 	"hyprland hyprpaper hyprpicker hyprlock hypridle",
 }
 
