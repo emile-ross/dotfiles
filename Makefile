@@ -4,7 +4,7 @@ BASE_FLAGS = -Wall -Wextra -Wpedantic -std=c99 -Wconversion -Wshadow -Wundef -Wc
 DEBUG_FLAGS = -g -std=c99  
 
 ALL_FLAGS = $(BASE_FLAGS) $(DEBUG_FLAGS)
-SRC_FILES := arguments compare configuring errors files functions globals install packages programs setup update
+SRC_FILES := arguments compare configuring errors files functions globals install packages old-programs setup update
 OS_FILES := os
 
 OUT = -o setup
@@ -20,6 +20,9 @@ setup:
 zig: base
 base:
 	$(BASE_CMD) $(BASE_FLAGS) $(DEBUG_FLAGS) -Werror
+
+base-e:
+	$(BASE_CMD) $(BASE_FLAGS) $(DEBUG_FLAGS)
 
 clean:
 	@rm setup
