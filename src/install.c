@@ -33,115 +33,6 @@ void install_config_message(char *text)
 	printf("\nInstalling %s \n", text);
 }
 
-/* this function is never used but it could easily be used */
-void install_configs(uint8_t custom_package_install)  /* the partial install script (configure which package or configuration to install) */
-{
-	do
-	{
-		bool install_success = true;
-		pver = 0.0f; /* assumes the user doesn't have the dotfiles */
-		char* temp_conf_installed = NULL;
-		
-		clearbuffer();
-		printf("Do you want to archive your old config?"BOLD_S"(Y/n)\n"STYLE_END);
-		char ARCHIVE_T;
-		scanf(" %c", &ARCHIVE_T);
-		bool archive_bl = y_n(ARCHIVE_T);
-		
-		clearbuffer();
-		printf("Do you want to install the package "BOLD_S"(Y/n)\n"STYLE_END);
-		char PKGINSTALL_T = '\0';
-		scanf(" %c", &PKGINSTALL_T);
-		bool pkginstall_bl = y_n(PKGINSTALL_T);
-		
-		config_name config_install_enum = custom_package_install;
-		
-		if (custom_package_install < n_configs && custom_package_install > 0)
-		{
-			temp_conf_installed = config_names[custom_package_install];
-		}
-		else
-		{
-			error_message(CLI_UNKNOWN_PKG);
-		}
-		
-		switch (config_install_enum)
-		{
-		case bash:
-			install_config_message(temp_conf_installed);
-			BASH();
-			break;
-		case bpyt:
-			install_config_message(temp_conf_installed);
-			BPYT(archive_bl, pkginstall_bl);
-			break;
-		case btop:
-			install_config_message(temp_conf_installed);
-			BTOP(archive_bl, pkginstall_bl);
-			break;
-		case cava:
-			install_config_message(temp_conf_installed);
-			CAVA(archive_bl, pkginstall_bl);
-			break;
-		case fast:
-			install_config_message(temp_conf_installed);
-			FAST(archive_bl, pkginstall_bl);
-			break;
-		case fuzz:
-			install_config_message(temp_conf_installed);
-			FUZZ(archive_bl, pkginstall_bl);
-			break;
-		case gtkl:
-			install_config_message(temp_conf_installed);
-			GTKL(archive_bl, pkginstall_bl);
-			break;
-		case hypr:
-			install_config_message(temp_conf_installed);
-			HYPR(archive_bl, pkginstall_bl);
-			break;
-		case kitt:
-			install_config_message(temp_conf_installed);
-			KITT(archive_bl, pkginstall_bl);
-			break;
-		case mpvf:
-			install_config_message(temp_conf_installed);
-			MPVF(archive_bl, pkginstall_bl);
-			break;
-		case nvim:
-			install_config_message(temp_conf_installed);
-			NVIM(archive_bl, pkginstall_bl);
-			break;
-		case sway:
-			install_config_message(temp_conf_installed);
-			SWAY(archive_bl, pkginstall_bl);
-			break;
-		case wayb:
-			install_config_message(temp_conf_installed);
-			WAYB(archive_bl, pkginstall_bl);
-			break;
-		case zshh:
-			install_config_message(temp_conf_installed);
-			ZSHH(archive_bl, pver, pkginstall_bl);
-			break;
-		default:
-			fprintf(stderr, ANSI_RED"\nInvalid character\n"STYLE_END);
-			install_success = false;
-			wait_for_timeout(SHORT_TIMER, 0);
-			break;
-		}
-		clear();
-		if (install_success)
-		{
-			/* print success message if enabled */
-			printf(UDRL_S"\nInstalled %s successfully.\n"STYLE_END, temp_conf_installed);
-		}
-
-		/* relatively short pause */
-		wait_for_timeout(0, LONG_TIMER);
-	}
-    	while (custom_package_install > 0 && (int)custom_package_install < max_menu_opt_n);
-}
-
 void full_install(bool archive_bl, bool full_install_bl)
 {
 	float previous_version = 0.0f; /* assumes the user doesn't have the dotfiles */
@@ -172,7 +63,7 @@ void full_install(bool archive_bl, bool full_install_bl)
 			/* cast from long to uint8_t is safe since there is already bounds checking
 			 * within the get_long() function (we provide UINT8MAX as the upper bound) */
 			install_pkg_opt = (uint8_t)get_long(" ", 0, UINT8MAX);
-			install_configs(install_pkg_opt);
+			/* install_configs(install_pkg_opt); TODO add custom packge installation (matching with a switch) */ 
 		}
 		while (install_pkg_opt > 0);
 	}

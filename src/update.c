@@ -50,44 +50,44 @@ int full_update(char archive_file, float version)
 		case V_1_2:
 		case V_1_3:
 			install_package(parent_d, "hyprpaper btop");
-			CAVA(archive_bl, install_pkg_yn);
+			/* CAVA(archive_bl, install_pkg_yn); */
 			__attribute__ ((fallthrough));	/* do not break because we are also installing everything below */
 		case V_1_4:
-			BTOP(archive_bl, install_pkg_yn);
-			__attribute__ ((fallthrough));	/* do not break because we are also installing everything below */
+			/* BTOP(archive_bl, install_pkg_yn);
+			__attribute__ ((fallthrough));	do not break because we are also installing everything below */
 		case V_2:
 			install_package(parent_d, "gtklock");
-			KITT(archive_bl, install_pkg_yn);
+			/* KITT(archive_bl, install_pkg_yn); */
 		__attribute__ ((fallthrough));	/* do not break because we are also installing everything below */
 		case V_2_1:
 			install_package(parent_d, "sway");
-			WAYB(archive_bl, install_pkg_yn);
+			/* WAYB(archive_bl, install_pkg_yn); */
 			__attribute__ ((fallthrough));	/* do not break because we are also installing everything below */
 		case V_2_2:
-			SWAY(archive_bl, install_pkg_yn);
-			GTKL(archive_bl, install_pkg_yn);
+			/* SWAY(archive_bl, install_pkg_yn); */
+			/* GTKL(archive_bl, install_pkg_yn); */
 			install_package(parent_d, "mpv swaylock");
 			__attribute__ ((fallthrough));	/* do not break because we are also installing everything below */
 		case V_2_3:
-			NVIM(archive_bl, install_pkg_yn);
-			FUZZ(archive_bl, install_pkg_yn);
-			MPVF(archive_bl, install_pkg_yn);
-			__attribute__ ((fallthrough));	/* do not break because we are also installing everything below */
+			/* NVIM(archive_bl, install_pkg_yn); */
+			/* FUZZ(archive_bl, install_pkg_yn); */
+			/* MPVF(archive_bl, install_pkg_yn); */
+			/* __attribute__ ((fallthrough));	do not break because we are also installing everything below */
 		case V_2_4:
 			install_package(parent_d, "hyprland bpytop hyprlock");
-			__attribute__ ((fallthrough));	/* do not break because we are also installing everything below */
+			/* __attribute__ ((fallthrough));	 do not break because we are also installing everything below */
 		case V_2_5:
 		case V_3:
-			BPYT(archive_bl, install_pkg_yn);
-			__attribute__ ((fallthrough));	/* do not break because we are also installing everything below */
+			/* BPYT(archive_bl, install_pkg_yn);
+			__attribute__ ((fallthrough));	do not break because we are also installing everything below */
 		case V_3_1:
 			install_package(parent_d, "nvim");
 			goto update_version_number;
 		
 		update_version_number:
-			BASH();
-			HYPR(archive_bl, install_pkg_yn);
-			ZSHH(archive_bl, version, install_pkg_yn);
+			/* BASH(); */
+			/* HYPR(archive_bl, install_pkg_yn); */
+			/* ZSHH(archive_bl, version, install_pkg_yn); */
 			printf("Update completed!\n");
 			break;
 		
