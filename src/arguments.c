@@ -1,5 +1,6 @@
 #include "header.h"
 
+#include "programs.h"
 #include <stdint.h>
 
 void cli_arg_missing(char *first_command, char *type_of_missing_arg, char *user_flag_t)
