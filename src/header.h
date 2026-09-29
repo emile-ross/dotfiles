@@ -13,22 +13,6 @@
 #include <time.h>
 #include <unistd.h>
 
-
-void BASH(void);
-void BPYT(bool archive_bl, bool pkginstall_bl);
-void BTOP(bool archive_bl, bool pkginstall_bl);
-void CAVA(bool archive_bl, bool pkginstall_bl);
-void FAST(bool archive_bl, bool pkginstall_bl);
-void FUZZ(bool archive_bl, bool pkginstall_bl);
-void GTKL(bool archive_bl, bool pkginstall_bl);
-void HYPR(bool archive_bl, bool pkginstall_bl);
-void KITT(bool archive_bl, bool pkginstall_bl);
-void MPVF(bool archive_bl, bool pkginstall_bl);
-void NVIM(bool archive_bl, bool pkginstall_bl);
-void SWAY(bool archive_bl, bool pkginstall_bl);
-void WAYB(bool archive_bl, bool pkginstall_bl);
-void ZSHH(bool archive_bl, float fversion, bool pkginstall_bl);
-
 int install_package(distro_type distro, const char *pkginstallname);
 void pkg_cmd(const char *cmd_format, const char *pkg);
 

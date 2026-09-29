@@ -184,20 +184,7 @@ void full_config_install(bool ARCHIVE_BL, float previous_version_t, bool PKGINST
 {
 	/* a list of all configs
 	* this will execute all configuration entries */
-	BASH();
-	BPYT(ARCHIVE_BL, PKGINSTALL_BL);
-	BTOP(ARCHIVE_BL, PKGINSTALL_BL);
-	CAVA(ARCHIVE_BL, PKGINSTALL_BL);
-	FAST(ARCHIVE_BL, PKGINSTALL_BL);
-	FUZZ(ARCHIVE_BL, PKGINSTALL_BL);
-	GTKL(ARCHIVE_BL, PKGINSTALL_BL);
-	HYPR(ARCHIVE_BL, PKGINSTALL_BL);
-	KITT(ARCHIVE_BL, PKGINSTALL_BL);
-	MPVF(ARCHIVE_BL, PKGINSTALL_BL);
-	NVIM(ARCHIVE_BL, PKGINSTALL_BL);
-	SWAY(ARCHIVE_BL, PKGINSTALL_BL);
-	WAYB(ARCHIVE_BL, PKGINSTALL_BL);
-	ZSHH(ARCHIVE_BL, previous_version_t, PKGINSTALL_BL);
+	/* TODO add all package installs */
 }
 
 void check_for_yay(void)
