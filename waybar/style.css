@@ -9,7 +9,7 @@
 window#waybar {
   transition-property: background-color;
   transition-duration: 0.5s;
-  background-color: rgba(26, 26, 36, 0.55);
+  background-color: rgba(0, 0, 0, 0.55);
   /* background-color: rgba(0, 0, 0, 0.0); */
 }
 
@@ -18,7 +18,7 @@ window#waybar {
   margin: 0.4rem 0.25rem;
   border-radius: 6px;
   /* background-color: #181825; */
-  background-color: rgba(30, 30, 46, 0.6);
+  background-color: rgba(33, 33, 49, 0.65);
   color: #CFDFFF;
   /* create a border colour */
   border-color: rgba(53, 53, 69, 0.6);

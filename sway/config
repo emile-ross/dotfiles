@@ -69,6 +69,14 @@ output HDMI-A-1 resolution 1600x900 position 1920 0
 	workspace 10 output DP-1
 	# workspaces 11-12 are left unassigned 
 
+### SCREENSHOTS / screenshots (sway-screenshot)
+# screenshot a window
+bindsym $mod+Print exec sway-screenshot -m window -o ~/screenshots
+
+# Screenshot a region
+bindsym $mod+Shift+Print exec sway-screenshot -m region -o ~/screenshots
+
+
 # You can get the names of your outputs by running: swaymsg -t get_outputs
 
 ### Idle configuration
@@ -212,7 +220,7 @@ output HDMI-A-1 resolution 1600x900 position 1920 0
 
     # Switch the current container between different layout styles
     bindsym $mod+s layout stacking
-    bindsym $mod+w layout tabbed
+    # bindsym $mod+w layout tabbed
     bindsym $mod+e layout toggle split
 
     # Make the current focus fullscreen
@@ -227,17 +235,18 @@ output HDMI-A-1 resolution 1600x900 position 1920 0
     # Move focus to the parent container
     bindsym $mod+a focus parent
 #
+
 # Scratchpad:
 #
     # Sway has a "scratchpad", which is a bag of holding for windows.
     # You can send windows there and get them back later.
 
     # Move the currently focused window to the scratchpad
-    bindsym $mod+Shift+minus move scratchpad
+    # bindsym $mod+Shift+minus move scratchpad
 
     # Show the next scratchpad window or hide the focused scratchpad window.
     # If there are multiple scratchpad windows, this command cycles through them.
-    bindsym $mod+minus scratchpad show
+    # bindsym $mod+minus scratchpad show
 #
 # Resizing containers:
 #
