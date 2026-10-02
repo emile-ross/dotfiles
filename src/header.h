@@ -56,9 +56,6 @@ config_name detect_config_name(char *input);
 
 /*  command line arguments */
 	char *package_name(config_name config);
-	int config_fn_exec(config_name config_type, bool archive_bl, bool package_bl, float version);
-	void argument_config_install(char *package_t, char archiving_t, char pkginstall_t);
-	void cmd_arg_install(int num_cmd_arguments_t, char *cmd_arg_v_t[], char config_archive_t, char pkg_install_t);
 	void cli_arg_missing(char *first_command, char *type_of_missing_arg, char *user_flag_t);
 	int parse_arguments(int num_cmd_arguments, char *cmd_arg_v[]);
 
@@ -97,7 +94,6 @@ config_name detect_config_name(char *input);
 	extern char opt_one_text[MENU_TEXT_SIZE];
 	extern char opt_the_text[MENU_TEXT_SIZE];
 	extern char opt_for_text[MENU_TEXT_SIZE];
-	extern char opt_fiv_text[MENU_TEXT_SIZE];
 	extern char opt_exit_text[16];
 	extern char *main_menu_text[NUM_ELEMENTS_MAIN_MENU];
 
@@ -123,7 +119,7 @@ config_name detect_config_name(char *input);
 	extern char full_update_opt; 
 	float* get_version(void);
 
-	int full_update(char ARCHIVE, float pver);
+	int full_update(float version);
 
 
 /* fuzzel functions */

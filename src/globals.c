@@ -44,16 +44,14 @@ char *config_names[n_configs] =
 	
 	char main_menu_title[128] = "Welcome to the setup utility for ImAwsumm's dotfiles";
 	char opt_one_text[128] = "Install the dotfiles";
-	char opt_the_text[128] = "Update your dotfiles";
-	char opt_for_text[128] = "Custom configuration menu";
-	char opt_fiv_text[128] = "Something else";
+	char opt_the_text[128] = "Custom configuration menu";
+	char opt_for_text[128] = "Something else";
 	char opt_exit_text[16] = "Exit";
 	char opt_back_text[16] = "Back";
 	
 	char *main_menu_text[NUM_ELEMENTS_MAIN_MENU] =
 	{
 		"Install the dotfiles",
-		"Update your dotfiles",
 		"Custom configuration menu",
 		"Something else",
 	};

@@ -5,7 +5,10 @@ int main(int argc, char *argv[])
 	printf("HI");
 	pre_startup();
 
-	parse_arguments(argc, argv);
+	if (argc > 1)
+	{
+		parse_arguments(argc, argv);
+	}
 
 	/*
 	int menu_one_i;
