@@ -1,5 +1,10 @@
 #include "header.h"
 
+#include "programs.h"
+
+void install_config(program_conf_type config);
+
+
 int main(int argc, char *argv[])
 {
 	printf("HI");
@@ -9,6 +14,9 @@ int main(int argc, char *argv[])
 	{
 		parse_arguments(argc, argv);
 	}
+
+	install_config(bpytop);
+	return 0;
 
 	/*
 	int menu_one_i;
