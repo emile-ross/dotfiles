@@ -1,8 +1,26 @@
 #include "header.h"
 
-void install_config()
+#include "programs.h"
+
+void install_config(program_conf_type config)
 {
+	if (verbose)
+	{
+		if (config.package_name != NULL)
+			printf("Installing config \"%s\"\n", config.package_name);
+	}
+
+	char *base_cmd = "mkdir %s";
+	size_t cmd_size = strlen(base_cmd) + strlen(config.config_dir);
+	char *cmd = malloc(cmd_size);
+
+	snprintf(cmd, cmd_size, base_cmd, config.config_dir);
+
+	printf(cmd);
+
+	size_t new_size = 0;
 }
+
 
 int install_package(distro_type distro, const char *pkginstallname)
 {

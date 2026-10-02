@@ -1,34 +1,34 @@
 
-struct program_conf_type
+typedef struct
 {
 	const char *config_dir;
 	const char *config_list;
 	const char *repo_dir;
 	const char *package_name;
-};
+} program_conf_type;
 
-static struct program_conf_type bash_data = 
+static program_conf_type bash_data = 
 {
 	"~/",
 	".bashrc",
 	"shell/bash/",
 	NULL,
 };
-static struct program_conf_type bpytop = 
+static program_conf_type bpytop = 
 {
 	"~/.config/bpytop/",
 	"bpytop.conf",
 	"bpytop/",
 	"bpytop",
 };
-static struct program_conf_type btop_data = 
+static program_conf_type btop_data = 
 {
 	"~/.config/btop/",
 	"btop.conf",
 	"btop/",
 	"btop",
 };
-static struct program_conf_type cava_data = 
+static program_conf_type cava_data = 
 {
 	"~/.config/cava/",
 	"config",
@@ -36,7 +36,7 @@ static struct program_conf_type cava_data =
 	"cava",
 };
 
-static struct program_conf_type fastfetch = 
+static program_conf_type fastfetch = 
 {
 	"~/.config/fastfetch/",
 	"config.conf config-other.conf config-default.conf",
@@ -44,7 +44,7 @@ static struct program_conf_type fastfetch =
 	"fastfetch",
 };
 
-static struct program_conf_type fuzzel = 
+static program_conf_type fuzzel = 
 {
 	"~/.config/fuzzel/",
 	"fuzzel.ini old-fuzzel.ini default-fuzzel.ini fuzzel-duplicated.ini",
@@ -52,7 +52,7 @@ static struct program_conf_type fuzzel =
 	"fuzzel",
 };
 
-static struct program_conf_type gtklock = 
+static program_conf_type gtklock = 
 {
 	"~/.config/gtklock/",
 	"style.css lockscreen.jpg",
@@ -60,7 +60,7 @@ static struct program_conf_type gtklock =
 	"gtklock",
 };
 
-static struct program_conf_type hyprland = 
+static program_conf_type hyprland = 
 {
 	"~/.config/hypr/",
 	"hyprland.conf hypridle.conf hyprlock.conf hyprpaper.conf",
@@ -68,7 +68,7 @@ static struct program_conf_type hyprland =
 	"hyprland hyprpaper hyprpicker hyprlock hypridle",
 };
 
-static struct program_conf_type kitty = 
+static program_conf_type kitty = 
 {
 	"~/.config/kitty/",
 	"kitty.conf",
@@ -76,7 +76,7 @@ static struct program_conf_type kitty =
 	"kitty"
 };
 
-static struct program_conf_type mpv = 
+static program_conf_type mpv = 
 {
 	"~/.config/mpv/",
 	"mpv.conf",
@@ -84,7 +84,7 @@ static struct program_conf_type mpv =
 	"mpv",
 };
 
-static struct program_conf_type nvim_data = 
+static program_conf_type nvim_data = 
 {
 	"~/.config/nvim/",
 	"init.lua dark-init.lua",
@@ -92,7 +92,7 @@ static struct program_conf_type nvim_data =
 	"nvim"
 };
 
-static struct program_conf_type rofi_data = 
+static program_conf_type rofi_data = 
 {
 	"~/.config/rofi/",
 	"config.rasi",
@@ -100,7 +100,7 @@ static struct program_conf_type rofi_data =
 	"rofi",
 };
 
-static struct program_conf_type sway_data = 
+static program_conf_type sway_data = 
 {
 	"~/.config/sway/",
 	"config",
@@ -108,7 +108,7 @@ static struct program_conf_type sway_data =
 	"sway",
 };
 
-static struct program_conf_type waybar = 
+static program_conf_type waybar = 
 {
 	"~/.config/waybar/",
 	"config.jsonc style.css",
@@ -116,7 +116,7 @@ static struct program_conf_type waybar =
 	"waybar"
 };
 
-static struct program_conf_type zsh = 
+static program_conf_type zsh = 
 {
 	"~/",
 	".zshrc",
