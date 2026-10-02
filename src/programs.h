@@ -1,3 +1,4 @@
+
 struct program_conf_type
 {
 	const char *config_dir;
@@ -6,7 +7,7 @@ struct program_conf_type
 	const char *package_name;
 };
 
-static struct program_conf_type bash = 
+static struct program_conf_type bash_data = 
 {
 	"~/",
 	".bashrc",
@@ -20,14 +21,14 @@ static struct program_conf_type bpytop =
 	"bpytop/",
 	"bpytop",
 };
-static struct program_conf_type btop = 
+static struct program_conf_type btop_data = 
 {
 	"~/.config/btop/",
 	"btop.conf",
 	"btop/",
 	"btop",
 };
-static struct program_conf_type cava = 
+static struct program_conf_type cava_data = 
 {
 	"~/.config/cava/",
 	"config",
@@ -83,7 +84,7 @@ static struct program_conf_type mpv =
 	"mpv",
 };
 
-static struct program_conf_type nvim = 
+static struct program_conf_type nvim_data = 
 {
 	"~/.config/nvim/",
 	"init.lua dark-init.lua",
@@ -91,7 +92,7 @@ static struct program_conf_type nvim =
 	"nvim",
 };
 
-static struct program_conf_type rofi = 
+static struct program_conf_type rofi_data = 
 {
 	"~/.config/rofi/",
 	"config.rasi",
@@ -99,7 +100,7 @@ static struct program_conf_type rofi =
 	"rofi",
 };
 
-static struct program_conf_type sway = 
+static struct program_conf_type sway_data = 
 {
 	"~/.config/sway/",
 	"config",
@@ -107,7 +108,7 @@ static struct program_conf_type sway =
 	"sway",
 };
 
-static struct program_conf_type wayb = 
+static struct program_conf_type waybar = 
 {
 	"~/.config/waybar/",
 	"config.jsonc style.css",
@@ -115,7 +116,7 @@ static struct program_conf_type wayb =
 	"waybar"
 };
 
-static struct program_conf_type wayb = 
+static struct program_conf_type zsh = 
 {
 	"~/",
 	".zshrc",

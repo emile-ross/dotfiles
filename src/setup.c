@@ -2,10 +2,12 @@
 
 int main(int argc, char *argv[])
 {
+	printf("HI");
 	pre_startup();
 
 	parse_arguments(argc, argv);
 
+	/*
 	int menu_one_i;
 	do
 	{
@@ -20,23 +22,11 @@ int main(int argc, char *argv[])
 		printf("\n  "BOLD_S"[0] "STYLE_END"%s\n", opt_exit_text);
 
 		menu_one_i = (int)get_long(NULL, 0, 5);
+
 		if (menu_one_i == 1)
 		{
-			/* launch the install menu it suggests some options to the user and then it executes full_install() */
+			// launch the install menu it suggests some options to the user and then it executes full_install()
 			install_menu();
-		}
-		else if (menu_one_i == 2)
-		{
-			clear();
-			float version = *get_version();
-			printf(ANSI_GREY"\nDetected Version: %.2f\n"STYLE_END, version);
-			printf(BOLD_S "%s\n\n"STYLE_END, opt_the_text );
-			printf("\nDo you want to backup your old dotfiles before updating? (Y/n)\n");
-			char backuptemp = -1;
-			
-			clearbuffer();
-			scanf("%c", &backuptemp);
-			full_update(backuptemp, version);
 		}
 		else if (menu_one_i == KEY_MAIN_MENU_CONFIGURE)
 		{
@@ -44,7 +34,7 @@ int main(int argc, char *argv[])
 			do
 			{
 				clear();
-				printf(BOLD_S ANSI_WHITE "%s\n\n"STYLE_END, opt_for_text );
+				printf(BOLD_S ANSI_WHITE "%s\n\n"STYLE_END, opt_the_text );
 				printf(BOLD_S "  [1] " STYLE_END UDRL_S"%s"STYLE_END"\n", fastfetch_config_menu_text);
 		        	printf(BOLD_S "  [2] " STYLE_END UDRL_S"%s"STYLE_END"\n", kitty_config_menu_text);
 		        	printf(BOLD_S "  [3] " STYLE_END UDRL_S"%s"STYLE_END"\n", fuzzel_config_menu_text);
@@ -79,7 +69,7 @@ int main(int argc, char *argv[])
 						}
 					}
 					while (fastfetch_config_choice > INPUT_BACK_VALUE);
-					/* exits the while loop when the user types 0 */
+					// exits the while loop when the user types 0
 				}
 				else if (dotfiles_config_menu == 2)
 				{
@@ -104,7 +94,7 @@ int main(int argc, char *argv[])
 							printf("\nThe install script can be used to install more fonts.");
 						}
 					}
-					while (kitty_config_choice > INPUT_BACK_VALUE); /* exits the while loop when the user types 0 */
+					while (kitty_config_choice > INPUT_BACK_VALUE); // exits the while loop when the user types 0
 				}
 				else if (dotfiles_config_menu == 3)
 				{
@@ -187,7 +177,7 @@ int main(int argc, char *argv[])
 				}			
 			} 
 			while (dotfiles_config_menu > INPUT_BACK_VALUE);
-			/* exits the while loop when the user types 0 */
+			// exits the while loop when the user types 0
 		}
 		else if (menu_one_i == 4)
 		{
@@ -195,7 +185,7 @@ int main(int argc, char *argv[])
 			do
 			{
 				clear();
-				printf(BOLD_S "%s\n"STYLE_END, opt_fiv_text );
+				printf(BOLD_S "%s\n"STYLE_END, opt_for_text );
 				
 				char act_linux_water_text[128] = "Do you want to add the \"Activate Linux\" watermark?";
 				
@@ -225,10 +215,11 @@ int main(int argc, char *argv[])
 		}
 		else
 		{
-			/* this is caused by invalid input */
+			// this is caused by invalid input
 			error_message(INVALID_INPUT);
 		}
 	}
-	while (menu_one_i != 0);	/* exits the while loop when the user types 0 */
+	while (menu_one_i != 0);	exits the while loop when the user types 0
+	*/
 	return 0;
 }
