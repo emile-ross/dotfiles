@@ -270,7 +270,7 @@ void configure_fastfetch(void)
 		printf(BOLD_S "  [1] "STYLE_END"config-default.jsonc\n");
 		printf(BOLD_S "  [2] "STYLE_END"config-other.jsonc\n");
 		printf(BOLD_S "  [3] "STYLE_END"config-duplicated.jsonc\n\n");
-		printf(BOLD_S "  [0] "STYLE_END "%s\n", opt_exit_text);
+		printf(BOLD_S "  [0] "STYLE_END "Exit\n");
 		
 		fastfetch_opt = get_long(NULL, 0, 3);
 		

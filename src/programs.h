@@ -88,8 +88,8 @@ static struct program_conf_type nvim_data =
 {
 	"~/.config/nvim/",
 	"init.lua dark-init.lua",
-	"nvim/"
-	"nvim",
+	"nvim/",
+	"nvim"
 };
 
 static struct program_conf_type rofi_data = 

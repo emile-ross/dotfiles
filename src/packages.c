@@ -1,5 +1,8 @@
 #include "header.h"
 
+void install_config()
+{
+}
 
 int install_package(distro_type distro, const char *pkginstallname)
 {

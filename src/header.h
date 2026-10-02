@@ -38,11 +38,6 @@ void configure_fastfetch(void);
 void configure_oh_my_zsh(void);
 void copyfiles(int fastfetch_conf_export);
 void link_fastfetch_configs(void);
-void full_config_install(bool ARCHIVE_BL, float previous_version_t, bool install_packages_t);
-void full_install(bool archive_bl, bool full_install_bl);
-void install_config_message(char *text);
-void dinstall_configs(uint8_t custom_package_install);
-void install_menu(void);
 
 config_name detect_config_name(char *input);
 
@@ -76,26 +71,6 @@ config_name detect_config_name(char *input);
 	void verbose_path_print(char *file_path, char *file_name);
 
 /* data */
-	extern char *config_names[n_configs];
-	extern char fastfetch_config_menu_text[menu_text_size];
-	extern char kitty_config_menu_text[menu_text_size];
-	extern char zshforhumans_config_menu_text[menu_text_size];
-
-	/* fuzzel */
-		extern char fuzzel_config_menu_text[menu_text_size];
-		extern char fuzzel_view_config_text[menu_text_size];
-		extern char fuzzel_edit_config_text[menu_text_size];
-		extern char fuzzel_catppuccin_text[menu_text_size];
-
-	extern char kitty_color_text[menu_text_size];
-	extern char kitty_fonts_text[menu_text_size];
-
-	extern char main_menu_title[128];
-	extern char opt_one_text[MENU_TEXT_SIZE];
-	extern char opt_the_text[MENU_TEXT_SIZE];
-	extern char opt_for_text[MENU_TEXT_SIZE];
-	extern char opt_exit_text[16];
-	extern char *main_menu_text[NUM_ELEMENTS_MAIN_MENU];
 
 /* needs to be global */
 	extern char* theme_colour_text;
