@@ -4,7 +4,7 @@ BASE_FLAGS = -Wall -Wextra -Wpedantic -std=c99 -Wconversion -Wshadow -Wundef -Wc
 DEBUG_FLAGS = -g -std=c99  
 
 ALL_FLAGS = $(BASE_FLAGS) $(DEBUG_FLAGS)
-SRC_FILES := arguments compare configuring errors files functions globals packages old-programs setup version
+SRC_FILES := arguments compare configuring errors files functions globals packages setup version
 OS_FILES := os
 
 OUT = -o setup
