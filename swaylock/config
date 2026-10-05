@@ -1,13 +1,33 @@
+# background
 color=000000
+# image=~/wallpapers/lockscreen.png
+# scaling=fill
 
+# indicator appearance
 indicator-radius=57
 indicator-thickness=13
 indicator-idle-visible
 
-# colors
+# colours
 inside-color=1E1E2E
 
+inside-wrong-color=000000
+ring-color=2AAED6
+ring-wrong-color=FF0000
+text-color=CDD6F4
+text-wrong-color=FF0000
+line-color=313244
+text-caps-lock-color=FFFFFF
+line-caps-lock-color=454545
+
+
+# Authentication feedback
 show-failed-attempts
 ignore-empty-password
 
+# Font settings
+font=JetBrains Mono NL
+font-size=17
+
+# keyboard layout
 show-keyboard-layout
