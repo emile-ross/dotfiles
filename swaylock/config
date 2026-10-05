@@ -1,0 +1,13 @@
+color=000000
+
+indicator-radius=57
+indicator-thickness=13
+indicator-idle-visible
+
+# colors
+inside-color=1E1E2E
+
+show-failed-attempts
+ignore-empty-password
+
+show-keyboard-layout

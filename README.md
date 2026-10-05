@@ -55,7 +55,7 @@ When doing a full installation, you are installing all of the following programs
 - **hyprland**
     - with hypridle
 - sway
-    - with swaybg config
+    - with swaylock config
 - **waybar**
 - btop
 - bpytop 
