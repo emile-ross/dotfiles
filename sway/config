@@ -24,7 +24,7 @@ set $right l
 
 # set $lock swaylock
 # set $lock gtklock -c ~/.config/gtklock/style.css
-set $lock swaylock -f -c 000000
+set $lock swaylock -c 000000 --text-wrong-color FF0000 --font jetbrainsmono --font-size 17 --ring-wrong-color FF0000 --inside-wrong-color 000000 --indicator-radius 57 --indicator-thickness 13 
 
 ## terminal emulator
 set $term kitty
