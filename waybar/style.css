@@ -1,9 +1,9 @@
 * {
-  min-height: 0;
-  min-width: 0;
-  font-family: Lexend, "JetBrainsMono NFP";
-  font-size: 14px;
-  font-weight: 700;
+	min-height: 0;
+	min-width: 0;
+	font-family: Lexend, "JetBrainsMono NFP";
+	font-size: 14px;
+	font-weight: 800;
 }
 
 window#waybar {

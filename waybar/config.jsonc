@@ -10,6 +10,7 @@
 
   "modules-center": [
     "cpu",
+    "temperature",
     "memory"
   ],
   "modules-right": [
@@ -70,6 +71,13 @@
       "default": [" ", " ", " "],
     },
     "on-click": "pavucontrol",
+  },
+  "temperature": {
+    "format": "{icon} {temperatureC}°C",
+    "format-icons": ["", "", "", "", ""],
+    "critical-threshold": 80,
+    "on-click": "missioncenter",
+    "interval": 5
   },
   "battery": {
     "bat": "BAT0",
