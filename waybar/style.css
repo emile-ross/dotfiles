@@ -25,18 +25,18 @@ window#waybar {
 }
 
 #workspaces button:hover {
-  color: #1E1E2E;
-  background-color: #9FAFFF;
+	color: #1E1E2E;
+	background-color: #9FAFFF;
 }
 
 #workspaces button.active {
-  background-color: #3F4F5F;
-  color: #CFDFFF;
+	background-color: #FFFFFF;
+	color: #CFDFFF;
 }
 
 #workspaces button.urgent {
-  background-color: #1E1E2E;
-  color: #FF8BA8;
+	background-color: #1E1E2E;
+	color: #FF8BA8;
 }
 
 #clock,
