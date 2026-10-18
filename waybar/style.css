@@ -7,21 +7,21 @@
 }
 
 window#waybar {
-  transition-property: background-color;
-  transition-duration: 0.5s;
-  background-color: rgba(0, 0, 0, 0.55);
-  /* background-color: rgba(0, 0, 0, 0.0); */
+	transition-property: background-color;
+	transition-duration: 0.5s;
+	background-color: rgba(0, 0, 0, 0);
+	/* background-color: rgba(0, 0, 0, 0.0); */
 }
 
 #workspaces button {
-  padding: 0.3rem 0.6rem;
-  margin: 0.4rem 0.25rem;
-  border-radius: 6px;
-  /* background-color: #181825; */
-  background-color: rgba(33, 33, 49, 0.65);
-  color: #CFDFFF;
-  /* create a border colour */
-  border-color: rgba(53, 53, 69, 0.6);
+	padding: 0.3rem 0.6rem;
+	margin: 0.4rem 0.25rem;
+	border-radius: 6px;
+	/* background-color: #181825; */
+	background-color: rgba(33, 33, 49, 0.65);
+	color: #FFFFFF;
+	/* create a border colour */
+	border-color: rgba(53, 53, 69, 0.6);
 }
 
 #workspaces button:hover {
@@ -45,74 +45,75 @@ window#waybar {
 #custom-power,
 #custom-notification,
 #cpu,
+#temperature,
 #battery,
 #tray,
 #memory,
 #window {
-  padding: 0.3rem 0.7rem;
-  margin: 0.4rem 0.25rem;
-  border-radius: 7px;
-  /* background-color: #1e1e2e; */
-  background-color: rgba(34, 34, 49, 0.45);
+	padding: 0.3rem 0.7rem;
+	margin: 0.4rem 0.25rem;
+	border-radius: 7px;
+	/* background-color: #1e1e2e; */
+	background-color: rgba(34, 34, 49, 0.45);
 }
 
 #custom-notification {
-  color: #DDDDDD;
-  padding: 0.3rem 0.7rem;
-  margin: 0.4rem 0.25rem;
-  border-radius: 7px;
-  /* background-color: #1e1e2e; */
-  background-color: rgba(34, 34, 49, 0.45);
+	color: #DDDDDD;
+	padding: 0.3rem 0.7rem;
+	margin: 0.4rem 0.25rem;
+	border-radius: 7px;
+	/* background-color: #1e1e2e; */
+	background-color: rgba(34, 34, 49, 0.45);
 }
 
 #custom-sep {
-  padding: 0px;
-  color: #585B70;
+	padding: 0px;
+	color: #585B70;
 }
 
 window#waybar.empty #window {
-  background-color: transparent;
+	background-color: transparent;
 }
 
 #battery {
-  color: #94E2D5;
+	color: #94E2D5;
 }
 
 #cpu {
-  /* color: #94E2D5; */
-  color: #FFFFFF;
+	/* color: #94E2D5; */
+	color: #FFFFFF;
 }
 
 #memory {
-  /* color: #B6F5C6; */
-  color: #FFFFFF;
+	/* color: #B6F5C6; */
+	color: #FFFFFF;
 }
 
 #clock {
-  color: #74C7EC;
+	color: #74C7EC;
 }
 
 #clock.simpleclock {
-  color: #89B4FA;
+	color: #89B4FA;
 }
 
 #window {
-  color: #CDD6F4;
+	color: #CDD6F4;
 }
 
 #pulseaudio {
-  color: #B4BEFE;
+	color: #B4BEFE;
 }
 
 #pulseaudio.muted {
-  color: #A6ADC8;
+	color: #A6ADC8;
 }
 
 #custom-logo {
-  color: #89B4FA;
+	color: #89B4FA;
 }
 
 tooltip {
-  background-color: #181825;
-  border: 2px solid #89B4FA;
+	background-color: rgba(0, 0, 0, 0.5);
+	border: 2px solid #478BCF;
 }
