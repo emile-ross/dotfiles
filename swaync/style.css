@@ -1,0 +1,70 @@
+/* original work found at : https://github.com/stulzer/swaync/
+ * adapted for https://github.com/emile-ross/dotfiles */
+:root {
+  --cc-bg: rgba(40, 44, 52, 0.95);
+  --noti-border-color: rgba(89, 89, 89, 0.67);
+  --noti-bg: 40, 44, 52;
+  --noti-bg-alpha: 0.9;
+  --noti-bg-darker: rgb(30, 33, 39);
+  --noti-bg-hover: rgb(50, 55, 65);
+  --noti-bg-focus: rgba(60, 65, 75, 0.6);
+  --noti-close-bg: rgba(255, 255, 255, 0.1);
+  --noti-close-bg-hover: rgba(255, 255, 255, 0.15);
+  --text-color: rgba(255, 255, 255, 0.9);
+  --text-color-disabled: rgba(255, 255, 255, 0.4);
+  --bg-selected: rgba(255, 255, 255, 0.15);
+  --border-radius: 7px;
+  --notification-shadow: none;
+  --notification-icon-size: 40px;
+}
+
+* {
+  font-family: 'Maple Mono NF';
+  font-size: 12px;
+}
+
+.control-center {
+ border: 2px solid #2fc7e8;
+  border-radius: 7px;
+  padding: 12px;
+  margin-right: 11px;
+  margin-top: -20px;
+  background: --cc-bg;
+}
+
+.notification-row .notification-background .notification {
+  border: 2px solid rgba(89, 89, 89, 0.9);
+  padding: 12px;
+  margin-top: 22px;
+  margin-right: 16px;
+}
+
+.notification-group {
+  border-radius: 7px;
+  padding: 18px 8px 8px 8px;
+}
+
+.floating-notifications .notification {
+  border: 1px solid rgba(89, 89, 89, 0.67);
+}
+
+.notification-content .image {
+  margin-right: 18px;
+}
+
+.widget-title > button {
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px solid #fff;
+}
+
+.widget-title > button:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* .notification-row .notification-background .notification.low {} */
+/* .notification-row .notification-background .notification.normal {} */
+.notification-row .notification-background .notification.critical {
+  background: #e06c75;
+  /* Critical Priority Notification */
+ border: 2px solid #fff;
+}
