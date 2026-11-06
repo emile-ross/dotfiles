@@ -14,3 +14,4 @@ for config in $configs
 do
 	config_install $config
 done
+
