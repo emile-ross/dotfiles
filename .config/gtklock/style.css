@@ -1,0 +1,26 @@
+* {
+  border: none;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8)
+}
+window {
+  background-image: url("assets/lockscreen.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: rgba(0, 0, 0, 0.8);
+  font-family: JetBrainsMono;
+}
+#clock-label {
+  font-size: 45.0px;
+}
+#unlock-button {
+  background: none;
+  background-color: rgba(25, 25, 25, 0.4);
+  padding: 6px;
+}
+#input-field {
+  border-radius: 10px;
+  background-color: rgba(20, 20, 20, 0.7);
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
