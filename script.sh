@@ -10,7 +10,7 @@ package_install(){
 	cat $1 | sh
 }
 
-function y_n {
+function yes_no {
 	while true; do
 		echo -n "$1 [$2]:"
 		read yn
@@ -32,10 +32,12 @@ do
 	echo "Do you want to install $config? (Y/n)"
 	read input
 	if [ $input -eq y ]
+
 	then
 		# execute installation script for the specific program
-		package_install $config
-		config_install $config
+		yes_no "Install configurations for $config" "Y/n" && config_install $config
+		yes_no "Install package $config" "Y/n" && package_install $config
+		
 	fi
 done
 
