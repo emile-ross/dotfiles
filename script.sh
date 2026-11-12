@@ -18,13 +18,13 @@ configs='bpytop btop fastfetch fish fuzzel gtklock hypr kitty mpv nvim rofi sway
 # install all configs
 for config in $configs
 do
-	config_install $config
 	echo "Do you want to install $config? (Y/n)"
 	read input
 	if [ $input -eq y ]
 	then
 		# execute installation script for the specific program
 		package_install $config
+		config_install $config
 	fi
 done
 
