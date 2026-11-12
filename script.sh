@@ -9,6 +9,17 @@ config_install(){
 package_install(){
 	cat $1 | sh
 }
+
+function y_n {
+	while true; do
+		echo -n "$1 [$2]:"
+		read yn
+		case $yn in
+			[Yy]*) return 0  ;;  
+			[Nn]*) echo "Aborted" ; return  1 ;;
+		esac
+	done
+}
 	
 
 
