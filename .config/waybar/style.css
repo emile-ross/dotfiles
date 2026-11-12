@@ -39,9 +39,19 @@ window#waybar {
 	color: #FF8BA8;
 }
 
+#custom-next-event-am,
+#custom-next-event-pm {
+	color: #FFFFFF;
+	padding: 0.3rem 0.7rem;
+	margin: 0.4rem 0.25rem;
+	border-radius: 7px;
+	background-color: rgba(34, 34, 49, 0.45);
+}
+
 #clock,
 #pulseaudio,
 #custom-logo,
+#custom-next-event-time,
 #custom-power,
 #custom-notification,
 #cpu,
