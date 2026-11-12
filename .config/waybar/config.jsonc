@@ -7,7 +7,6 @@
   "gtk-layer-shell": true,
   "passthrough": false,
   "modules-left": [
-	  "sway/workspaces", 
 	  "custom/next-event-am",
 	  "custom/next-event-pm"
   ],
@@ -60,7 +59,7 @@
     // "format": " {usage}%",
     "format": "CPU: {usage}%",
     "tooltip": true,
-    "interval": 1,
+    "interval": 4,
   },
   "memory": {
     //"format": " {used:0.1f}Gi",
@@ -80,13 +79,12 @@
     "format": "{icon} {temperatureC}°C",
     "format-icons": ["", "", "", "", ""],
     "critical-threshold": 80,
-    "on-click": "missioncenter",
-    "interval": 5
+    "interval": 10
   },
   "battery": {
     "bat": "BAT0",
     "adapter": "AC",
-    "interval": 8,
+    "interval": 20,
     "states": {
       "warning": 30,
       "critical": 15
@@ -123,7 +121,7 @@
       "tooltip": true
   },
   "custom/next-event-pm": {
-      "exec": "next-event-time -s",
+      "exec": "next-event-time -s ~/.config/waybar/pm_bus.txt",
       "return-type": "json",
       "interval": 60,
       "format": "{text}",
