@@ -26,18 +26,24 @@ function yes_no {
 # make a list of all configs and install all of them one at a time
 configs='bpytop btop fastfetch fish fuzzel gtklock hypr kitty mpv nvim rofi sway swaylock swaync waybar wlogout'
 
-# install all configs
-for config in $configs
-do
-	echo "Do you want to install $config? (Y/n)"
-	read input
-	if [ $input -eq y ]
+if [ $# -eq 1 ]; then
+	config_install $1
+else
+	for config in $configs
+	do
+		echo "Do you want to install $config? (Y/n)"
+		read input
+		if [ $input -eq y ]
+	
+		then
+			# execute installation script for the specific program
+			yes_no "Install configurations for $config" "Y/n" && config_install $config
+			yes_no "Install package $config" "Y/n" && package_install $config
+			
+		fi
+	done
+fi
 
-	then
-		# execute installation script for the specific program
-		yes_no "Install configurations for $config" "Y/n" && config_install $config
-		yes_no "Install package $config" "Y/n" && package_install $config
-		
-	fi
-done
+
+# install all configs
 
