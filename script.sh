@@ -11,7 +11,8 @@ package_install(){
 	cat $1 | sh
 }
 
-function yes_no {
+function yes_no
+{
 	while true; do
 		echo -n "$1 [$2]:"
 		read yn
@@ -23,7 +24,6 @@ function yes_no {
 }
 	
 
-
 # make a list of all configs and install all of them one at a time
 configs='bpytop btop fastfetch fish fuzzel gtklock hypr kitty mpv nvim rofi sway swaylock swaync waybar wlogout'
 
@@ -32,10 +32,8 @@ if [ $# -eq 1 ]; then
 else
 	for config in $configs
 	do
-		echo "Do you want to install $config? (Y/n)"
-		read input
-		if [ $input -eq y ]
-	
+		yes_no "Do you want to install $config?" "Y/n"
+		if [ $? -eq 0 ]
 		then
 			# execute installation script for the specific program
 			yes_no "Install configurations for $config" "Y/n" && config_install $config
