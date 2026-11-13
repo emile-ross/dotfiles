@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 
-target_directory="~/.config"
+target_directory="$HOME/.config"
 
 config_install(){
-	cp -if $1/* $target_directory/$1/
+	mkdir -p $target_directory/$1
+	cp -f .config/$1/* $target_directory/$1/
 }
 
 package_install(){
