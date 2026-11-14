@@ -6,15 +6,13 @@
         "height": 15,
         "width": 30,
         "padding": {
-            "top": 5,
-            "left": 3
+            "top": 1
         }
     },
     "modules": [
-        "break",
         {
             "type": "custom",
-            "format": "\u001b[90m┌──────────────────────Hardware──────────────────────┐"
+            "format": "\u001b[90m┌────────────────────Hardware────────────────────┐"
         },
         {
             "type": "host",
@@ -24,11 +22,6 @@
         {
             "type": "cpu",
             "key": "│ ├",
-            "keyColor": "green"
-        },
-        {
-            "type": "gpu",
-            "key": "│ ├󰍛",
             "keyColor": "green"
         },
         {
@@ -43,12 +36,11 @@
         },
         {
             "type": "custom",
-            "format": "\u001b[90m└────────────────────────────────────────────────────┘"
+            "format": "\u001b[90m└────────────────────────────────────────────────┘"
         },
-        "break",
         {
             "type": "custom",
-            "format": "\u001b[90m┌──────────────────────Software──────────────────────┐"
+            "format": "\u001b[90m┌────────────────────Software────────────────────┐"
         },
         {
             "type": "os",
@@ -60,11 +52,13 @@
             "key": "│ ├",
             "keyColor": "yellow"
         },
+	/*
         {
             "type": "bios",
             "key": "│ ├",
             "keyColor": "yellow"
         },
+	*/
         {
             "type": "packages",
             "key": "│ ├󰏖",
@@ -75,7 +69,6 @@
             "key": "└ └",
             "keyColor": "yellow"
         },
-        "break",
         {
             "type": "de",
             "key": " DE",
@@ -103,12 +96,11 @@
         },
         {
             "type": "custom",
-            "format": "\u001b[90m└────────────────────────────────────────────────────┘"
+            "format": "\u001b[90m└────────────────────────────────────────────────┘"
         },
-        "break",
         {
             "type": "custom",
-            "format": "\u001b[90m┌────────────────────Uptime / Age / DT────────────────────┐"
+            "format": "\u001b[90m┌────────────────Uptime / Age / DT───────────────┐"
         },
         {
             "type": "command",
@@ -123,23 +115,20 @@
         },
         {
             "type": "datetime",
-            "key": "  DateTime ",
+            "key":   "  Date",
             "keyColor": "magenta"
         },
         {
             "type": "custom",
-            "format": "\u001b[90m└─────────────────────────────────────────────────────────┘"
+            "format": "\u001b[90m└────────────────────────────────────────────────┘"
         },
-
-//        {
-//            "type": "colors"
-//        },
-
+/*
         {
             "type": "colors",
             "paddingLeft": 2,
             "symbol": "circle"
         }
+*/
  
     ]
 }
