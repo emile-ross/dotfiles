@@ -25,7 +25,7 @@ function yes_no
 	
 
 # make a list of all configs and install all of them one at a time
-configs='bpytop btop fastfetch fish fuzzel gtklock hypr kitty mpv nvim rofi sway swaylock swaync waybar wlogout'
+configs='alacritty bpytop btop fastfetch fish fuzzel gtklock hypr kitty mpv nvim rofi sway swaylock swaync waybar wlogout'
 
 if [ $# -eq 1 ]; then
 	config_install $1

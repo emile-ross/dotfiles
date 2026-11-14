@@ -12,13 +12,17 @@ void install_config(program_conf_type config)
 
 	char *base_cmd = "mkdir %s";
 	size_t cmd_size = strlen(base_cmd) + strlen(config.config_dir);
-	char *cmd = malloc(cmd_size);
 
+	char *cmd = malloc(cmd_size);
+	if (cmd == NULL)
+	{
+		fprintf(stderr, "malloc() failed to allocate memory of size %zu\n", cmd_size);
+		exit(EXIT_FAILURE);
+	}
 	snprintf(cmd, cmd_size, base_cmd, config.config_dir);
 
-	printf(cmd);
-
-	size_t new_size = 0;
+	if (verbose)
+		printf("%s\n", cmd);
 }
 
 
