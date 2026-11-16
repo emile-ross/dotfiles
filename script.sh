@@ -5,8 +5,8 @@ target_directory="$HOME/.config"
 config_install(){
 	if [ -z $LANG ] ;
 	then
-		echo "export LANG=en_US.UTF-8" >> ~/.bashrc
-		echo "export LANG=en_US.UTF-8" >> ~/.zshrc
+		echo "export LANG=en_US.UTF-8" >> $HOME/.bashrc
+		echo "export LANG=en_US.UTF-8" >> $HOME/.zshrc
 	fi
 	
 	mkdir -p $target_directory/$1
@@ -30,21 +30,22 @@ function yes_no
 }
 
 # make a list of all configs and install all of them one at a time
-echo "Installing all configurations... \n"
+echo -e "Installing all configurations... \n"
 configs='alacritty bpytop btop fastfetch fish fuzzel gtklock hypr kitty mpv nvim rofi sway swaylock swaync waybar wlogout'
 
 if [ $# -eq 1 ]; then
 	config_install $1
 else
+	yes_count=0
 	for config in $configs
 	do
 		yes_no "Do you want to install $config?" "Y/n"
 		if [ $? -eq 0 ]
 		then
 			# execute installation script for the specific program
-			yes_no "Install configurations for $config" "Y/n" && config_install $config
+			yes_no "Install configurations for $config" "Y/n" && ((yes_count++)) && config_install $config
 			yes_no "Install package $config" "Y/n" && package_install $config
-			
+			echo "$yes_count"
 		fi
 	done
 fi
