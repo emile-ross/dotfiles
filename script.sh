@@ -3,6 +3,7 @@
 target_directory="$HOME/.config"
 
 config_install(){
+	export LANG=en_US.UTF-8
 	mkdir -p $target_directory/$1
 	cp -f .config/$1/* $target_directory/$1/
 }
@@ -22,9 +23,9 @@ function yes_no
 		esac
 	done
 }
-	
 
 # make a list of all configs and install all of them one at a time
+echo "Installing all configurations... \n"
 configs='alacritty bpytop btop fastfetch fish fuzzel gtklock hypr kitty mpv nvim rofi sway swaylock swaync waybar wlogout'
 
 if [ $# -eq 1 ]; then
@@ -43,6 +44,4 @@ else
 	done
 fi
 
-
 # install all configs
-
