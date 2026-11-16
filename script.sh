@@ -33,8 +33,14 @@ function yes_no
 echo -e "Installing all configurations... \n"
 configs='alacritty bpytop btop fastfetch fish fuzzel gtklock hypr kitty mpv nvim rofi sway swaylock swaync waybar wlogout'
 
-if [ $# -eq 1 ]; then
+
+if [ $# -eq 1 ] ; then
 	config_install $1
+elif [ $# -gt 1] ; then
+	for argument in $@
+	do
+		echo "$argument"
+	done
 else
 	yes_count=0
 	for config in $configs
