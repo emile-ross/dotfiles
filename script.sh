@@ -3,7 +3,12 @@
 target_directory="$HOME/.config"
 
 config_install(){
-	export LANG=en_US.UTF-8
+	if [ -z $LANG ] ;
+	then
+		echo "export LANG=en_US.UTF-8" >> ~/.bashrc
+		echo "export LANG=en_US.UTF-8" >> ~/.zshrc
+	fi
+	
 	mkdir -p $target_directory/$1
 	cp -f .config/$1/* $target_directory/$1/
 }
