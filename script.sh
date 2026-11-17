@@ -17,17 +17,17 @@ config_install()
 
 package_install()
 {
+	# make package name lowercase (for standard naming)
+	package=${1,,}
 	if [ $# -gt 0 ] ;
 	then
-		echo "Installing $1"
-		sudo pacman -S "$1"
+		echo "Installing $package"
+		sudo pacman -S "$package"
 		if [ "$EUID" -eq 0 ] ; 
 		then
-			echo "Installed $1 successfully!\n"
+			echo "Installed $package successfully!\n"
 		fi
 	fi
-
-	cat $1 | sh
 }
 
 function yes_no
@@ -59,20 +59,19 @@ then
 	i=0
 	for arg in $@
 	do
-		next_index=$(($i + 1))
+		next_index=$(($i + 2))
 		next_argument=${!next_index}
-		echo "next arg: $next_argument"
 		echo "argument #$i $arg"
 		if [ "$arg" == "-p" ] || [ "$arg" == "--package" ] ;
 		then
-			sudo pacman -S "$2"
+			sudo pacman -S "$next_argument"
 			echo "package flag was found"
 		elif [ "$arg" == "-v" ] || [ "$arg" == "--version" ] ;
 		then
-			get_diff "$2"
+			get_diff "$next_argument"
 		elif [ "$arg" == "-c" ] || [ "$arg" == "--config" ] ;
 		then
-			config_install "$2"
+			config_install "$next_argument"
 		fi
 		((i++))
 	done
