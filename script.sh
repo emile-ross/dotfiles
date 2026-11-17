@@ -18,7 +18,7 @@ package_install(){
 	if [ $# -gt 0 ] ;
 	then
 		echo "Installing $1"
-		pacman -S "$1"
+		sudo pacman -S "$1"
 		if [ "$EUID" -eq 0 ] ; 
 		then
 			echo "Installed $1 successfully!\n"
@@ -43,10 +43,13 @@ function yes_no
 # make a list of all configs and install all of them one at a time
 configs='alacritty bpytop btop fastfetch fish fuzzel gtklock hypr kitty mpv nvim rofi sway swaylock swaync waybar wlogout'
 
-
 if [ $# -eq 1 ] ; 
 then
 	config_install $1
+	if [ ${1:0:0} == "-" ] ;
+	then
+		echo "you probably didn't want to install a file starting with a \'-\'"
+	fi
 elif [ $# -gt 1 ] ; 
 then
 	i=0
@@ -57,6 +60,9 @@ then
 		then
 			sudo pacman -S "$2"
 			echo "package flag was found"
+		elif [ "$arg" == "-v" ] || [ "$arg" == "--version" ] ;
+		then
+			get_diff "$2"
 		elif [ "$arg" == "-c" ] || [ "$arg" == "--config" ] ;
 		then
 			config_install "$2"
@@ -88,5 +94,3 @@ else
 		fi
 	done
 fi
-
-# install all configs

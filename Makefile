@@ -1,5 +1,3 @@
-CC := gcc
-
 BASE_FLAGS = -Wall -Wextra -Wpedantic -std=c99 -Wconversion -Wshadow -Wundef -Wcast-qual -Wcast-align
 DEBUG_FLAGS = -g -std=c99  
 
