@@ -2,7 +2,8 @@
 
 target_directory="$HOME/.config"
 
-config_install() {
+config_install()
+{
 	name=${1,,}
 	if [ -z $LANG ] ;
 	then
@@ -14,7 +15,8 @@ config_install() {
 	cp -f .config/$name/* $target_directory/$name/
 }
 
-package_install(){
+package_install()
+{
 	if [ $# -gt 0 ] ;
 	then
 		echo "Installing $1"
@@ -45,11 +47,15 @@ configs='alacritty bpytop btop fastfetch fish fuzzel gtklock hypr kitty mpv nvim
 
 if [ $# -eq 1 ] ; 
 then
-	config_install $1
-	if [ ${1:0:0} == "-" ] ;
+	index=2
+	character=${!index:0:1}
+	echo $character
+	if [ ${character} == "-" ] ;
 	then
 		echo "you probably didn't want to install a file starting with a \'-\'"
 	fi
+	echo -e "\n"
+	config_install $1
 elif [ $# -gt 1 ] ; 
 then
 	i=0
