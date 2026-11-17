@@ -35,11 +35,20 @@ configs='alacritty bpytop btop fastfetch fish fuzzel gtklock hypr kitty mpv nvim
 
 
 if [ $# -eq 1 ] ; then
+
 	config_install $1
-elif [ $# -gt 1] ; then
+	
+elif [ $# -gt 1 ] ; then
+	i=0
 	for argument in $@
 	do
 		echo "$argument"
+		echo "$i"
+		if [ "$arg" == "-p" || "$arg" == "--package" ] ;
+		then
+			echo "package flag was found"
+		fi
+		((i++))
 	done
 else
 	echo -e "Installing all configurations... \n"
