@@ -15,6 +15,16 @@ config_install() {
 }
 
 package_install(){
+	if [ $# -gt 0 ] ;
+	then
+		echo "Installing $1"
+		pacman -S "$1"
+		if [ "$EUID" -eq 0 ] ; 
+		then
+			echo "Installed $1 successfully!\n"
+		fi
+	fi
+
 	cat $1 | sh
 }
 
