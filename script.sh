@@ -2,7 +2,7 @@
 
 target_directory="$HOME/.config"
 
-config_install(){
+config_install() {
 	name=${1,,}
 	if [ -z $LANG ] ;
 	then
@@ -62,8 +62,18 @@ else
 		if [ $? -eq 0 ]
 		then
 			# execute installation script for the specific program
-			yes_no "Install configurations for $config" "Y/n" && ((yes_count++)) && config_install "$config"
-			yes_no "Install package $config" "Y/n" && package_install "$config"
+			yes_no "Install configurations for $config" "Y/n"
+			if [ "$EUID" -eq 0 ] ;
+			then
+				((config_yes_count++))
+				config_install "$config"
+			fi
+			yes_no "Install package $config" "Y/n"
+			if [ "$EUID" -eq 0 ] ;
+			then
+				((package_yes_count++))
+				package_install "$config"
+			fi
 			echo "$yes_count"
 		fi
 	done
