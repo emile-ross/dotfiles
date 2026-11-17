@@ -47,12 +47,10 @@ configs='alacritty bpytop btop fastfetch fish fuzzel gtklock hypr kitty mpv nvim
 
 if [ $# -eq 1 ] ; 
 then
-	index=2
-	character=${!index:0:1}
-	echo $character
-	if [ ${character} == "-" ] ;
+	index=1
+	if [[ ${!index:0:1} = "-" ]] ;
 	then
-		echo "you probably didn't want to install a file starting with a \'-\'"
+		echo -e "you probably didn't want to install a file starting with a '-'"
 	fi
 	echo -e "\n"
 	config_install $1
@@ -61,6 +59,9 @@ then
 	i=0
 	for arg in $@
 	do
+		next_index=$(($i + 1))
+		next_argument=${!next_index}
+		echo "next arg: $next_argument"
 		echo "argument #$i $arg"
 		if [ "$arg" == "-p" ] || [ "$arg" == "--package" ] ;
 		then
