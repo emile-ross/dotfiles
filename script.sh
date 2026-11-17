@@ -35,18 +35,18 @@ configs='alacritty bpytop btop fastfetch fish fuzzel gtklock hypr kitty mpv nvim
 
 
 if [ $# -eq 1 ] ; then
-
 	config_install $1
-	
 elif [ $# -gt 1 ] ; then
 	i=0
-	for argument in $@
+	for arg in $@
 	do
-		echo "$argument"
-		echo "$i"
-		if [ "$arg" == "-p" || "$arg" == "--package" ] ;
+		echo "argument #$i $arg"
+		if [ "$arg" == "-p" ] || [ "$arg" == "--package" ] ;
 		then
+			sudo pacman -S "$2"
 			echo "package flag was found"
+		elif [ "$arg" == "-c" ] || [ "$arg" == "--config" ] ;
+			config_install "$2"
 		fi
 		((i++))
 	done
