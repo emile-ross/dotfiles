@@ -34,9 +34,11 @@ function yes_no
 configs='alacritty bpytop btop fastfetch fish fuzzel gtklock hypr kitty mpv nvim rofi sway swaylock swaync waybar wlogout'
 
 
-if [ $# -eq 1 ] ; then
+if [ $# -eq 1 ] ; 
+then
 	config_install $1
-elif [ $# -gt 1 ] ; then
+elif [ $# -gt 1 ] ; 
+then
 	i=0
 	for arg in $@
 	do
@@ -46,6 +48,7 @@ elif [ $# -gt 1 ] ; then
 			sudo pacman -S "$2"
 			echo "package flag was found"
 		elif [ "$arg" == "-c" ] || [ "$arg" == "--config" ] ;
+		then
 			config_install "$2"
 		fi
 		((i++))
@@ -59,8 +62,8 @@ else
 		if [ $? -eq 0 ]
 		then
 			# execute installation script for the specific program
-			yes_no "Install configurations for $config" "Y/n" && ((yes_count++)) && config_install $config
-			yes_no "Install package $config" "Y/n" && package_install $config
+			yes_no "Install configurations for $config" "Y/n" && ((yes_count++)) && config_install "$config"
+			yes_no "Install package $config" "Y/n" && package_install "$config"
 			echo "$yes_count"
 		fi
 	done
