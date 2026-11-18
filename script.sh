@@ -77,34 +77,41 @@ then
 	done
 else
 	echo -e "Installing all configurations... \n"
-	yes_count=0
 	config_itterator=0
+	config_yes_count=0
 	for config in $configs
 	do
 		yes_no "Do you want to install $config?" "Y/n"
 		if [ $? -eq 0 ]
 		then
 			# execute installation script for the specific program
-			yes_no "Install configurations for $config" "Y/n"
-			if [ "$EUID" -eq 0 ] ;
-			then
-				if [ config_itterator -gt 3 ] ;
-				then
-					if [ config_itterator -eq yes_count ] ;
-					then
 
-					fi
-				fi
+			if [ config_itterator -gt 3  && config_itterator -eq config_yes_count ] ;
+			then
 				((config_yes_count++))
 				config_install "$config"
+			else
+				yes_no "Install configurations for $config" "Y/n"
+				if [ "$EUID" -eq 0 ] ;
+				then
+					((config_yes_count++))
+					config_install "$config"
+				fi
 			fi
-			yes_no "Install package $config" "Y/n"
-			if [ "$EUID" -eq 0 ] ;
+
+			if [ config_itterator -gt 3  && config_itterator -eq package_yes_count ] ;
 			then
 				((package_yes_count++))
 				package_install "$config"
+			else
+				yes_no "Install configurations for $config" "Y/n"
+				if [ "$EUID" -eq 0 ] ;
+				then
+					((config_yes_count++))
+					package_install "$config"
+				fi
 			fi
-			echo "$yes_count"
+
 		fi
 	done
 fi
