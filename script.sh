@@ -78,6 +78,7 @@ then
 else
 	echo -e "Installing all configurations... \n"
 	yes_count=0
+	config_itterator=0
 	for config in $configs
 	do
 		yes_no "Do you want to install $config?" "Y/n"
@@ -87,6 +88,13 @@ else
 			yes_no "Install configurations for $config" "Y/n"
 			if [ "$EUID" -eq 0 ] ;
 			then
+				if [ config_itterator -gt 3 ] ;
+				then
+					if [ config_itterator -eq yes_count ] ;
+					then
+
+					fi
+				fi
 				((config_yes_count++))
 				config_install "$config"
 			fi
