@@ -40,11 +40,9 @@ many configurations would have been impossible without these free ressources: [C
   </tr>
 </table>
 
-<img src="assets/menu.png" alt="Installer ui preview" width=350>
 
 ## prerequisites
 - an Arch based distribution of linux (Windows will **never** get support)
-- Hyprland isn't required but still recomended in order to benefit from all configurations
 
 ## programs modified 
 
@@ -78,54 +76,10 @@ When doing a full installation, you are installing all of the following programs
 
 >  **Warning** Be careful running scripts found on the internet!
 
-Before executing the c script, you will need to compile it.  
+Before executing the bash script
 
 This is a script to help new users configure their system to tbeir liking.  
 You can use this script to install your dotfiles, update your dotfiles and configure your environment! 
-
-### Compile with make
-
-The makefile compiles the entire source-code by executing the code in the ``build.c`` file.  
-
-```sh
-git clone https://github.com/emile-ross/dotfiles
-cd dotfiles/
-```
-
-Compile for most linux distros using this command:
-
-```sh
-make setup
-```
-
-For macos, you can use 
-
-```sh
-make macos
-```
-
-Now, execute the binary with:
-```sh
-./setup
-```
-
-note: This only compiles the code necessary for the install script. 
-
-You can also append the ``--noconfirm`` flag in order to install without any prompts.
-
-```bash
-./setup --noconfirm
-```
-
-### Partial Install
-
-You can use the ``-c`` flag in order to install a single config
-
-example: ``./setup -c hyprland`` installs the hyprland config *(only the configs, use ``-p`` for the package)*
-
-You can also use the ``-p`` flag in order to install a package with the correct package manager
-
-example: ``./setup -p cafva`` This would install cava *(only the package, use ``-c`` for configs)*
 
 ## Keybinds for Hyprland
 
@@ -142,7 +96,6 @@ super + V -> **Toggle Floating Mode**
 > ( Allows windows to stack on top of each other)
 
 super + C -> **Close Window**
-
 
 ### execute programs (in Hyprland)
 
@@ -164,9 +117,6 @@ super + 3 -> **execute [Chromium](https://source.chromium.org/chromium)**
 super + 4 -> **execute [LibreWolf](https://codeberg.org/librewolf/source)**
 > (firefox/gecko based web browser)
 
-super + 0 -> **execute [OBS](https://github.com/obsproject/obs-studio)**
-> (an open source program to stream and record videos)
-
 ## Multi Tasking
 
 super + F1 -> **switch to Workspace 1**
@@ -174,14 +124,6 @@ super + F1 -> **switch to Workspace 1**
 super + shift + F1 -> **move window to Workspace 1** 
  
  > *super + (F1-F11) -> Workspaces (1-11)*
-
-ALT + Q -> **focus kitty**
-
-ALT + 1 -> **focus floorp**
-
-ALT + 2 -> **focus firefox**
-
-ALT + 0 -> **focus obs**
 
 If you ever encounter an issue please report it by providing the issue you are experiencing with a log, it helps me improve this script. 
 
@@ -203,8 +145,6 @@ fastfetch config: [github.com/harilvfs/fastfetch](https://github.com/harilvfs/fa
 linux kernel source code: [github.com/torvalds/linux](https://github.com/torvalds/linux)
 
 nvim ascii art [github.com/Matt-FTW/dotfiles](https://github.com/Matt-FTW/dotfiles)
-
-Hyprland WM source code: [github.com/hyprwm/Hyprland](https://github.com/hyprwm/Hyprland)
 
 SwayWM source code: [github.com/swaywm/sway](https://github.com/swaywm/sway)
 
