@@ -82,11 +82,10 @@ else
 	for config in $configs
 	do
 		yes_no "Do you want to install $config?" "Y/n"
-		if [ $? -eq 0 ]
+		if [ $? -eq 0 ] ;
 		then
 			# execute installation script for the specific program
-
-			if [ config_itterator -gt 3  && config_itterator -eq config_yes_count ] ;
+			if [ $config_itterator -gt 3 ] && [ $config_itterator -eq $config_yes_count ] ;
 			then
 				((config_yes_count++))
 				config_install "$config"
@@ -99,7 +98,7 @@ else
 				fi
 			fi
 
-			if [ config_itterator -gt 3  && config_itterator -eq package_yes_count ] ;
+			if [ $config_itterator -gt 3 ]  && [ $config_itterator -eq $package_yes_count ] ;
 			then
 				((package_yes_count++))
 				package_install "$config"
